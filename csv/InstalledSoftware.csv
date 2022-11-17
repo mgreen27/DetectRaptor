@@ -1,0 +1,5 @@
+Category,IocRegex
+VPN,nordvpn|protonvpn|expressvpn|surfshark|cyberghost|Private Internet Access|IPvanish|wireguard|Connectify|OpenVPN
+P2P,torrent|deluge|BiglyBT|vuze
+Remote Access,anydesk|teamviewer|logmein|connectwise|screenconnect|mremoteng|GoToAssist|zoho assist|BeyondTrust Remote|realvnc|VNC connect|tightvnc|ultravnc|bomgar|splashtop|atera|supremo|awesun|emco remote|Meraki Systems Manager Agent
+Encryption,veracrypt|bestcrypt

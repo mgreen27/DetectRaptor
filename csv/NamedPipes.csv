@@ -1,0 +1,46 @@
+PipeRegex,Detection,Reference
+^46a676ab7f179e511e30dd2dc41bd388$,APT: Project Sauron,https://securelist.com/faq-the-projectsauron-apt/75533/
+^583da945-62af-10e8-4902-a8f205c72b2e$,Sunburst: Solarwinds,https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html
+^9f81f59bc58452127884ce513865ed20$,APT: Project Sauron,https://securelist.com/faq-the-projectsauron-apt/75533/
+^ahexec$,Winexe,https://community.netwitness.com/t5/netwitness-community-blog/detecting-lateral-movement-in-rsa-netwitness-winexe/ba-p/520480
+^atctl$,APT: Turla,https://github.com/SigmaHQ/sigma/blob/master/rules/windows/pipe_created/pipe_created_apt_turla_namedpipes.yml
+^bizkaz$,Meterpreter: Ransomware Related,https://thedfirreport.com/2020/06/21/snatch-ransomware/
+^cachedump,Cred Dump-Tools Named Pipes,https://docs.logpoint.com/docs/alert-rules/en/latest/MITRE.html#lp-possible-credential-dump-tools-named-pipes-detected
+^comnap$,APT: Turla,https://www.gdatasoftware.com/blog/2015/01/23926-analysis-of-project-cobra
+^csexecsvc,CSExec: Default Named Pipe,https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
+^dce_,Cobalt Strike: SMB beacon Qbot Related,https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/;https://thedfirreport.com/2021/01/11/trickbot-still-alive-and-well/
+^DserNamePipe,Cobalt Strike: trick_ryuk.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f584
+^dummypipe$,pipeserverimpersonate.ps1: Default Named Pipe,https://github.com/decoder-it/pipeserverimpersonate/blob/master/pipeserverimpersonate.ps1
+^e710f28d59aa529d6792ca6ff0ca1b34$,APT: Project Sauron,https://securelist.com/faq-the-projectsauron-apt/75533/
+^gruntsvc$,Covenant: Default Named pipe,https://github.com/cobbr/Covenant/blob/c53155615563cf68979820356b8430e4eb01207d/Covenant/Data/Tasks/DefaultGruntTasks.yaml#L88
+^halfduplux_,Cobalt Strike: SMB beacon ,https://thedA1:C48firreport.com/2021/06/20/from-word-to-lateral-movement-in-1-hour/
+^iehelper$,APT: Turla,https://github.com/SigmaHQ/sigma/blob/master/rules/windows/pipe_created/pipe_created_apt_turla_namedpipes.yml
+^jaccdpqnvbrrxlaf$,PoshC2: Default Named Pipe,https://github.com/nettitude/PoshC2/blob/567207723517895ce53d38730fd5c2a2c2e15535/resources/config-template.yml#L49
+^lsadump,Cred Dump-Tools Named Pipes,https://docs.logpoint.com/docs/alert-rules/en/latest/MITRE.html#lp-possible-credential-dump-tools-named-pipes-detected
+^mojo.5688.8052.183894939787088877,Cobalt Strike: jquery-c2.4.2.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f580
+^mojo.5688.8052.35780273329370473,Cobalt Strike: jquery-c2.4.2.profile,https://thedfirreport.com/2021/03/08/bazar-drops-the-anchor/
+^msagent_,Cobalt Strike: Default SMB beacon,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f578
+^msf-pipe,Metasploit: Default Bind Named Pipe,https://github.com/rapid7/metasploit-framework/blob/04e8752b9b74cbaad7cb0ea6129c90e3172580a2/lib/msf/core/handler/bind_named_pipe.rb#L207
+^MSSE-,Cobalt Strike: Default Cobalt Strike Artifact Kit binaries,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f575
+^mypipe-f,Cobalt Strike: havex.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f588
+^mypipe-h,Cobalt Strike: havex.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f589
+^ntsvcs,Cobalt Strike: trick_ryuk.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f583
+^ntsvcs,Cobalt Strike: zoom.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f595
+^paexec,PAExec: Default Named Pipe,https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
+^PoshMS$,PoshC2: Default Named Pipe,https://github.com/nettitude/PoshC2/blob/d9f487a3794796b3cf2718cb363d2316709fe2e9/resources/modules/NamedPipe.ps1#L4
+^postex_,Cobalt Strike: Default Post Exploitation job (v4.2+),https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f579
+^postex_ssh_,Cobalt Strike: Default SSH beacon,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f577
+^remcom_comunication$,Remcom: Default Named Pipe,https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
+^RoguePotato$,RoguePotato: Default Named Pipe,https://github.com/antonioCoco/RoguePotato
+^rpchlp_3,APT: Project Sauron,https://securelist.com/faq-the-projectsauron-apt/75533/
+^scerpc,Cobalt Strike: zoom.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f594
+^sdlrpc$,APT: Turla,https://www.gdatasoftware.com/blog/2015/01/23926-analysis-of-project-cobra
+^SearchTextHarvester,Cobalt Strike: trick_ryuk.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f585
+^ShitSecure$,SharpNamedPipePTH: Default Named Pipe,https://github.com/S3cur3Th1sSh1t/SharpNamedPipePTH/
+^status_,Cobalt Strike: Default psexec_psh,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f576
+^userpipe$,APT: Turla,https://github.com/SigmaHQ/sigma/blob/master/rules/windows/pipe_created/pipe_created_apt_turla_namedpipes.yml
+^wceservicepipe,Cred Dump-Tools Named Pipes,https://docs.logpoint.com/docs/alert-rules/en/latest/MITRE.html#lp-possible-credential-dump-tools-named-pipes-detected
+^windows.update.manager,Cobalt Strike: windows-updates.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f590
+^windows.update.manager,Cobalt Strike: windows-updates.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f591
+77control,r77 Rootkit,https://github.com/bytecode77/r77-rootkit
+toteslegit,InlineExecute-Assembly,https://github.com/anthemtotheego/InlineExecute-Assembly
