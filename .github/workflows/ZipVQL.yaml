@@ -1,10 +1,36 @@
-name: Create Archive
+name: VQL build and archive
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+    
+    
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Install python requirements
+      run: pip install PyYAML==6.0 -q
+          
+    - name: Update vql
+      run: |
+          mkdir -p ./vql
+          cd ./scripts
+          python bulk_mft.py
+          python bulk_evtx.py
+          cd ..
+          echo $(shasum vql/*.yaml)
+          
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v4.15.4
+      with:
+        commit_message: AutoUpdate VQL
+        file_pattern: vql/*.yaml
+        
     - name: Zip Folder
       run: zip -r DetectRaptorVQL.zip vql/*.yaml
     - uses: ncipollo/release-action@v1
