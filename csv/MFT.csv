@@ -17,4 +17,4 @@ Execution,.,/Windows/(PAEXE|PSEXE|WinExeSvc),Internal
 Execution Tool,^(nsudo|nircmd)\.exe,.,Internal
 Pirating Software,.,KMSPico|cracked|keygen,Internal
 VPN,.,nordvpn|protonvpn|expressvpn|surfshark|cyberghost|Private Internet Access|IPvanish|wireguard|Connectify|OpenVPN,Internal
-RMM,.,anydesk|teamviewer|logmein|connectwise|screenconnect|mremoteng|GoToAssist|zoho assist|BeyondTrust Remote|realvnc|VNC connect|tightvnc|ultravnc|bomgar|splashtop|/atera|supremo|awesun|RemoteAgent,Internal
+RMM,.,anydesk|/atera|awesun|Basecamp|BeAnywhere|BeyondTrust Remote|bomgar|connectwise|Domotz|DWservice|emco remote|Fixmeit|Fleetdeck|GoToAssist|Itarian|Level.io|logmein|ManageEngine|Meraki Systems Manager Agent|mremoteng|N-Able|Pulseway|realvnc|screenconnect|Sorillus|splashtop|supremo|teamviewer|tightvnc|ultravnc|VNC connect|ZeroTier|zoho assist|RemoteAgent,Internal

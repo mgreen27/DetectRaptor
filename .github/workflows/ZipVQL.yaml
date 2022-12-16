@@ -22,6 +22,7 @@ jobs:
           cd ./scripts
           python bulk_mft.py
           python bulk_evtx.py
+          python bulk_webhistory.py
           cd ..
           echo $(shasum vql/*.yaml)
           
