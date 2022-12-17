@@ -8,7 +8,6 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
     
-    
     - name: Install Python
       uses: actions/setup-python@v4
       with:
@@ -24,6 +23,7 @@ jobs:
           python evtx.py
           python webhistory.py
           python zoneidentifier.py
+          python applications.py
           cd ..
           echo $(shasum vql/*.yaml)
           
