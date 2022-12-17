@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This script converts a evtx IOC list to a velociraptor artifact.
+This script converts a Domain IOC list to a velociraptor 
+Webhistory detection artifact.
 
 Simply set variables and run the script.
 
@@ -12,8 +13,8 @@ import os
 import yaml
 
 # set variables
-template_vql = '../templates/BulkEvtx.template'
-ioc_csv = '../csv/Eventlogs.csv'
+template_vql = '../templates/Webhistory.template'
+ioc_csv = '../csv/WebBrowsers.csv'
 output_path = '../vql/'
 
 
@@ -33,7 +34,7 @@ def build_vql(lookup_table,template,output_path):
 
     
 if __name__ == "__main__":
-    print('Building BulkEvtx IOC artifacts')
+    print('Building Webhistory IOC artifacts')
 
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:

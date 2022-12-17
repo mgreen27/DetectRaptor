@@ -20,9 +20,10 @@ jobs:
       run: |
           mkdir -p ./vql
           cd ./scripts
-          python bulk_mft.py
-          python bulk_evtx.py
-          python bulk_webhistory.py
+          python mft.py
+          python evtx.py
+          python webhistory.py
+          python zoneidentifier.py
           cd ..
           echo $(shasum vql/*.yaml)
           

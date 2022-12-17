@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This script converts a Webhistory IOC list to a velociraptor artifact.
+This script converts a Domain IOC list to a velociraptor 
+Zone.Identifier detection artifact.
 
 Simply set variables and run the script.
 
@@ -12,7 +13,7 @@ import os
 import yaml
 
 # set variables
-template_vql = '../templates/BulkWebhistory.template'
+template_vql = '../templates/ZoneIdentifier.template'
 ioc_csv = '../csv/WebBrowsers.csv'
 output_path = '../vql/'
 
