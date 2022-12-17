@@ -11,6 +11,7 @@ Current artifacts include:
 - Windows.Detection.MFT
 - Windows.Detection.Webhistory
 - Windows.Detection.ZoneIdentifier
+- Windows.Detection.Applications
 
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections
