@@ -24,6 +24,7 @@ jobs:
           python webhistory.py
           python zoneidentifier.py
           python applications.py
+          python namedpipes.py
           cd ..
           echo $(shasum vql/*.yaml)
           
