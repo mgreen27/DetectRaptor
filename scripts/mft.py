@@ -33,7 +33,7 @@ def build_vql(lookup_table,template,output_path):
 
     
 if __name__ == "__main__":
-    print('Building MFT IOC artifacts')
+    print('Building MFT IOC artifact')
 
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:

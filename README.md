@@ -7,11 +7,12 @@ and import it into Velociraptor.
 This is made easy via the Velociraptor artifact exchange: [Server.Import.DetectRaptor](https://docs.velociraptor.app/exchange/artifacts/pages/detectraptor/)
 
 Current artifacts include:
+- Windows.Detection.Applications
 - Windows.Detection.Evtx
 - Windows.Detection.MFT
+- Windows.Detection.NamedPipes
 - Windows.Detection.Webhistory
 - Windows.Detection.ZoneIdentifier
-- Windows.Detection.Applications
 
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections
