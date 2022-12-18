@@ -19,12 +19,13 @@ jobs:
       run: |
           mkdir -p ./vql
           cd ./scripts
-          python mft.py
+          python applications.py
+          python binaryrename.py
           python evtx.py
+          python mft.py
+          python namedpipes.py
           python webhistory.py
           python zoneidentifier.py
-          python applications.py
-          python namedpipes.py
           cd ..
           echo $(shasum vql/*.yaml)
           

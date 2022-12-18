@@ -73,3 +73,4 @@ ANY,action1_remote.exe,action1_remote.exe,Endpoint Agent,Action1 agent
 ANY,Defender Control,Defender Control,Windows Defender Control,Windows Defender Control
 ANY,NirCmd,NirCmd.exe,Nir Sofer,nircmd.exe
 ANY,NSudo,NSudo.exe,NSudo for Windows,Nsudo
+ANY,Python Application,pythonw.exe,Python,Python 3.10.0 packaged with DWAgent - possibly noisy.

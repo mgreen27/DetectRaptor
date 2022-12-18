@@ -8,6 +8,7 @@ This is made easy via the Velociraptor artifact exchange: [Server.Import.DetectR
 
 Current artifacts include:
 - Windows.Detection.Applications
+- Windows.Detection.BinaryRename
 - Windows.Detection.Evtx
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
