@@ -1,0 +1,53 @@
+name: Server.StartHunts
+author: Matt Green - @mgreen27
+description: |
+    This is an automatically generated artifact that can be used to execute 
+    DetectRaptor hunts.
+
+    Use the ArtifactRegex filter for targeting.
+    
+reference:
+  - https://github.com/mgreen27/DetectRaptor
+type: SERVER
+
+parameters:
+  - name: ArtifactRegex
+    description: regex filter to target artifact name
+    default: .
+    type: regex
+  - name: TestTargeting
+    description: If selected only report hunts to target
+    type: bool
+  - name: JustRun
+    description: If selected do not start start paused. Warning - Will Run all selected hunts!
+    type: bool
+  - name: HuntList
+    type: csv
+    default: |
+        Artifact
+        Windows.Detection.Webhistory
+        Windows.Detection.NamedPipes
+        Windows.Detection.BinaryRename
+        Windows.Detection.Evtx
+        Windows.Detection.MFT
+        Windows.Detection.ZoneIdentifier
+        Windows.Detection.Applications
+ 
+
+sources:
+  - query: |
+      SELECT 
+        Artifact,
+        if(condition= TestTargeting,
+            then= 'Only testing',
+            else= hunt(
+                    artifacts= [Artifact],
+                    description = regex_replace(source=Artifact,
+                                                re='^DetectRaptor\.',
+                                                replace='DetectRaptor: '),
+                    pause=if(condition= JustRun,
+                            then= Null,
+                            else= 'Y' ) 
+                )) as RunHunt
+      FROM HuntList
+      WHERE Artifact =~ ArtifactRegex
