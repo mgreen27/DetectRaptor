@@ -9,6 +9,8 @@ reference:
   - https://github.com/mgreen27/DetectRaptor
 
 type: CLIENT
+resources:
+  timeout: 3600
 
 parameters:
   - name: UserRegex

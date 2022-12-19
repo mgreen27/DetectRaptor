@@ -8,6 +8,10 @@ description: |
 reference:
   - https://github.com/mgreen27/DetectRaptor
 
+type: CLIENT
+resources:
+  timeout: 9000
+
 parameters:
    - name: IOCs
      type: csv

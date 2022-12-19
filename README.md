@@ -14,6 +14,7 @@ Current artifacts include:
 - Windows.Detection.NamedPipes
 - Windows.Detection.Webhistory
 - Windows.Detection.ZoneIdentifier
+- Server.StartHunts
 
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections

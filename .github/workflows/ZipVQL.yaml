@@ -26,6 +26,7 @@ jobs:
           python namedpipes.py
           python webhistory.py
           python zoneidentifier.py
+          python starthunts.py
           cd ..
           echo $(shasum vql/*.yaml)
           

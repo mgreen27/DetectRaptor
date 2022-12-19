@@ -9,13 +9,14 @@ reference:
   - https://github.com/mgreen27/DetectRaptor
 
 type: CLIENT
+resources:
+  timeout: 1200
 
 parameters:
   - name: IOCs
     type: csv
     default: |
 %(ioc)s  
-
 
 sources:
   - precondition:
