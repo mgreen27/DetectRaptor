@@ -18,6 +18,8 @@ reference:
   - https://attack.mitre.org/techniques/T1036/003/
 
 type: CLIENT
+resources:
+  timeout: 9000
 
 parameters:
   - name: TargetGlob

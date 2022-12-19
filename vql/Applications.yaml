@@ -9,6 +9,8 @@ reference:
   - https://github.com/mgreen27/DetectRaptor
 
 type: CLIENT
+resources:
+  timeout: 1200
 
 parameters:
   - name: IOCs
@@ -65,7 +67,6 @@ parameters:
         VPN,protonvpn,
         VPN,surfshark,
         VPN,wireguard,  
-
 
 sources:
   - precondition:

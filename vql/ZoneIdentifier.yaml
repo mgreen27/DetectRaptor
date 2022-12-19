@@ -13,6 +13,8 @@ reference:
   - https://github.com/mgreen27/DetectRaptor
 
 type: CLIENT
+resources:
+  timeout: 6000
 
 parameters:
   - name: TargetFolder
