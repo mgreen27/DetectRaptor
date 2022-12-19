@@ -14,6 +14,7 @@ import yaml
 # set variables
 template_vql = '../templates/StartHunts.template'
 output_path = '../vql/'
+prefix = 'DetectRaptor.'
 
 
 def build_vql(lookup_table,template,output_path):
@@ -41,7 +42,7 @@ if __name__ == "__main__":
       if artifact != 'StartHunts.yaml':
         with open(output_path + artifact, 'r') as stream:
           try:
-              lookup_table.append(yaml.safe_load(stream)['name'] + '\n')
+              lookup_table.append(prefix + yaml.safe_load(stream)['name'] + '\n')
           except yaml.YAMLError as exc:
               print(exc)
 
