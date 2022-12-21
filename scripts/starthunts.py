@@ -33,7 +33,7 @@ def build_vql(lookup_table,template,output_path):
 
     
 if __name__ == "__main__":
-    print('Building Webhistory IOC artifact')
+    print('Building Server.StartHunts')
 
     lookup_table = ['Artifact\n']
 
