@@ -42,11 +42,35 @@ sources:
       SELECT OS From info() where OS = 'windows'
 
     query: |
-      SELECT * FROM foreach(row=IOCs,query={
+      -- firsly split IOCs by path or filename focus
+      LET path_focus = SELECT PathName FROM IOCs WHERE Filename =~ '^\.$|\\|\.\\|'
+        GROUP BY PathName
+      LET file_focus = SELECT Filename FROM IOCs WHERE NOT Filename =~ '^\.$|\\|\.\\|'
+        GROUP BY Filename
+      
+      -- run Filename regex first as it should be very performant
+      LET file_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
+            Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
+            Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
+        FROM Artifact.Windows.NTFS.MFT(FileRegex=join(array=file_focus.Filename,sep='|'))
+      
+      -- second pass is path regex  
+      LET path_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
+            Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
+            Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
+        FROM Artifact.Windows.NTFS.MFT(PathRegex=join(array=path_focus.PathName,sep='|'))
+      
+      LET hits = SELECT * from chain( a=file_regex_hits,
+                                      b=path_regex_hits )
+      
+      -- output results and enrich with IOC data
+      SELECT * FROM foreach(row=hits,query={
             SELECT 
                 dict(Name=Detection,Filename=Filename,PathName=PathName) as Detection,
                 EntryNumber,InUse,OSPath,FileName,FileSize,IsDir,
                 dict(Created0x10=Created0x10,LastModified0x10=LastModified0x10,LastRecordChange0x10=LastRecordChange0x10,LastAccess0x10=LastAccess0x10) as SITimestamps,
                 dict(Created0x30=Created0x30,LastModified0x30=LastModified0x30,LastRecordChange0x30=LastRecordChange0x30,LastAccess0x30=LastAccess0x30) as FNTimestamps
-            FROM Artifact.Windows.NTFS.MFT(PathRegex=PathName,FileRegex=Filename)
-        })
+            FROM IOCs
+            WHERE FileName =~ Filename
+                AND OSPath =~ PathName
+        },workers=20)
