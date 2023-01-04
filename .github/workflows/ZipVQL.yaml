@@ -16,7 +16,7 @@ jobs:
       run: |
           pip install PyYAML==6.0 -q
           pip install requests -q
-          sudo apt install python-pandas
+          pip install pandas -q
 
     - name: Update vql
       run: |
