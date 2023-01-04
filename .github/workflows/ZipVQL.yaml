@@ -13,8 +13,10 @@ jobs:
       with:
         python-version: '3.10'
     - name: Install python requirements
-      run: pip install PyYAML==6.0 -q
-          
+      run: |
+          pip install PyYAML==6.0 -q
+          pip install requirements -q
+          pip install pandas=1.3.2 -q
     - name: Update vql
       run: |
           mkdir -p ./vql
@@ -22,6 +24,7 @@ jobs:
           python applications.py
           python binaryrename.py
           python evtx.py
+          python hijacklibs.py
           python mft.py
           python namedpipes.py
           python webhistory.py
