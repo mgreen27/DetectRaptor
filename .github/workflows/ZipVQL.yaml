@@ -16,7 +16,8 @@ jobs:
       run: |
           pip install PyYAML==6.0 -q
           pip install requests -q
-          pip install pandas==1.3.2 -q
+          sudo apt install python3-pandas
+
     - name: Update vql
       run: |
           mkdir -p ./vql
