@@ -10,6 +10,8 @@ Current artifacts include:
 - Windows.Detection.Applications
 - Windows.Detection.BinaryRename
 - Windows.Detection.Evtx
+- Windows.Detection.HijackLibsEnv
+- Windows.Detection.HijackLibsMFT
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
 - Windows.Detection.Webhistory
@@ -18,4 +20,5 @@ Current artifacts include:
 
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections
+- https://hijacklibs.net/
 - https://github.com/SigmaHQ/sigma
