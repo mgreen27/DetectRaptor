@@ -35,17 +35,20 @@ import pandas as pd
 # set variables
 hijacklibs_url = 'https://hijacklibs.net/api/hijacklibs.csv'
 ioc_csv = '../csv/hijacklibs.csv'
-ioc_csv2 = '../csv/hijacklibs_environment.csv'
+env_ioc_csv = '../csv/hijacklibs_env.csv'
 
 template_vql = '../templates/Hijacklibs.tempalte'
+env_template_vql = '../templates/HijacklibsEnv.tempalte'
 output_path = '../vql/'
 
 
 def build_vql(lookup_table,template,output_path):
-
-    vql = (template % dict(
-        ioc=''.join(["        " + x for x in lookup_table])
+    vql = template % dict(
+        ioc=(''.join(["        " + x for x in lookup_table])
       ))
+    
+    # hack to bypass a formatting issue
+    vql = vql.replace("--FORMATTINGISHARD--", "%")
 
     name = yaml.load(vql, Loader=yaml.BaseLoader)['name']
     output_path = output_path +  name.split('.')[-1] + '.yaml'
@@ -74,8 +77,8 @@ def convert_env(variable):
 
 
 # function that appends to our final list data 
-def append_csv_data(x, grouped_name):
-    usable_data.append(
+def append_csv_data(target, x, grouped_name):
+    target.append(
         [
             grouped_name,
             '|'.join(x['Vendor'].unique().tolist()),
@@ -96,6 +99,9 @@ if __name__ == "__main__":
     flattened_data = []
     usable_data = []
 
+    env_flattened_data = []
+    env_usable_data = []
+
     #for row in csv_data.split('\n'):
     for row in csv.reader(csv_data.split('\n')):
         if not row:
@@ -105,11 +111,13 @@ if __name__ == "__main__":
             if not row == ['Name', 'Author', 'Created', 'Vendor', 'CVE', 'ExpectedLocations', 'VulnerableExecutablePath', 'VulnerableExecutableType', 'VulnerableExecutableAutoElevated', 'VulnerableExecutablePrivilegeEscalation', 'VulnerableExecutableCondition', 'VulnerableExecutableSHA256', 'VulnerableExecutableEnvironmentVariable', 'Resources', 'Acknowledgements', 'URL']:
                 print('API may have changed')
                 print(row)
+            
             #[row[0],row[3],row[5],row[6],row[7],row[11],row[15]]
             flattened_data.append(['DllName','Vendor','ExpectedLocation','ExecutablePath','Type','ExecutableSHA256','Url'])
             usable_data.append(['DllName','Vendor','ExpectedLocation','ExecutablePath','Type','ExecutableSHA256','Url'])
-        elif row[7] == 'Environment Variable':
-            continue
+
+            env_flattened_data.append(['DllName','Vendor','ExpectedLocation','ExecutablePath','Type','ExecutableSHA256','Url'])
+            env_usable_data.append(['DllName','Vendor','ExpectedLocation','ExecutablePath','Type','ExecutableSHA256','Url'])
         else:
             # normalise paths to regex
             row[5] = convert_env(row[5])
@@ -117,35 +125,45 @@ if __name__ == "__main__":
 
             # flatten ExpectedLocations and VulnerableExecutablePath
             if ',' in row[5] and ',' in row[6]:
-                print('value5 and value6')
                 for value5 in row[5].split(','):
                     for value6 in row[6].split(','):
-                        flattened_data.append([row[0],row[3],value5.lstrip(),value6.lstrip(),row[7],row[11],row[15]])
+                        if row[7] == 'Environment Variable':
+                            env_flattened_data.append([row[0],row[3],value5.lstrip(),value6.lstrip(),row[7],row[11],row[15]])
+                        else:
+                            flattened_data.append([row[0],row[3],value5.lstrip(),value6.lstrip(),row[7],row[11],row[15]])
             # flatten ExpectedLocations
             elif ',' in row[5]:
                 for value5 in row[5].split(','):
-                    flattened_data.append([row[0],row[3],value5.lstrip(),row[6],row[7],row[11],row[15]])
+                    if row[7] == 'Environment Variable':
+                        env_flattened_data.append([row[0],row[3],value5.lstrip(),row[6],row[7],row[11],row[15]])
+                    else:
+                        flattened_data.append([row[0],row[3],value5.lstrip(),row[6],row[7],row[11],row[15]])
 
             # flatten VulnerableExecutablePath
             elif ',' in row[6]:
-                print('value6')
                 for value6 in row[6].split(','):
-                    flattened_data.append([row[0],row[3],row[5],value6.lstrip(),row[7],row[11],row[15]])
+                    if row[7] == 'Environment Variable':
+                        env_flattened_data.append([row[0],row[3],row[5],value6.lstrip(),row[7],row[11],row[15]])
+                    else:
+                        flattened_data.append([row[0],row[3],row[5],value6.lstrip(),row[7],row[11],row[15]])
             else:
-                flattened_data.append([row[0],row[3],row[5],row[6],row[7],row[11],row[15]])
-
-    
-    #use pandas to group by DllName and join hijacklibs data
+                if row[7] == 'Environment Variable':
+                    env_flattened_data.append([row[0],row[3],row[5],row[6],row[7],row[11],row[15]])
+                else:
+                    flattened_data.append([row[0],row[3],row[5],row[6],row[7],row[11],row[15]])
+ 
+    ## use pandas to group by DllName and join hijacklibs data
+    # sideload version
     df = pd.DataFrame(flattened_data[1:], columns=flattened_data[0])
     grouped = df.groupby('DllName')
-    grouped.apply(lambda x: append_csv_data(x, x.name))
+    grouped.apply(lambda x: append_csv_data(usable_data, x, x.name))
 
-    
+
     # finally we write to csv and build VQL
     with open(ioc_csv, 'w') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(usable_data)
-    
+
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:
       lookup_table = file.readlines()
@@ -155,4 +173,27 @@ if __name__ == "__main__":
       template = file.read()
 
     # build vql artifacts
-    build_vql(lookup_table,template,output_path)
+    build_vql(lookup_table,template,output_path)   
+    
+    ## use pandas to group by DllName and join hijacklibs data
+    # env variables version
+    df = pd.DataFrame(env_flattened_data[1:], columns=env_flattened_data[0])
+    grouped = df.groupby('DllName')
+    grouped.apply(lambda x: append_csv_data(env_usable_data, x, x.name))
+
+    ## finally we write to csv and build VQL
+    ## env_variable hijack
+    with open(env_ioc_csv, 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(env_usable_data)
+
+    # grab csv contents and split to list of lines
+    with open(env_ioc_csv, 'r') as file:
+      lookup_table = file.readlines()
+
+    #grab VQL template
+    with open(env_template_vql, 'r') as file:
+      template = file.read()
+
+    # build vql artifacts
+    build_vql(lookup_table,template,output_path)  

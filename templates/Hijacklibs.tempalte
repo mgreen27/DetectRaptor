@@ -79,3 +79,38 @@ sources:
                 OR DllInfo.VersionInformation.ProductName =~ HijackLibInfo.Vendor
                 OR DllInfo.VersionInformation.OriginalFilename =~ HijackLibInfo.DllName
                 OR DllInfo.VersionInformation.OriginalFilename =~ HijackLibInfo.DllName )
+
+    notebook:
+      - type: vql_suggestion
+        name: Data and field reduction
+        template: |
+            /*
+            ## Data and field reduction
+            Commonly side loading threats are deployed only with barebones files
+            to enable execution. This notebook only shows hits that have less 
+            than 6 files and both an exe and dll in the parent folder.  
+            
+            Modify as needed.
+            */
+            LET find_pe_folder(data) = SELECT split(string=_value, sep='\\.')[-1] as ext
+              FROM foreach(
+                row=data)
+              WHERE _value =~ '\\.(exe|dll)$'
+              GROUP BY ext
+              
+            SELECT
+                HijackLibInfo,
+                Fqdn, --ClientId,
+                OSPath,
+                FileSize,
+                DllAuthenticode.Trusted AS DllTrust,
+                DllHash.SHA1 AS DllSHA1,
+                TimestampsSI.Created0x10 AS Created0x10,
+                TimestampsFN.Created0x30 AS Created0x30,
+                TimestampsSI.LastModified0x10 AS LastModified0x10,
+                TimestampsFN.LastModified0x30 AS LastModified0x30,
+                Folder
+                --label(client_id=ClientId, labels=['threat2023MMDD'], op='set') AS labelme
+            FROM source()
+            WHERE len(list=Folder) < 6
+                AND len(list=find_pe_folder(data=Folder).ext) = 2
