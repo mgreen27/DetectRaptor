@@ -28,6 +28,7 @@ parameters:
         DetectRaptor.Windows.Detection.HijackLibsMFT
         DetectRaptor.Windows.Detection.Webhistory
         DetectRaptor.Windows.Detection.NamedPipes
+        DetectRaptor.Windows.Detection.HijackLibsEnv
         DetectRaptor.Windows.Detection.BinaryRename
         DetectRaptor.Windows.Detection.Evtx
         DetectRaptor.Windows.Detection.MFT
