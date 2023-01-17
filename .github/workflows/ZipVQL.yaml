@@ -28,6 +28,7 @@ jobs:
           python hijacklibs.py
           python mft.py
           python namedpipes.py
+          python psreadline.py
           python webhistory.py
           python zoneidentifier.py
           python starthunts.py
