@@ -14,6 +14,7 @@ Current artifacts include:
 - Windows.Detection.HijackLibsMFT
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
+- Windows.Detection.PowershellPSReadline
 - Windows.Detection.Webhistory
 - Windows.Detection.ZoneIdentifier
 - Server.StartHunts
