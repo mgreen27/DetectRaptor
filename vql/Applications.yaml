@@ -47,6 +47,8 @@ parameters:
         Remote Access,Pulseway,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
         Remote Access,realvnc,
         Remote Access,RemoteAgent,
+        Remote Access,Rport,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
+        Remote Access,Rsocx,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
         Remote Access,screenconnect,Ransomware
         Remote Access,Sorillus,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
         Remote Access,splashtop,Ransomware
