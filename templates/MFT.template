@@ -13,6 +13,12 @@ resources:
   timeout: 9000
 
 parameters:
+   - name: DateAfter
+     type: timestamp
+     description: "search for events after this date. YYYY-MM-DDTmm:hh:ssZ"
+   - name: DateBefore
+     type: timestamp
+     description: "search for events before this date. YYYY-MM-DDTmm:hh:ssZ"
    - name: IOCs
      type: csv
      default: |
@@ -33,13 +39,19 @@ sources:
       LET file_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
-        FROM Artifact.Windows.NTFS.MFT(FileRegex=join(array=file_focus.Filename,sep='|'))
+        FROM Artifact.Windows.NTFS.MFT(
+                                FileRegex=join(array=file_focus.Filename,sep='|').
+                                DateBefore=DateBefore,
+                                DateAfter=DateAfter )
       
       -- second pass is path regex  
       LET path_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
-        FROM Artifact.Windows.NTFS.MFT(PathRegex=join(array=path_focus.PathName,sep='|'))
+        FROM Artifact.Windows.NTFS.MFT(
+                                PathRegex=join(array=path_focus.PathName,sep='|'),
+                                DateBefore=DateBefore,
+                                DateAfter=DateAfter )
       
       LET hits = SELECT * from chain( a=file_regex_hits,
                                       b=path_regex_hits )
@@ -55,3 +67,32 @@ sources:
             WHERE FileName =~ Filename
                 AND OSPath =~ PathName
         },workers=20)
+
+    notebook:
+      - type: vql_suggestion
+        name: Detection summary
+        template: |
+            /*
+            ### Detection summary
+            */
+            
+            SELECT Detection.Name, count() AS Total
+            FROM source()
+            GROUP BY Detection.Name
+            ORDER BY Total DESC 
+            
+      - type: vql_suggestion
+        name: Detection filter
+        template: |
+            /*
+            ### Detection filter  
+            Use this notebook to modify filter and target specific Detections.
+            */
+            
+            SELECT Fqdn,Detection.Name,OSPath,InUse,FileSize,
+                SITimestamps.Created0x10 as Created0x10,
+                SITimestamps.LastModified0x10 as LastModified0x10,
+                FNTimestamps.Created0x30 as Created0x30,
+                FNTimestamps.LastModified0x30 as LastModified0x30
+            FROM source()
+            WHERE Detection.Name =~ 'Defense Evasion Binaries|RMM'
