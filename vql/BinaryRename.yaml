@@ -28,6 +28,7 @@ parameters:
     type: csv
     default: |
         Filename,Internal,Original,Description,Note
+        ANY,ab.exe,ab.exe,ApacheBench command line utility,Default shellcode stager
         cmd.exe,cmd,Cmd.Exe,Windows Command Processor,cmd.exe
         7z.exe,7z,7z.exe,7-Zip Console,7z.exe
         certutil.exe,CertUtil.exe,CertUtil.exe,CertUtil,certutil.exe
@@ -103,6 +104,7 @@ parameters:
         ANY,NirCmd,NirCmd.exe,Nir Sofer,nircmd.exe
         ANY,NSudo,NSudo.exe,NSudo for Windows,Nsudo
         ANY,Python Application,pythonw.exe,Python,Python 3.10.0 packaged with DWAgent - possibly noisy.
+
 
 
 sources:

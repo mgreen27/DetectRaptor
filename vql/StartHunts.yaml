@@ -25,16 +25,16 @@ parameters:
     type: csv
     default: |
         Artifact
-        DetectRaptor.Windows.Detection.NamedPipes
         DetectRaptor.Windows.Detection.Evtx
-        DetectRaptor.Windows.Detection.MFT
         DetectRaptor.Windows.Detection.Webhistory
+        DetectRaptor.Windows.Detection.HijackLibsMFT
+        DetectRaptor.Windows.Detection.NamedPipes
+        DetectRaptor.Windows.Detection.ZoneIdentifier
+        DetectRaptor.Windows.Detection.PowershellPSReadline
         DetectRaptor.Windows.Detection.Applications
         DetectRaptor.Windows.Detection.HijackLibsEnv
-        DetectRaptor.Windows.Detection.PowershellPSReadline
-        DetectRaptor.Windows.Detection.HijackLibsMFT
+        DetectRaptor.Windows.Detection.MFT
         DetectRaptor.Windows.Detection.BinaryRename
-        DetectRaptor.Windows.Detection.ZoneIdentifier
  
 
 sources:
