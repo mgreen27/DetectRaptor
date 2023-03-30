@@ -64,7 +64,6 @@ parameters:
         ^windows.update.manager,Cobalt Strike: windows-updates.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f591
         77control,r77 Rootkit,https://github.com/bytecode77/r77-rootkit
         toteslegit,InlineExecute-Assembly,https://github.com/anthemtotheego/InlineExecute-Assembly
-        PipeRegex,Detection,Reference
         EngineerPipe,HardHat C2: default pipe name,https://github.com/DragoQCC/HardHatC2
   
 
