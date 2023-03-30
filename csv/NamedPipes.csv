@@ -12,6 +12,7 @@ PipeRegex,Detection,Reference
 ^DserNamePipe,Cobalt Strike: trick_ryuk.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f584
 ^dummypipe$,pipeserverimpersonate.ps1: Default Named Pipe,https://github.com/decoder-it/pipeserverimpersonate/blob/master/pipeserverimpersonate.ps1
 ^e710f28d59aa529d6792ca6ff0ca1b34$,APT: Project Sauron,https://securelist.com/faq-the-projectsauron-apt/75533/
+EngineerPipe,HardHatC2 default pipe,https://github.com/DragoQCC/HardHatC2
 ^gruntsvc$,Covenant: Default Named pipe,https://github.com/cobbr/Covenant/blob/c53155615563cf68979820356b8430e4eb01207d/Covenant/Data/Tasks/DefaultGruntTasks.yaml#L88
 ^halfduplux_,Cobalt Strike: SMB beacon ,https://thedA1:C48firreport.com/2021/06/20/from-word-to-lateral-movement-in-1-hour/
 ^iehelper$,APT: Turla,https://github.com/SigmaHQ/sigma/blob/master/rules/windows/pipe_created/pipe_created_apt_turla_namedpipes.yml
@@ -44,4 +45,3 @@ PipeRegex,Detection,Reference
 ^windows.update.manager,Cobalt Strike: windows-updates.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f591
 77control,r77 Rootkit,https://github.com/bytecode77/r77-rootkit
 toteslegit,InlineExecute-Assembly,https://github.com/anthemtotheego/InlineExecute-Assembly
-EngineerPipe,HardHatC2 default pipe,https://github.com/DragoQCC/HardHatC2
