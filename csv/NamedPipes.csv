@@ -45,3 +45,10 @@ EngineerPipe,HardHatC2 default pipe,https://github.com/DragoQCC/HardHatC2
 ^windows.update.manager,Cobalt Strike: windows-updates.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f591
 77control,r77 Rootkit,https://github.com/bytecode77/r77-rootkit
 toteslegit,InlineExecute-Assembly,https://github.com/anthemtotheego/InlineExecute-Assembly
+^isapi_http,Uroburos Malware Named Pipe,https://github.com/NVISOsecurity/sigma-public/blob/master/rules/windows/sysmon/sysmon_mal_namedpipes.yml
+^isapi_dg,Uroburos Malware Named Pipe,https://github.com/NVISOsecurity/sigma-public/blob/master/rules/windows/sysmon/sysmon_mal_namedpipes.yml
+^isapi_dg2,Uroburos Malware Named Pipe,https://github.com/NVISOsecurity/sigma-public/blob/master/rules/windows/sysmon/sysmon_mal_namedpipes.yml
+^winsession,Wild Neutron APT malware,https://securelist.com/wild-neutron-economic-espionage-threat-actor-returns-with-new-tricks/71275/
+^lsassw,Wild Neutron APT malware,https://securelist.com/wild-neutron-economic-espionage-threat-actor-returns-with-new-tricks/71275/
+^NamePipe_MoreWindows,Cloud Hopper Annex B,https://www.cisa.gov/news-events/alerts/2017/04/27/intrusions-affecting-multiple-victims-across-multiple-sectors
+^pcheap_reuse,Pipe used by Equation Group malware,https://github.com/NVISOsecurity/sigma-public/blob/master/rules/windows/sysmon/sysmon_mal_namedpipes.yml
