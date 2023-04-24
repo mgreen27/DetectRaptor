@@ -12,6 +12,7 @@ Current artifacts include:
 - Windows.Detection.Evtx
 - Windows.Detection.HijackLibsEnv
 - Windows.Detection.HijackLibsMFT
+- Windows.Detection.LolDrivers
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
 - Windows.Detection.PowershellPSReadline
