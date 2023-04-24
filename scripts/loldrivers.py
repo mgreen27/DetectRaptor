@@ -63,8 +63,7 @@ if __name__ == "__main__":
         if len(item["KnownVulnerableSamples"]) > 1:
             for sample in item["KnownVulnerableSamples"]:
                 row = {
-                    'Name': item['Name'], 
-                    'Created': item['Created'],
+                    'Name': item['Name'],
                     'SHA1': sample['SHA1'],
                     'Product': sample['Product'],
                     'Description': sample['Description'],
@@ -73,15 +72,13 @@ if __name__ == "__main__":
                     'MachineType': sample['MachineType'],
                     'Category': item['Category'],
                     'Usecase':item['Commands']['Usecase'],
-                    'Verified': item['Verified'],
-                    'Url':'https://www.loldrivers.io/drivers/' + os.path.splitext(item['Name'])[0].lower() + '/'
+                    'LolDriversUrl':'https://www.loldrivers.io/drivers/' + os.path.splitext(item['Name'])[0].lower() + '/'
                 }
                 if row['SHA1'] and not row['SHA1'] == '-':
                     flattened_data.append(row)
         else:
             row = {
-                'Name': item['Name'], 
-                'Created': item['Created'],
+                'Name': item['Name'],
                 'SHA1': item['KnownVulnerableSamples'][0]['SHA1'],
                 'Product': item['KnownVulnerableSamples'][0]['Product'],
                 'Description': item['KnownVulnerableSamples'][0]['Description'],
@@ -90,15 +87,14 @@ if __name__ == "__main__":
                 'MachineType': item['KnownVulnerableSamples'][0]['MachineType'],
                 'Category': item['Category'],
                 'Usecase':item['Commands']['Usecase'],
-                'Verified': item['Verified'],
-                'Url':'https://www.loldrivers.io/drivers/' + os.path.splitext(item['Name'])[0].lower() + '/'
+                'LolDriversUrl':'https://www.loldrivers.io/drivers/' + os.path.splitext(item['Name'])[0].lower() + '/'
             }
             if row['SHA1'] and not row['SHA1'] == '-':
                 flattened_data.append(row)
 
     # next write to csv and build VQL
     with open(ioc_csv, 'w') as csvfile:
-        fieldnames = ['Name','Created','SHA1','Product','Description','ProductVersion','FileVersion','MachineType','Category','Usecase','Verified','Url']
+        fieldnames = ['Name','SHA1','Product','Description','ProductVersion','FileVersion','MachineType','Category','Usecase','LolDriversUrl']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
