@@ -37,8 +37,8 @@ hijacklibs_url = 'https://hijacklibs.net/api/hijacklibs.csv'
 ioc_csv = '../csv/hijacklibs.csv'
 env_ioc_csv = '../csv/hijacklibs_env.csv'
 
-template_vql = '../templates/Hijacklibs.tempalte'
-env_template_vql = '../templates/HijacklibsEnv.tempalte'
+template_vql = '../templates/Hijacklibs.template'
+env_template_vql = '../templates/HijacklibsEnv.template'
 output_path = '../vql/'
 
 

@@ -23,4 +23,5 @@ Current artifacts include:
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections
 - https://hijacklibs.net/
+- https://www.loldrivers.io/
 - https://github.com/SigmaHQ/sigma
