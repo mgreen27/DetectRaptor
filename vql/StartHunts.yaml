@@ -35,6 +35,7 @@ parameters:
         DetectRaptor.Windows.Detection.BinaryRename
         DetectRaptor.Windows.Detection.Applications
         DetectRaptor.Windows.Detection.MFT
+        DetectRaptor.Windows.Detection.LolDrivers
  
 
 sources:
