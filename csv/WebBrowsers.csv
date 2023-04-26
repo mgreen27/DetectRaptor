@@ -4,6 +4,7 @@ Enumeration,joeware.net,,Adfind
 Enumeration,softperfect.com,,SoftPerfect Network Scanner
 Generic Bad,duckdns.org,,
 Generic Bad,dyndns-home.com,,
+Generic Bad,ngrok.com,,
 IPFS Hosting,4everland.io,,https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/ipfs-the-new-hotbed-of-phishing/
 IPFS Hosting,alexdav.id,,https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/ipfs-the-new-hotbed-of-phishing/
 IPFS Hosting,aragon.ventures,,https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/ipfs-the-new-hotbed-of-phishing/
@@ -102,6 +103,7 @@ Malware Hosting and Exfiltration,filestash.app,,
 Malware Hosting and Exfiltration,filetransfer.io,,
 Malware Hosting and Exfiltration,filezone.cf,,
 Malware Hosting and Exfiltration,fromsmash.com,,
+Malware Hosting and Exfiltration,gofile.io,,
 Malware Hosting and Exfiltration,ghostbin.me,,
 Malware Hosting and Exfiltration,hastebin.com,,https://www.crowdstrike.com/blog/how-falcon-complete-thwarted-a-revil-ransomware-attack/
 Malware Hosting and Exfiltration,hotdropp.com,,
@@ -126,6 +128,7 @@ Malware Hosting and Exfiltration,privnote.com,,
 Malware Hosting and Exfiltration,qaz.im,,
 Malware Hosting and Exfiltration,rapidgator.net,,
 Malware Hosting and Exfiltration,raw.githubusercontent.com,,
+Malware Hosting and Exfiltration,rghost.net,,
 Malware Hosting and Exfiltration,saicloud.com,,
 Malware Hosting and Exfiltration,seafile.com,,
 Malware Hosting and Exfiltration,send.firefox.com,,https://twitter.com/nembo81pr/status/1280429645922471937?s=20
@@ -141,6 +144,7 @@ Malware Hosting and Exfiltration,storro.com,,
 Malware Hosting and Exfiltration,surgesend.com,,
 Malware Hosting and Exfiltration,teknik.io,,
 Malware Hosting and Exfiltration,temp.sh,,
+Malware Hosting and Exfiltration,textbin.net,,https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/
 Malware Hosting and Exfiltration,tmpfiles.org,,https://unit42.paloaltonetworks.com/cuba-ransomware-tropical-scorpius/
 Malware Hosting and Exfiltration,transfer.midrive.io,,
 Malware Hosting and Exfiltration,transfer.sh,,
@@ -163,6 +167,7 @@ Phishing Hosting,glitch.me,,
 Phishing Hosting,herokuapp.com,,
 Phishing Hosting,myportfolio.com,,
 Phishing Hosting,myhuaweicloud.com,,
+Phishing Hosting,pantheonsite.io,,
 Phishing Hosting,plesk.page,,https://www.malwarebytes.com/blog/detections/plesk-page
 Phishing Hosting,rise.articulate.com,,
 Phishing Hosting,siasky.net,,
