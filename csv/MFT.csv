@@ -1,5 +1,5 @@
 Detection,Filename,PathName,Reference
-Suspicious Location,\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,/Perflogs/|/ProgramData/|/Users/Public|/Windows/Temp|Appdata/Roaming/|Appdata/Local/|C:/Temp/,Internal
+Suspicious Location,\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z|txt|vbs|vbe)$,(\\Perflogs\\|\\Users\\Public|\\Windows\\Temp|C:\\Temp\\),,Internal
 Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,
 Mimikatz Path,.,mimikatz,https://github.com/gentilkiwi/mimikatz
 Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,https://github.com/gentilkiwi/mimikatz
