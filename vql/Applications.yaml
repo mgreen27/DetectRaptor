@@ -23,6 +23,7 @@ parameters:
         P2P,deluge,
         P2P,torrent,
         P2P,vuze,
+        Remote Access,action1,https://twitter.com/Kostastsale/status/1646256903675314176
         Remote Access,anydesk,Ransomware
         Remote Access,atera,Ransomware
         Remote Access,awesun,
@@ -47,16 +48,19 @@ parameters:
         Remote Access,Pulseway,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
         Remote Access,realvnc,
         Remote Access,RemoteAgent,
+        Remote Access,rustdesk,
         Remote Access,screenconnect,Ransomware
         Remote Access,Sorillus,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
         Remote Access,splashtop,Ransomware
         Remote Access,supremo,
+        Remote Access,syncro,https://www.huntress.com/blog/critical-vulnerabilities-in-papercut-print-management-software
         Remote Access,teamviewer,Ransomware
         Remote Access,tightvnc,
         Remote Access,ultravnc,
         Remote Access,VNC connect,
         Remote Access,ZeroTier,https://www.crowdstrike.com/blog/analysis-of-intrusion-campaign-targeting-telecom-and-bpo-companies/
         Remote Access,zoho assist,
+        Remote Access,ISL (AlwaysOn|Light|Online),https://www.coinbase.com/blog/social-engineering-a-coinbase-case-study
         VPN,Connectify,
         VPN,cyberghost,
         VPN,expressvpn,

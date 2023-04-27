@@ -195,6 +195,9 @@ parameters:
         smep_namco.sys,f052dc35b74a1a6246842fbb35eb481577537826,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/smep_namco/
         ALSysIO64.sys,2f991435a6f58e25c103a657d24ed892b99690b8,ALSysIO,ALSysIO,2.0.8.0,2.0.8.0,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/alsysio64/
         ALSysIO64.sys,f02af84393e9627ba808d4159841854a6601cf80,ALSysIO,ALSysIO,2.0.9.0,2.0.9.0,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/alsysio64/
+        windbg.sys,b5a8e2104d76dbb04cd9ffe86784113585822375,,,,,,malicious,Elevate privileges,https://www.loldrivers.io/drivers/windbg/
+        windbg.sys,9c1c9032aa1e33461f35dbf79b6f2d061bfc6774,,,,,,malicious,Elevate privileges,https://www.loldrivers.io/drivers/windbg/
+        windbg.sys,b8b123a413b7bccfa8433deba4f88669c969b543,,,,,,malicious,Elevate privileges,https://www.loldrivers.io/drivers/windbg/
         BSMIXP64.sys,9a35ae9a1f95ce4be64adc604c80079173e4a676,,SMI Driver,1.0.0.3,1.0.0.3,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/bsmixp64/
         sandra.sys,82ba5513c33e056c3f54152c8555abf555f3e745,SiSoftware Sandra,Sandra Device Driver (Win64 x64)(Unicode),10.11.1.1,10.11.1.1 built by: WinDDK,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/sandra/
         daxin_blank6.sys,c257aa4094539719a3c7b7950598ef872dbf9518,,,,,I386,malicious,Elevate privileges,https://www.loldrivers.io/drivers/daxin_blank6/
