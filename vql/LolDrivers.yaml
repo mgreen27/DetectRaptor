@@ -8,7 +8,7 @@ description: |
    extract of LolDrivers entries.
 
    NOTE: AMCache can be unreliable. For example, SHA1 of large files will 
-   only use the first ~21MB.
+   only use the first ~31MB.
 
 
 reference:
