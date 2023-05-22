@@ -60,10 +60,10 @@ if __name__ == "__main__":
     flattened_data = []
 
     for item in data:
-        if len(item["KnownVulnerableSamples"]) > 1:
-            for sample in item["KnownVulnerableSamples"]:
+        for sample in item["KnownVulnerableSamples"]:
+            try:
                 row = {
-                    'Name': item['Name'],
+                    'Name': sample['Filename'],
                     'SHA1': sample['SHA1'],
                     'Product': sample['Product'],
                     'Description': sample['Description'],
@@ -72,25 +72,13 @@ if __name__ == "__main__":
                     'MachineType': sample['MachineType'],
                     'Category': item['Category'],
                     'Usecase':item['Commands']['Usecase'],
-                    'LolDriversUrl':'https://www.loldrivers.io/drivers/' + os.path.splitext(item['Name'])[0].lower() + '/'
+                    'LolDriversUrl':'https://www.loldrivers.io/drivers/' + os.path.splitext(sample['Filename'])[0].lower() + '/'
                 }
+                print(row)               
                 if row['SHA1'] and not row['SHA1'] == '-':
                     flattened_data.append(row)
-        else:
-            row = {
-                'Name': item['Name'],
-                'SHA1': item['KnownVulnerableSamples'][0]['SHA1'],
-                'Product': item['KnownVulnerableSamples'][0]['Product'],
-                'Description': item['KnownVulnerableSamples'][0]['Description'],
-                'ProductVersion': item['KnownVulnerableSamples'][0]['ProductVersion'],
-                'FileVersion': item['KnownVulnerableSamples'][0]['FileVersion'],
-                'MachineType': item['KnownVulnerableSamples'][0]['MachineType'],
-                'Category': item['Category'],
-                'Usecase':item['Commands']['Usecase'],
-                'LolDriversUrl':'https://www.loldrivers.io/drivers/' + os.path.splitext(item['Name'])[0].lower() + '/'
-            }
-            if row['SHA1'] and not row['SHA1'] == '-':
-                flattened_data.append(row)
+            except:
+                break
 
     # next write to csv and build VQL
     with open(ioc_csv, 'w') as csvfile:
