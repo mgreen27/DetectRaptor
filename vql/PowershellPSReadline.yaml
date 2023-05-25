@@ -16,7 +16,7 @@ parameters:
     type: csv
     default: |
         eventlog,id,name,eventid,rule,ignore
-        security,win_domain_trust_discovery_execution,T1482-Execution of Domain Trust Discovery Tools,^(4688|4648)$,adfind|dsquery|nltest,
+        security,win_domain_trust_discovery_execution,T1482-Execution of Domain Trust Discovery Tools,^(4688|4648)$,adfind|ADGet|dsquery|nltest,
         security,win_enumeration_execution,T1046-Network and discovery tools,^(4688|4648)$,fscan.exe|netscan|nmap.exe|massscan.exe,
         security,win_exfiltration_programs,T1567.002-Execution of Exfiltration Programs,^(4688)$,meg\.exe|rclone|rsync|megacmd|megasync|megaclient,
         security,win_syswow64_binaries,T1567.002-Use of 32-bit LOLBINs,^(4688)$,syswow64,
