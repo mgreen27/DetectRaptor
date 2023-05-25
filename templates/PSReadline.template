@@ -24,10 +24,28 @@ sources:
     query: |
         LET rules = SELECT id, name, rule, ignore FROM IOCs 
                  WHERE eventlog =~ "powershell"
-        SELECT * FROM foreach(row=rules,
+        
+        LET hits = SELECT * FROM Artifact.Windows.System.Powershell.PSReadline(
+                                SearchStrings= join(array=rules.rule,sep='|'))
+        
+        SELECT * FROM foreach(row=hits,
                 query={
-                        SELECT *,id as RuleID,name as RuleName 
-                        FROM Artifact.Windows.System.Powershell.PSReadline(
-                                    SearchStrings=rule,
-                                    StringWhiteList=ignore )
+                        SELECT 
+                            id as RuleID,
+                            name as RuleName,
+                            Username,
+                            LineNum,
+                            Line,
+                            rule as RuleRegex,
+                            dict(
+                                FullPath = Stat.FullPath,
+                                Size = Stat.Size,
+                                Mtime = Stat.Mtime,
+                                Ctime = Stat.Ctime,
+                                Btime = Stat.Btime ) as FileInfo
+                        FROM rules 
+                        WHERE Line =~ rule
+                            and NOT if(condition= ignore,
+                                            then= Line=~ignore,
+                                            else= False )
                     })
