@@ -27,7 +27,7 @@ parameters:
         Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,
         Mimikatz Path,.,mimikatz,https://github.com/gentilkiwi/mimikatz
         Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,https://github.com/gentilkiwi/mimikatz
-        Enumeration Tools,^(AdFind.exe|everything.exe|sharphound|bloodhound|nbtscan|Nmap.exe|Zenmap|KPortScan|Advanced_port_scanner|Advanced_ip_scanner|netscan.exe|nsscan.exe|ipscan.exe),.,Internal
+        Enumeration Tools,^(AdFind.exe|ADGet.exe|everything.exe|sharphound|bloodhound|nbtscan|Nmap.exe|Zenmap|KPortScan|Advanced_port_scanner|Advanced_ip_scanner|netscan.exe|nsscan.exe|ipscan.exe),.,Internal
         Enumeration Tool outputs,(^(ad_ous|ad_computers|ad_users|ad_group|trustdmp|subnets)\.txt)|(_computers|_domains|_gpos|_groups|_ous|_users)\.json|bloodhound\.zip|ADRecon-Report-,.,Internal
         Data Transfer Paths,.,(rclone|megasync|megaclient|MEGA.exe|plink.exe|FileZilla|ngrok|StealBit),Internal
         Data Transfer,^(rclone|megasync|megaclient|plink.exe|ngrok|StealBit),.,Internal
