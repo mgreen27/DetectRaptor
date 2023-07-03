@@ -64,14 +64,15 @@ sources:
                                 DateBefore=DateBefore,
                                 DateAfter=DateAfter )
       
-      -- second pass is path regex  
+      -- second pass is path regex  (only matches on folder path)
       LET path_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
         FROM Artifact.Windows.NTFS.MFT(
-                                PathRegex=join(array=path_focus.PathName,sep='|'),
+                                FileRegex=join(array=path_focus.PathName,sep='|'),
                                 DateBefore=DateBefore,
                                 DateAfter=DateAfter )
+        WHERE IsDir
       
       LET hits = SELECT * from chain( a=file_regex_hits,
                                       b=path_regex_hits )
@@ -86,6 +87,7 @@ sources:
             FROM IOCs
             WHERE FileName =~ Filename
                 AND OSPath =~ PathName
+            LIMIT 1
         },workers=20)
 
     notebook:
