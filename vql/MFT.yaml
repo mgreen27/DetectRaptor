@@ -50,46 +50,39 @@ sources:
 
     query: |
       -- firsly split IOCs by path or filename focus
-      LET path_focus = SELECT PathName FROM IOCs WHERE Filename =~ '^\.$|\\|\.\\|'
-        GROUP BY PathName
-      LET file_focus = SELECT Filename FROM IOCs WHERE NOT Filename =~ '^\.$|\\|\.\\|'
-        GROUP BY Filename
+      LET all_the_things = SELECT KeywordRegex FROM IOCs WHERE NOT KeywordRegex = '.'
+        GROUP BY KeywordRegex
       
-      -- run Filename regex first as it should be very performant
-      LET file_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
+      LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
         FROM Artifact.Windows.NTFS.MFT(
-                                FileRegex=join(array=file_focus.Filename,sep='|').
+                                FileRegex=join(array=all_the_things.KeywordRegex,sep='|'),
                                 DateBefore=DateBefore,
                                 DateAfter=DateAfter )
-      
-      -- second pass is path regex  (only matches on folder path)
-      LET path_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
-            Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
-            Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
-        FROM Artifact.Windows.NTFS.MFT(
-                                FileRegex=join(array=path_focus.PathName,sep='|'),
-                                DateBefore=DateBefore,
-                                DateAfter=DateAfter )
-        WHERE IsDir
-      
-      LET hits = SELECT * from chain( a=file_regex_hits,
-                                      b=path_regex_hits )
-      
+
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
             SELECT 
-                dict(Name=Detection,Filename=Filename,PathName=PathName) as Detection,
-                EntryNumber,InUse,OSPath,FileName,FileSize,IsDir,
+                dict(
+                    Name=Detection,
+                    KeywordRegex=KeywordRegex,
+                    PathRegex=PathRegex,
+                    IgnoreRegex=IgnoreRegex,
+                    RegexHit=parse_string_with_regex(string=OSPath,regex='(' + KeywordRegex + ')' ).g1
+                    ) as Detection,
+                EntryNumber,InUse,OSPath,FileSize,IsDir,
                 dict(Created0x10=Created0x10,LastModified0x10=LastModified0x10,LastRecordChange0x10=LastRecordChange0x10,LastAccess0x10=LastAccess0x10) as SITimestamps,
                 dict(Created0x30=Created0x30,LastModified0x30=LastModified0x30,LastRecordChange0x30=LastRecordChange0x30,LastAccess0x30=LastAccess0x30) as FNTimestamps
             FROM IOCs
-            WHERE FileName =~ Filename
-                AND OSPath =~ PathName
+            WHERE FileName =~ KeywordRegex
+                AND OSPath =~ PathRegex
+                AND NOT if(condition=IgnoreRegex,
+                        then= OSPath =~ IgnoreRegex,
+                        else= False )
             LIMIT 1
         },workers=20)
-
+        
     notebook:
       - type: vql_suggestion
         name: Detection summary
@@ -111,10 +104,37 @@ sources:
             Use this notebook to modify filter and target specific Detections.
             */
             
-            SELECT Fqdn,Detection.Name,OSPath,InUse,FileSize,
+            SELECT Fqdn,
+                Detection.Name as Detection,
+                Detection.RegexHit as RegexHit,
+                Detection.PathRegex as PathRegex,
+                Detection.FileRegex as FileRegex,
+                OSPath,InUse,IsDir,FileSize,
                 SITimestamps.Created0x10 as Created0x10,
                 SITimestamps.LastModified0x10 as LastModified0x10,
                 FNTimestamps.Created0x30 as Created0x30,
                 FNTimestamps.LastModified0x30 as LastModified0x30
             FROM source()
-            WHERE Detection.Name =~ 'Defense Evasion Binaries|RMM'
+            WHERE Detection =~ 'Defense Evasion Binaries|RMM'
+
+      - type: vql_suggestion
+        name: Detection folder grouping
+        template: |
+            /*
+            ### Detection folder grouping  
+            Use this notebook to modify group by folder and figure out ignore list filters
+            */
+            
+            SELECT Fqdn,
+                Detection.Name as Detection,
+                Detection.RegexHit as RegexHit,
+                Detection.PathRegex as PathRegex,
+                Detection.FileRegex as FileRegex,
+                OSPath as OSPathExample,
+                if(condition= IsDir,
+                    then= OSPath, else=dirname(path=OSPath)) as Directory,
+                count() as Total
+            FROM source()
+            WHERE Detection =~ 'Defense Evasion Binaries|RMM'
+                --AND NOT OSPath =~ '''ADD HERE'''
+            GROUP BY Fqdn,Detection,Directory
