@@ -1,7 +1,7 @@
 Category,Regex,Comment
 Data Transfer,rclone,
 Data Transfer,megasync,
-Data Transfer,plink,
+Data Transfer,putty,
 Data Transfer,FileZilla,
 Data Transfer,ngrok,
 Data Transfer,StealBit,
