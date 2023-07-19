@@ -5,6 +5,7 @@ Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|M
 Enumeration Tools,^(AdFind.exe|ADGet.exe|NtdsAudit.exe|everything.exe|sharphound|bloodhound|nbtscan|Nmap.exe|Zenmap|KPortScan|Advanced_port_scanner|Advanced_ip_scanner|netscan.exe|nsscan.exe|ipscan.exe|SharpShares|PingCastle),.,,Internal
 Enumeration Tool outputs,^(ad_ous|ad_computers|ad_users|ad_group|trustdmp|subnets)\.txt|(_computers|_domains|_gpos|_groups|_ous|_users)\.json|bloodhound\.zip|ADRecon-Report-,.,,Internal
 Data Transfer,^rclone|megasync|megaclient|megacmd|mega\.exe|plink\.exe|FileZilla|ngrok|StealBit,.,,Internal
+BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal
 Archive Utilities,^(WinRAR|7zip\.exe|7z\.exe),.,\\Program Files\\,Internal
 Credential Theft,^(rubeus\.exe|sekurLSA\.dll|WebBrowserPassView|WirelessKeyView|GrabChrome|NLBrute|veaam\.ps1$|lsass.*\.(dmp|zip|rar)|pwdump|procdump),.,,Internal
 Defense Evasion Paths,IObit Unlocker|File Shredder|DefenderControl|processhacker|pchunter|CleanWipe|DefenderControl,.,,Internal
