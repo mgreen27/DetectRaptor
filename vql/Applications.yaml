@@ -17,6 +17,21 @@ parameters:
     type: csv
     default: |
         Category,Regex,Comment
+        Data Transfer,rclone,
+        Data Transfer,megasync,
+        Data Transfer,putty,
+        Data Transfer,FileZilla,
+        Data Transfer,ngrok,
+        Data Transfer,StealBit,
+        Data Transfer,OneDrive,
+        Data Transfer,iCloud,
+        Data Transfer,GoogleDrive,
+        Data Transfer,Dropbox,
+        Data Transfer,BoxDrive,
+        Data Transfer,ShareFile,
+        Data Transfer,AmazonCloudDrie,
+        Data Transfer,SpiderOak,
+        Data Transfer,pCloud,
         Encryption,bestcrypt,
         Encryption,veracrypt,
         P2P,BiglyBT,
