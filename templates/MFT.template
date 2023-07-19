@@ -19,6 +19,9 @@ parameters:
    - name: DateBefore
      type: timestamp
      description: "search for events before this date. YYYY-MM-DDTmm:hh:ssZ"
+   - name: AllDrives
+     type: bool
+     description: "Select MFT search on all attached ntfs drives."
    - name: IOCs
      type: csv
      default: |
@@ -39,7 +42,8 @@ sources:
         FROM Artifact.Windows.NTFS.MFT(
                                 FileRegex=join(array=all_the_things.KeywordRegex,sep='|'),
                                 DateBefore=DateBefore,
-                                DateAfter=DateAfter )
+                                DateAfter=DateAfter,
+                                AllDrives=AllDrives )
 
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
