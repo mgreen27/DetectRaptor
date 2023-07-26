@@ -1,11 +1,12 @@
-name: Server.StartHunts
+name: DetectRaptor.Server.StartHunts
 author: Matt Green - @mgreen27
 description: |
     This is an automatically generated artifact that can be used to execute 
     DetectRaptor hunts.
 
-    Use the ArtifactRegex filter for targeting.
-    
+    Use the ArtifactRegex filter for targeting.  
+    If Timeout, CpuLimit or IopLimit is blank, the artifact default will be used.
+
 reference:
   - https://github.com/mgreen27/DetectRaptor
 type: SERVER
@@ -33,6 +34,9 @@ sources:
         if(condition= TestTargeting,
             then= 'Only testing',
             else= hunt(
+                    timeout=int(int=Timeout),
+                    cpu_limit=int(int=CpuLimit),
+                    iops_limit=int(int=IopsLimit),
                     artifacts= [Artifact],
                     description = regex_replace(source=Artifact,
                                                 re='^DetectRaptor\.',
