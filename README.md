@@ -15,7 +15,8 @@ Current artifacts include:
 - Windows.Detection.LolDrivers
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
-- Windows.Detection.PowershellPSReadline
+- Windows.Detection.Powershell.ISEAutoSave
+- Windows.Detection.Powershell.PSReadline
 - Windows.Detection.Webhistory
 - Windows.Detection.ZoneIdentifier
 - Server.StartHunts

@@ -26,6 +26,7 @@ jobs:
           python binaryrename.py
           python evtx.py
           python hijacklibs.py
+          python iseautosave.py
           python loldrivers.py
           python mft.py
           python namedpipes.py

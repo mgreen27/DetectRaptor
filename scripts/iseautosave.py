@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script converts a PSReadline IOC list to a velociraptor artifact.
+This script converts a ISEAutoSave IOC list to a velociraptor artifact.
 
 Simply set variables and run the script.
 
@@ -12,7 +12,7 @@ import os
 import yaml
 
 # set variables
-template_vql = '../templates/PSReadline.template'
+template_vql = '../templates/ISEAutoSave.template'
 ioc_csv = '../csv/Eventlogs.csv'
 output_path = '../vql/'
 
@@ -33,7 +33,7 @@ def build_vql(lookup_table,template,output_path):
 
     
 if __name__ == "__main__":
-    print('Building PSReadline IOC artifact')
+    print('Building ISEAutoSave IOC artifact')
 
     # grab csv contents and split to list of lines
     lookup_table = []
