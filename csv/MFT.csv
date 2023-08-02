@@ -1,4 +1,4 @@
-Detection,Filename,PathName,AllowList,Reference,Criticality
+Detection,KeywordRegex,PathName,AllowList,Reference,Criticality
 Archive Utilities,(7z|7zip)\.exe$,.,,7zip,low
 Archive Utilities,WinRAR.exe,.,,WinRar,low
 BAU Cloud Data Transfer,AmazonCloudDrive\.exe,.,,Internal,low
