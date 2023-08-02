@@ -36,34 +36,32 @@ sources:
 
     query: |
       -- firsly split IOCs by path or filename focus
-      LET path_focus = SELECT PathName FROM IOCs WHERE NOT PathName =~ '^\.$|\\|\.\\|' AND Criticality =~ criticalitylevel
-        GROUP BY PathName
-      LET file_focus = SELECT Filename FROM IOCs WHERE NOT Filename =~ '^\.$|\\|\.\\|' AND Criticality =~ criticalitylevel
-        GROUP BY Filename
+      LET all_the_things = SELECT KeywordRegex FROM IOCs WHERE NOT KeywordRegex = '.' AND Criticality =~ criticalitylevel
+						 
+																														  
+        GROUP BY KeywordRegex
+	  
+																 
+																					 
+																			 
+																			
+									   
+																				  
+													  
+													 
       
-      -- run Filename regex first as it should be very performant
-      LET file_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
+									
+      LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
         FROM Artifact.Windows.NTFS.MFT(
-                                FileRegex=join(array=file_focus.Filename,sep='|').
-                                DateBefore=DateBefore,
-                                DateAfter=DateAfter ,
-                                AllDrives=AllDrives )
-      
-      -- second pass is path regex  
-      LET path_regex_hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
-            Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
-            Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
-        FROM Artifact.Windows.NTFS.MFT(
-                                PathRegex=join(array=path_focus.PathName,sep='|'),
+                                FileRegex=join(array=all_the_things.KeywordRegex,sep='|'),
                                 DateBefore=DateBefore,
                                 DateAfter=DateAfter,
                                 AllDrives=AllDrives )
-      
-      LET hits = SELECT * from chain( a=file_regex_hits,
-                                      b=path_regex_hits )
-      
+
+														 
+	  
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
             SELECT 
@@ -72,16 +70,20 @@ sources:
                     KeywordRegex=KeywordRegex,
                     PathRegex=PathRegex,
                     IgnoreRegex=IgnoreRegex,
-                    RegexHit=parse_string_with_regex(string=OSPath,regex='(' + KeywordRegex + ')' ).g1
-                    ) as Detection,						   
-                EntryNumber,InUse,OSPath,FileName,FileSize,IsDir,
+                    RegexHit=parse_string_with_regex(string=OSPath,regex='(' + KeywordRegex + ')' ).g1,
+                    Criticality=Criticality) as Detection,
+                EntryNumber,InUse,OSPath,FileSize,IsDir,
                 dict(Created0x10=Created0x10,LastModified0x10=LastModified0x10,LastRecordChange0x10=LastRecordChange0x10,LastAccess0x10=LastAccess0x10) as SITimestamps,
                 dict(Created0x30=Created0x30,LastModified0x30=LastModified0x30,LastRecordChange0x30=LastRecordChange0x30,LastAccess0x30=LastAccess0x30) as FNTimestamps
             FROM IOCs
-            WHERE FileName =~ Filename
-                AND OSPath =~ PathName
+            WHERE FileName =~ KeywordRegex
+                AND OSPath =~ PathRegex
+                AND NOT if(condition=IgnoreRegex,
+                        then= OSPath =~ IgnoreRegex,
+                        else= False )
+            LIMIT 1
         },workers=20)
-
+        
     notebook:
       - type: vql_suggestion
         name: Critical and High Detections Only
