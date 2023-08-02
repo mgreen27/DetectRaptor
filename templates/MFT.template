@@ -15,7 +15,7 @@ resources:
 parameters:
    - name: DateAfter
      type: timestamp
-     description: "search for events after this date. YYYY-MM-DDTmm:hh:ssZ"
+     description: "search for events after this date. -MM-DDTmm:hh:ssZ"
    - name: DateBefore
      type: timestamp
      description: "search for events before this date. YYYY-MM-DDTmm:hh:ssZ"
@@ -37,20 +37,8 @@ sources:
     query: |
       -- firsly split IOCs by path or filename focus
       LET all_the_things = SELECT KeywordRegex FROM IOCs WHERE NOT KeywordRegex = '.' AND Criticality =~ criticalitylevel
-						 
-																														  
         GROUP BY KeywordRegex
-	  
-																 
-																					 
-																			 
-																			
-									   
-																				  
-													  
-													 
       
-									
       LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
@@ -60,8 +48,6 @@ sources:
                                 DateAfter=DateAfter,
                                 AllDrives=AllDrives )
 
-														 
-	  
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
             SELECT 
@@ -69,7 +55,7 @@ sources:
                     Name=Detection,
                     KeywordRegex=KeywordRegex,
                     PathRegex=PathRegex,
-                    IgnoreRegex=IgnoreRegex,
+                    Allowlist=Allowlist,
                     RegexHit=parse_string_with_regex(string=OSPath,regex='(' + KeywordRegex + ')' ).g1,
                     Criticality=Criticality) as Detection,
                 EntryNumber,InUse,OSPath,FileSize,IsDir,
@@ -78,8 +64,8 @@ sources:
             FROM IOCs
             WHERE FileName =~ KeywordRegex
                 AND OSPath =~ PathRegex
-                AND NOT if(condition=IgnoreRegex,
-                        then= OSPath =~ IgnoreRegex,
+                AND NOT if(condition=Allowlist,
+                        then= OSPath =~ Allowlist,
                         else= False )
             LIMIT 1
         },workers=20)
