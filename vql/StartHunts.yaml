@@ -26,19 +26,18 @@ parameters:
     type: csv
     default: |
         Artifact,Timeout,CpuLimit,IopLimit
-        DetectRaptor.Windows.Detection.Powershell.PSReadline,,,
-        DetectRaptor.Windows.Detection.HijackLibsMFT,,,
-        DetectRaptor.Windows.Detection.BinaryRename,,,
-        DetectRaptor.Windows.Detection.NamedPipes,,,
-        DetectRaptor.Windows.Detection.Applications,,,
         DetectRaptor.Windows.Detection.HijackLibsEnv,,,
-        DetectRaptor.Windows.Detection.Webhistory,,,
-        DetectRaptor.Windows.Detection.Evtx,,,
-        DetectRaptor.Windows.Detection.ZoneIdentifier,,,
+        DetectRaptor.Windows.Detection.NamedPipes,,,
         DetectRaptor.Windows.Detection.LolDrivers,,,
-        DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,
+        DetectRaptor.Windows.Detection.BinaryRename,,,
+        DetectRaptor.Windows.Detection.Webhistory,,,
+        DetectRaptor.Windows.Detection.Powershell.PSReadline,,,
+        DetectRaptor.Windows.Detection.ZoneIdentifier,,,
         DetectRaptor.Windows.Detection.MFT,,,
-        DetectRaptor.Windows.Detection.PowershellPSReadline,,,
+        DetectRaptor.Windows.Detection.Applications,,,
+        DetectRaptor.Windows.Detection.HijackLibsMFT,,,
+        DetectRaptor.Windows.Detection.Evtx,,,
+        DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,
  
 
 sources:
