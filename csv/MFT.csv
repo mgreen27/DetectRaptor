@@ -174,15 +174,15 @@ RMM Filename,Zaservice.exe,.,,Zoho Assist,medium
 RMM Filename,ZohoMeeting.exe,.,,Zoho Assist,medium
 Suspicious Double Extension,\.(doc|docx|jpg|jpeg|pdf|png|ppt|pptx|xls|xlsx|zip|rar)\.(exe|com)$,.,,Eg pdf.exe,high
 Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,Eg 1.exe,medium
-VPN Path,.,nordvpn,,Internal,medium
-VPN Path,.,protonvpn,,Internal,medium
-VPN Path,.,expressvpn,,Internal,medium
-VPN Path,.,surfshark,,Internal,medium
-VPN Path,.,cyberghost,,Internal,medium
-VPN Path,.,Private Internet Access,,Internal,medium
-VPN Path,.,IPvanish,,Internal,medium
-VPN Path,.,wireguard,,Internal,medium
-VPN Path,.,Connectify,,Internal,medium
-VPN Path,.,OpenVPN,,Internal,medium
-VPN Path,.,mullvad,,Internal,medium
-VPN Path,.,tunnelbear,,Internal,medium
+VPN Path,nordvpn,.,,Internal,medium
+VPN Path,protonvpn,.,,Internal,medium
+VPN Path,expressvpn,.,,Internal,medium
+VPN Path,surfshark,.,,Internal,medium
+VPN Path,cyberghost,.,,Internal,medium
+VPN Path,Private Internet Access,.,,Internal,medium
+VPN Path,IPvanish,.,,Internal,medium
+VPN Path,wireguard,.,,Internal,medium
+VPN Path,Connectify,.,,Internal,medium
+VPN Path,OpenVPN,.,,Internal,medium
+VPN Path,mullvad,.,,Internal,medium
+VPN Path,tunnelbear,.,,Internal,medium
