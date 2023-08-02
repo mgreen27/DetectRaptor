@@ -52,11 +52,6 @@ Data Transfer FileName,plink\.exe,.,,Internal,low
 Data Transfer FileName,powercat,.,,Internal,low
 Data Transfer FileName,pscp\.exe,.,,Internal,low
 Data Transfer FileName,StealBit,.,,Internal,high
-Data Transfer Path,.,megasync,,Internal,high
-Data Transfer Path,.,megaclient,,Internal,high
-Data Transfer Path,.,\\MEGA,,Internal,high
-Data Transfer Path,.,\\ngrok|\.ngrok,,Internal,high
-Data Transfer Path,.,StealBit,,Internal,high
 Defense Evasion FileName,^dControl\.exe,.,,Internal,high
 Defense Evasion FileName,^gmer\.exe,.,,Internal,high
 Defense Evasion FileName,CleanWipe,.,,Internal,low
@@ -66,13 +61,6 @@ Defense Evasion FileName,nssm\.exe$,.,,Internal,low
 Defense Evasion FileName,pchunter,.,,Internal,high
 Defense Evasion FileName,processhacker,.,,Internal,low
 Defense Evasion FileName,processhacker,.,,Internal,low
-Defense Evasion Path,.,IObit Unlocker,,Internal,high
-Defense Evasion Path,.,File Shredder,,Internal,high
-Defense Evasion Path,.,DefenderControl,,Internal,high
-Defense Evasion Path,.,processhacker,,Internal,low
-Defense Evasion Path,.,pchunter,,Internal,high
-Defense Evasion Path,.,CleanWipe,,Internal,low
-Defense Evasion Path,.,DefenderControl,,Internal,high
 Encryption,^(dcrypt|truecrypt|VeraCrypt),.,,Internal,low
 Enumeration Tool FileName,^adget,.,,Internal,high
 Enumeration Tool FileName,^fscan\.exe,.,,Internal,high
@@ -97,11 +85,9 @@ Execution FileName,LuciRoot,.,,Rootkit,high
 Execution FileName,psexec\.exe,.,,Internal,medium
 Execution FileName,psexec64\.exe,.,,Internal,medium
 Execution FileName,remcom.exe,.,,Some applications can use this in built,medium
-Execution Path,.,\\Windows\\(PAEXE|PSEXE|WinExeSvc),,Internal,low
-Malware,.,AppData\\Local\\Temp\\(_\.vbs|3582-490),,Neshta - known temp locations,critical
-Malware,.,C:\\(Jambo|Datop|Babmo|Dabmo|Badna|Testes)\\,,Qbot Hardcoded Folders,critical
-Malware,.,\\Windows\\(__|TEMP\\execute\.bat),,"Temp output for Impacket tools (WMIEXEC, SMEXEC, DCOMEXEC)",critical
-Malware,.,\\AppData\\Local\\Microsoft\Windows\\InetHelper,,Folder used by crypto miners and infostealers,critical
+Execution Path,PAEXE|PSEXE|WinExeSvc,\\Windows\\,,Internal,low
+Malware,(Jambo|Datop|Babmo|Dabmo|Badna|Testes),C:\\(Jambo|Datop|Babmo|Dabmo|Badna|Testes)\\,,Qbot Hardcoded Folders,critical
+Malware,execute\.bat,\\Windows\\TEMP\\execute\.bat),,"Temp output for Impacket tools (WMIEXEC, SMEXEC, DCOMEXEC)",critical
 Malware,^(Winkeyjet\.ini|cdck\.bin|bdck\.bin|Kebba\.dan)$,.,,DevOpt - https://www.zscaler.com/blogs/security-research/introducing-devopt-multifunctional-backdoor-arsenal,critical
 Mimikatz Path,.,mimikatz,,Generic Mimiaktz,critical
 Mimikatz Tools,(mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$),.,,Generic Mimiaktz,critical
@@ -174,15 +160,15 @@ RMM Filename,Zaservice.exe,.,,Zoho Assist,medium
 RMM Filename,ZohoMeeting.exe,.,,Zoho Assist,medium
 Suspicious Double Extension,\.(doc|docx|jpg|jpeg|pdf|png|ppt|pptx|xls|xlsx|zip|rar)\.(exe|com)$,.,,Eg pdf.exe,high
 Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,Eg 1.exe,medium
-VPN Path,nordvpn,.,,Internal,medium
-VPN Path,protonvpn,.,,Internal,medium
-VPN Path,expressvpn,.,,Internal,medium
-VPN Path,surfshark,.,,Internal,medium
-VPN Path,cyberghost,.,,Internal,medium
-VPN Path,Private Internet Access,.,,Internal,medium
-VPN Path,IPvanish,.,,Internal,medium
-VPN Path,wireguard,.,,Internal,medium
-VPN Path,Connectify,.,,Internal,medium
-VPN Path,OpenVPN,.,,Internal,medium
-VPN Path,mullvad,.,,Internal,medium
-VPN Path,tunnelbear,.,,Internal,medium
+VPN Filename,nordvpn,.,,Internal,medium
+VPN Filename,protonvpn,.,,Internal,medium
+VPN Filename,expressvpn,.,,Internal,medium
+VPN Filename,surfshark,.,,Internal,medium
+VPN Filename,cyberghost,.,,Internal,medium
+VPN Filename,Private Internet Access,.,,Internal,medium
+VPN Filename,IPvanish,.,,Internal,medium
+VPN Filename,wireguard,.,,Internal,medium
+VPN Filename,Connectify,.,,Internal,medium
+VPN Filename,OpenVPN,.,,Internal,medium
+VPN Filename,mullvad,.,,Internal,medium
+VPN Filename,tunnelbear,.,,Internal,medium
