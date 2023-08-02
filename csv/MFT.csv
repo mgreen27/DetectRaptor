@@ -1,19 +1,188 @@
-Detection,KeywordRegex,PathRegex,IgnoreRegex,Reference
-Suspicious Location,\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,\\Perflogs\\|\\ProgramData\\[^\\]+$|\\Users\\Public\\|\\Appdata\\(Roaming|Local)\\.+\\[^\\]$,\\eclipse\\|\\WebSphere\\|com\.ibm\.websphere,Internal
-Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,
-Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz
-Enumeration Tools,^(AdFind.exe|ADGet.exe|NtdsAudit.exe|everything.exe|sharphound|bloodhound|nbtscan|Nmap.exe|Zenmap|KPortScan|Advanced_port_scanner|Advanced_ip_scanner|netscan.exe|nsscan.exe|ipscan.exe|SharpShares|PingCastle),.,,Internal
-Enumeration Tool outputs,^(ad_ous|ad_computers|ad_users|ad_group|trustdmp|subnets)\.txt|(_computers|_domains|_gpos|_groups|_ous|_users)\.json|bloodhound\.zip|ADRecon-Report-,.,,Internal
-Data Transfer,^rclone|megasync|megaclient|megacmd|mega\.exe|plink\.exe|FileZilla|ngrok|StealBit,.,,Internal
-BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal
-Archive Utilities,^(WinRAR|7zip\.exe|7z\.exe),.,\\Program Files\\,Internal
-Credential Theft,^(rubeus\.exe|sekurLSA\.dll|WebBrowserPassView|WirelessKeyView|GrabChrome|NLBrute|veaam\.ps1$|lsass.*\.(dmp|zip|rar)|pwdump|procdump),.,,Internal
-Defense Evasion Paths,IObit Unlocker|File Shredder|DefenderControl|processhacker|pchunter|CleanWipe|DefenderControl,.,,Internal
-Defense Evasion Binaries,^(gmer\.exe|dControl\.exe$|processhacker|file_shredder|pchunter|processhacker|CleanWipe|DefenderControl|nssm\.exe$),.,,Internal
-Encryption,^(dcrypt|truecrypt|VeraCrypt),.,,Internal
-Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal
-Execution,PAEXE|PSEXE|WinExeSvc,\\Windows\\(PAEXE|PSEXE|WinExeSvc),,Internal
-Execution Tool,^(nsudo|nircmd)\.exe,.,,Internal
-Pirating Software,KMSPico|cracked,.,WindowsApps\\king\.com|\.(jpg|gif|png|bmp|pat|sbsar|pdf|doc|docx|Metadata)$,Internal
-VPN,nordvpn|protonvpn|expressvpn|surfshark|cyberghost|Private Internet Access|IPvanish|wireguard|Connectify|OpenVPN,.,\\\<Err\>\\|Nessus|\.(jpg|gif|png|bmp|pat|pdf|doc|docx|SyncRootIdentity|vim)$,Internal
-RMM,action1|anydesk|^atera|awesun|Basecamp|BeAnywhere|BeyondTrust Remote|bomgar|connectwise|Domotz|DWservice|emco remote|Fixmeit|Fleetdeck|GoToAssist|Itarian|Level.io|logmein|ManageEngine|Meraki Systems Manager Agent|mremoteng|N-Able|Pulseway|realvnc|screenconnect|Sorillus|splashtop|supremo|teamviewer|tightvnc|ultravnc|VNC connect|ZeroTier|zoho assist|RemoteAgent|Syncro|Itarian Endpoint Manager|^Rport|Rsocx|TrendMicro BaseCamp|TigerVNC|JollyFastVNC|AB Tutor|Barracuda Workplace|Datto|SolarWinds RMM|Naverisk|RustDesk|tacticalrmm|SimpleHelp|NinjaRMM,.,\\\<Err\>\\|(x86|amd64|wow64)_microsoft-windows|\.(jpg|gif|png|bmp|pat|pdf|doc|docx|SyncRootIdentity)$,Internal
+Detection,Filename,PathName,AllowList,Reference,Criticality
+Archive Utilities,(7z|7zip)\.exe$,.,,7zip,low
+Archive Utilities,WinRAR.exe,.,,WinRar,low
+BAU Cloud Data Transfer,AmazonCloudDrive\.exe,.,,Internal,low
+BAU Cloud Data Transfer,AmazonDrive\.exe,.,,Internal,low
+BAU Cloud Data Transfer,BoxDrive,.,,Internal,low
+BAU Cloud Data Transfer,Dropbox\.exe,.,,Internal,low
+BAU Cloud Data Transfer,DropboxOEM\.exe,.,,Internal,low
+BAU Cloud Data Transfer,DropboxUpdate\.exe,.,,Internal,low
+BAU Cloud Data Transfer,GoogleDriveSetup\.exe,.,,Internal,low
+BAU Cloud Data Transfer,googledrivesync\.exe,.,,Internal,low
+BAU Cloud Data Transfer,iCloud\.exe,.,,Internal,low
+BAU Cloud Data Transfer,OneDrive\.exe,.,,Internal,low
+BAU Cloud Data Transfer,pCloud\.exe,.,,Internal,low
+BAU Cloud Data Transfer,ShareFile,.,,Internal,low
+BAU Cloud Data Transfer,SpiderOak,.,,Internal,low
+Credential Theft FileName,(lsass.*\.(dmp|zip|rar)),.,,Internal,high
+Credential Theft FileName,^ARestore,.,,Internal,high
+Credential Theft FileName,^Certify\.exe,.,,Internal,high
+Credential Theft FileName,^FgDump,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,high
+Credential Theft FileName,^Hydra\.exe,.,,Internal,high
+Credential Theft FileName,AccountRestore,.,,Internal,high
+Credential Theft FileName,adfsdump,.,,Internal,high
+Credential Theft FileName,ChromePass,.,,Internal,high
+Credential Theft FileName,DUBrute,.,,Internal,high
+Credential Theft FileName,GrabChrome,.,,Internal,high
+Credential Theft FileName,kidlogger.exe,.,,Internal,high
+Credential Theft FileName,lazagne,.,,Internal,high
+Credential Theft FileName,mailpv.exe,.,,Internal,high
+Credential Theft FileName,MiniDumpWriteDump,.,,Internal,high
+Credential Theft FileName,NLBrute,.,,Internal,high
+Credential Theft FileName,Potato.exe,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",high
+Credential Theft FileName,procdump,.,,Internal,high
+Credential Theft FileName,pwdump,.,,Internal,high
+Credential Theft FileName,rdpv\.exe,.,,Internal,high
+Credential Theft FileName,rubeus\.exe,.,,Internal,high
+Credential Theft FileName,sekurLSA\.dll,.,,Internal,high
+Credential Theft FileName,veaam\.ps1$,.,,Internal,high
+Credential Theft FileName,WebBrowserPassView,.,,Internal,high
+Credential Theft FileName,WirelessKeyView,.,,Internal,high
+Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,low
+Data Transfer FileName,^(ngrok|\.ngrok),.,,Internal,high
+Data Transfer FileName,^rclone,.,,Internal,high
+Data Transfer FileName,FileZilla,.,,Internal,low
+Data Transfer FileName,FreeFileSync,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,high
+Data Transfer FileName,GoodSync,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,high
+Data Transfer FileName,mega\.exe,.,,Internal,high
+Data Transfer FileName,megaclient,.,,Internal,high
+Data Transfer FileName,megasync,.,,Internal,high
+Data Transfer FileName,megatool,,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,high
+Data Transfer FileName,plink\.exe,.,,Internal,low
+Data Transfer FileName,powercat,.,,Internal,low
+Data Transfer FileName,pscp\.exe,.,,Internal,low
+Data Transfer FileName,StealBit,.,,Internal,high
+Data Transfer Path,.,megasync,,Internal,high
+Data Transfer Path,.,megaclient,,Internal,high
+Data Transfer Path,.,\\MEGA,,Internal,high
+Data Transfer Path,.,\\ngrok|\.ngrok,,Internal,high
+Data Transfer Path,.,StealBit,,Internal,high
+Defense Evasion FileName,^dControl\.exe,.,,Internal,high
+Defense Evasion FileName,^gmer\.exe,.,,Internal,high
+Defense Evasion FileName,CleanWipe,.,,Internal,low
+Defense Evasion FileName,DefenderControl,.,,Internal,high
+Defense Evasion FileName,file_shredder,.,,Internal,high
+Defense Evasion FileName,nssm\.exe$,.,,Internal,low
+Defense Evasion FileName,pchunter,.,,Internal,high
+Defense Evasion FileName,processhacker,.,,Internal,low
+Defense Evasion FileName,processhacker,.,,Internal,low
+Defense Evasion Path,.,IObit Unlocker,,Internal,high
+Defense Evasion Path,.,File Shredder,,Internal,high
+Defense Evasion Path,.,DefenderControl,,Internal,high
+Defense Evasion Path,.,processhacker,,Internal,low
+Defense Evasion Path,.,pchunter,,Internal,high
+Defense Evasion Path,.,CleanWipe,,Internal,low
+Defense Evasion Path,.,DefenderControl,,Internal,high
+Encryption,^(dcrypt|truecrypt|VeraCrypt),.,,Internal,low
+Enumeration Tool FileName,^adget,.,,Internal,high
+Enumeration Tool FileName,^fscan\.exe,.,,Internal,high
+Enumeration Tool FileName,AdFind\.exe,.,,Internal,high
+Enumeration Tool FileName,Advanced_ip_scanner,.,,Internal,high
+Enumeration Tool FileName,Advanced_port_scanner,.,,Internal,high
+Enumeration Tool FileName,bloodhound,.,bloodhound\.(js|min),Internal,high
+Enumeration Tool FileName,everything\.exe,.,,Internal,medium
+Enumeration Tool FileName,ipscan\.exe,.,,Internal,high
+Enumeration Tool FileName,KPortScan,.,,Internal,high
+Enumeration Tool FileName,massscan,.,,Internal,high
+Enumeration Tool FileName,nbtscan,.,,Internal,high
+Enumeration Tool FileName,netscan\.exe,.,,Internal,high
+Enumeration Tool FileName,Nmap\.exe,.,,Internal,low
+Enumeration Tool FileName,nsscan\.exe,.,,Internal,high
+Enumeration Tool FileName,sharphound,.,,Internal,high
+Enumeration Tool FileName,Zenmap,.,,Internal,low
+Enumeration Tool Outputs,(^(ad_ous|ad_computers|ad_users|ad_group|trustdmp|subnets)\.txt)|(_computers|_domains|_gpos|_groups|_ous|_users)\.json|bloodhound\.zip|ADRecon-Report-,.,,Internal,high
+Execution FileName,^nircmd,.,,Internal,low
+Execution FileName,^nsudo,.,,Internal,high
+Execution FileName,LuciRoot,.,,Rootkit,high
+Execution FileName,psexec\.exe,.,,Internal,medium
+Execution FileName,psexec64\.exe,.,,Internal,medium
+Execution FileName,remcom.exe,.,,Some applications can use this in built,medium
+Execution Path,.,\\Windows\\(PAEXE|PSEXE|WinExeSvc),,Internal,low
+Malware,.,AppData\\Local\\Temp\\(_\.vbs|3582-490),,Neshta - known temp locations,critical
+Malware,.,C:\\(Jambo|Datop|Babmo|Dabmo|Badna|Testes)\\,,Qbot Hardcoded Folders,critical
+Malware,.,\\Windows\\(__|TEMP\\execute\.bat),,"Temp output for Impacket tools (WMIEXEC, SMEXEC, DCOMEXEC)",critical
+Malware,.,\\AppData\\Local\\Microsoft\Windows\\InetHelper,,Folder used by crypto miners and infostealers,critical
+Malware,^(Winkeyjet\.ini|cdck\.bin|bdck\.bin|Kebba\.dan)$,.,,DevOpt - https://www.zscaler.com/blogs/security-research/introducing-devopt-multifunctional-backdoor-arsenal,critical
+Mimikatz Path,.,mimikatz,,Generic Mimiaktz,critical
+Mimikatz Tools,(mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$),.,,Generic Mimiaktz,critical
+Pirating Software,\.(exe|rar|zip|7z|iso|lnk)$,KMSPico|cracked|keygen,ssh-keygen,Internal,low
+Privilege Escalation Tool,PowerUp,.,,Internal,high
+Privilege Escalation Tool,winPEAS,.,,Internal,high
+Privilege Escalation Tool,winpwn,.,,Internal,high
+RMM Filename,^Rport,,,Rport,medium
+RMM Filename,aa_v.*.exe,.,,Ammyy Admin,medium
+RMM Filename,action1_agent.exe,.,,action1,medium
+RMM Filename,AeroAdmin.exe,.,,AeroAdmin,medium
+RMM Filename,anydesk.*..exe,.,,AnyDesk,medium
+RMM Filename,AnyViewerSetup.exe,.,,AnyViewer,medium
+RMM Filename,atera_agent.exe,.,,Atera,medium
+RMM Filename,AteraAgent.exe,.,,Atera,medium
+RMM Filename,aweray_remote.*.exe,.,,AweRay (AweSun),medium
+RMM Filename,awhost32.exe,.,,PCAnywhere Server,medium
+RMM Filename,awrem32.exe,.,,PCAnywhere Client,medium
+RMM Filename,bomgar-rdp.*.exe,.,,BeyondTrust (Bomgar),medium
+RMM Filename,bomgar-scc.*.exe,.,,BeyondTrust (Bomgar),medium
+RMM Filename,ConnectWise.*.exe,.,,Connect Wise,medium
+RMM Filename,distant-desktop.exe,.,,Distant Desktop,medium
+RMM Filename,dwagsvc.exe,.,,DW Service,medium
+RMM Filename,dwrcs.exe,.,,Dameware,medium
+RMM Filename,famitrfc.exe,.,,RAdmin,medium
+RMM Filename,g2comm.exe,.,,GoToMyPC,medium
+RMM Filename,g2fileh.exe,.,,GoToMyPC,medium
+RMM Filename,g2host.exe,.,,GoToMyPC,medium
+RMM Filename,g2mainh.exe,.,,GoToMyPC,medium
+RMM Filename,g2mlauncher.exe,.,,GoToMeeting,medium
+RMM Filename,g2printh.exe,.,,GoToMyPC,medium
+RMM Filename,g2svc.exe,.,,GoToMyPC,medium
+RMM Filename,g2tray.exe,.,,GoToMyPC,medium
+RMM Filename,gopcsrv.exe,.,,GoToMyPC,medium
+RMM Filename,GoToAssistService.exe,.,,GoToMeeting,medium
+RMM Filename,GoToAssistUnattended.exe,.,,GoToMeeting,medium
+RMM Filename,lmiguardiansvc.exe,.,,LogMeIn,medium
+RMM Filename,lmiignition.exe,.,,LogMeIn,medium
+RMM Filename,logmein.*.exe,.,,LogMeIn,medium
+RMM Filename,meshagent.exe,.,,MeshAgent,medium
+RMM Filename,NinjaRMMAgent.exe,.,,NinjaRMM,medium
+RMM Filename,PCMonitorManager.exe,.,,Pulseway,medium
+RMM Filename,pcmonitorsrv.exe,.,,Pulseway,medium
+RMM Filename,radmin3.exe,.,,RAdmin,medium
+RMM Filename,RCClient.exe,.,,AnyViewer,medium
+RMM Filename,ROMFUSClient.exe,.,,LiteManager,medium
+RMM Filename,ROMServer.exe,.,,LiteManager,medium
+RMM Filename,Rsocx,,,Rsocx,medium
+RMM Filename,RustDesk,.,,RustDesk,medium
+RMM Filename,rutserv.exe,.,,RemoteUtilities,medium
+RMM Filename,screenconnect.clientservice.exe,.,,ConnectWise Control,medium
+RMM Filename,screenconnect.windowsclient.exe,.,,ConnectWise Control,medium
+RMM Filename,showmypc.*.exe,.,,ShowMyPC,medium
+RMM Filename,smpcsetup.exe,.,,ShowMyPC,medium
+RMM Filename,strwinclt.exe,.,,Splashtop,medium
+RMM Filename,supremo.exe,.,,Supremo,medium
+RMM Filename,supremohelper.exe,.,,Supremo,medium
+RMM Filename,SupremoService.exe,.,,Supremo,medium
+RMM Filename,supremosystem.exe,.,,Supremo,medium
+RMM Filename,tacticalrmm.exe,.,,Tactical RMM,medium
+RMM Filename,teamviewer.exe,.,,TeamViewer Service,medium
+RMM Filename,teamviewer_desktop.exe,.,,TeamViewer Desktop,medium
+RMM Filename,teamviewer_service.exe,.,,TeamViewer Service,medium
+RMM Filename,TigerVNC,.,,VNC,medium
+RMM Filename,vncviewer.exe,.,,VNC,medium
+RMM Filename,winvnc.exe,.,,VNC,medium
+RMM Filename,winvncsc.exe,.,,VNC,medium
+RMM Filename,winwvc.exe,.,,VNC,medium
+RMM Filename,Zaservice.exe,.,,Zoho Assist,medium
+RMM Filename,ZohoMeeting.exe,.,,Zoho Assist,medium
+Suspicious Double Extension,\.(doc|docx|jpg|jpeg|pdf|png|ppt|pptx|xls|xlsx|zip|rar)\.(exe|com)$,.,,Eg pdf.exe,high
+Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,Eg 1.exe,medium
+VPN Path,.,nordvpn,,Internal,medium
+VPN Path,.,protonvpn,,Internal,medium
+VPN Path,.,expressvpn,,Internal,medium
+VPN Path,.,surfshark,,Internal,medium
+VPN Path,.,cyberghost,,Internal,medium
+VPN Path,.,Private Internet Access,,Internal,medium
+VPN Path,.,IPvanish,,Internal,medium
+VPN Path,.,wireguard,,Internal,medium
+VPN Path,.,Connectify,,Internal,medium
+VPN Path,.,OpenVPN,,Internal,medium
+VPN Path,.,mullvad,,Internal,medium
+VPN Path,.,tunnelbear,,Internal,medium
