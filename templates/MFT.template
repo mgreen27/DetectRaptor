@@ -22,6 +22,9 @@ parameters:
    - name: AllDrives
      type: bool
      description: "Select MFT search on all attached ntfs drives."
+   - name: CriticalityLevel
+     default: .
+     description: "Only use detections matching this regex (values can be Critical,High,Medium,Low)"
    - name: IOCs
      type: csv
      default: |
@@ -33,10 +36,11 @@ sources:
 
     query: |
       -- firsly split IOCs by path or filename focus
-      LET all_the_things = SELECT KeywordRegex FROM IOCs WHERE NOT KeywordRegex = '.'
+      LET all_the_things <= SELECT * FROM IOCs
+        WHERE NOT KeywordRegex = '.' AND Criticality =~ CriticalityLevel
         GROUP BY KeywordRegex
-      
-      LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir, 
+
+      LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir,
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
         FROM Artifact.Windows.NTFS.MFT(
@@ -47,18 +51,19 @@ sources:
 
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
-            SELECT 
+            SELECT
                 dict(
                     Name=Detection,
                     KeywordRegex=KeywordRegex,
                     PathRegex=PathRegex,
                     IgnoreRegex=IgnoreRegex,
-                    RegexHit=parse_string_with_regex(string=OSPath,regex='(' + KeywordRegex + ')' ).g1
-                    ) as Detection,
+                    StringHit=parse_string_with_regex(string=FileName,regex='(' + KeywordRegex + ')' ).g1,
+                    Criticality=Criticality
+                        ) as Detection,
                 EntryNumber,InUse,OSPath,FileSize,IsDir,
                 dict(Created0x10=Created0x10,LastModified0x10=LastModified0x10,LastRecordChange0x10=LastRecordChange0x10,LastAccess0x10=LastAccess0x10) as SITimestamps,
                 dict(Created0x30=Created0x30,LastModified0x30=LastModified0x30,LastRecordChange0x30=LastRecordChange0x30,LastAccess0x30=LastAccess0x30) as FNTimestamps
-            FROM IOCs
+            FROM all_the_things
             WHERE FileName =~ KeywordRegex
                 AND OSPath =~ PathRegex
                 AND NOT if(condition=IgnoreRegex,
@@ -66,7 +71,7 @@ sources:
                         else= False )
             LIMIT 1
         },workers=20)
-        
+
     notebook:
       - type: vql_suggestion
         name: Detection summary
@@ -74,26 +79,48 @@ sources:
             /*
             ### Detection summary
             */
-            
+
             SELECT Detection.Name, count() AS Total
             FROM source()
             GROUP BY Detection.Name
-            ORDER BY Total DESC 
-            
+            ORDER BY Total DESC
+
+      - type: vql_suggestion
+        name: Criticality filter
+        template: |
+            /*
+            ### Detection filter
+            Use this notebook to modify filter and target specific Criticality Detections.
+            */
+
+            SELECT Fqdn,
+                Detection.Name as Detection,
+                OSPath,
+                Detection.StringHit as StringHit,
+                Detection.KeywordRegex as KeywordRegex,
+                InUse,IsDir,FileSize,
+                SITimestamps.Created0x10 as Created0x10,
+                SITimestamps.LastModified0x10 as LastModified0x10,
+                FNTimestamps.Created0x30 as Created0x30,
+                FNTimestamps.LastModified0x30 as LastModified0x30
+            FROM source()
+            WHERE Criticality =~ 'Critical|High'
+
+
       - type: vql_suggestion
         name: Detection filter
         template: |
             /*
-            ### Detection filter  
+            ### Detection filter
             Use this notebook to modify filter and target specific Detections.
             */
-            
+
             SELECT Fqdn,
                 Detection.Name as Detection,
-                Detection.RegexHit as RegexHit,
-                Detection.PathRegex as PathRegex,
-                Detection.FileRegex as FileRegex,
-                OSPath,InUse,IsDir,FileSize,
+                OSPath,
+                Detection.StringHit as StringHit,
+                Detection.KeywordRegex as KeywordRegex,
+                InUse,IsDir,FileSize,
                 SITimestamps.Created0x10 as Created0x10,
                 SITimestamps.LastModified0x10 as LastModified0x10,
                 FNTimestamps.Created0x30 as Created0x30,
@@ -105,19 +132,18 @@ sources:
         name: Detection folder grouping
         template: |
             /*
-            ### Detection folder grouping  
+            ### Detection folder grouping
             Use this notebook to modify group by folder and figure out ignore list filters
             */
-            
+
             SELECT Fqdn,
                 Detection.Name as Detection,
-                Detection.RegexHit as RegexHit,
-                Detection.PathRegex as PathRegex,
-                Detection.FileRegex as FileRegex,
-                OSPath as OSPathExample,
+                Detection.StringHit as StringHit,
+                Detection.KeywordRegex as KeywordRegex,
                 if(condition= IsDir,
                     then= OSPath, else=dirname(path=OSPath)) as Directory,
                 count() as Total
+                OSPath as ExampleOSPath,
             FROM source()
             WHERE Detection =~ 'Defense Evasion Binaries|RMM'
                 --AND NOT OSPath =~ '''ADD HERE'''
