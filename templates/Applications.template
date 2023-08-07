@@ -51,3 +51,17 @@ sources:
             WHERE ( KeyName =~ Regex OR DisplayName =~ Regex )
             LIMIT 1 -- limit 1 hit per domain for performance
         }, workers= 20)
+
+    notebook:
+      - type: vql_suggestion
+        name: Detection summary
+        template: |
+            /*
+            ### Detection summary
+            */
+
+            SELECT Category,DisplayName, 
+              count() as Total 
+            FROM source()
+            GROUP BY DisplayName
+            ORDER BY Total DESC
