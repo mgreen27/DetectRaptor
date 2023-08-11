@@ -30,6 +30,7 @@ parameters:
         DetectRaptor.Windows.Detection.NamedPipes,,,
         DetectRaptor.Windows.Detection.LolDrivers,,,
         DetectRaptor.Windows.Detection.BinaryRename,,,
+        DetectRaptor.Generic.Detection.WebshellYara,,,
         DetectRaptor.Windows.Detection.Webhistory,,,
         DetectRaptor.Windows.Detection.Powershell.PSReadline,,,
         DetectRaptor.Windows.Detection.ZoneIdentifier,,,
