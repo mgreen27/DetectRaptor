@@ -22,6 +22,7 @@ jobs:
       run: |
           mkdir -p ./vql
           cd ./scripts
+          python amcache.py
           python applications.py
           python binaryrename.py
           python evtx.py
