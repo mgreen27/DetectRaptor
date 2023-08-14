@@ -108,9 +108,9 @@ sources:
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
             SELECT 
-                dict(Name=Detection,KeywordRegex=KeywordRegex,PathName=PathName,Reference=Reference,Criticality=Criticality) as Detection,KeyMTime,EntryName,EntryPath,OriginalFileName,Publisher,SHA1
+                dict(Name=Detection,KeywordRegex=KeywordRegex,PathName=PathName,Reference=Reference,Criticality=Criticality) as Detection,KeyMTime,EntryName,EntryPath,Publisher,SHA1
             FROM all_the_things
-            WHERE (EntryName =~ KeywordRegex OR OriginalFileName =~ KeywordRegex)
+            WHERE EntryName =~ KeywordRegex
                 AND EntryPath =~ PathRegex
                 AND NOT if(condition=IgnoreRegex,
                     then= EntryPath =~ IgnoreRegex,
