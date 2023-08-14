@@ -29,6 +29,7 @@ parameters:
         DetectRaptor.Windows.Detection.HijackLibsEnv,,,
         DetectRaptor.Windows.Detection.NamedPipes,,,
         DetectRaptor.Windows.Detection.LolDrivers,,,
+        DetectRaptor.Windows.Detection.Amcache,,,
         DetectRaptor.Windows.Detection.BinaryRename,,,
         DetectRaptor.Generic.Detection.WebshellYara,,,
         DetectRaptor.Windows.Detection.Webhistory,,,
