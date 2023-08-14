@@ -7,6 +7,7 @@ and import it into Velociraptor.
 This is made easy via the Velociraptor artifact exchange: [Server.Import.DetectRaptor](https://docs.velociraptor.app/exchange/artifacts/pages/detectraptor/)
 
 Current artifacts include:
+- Windows.Detection.Amcache
 - Windows.Detection.Applications
 - Windows.Detection.BinaryRename
 - Windows.Detection.Evtx
