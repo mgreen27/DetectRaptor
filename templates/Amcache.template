@@ -57,12 +57,24 @@ sources:
 
     notebook:
       - type: vql_suggestion
+        name: Detection Filter
+        template:  |
+            /*
+            ### Detection Filter
+            Use this notebook to modify filter and target specific Detections.
+            */
+
+            SELECT *
+            FROM source()
+            WHERE Detection.Name =~ "VPN|Execution"
+      - type: vql_suggestion
         name: Critical and High Detections Only
         template: |
             /*
             ### Critical and High Detections
+            Use this notebook to modify filter and target specific Criticality Detections.
             */
-            
+
             SELECT *
             FROM source()
             WHERE Detection.Criticality =~ "critical|high"
