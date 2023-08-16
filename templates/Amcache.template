@@ -38,16 +38,21 @@ sources:
         GROUP BY KeywordRegex
       
       -- run KeywordRegex regex
-      LET hits = SELECT *
-                            FROM Artifact.Windows.Detection.Amcache(KeyPathGlob='/Root/{Inventory, File}*/**',   
+      LET hits = SELECT * FROM Artifact.Windows.Detection.Amcache(   
                                 NameRegex=join(array=all_the_things.KeywordRegex,sep='|'))
       
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
             SELECT 
-                dict(Name=Detection,KeywordRegex=KeywordRegex,PathName=PathName,Reference=Reference,Criticality=Criticality) as Detection,KeyMTime,EntryName,EntryPath,Publisher,SHA1
+                dict(
+                    Name=Detection,
+                    KeywordRegex=KeywordRegex,
+                    PathName=EntryPath,
+                    Reference=Reference,
+                    Criticality=Criticality) as Detection,
+                KeyMTime,EntryName,EntryPath,Publisher,OriginalFileName,SHA1
             FROM all_the_things
-            WHERE EntryName =~ KeywordRegex
+            WHERE ( EntryName =~ KeywordRegex OR OriginalFileName =~ KeywordRegex )
                 AND EntryPath =~ PathRegex
                 AND NOT if(condition=IgnoreRegex,
                     then= EntryPath =~ IgnoreRegex,
