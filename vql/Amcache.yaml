@@ -101,7 +101,8 @@ sources:
         GROUP BY KeywordRegex
       
       -- run KeywordRegex regex
-      LET hits = SELECT * FROM Artifact.Windows.Detection.Amcache(   
+      LET hits = SELECT * FROM Artifact.Windows.Detection.Amcache(
+                                KeyPathGlob='/Root/{Inventory, File}*/**',
                                 NameRegex=join(array=all_the_things.KeywordRegex,sep='|'))
       
       -- output results and enrich with IOC data
