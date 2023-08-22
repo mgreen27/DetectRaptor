@@ -35,7 +35,7 @@ def build_vql(lookup_table,template,output_path):
 if __name__ == "__main__":
     print('Building Server.StartHunts')
 
-    lookup_table = ['Artifact,Timeout,CpuLimit,IopLimit\n']
+    lookup_table = ['Artifact,Timeout,CpuLimit,IopsLimit\n']
 
     # grab each yaml file's name
     for artifact in os.listdir(output_path):

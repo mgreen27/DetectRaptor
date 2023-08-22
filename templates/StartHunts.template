@@ -5,7 +5,7 @@ description: |
     DetectRaptor hunts.
 
     Use the ArtifactRegex filter for targeting.  
-    If Timeout, CpuLimit or IopLimit is blank, the artifact default will be used.
+    If Timeout, CpuLimit or IopsLimit is blank, the artifact default will be used.
 
 reference:
   - https://github.com/mgreen27/DetectRaptor
