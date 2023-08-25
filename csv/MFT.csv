@@ -2,7 +2,7 @@ Detection,KeywordRegex,PathRegex,IgnoreRegex,Reference,Criticality
 Archive Utilities,^(WinRAR|7zip|7z).*\.exe$,.,\\Program Files\\,Internal,Low
 BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal - mixed cloud services,Low
 Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz,High
-Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|procdump|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High
+Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|BrowsingHistoryView|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|procdump|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High
 Credential Theft,^FgDump,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,High
 Credential Theft,Potato\.exe$,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",High
 Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low
