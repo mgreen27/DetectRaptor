@@ -65,3 +65,13 @@ sources:
             FROM source()
             GROUP BY DisplayName
             ORDER BY Total DESC
+        name: Detection Filter
+        template:  |
+            /*
+            ### Detection Filter
+            Use this notebook to modify filter and target specific Detections.
+            */
+
+            SELECT Category, KeyName, KeyLastWriteTimestamp, InstallDate, Fqdn FROM source()
+            WHERE Category =~ "Remote"
+            ORDER BY KeyLastWriteTimestamp DESC
