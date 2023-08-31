@@ -74,7 +74,7 @@ if __name__ == "__main__":
                     'Usecase':item['Commands']['Usecase'],
                     'LolDriversUrl':'https://www.loldrivers.io/drivers/' + os.path.splitext(sample['Filename'])[0].lower() + '/'
                 }
-                print(row)               
+                #print(row)               
                 if row['SHA1'] and not row['SHA1'] == '-':
                     flattened_data.append(row)
             except:
