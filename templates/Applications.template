@@ -65,6 +65,7 @@ sources:
             FROM source()
             GROUP BY DisplayName
             ORDER BY Total DESC
+      - type: vql_suggestion
         name: Detection Filter
         template:  |
             /*
