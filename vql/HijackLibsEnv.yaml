@@ -164,7 +164,7 @@ sources:
 
       LET hits = SELECT
             InUse,
-            format(format='C:\\%s',args=OSPath) as OSPath,
+            format(format='C:\\--FORMATTINGISHARD--s',args=OSPath) as OSPath,
             FileName, FileSize,SI_Lt_FN,uSecZeros,
             LastModified0x10,LastAccess0x10,LastRecordChange0x10,Created0x10,
             LastModified0x30,LastAccess0x30,LastRecordChange0x30,Created0x30
@@ -210,7 +210,7 @@ sources:
       LET IocCsv <= SELECT * FROM parse_csv(filename=AllCsv,accessor='data')
       LET files = SELECT
             EntryNumber,InUse,ParentEntryNumber,
-            format(format='C:\\%s',args=OSPath) as OSPath,
+            format(format='C:\\--FORMATTINGISHARD--s',args=OSPath) as OSPath,
             FileName as DllName, FileSize,SI_Lt_FN,uSecZeros,
             LastModified0x10,LastAccess0x10,LastRecordChange0x10,Created0x10,
             LastModified0x30,LastAccess0x30,LastRecordChange0x30,Created0x30

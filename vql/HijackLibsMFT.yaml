@@ -428,7 +428,7 @@ parameters:
         xmllite.dll,Microsoft,\\Windows\\System32|\\Windows\\SysWOW64,\\Windows\\System32\\certreq\.exe|\\Windows\\System32\\ddodiag\.exe|\\Windows\\System32\\deviceenroller\.exe|\\Windows\\System32\\dmcfghost\.exe|\\Windows\\System32\\dmclient\.exe|\\Windows\\System32\\dmomacpmo\.exe|\\Windows\\System32\\dxcap\.exe|\\Windows\\System32\\dxpserver\.exe|\\Windows\\System32\\mdmdiagnosticstool\.exe|\\Windows\\System32\\mousocoreworker\.exe|\\Windows\\System32\\musnotificationux\.exe|\\Windows\\System32\\musnotifyicon\.exe|\\Windows\\System32\\omadmclient\.exe|\\Windows\\System32\\psr\.exe|\\Windows\\System32\\resetengine\.exe|\\Windows\\System32\\sppsvc\.exe|\\Windows\\System32\\systemreset\.exe|\\Windows\\System32\\tracerpt\.exe|\\Windows\\System32\\upfc\.exe|\\Windows\\System32\\usocoreworker\.exe|\\Windows\\System32\\vsgraphicsdesktopengine\.exe|\\Windows\\System32\\vsgraphicsremoteengine\.exe|\\Windows\\System32\\wbengine\.exe|\\Windows\\Program Files( \(x86\))?\\Common Files\\Microsoft Shared\\ink\\InputPersonalization\.exe,Sideloading,,https://hijacklibs.net/entries/microsoft/built-in/xmllite.html
         xolehlp.dll,Microsoft,\\Windows\\System32|\\Windows\\SysWOW64,\\Windows\\System32\\msdtc\.exe,Sideloading,,https://hijacklibs.net/entries/microsoft/built-in/xolehlp.html
         xpsservices.dll,Microsoft,\\Windows\\System32|\\Windows\\SysWOW64,\\Windows\\System32\\printfilterpipelinesvc\.exe,Sideloading,,https://hijacklibs.net/entries/microsoft/built-in/xpsservices.html
-  
+ 
 
 sources:
   - precondition:

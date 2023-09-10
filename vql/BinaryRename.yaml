@@ -106,7 +106,6 @@ parameters:
         ANY,Python Application,pythonw.exe,Python,Python 3.10.0 packaged with DWAgent - possibly noisy.
 
 
-
 sources:
   - query: |
       LET bins <= SELECT

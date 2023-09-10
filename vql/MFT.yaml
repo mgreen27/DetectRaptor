@@ -94,7 +94,7 @@ parameters:
         Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,,Medium
         Suspicious Location,\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,\\Perflogs\\|\\ProgramData\\[^\\]+$|\\Users\\Public\\|\\Appdata\\(Roaming|Local)\\.+\\[^\\]$,\\eclipse\\|\\WebSphere\\|com\.ibm\.websphere,Internal,High
         Web Browsing History,BrowsingHistoryView,.,,BrowsingHistoryView,Low
-  
+ 
 
 sources:
   - precondition:

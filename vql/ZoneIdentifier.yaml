@@ -234,7 +234,7 @@ parameters:
         URL Shortener,^u\.to,,u.to - URL shortener https://u.to/
         URL Shortener,^u\.no,,Free Custom URL Shortener Branded URLs Link Management
         URL Shortener,urlz\.fr,,
-  
+ 
 
 sources:
   - precondition:

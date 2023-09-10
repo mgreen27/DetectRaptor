@@ -72,7 +72,7 @@ parameters:
         ^lsassw,Wild Neutron APT malware,https://securelist.com/wild-neutron-economic-espionage-threat-actor-returns-with-new-tricks/71275/
         ^NamePipe_MoreWindows,Cloud Hopper Annex B,https://www.cisa.gov/news-events/alerts/2017/04/27/intrusions-affecting-multiple-victims-across-multiple-sectors
         ^pcheap_reuse,Pipe used by Equation Group malware,https://github.com/NVISOsecurity/sigma-public/blob/master/rules/windows/sysmon/sysmon_mal_namedpipes.yml
-  
+
 
 sources:
   - precondition:
