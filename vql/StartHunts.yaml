@@ -32,7 +32,6 @@ parameters:
         DetectRaptor.Windows.Detection.Evtx,,,
         DetectRaptor.Windows.Detection.Powershell.PSReadline,,,
         DetectRaptor.Windows.Detection.Applications,,,
-        DetectRaptor.Windows.Detection.LolDrivers,,,
         DetectRaptor.Windows.Detection.HijackLibsMFT,,,
         DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,
         DetectRaptor.Windows.Detection.MFT,,,
