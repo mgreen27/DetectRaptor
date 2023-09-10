@@ -6,31 +6,12 @@ Simply set variables and run the script.
 
 """
 
-import sys
-import re
-import os
-import yaml
+from base_functions import *
 
 # set variables
 template_vql = '../templates/WebshellYara.template'
 yara_file = '../yara/webshells.yar'
 output_path = '../vql/'
-
-
-def build_vql(yara_rule,template,output_path):
-    template_start = template.split('%yara%')[0]
-    template_end = template.split('%yara%')[1]
-
-    vql = "{}{}{}".format(template_start,yara_rule,template_end)
-
-    name = yaml.load(vql, Loader=yaml.BaseLoader)['name']
-    output_path = output_path +  name.split('.')[-1] + '.yaml'
-    
-    print('\tWriting to:' + output_path)
-
-    with open(output_path, 'w') as outfile:
-      outfile.write(vql)
-
     
 if __name__ == "__main__":
     print('Building WebshellYara artifact')

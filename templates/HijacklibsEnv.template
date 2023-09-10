@@ -50,7 +50,7 @@ parameters:
    - name: AllCsv
      type: hidden
      default: |
-%(ioc)s
+%splitme%
 
 
 sources:

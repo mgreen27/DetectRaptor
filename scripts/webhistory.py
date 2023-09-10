@@ -7,31 +7,12 @@ Simply set variables and run the script.
 
 """
 
-import sys
-import re
-import os
-import yaml
+from base_functions import *
 
 # set variables
 template_vql = '../templates/Webhistory.template'
 ioc_csv = '../csv/WebBrowsers.csv'
 output_path = '../vql/'
-
-
-def build_vql(lookup_table,template,output_path):
-
-    vql = (template % dict(
-        ioc=''.join(["        " + x for x in lookup_table])
-      ))
-
-    name = yaml.load(vql, Loader=yaml.BaseLoader)['name']
-    output_path = output_path +  name.split('.')[-1] + '.yaml'
-    
-    print('\tWriting to:' + output_path)
-
-    with open(output_path, 'w') as outfile:
-      outfile.write(vql)
-
     
 if __name__ == "__main__":
     print('Building Webhistory IOC artifact')
@@ -39,6 +20,9 @@ if __name__ == "__main__":
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:
       lookup_table = file.readlines()
+
+    # format lookup table txt for VQL insertion
+    lookup_table = ''.join(["        " + x for x in lookup_table])
 
     #grab VQL template
     with open(template_vql, 'r') as file:

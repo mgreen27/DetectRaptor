@@ -6,31 +6,12 @@ Simply set variables and run the script.
 
 """
 
-import sys
-import re
-import os
-import yaml
+from base_functions import *
 
 # set variables
 template_vql = '../templates/StartHunts.template'
 output_path = '../vql/'
 prefix = 'DetectRaptor.'
-
-
-def build_vql(lookup_table,template,output_path):
-
-    vql = (template % dict(
-        hunts=''.join(["        " + x for x in lookup_table])
-      ))
-
-    name = yaml.load(vql, Loader=yaml.BaseLoader)['name']
-    output_path = output_path +  name.split('.')[-1] + '.yaml'
-    
-    print('\tWriting to:' + output_path)
-
-    with open(output_path, 'w') as outfile:
-      outfile.write(vql)
-
     
 if __name__ == "__main__":
     print('Building Server.StartHunts')
@@ -46,6 +27,9 @@ if __name__ == "__main__":
           except yaml.YAMLError as exc:
               print(exc)
 
+    # format lookup table txt for VQL insertion
+    lookup_table = ''.join(["        " + x for x in lookup_table])
+    
     #grab VQL template
     with open(template_vql, 'r') as file:
       template = file.read()

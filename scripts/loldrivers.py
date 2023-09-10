@@ -5,13 +5,11 @@ This script builds Living Off The Land Drivers based Velociraptor artifacts
 https://https://www.loldrivers.io/
 
 """
+
+from base_functions import *
 import requests
 import csv
 import json
-import sys
-import re
-import os
-import yaml
 
 
 # set variables
@@ -21,22 +19,6 @@ ioc_csv = '../csv/drivers.csv'
 template_vql = '../templates/LolDrivers.template'
 output_path = '../vql/'
 
-
-def build_vql(lookup_table,template,output_path):
-    vql = template % dict(
-        ioc=(''.join(["        " + x for x in lookup_table])
-      ))
-    # hack to bypass a formatting issue
-    vql = vql.replace("--FORMATTINGISHARD--", "%")
-
-
-    name = yaml.load(vql, Loader=yaml.BaseLoader)['name']
-    output_path = output_path +  name.split('.')[-1] + '.yaml'
-    
-    print('\tWriting to:' + output_path)
-
-    with open(output_path, 'w') as outfile:
-      outfile.write(vql)
 
 # Define a function to flatten the KnownVulnerableSamples dictionary
 def flatten_field(record):
@@ -92,6 +74,9 @@ if __name__ == "__main__":
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:
       lookup_table = file.readlines()
+
+    # format lookup table txt for VQL insertion
+    lookup_table = ''.join(["        " + x for x in lookup_table])
     
     #grab VQL template
     with open(template_vql, 'r') as file:

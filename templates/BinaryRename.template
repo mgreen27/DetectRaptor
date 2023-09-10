@@ -27,8 +27,7 @@ parameters:
   - name: VersionInfoTable
     type: csv
     default: |
-%(ioc)s
-
+%splitme%
 
 sources:
   - query: |

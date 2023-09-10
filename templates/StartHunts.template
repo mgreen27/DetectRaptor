@@ -25,7 +25,7 @@ parameters:
   - name: HuntList
     type: csv
     default: |
-%(hunts)s 
+%splitme% 
 
 sources:
   - query: |

@@ -27,7 +27,7 @@ parameters:
    - name: IOCs
      type: hidden
      default: |
-%(ioc)s
+%splitme%
 
 sources:
   - precondition:

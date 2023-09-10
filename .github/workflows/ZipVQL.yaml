@@ -28,7 +28,7 @@ jobs:
           python evtx.py
           python hijacklibs.py
           python iseautosave.py
-          python loldrivers.py
+          #python loldrivers.py
           python mft.py
           python namedpipes.py
           python psreadline.py
@@ -36,8 +36,6 @@ jobs:
           python zoneidentifier.py
           python starthunts.py
           python yarawebshell.py
-          cd ..
-          echo $(shasum vql/*.yaml)
           
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v4.15.4

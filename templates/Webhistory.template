@@ -20,7 +20,7 @@ parameters:
   - name: IOCs
     type: csv
     default: |
-%(ioc)s
+%splitme%
 
 sources:
   - precondition:
