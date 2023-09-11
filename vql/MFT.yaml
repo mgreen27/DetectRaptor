@@ -146,7 +146,9 @@ sources:
             ### Detection summary
             */
 
-            SELECT Detection.Name, count() AS Total
+            SELECT Detection.Name, 
+               Detection.Criticality as Criticality,
+               count() AS Total
             FROM source()
             GROUP BY Detection.Name
             ORDER BY Total DESC
@@ -161,6 +163,7 @@ sources:
 
             SELECT Fqdn,
                 Detection.Name as Detection,
+                Detection.Criticality as Criticality,
                 OSPath,
                 Detection.StringHit as StringHit,
                 Detection.KeywordRegex as KeywordRegex,
@@ -183,6 +186,7 @@ sources:
 
             SELECT Fqdn,
                 Detection.Name as Detection,
+                Detection.Criticality as Criticality,
                 OSPath,
                 Detection.StringHit as StringHit,
                 Detection.KeywordRegex as KeywordRegex,
