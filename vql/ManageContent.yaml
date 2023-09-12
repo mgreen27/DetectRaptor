@@ -1,0 +1,28 @@
+name: Server.ManageContent
+author: Matt Green - @mgreen27
+description: |
+   This artifact is used to manage DetectRaptor VQL content into Velociraptor. 
+   Designed to run every X seconds it will execute content_chain.
+
+   Default is every 4 hours.
+
+type: SERVER_EVENT
+
+parameters:
+   - name: ScheduleSecs
+     default: 14400
+     description: Will run each period in seconds. Default is 4 hours.
+
+
+sources:
+  - query: |
+      -- create schedule events
+      LET schedule = SELECT timestamp(epoch=Unix) as TimeUTC
+        FROM clock(period=atoi(string=ScheduleSecs))
+        
+      -- content chain
+      SELECT * FROM foreach(row=schedule, 
+        query={
+            SELECT * 
+            FROM Artifact.Exchange.Server.Import.DetectRaptor()
+        } )
