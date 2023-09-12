@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     # grab each yaml file's name
     for artifact in os.listdir(output_path):
-      if artifact != 'StartHunts.yaml':
+      if not (artifact=='StartHunts.yaml' or artifact=='ManageContent.yaml'):
         with open(output_path + artifact, 'r') as stream:
           try:
               lookup_table.append(prefix + yaml.safe_load(stream)['name'] + ',,,' + '\n')
