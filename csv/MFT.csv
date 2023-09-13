@@ -6,7 +6,7 @@ Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBr
 Credential Theft,^FgDump,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,High
 Credential Theft,Potato\.exe$,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",High
 Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low
-Data Transfer,FreeFileSync|FreeFileSync|^mega\.exe|megaclient|megacmd|megasync|megatool|^(ngrok|\.ngrok)|^rclone|Stealbit,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High
+Data Transfer,FreeFileSync|^mega\.exe|megaclient|megacmd|megasync|megatool|^(ngrok|\.ngrok)|^rclone|Stealbit,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High
 Data Transfer,FileZilla,.,,Internal,Low
 Data Transfer,plink\.exe|pscp\.exe|powercat,.,\\Program Files\\,PuTTy / SSH tools outside Program Files is highly suspicious.,High
 Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter,.,,Internal,High
