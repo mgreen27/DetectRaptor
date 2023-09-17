@@ -28,7 +28,7 @@ jobs:
           python evtx.py
           python hijacklibs.py
           python iseautosave.py
-          #python loldrivers.py
+          python loldrivers.py
           python mft.py
           python namedpipes.py
           python psreadline.py
