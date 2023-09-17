@@ -13,7 +13,8 @@ Current artifacts include:
 - Windows.Detection.Evtx
 - Windows.Detection.HijackLibsEnv
 - Windows.Detection.HijackLibsMFT
-- Windows.Detection.LolDrivers
+- Windows.Detection.LolDriversMalicious
+- Windows.Detection.LolDriversVulnerable
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
 - Windows.Detection.Powershell.ISEAutoSave
