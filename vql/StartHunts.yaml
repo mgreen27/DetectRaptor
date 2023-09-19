@@ -25,20 +25,22 @@ parameters:
   - name: HuntList
     type: csv
     default: |
-        Artifact,Timeout,CpuLimit,IopsLimit
-        DetectRaptor.Generic.Detection.WebshellYara,,,
-        DetectRaptor.Windows.Detection.ZoneIdentifier,,,
-        DetectRaptor.Windows.Detection.Amcache,,,
-        DetectRaptor.Windows.Detection.Evtx,,,
-        DetectRaptor.Windows.Detection.Powershell.PSReadline,,,
-        DetectRaptor.Windows.Detection.Applications,,,
-        DetectRaptor.Windows.Detection.HijackLibsMFT,,,
-        DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,
-        DetectRaptor.Windows.Detection.MFT,,,
-        DetectRaptor.Windows.Detection.BinaryRename,,,
-        DetectRaptor.Windows.Detection.Webhistory,,,
-        DetectRaptor.Windows.Detection.NamedPipes,,,
-        DetectRaptor.Windows.Detection.HijackLibsEnv,,,
+        Artifact,Tag,Timeout,CpuLimit,IopsLimit
+        DetectRaptor.Windows.Detection.Evtx,,,,
+        DetectRaptor.Windows.Detection.HijackLibsEnv,,,,
+        DetectRaptor.Windows.Detection.Applications,,,,
+        DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,,
+        DetectRaptor.Windows.Detection.Webhistory,,,,
+        DetectRaptor.Windows.Detection.NamedPipes,,,,
+        DetectRaptor.Windows.Detection.Amcache,,,,
+        DetectRaptor.Windows.Detection.BinaryRename,,,,
+        DetectRaptor.Generic.Detection.WebshellYara,,,,
+        DetectRaptor.Windows.Detection.Powershell.PSReadline,,,,
+        DetectRaptor.Windows.Detection.LolDriversMalicious,,,,
+        DetectRaptor.Windows.Detection.LolDriversVulnerable,,,,
+        DetectRaptor.Windows.Detection.MFT,,,,
+        DetectRaptor.Windows.Detection.ZoneIdentifier,,,,
+        DetectRaptor.Windows.Detection.HijackLibsMFT,,,,
  
 
 sources:
@@ -52,7 +54,10 @@ sources:
                     cpu_limit=int(int=CpuLimit),
                     iops_limit=int(int=IopsLimit),
                     artifacts= [Artifact],
-                    description = regex_replace(source=Artifact,
+                    description = regex_replace(source=
+                                    Artifact + if(condition=Tag, 
+                                                    then=' - ' + Tag,
+                                                    else= ''),
                                                 re='^DetectRaptor\.',
                                                 replace='DetectRaptor: '),
                     pause=if(condition= JustRun,
