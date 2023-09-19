@@ -16,14 +16,14 @@ prefix = 'DetectRaptor.'
 if __name__ == "__main__":
     print('Building Server.StartHunts')
 
-    lookup_table = ['Artifact,Timeout,CpuLimit,IopsLimit\n']
+    lookup_table = ['Artifact,Tag,Timeout,CpuLimit,IopsLimit\n']
 
     # grab each yaml file's name
     for artifact in os.listdir(output_path):
       if not (artifact=='StartHunts.yaml' or artifact=='ManageContent.yaml'):
         with open(output_path + artifact, 'r') as stream:
           try:
-              lookup_table.append(prefix + yaml.safe_load(stream)['name'] + ',,,' + '\n')
+              lookup_table.append(prefix + yaml.safe_load(stream)['name'] + ',,,,' + '\n')
           except yaml.YAMLError as exc:
               print(exc)
 

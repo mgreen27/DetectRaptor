@@ -38,7 +38,10 @@ sources:
                     cpu_limit=int(int=CpuLimit),
                     iops_limit=int(int=IopsLimit),
                     artifacts= [Artifact],
-                    description = regex_replace(source=Artifact,
+                    description = regex_replace(source=
+                                    Artifact + if(condition=Tag, 
+                                                    then=' - ' + Tag,
+                                                    else= ''),
                                                 re='^DetectRaptor\.',
                                                 replace='DetectRaptor: '),
                     pause=if(condition= JustRun,
