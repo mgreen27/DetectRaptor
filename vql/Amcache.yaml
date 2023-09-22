@@ -39,7 +39,7 @@ parameters:
         Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter,.,,Internal,High
         Defence Evasion,CleanWipe|nssm\.exe$|processhacker,.,,Internal,Medium
         Encryption,^dcrypt|^truecrypt|^VeraCrypt,.,,Internal,Low
-        Enumeration Tools,^ADGet\.exe|$AdFind\.exe|Advanced_ip_scanner|Advanced_port_scanner|^fscan\.exe|ipscan\.exe|kportscan\.exe|massscan|nbtscan\.exe|netscan\.exe|nsscan\.exe|NtdsAudit\.exe|PingCastle|SharpShares,.,,Internal,High
+        Enumeration Tools,^ADGet\.exe|^AdFind\.exe|Advanced_ip_scanner|Advanced_port_scanner|^fscan\.exe|ipscan\.exe|kportscan\.exe|massscan|nbtscan\.exe|netscan\.exe|nsscan\.exe|NtdsAudit\.exe|PingCastle|SharpShares,.,,Internal,High
         Enumeration Tools,bloodhound|sharphound,.,bloodhound\.(js|min),Internal,High
         Enumeration Tools,everything\.exe|nmap\.exe|zenmap,.,,Internal,Medium
         Enumeration Tool outputs,^ad_ous\.txt|^ad_computers\.txt|^ad_users\.txt|^ad_group\.txt|^trustdmp\.txt|^subnets\.txt|_computers\.json|_domains\.json|_gpos\.json|_groups\.json|_ous\.json|_users\.json|bloodhound\.zip|ADRecon-Report-,.,,Internal,High
