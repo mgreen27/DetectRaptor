@@ -25,6 +25,7 @@ jobs:
           python amcache.py
           python applications.py
           python binaryrename.py
+          python bootloaders.py
           python evtx.py
           python hijacklibs.py
           python iseautosave.py
