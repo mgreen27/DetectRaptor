@@ -21,19 +21,6 @@ template_vql = '../templates/LolDrivers.template'
 output_path = '../vql/'
 
 
-# Define a function to flatten the KnownVulnerableSamples dictionary
-def flatten_field(record):
-    flat_record = {}
-    for key, value in record.items():
-        if isinstance(value, dict):
-            for subkey, subvalue in value.items():
-                flat_record[key + "_" + subkey] = subvalue
-        elif isinstance(value, list):
-            for i, subdict in enumerate(value):
-                for subkey, subvalue in subdict.items():
-                    flat_record[key + "_" + str(i) + "_" + subkey] = subvalue
-    return flat_record
-
 if __name__ == "__main__":
     print('Building LolDrivers artifact')
 

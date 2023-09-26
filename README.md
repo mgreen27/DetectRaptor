@@ -10,6 +10,7 @@ Current artifacts include:
 - Windows.Detection.Amcache
 - Windows.Detection.Applications
 - Windows.Detection.BinaryRename
+- Windows.Detection.Bootloaders
 - Windows.Detection.Evtx
 - Windows.Detection.HijackLibsEnv
 - Windows.Detection.HijackLibsMFT
@@ -25,6 +26,7 @@ Current artifacts include:
 
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections
+- https://www.bootloaders.io/
 - https://hijacklibs.net/
 - https://www.loldrivers.io/
 - https://github.com/SigmaHQ/sigma
