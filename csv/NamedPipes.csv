@@ -25,8 +25,6 @@ EngineerPipe,HardHatC2 default pipe,https://github.com/DragoQCC/HardHatC2
 ^MSSE-,Cobalt Strike: Default Cobalt Strike Artifact Kit binaries,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f575
 ^mypipe-f,Cobalt Strike: havex.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f588
 ^mypipe-h,Cobalt Strike: havex.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f589
-^ntsvcs,Cobalt Strike: trick_ryuk.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f583
-^ntsvcs,Cobalt Strike: zoom.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f595
 ^paexec,PAExec: Default Named Pipe,https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
 ^PoshMS$,PoshC2: Default Named Pipe,https://github.com/nettitude/PoshC2/blob/d9f487a3794796b3cf2718cb363d2316709fe2e9/resources/modules/NamedPipe.ps1#L4
 ^postex_,Cobalt Strike: Default Post Exploitation job (v4.2+),https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f579
