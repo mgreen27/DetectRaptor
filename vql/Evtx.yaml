@@ -25,9 +25,14 @@ parameters:
    - name: DateBefore
      type: timestamp
      description: "search for events before this date. YYYY-MM-DDTmm:hh:ssZ"
-   - name: SearchVSS
-     description: "Add VSS into query."
-     type: bool
+   - name: VSSAnalysisAge
+     type: int
+     default: 0
+     description: |
+      If larger than zero we analyze VSS within this many days
+      ago. (e.g 7 will analyze all VSS within the last week).  Note
+      that when using VSS analysis we have to use the ntfs accessor
+      for everything which will be much slower.   
    - name: IOCs
      type: hidden
      default: |
@@ -64,7 +69,7 @@ sources:
       SELECT * FROM foreach(row=IOCcsv,query={
             SELECT EventTime,Computer,
                 dict(Name=name,EventId=eventid,Regex=rule,Ignore=ignore) as Detection,
-                Channel,EventID,UserSID,Username,EventData,Message,FullPath
+                Channel,EventID,UserSID,Username,EventData,Message,OSPath
             FROM Artifact.Windows.EventLogs.EvtxHunter(
                   EvtxGlob='C:\\Windows\\System32\\Winevt\\Logs\\*' + eventlog + '*',
                   IdRegex=eventid,
@@ -72,7 +77,7 @@ sources:
                   WhitelistRegex=ignore,
                   DateBefore=DateBefore,
                   DateAfter=DateAfter,
-                  SearchVSS=SearchVSS
+                  VSSAnalysisAge=VSSAnalysisAge
                 )
         })
 
