@@ -32,6 +32,7 @@ parameters:
         Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|procdump|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High
         Credential Theft,^FgDump,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,High
         Credential Theft,Potato\.exe$,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",High
+        Credential Theft,^gosecretsdump_win_v0.3.1\.exe$,.,,https://github.com/C-Sto/gosecretsdump,High
         Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low
         Data Transfer,FreeFileSync|^mega\.exe|megaclient|megacmd|megasync|megatool|^(ngrok|\.ngrok)|^rclone|Stealbit,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High
         Data Transfer,FileZilla,.,,Internal,Low
