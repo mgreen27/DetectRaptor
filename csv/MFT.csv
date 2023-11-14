@@ -23,7 +23,7 @@ Execution,^nsudo\.exe,.,,Internal,High
 Execution,psexec\.exe$|psexec64\.exe$|remcom\.exe$,.,,Psexec - some applications use RemCom,Medium
 Execution,LuciRoot,.,,Rootkit,High
 Hack Tool - Impacket,^execute\.bat$|^[a-zA-Z]{8}\.bat$|^__output$,C:\\WINDOWS\\[a-zA-Z]{8}\.bat|C:\\Windows\\TEMP\\execute\.bat|C:\\__output,,SMBExec - https://github.com/fortra/impacket/blob/master/examples/smbexec.py,High
-Hack Tool - PsMapExec,PsMapExec\.ps1|DumpSAM\.ps1|Invoke-MSSQLup\.ps1|Invoke-Mongoose\.ps1|Invoke-NETMongoose\.ps1|Invoke-Pandemonium\.ps1|Invoke-SecretsDump\.ps1|Invoke-SharpRDPTest\.ps1|Kirby\.ps1,.,,PsMapExec - https://github.com/The-Viper-One/PsMapExec/blob/main/PsMapExec.ps1,High
+Hack Tool - PsMapExec,PsMapExec\.ps1|DumpSAM\.ps1|Invoke-MSSQLup\.ps1|Invoke-Mongoose\.ps1|Invoke-NETMongoose\.ps1|Invoke-Pandemonium\.ps1|Invoke-SecretsDump\.ps1|Invoke-NTDS\.ps1|Invoke-SharpRDPTest\.ps1|Kirby\.ps1,.,,PsMapExec - https://github.com/The-Viper-One/PsMapExec/blob/main/PsMapExec.ps1,High
 Privilege Escalation Tool,winPEAS|winpwn,.,,Internal,High
 Privilege Escalation Tool,KrbRelayUp,.,,Internal,High
 Pirating Software,KMSPico|cracked,.,WindowsApps\\king\.com|\.(jpg|gif|png|bmp|pat|sbsar|pdf|doc|docx|Metadata)$,Internal,Low
