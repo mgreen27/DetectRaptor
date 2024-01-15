@@ -12,6 +12,7 @@ Data Transfer,FileZilla,.,,Internal,Low
 Data Transfer,plink\.exe|pscp\.exe|powercat,.,\\Program Files\\,PuTTy / SSH tools outside Program Files is highly suspicious.,High
 Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter,.,,Internal,High
 Defence Evasion,CleanWipe|nssm\.exe$|processhacker,.,,Internal,Medium
+EDR Evasion,^EDRSilencer\.exe$|^FireBlock\.exe$,.,,https://github.com/netero1010/EDRSilencer,High
 Encryption,^dcrypt|^truecrypt|^VeraCrypt,.,,Internal,Low
 Enumeration Tools,^ADGet\.exe|^AdFind\.exe|Advanced_ip_scanner|Advanced_port_scanner|^fscan\.exe|ipscan\.exe|kportscan\.exe|massscan|nbtscan\.exe|netscan\.exe|nsscan\.exe|NtdsAudit\.exe|PingCastle|SharpShares,.,,Internal,High
 Enumeration Tools,bloodhound|sharphound,.,bloodhound\.(js|min),Internal,High
