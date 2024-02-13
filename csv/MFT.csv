@@ -74,7 +74,7 @@ RMM - ESET Remote Administrator,^era\.exe$|^ezhelp*\.exe$|^eratool\.exe$,.,,ESET
 RMM - ezHelp,^ezhelpclient\.exe$|^ezhelpclientmanager\.exe$,.,,ezHelp - ezhelp.co.kr,Medium
 RMM - FastViewer,^fastclient\.exe$|^fastmaster\.exe$,.,,FastViewer - fastviewer.com,Medium
 RMM - FixMe.it,^fixmeitclient\.exe$,.,,FixMe.it - fixme.it,Medium
-RMM - FleetDeck,^fleetdeck_agent_svc.\exe$,.,,FleetDeck - fleetdeck.io,Medium
+RMM - FleetDeck,^fleetdeck_agent_svc\.exe$,.,,FleetDeck - fleetdeck.io,Medium
 RMM - Fortra,^Fortra$,.,,Fortra - fortra.com,Medium
 RMM - GatherPlace-desktop sharing,^gp3\.exe$|^gp4\.exe$|^gp5\.exe$,.,,GatherPlace-desktop sharing - gatherplace.com,Medium
 RMM - GetScreen,^getscreen.exe$,.,,GetScreen - getscreen.me,Medium
