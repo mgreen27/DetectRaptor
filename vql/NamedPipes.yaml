@@ -119,9 +119,14 @@ sources:
                 Exe, 
                 PipeName, 
                 Type,
-                PipeRegex,
+                dict(
+                    PipeRegex=PipeRegex,
+                    IgnoreExeRegex=IgnoreExeRegex
+                        ) as Regex,
                 Reference
             FROM IOCs
             WHERE PipeName =~ PipeRegex
+                AND NOT if(condition= IgnoreExeRegex,
+                        then= Exe=~IgnoreExeRegex )
             LIMIT 1 -- for performance stop after 1 hit
         }, workers= 20 )
