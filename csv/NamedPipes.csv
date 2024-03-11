@@ -31,7 +31,7 @@ EngineerPipe,,HardHatC2 default pipe,https://github.com/DragoQCC/HardHatC2
 ^postex_ssh_,,Cobalt Strike: Default SSH beacon,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f577
 ^RoguePotato$,,RoguePotato: Default Named Pipe,https://github.com/antonioCoco/RoguePotato
 ^rpchlp_3,,APT: Project Sauron,https://securelist.com/faq-the-projectsauron-apt/75533/
-^scerpc,,Cobalt Strike: zoom.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f594
+^scerpc,\\Windows\\System32\\(services|svchost|CxUIUSvc64)\.exe$,Cobalt Strike: zoom.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f594
 ^sdlrpc$,,APT: Turla,https://www.gdatasoftware.com/blog/2015/01/23926-analysis-of-project-cobra
 ^SearchTextHarvester,,Cobalt Strike: trick_ryuk.profile,https://svch0st.medium.com/guide-to-named-pipes-and-hunting-for-cobalt-strike-pipes-dc46b2c5f585
 ^ShitSecure$,,SharpNamedPipePTH: Default Named Pipe,https://github.com/S3cur3Th1sSh1t/SharpNamedPipePTH/
