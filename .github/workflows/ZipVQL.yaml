@@ -1,5 +1,8 @@
 name: VQL build and archive
 on: [push]
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -51,6 +54,3 @@ jobs:
         artifacts: DetectRaptorVQL.zip
         tag: DetectRaptor
         allowUpdates: true
-      branches:
-        - master
-
