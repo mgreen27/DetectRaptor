@@ -1,5 +1,5 @@
 name: VQL build and archive
-on: [push]
+on:
   push:
     branches:
       - master
