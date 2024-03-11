@@ -73,7 +73,7 @@ sources:
             FROM IOCs
             WHERE PipeName =~ PipeRegex
                 AND NOT if(condition= IgnoreExeRegex,
-                           then= Exe=~IgnoreExeRegex.
+                           then= Exe=~IgnoreExeRegex,
                            else= False )
             LIMIT 1 -- for performance stop after 1 hit
         }, workers= 20 )
