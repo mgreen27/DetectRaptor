@@ -26,22 +26,22 @@ parameters:
     type: csv
     default: |
         Artifact,Tag,Timeout,CpuLimit,IopsLimit
-        DetectRaptor.Windows.Detection.Applications,,,,
-        DetectRaptor.Generic.Detection.WebshellYara,,,,
-        DetectRaptor.Windows.Detection.LolDriversMalicious,,,,
-        DetectRaptor.Windows.Detection.Bootloaders,,,,
-        DetectRaptor.Windows.Detection.Evtx,,,,
-        DetectRaptor.Windows.Detection.HijackLibsEnv,,,,
-        DetectRaptor.Windows.Detection.BinaryRename,,,,
         DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,,
-        DetectRaptor.Windows.Detection.Webhistory,,,,
-        DetectRaptor.Windows.Detection.Amcache,,,,
-        DetectRaptor.Windows.Detection.HijackLibsMFT,,,,
-        DetectRaptor.Windows.Detection.ZoneIdentifier,,,,
-        DetectRaptor.Windows.Detection.Powershell.PSReadline,,,,
-        DetectRaptor.Windows.Detection.MFT,,,,
+        DetectRaptor.Windows.Detection.HijackLibsEnv,,,,
+        DetectRaptor.Windows.Detection.Applications,,,,
         DetectRaptor.Windows.Detection.LolDriversVulnerable,,,,
         DetectRaptor.Windows.Detection.NamedPipes,,,,
+        DetectRaptor.Windows.Detection.LolDriversMalicious,,,,
+        DetectRaptor.Windows.Detection.Powershell.PSReadline,,,,
+        DetectRaptor.Windows.Detection.Evtx,,,,
+        DetectRaptor.Generic.Detection.WebshellYara,,,,
+        DetectRaptor.Windows.Detection.Bootloaders,,,,
+        DetectRaptor.Windows.Detection.ZoneIdentifier,,,,
+        DetectRaptor.Windows.Detection.MFT,,,,
+        DetectRaptor.Windows.Detection.HijackLibsMFT,,,,
+        DetectRaptor.Windows.Detection.Amcache,,,,
+        DetectRaptor.Windows.Detection.Webhistory,,,,
+        DetectRaptor.Windows.Detection.BinaryRename,,,,
  
 
 sources:
