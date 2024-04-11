@@ -40,6 +40,7 @@ parameters:
         Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low
         Data Transfer,FreeFileSync|^mega\.exe|megaclient|megacmd|megasync|megatool|^(ngrok|\.ngrok)|^rclone|Stealbit,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High
         Data Transfer - FileZilla,FileZilla,.,,Internal,Low
+        Data Transfer - Restic,restic\.exe,.,,Internal - https://github.com/restic/restic,Low
         Data Transfer,plink\.exe|pscp\.exe|powercat,.,\\Program Files\\,PuTTy / SSH tools outside Program Files is highly suspicious.,High
         Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter,.,,Internal,High
         Defence Evasion,CleanWipe|nssm\.exe$|processhacker,.,,Internal,Medium
