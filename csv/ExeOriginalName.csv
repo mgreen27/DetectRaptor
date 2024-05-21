@@ -75,3 +75,4 @@ ANY,Defender Control,Defender Control,Windows Defender Control,Windows Defender 
 ANY,NirCmd,NirCmd.exe,Nir Sofer,nircmd.exe
 ANY,NSudo,NSudo.exe,NSudo for Windows,Nsudo
 ANY,Python Application,pythonw.exe,Python,Python 3.10.0 packaged with DWAgent - possibly noisy.
+ANY,LinkShares.exe,LinkShares.exe,LinkShares,Observed in field deploying ransomware.
