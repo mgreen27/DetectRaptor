@@ -17,8 +17,8 @@ resources:
   timeout: 6000
 
 parameters:
-  - name: TargetFolder
-    default: C:\
+  - name: TargetGlob
+    default: C:\**
   - name: HostUrlRegex
     default: \.(exe|dll|sys|drv|pif|com|scr|cpl|zip|7z|vhd|iso|msi|jar|hta|bat|cmd|vb|vbs|vbe|js|jse|ws|wsf|wsc|wsh|ps1|scf|lnk|reg|doc|xls|ppt|docm|dotm|xlsm|xltm|xlam|pptm|potm|ppam|ppsm|sldm)$
     type: regex
@@ -253,7 +253,7 @@ sources:
                     'HostUrl=[^:]+://(?P<UrlDomain>[^:/]+)']
                 ) as AdsContent
           FROM Artifact.Windows.NTFS.ADSHunter(
-                TargetFolder=TargetFolder,
+                TargetGlob=TargetGlob,
                 AdsContentRegex='HostUrl|ReferrerUrl',
                 AdsNameGlob='Zone.Identifier' )
           WHERE AdsContent.HostUrl
