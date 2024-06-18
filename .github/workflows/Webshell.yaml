@@ -1,8 +1,13 @@
-name: VQL build and archive
+name: Weekly webshell update
+
+permissions:
+  contents: write
+
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 3 * * 0' # Runs at 03:00 every Sunday
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,26 +24,13 @@ jobs:
       run: |
           pip install PyYAML==6.0 -q
           pip install requests -q
-          pip install pandas -q
 
     - name: Update vql
       run: |
           mkdir -p ./vql
           cd ./scripts
-          python amcache.py
-          python applications.py
-          python binaryrename.py
-          python bootloaders.py
-          python evtx.py
-          python hijacklibs.py
-          python iseautosave.py
-          python loldrivers.py
-          python mft.py
-          python namedpipes.py
-          python psreadline.py
-          python webhistory.py
-          python zoneidentifier.py
-          python starthunts.py
+          python get_webshell_yara.py
+          python yarawebshell.py
           
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v4.15.4
