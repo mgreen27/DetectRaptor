@@ -88,6 +88,14 @@ for file in target_files:
         matching_rules = search_in_rules(parsed_rules, 'webshell')
 
         for rule in matching_rules:
+            try:
+                # set import bool to add to rule later
+                if 'pe' in rule['imports']:
+                    pe = True
+                if 'math' in rule['imports']:
+                    math = True
+            except:
+                pass
             if rule.get('tags'):
                 filtered_rules = filtered_rules + "rule %s : %s {\n    %s%s%s}\n" % (rule['rule_name'],' '.join(rule['tags']),rule['raw_meta'],rule['raw_strings'],rule['raw_condition'])
             else:
@@ -97,6 +105,11 @@ parser.clear()
 
 if os.path.exists(filename):
     os.remove(filename)
+
+if math:
+    filtered_rules = 'import "math"\n' + filtered_rules
+if pe:
+    filtered_rules = 'import "pe"\n' + filtered_rules
 
 filtered_rules = ['        ' + line.rstrip() for line in filtered_rules.splitlines()]
 filtered_rules = ''.join([x + "\n" for x in filtered_rules])

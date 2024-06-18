@@ -1,3 +1,5 @@
+        import "pe"
+        import "math"
         rule ELASTIC_Windows_Trojan_Behinder_B9A49F4B : FILE MEMORY {
             meta:
         		description = "Webshell found in REF2924, either Behinder or Godzilla based shell in C#"
