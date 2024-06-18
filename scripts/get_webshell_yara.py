@@ -14,7 +14,7 @@ import plyara
 
 # set variables
 output_path = '../yara/webshells.yar'
-url = "https://github.com/YARAHQ/yara-forge/releases/download/20240414/yara-forge-rules-full.zip"
+url = "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip"
 filename = os.path.basename(url)
 extract_dir = "yara-forge-rules"
 
