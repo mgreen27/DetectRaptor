@@ -20,7 +20,7 @@ template_vql = '../templates/Bootloaders.template'
 output_path = '../vql/'
 
 if __name__ == "__main__":
-    print('Building Botloaders artifact')
+    print('Building Bootloaders artifact')
 
     # first download loldrivers csv and build regex csv
     data = requests.get(loldrivers_url).json()
