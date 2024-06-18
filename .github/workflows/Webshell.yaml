@@ -24,6 +24,7 @@ jobs:
       run: |
           pip install PyYAML==6.0 -q
           pip install requests -q
+          pip install plyara -q #2.1.1
 
     - name: Update vql
       run: |
