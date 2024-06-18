@@ -135,7 +135,7 @@ if __name__ == "__main__":
     # sideload version
     df = pd.DataFrame(flattened_data[1:], columns=flattened_data[0])
     grouped = df.groupby('DllName')
-    grouped.apply(lambda x: append_csv_data(usable_data, x, x.name))
+    grouped.apply(lambda x: append_csv_data(usable_data, x, x.name), include_groups=False)
 
 
     # finally we write to csv and build VQL
