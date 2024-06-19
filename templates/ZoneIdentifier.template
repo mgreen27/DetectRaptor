@@ -25,8 +25,7 @@ parameters:
   - name: IOCs
     type: csv
     default: |
-%splitme% 
-        Direct Local IP address,"^(10\.|192\.168\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)",,Local IP regex
+%splitme%        Direct Local IP address,"^(10\.|192\.168\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)",,Local IP regex
 
 sources:
   - precondition:
