@@ -20,12 +20,13 @@ parameters:
   - name: TargetGlob
     default: C:\**
   - name: HostUrlRegex
-    default: \.(exe|dll|sys|drv|pif|com|scr|cpl|zip|7z|vhd|iso|msi|jar|hta|bat|cmd|vb|vbs|vbe|js|jse|ws|wsf|wsc|wsh|ps1|scf|lnk|reg|doc|xls|ppt|docm|dotm|xlsm|xltm|xlam|pptm|potm|ppam|ppsm|sldm)$
+    default: \.(exe|dll|sys|drv|pif|com|scr|cpl|zip|7z|vhd|iso|msi|jar|hta|bat|cmd|vb|vbs|vbe|js|jse|ws|wsf|wsc|wsh|ps1|scf|lnk|reg|doc|xls|ppt|docm|dotm|xlsm|xltm|xlam|pptm|potm|ppam|ppsm|sldm)
     type: regex
   - name: IOCs
     type: csv
     default: |
 %splitme% 
+        Direct Local IP address,"^(10\.|192\.168\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)",,Local IP regex
 
 sources:
   - precondition:
