@@ -68,16 +68,9 @@ sources:
                 AllowRegex,
                 Comment
             FROM IOCs
-            WHERE 
-                (
-                    ( AdsContent.UrlDomain =~ DomainRegex
-                        AND NOT if(condition= AllowRegex,
-                                    then= AdsContent.UrlDomain =~ AllowRegex,
-                                    else= False) )
-                OR  ( AdsContent.UrlDomain =~ DomainRegex
-                        AND NOT if(condition= AllowRegex,
-                                    then= AdsContent.UrlDomain =~ AllowRegex,
-                                    else= False) )
-                )
+            WHERE AdsContent.UrlDomain =~ DomainRegex
+                AND NOT if(condition= AllowRegex,
+                                then= AdsContent.UrlDomain =~ AllowRegex,
+                                else= False)
             LIMIT 1 -- limit 1 hit per domain for performance
         }, workers= 20)
