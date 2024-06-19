@@ -147,7 +147,7 @@ parameters:
         Malware Hosting and Exfiltration,privnote.com,,
         Malware Hosting and Exfiltration,qaz.im,,
         Malware Hosting and Exfiltration,rapidgator.net,,
-        Malware Hosting and Exfiltration,raw.githubusercontent.com,,
+        Malware Hosting and Exfiltration,(raw|objects).githubusercontent.com,,
         Malware Hosting and Exfiltration,saicloud.com,,
         Malware Hosting and Exfiltration,seafile.com,,
         Malware Hosting and Exfiltration,sendfiles.dev,,
