@@ -22,6 +22,10 @@ Current artifacts include:
 - Windows.Detection.Powershell.PSReadline
 - Windows.Detection.Webhistory
 - Windows.Detection.ZoneIdentifier
+- Generic.Detection.WebshellYara
+- Linux.Detection.YaraProcessLinux
+- Windows.Detection.YaraProcessWin
+- Macos.Detection.YaraProcessMacos
 - Server.StartHunts
 
 Some contributing repositories:
@@ -30,3 +34,4 @@ Some contributing repositories:
 - https://hijacklibs.net/
 - https://www.loldrivers.io/
 - https://github.com/SigmaHQ/sigma
+- https://yarahq.github.io/
