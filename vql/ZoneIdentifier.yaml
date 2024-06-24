@@ -20,7 +20,7 @@ parameters:
   - name: TargetGlob
     default: C:\**
   - name: HostUrlRegex
-    default: \.(exe|dll|sys|drv|pif|com|scr|cpl|zip|7z|vhd|iso|msi|jar|hta|bat|cmd|vb|vbs|vbe|js|jse|ws|wsf|wsc|wsh|ps1|scf|lnk|reg|doc|xls|ppt|docm|dotm|xlsm|xltm|xlam|pptm|potm|ppam|ppsm|sldm)$
+    default: \.(exe|dll|sys|drv|pif|com|scr|cpl|zip|7z|vhd|iso|msi|jar|hta|bat|cmd|vb|vbs|vbe|js|jse|ws|wsf|wsc|wsh|ps1|scf|lnk|reg|doc|xls|ppt|docm|dotm|xlsm|xltm|xlam|pptm|potm|ppam|ppsm|sldm)
     type: regex
   - name: IOCs
     type: csv
@@ -152,7 +152,7 @@ parameters:
         Malware Hosting and Exfiltration,privnote.com,,
         Malware Hosting and Exfiltration,qaz.im,,
         Malware Hosting and Exfiltration,rapidgator.net,,
-        Malware Hosting and Exfiltration,raw.githubusercontent.com,,
+        Malware Hosting and Exfiltration,(raw|objects).githubusercontent.com,,
         Malware Hosting and Exfiltration,saicloud.com,,
         Malware Hosting and Exfiltration,seafile.com,,
         Malware Hosting and Exfiltration,sendfiles.dev,,
@@ -234,7 +234,7 @@ parameters:
         URL Shortener,^u\.to,,u.to - URL shortener https://u.to/
         URL Shortener,^u\.no,,Free Custom URL Shortener Branded URLs Link Management
         URL Shortener,urlz\.fr,,
- 
+        Direct Local IP address,"^(10\.|192\.168\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.)",,Local IP regex
 
 sources:
   - precondition:
@@ -277,16 +277,9 @@ sources:
                 AllowRegex,
                 Comment
             FROM IOCs
-            WHERE 
-                (
-                    ( AdsContent.UrlDomain =~ DomainRegex
-                        AND NOT if(condition= AllowRegex,
-                                    then= AdsContent.UrlDomain =~ AllowRegex,
-                                    else= False) )
-                OR  ( AdsContent.UrlDomain =~ DomainRegex
-                        AND NOT if(condition= AllowRegex,
-                                    then= AdsContent.UrlDomain =~ AllowRegex,
-                                    else= False) )
-                )
+            WHERE AdsContent.UrlDomain =~ DomainRegex
+                AND NOT if(condition= AllowRegex,
+                                then= AdsContent.UrlDomain =~ AllowRegex,
+                                else= False)
             LIMIT 1 -- limit 1 hit per domain for performance
         }, workers= 20)
