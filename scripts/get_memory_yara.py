@@ -158,30 +158,14 @@ for file in target_files:
 
         for os_rules in [ (windows_rules,windows_path),(linux_rules,linux_path),(macos_rules,macos_path)]:
             output_path = os_rules[1]
-            pe = False
-            math = False
             filtered_rules = ''
             print(f'{len(os_rules[0])} rules to be written to {output_path}')
             
             for rule in os_rules[0]:
-                '''try:
-                    # set import bool to add to rule later
-                    if 'pe' in rule['imports']:
-                        pe = True
-                    if 'math' in rule['imports']:
-                        math = True
-                except:
-                    pass
-                '''
                 if rule.get('tags'):
                     filtered_rules = filtered_rules + "rule %s : %s {\n    %s%s%s}\n" % (rule['rule_name'],' '.join(rule['tags']),rule['raw_meta'],rule['raw_strings'],rule['raw_condition'])
                 else:
                     filtered_rules = filtered_rules + "rule %s {\n    %s%s%s}\n" % (rule['rule_name'],rule['raw_meta'],rule['raw_strings'],rule['raw_condition'])
-
-            if math:
-                filtered_rules = 'import "math"\n' + filtered_rules
-            if pe:
-                filtered_rules = 'import "pe"\n' + filtered_rules
 
             filtered_rules = ['        ' + line.rstrip() for line in filtered_rules.splitlines()]
             filtered_rules = ''.join([x + "\n" for x in filtered_rules])
@@ -192,6 +176,3 @@ for file in target_files:
                 print('\tWriting to: ' + output_path)
                 print('\tSHA1: ' + shasum(output_path))
 parser.clear()
-
-
-
