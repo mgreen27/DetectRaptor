@@ -68,6 +68,7 @@ for file in target_files:
         # find rules in scope
         parsed_rules = module_fix(parsed_rules, unsupported_modules)
         parsed_rules = drop_memory_only(parsed_rules)
+        parsed_rules = find_private(parsed_rules) # drops private rules for now... will update
         print(f"{len(parsed_rules)} inscope rules")
 
         linux_rules = find_linux(parsed_rules)
