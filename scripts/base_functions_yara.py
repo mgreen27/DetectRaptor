@@ -10,7 +10,6 @@ import requests
 import zipfile
 import fnmatch
 import plyara
-import yara
 
 from base_functions import shasum  # Assuming this is defined in base_functions
 
@@ -290,20 +289,3 @@ def order_rules(original_rules,rules):
                 break
 
     return matching_rules
-
-
-def compile_yar(file_path):
-    try:
-        # Read YARA rules from the file
-        with open(file_path, 'r') as file:
-            yara_rules = file.read()
-
-        # Compile the YARA rules
-        compiled_rules = yara.compile(source=yara_rules)
-                
-        return compiled_rules
-    
-    except yara.SyntaxError as e:
-        print(f"Syntax error in YARA rules: {e}")
-    except Exception as e:
-        print(f"Error compiling YARA rules: {e}")

@@ -22,7 +22,23 @@ urls = [
 extract_dir = "./yara-forge-rules"
 unsupported_modules = [ "hash", "dotnet", "console" ]
 
-#download_rules(urls,extract_dir)
+def compile_yar(file_path):
+    try:
+        # Read YARA rules from the file
+        with open(file_path, 'r') as file:
+            yara_rules = file.read()
+
+        # Compile the YARA rules
+        compiled_rules = yara.compile(source=yara_rules)
+
+        return compiled_rules
+    
+    except yara.SyntaxError as e:
+        print(f"Syntax error in YARA rules: {e}")
+    except Exception as e:
+        print(f"Error compiling YARA rules: {e}")
+
+download_rules(urls,extract_dir)
 
 target_files = []
 for root, _, files in os.walk(extract_dir):
