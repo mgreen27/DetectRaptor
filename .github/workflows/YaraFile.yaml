@@ -40,7 +40,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4.15.4
       with:
         commit_message: AutoUpdate VQL and yara
-        file_pattern: vql/*.yaml yara/yara-rules-full.yar
+        file_pattern: vql/*.yaml */yara-rules-full.yar
         
     - name: Zip Folder
       run: zip -r DetectRaptorVQL.zip vql/*.yaml
