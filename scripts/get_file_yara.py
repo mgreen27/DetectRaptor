@@ -8,7 +8,6 @@ import yara
 import gzip
 import io
 import shutil
-import base64
 
 from base_functions_yara import *
 

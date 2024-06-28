@@ -6,6 +6,7 @@ Simply set variables and run the script.
 
 """
 
+import base64
 from base_functions import *
 
 # set variables: os = [template, compiledrules.gz]
