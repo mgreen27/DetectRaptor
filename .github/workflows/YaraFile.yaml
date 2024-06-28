@@ -33,14 +33,14 @@ jobs:
       run: |
           mkdir -p ./vql
           cd ./scripts
-          python get_memory_yara.py
-          python yaraprocess.py
+          python get_file_yara.py
+          python yarafile.py
           
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v4.15.4
       with:
         commit_message: AutoUpdate VQL and yara
-        file_pattern: vql/*.yaml */yara-rules-full.yar
+        file_pattern: vql/*.yaml yara/yara-rules-full.yar
         
     - name: Zip Folder
       run: zip -r DetectRaptorVQL.zip vql/*.yaml
