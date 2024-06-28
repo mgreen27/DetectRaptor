@@ -1,0 +1,51 @@
+name: Weekly yara process update
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 5 * * 0' # Runs at 05:00 every Sunday
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+    
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Install python requirements
+      run: |
+          sudo apt-get update
+          sudo apt-get install -y automake libtool make gcc pkg-config libssl-dev flex bison
+          pip install PyYAML==6.0 -q
+          pip install requests -q
+          pip install plyara -q #2.1.1
+          pip install yara-python -q
+
+    - name: Update yara rules and buildvql
+      run: |
+          mkdir -p ./vql
+          cd ./scripts
+          python get_file_yara.py
+          python yarafile.py
+          
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v4.15.4
+      with:
+        commit_message: AutoUpdate VQL and yara
+        file_pattern: vql/*.yaml yara/yara-rules-full.yar
+        
+    - name: Zip Folder
+      run: zip -r DetectRaptorVQL.zip vql/*.yaml
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: DetectRaptorVQL.zip
+        tag: DetectRaptor
+        allowUpdates: true
