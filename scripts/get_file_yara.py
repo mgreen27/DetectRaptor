@@ -1,27 +1,28 @@
 #!/usr/bin/python3
 """
-This script Adds a yara rule set to a velociraptor ProcessYara artifacts.
+This script adds a YARA rule set to a Velociraptor YARA glob artifacts.
 
 Simply set variables and run the script.
-
 """
+import yara
+import gzip
+import io
+import shutil
+import base64
 
 from base_functions_yara import *
-# set variables
-windows_yar = 'windows_process.yar'
-linux_yar = 'linux_process.yar'
-macos_yar = 'macos_process.yar'
-urls = [ # when testing Memory focused rules in all sets identical - reducing download for now
-        #"https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip",
-        #"https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip",
-        "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip"
-    ]
 
-
-extract_dir = "yara-forge-rules"
+# Set variables
+windows_yar = 'windows_file.yar'
+linux_yar = 'linux_file.yar'
+macos_yar = 'macos_file.yar'
+urls = [
+    "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip"
+]
+extract_dir = "./yara-forge-rules"
 unsupported_modules = [ "hash", "dotnet", "console" ]
 
-download_rules(urls,extract_dir)
+#download_rules(urls,extract_dir)
 
 target_files = []
 for root, _, files in os.walk(extract_dir):
@@ -48,8 +49,9 @@ for file in target_files:
         parsed_rules = parser.parse_string(data.read())
         print(f"\n{len(parsed_rules)} total rules in {file}")
 
-        parsed_rules = search_in_rules(parsed_rules, 'memory','file')
+        # find rules in scope
         parsed_rules = module_fix(parsed_rules, unsupported_modules)
+        parsed_rules = drop_memory_only(parsed_rules)
         print(f"{len(parsed_rules)} inscope rules")
 
         linux_rules = find_linux(parsed_rules)
@@ -70,13 +72,32 @@ for file in target_files:
 
             for rule in os_rules:
                 if rule.get('tags'):
-                    filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
+                    filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
                 else:
-                    filtered_rules += f"rule {rule['rule_name']} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
-
+                    filtered_rules += f"rule {rule['rule_name']} {{\n    {rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
 
             with open(output_path, 'w') as final_yara:
                 final_yara.write(filtered_rules)
-                print(f'\tWriting to: {output_path}')
-                print(f'\tSHA1: {shasum(output_path)}')
+            print(f'\tWriting to: {output_path}\t\tSHA1: {shasum(output_path)}')
+
+            try:
+                compiled_rules = compile_yar(output_path)
+                with open(output_path + 'c', 'wb') as compiled_yara:
+                    compiled_rules.save(file=compiled_yara)
+                print(f'\tWriting to: {output_path + 'c'}\tSHA1: {shasum(output_path + 'c')}')
+
+                # Open the input file for reading in binary mode
+                with open(output_path + 'c', 'rb') as compiled_yara:
+                    with gzip.open(output_path + 'c.gz', 'wb') as gz_file:
+                        gz_file.writelines(compiled_yara)
+                print(f'\tWriting to: {output_path + 'c.gz'}\tSHA1: {shasum(output_path + 'c.gz')}')                
+
+            except:
+                continue
+
+    # finally copy yara forge to yara folder for licence reference
+    shutil.copy(file, '../yara/' + os.path.basename(file))
+
+
 parser.clear()
+
