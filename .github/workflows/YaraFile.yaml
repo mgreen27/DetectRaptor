@@ -22,7 +22,7 @@ jobs:
         python-version: '3.10'
     - name: Install python requirements
       run: |
-	  sudo apt-get update
+          sudo apt-get update
           sudo apt-get install -y automake libtool make gcc pkg-config libssl-dev flex bison
           pip install yara-python -q
           pip install PyYAML==6.0 -q
