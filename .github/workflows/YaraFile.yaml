@@ -1,4 +1,4 @@
-name: Weekly yara process update
+name: Weekly yara file update
 
 permissions:
   contents: write
