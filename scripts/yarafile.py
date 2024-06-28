@@ -10,7 +10,7 @@ import base64
 from base_functions import *
 
 # set variables: os = [template, compiledrules.gz]
-windows = [ '../templates/FileYaraWin.template', '../yara/full_windows_file.yarc.gz' ]
+#windows = [ '../templates/FileYaraWin.template', '../yara/full_windows_file.yarc.gz' ]
 linux   = [ '../templates/FileYaraLinux.template', '../yara/full_linux_file.yarc.gz' ]
 macos   = [ '../templates/FileYaraMacos.template', '../yara/full_macos_file.yarc.gz' ]
 
@@ -28,7 +28,7 @@ def encode_base64(data):
 if __name__ == "__main__":
     print('Building FileYara artifacts')
 
-    for os in [ windows, linux, macos ]:
+    for os in [ linux, macos ]:
       # open gzipped rules and base64 encode
       with open(os[1], 'rb') as gz_file:
         gz_rules = gz_file.read()
