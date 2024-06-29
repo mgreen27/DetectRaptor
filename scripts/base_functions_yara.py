@@ -158,6 +158,46 @@ def drop_memory_only(rules):
     return matching_rules
 
 
+def find_windows(rules):
+    matching_rules = []
+    seen_rule_names = set()
+
+    for rule in rules:
+        rule_name = rule.get('rule_name', '').lower()
+        metadata = rule.get('metadata', [])
+        tags = [tag.lower() for tag in rule.get('tags', [])]
+        imports = [i.lower() for i in rule.get('imports', [])]
+        is_windows = False
+
+        # Check for the search string in tags
+        for tag in tags:
+            if 'windows' in tag or 'pe' in tag:
+                is_windows = True
+                if rule_name not in seen_rule_names:
+                    seen_rule_names.add(rule_name)
+                    matching_rules.append(rule)
+                break
+
+        for i in imports:
+            if 'pe' in i:
+                is_windows = True
+                if rule_name not in seen_rule_names:
+                    seen_rule_names.add(rule_name)
+                    matching_rules.append(rule)
+                break
+        
+        if is_windows:
+            continue
+
+        if 'linux' in rule_name or '_elf_' in rule_name or 'macos' in rule_name or 'macho' in rule_name:
+            continue
+
+        if rule_name not in seen_rule_names:
+            seen_rule_names.add(rule_name)
+            matching_rules.append(rule)
+
+    return matching_rules
+
 def find_linux(rules):
     matching_rules = []
     seen_rule_names = set()
@@ -203,9 +243,13 @@ def find_linux(rules):
                         seen_rule_names.add(rule_name)
                         matching_rules.append(rule)
                     break
-            else:
-                continue
-            break
+                elif key == 'os' and 'all' in str(value).lower():
+                    if rule_name not in seen_rule_names:
+                        seen_rule_names.add(rule_name)
+                        matching_rules.append(rule)
+                    break
+                else:
+                    continue
 
     return matching_rules
 
@@ -247,52 +291,21 @@ def find_macos(rules):
                         seen_rule_names.add(rule_name)
                         matching_rules.append(rule)
                     break
-            else:
-                continue
-            break
 
-    return matching_rules
-
-def find_crossplatform_rules(rules):
-    matching_rules = []
-    seen_rule_names = set()
-    
-    for rule in rules:
-        rule_name = rule.get('rule_name', '').lower()
-        metadata = rule.get('metadata', [])
-        for item in metadata:
-            for key, value in item.items():
-                if key == 'os' and 'all' in str(value).lower():
+                elif key == 'os' and 'all' in str(value).lower():
                     if rule_name not in seen_rule_names:
                         seen_rule_names.add(rule_name)
                         matching_rules.append(rule)
                     break
                 else:
                     continue
-
-    return matching_rules
-
-
-def order_rules(original_rules,rules):
-    matching_rules = []
-    seen_rule_names = set()
-    
-    for orig_rule in original_rules:
-        orig_name = orig_rule.get('rule_name', '').lower()
-
-        for rule in rules:
-            rule_name = rule.get('rule_name', '').lower()
-            if rule_name == orig_name:
-                if rule_name not in seen_rule_names:
-                    seen_rule_names.add(rule_name)
-                    matching_rules.append(rule)
                 break
 
     return matching_rules
 
 
 def find_private(rules):
-    matching_rules = []
+    private_rules = []
     not_private = []
     seen_rule_names = set()
 
@@ -300,20 +313,20 @@ def find_private(rules):
         rule_name = rule.get('rule_name', '').lower()
         scopes = [scope.lower() for scope in rule.get('scopes', [])]
         if 'private' in scopes:
-            print (rule_name,scopes)
+            #print (rule_name,scopes)
             if rule_name not in seen_rule_names:
                 seen_rule_names.add(rule_name)
-                matching_rules.append(rule)
+                private_rules.append(rule)
 
         for condition in rule.get('condition_terms', []):
                 if condition.lower() in seen_rule_names:
-                    print(rule_name,condition)
+                    #print(rule_name,condition)
                     if rule_name not in seen_rule_names:
                         seen_rule_names.add(rule_name)
-                        matching_rules.append(rule)
+                        private_rules.append(rule)
 
         if rule_name not in seen_rule_names:
             seen_rule_names.add(rule_name)
             not_private.append(rule)
-            
-    return not_private
+
+    return not_private, private_rules

@@ -50,15 +50,13 @@ for file in target_files:
 
         parsed_rules = search_in_rules(parsed_rules, 'memory','file')
         parsed_rules = module_fix(parsed_rules, unsupported_modules)
+        
         print(f"{len(parsed_rules)} inscope rules")
 
+        windows_rules = find_windows(parsed_rules)
         linux_rules = find_linux(parsed_rules)
         macos_rules = find_macos(parsed_rules)
-        crossplatform_rules = find_crossplatform_rules(parsed_rules)
-        
-        windows_rules = filter_non_matching_rules(parsed_rules, linux_rules + macos_rules)
-        linux_rules += crossplatform_rules
-        macos_rules += crossplatform_rules
+
 
         # Write filtered rules to respective files
         for os_rules, output_path in [(windows_rules, windows_path), (linux_rules, linux_path), (macos_rules, macos_path)]:
