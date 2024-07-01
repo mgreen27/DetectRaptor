@@ -85,11 +85,11 @@ for file in target_files:
             for i in find_modules_used(os_rules):
                 filtered_rules = f'import "{i}"\n' + filtered_rules
 
-            # hacky fix for private rule with conflict
-            if '(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)' in rule['raw_condition']:
-                rule['raw_condition'] = rule['raw_condition'].replace('(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)','AVASTTI_EXE_PRIVATE')
-
             for rule in os_rules:
+                # hacky fix for private rule with conflict
+                if 'windows' in output_path and '(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)' in rule['raw_condition']:
+                    rule['raw_condition'] = rule['raw_condition'].replace('(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)','AVASTTI_EXE_PRIVATE')
+
                 if rule.get('tags'):
                     filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
                 else:
