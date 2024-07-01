@@ -189,7 +189,10 @@ def find_windows(rules):
         if is_windows:
             continue
 
-        if 'linux' in rule_name or '_elf_' in rule_name or 'macos' in rule_name or 'macho' in rule_name:
+        if 'linux' in rule_name or '_elf' in rule_name or 'macos' in rule_name or 'macho' in rule_name:
+            continue
+
+        if eset_moose in rule_name:
             continue
 
         if rule_name not in seen_rule_names:
@@ -229,7 +232,7 @@ def find_linux(rules):
         if is_linux:
             continue
         
-        if 'linux' in rule_name or '_elf_' in rule_name:
+        if 'linux' in rule_name or '_elf' in rule_name:
             if rule_name not in seen_rule_names:
                 seen_rule_names.add(rule_name)
                 matching_rules.append(rule)
