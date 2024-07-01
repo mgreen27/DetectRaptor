@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script Adds a yara rule set to a velociraptor ProcessYara artifacts.
+This script Adds a yara rule set to a velociraptor YaraProcess artifacts.
 
 Simply set variables and run the script.
 
@@ -9,14 +9,14 @@ Simply set variables and run the script.
 from base_functions import *
 
 # set variables
-windows = [ '../templates/ProcessYaraWin.template', '../yara/full_windows_process.yar' ]
-linux   = [ '../templates/ProcessYaraLinux.template', '../yara/full_linux_process.yar' ]
-macos   = [ '../templates/ProcessYaraMacos.template', '../yara/full_macos_process.yar' ]
+windows = [ '../templates/YaraProcessWin.template', '../yara/full_windows_process.yar' ]
+linux   = [ '../templates/YaraProcessLinux.template', '../yara/full_linux_process.yar' ]
+macos   = [ '../templates/YaraProcessMacos.template', '../yara/full_macos_process.yar' ]
 
 output_path = '../vql/'
     
 if __name__ == "__main__":
-    print('Building ProcessYara artifacts')
+    print('Building YaraProcess artifacts')
 
     for os in [ windows, linux, macos]:
       template_vql = os[0]

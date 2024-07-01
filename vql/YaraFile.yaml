@@ -59,18 +59,15 @@ parameters:
     type: bool
 
 sources:
-  - precondition:
-      SELECT OS From info() where OS = 'darwin'
-
-    query: |
-      LET host <= SELECT OS FROM info()
-      LET ToolName =    if(condition= host[0].OS=~'Windows', 
+  - query: |
+      LET host_info <= SELECT OS FROM info()
+      LET ToolName =    if(condition= host_info[0].OS=~'Windows', 
                             then= 'FileYaraWindows',
                             else=   
-                        if(condition= host[0].OS=~'Linux', 
+                        if(condition= host_info[0].OS=~'Linux', 
                             then= 'FileYaraLinux',
                             else=
-                        if(condition= host[0].OS=~'darwin',
+                        if(condition= host_info[0].OS=~'darwin',
                             then= 'FileYaraMacOS' )))
                             
       LET rules <= SELECT OSPath FROM Artifact.Generic.Utils.FetchBinary(
