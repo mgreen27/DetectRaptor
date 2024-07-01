@@ -192,7 +192,7 @@ def find_windows(rules):
         if 'linux' in rule_name or '_elf' in rule_name or 'macos' in rule_name or 'macho' in rule_name:
             continue
 
-        if eset_moose in rule_name:
+        if 'eset_moose' in rule_name:
             continue
 
         if rule_name not in seen_rule_names:
