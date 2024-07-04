@@ -1,4 +1,4 @@
-name: Generic.Detection.WebshellYara
+name: Generic.Detection.YaraWebshell
 author: Matt Green - @mgreen27
 description: |
    This artifact is a bulk yara hunt for webshells that leverages a Glob 
