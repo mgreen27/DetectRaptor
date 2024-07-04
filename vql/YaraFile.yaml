@@ -69,6 +69,14 @@ sources:
                             else=
                         if(condition= host_info[0].OS=~'darwin',
                             then= 'FileYaraMacOS' )))
+      LET Length =    if(condition= host_info[0].OS=~'Windows', 
+                            then= 30000000,
+                            else=   
+                        if(condition= host_info[0].OS=~'Linux', 
+                            then= 2000000,
+                            else=
+                        if(condition= host_info[0].OS=~'darwin',
+                            then= 1000000 )))
                             
       LET rules <= SELECT OSPath FROM Artifact.Generic.Utils.FetchBinary(
                 ToolName=ToolName,
@@ -93,7 +101,7 @@ sources:
             String.Offset as HitOffset,
             String.Data as HitContext
         FROM yara(
-                rules=read_file(filename=rules[0].OSPath,accessor='gzip'),
+                rules=read_file(filename=rules[0].OSPath,accessor='gzip',length=Length),
                 files=files.OSPath,
                 context=ContextBytes,
                 number=NumberOfHits )
