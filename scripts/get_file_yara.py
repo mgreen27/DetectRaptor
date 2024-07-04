@@ -87,8 +87,15 @@ for file in target_files:
 
             for rule in os_rules:
                 # hacky fix for private rule with conflict
-                if 'windows' in output_path and '(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)' in rule['raw_condition']:
-                    rule['raw_condition'] = rule['raw_condition'].replace('(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)','AVASTTI_EXE_PRIVATE')
+                if 'windows' in output_path:
+                    if '(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)' in rule['raw_condition']:
+                        rule['raw_condition'] = rule['raw_condition'].replace('(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)','AVASTTI_EXE_PRIVATE')
+                    if 'pe.number_of_signatures' in rule['raw_condition']:
+                        print(f"Dropping {rule['rule_name']}: pe.number_of_signatures issue (currently working on a fix)" )
+                        continue
+                    if 'ESET_Not_Ms_PRIVATE' in rule['raw_condition']:
+                        print(f"Dropping {rule['rule_name']}: pe.number_of_signatures issue (currently working on a fix)" )
+                        continue
 
                 if rule.get('tags'):
                     filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
