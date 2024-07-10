@@ -132,7 +132,7 @@ parameters:
         RMM - LANDesk,^issuser\.exe$|^landeskagentbootstrap\.exe$|^ldinv32\.exe$|^ldsensors\.exe$,.,,LANDesk - ivanti.com,Medium
         RMM - Laplink Everywhere,^laplink\.exe$|^laplinkeverywhere\.exe$|^llrcservice\.exe$|^serverproxyservice\.exe$,.,,Laplink Everywhere - everywhere.laplink.com,Medium
         RMM - Laplink Gold,^laplink\.exe$|^tsircusr\.exe$,.,,Laplink Gold - wen.laplink.com/product/laplink-gold,Medium
-        RMM - Level,^levelio$|^level$|^level\.exe$|^Level.io$,.,,Level - level.io,Medium
+        RMM - Level,^levelio$|^level\.exe$|^Level.io$,.,,Level - level.io,Medium
         RMM - LiteManager,^romfusclient\.exe$|^romserver\.exe$|^romviewer\.exe$,.,,LiteManager - litemanager.com,Medium
         RMM - LogMeIn,^lmiguardiansvc\.exe$|^lmiignition\.exe$|^logmein\.exe$|^logmeinsystray\.exe$|^logmein.*\.exe$,.,,LogMeIn - logmein.com/central,Medium
         RMM - LogMeIn rescue,^support-logmeinrescue*\.exe$|^support-logmeinrescue\.exe$|^lmi_rescue\.exe$,.,,LogMeIn rescue - logmeinrescue.com,Medium
