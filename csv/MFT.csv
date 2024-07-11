@@ -16,6 +16,7 @@ Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_
 Defence Evasion,CleanWipe|nssm\.exe$|processhacker,.,,Internal,Medium
 EDR Evasion,^EDRSilencer\.exe$|^FireBlock\.exe$,.,,https://github.com/netero1010/EDRSilencer,High
 Encryption,^dcrypt|^truecrypt|^VeraCrypt,.,,Internal,Low
+Enumeration Tool - Network Scanner (NS) Tool,^ns\.exe,.,,Internal,High
 Enumeration Tools,^ADGet\.exe|^AdFind\.exe|Advanced_ip_scanner|Advanced_port_scanner|^fscan\.exe|ipscan\.exe|kportscan\.exe|massscan|nbtscan\.exe|netscan\.exe|nsscan\.exe|NtdsAudit\.exe|^ADRecon\.ps1$|^Group3r\.exe$|^PingCastle\.exe$|^ADExplorer\.exe$|^SharpShares\.exe$,.,,Internal,High
 Enumeration Tools,bloodhound|^BloodHound\.exe$|^bloodhound\.py$|^SharpHound\.ps1$|^SharpHound\.exe$|^AzureHound\.ps1$,.,bloodhound\.(js|min),Internal,High
 Enumeration Tools,everything\.exe|nmap\.exe|zenmap,.,,Internal,Medium
