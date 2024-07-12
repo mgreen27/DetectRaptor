@@ -30,6 +30,42 @@ parameters:
      default: |
         Detection,KeywordRegex,PathRegex,IgnoreRegex,Reference,Criticality
         Archive Utilities,^(WinRAR|7zip|7z).*\.exe$,.,\\Program Files\\,Internal,Low
+        Attacker Tool - ADCollector,^ADCollector\.exe,.,,Internal,Medium
+        Attacker Tool - ADPassHunt,^ADPassHunt\.exe,.,,Internal,High
+        Attacker Tool - Antivirus-Disabling Utility,^PowerTool\.exe,.,,Internal,Medium
+        Attacker Tool - Apollo Agent,^apollo\.exe,.,,Internal,Medium
+        Attacker Tool - Certipy,^certipy,.,,Internal,High
+        Attacker Tool - CrackMapExec,crackmapexec,.,,Internal,High
+        Attacker Tool - Defender Control,^DefenderControl\.exe|^Disable Defender\.exe|^dControl\.exe|^dfControl\.exe|^disable-defender\.exe|^enable-defender\.exe|^DefenderControl v1.6\.rar,.,,Internal,Medium
+        Attacker Tool - Direct HTTP Tunnel,^Direct HTTP Tunnel\.exe,.,,Internal,High
+        Attacker Tool - DomainPasswordSpray,^DomainPasswordSpray\.ps1,.,,Internal,High
+        Attacker Tool - Dotnetcat,^dncat\.(exe|dll),.,,Internal,High
+        Attacker Tool - GadgetToJScript,^GadgetToJScript\.exe,.,,Internal,Medium
+        Attacker Tool - GetShell,^GetShell\.exe,.,,Internal,Medium
+        Attacker Tool - Gobuster,^gobuster.exe,.,,Internal,Low
+        Attacker Tool - Hashcat,^hashcat\.exe,.,,Internal,Low
+        Attacker Tool - Interceptor-NG,^Intercepter-NG\.exe,.,,Internal,Medium
+        Attacker Tool - Inveigh,^Inveigh\.exe,.,,Internal,Medium
+        Attacker Tool - John The Ripper,^john\.exe|^john-omp\.exe,.,,Internal,Low
+        Attacker Tool - MSF.exe,^msf\.exe,.,,Internal,Medium
+        Attacker Tool - Nuclei,^nuclei.exe,.,,Internal,Medium
+        Attacker Tool - Ophcrack,^ophcrack\.exe,.,,Internal,Low
+        Attacker Tool - PowerLine,^powerline\.exe,.,,Internal,Medium
+        Attacker Tool - PSAttack,^PSAttack,.,,Internal,Medium
+        Attacker Tool - Pyramid,^cradle\.py|^pyramid\.py,.,,Internal,Medium
+        Attacker Tool - Quasar Remote Access Tool (RAT),^Quasar\.exe,.,,Internal,Medium
+        Attacker Tool - RuralBishop,^RuralBishop\.exe,.,,Internal,Medium
+        Attacker Tool - SafetyDump,^SafetyDump,.,,Internal,Medium
+        Attacker Tool - SafetyKatz,SafetyKatz,.,,Internal,Medium
+        Attacker Tool - Seatbelt,^seatbelt,.,,Internal,Medium
+        Attacker Tool - SharpDump,^sharpdump,.,,Internal,Medium
+        Attacker Tool - SharPersist,^SharPersist,.,,Internal,Medium
+        Attacker Tool - SharpStomp,^SharpStomp,.,,Internal,Medium
+        Attacker Tool - SharpUp,^SharpUp\.exe,.,,Internal,Medium
+        Attacker Tool - SharpView,^SharpView,.,,Internal,Medium
+        Attacker Tool - SharpWMI,^sharpwmi\.exe,.,,Internal,Medium
+        Attacker Tool - SharpZeroLogon,^SharpZeroLogon,.,,Internal,Medium
+        Attacker Tool - VulnRecon,vulnrecon\.(exe|dll|py),.,,Internal,Medium
         BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal - mixed cloud services,Low
         Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz,High
         Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|procdump|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High
