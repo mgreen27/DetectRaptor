@@ -5,7 +5,7 @@ Attacker Tool - ADPassHunt,^ADPassHunt\.exe,.,,Internal,High
 Attacker Tool - Antivirus-Disabling Utility,^PowerTool\.exe,.,,Internal,Medium
 Attacker Tool - Apollo Agent,^apollo\.exe,.,,Internal,Medium
 Attacker Tool - Certipy,^certipy,.,,Internal,High
-Attacker Tool - CrackMapExec,^crackmapexec,.,,Internal,High
+Attacker Tool - CrackMapExec,crackmapexec,.,,Internal,High
 Attacker Tool - Defender Control,^DefenderControl\.exe|^Disable Defender\.exe|^dControl\.exe|^dfControl\.exe|^disable-defender\.exe|^enable-defender\.exe|^DefenderControl v1.6\.rar,.,,Internal,Medium
 Attacker Tool - Direct HTTP Tunnel,^Direct HTTP Tunnel\.exe,.,,Internal,High
 Attacker Tool - DomainPasswordSpray,^DomainPasswordSpray\.ps1,.,,Internal,High
@@ -21,20 +21,20 @@ Attacker Tool - MSF.exe,^msf\.exe,.,,Internal,Medium
 Attacker Tool - Nuclei,^nuclei.exe,.,,Internal,Medium
 Attacker Tool - Ophcrack,^ophcrack\.exe,.,,Internal,Low
 Attacker Tool - PowerLine,^powerline\.exe,.,,Internal,Medium
-Attacker Tool - PSAttack,^PSAttack\.exe,.,,Internal,Medium
+Attacker Tool - PSAttack,^PSAttack,.,,Internal,Medium
 Attacker Tool - Pyramid,^cradle\.py|^pyramid\.py,.,,Internal,Medium
 Attacker Tool - Quasar Remote Access Tool (RAT),^Quasar\.exe,.,,Internal,Medium
 Attacker Tool - RuralBishop,^RuralBishop\.exe,.,,Internal,Medium
-Attacker Tool - SafetyDump,^SafetyDump\.exe,.,,Internal,Medium
-Attacker Tool - SafetyKatz,^BetterSafetyKatz\.exe|^SafetyKatz\.exe,.,,Internal,Medium
-Attacker Tool - Seatbelt,^seatbelt\.exe,.,,Internal,Medium
-Attacker Tool - SharpDump,^sharpdump\.exe,.,,Internal,Medium
-Attacker Tool - SharPersist,^SharPersist\.exe,.,,Internal,Medium
-Attacker Tool - SharpStomp,^SharpStomp\.exe,.,,Internal,Medium
+Attacker Tool - SafetyDump,^SafetyDump,.,,Internal,Medium
+Attacker Tool - SafetyKatz,SafetyKatz,.,,Internal,Medium
+Attacker Tool - Seatbelt,^seatbelt,.,,Internal,Medium
+Attacker Tool - SharpDump,^sharpdump,.,,Internal,Medium
+Attacker Tool - SharPersist,^SharPersist,.,,Internal,Medium
+Attacker Tool - SharpStomp,^SharpStomp,.,,Internal,Medium
 Attacker Tool - SharpUp,^SharpUp\.exe,.,,Internal,Medium
-Attacker Tool - SharpView,^SharpView\.exe,.,,Internal,Medium
+Attacker Tool - SharpView,^SharpView,.,,Internal,Medium
 Attacker Tool - SharpWMI,^sharpwmi\.exe,.,,Internal,Medium
-Attacker Tool - SharpZeroLogon,^SharpZeroLogon\.exe,.,,Internal,Medium
+Attacker Tool - SharpZeroLogon,^SharpZeroLogon,.,,Internal,Medium
 Attacker Tool - VulnRecon,vulnrecon\.(exe|dll|py),.,,Internal,Medium
 BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal - mixed cloud services,Low
 Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz,High
