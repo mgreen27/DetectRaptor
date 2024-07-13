@@ -32,13 +32,13 @@ reference:
 
 tools:
   - name: FileYaraWindows
-    url: https://github.com/mgreen27/DetectRaptor/raw/master/yara/full_windows_file.yarc.gz
+    url: https://github.com/mgreen27/DetectRaptor/raw/master/yara/full_windows_file.yar.gz
     serve_locally: true
   - name: FileYaraLinux
-    url: https://github.com/mgreen27/DetectRaptor/raw/master/yara/full_linux_file.yarc.gz
+    url: https://github.com/mgreen27/DetectRaptor/raw/master/yara/full_linux_file.yar.gz
     serve_locally: true
   - name: FileYaraMacOS
-    url: https://github.com/mgreen27/DetectRaptor/raw/master/yara/full_macos_file.yarc.gz
+    url: https://github.com/mgreen27/DetectRaptor/raw/master/yara/full_macos_file.yar.gz
     serve_locally: true
 
 
@@ -96,7 +96,7 @@ sources:
             File.Ctime as Ctime, 
             File.Btime as Btime,
             Rule, Tags,
-            'https://github.com/mgreen27/DetectRaptor/blob/master/yara/yara-rules-full.yar' As RuleSource,
+            Meta,
             String.Name as YaraString,
             String.Offset as HitOffset,
             String.Data as HitContext
@@ -118,7 +118,5 @@ sources:
 column_types:
   - name: HitContext
     type: base64
-  - name: RuleSource
-    type: url
   - name: Upload
     type: preview_upload

@@ -4,7 +4,6 @@ This script adds a YARA rule set to a Velociraptor YaraFile artifact.
 
 Simply set variables and run the script.
 """
-import yara
 import gzip
 import io
 import shutil
@@ -20,22 +19,6 @@ urls = [
 ]
 extract_dir = "./yara-forge-rules"
 unsupported_modules = [ "hash", "dotnet", "console" ]
-
-def compile_yar(file_path):
-    try:
-        # Read YARA rules from the file
-        with open(file_path, 'r') as file:
-            yara_rules = file.read()
-
-        # Compile the YARA rules
-        compiled_rules = yara.compile(source=yara_rules)
-
-        return compiled_rules
-    
-    except yara.SyntaxError as e:
-        print(f"Syntax error in YARA rules: {e}")
-    except Exception as e:
-        print(f"Error compiling YARA rules: {e}")
 
 download_rules(urls,extract_dir)
 
@@ -98,27 +81,21 @@ for file in target_files:
                         continue
 
                 if rule.get('tags'):
-                    filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
+                    filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
                 else:
-                    filtered_rules += f"rule {rule['rule_name']} {{\n    {rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
+                    filtered_rules += f"rule {rule['rule_name']} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
 
             with open(output_path, 'w') as final_yara:
                 final_yara.write(filtered_rules)
             print(f'\tWriting to: {output_path}\t\tSHA1: {shasum(output_path)}')
 
             try:
-                compiled_rules = compile_yar(output_path)
-                compiled_path = output_path + 'c'
-                gz_path = output_path + 'c.gz'
-                
-                with open(compiled_path, 'wb') as compiled_yara:
-                    compiled_rules.save(file=compiled_yara)
-                print(f'\tWriting to: {compiled_path}\tSHA1: {shasum(compiled_path)}')
+                gz_path = output_path + '.gz'
 
                 # Open the input file for reading in binary mode
-                with open(compiled_path, 'rb') as compiled_yara:
+                with open(output_path, 'rb') as output_yara:
                     with gzip.open(gz_path, 'wb') as gz_file:
-                        gz_file.writelines(compiled_yara)
+                        gz_file.writelines(output_yara)
                 print(f'\tWriting to: {gz_path}\tSHA1: {shasum(gz_path)}')                
 
             except:
