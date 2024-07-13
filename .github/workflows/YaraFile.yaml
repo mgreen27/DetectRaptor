@@ -39,4 +39,4 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4.15.4
       with:
         commit_message: AutoUpdate VQL and yara
-        file_pattern: yara/full_windows_file.yarc.gz yara/full_linux_file.yarc.gz yara/full_macos_file.yarc.gz yara/yara-rules-full.yar
+        file_pattern: yara/full_windows_file.yar.gz yara/full_linux_file.yar.gz yara/full_macos_file.yar.gz yara/yara-rules-full.yar
