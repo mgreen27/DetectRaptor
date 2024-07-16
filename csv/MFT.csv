@@ -18,7 +18,8 @@ Attacker Tool - Interceptor-NG,^Intercepter-NG\.exe,.,,Internal,Medium
 Attacker Tool - Inveigh,^Inveigh\.exe,.,,Internal,Medium
 Attacker Tool - John The Ripper,^john\.exe|^john-omp\.exe,.,,Internal,Low
 Attacker Tool - MSF.exe,^msf\.exe,.,,Internal,Medium
-Attacker Tool - Nuclei,^nuclei.exe,.,,Internal,Medium
+Attacker Tool - Nuclei,^nuclei\.exe,.,,Internal,Medium
+Attacker Tool - NetExec,^nxc\.exe,.,,https://github.com/Pennyw0rth/NetExec,Medium
 Attacker Tool - Ophcrack,^ophcrack\.exe,.,,Internal,Low
 Attacker Tool - PowerLine,^powerline\.exe,.,,Internal,Medium
 Attacker Tool - PSAttack,^PSAttack,.,,Internal,Medium
