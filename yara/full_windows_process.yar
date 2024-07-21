@@ -25100,8 +25100,8 @@ rule DITEKSHEN_MALWARE_Win_Quilclipper {
 		date = "2024-05-28"
 		modified = "2024-05-28"
 		reference = "https://github.com/ditekshen/detection"
-		source_url = "https://github.com/ditekshen/detection/blob/2ddbbe14eea1f342bca2cfd09a643a40ae2fcaf6/yara/malware.yar#L4076-L4094"
-		license_url = "https://github.com/ditekshen/detection/blob/2ddbbe14eea1f342bca2cfd09a643a40ae2fcaf6/LICENSE.txt"
+		source_url = "https://github.com/ditekshen/detection/blob/6419013759723bbe4d5739312c9bc0a339259bc4/yara/malware.yar#L4076-L4094"
+		license_url = "https://github.com/ditekshen/detection/blob/6419013759723bbe4d5739312c9bc0a339259bc4/LICENSE.txt"
 		logic_hash = "dcac93806a438b188ae70a679301cb6630b9eb6849bf8fbbb1cea5fed5e7cf75"
 		score = 75
 		quality = 75
@@ -25131,8 +25131,8 @@ rule DITEKSHEN_MALWARE_Win_Scouteliteps {
 		date = "2024-05-28"
 		modified = "2024-05-28"
 		reference = "https://github.com/ditekshen/back-in-2017"
-		source_url = "https://github.com/ditekshen/detection/blob/2ddbbe14eea1f342bca2cfd09a643a40ae2fcaf6/yara/malware.yar#L11552-L11587"
-		license_url = "https://github.com/ditekshen/detection/blob/2ddbbe14eea1f342bca2cfd09a643a40ae2fcaf6/LICENSE.txt"
+		source_url = "https://github.com/ditekshen/detection/blob/6419013759723bbe4d5739312c9bc0a339259bc4/yara/malware.yar#L11552-L11587"
+		license_url = "https://github.com/ditekshen/detection/blob/6419013759723bbe4d5739312c9bc0a339259bc4/LICENSE.txt"
 		logic_hash = "9b1047b8b485fcfa29225f53674050703d32498cfa99654c8ac5f8bfac29878e"
 		score = 75
 		quality = 37
