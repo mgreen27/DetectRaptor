@@ -48,7 +48,8 @@ parameters:
         Attacker Tool - Inveigh,^Inveigh\.exe,.,,Internal,Medium
         Attacker Tool - John The Ripper,^john\.exe|^john-omp\.exe,.,,Internal,Low
         Attacker Tool - MSF.exe,^msf\.exe,.,,Internal,Medium
-        Attacker Tool - Nuclei,^nuclei.exe,.,,Internal,Medium
+        Attacker Tool - Nuclei,^nuclei\.exe,.,,Internal,Medium
+        Attacker Tool - NetExec,^nxc\.exe,.,,https://github.com/Pennyw0rth/NetExec,Medium
         Attacker Tool - Ophcrack,^ophcrack\.exe,.,,Internal,Low
         Attacker Tool - PowerLine,^powerline\.exe,.,,Internal,Medium
         Attacker Tool - PSAttack,^PSAttack,.,,Internal,Medium
@@ -116,7 +117,7 @@ parameters:
         RMM - BeAnywhere,^basupsrvc\.exe$|^basupsrvcupdate\.exe$|^basuptshelper\.exe$,.,,BeAnywhere - beanywhere.en.uptodown.com/windows,Medium
         RMM - Beyond Trust (Bomgar),^bomgar-scc\.exe$|^bomgar-(rdp|scc).*\.exe$|^BeyondTrust Remote$,.,,BeyondTrust - beyondtrust.com/brand/bomgar,Medium
         RMM - Bluetrait,^BluetraitAgent\.exe$|^Bluetrait$,.,,Bluetrait - https://bluetrait.io/,Medium
-        RMM - CentraStage (Now Datto),^CagService\.exe$,.,,CentraStage (Now Datto) - datto.com/au/products/rmm/,Medium
+        RMM - CentraStage (Now Datto),^CagService\.exe$|^AEMAgent\.exe$,.,,CentraStage (Now Datto) - datto.com/au/products/rmm/,Medium
         RMM - Centurion,^ctiserv\.exe$,.,,Centurion,Medium
         RMM - ChromeRDP,^remoting_host\.exe$|^remote_host\.exe|^ChromeRDP$,.,,ChromeRDP - https://remotedesktop.google.com/,Medium
         Remote Access - CloudFlare Tunnel,^cloudflared\.exe$,.,,CloudFlare Tunnel - cloudflare.com/products/tunnel/,Medium
