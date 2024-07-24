@@ -87,7 +87,7 @@ RMM - BeamYourScreen,^beamyourscreen\.exe$|^beamyourscreen-host\.exe$,.,,BeamYou
 RMM - BeAnywhere,^basupsrvc\.exe$|^basupsrvcupdate\.exe$|^basuptshelper\.exe$,.,,BeAnywhere - beanywhere.en.uptodown.com/windows,Medium
 RMM - Beyond Trust (Bomgar),^bomgar-scc\.exe$|^bomgar-(rdp|scc).*\.exe$|^BeyondTrust Remote$,.,,BeyondTrust - beyondtrust.com/brand/bomgar,Medium
 RMM - Bluetrait,^BluetraitAgent\.exe$|^Bluetrait$,.,,Bluetrait - https://bluetrait.io/,Medium
-RMM - CentraStage (Now Datto),^CagService\.exe$,.,,CentraStage (Now Datto) - datto.com/au/products/rmm/,Medium
+RMM - CentraStage (Now Datto),^CagService\.exe$|^AEMAgent\.exe$,.,,CentraStage (Now Datto) - datto.com/au/products/rmm/,Medium
 RMM - Centurion,^ctiserv\.exe$,.,,Centurion,Medium
 RMM - ChromeRDP,^remoting_host\.exe$|^remote_host\.exe|^ChromeRDP$,.,,ChromeRDP - https://remotedesktop.google.com/,Medium
 Remote Access - CloudFlare Tunnel,^cloudflared\.exe$,.,,CloudFlare Tunnel - cloudflare.com/products/tunnel/,Medium
