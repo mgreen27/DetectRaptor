@@ -36,6 +36,7 @@ parameters:
         Attacker Tool - Apollo Agent,^apollo\.exe,.,,Internal,Medium
         Attacker Tool - Certipy,^certipy,.,,Internal,High
         Attacker Tool - CrackMapExec,crackmapexec,.,,Internal,High
+        Attacker Tool - Dead Potato,^DeadPotato,.,,https://github.com/lypd0/DeadPotato,High
         Attacker Tool - Defender Control,^DefenderControl\.exe|^Disable Defender\.exe|^dControl\.exe|^dfControl\.exe|^disable-defender\.exe|^enable-defender\.exe|^DefenderControl v1.6\.rar,.,,Internal,Medium
         Attacker Tool - Direct HTTP Tunnel,^Direct HTTP Tunnel\.exe,.,,Internal,High
         Attacker Tool - DomainPasswordSpray,^DomainPasswordSpray\.ps1,.,,Internal,High
