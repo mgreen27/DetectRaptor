@@ -1,5 +1,5 @@
-import "math"
 import "pe"
+import "math"
 rule ELASTIC_Linux_Webshell_Generic_E80Ff633 : FILE MEMORY {
     meta:
 		description = "Detects Linux Webshell Generic (Linux.Webshell.Generic)"
@@ -8,8 +8,8 @@ rule ELASTIC_Linux_Webshell_Generic_E80Ff633 : FILE MEMORY {
 		date = "2021-01-12"
 		modified = "2021-09-16"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/03e8fa40db51260b4033ee28e8e1058d80e2f3e6/yara/rules/Linux_Webshell_Generic.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/03e8fa40db51260b4033ee28e8e1058d80e2f3e6/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/8cf4e62fe83da49cf0dc04873daae04a92711058/yara/rules/Linux_Webshell_Generic.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/8cf4e62fe83da49cf0dc04873daae04a92711058/LICENSE.txt"
 		hash = "7640ba6f2417931ef901044152d5bfe1b266219d13b5983d92ddbdf644de5818"
 		logic_hash = "d345e6ce3e51ed55064aafb1709e9bee7ef2ce87ec80165ac1b58eebd83cefee"
 		score = 75
@@ -36,8 +36,8 @@ rule ELASTIC_Linux_Webshell_Generic_41A5Fa40 : FILE MEMORY {
 		date = "2021-06-28"
 		modified = "2021-09-16"
 		reference = "18ac7fbc3d8d3bb8581139a20a7fee8ea5b7fcfea4a9373e3d22c71bae3c9de0"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/03e8fa40db51260b4033ee28e8e1058d80e2f3e6/yara/rules/Linux_Webshell_Generic.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/03e8fa40db51260b4033ee28e8e1058d80e2f3e6/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/8cf4e62fe83da49cf0dc04873daae04a92711058/yara/rules/Linux_Webshell_Generic.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/8cf4e62fe83da49cf0dc04873daae04a92711058/LICENSE.txt"
 		logic_hash = "574148bc58626aac00add1989c65ad56315c7e2a8d27c7b96be404d831a7a576"
 		score = 75
 		quality = 73
@@ -63,8 +63,8 @@ rule ELASTIC_Windows_Trojan_Behinder_B9A49F4B : FILE MEMORY {
 		date = "2023-03-02"
 		modified = "2023-06-13"
 		reference = "https://www.elastic.co/security-labs/ref2924-howto-maintain-persistence-as-an-advanced-threat"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/03e8fa40db51260b4033ee28e8e1058d80e2f3e6/yara/rules/Windows_Trojan_Behinder.yar#L1-L22"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/03e8fa40db51260b4033ee28e8e1058d80e2f3e6/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/8cf4e62fe83da49cf0dc04873daae04a92711058/yara/rules/Windows_Trojan_Behinder.yar#L1-L22"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/8cf4e62fe83da49cf0dc04873daae04a92711058/LICENSE.txt"
 		hash = "a50ca8df4181918fe0636272f31e19815f1b97cce6d871e15e03b0ee0e3da17b"
 		logic_hash = "2303ef82e4dc5e8be87ddc4563dcd06963d17e1fbf25cf246a6c81e4e74adbcb"
 		score = 75
@@ -1675,7 +1675,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Gzinflated : FILE {
 		hash = "07eb6634f28549ebf26583e8b154c6a579b8a733"
 		logic_hash = "d2edb7050c986a00889fd01b709ec0aa1409ce2e40a15b7942562d12596b190e"
 		score = 75
-		quality = 32
+		quality = 7
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
