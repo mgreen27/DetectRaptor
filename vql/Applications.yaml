@@ -180,7 +180,7 @@ parameters:
         RMM - Sophos-Remote Management System,^Sophos-Remote Management System$,
         RMM - Sorillus,Sorillus,
         RMM - Splashtop Remote,^Splashtop Remote$,
-        RMM - Splashtop Streamer,^Splashtop Streamer$
+        RMM - Splashtop Streamer,^Splashtop Streamer$,
         RMM - SpyAnywhere,SpyAnywhere,
         RMM - SuperOps,SuperOps,
         RMM - Supremo,Supremo,
@@ -204,7 +204,7 @@ parameters:
         RMM - XMReality,XMReality,
         RMM - Zabbix Agent,^Zabbix Agent$,
         RMM - ZeroTier,ZeroTier,
-        RMM - Zoho Assist,^Zoho Assist
+        RMM - Zoho Assist,^Zoho Assist,
         VPN,Connectify,
         VPN,cyberghost,
         VPN,expressvpn,
