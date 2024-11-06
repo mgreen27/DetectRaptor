@@ -90,12 +90,13 @@ sources:
         name: Timeline preparation
         template: |
             /*
-            ### Create timestamps for timeline - typically Modified is best.
+            ### Create timestamps for timeline - typically Modified is best timestamp.
             */
 
             SELECT *, 
-                SITimestamps.LastModified0x10 as SIModified,
-                SITimestamps.Created0x10 as SICreated
+               Detection.Name + "|" + Detection.StringHit + "|" + OSPath as Message,
+               SITimestamps.LastModified0x10 as SIModified,
+               SITimestamps.Created0x10 as SICreated
             FROM source()
 
 
