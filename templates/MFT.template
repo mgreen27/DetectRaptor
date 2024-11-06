@@ -86,6 +86,18 @@ sources:
             FROM source()
             GROUP BY Detection.Name
             ORDER BY Total DESC
+      - type: vql_suggestion
+        name: Timeline preparation
+        template: |
+            /*
+            ### Create timestamps for timeline - typically Modified is best.
+            */
+
+            SELECT *, 
+                SITimestamps.LastModified0x10 as SIModified,
+                SITimestamps.Created0x10 as SICreated
+            FROM source()
+
 
       - type: vql_suggestion
         name: Criticality filter
