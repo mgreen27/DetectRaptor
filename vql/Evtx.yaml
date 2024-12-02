@@ -58,7 +58,7 @@ parameters:
         powershell,win_powershell_tamper_with_windows_defender,T1562.001-Win Defender Disable using Powershell,^(200|400|800|4100|4103|4104)$,Set-MpPreference -DisableRealtimeMonitoring|Set-MpPreference DisableBehaviorMonitoring|Set-MpPreference -DisableScriptScanning|Set-MpPreference -DisableBlockAtFirstSeen|MpPreference -ExclusionPath,
         "{Powershell,Security,Sysmon}",win_proxy_hunter,T0884-Connection Proxy,.,"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\:\d{1,5} :\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\:\d{1,5}:socks",
         powershell,win_powershell_tcpsocket^(4103|4104)$,C2-Powershell Socket Connection,^(4103|4104)$,Net\.Sockets\.TCPClient,\\ProgramData\\Microsoft\\Windows Defender Advanced Threat Protection\\Downloads\\PSScript_.+\.ps1
-        powershell,win_powershell_dns,Powershell potential DNS disruption,^(4103|4104)$,Add-DnsClientNrptRule|New-NetRoute|drivers\\etc\\hosts,
+        powershell,win_powershell_dns,Powershell potential DNS disruption,^(4103|4104)$,Add-DnsClientNrptRule|New-NetRoute|drivers\\etc\\hosts,Microsoft\.PowerShell\.Cmdletization\.MethodParameter
 
 
 sources:
