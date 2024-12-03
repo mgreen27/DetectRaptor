@@ -5,6 +5,7 @@ cmd.exe,cmd,Cmd.Exe,Windows Command Processor,cmd.exe
 certutil.exe,CertUtil.exe,CertUtil.exe,CertUtil,certutil.exe
 cmstp.exe,CMSTP,CMSTP.EXE,Microsoft Connection Manager Profile Installer,cmstp.exe
 cscript.exe,cscript.exe,cscript.exe,Microsoft ® Console Based Script Host,cscript.exe
+ie4uinit.exe,IE4UINIT,IE4UINIT.EXE,IE Per-User Initialization Utility,ie4uinit.exe
 mshta.exe,MSHTA.EXE,MSHTA.EXE,Microsoft ® HTML Application host,mshta.exe
 msiexec.exe,msiexec,msiexec.exe,Windows® installer,msiexec.exe
 powershell.exe,POWERSHELL,PowerShell.EXE,Windows PowerShell,powershell.exe
