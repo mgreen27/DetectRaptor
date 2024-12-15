@@ -6,9 +6,9 @@ rule ELASTIC_Macos_Infostealer_Mdquerypassw_6125F987 : FILE MEMORY {
 		date = "2023-04-11"
 		modified = "2024-08-19"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Infostealer_MdQueryPassw.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "72e0c1a7507733157f93e2bff82e6ec10d50986020eeeb27a02aba5cd8c78a81"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Infostealer_MdQueryPassw.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_72e0c1a7507733157f93e2bff82e6ec10d50986020eeeb27a02aba5cd8c78a81"
 		score = 75
 		quality = 71
 		tags = "FILE, MEMORY"
@@ -24,7 +24,7 @@ rule ELASTIC_Macos_Infostealer_Mdquerypassw_6125F987 : FILE MEMORY {
 		$string2 = /kMDItemDisplayName\s{1,50}==\s{1,50}\S{1,50}passw\S{1,50}/ ascii wide nocase
 
 	condition:
-		any of ($string1,$string2)
+		any of ( $string1 , $string2 )
 }
 rule ELASTIC_Macos_Trojan_Kandykorn_A7Bb6944 : FILE MEMORY {
     meta:
@@ -34,10 +34,10 @@ rule ELASTIC_Macos_Trojan_Kandykorn_A7Bb6944 : FILE MEMORY {
 		date = "2023-10-23"
 		modified = "2023-10-23"
 		reference = "https://www.elastic.co/security-labs/elastic-catches-dprk-passing-out-kandykorn"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_KandyKorn.yar#L1-L29"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_KandyKorn.yar#L1-L29"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "51dd4efcf714e64b4ad472ea556bf1a017f40a193a647b9e28bf356979651077"
-		logic_hash = "65decd519dee947894dd684c52d91202ebe5587acfecc0b8b56cd73f2981e387"
+		logic_hash = "v1_sha256_65decd519dee947894dd684c52d91202ebe5587acfecc0b8b56cd73f2981e387"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -61,7 +61,7 @@ rule ELASTIC_Macos_Trojan_Kandykorn_A7Bb6944 : FILE MEMORY {
 		$rc4_key = { D9 F9 36 CE 62 8C 3E 5D 9B 36 95 69 4D 1C DE 79 E4 70 E9 38 06 4D 98 FB F4 EF 98 0A 55 58 D1 C9 0C 7E 65 0C 23 62 A2 1B 91 4A BD 17 3A BA 5C 0E 58 37 C4 7B 89 F7 4C 5B 23 A7 29 4C C1 CF D1 1B }
 
 	condition:
-		4 of ($str*) or 3 of ($seq*) or $rc4_key
+		4 of ( $str* ) or 3 of ( $seq* ) or $rc4_key
 }
 rule ELASTIC_Macos_Trojan_Adload_4995469F : FILE MEMORY {
     meta:
@@ -71,10 +71,10 @@ rule ELASTIC_Macos_Trojan_Adload_4995469F : FILE MEMORY {
 		date = "2021-10-04"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Adload.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Adload.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "6464ca7b36197cccf0dac00f21c43f0cb09f900006b1934e2b3667b367114de5"
-		logic_hash = "cceb804a11b93b0e3f491016c47a823d9e6a31294c3ed05d4404601323b30993"
+		logic_hash = "v1_sha256_cceb804a11b93b0e3f491016c47a823d9e6a31294c3ed05d4404601323b30993"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -99,10 +99,10 @@ rule ELASTIC_Macos_Trojan_Adload_9B9F86C7 : FILE MEMORY {
 		date = "2021-10-04"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Adload.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Adload.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "952e6004ce164ba607ac7fddc1df3d0d6cac07d271d90be02d790c52e49cb73c"
-		logic_hash = "82297db23e036f22c90eee7b2654e84df847eb1c2b1ea4dcf358c48a14819709"
+		logic_hash = "v1_sha256_82297db23e036f22c90eee7b2654e84df847eb1c2b1ea4dcf358c48a14819709"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -127,10 +127,10 @@ rule ELASTIC_Macos_Trojan_Adload_F6B18A0A : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Adload.yar#L41-L59"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Adload.yar#L41-L59"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "06f38bb811e6a6c38b5e2db708d4063f4aea27fcd193d57c60594f25a86488c8"
-		logic_hash = "20d43fbf0b8155940e2e181f376a7b1979ce248d88dc08409aaa1a916777231c"
+		logic_hash = "v1_sha256_20d43fbf0b8155940e2e181f376a7b1979ce248d88dc08409aaa1a916777231c"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -155,10 +155,10 @@ rule ELASTIC_Macos_Infostealer_Encodedosascript_Eeb54A7E : FILE MEMORY {
 		date = "2024-08-19"
 		modified = "2024-08-26"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/Macos_Infostealer_EncodedOsascript.yar#L1-L21"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/Macos_Infostealer_EncodedOsascript.yar#L1-L21"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "c1693ee747e31541919f84dfa89e36ca5b74074044b181656d95d7f40af34a05"
-		logic_hash = "2f450c9afd92f52cdd8333e39e41b7334a01ddc39371c118260820a878359742"
+		logic_hash = "v1_sha256_2f450c9afd92f52cdd8333e39e41b7334a01ddc39371c118260820a878359742"
 		score = 75
 		quality = 71
 		tags = "FILE, MEMORY"
@@ -185,10 +185,10 @@ rule ELASTIC_Macos_Backdoor_Applejeus_31872Ae2 : FILE MEMORY {
 		date = "2021-10-18"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Backdoor_Applejeus.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Backdoor_Applejeus.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "e352d6ea4da596abfdf51f617584611fc9321d5a6d1c22aff243aecdef8e7e55"
-		logic_hash = "1d6f06668a7d048a93e53b294c5ab8ffe4cd610f3bef3fd80f14425ef8a85a29"
+		logic_hash = "v1_sha256_1d6f06668a7d048a93e53b294c5ab8ffe4cd610f3bef3fd80f14425ef8a85a29"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -213,9 +213,9 @@ rule ELASTIC_Macos_Infostealer_Mdquerysecret_5535Ab96 : FILE MEMORY {
 		date = "2023-04-11"
 		modified = "2024-08-19"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Infostealer_MdQuerySecret.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "c755e617b9dd41505bb225ea836ecdde8f3f6f9ab7ae79697e6d85190e206c41"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Infostealer_MdQuerySecret.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_c755e617b9dd41505bb225ea836ecdde8f3f6f9ab7ae79697e6d85190e206c41"
 		score = 75
 		quality = 71
 		tags = "FILE, MEMORY"
@@ -231,7 +231,7 @@ rule ELASTIC_Macos_Infostealer_Mdquerysecret_5535Ab96 : FILE MEMORY {
 		$string2 = /kMDItemDisplayName\s{1,50}==\s{1,50}\S{1,50}secret\S{1,50}/ ascii wide nocase
 
 	condition:
-		any of ($string1,$string2)
+		any of ( $string1 , $string2 )
 }
 rule ELASTIC_Macos_Trojan_Electrorat_B4Dbfd1D : FILE MEMORY {
     meta:
@@ -241,10 +241,10 @@ rule ELASTIC_Macos_Trojan_Electrorat_B4Dbfd1D : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Electrorat.yar#L1-L22"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Electrorat.yar#L1-L22"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "b1028b38fcce0d54f2013c89a9c0605ccb316c36c27faf3a35adf435837025a4"
-		logic_hash = "a36143a8c93cb187dba0a88a15550219c19f1483502f782dfefc1e53829cfbf1"
+		logic_hash = "v1_sha256_a36143a8c93cb187dba0a88a15550219c19f1483502f782dfefc1e53829cfbf1"
 		score = 75
 		quality = 71
 		tags = "FILE, MEMORY"
@@ -272,10 +272,10 @@ rule ELASTIC_Macos_Hacktool_Jokerspy_58A6B26D : FILE MEMORY {
 		date = "2023-06-19"
 		modified = "2023-06-19"
 		reference = "https://www.elastic.co/security-labs/inital-research-of-jokerspy"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/Macos_Hacktool_JokerSpy.yar#L1-L25"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/Macos_Hacktool_JokerSpy.yar#L1-L25"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "d895075057e491b34b0f8c0392b44e43ade425d19eaaacea6ef8c5c9bd3487d8"
-		logic_hash = "e9e1333c7172d5a0f06093a902edefd7f128963dbaadf77e829f032ccb04ce56"
+		logic_hash = "v1_sha256_e9e1333c7172d5a0f06093a902edefd7f128963dbaadf77e829f032ccb04ce56"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -305,10 +305,10 @@ rule ELASTIC_Macos_Virus_Maxofferdeal_53Df500F : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Maxofferdeal.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Maxofferdeal.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "ecd62ef880da057726ca55c6826ce4e1584ec6fc3afaabed7f66154fc39ffef8"
-		logic_hash = "ed63c14e31c200f906b525c7ef1cd671511a89c8833cfa1a605fc9870fe91043"
+		logic_hash = "v1_sha256_ed63c14e31c200f906b525c7ef1cd671511a89c8833cfa1a605fc9870fe91043"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -333,10 +333,10 @@ rule ELASTIC_Macos_Virus_Maxofferdeal_F4681Eba : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Maxofferdeal.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Maxofferdeal.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "ecd62ef880da057726ca55c6826ce4e1584ec6fc3afaabed7f66154fc39ffef8"
-		logic_hash = "cf478ec5313b40d74d110e4d6e97da5f671d5af331adc3ab059a69616e78c76c"
+		logic_hash = "v1_sha256_cf478ec5313b40d74d110e4d6e97da5f671d5af331adc3ab059a69616e78c76c"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -361,10 +361,10 @@ rule ELASTIC_Macos_Virus_Maxofferdeal_4091E373 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Maxofferdeal.yar#L41-L59"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Maxofferdeal.yar#L41-L59"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "c38c4bdd3c1fa16fd32db06d44d0db1b25bb099462f8d2936dbdd42af325b37c"
-		logic_hash = "ce82f6d3a2e4b7ffe7010629bf91a9144a94e50513682a6c0622603d28248d51"
+		logic_hash = "v1_sha256_ce82f6d3a2e4b7ffe7010629bf91a9144a94e50513682a6c0622603d28248d51"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -389,10 +389,10 @@ rule ELASTIC_Macos_Virus_Maxofferdeal_20A0091E : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Maxofferdeal.yar#L61-L79"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Maxofferdeal.yar#L61-L79"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "b00a61c908cd06dbc26bee059ba290e7ce2ad6b66c453ea272c7287ffa29c5ab"
-		logic_hash = "bb90b7e1637fd86e91763b4801a0b3bb8a1b956f328d07e96cf1b26e42b1931b"
+		logic_hash = "v1_sha256_bb90b7e1637fd86e91763b4801a0b3bb8a1b956f328d07e96cf1b26e42b1931b"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -417,10 +417,10 @@ rule ELASTIC_Macos_Backdoor_Useragent_1A02Fc3A : FILE MEMORY {
 		date = "2021-11-11"
 		modified = "2022-07-22"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Backdoor_Useragent.yar#L1-L23"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Backdoor_Useragent.yar#L1-L23"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "623f99cbe20af8b79cbfea7f485d47d3462d927153d24cac4745d7043c15619a"
-		logic_hash = "90debdfc24ef100952302808a2e418bca2a46be3e505add9a0ccf4c49aff5102"
+		logic_hash = "v1_sha256_90debdfc24ef100952302808a2e418bca2a46be3e505add9a0ccf4c49aff5102"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -449,10 +449,10 @@ rule ELASTIC_Macos_Trojan_Thiefquest_9130C0F3 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Thiefquest.yar#L1-L22"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Thiefquest.yar#L1-L22"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "bed3561210e44c290cd410adadcdc58462816a03c15d20b5be45d227cd7dca6b"
-		logic_hash = "20e9ea15a437a17c4ef68f2472186f6d1ab3118d5b392f84fcb2bd376ec3863a"
+		logic_hash = "v1_sha256_20e9ea15a437a17c4ef68f2472186f6d1ab3118d5b392f84fcb2bd376ec3863a"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -480,10 +480,10 @@ rule ELASTIC_Macos_Trojan_Thiefquest_Fc2E1271 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Thiefquest.yar#L24-L42"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Thiefquest.yar#L24-L42"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "12fb0eca3903a3b39ecc3c2aa6c04fe5faa1f43a3d271154d14731d1eb196923"
-		logic_hash = "a20c76e53874fc0fec5fd2660c63c6f1e7c1b2055cbd2a9efdfd114cd6bdda5c"
+		logic_hash = "v1_sha256_a20c76e53874fc0fec5fd2660c63c6f1e7c1b2055cbd2a9efdfd114cd6bdda5c"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -508,10 +508,10 @@ rule ELASTIC_Macos_Trojan_Thiefquest_86F9Ef0C : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Thiefquest.yar#L44-L62"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Thiefquest.yar#L44-L62"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "59fb018e338908eb69be72ab11837baebf8d96cdb289757f1f4977228e7640a0"
-		logic_hash = "426d533d39e594123f742b15d0a93ded986b9b308685f7b2cfaf5de0b32cdbff"
+		logic_hash = "v1_sha256_426d533d39e594123f742b15d0a93ded986b9b308685f7b2cfaf5de0b32cdbff"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -536,10 +536,10 @@ rule ELASTIC_Macos_Trojan_Thiefquest_40F9C1C3 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Thiefquest.yar#L64-L82"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Thiefquest.yar#L64-L82"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "e402063ca317867de71e8e3189de67988e2be28d5d773bbaf75618202e80f9f6"
-		logic_hash = "546edc2d6d715eac47e7a8d3ceb91cf314fa6dbee04f0475a5c4a84ba53fd722"
+		logic_hash = "v1_sha256_546edc2d6d715eac47e7a8d3ceb91cf314fa6dbee04f0475a5c4a84ba53fd722"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -564,10 +564,10 @@ rule ELASTIC_Macos_Trojan_Thiefquest_0F9Fe37C : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Thiefquest.yar#L84-L102"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Thiefquest.yar#L84-L102"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "12fb0eca3903a3b39ecc3c2aa6c04fe5faa1f43a3d271154d14731d1eb196923"
-		logic_hash = "84f9e8938d7e2b0210003fc8334b8fa781a40afffeda8d2341970b84ed5d3b5a"
+		logic_hash = "v1_sha256_84f9e8938d7e2b0210003fc8334b8fa781a40afffeda8d2341970b84ed5d3b5a"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -592,10 +592,10 @@ rule ELASTIC_Macos_Trojan_Thiefquest_1F4Bac78 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Thiefquest.yar#L104-L122"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Thiefquest.yar#L104-L122"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "12fb0eca3903a3b39ecc3c2aa6c04fe5faa1f43a3d271154d14731d1eb196923"
-		logic_hash = "96db33e135138846f978026867bb2536226539997d060f41e7081f7f29b66c85"
+		logic_hash = "v1_sha256_96db33e135138846f978026867bb2536226539997d060f41e7081f7f29b66c85"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -620,10 +620,10 @@ rule ELASTIC_Macos_Trojan_Generic_A829D361 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Generic.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Generic.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "5b2a1cd801ae68a890b40dbd1601cdfeb5085574637ae8658417d0975be8acb5"
-		logic_hash = "70a954e8b44b1ce46f5ce0ebcf43b46e1292f0b8cdb46aa67f980d3c9b0a6f61"
+		logic_hash = "v1_sha256_70a954e8b44b1ce46f5ce0ebcf43b46e1292f0b8cdb46aa67f980d3c9b0a6f61"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -648,10 +648,10 @@ rule ELASTIC_Macos_Trojan_Rustbucket_E64F7A92 : FILE MEMORY {
 		date = "2023-06-26"
 		modified = "2023-06-29"
 		reference = "https://www.elastic.co/security-labs/DPRK-strikes-using-a-new-variant-of-rustbucket"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_RustBucket.yar#L1-L22"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_RustBucket.yar#L1-L22"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "9ca914b1cfa8c0ba021b9e00bda71f36cad132f27cf16bda6d937badee66c747"
-		logic_hash = "bd6005d72faba6aaeebdcbd8c771995cbfc667faf01eb93825afe985954a47fc"
+		logic_hash = "v1_sha256_bd6005d72faba6aaeebdcbd8c771995cbfc667faf01eb93825afe985954a47fc"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -678,10 +678,10 @@ rule ELASTIC_Macos_Trojan_Fplayer_1C1Fae37 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Fplayer.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Fplayer.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "f57e651088dee2236328d09705cef5e98461e97d1eb2150c372d00ca7c685725"
-		logic_hash = "0d65717bdbac694ffb2535a1ff584f7ec2aa7b553a08d29113c6e2bd7b2ff1aa"
+		logic_hash = "v1_sha256_0d65717bdbac694ffb2535a1ff584f7ec2aa7b553a08d29113c6e2bd7b2ff1aa"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -706,10 +706,10 @@ rule ELASTIC_Macos_Infostealer_Mdquerytcc_142313Cb : FILE MEMORY {
 		date = "2023-04-11"
 		modified = "2024-08-19"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Infostealer_MdQueryTCC.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Infostealer_MdQueryTCC.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "d895075057e491b34b0f8c0392b44e43ade425d19eaaacea6ef8c5c9bd3487d8"
-		logic_hash = "e00015867ad0a0c440a49364945fe828d50675ecfd2039028653d97c77cff323"
+		logic_hash = "v1_sha256_e00015867ad0a0c440a49364945fe828d50675ecfd2039028653d97c77cff323"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -734,10 +734,10 @@ rule ELASTIC_Macos_Trojan_Metasploit_6Cab0Ec0 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "7ab5490dca314b442181f9a603252ad7985b719c8aa35ddb4c3aa4b26dcc8a42"
-		logic_hash = "c19fe812b74b034bfb42c0e2ee552d879ed038e054c5870b85e7e610d3184198"
+		logic_hash = "v1_sha256_c19fe812b74b034bfb42c0e2ee552d879ed038e054c5870b85e7e610d3184198"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -762,10 +762,10 @@ rule ELASTIC_Macos_Trojan_Metasploit_293Bfea9 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L21-L42"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L21-L42"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "7ab5490dca314b442181f9a603252ad7985b719c8aa35ddb4c3aa4b26dcc8a42"
-		logic_hash = "b8bd0d034a6306f99333723d77724ae53c1a189dad3fad7417f2d2fde214c24a"
+		logic_hash = "v1_sha256_b8bd0d034a6306f99333723d77724ae53c1a189dad3fad7417f2d2fde214c24a"
 		score = 75
 		quality = 71
 		tags = "FILE, MEMORY"
@@ -793,10 +793,10 @@ rule ELASTIC_Macos_Trojan_Metasploit_448Fa81D : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L44-L64"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L44-L64"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "7ab5490dca314b442181f9a603252ad7985b719c8aa35ddb4c3aa4b26dcc8a42"
-		logic_hash = "ab0608920b9f632bad99e1358f21a88bc6048f46fca21a488a1a10b7ef1e42ae"
+		logic_hash = "v1_sha256_ab0608920b9f632bad99e1358f21a88bc6048f46fca21a488a1a10b7ef1e42ae"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -823,9 +823,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_768Df39D : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/singles/osx/x86/shell_reverse_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L66-L85"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "140ba93d57b27325f66b36132ecaab205663e3e582818baf377e050802c8d152"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L66-L85"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_140ba93d57b27325f66b36132ecaab205663e3e582818baf377e050802c8d152"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -851,9 +851,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_7Ce0B709 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/singles/osx/x86/shell_bind_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L87-L106"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "56fc05ece464d562ff6e56247756454c940c07b03c4a4c783b2bae4d5807247a"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L87-L106"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_56fc05ece464d562ff6e56247756454c940c07b03c4a4c783b2bae4d5807247a"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -879,9 +879,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_F11Ccdac : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/singles/osx/x86/shell_find_port.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L108-L127"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "fcf578d3e98b591b33cb6f4bec1b9e92a7e1a88f0b56f3c501f9089d2094289c"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L108-L127"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_fcf578d3e98b591b33cb6f4bec1b9e92a7e1a88f0b56f3c501f9089d2094289c"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -907,9 +907,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_D9B16F4C : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/singles/osx/x86/vforkshell_bind_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L129-L148"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "8e082878fb52f6314ec8c725dd279447ee8a0fc403c47ffd997712adb496e7c3"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L129-L148"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_8e082878fb52f6314ec8c725dd279447ee8a0fc403c47ffd997712adb496e7c3"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -935,9 +935,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_2992B917 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/singles/osx/x86/vforkshell_reverse_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L150-L169"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "10056ffb719092f83ad236a63ef6fa1f40568e500c042bd737575997bb67a8ec"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L150-L169"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_10056ffb719092f83ad236a63ef6fa1f40568e500c042bd737575997bb67a8ec"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -963,9 +963,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_27D409F1 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/singles/osx/x64/shell_bind_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L171-L190"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "b757e0ab6665a3e4846c6bbe4386e9d9a730ece00a2453933ce771aec2dd716e"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L171-L190"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_b757e0ab6665a3e4846c6bbe4386e9d9a730ece00a2453933ce771aec2dd716e"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -991,9 +991,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_65A2394B : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/stages/osx/x86/vforkshell.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L192-L211"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "f01f671b0bf9fa53aa3383c88ba871742f0e55dbdae4278f440ed29f35eb1ca1"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L192-L211"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_f01f671b0bf9fa53aa3383c88ba871742f0e55dbdae4278f440ed29f35eb1ca1"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1019,9 +1019,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_C7B7A90B : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/stagers/osx/x86/reverse_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L213-L232"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "d4b1f01bf8434dd69188d2ad0b376fad3a4d9c94ebe74d40f05019baf95b5496"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L213-L232"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_d4b1f01bf8434dd69188d2ad0b376fad3a4d9c94ebe74d40f05019baf95b5496"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1047,9 +1047,9 @@ rule ELASTIC_Macos_Trojan_Metasploit_4Bd6Aaca : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/rapid7/metasploit-framework/blob/master/modules/payloads/stagers/osx/x86/bind_tcp.rb"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L234-L253"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "a3de610ced90679f6fa0dcdf7890a64369c774839ea30018a7ef6fe9289d3d17"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L234-L253"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_a3de610ced90679f6fa0dcdf7890a64369c774839ea30018a7ef6fe9289d3d17"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1075,10 +1075,10 @@ rule ELASTIC_Macos_Trojan_Metasploit_5E5B685F : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Metasploit.yar#L255-L273"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Metasploit.yar#L255-L273"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "cdf0a3c07ef1479b53d49b8f22a9f93adcedeea3b869ef954cc043e54f65c3d0"
-		logic_hash = "003fb4f079b125f37899a2b3cb62d80edd5b3e5ccbed5bc1ea514a4a173d329d"
+		logic_hash = "v1_sha256_003fb4f079b125f37899a2b3cb62d80edd5b3e5ccbed5bc1ea514a4a173d329d"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1103,10 +1103,10 @@ rule ELASTIC_Macos_Trojan_Genieo_5E0F8980 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Genieo.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Genieo.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "6c698bac178892dfe03624905256a7d9abe468121163d7507cade48cf2131170"
-		logic_hash = "76b725f6ae5755bb00d384ef2ae1511789487257d8bb7cb61b893226f03a803e"
+		logic_hash = "v1_sha256_76b725f6ae5755bb00d384ef2ae1511789487257d8bb7cb61b893226f03a803e"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1131,10 +1131,10 @@ rule ELASTIC_Macos_Trojan_Genieo_37878473 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Genieo.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Genieo.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "0fadd926f8d763f7f15e64f857e77f44a492dcf5dc82ae965d3ddf80cd9c7a0d"
-		logic_hash = "bb04ae4e0a98e0dbd0c0708d5e767306e38edf76de2671523f4bd43cbcbfefc2"
+		logic_hash = "v1_sha256_bb04ae4e0a98e0dbd0c0708d5e767306e38edf76de2671523f4bd43cbcbfefc2"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1159,10 +1159,10 @@ rule ELASTIC_Macos_Trojan_Genieo_0D003634 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Genieo.yar#L41-L59"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Genieo.yar#L41-L59"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "bcd391b58338efec4769e876bd510d0c4b156a7830bab56c3b56585974435d70"
-		logic_hash = "0412f88408fb14d1126ef091d0a5cc0ee2b2e39aeb241bef55208b59830ca993"
+		logic_hash = "v1_sha256_0412f88408fb14d1126ef091d0a5cc0ee2b2e39aeb241bef55208b59830ca993"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1187,10 +1187,10 @@ rule ELASTIC_Macos_Trojan_Genieo_9E178C0B : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Genieo.yar#L61-L79"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Genieo.yar#L61-L79"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "b7760e73195c3ea8566f3ff0427d85d6f35c6eec7ee9184f3aceab06da8845d8"
-		logic_hash = "212f96ca964aceeb80c6d3282d488cfbb74aeffb9c0c9dd840a3a28f9bbdcbea"
+		logic_hash = "v1_sha256_212f96ca964aceeb80c6d3282d488cfbb74aeffb9c0c9dd840a3a28f9bbdcbea"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1215,9 +1215,9 @@ rule ELASTIC_Macos_Virus_Vsearch_0Dd3Ec6F : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Vsearch.yar#L1-L18"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "17a467b000117ea6c39fbd40b502ac9c7d59a97408c2cdfb09c65b2bb09924e5"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Vsearch.yar#L1-L18"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_17a467b000117ea6c39fbd40b502ac9c7d59a97408c2cdfb09c65b2bb09924e5"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1242,9 +1242,9 @@ rule ELASTIC_Macos_Virus_Vsearch_2A0419F8 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Vsearch.yar#L20-L37"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "fa9b811465e435bff5bc0f149ff65f57932c94f548a5ece4ec54ba775cdbb55a"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Vsearch.yar#L20-L37"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_fa9b811465e435bff5bc0f149ff65f57932c94f548a5ece4ec54ba775cdbb55a"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1269,9 +1269,9 @@ rule ELASTIC_Macos_Infostealer_Mdquerytoken_1C52D574 : FILE MEMORY {
 		date = "2023-04-11"
 		modified = "2024-08-19"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Infostealer_MdQueryToken.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "ede29154aae99bb67075e21acb694b089f9a1b366a4e2505cb761142393994a8"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Infostealer_MdQueryToken.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_ede29154aae99bb67075e21acb694b089f9a1b366a4e2505cb761142393994a8"
 		score = 75
 		quality = 71
 		tags = "FILE, MEMORY"
@@ -1287,7 +1287,7 @@ rule ELASTIC_Macos_Infostealer_Mdquerytoken_1C52D574 : FILE MEMORY {
 		$string2 = /kMDItemDisplayName\s{1,50}==\s{1,50}\S{1,50}token\S{1,50}/ ascii wide nocase
 
 	condition:
-		any of ($string1,$string2)
+		any of ( $string1 , $string2 )
 }
 rule ELASTIC_Macos_Virus_Pirrit_271B8Ed0 : FILE MEMORY {
     meta:
@@ -1297,10 +1297,10 @@ rule ELASTIC_Macos_Virus_Pirrit_271B8Ed0 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Virus_Pirrit.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Virus_Pirrit.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "7feda05d41b09c06a08c167c7f4dde597ac775c54bf0d74a82aa533644035177"
-		logic_hash = "cb77f6df1403afbc7f45d30551559b6de7eb1c3434778b46d31754da0a1b1f10"
+		logic_hash = "v1_sha256_cb77f6df1403afbc7f45d30551559b6de7eb1c3434778b46d31754da0a1b1f10"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1325,10 +1325,10 @@ rule ELASTIC_Macos_Cryptominer_Generic_D3F68E29 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Cryptominer_Generic.yar#L1-L21"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Cryptominer_Generic.yar#L1-L21"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "d9c78c822dfd29a1d9b1909bf95cab2a9550903e8f5f178edeb7a5a80129fbdb"
-		logic_hash = "cc336e536e0f8dda47f9551dfabfc50c2094fffe4a69cdcec23824dd063dede0"
+		logic_hash = "v1_sha256_cc336e536e0f8dda47f9551dfabfc50c2094fffe4a69cdcec23824dd063dede0"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1355,10 +1355,10 @@ rule ELASTIC_Macos_Cryptominer_Generic_365Ecbb9 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Cryptominer_Generic.yar#L23-L41"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Cryptominer_Generic.yar#L23-L41"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "e2562251058123f86c52437e82ea9ff32aae5f5227183638bc8aa2bc1b4fd9cf"
-		logic_hash = "66f16c8694c5cfde1b5e4eea03c530fa32a15022fa35acdbb676bb696e7deae2"
+		logic_hash = "v1_sha256_66f16c8694c5cfde1b5e4eea03c530fa32a15022fa35acdbb676bb696e7deae2"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1383,10 +1383,10 @@ rule ELASTIC_Macos_Cryptominer_Generic_4E7D4488 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Cryptominer_Generic.yar#L43-L61"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Cryptominer_Generic.yar#L43-L61"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "e2562251058123f86c52437e82ea9ff32aae5f5227183638bc8aa2bc1b4fd9cf"
-		logic_hash = "708b21b687c8b853a9b5f8a50d31119e4f0a02a5b63f81ba1cac8c06acd19214"
+		logic_hash = "v1_sha256_708b21b687c8b853a9b5f8a50d31119e4f0a02a5b63f81ba1cac8c06acd19214"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1411,10 +1411,10 @@ rule ELASTIC_Macos_Trojan_Hloader_A3945Baf : FILE MEMORY {
 		date = "2023-10-23"
 		modified = "2023-10-23"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_HLoader.yar#L1-L21"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_HLoader.yar#L1-L21"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "2360a69e5fd7217e977123c81d3dbb60bf4763a9dae6949bc1900234f7762df1"
-		logic_hash = "0383485b6bbcdae210a6c949f6796023b2f7ec3f1edbd2116207fc2b75a67849"
+		logic_hash = "v1_sha256_0383485b6bbcdae210a6c949f6796023b2f7ec3f1edbd2116207fc2b75a67849"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1431,7 +1431,7 @@ rule ELASTIC_Macos_Trojan_Hloader_A3945Baf : FILE MEMORY {
 		$seq_rename = { 41 89 DE 84 DB 74 ?? 48 8B 7D ?? FF 15 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4C 89 E7 E8 ?? ?? ?? ?? }
 
 	condition:
-		2 of ($seq*)
+		2 of ( $seq* )
 }
 rule ELASTIC_Macos_Trojan_Amcleaner_445Bb666 : FILE MEMORY {
     meta:
@@ -1441,10 +1441,10 @@ rule ELASTIC_Macos_Trojan_Amcleaner_445Bb666 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Amcleaner.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Amcleaner.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "c85bf71310882bc0c0cf9b74c9931fd19edad97600bc86ca51cf94ed85a78052"
-		logic_hash = "664829ff761186ec8f3055531b5490b7516756b0aa9d0183d4c17240a5ca44c4"
+		logic_hash = "v1_sha256_664829ff761186ec8f3055531b5490b7516756b0aa9d0183d4c17240a5ca44c4"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1469,10 +1469,10 @@ rule ELASTIC_Macos_Trojan_Amcleaner_A91D3907 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Amcleaner.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Amcleaner.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "dc9c700f3f6a03ecb6e3f2801d4269599c32abce7bc5e6a1b7e6a64b0e025f58"
-		logic_hash = "e61ceea117acf444a6b137b93d7c335c6eb8a7e13a567177ec4ea44bf64fd5c6"
+		logic_hash = "v1_sha256_e61ceea117acf444a6b137b93d7c335c6eb8a7e13a567177ec4ea44bf64fd5c6"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1497,10 +1497,10 @@ rule ELASTIC_Macos_Trojan_Amcleaner_8Ce3Fea8 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Amcleaner.yar#L41-L59"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Amcleaner.yar#L41-L59"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "c85bf71310882bc0c0cf9b74c9931fd19edad97600bc86ca51cf94ed85a78052"
-		logic_hash = "08c4b5b4afefbf1ee207525f9b28bc7eed7b55cb07f8576fddfa0bbe95002769"
+		logic_hash = "v1_sha256_08c4b5b4afefbf1ee207525f9b28bc7eed7b55cb07f8576fddfa0bbe95002769"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1525,9 +1525,9 @@ rule ELASTIC_Macos_Exploit_Log4J_75A13888 : FILE MEMORY {
 		date = "2021-12-13"
 		modified = "2022-07-22"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Exploit_Log4j.yar#L1-L24"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "b09d8dd9c422e7eb8aa23f8b1204d31fd290252925099300d6d19d73e562ca5e"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Exploit_Log4j.yar#L1-L24"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_b09d8dd9c422e7eb8aa23f8b1204d31fd290252925099300d6d19d73e562ca5e"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1548,7 +1548,7 @@ rule ELASTIC_Macos_Exploit_Log4J_75A13888 : FILE MEMORY {
 		$exp4 = "Exploit.java"
 
 	condition:
-		2 of ($jndi*) and 1 of ($exp*)
+		2 of ( $jndi* ) and 1 of ( $exp* )
 }
 rule ELASTIC_Macos_Trojan_Sugarloader_E7E1D99C : FILE MEMORY {
     meta:
@@ -1558,10 +1558,10 @@ rule ELASTIC_Macos_Trojan_Sugarloader_E7E1D99C : FILE MEMORY {
 		date = "2023-10-24"
 		modified = "2023-10-24"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_SugarLoader.yar#L1-L23"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_SugarLoader.yar#L1-L23"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "3ea2ead8f3cec030906dcbffe3efd5c5d77d5d375d4a54cca03bfe8a6cb59940"
-		logic_hash = "0689b704add81e8e7968d9dba5f60d45c8791209330f4ee97e218f8eeb22c88f"
+		logic_hash = "v1_sha256_0689b704add81e8e7968d9dba5f60d45c8791209330f4ee97e218f8eeb22c88f"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1580,7 +1580,7 @@ rule ELASTIC_Macos_Trojan_Sugarloader_E7E1D99C : FILE MEMORY {
 		$seq_recieve_msg = { 45 85 FF 74 ?? 45 39 EF BA ?? ?? ?? ?? 41 0F 42 D7 41 8B 3C 24 48 89 DE 31 C9 E8 ?? ?? ?? ?? 41 29 C7 48 01 C3 48 85 C0 7F ?? B8 ?? ?? ?? ?? EB ?? }
 
 	condition:
-		3 of ($seq*)
+		3 of ( $seq* )
 }
 rule ELASTIC_Macos_Cryptominer_Xmrig_241780A1 : FILE MEMORY {
     meta:
@@ -1590,10 +1590,10 @@ rule ELASTIC_Macos_Cryptominer_Xmrig_241780A1 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Cryptominer_Xmrig.yar#L1-L22"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Cryptominer_Xmrig.yar#L1-L22"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "2e94fa6ac4045292bf04070a372a03df804fa96c3b0cb4ac637eeeb67531a32f"
-		logic_hash = "9e091f6881a96abdc6592db385eb9026806befdda6bda4489470b4e16e1d4d87"
+		logic_hash = "v1_sha256_9e091f6881a96abdc6592db385eb9026806befdda6bda4489470b4e16e1d4d87"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1621,10 +1621,10 @@ rule ELASTIC_Macos_Hacktool_Swiftbelt_Bc62Ede6 : FILE MEMORY {
 		date = "2021-10-12"
 		modified = "2021-10-25"
 		reference = "https://www.elastic.co/security-labs/inital-research-of-jokerspy"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Hacktool_Swiftbelt.yar#L1-L44"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Hacktool_Swiftbelt.yar#L1-L44"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "452c832a17436f61ad5f32ee1c97db05575160105ed1dcd0d3c6db9fb5a9aea1"
-		logic_hash = "51481baa6ddb09cf8463d989637319cb26b23fef625cc1a44c96d438c77362ca"
+		logic_hash = "v1_sha256_51481baa6ddb09cf8463d989637319cb26b23fef625cc1a44c96d438c77362ca"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1673,10 +1673,10 @@ rule ELASTIC_Macos_Trojan_Aobokeylogger_Bd960F34 : FILE MEMORY {
 		date = "2021-10-18"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Aobokeylogger.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Aobokeylogger.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "2b50146c20621741642d039f1e3218ff68e5dbfde8bb9edaa0a560ca890f0970"
-		logic_hash = "f89fbf1d6bf041de0ce32f7920818c34ce0eeb6779bb7fac6f223bbea1c6f6fa"
+		logic_hash = "v1_sha256_f89fbf1d6bf041de0ce32f7920818c34ce0eeb6779bb7fac6f223bbea1c6f6fa"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -1701,10 +1701,10 @@ rule ELASTIC_Macos_Trojan_Getshell_F339D74C : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Getshell.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Getshell.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "b2199c15500728a522c04320aee000938f7eb69d751a55d7e51a2806d8cd0fe7"
-		logic_hash = "77a409f1a0ab5f87a77a6b2ffa2d4ff7bd6d86c0f685c524e2083585bb3fb764"
+		logic_hash = "v1_sha256_77a409f1a0ab5f87a77a6b2ffa2d4ff7bd6d86c0f685c524e2083585bb3fb764"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1729,10 +1729,10 @@ rule ELASTIC_Macos_Backdoor_Kagent_64Ca1865 : FILE MEMORY {
 		date = "2021-11-11"
 		modified = "2022-07-22"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Backdoor_Kagent.yar#L1-L25"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Backdoor_Kagent.yar#L1-L25"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "d599d7814adbab0f1442f5a10074e00f3a776ce183ea924abcd6154f0d068bb4"
-		logic_hash = "dea0a1bbe8c3065b395de50b5ffc2fbdf479ed35ce284fa33298d6ed55e960c6"
+		logic_hash = "v1_sha256_dea0a1bbe8c3065b395de50b5ffc2fbdf479ed35ce284fa33298d6ed55e960c6"
 		score = 75
 		quality = 50
 		tags = "FILE, MEMORY"
@@ -1763,9 +1763,9 @@ rule ELASTIC_Macos_Creddump_Keychainaccess_535C1511 : FILE MEMORY {
 		date = "2023-04-11"
 		modified = "2024-08-19"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Creddump_KeychainAccess.yar#L1-L25"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
-		logic_hash = "c2995263622d62b11db93f7d163a7595e316ec24b51099f434bc5dbd0afefbfe"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Creddump_KeychainAccess.yar#L1-L25"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		logic_hash = "v1_sha256_c2995263622d62b11db93f7d163a7595e316ec24b51099f434bc5dbd0afefbfe"
 		score = 75
 		quality = 49
 		tags = "FILE, MEMORY"
@@ -1787,7 +1787,7 @@ rule ELASTIC_Macos_Creddump_Keychainaccess_535C1511 : FILE MEMORY {
 		$strings8 = "Failed to get password" ascii wide nocase
 
 	condition:
-		all of ($strings1,$strings2) or $strings4 or all of ($strings3,$strings5) or all of ($strings6,$strings7,$strings8)
+		all of ( $strings1 , $strings2 ) or $strings4 or all of ( $strings3 , $strings5 ) or all of ( $strings6 , $strings7 , $strings8 )
 }
 rule ELASTIC_Macos_Hacktool_Bifrost_39Bcbdf8 : FILE MEMORY {
     meta:
@@ -1797,10 +1797,10 @@ rule ELASTIC_Macos_Hacktool_Bifrost_39Bcbdf8 : FILE MEMORY {
 		date = "2021-10-12"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Hacktool_Bifrost.yar#L1-L27"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Hacktool_Bifrost.yar#L1-L27"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "e2b64df0add316240b010db7d34d83fc9ac7001233259193e5a72b6e04aece46"
-		logic_hash = "a2ff4f1aca51e80f2b277e9171e99a80a75177d1d17d487de2eb8872832cb0d5"
+		logic_hash = "v1_sha256_a2ff4f1aca51e80f2b277e9171e99a80a75177d1d17d487de2eb8872832cb0d5"
 		score = 75
 		quality = 25
 		tags = "FILE, MEMORY"
@@ -1833,10 +1833,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_28B13E67 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "0b50a38749ea8faf571169ebcfce3dfd668eaefeb9a91d25a96e6b3881e4a3e8"
-		logic_hash = "586ae19e570c51805afd3727b2e570cdb1c48344aa699e54774a708f02bc3a6f"
+		logic_hash = "v1_sha256_586ae19e570c51805afd3727b2e570cdb1c48344aa699e54774a708f02bc3a6f"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1861,10 +1861,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_75C8Cb4E : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "3d69912e19758958e1ebdef5e12c70c705d7911c3b9df03348c5d02dd06ebe4e"
-		logic_hash = "527fecb8460c0325c009beddd6992e0abbf8c5a05843e4cedf3b17deb4b19a1c"
+		logic_hash = "v1_sha256_527fecb8460c0325c009beddd6992e0abbf8c5a05843e4cedf3b17deb4b19a1c"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1889,10 +1889,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_17B564B4 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L41-L59"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L41-L59"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "94f6e5ee6eb3a191faaf332ea948301bbb919f4ec6725b258e4f8e07b6a7881d"
-		logic_hash = "40cd2a793c8ed51a8191ecb9b358f50dc2035d997d0f773f6049f9c272291607"
+		logic_hash = "v1_sha256_40cd2a793c8ed51a8191ecb9b358f50dc2035d997d0f773f6049f9c272291607"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1917,10 +1917,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_C90C088A : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L61-L79"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L61-L79"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "875513f4ebeb63b9e4d82fb5bff2b2dc75b69c0bfa5dd8d2895f22eaa783f372"
-		logic_hash = "c82c5c8d1e38e0d2631c5611e384eb49b58c64daeafe0cc642682e5c64686b60"
+		logic_hash = "v1_sha256_c82c5c8d1e38e0d2631c5611e384eb49b58c64daeafe0cc642682e5c64686b60"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1945,10 +1945,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_3965578D : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L81-L99"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L81-L99"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "d72543505e36db40e0ccbf14f4ce3853b1022a8aeadd96d173d84e068b4f68fa"
-		logic_hash = "6bd24640e0a3aa152fcd90b6975ee4fb7e99ab5f2d48d3a861bc804c526c90b6"
+		logic_hash = "v1_sha256_6bd24640e0a3aa152fcd90b6975ee4fb7e99ab5f2d48d3a861bc804c526c90b6"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -1973,10 +1973,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_00D9D0E9 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L101-L119"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L101-L119"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "73069b34e513ff1b742b03fed427dc947c22681f30cf46288a08ca545fc7d7dd"
-		logic_hash = "535831872408caa27984190d1b1b1a5954e502265925d50457e934219598dbfd"
+		logic_hash = "v1_sha256_535831872408caa27984190d1b1b1a5954e502265925d50457e934219598dbfd"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2001,10 +2001,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_650B8Ff4 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L121-L139"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L121-L139"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "78fd2c4afd7e810d93d91811888172c4788a0a2af0b88008573ce8b6b819ae5a"
-		logic_hash = "e8a706db010e9c3d9714d5e7a376e9b2189af382a7b01db9a9e7ee947e9637bb"
+		logic_hash = "v1_sha256_e8a706db010e9c3d9714d5e7a376e9b2189af382a7b01db9a9e7ee947e9637bb"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2029,10 +2029,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_C8Ad7Edd : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L141-L159"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L141-L159"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "d4915473e1096a82afdaee405189a0d0ae961bd11a9e5e9adc420dd64cb48c24"
-		logic_hash = "be09b4bd612bb499044fe91ca4e1ab62405cf1e4d75b8e1da90e326d1c66e04f"
+		logic_hash = "v1_sha256_be09b4bd612bb499044fe91ca4e1ab62405cf1e4d75b8e1da90e326d1c66e04f"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2057,10 +2057,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_Cb7344Eb : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L161-L179"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L161-L179"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "53373668d8c5dc17f58768bf59fb5ab6d261a62d0950037f0605f289102e3e56"
-		logic_hash = "6b5e868dfd14e9b1cdf3caeb1216764361b28c1dd38849526baf5dbdb1020d8d"
+		logic_hash = "v1_sha256_6b5e868dfd14e9b1cdf3caeb1216764361b28c1dd38849526baf5dbdb1020d8d"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2085,10 +2085,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_753E5738 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L181-L199"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L181-L199"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "42aeea232b28724d1fa6e30b1aeb8f8b8c22e1bc8afd1bbb4f90e445e31bdfe9"
-		logic_hash = "7a6907b51c793e4182c1606eab6f2bcb71f0350a34aef93fa3f3a9f1a49961ba"
+		logic_hash = "v1_sha256_7a6907b51c793e4182c1606eab6f2bcb71f0350a34aef93fa3f3a9f1a49961ba"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2113,10 +2113,10 @@ rule ELASTIC_Macos_Trojan_Bundlore_7B9F0C28 : FILE MEMORY {
 		date = "2021-10-05"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Bundlore.yar#L201-L219"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Bundlore.yar#L201-L219"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "fc4da125fed359d3e1740dafaa06f4db1ffc91dbf22fd5e7993acf8597c4c283"
-		logic_hash = "32abbb76c866e3a555ee6a9c39f62a0712f641959b66068abfb4379baa9a9da9"
+		logic_hash = "v1_sha256_32abbb76c866e3a555ee6a9c39f62a0712f641959b66068abfb4379baa9a9da9"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2141,10 +2141,10 @@ rule ELASTIC_Macos_Trojan_Eggshell_Ddacf7B9 : FILE MEMORY {
 		date = "2021-09-30"
 		modified = "2021-10-25"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Trojan_Eggshell.yar#L1-L23"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Trojan_Eggshell.yar#L1-L23"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "6d93a714dd008746569c0fbd00fadccbd5f15eef06b200a4e831df0dc8f3d05b"
-		logic_hash = "f986f7d1e3a68e27f82048017c6d6381a0354ffad2cd10f3eee69bbbfa940abd"
+		logic_hash = "v1_sha256_f986f7d1e3a68e27f82048017c6d6381a0354ffad2cd10f3eee69bbbfa940abd"
 		score = 75
 		quality = 73
 		tags = "FILE, MEMORY"
@@ -2173,10 +2173,10 @@ rule ELASTIC_Macos_Backdoor_Fakeflashlxk_06Fd8071 : FILE MEMORY {
 		date = "2021-11-11"
 		modified = "2022-07-22"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/yara/rules/MacOS_Backdoor_Fakeflashlxk.yar#L1-L21"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/8824c8f250f189be8f7caf30dac0d045b7fb8651/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/MacOS_Backdoor_Fakeflashlxk.yar#L1-L21"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
 		hash = "107f844f19e638866d8249e6f735daf650168a48a322d39e39d5e36cfc1c8659"
-		logic_hash = "853d44465a472786bb48bbe1009e0ff925f79e4fd72f0eac537dd271c1ec3703"
+		logic_hash = "v1_sha256_853d44465a472786bb48bbe1009e0ff925f79e4fd72f0eac537dd271c1ec3703"
 		score = 75
 		quality = 75
 		tags = "FILE, MEMORY"
@@ -2199,13 +2199,13 @@ rule BINARYALERT_Hacktool_Macos_Macpmem {
     meta:
 		description = "MacPmem enables read/write access to physical memory on macOS. Can be used by CSIRT teams and attackers."
 		author = "@mimeframe"
-		id = "4890598e-936c-5a4d-9004-88ff4fe57c49"
+		id = "26ee217b-a3f3-5742-801e-cdc0684dfd99"
 		date = "2017-08-11"
 		modified = "2017-08-11"
 		reference = "https://github.com/google/rekall/tree/master/tools/osx/MacPmem"
 		source_url = "https://github.com/airbnb/binaryalert//blob/a9c0f06affc35e1f8e45bb77f835b92350c68a0b/rules/public/hacktool/macos/hacktool_macos_macpmem.yara#L3-L22"
 		license_url = "https://github.com/airbnb/binaryalert//blob/a9c0f06affc35e1f8e45bb77f835b92350c68a0b/LICENSE"
-		logic_hash = "d64b5a5423932211e3b72d949028f3f0ed1f1435e9584cffa947f2bd4846c29b"
+		logic_hash = "v1_sha256_d64b5a5423932211e3b72d949028f3f0ed1f1435e9584cffa947f2bd4846c29b"
 		score = 75
 		quality = 80
 		tags = ""
@@ -2221,19 +2221,19 @@ rule BINARYALERT_Hacktool_Macos_Macpmem {
 		$b2 = "MacPmem load tag is" wide ascii
 
 	condition:
-		BINARYALERT_Macho_PRIVATE and 2 of ($a*) or all of ($b*)
+		BINARYALERT_Macho_PRIVATE and 2 of ( $a* ) or all of ( $b* )
 }
 rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
     meta:
 		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
 		author = "threatintel@volexity.com"
-		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
+		id = "d896095d-3107-5239-921a-21b58dfc8520"
 		date = "2024-04-10"
 		modified = "2024-04-12"
 		reference = "TIB-20240412"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L57-L78"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
+		logic_hash = "v1_sha256_574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
 		score = 50
 		quality = 80
 		tags = "FILE, MEMORY"
@@ -2249,19 +2249,19 @@ rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
 		$proj_1 = "/home/jarischf/"
 
 	condition:
-		any of ($proj_*)
+		any of ( $proj_* )
 }
 rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
     meta:
 		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
 		author = "threatintel@volexity.com"
-		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
+		id = "683e9c91-8e33-5262-bb91-b545ca3a49ef"
 		date = "2024-04-10"
 		modified = "2024-04-12"
 		reference = "TIB-20240412"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L79-L112"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
+		logic_hash = "v1_sha256_38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
@@ -2286,19 +2286,19 @@ rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
 		$proj_1 = "github.com/Fahrj/reverse-ssh"
 
 	condition:
-		any of ($proj_*) or 4 of ($fun_*)
+		any of ( $proj_* ) or 4 of ( $fun_* )
 }
 rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
     meta:
 		description = "Detection for RELOADEXT, a Google Chrome extension malware."
 		author = "threatintel@volexity.com"
-		id = "6c6c8bee-2a13-5645-89ef-779f00264fd9"
+		id = "d4510cd3-db69-5f0a-9c4a-fafd35a6929a"
 		date = "2024-02-23"
 		modified = "2024-08-02"
 		reference = "TIB-20240227"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "2b11f8fc5b6260ebf00bde83585cd7469709a4979ca579cdf065724bc15052fc"
+		logic_hash = "v1_sha256_2b11f8fc5b6260ebf00bde83585cd7469709a4979ca579cdf065724bc15052fc"
 		score = 75
 		quality = 80
 		tags = "STORMBAMBOO, FILE, MEMORY"
@@ -2319,19 +2319,19 @@ rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
 		$code3 = "0x400*0x400"
 
 	condition:
-		all of ($man*) or (#code1>8 and #code2>=2 and #code3>=2)
+		all of ( $man* ) or ( #code1 > 8 and #code2 >= 2 and #code3 >= 2 )
 }
 rule VOLEXITY_Apt_Malware_Macos_Reloadext_Installer : STORMBAMBOO FILE MEMORY {
     meta:
 		description = "Detect the RELOADEXT installer."
 		author = "threatintel@volexity.com"
-		id = "c65ea2b5-ab98-5693-92ea-05c0f1ea1e5b"
+		id = "7499b1fc-3cfd-5844-84e7-8a4782e908b9"
 		date = "2024-02-23"
 		modified = "2024-08-02"
 		reference = "TIB-20240227"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-08-02 StormBamboo/rules.yar#L37-L62"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "8688796839202d95ded15e10262a7a7c7cbbae4a332b60305402e5984005d452"
+		logic_hash = "v1_sha256_8688796839202d95ded15e10262a7a7c7cbbae4a332b60305402e5984005d452"
 		score = 75
 		quality = 80
 		tags = "STORMBAMBOO, FILE, MEMORY"
@@ -2357,13 +2357,13 @@ rule VOLEXITY_Apt_Malware_Any_Macma_A : STORMBAMBOO FILE MEMORY {
     meta:
 		description = "Detects variants of the MACMA backdoor, variants of MACMA have been discovered for Windows, macOS and android."
 		author = "threatintel@volexity.com"
-		id = "6ab45af1-41e5-53fc-9297-e2bc07ebf797"
+		id = "81825776-9712-5cbb-96f2-b69eb72fe729"
 		date = "2021-11-12"
 		modified = "2024-08-02"
 		reference = "https://blog.google/threat-analysis-group/analyzing-watering-hole-campaign-using-macos-exploits/"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-08-02 StormBamboo/rules.yar#L64-L112"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "7ebaff9fddf6491d6b1ed9ab14c1b87dc8df850536e55aa723d625a593b33ed7"
+		logic_hash = "v1_sha256_7ebaff9fddf6491d6b1ed9ab14c1b87dc8df850536e55aa723d625a593b33ed7"
 		score = 75
 		quality = 53
 		tags = "STORMBAMBOO, FILE, MEMORY"
@@ -2404,19 +2404,19 @@ rule VOLEXITY_Apt_Malware_Any_Macma_A : STORMBAMBOO FILE MEMORY {
 		$s14 = "./param.ini" fullword ascii
 
 	condition:
-		any of ($magic*) or 7 of ($s*)
+		any of ( $magic* ) or 7 of ( $s* )
 }
 rule VOLEXITY_Apt_Malware_Macos_Gimmick : STORMBAMBOO FILE MEMORY {
     meta:
 		description = "Detects the macOS port of the GIMMICK malware."
 		author = "threatintel@volexity.com"
-		id = "3d485788-4aab-511b-a49e-5dc09d1950a9"
+		id = "c23b240c-10fc-5f83-b6cb-641afc60aa2a"
 		date = "2021-10-18"
 		modified = "2024-08-02"
 		reference = "https://www.volexity.com/blog/2022/03/22/storm-cloud-on-the-horizon-gimmick-malware-strikes-at-macos/"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-08-02 StormBamboo/rules.yar#L113-L171"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "00fba9df2212874a45d44b3d098a7b76c97fcd53ff083c76b784d2b510a4a467"
+		logic_hash = "v1_sha256_00fba9df2212874a45d44b3d098a7b76c97fcd53ff083c76b784d2b510a4a467"
 		score = 75
 		quality = 78
 		tags = "STORMBAMBOO, FILE, MEMORY"
@@ -2461,19 +2461,19 @@ rule VOLEXITY_Apt_Malware_Macos_Gimmick : STORMBAMBOO FILE MEMORY {
 		$cmd17 = "bash callback...." ascii wide
 
 	condition:
-		$s1 or 5 of ($json*) or 3 of ($msg*) or 9 of ($cmd*)
+		$s1 or 5 of ( $json* ) or 3 of ( $msg* ) or 9 of ( $cmd* )
 }
 rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
     meta:
 		description = "Detects Python script used by KPlayer to update, modified by attackers to download a malicious payload."
 		author = "threatintel@volexity.com"
-		id = "446d2eef-c60a-50ed-9ff1-df86b6210dff"
+		id = "9f8d5318-75e2-57c3-bf8e-9a3391e09750"
 		date = "2023-07-21"
 		modified = "2024-08-02"
 		reference = "TIB-20231221"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-08-02 StormBamboo/rules.yar#L243-L279"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "bb3a70dad28181534e27abbbd618165652c137264bfd3726ae4480c642493a3b"
+		logic_hash = "v1_sha256_bb3a70dad28181534e27abbbd618165652c137264bfd3726ae4480c642493a3b"
 		score = 75
 		quality = 80
 		tags = "STORMBAMBOO, FILE, MEMORY"
@@ -2499,19 +2499,19 @@ rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
 		$path_1 = "C:\\\\ProgramData\\\\Digiarty\\\\mediainfo.exe"
 
 	condition:
-		3 of ($s_*) or any of ($url_*) or $path_1
+		3 of ( $s_* ) or any of ( $url_* ) or $path_1
 }
 rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
     meta:
 		description = "SOCKS5 proxy tool used to relay connections."
 		author = "threatintel@volexity.com"
-		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
+		id = "35d798ba-7c95-538c-a489-e7cf9f7bba2c"
 		date = "2024-01-09"
 		modified = "2024-01-09"
 		reference = "TIB-20240109"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L85-L111"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
+		logic_hash = "v1_sha256_f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
@@ -2537,13 +2537,13 @@ rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY
     meta:
 		description = "Detection for fake macOS VPN client used by CharmingCypress."
 		author = "threatintel@volexity.com"
-		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
+		id = "1809d749-4b45-5195-990c-da025b1edea2"
 		date = "2023-10-17"
 		modified = "2023-10-27"
 		reference = "TIB-20231027"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-02-13 CharmingCypress/rules.yar#L236-L261"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
+		logic_hash = "v1_sha256_da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
 		score = 75
 		quality = 80
 		tags = "CHARMINGCYPRESS, FILE, MEMORY"
@@ -2563,19 +2563,19 @@ rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY
 		$s4 = "Error in importing the File." ascii
 
 	condition:
-		2 of ($s*)
+		2 of ( $s* )
 }
 rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
     meta:
 		description = "Detects a opensource malware available on github using strings in the ELF. DISGOMOJI used by UTA0137 is based on this malware."
 		author = "threatintel@volexity.com"
-		id = "6816d264-4311-5e90-948b-2e27cdf0b720"
+		id = "1cddd3a1-ed3c-5395-9eab-acadefbbd578"
 		date = "2024-03-28"
 		modified = "2024-03-28"
 		reference = "TIB-20240229"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L215-L241"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
+		logic_hash = "v1_sha256_22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
@@ -2601,13 +2601,13 @@ rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
     meta:
 		description = "Detects a opensource malware available on github using strings in the ELF. DISGOMOJI used by UTA0137 is based on this malware."
 		author = "threatintel@volexity.com"
-		id = "1ddbf476-ba2d-5cbb-ad95-38e0ae8db71b"
+		id = "b44c6a24-f1ef-55a3-8adc-acd5ad60d695"
 		date = "2024-02-22"
 		modified = "2024-03-28"
 		reference = "https://github.com/bmdyy/discord-c2"
 		source_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L243-L265"
 		license_url = "https://github.com/volexity/threat-intel/blob/b2dd39c31efbb1ed004fb25faaace7d5caf2f424/LICENSE.txt"
-		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
+		logic_hash = "v1_sha256_38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
