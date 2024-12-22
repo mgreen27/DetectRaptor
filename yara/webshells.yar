@@ -8,8 +8,8 @@ rule ELASTIC_Linux_Webshell_Generic_E80Ff633 : FILE MEMORY {
 		date = "2021-01-12"
 		modified = "2021-09-16"
 		reference = "https://github.com/elastic/protections-artifacts/"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/Linux_Webshell_Generic.yar#L1-L19"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/c6eb0081d3784ad249bb8c3aa419fbfe54263215/yara/rules/Linux_Webshell_Generic.yar#L1-L19"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/c6eb0081d3784ad249bb8c3aa419fbfe54263215/LICENSE.txt"
 		hash = "7640ba6f2417931ef901044152d5bfe1b266219d13b5983d92ddbdf644de5818"
 		logic_hash = "v1_sha256_d345e6ce3e51ed55064aafb1709e9bee7ef2ce87ec80165ac1b58eebd83cefee"
 		score = 75
@@ -36,8 +36,8 @@ rule ELASTIC_Linux_Webshell_Generic_41A5Fa40 : FILE MEMORY {
 		date = "2021-06-28"
 		modified = "2021-09-16"
 		reference = "18ac7fbc3d8d3bb8581139a20a7fee8ea5b7fcfea4a9373e3d22c71bae3c9de0"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/Linux_Webshell_Generic.yar#L21-L39"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/c6eb0081d3784ad249bb8c3aa419fbfe54263215/yara/rules/Linux_Webshell_Generic.yar#L21-L39"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/c6eb0081d3784ad249bb8c3aa419fbfe54263215/LICENSE.txt"
 		logic_hash = "v1_sha256_574148bc58626aac00add1989c65ad56315c7e2a8d27c7b96be404d831a7a576"
 		score = 75
 		quality = 73
@@ -63,8 +63,8 @@ rule ELASTIC_Windows_Trojan_Behinder_B9A49F4B : FILE MEMORY {
 		date = "2023-03-02"
 		modified = "2023-06-13"
 		reference = "https://www.elastic.co/security-labs/ref2924-howto-maintain-persistence-as-an-advanced-threat"
-		source_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/yara/rules/Windows_Trojan_Behinder.yar#L1-L22"
-		license_url = "https://github.com/elastic/protections-artifacts//blob/401b9f547292bee56d26a35f5f9d313b0c513e89/LICENSE.txt"
+		source_url = "https://github.com/elastic/protections-artifacts//blob/c6eb0081d3784ad249bb8c3aa419fbfe54263215/yara/rules/Windows_Trojan_Behinder.yar#L1-L22"
+		license_url = "https://github.com/elastic/protections-artifacts//blob/c6eb0081d3784ad249bb8c3aa419fbfe54263215/LICENSE.txt"
 		hash = "a50ca8df4181918fe0636272f31e19815f1b97cce6d871e15e03b0ee0e3da17b"
 		logic_hash = "v1_sha256_2303ef82e4dc5e8be87ddc4563dcd06963d17e1fbf25cf246a6c81e4e74adbcb"
 		score = 75
