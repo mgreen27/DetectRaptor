@@ -134,6 +134,7 @@ RMM - Itarian,^ITSMAgent\.exe$|^ItsmRsp\.exe$|^ITSMService\.exe$|^Rdesktop\.exe$
 RMM - ISL Light,^islalwaysonmonitor\.exe$|^isllight\.exe$|^isllightservice\.exe$,.,,ISL Light - islonline.com,Medium
 RMM - JumpCloud,^JumpCloud Remote Assist\.exe$,.,,JumpCloud - https://jumpcloud.com/support/understand-remote-assist-agent,Medium
 RMM - Jump Desktop,^jumpclient\.exe$|^jumpdesktop\.exe$|^jumpservice\.exe$,.,,Jump Desktop - jumpdesktop.com,Medium
+RMM - JWrapper Remote,^(https?([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}[0-9]{1,5}|serviceconfig.xml)$,JWrapper-Remote,,JWrapper-Remote,In feild.
 RMM - Kabuto,^kabuto\.exe$,.,,Kabuto - repairtechsolutions.com/kabuto/,Medium
 RMM - Kaseya (aka Unigma),^agentmon\.exe$,.,,Kaseya (aka Unigma) - kaseya.com,Medium
 RMM - KickIdler,^kickidler$,.,,KickIdler - kickidler.com,Medium
