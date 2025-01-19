@@ -681,6 +681,7 @@ parameters:
         ATSZIO.sys,cea540a2864ece0a868d841ab27680ff841fcbe6,ATSZIO Driver,ATSZIO Driver,0.2.1.7,0.2.1.7,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/6ec5ddda-f302-4008-a73e-12814c1d571f/
         ATSZIO.sys,3f67a43ae174a715795e49f72bc350302de83323,ATSZIO Driver,ATSZIO Driver,0.2.1.7,0.2.1.7,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/6ec5ddda-f302-4008-a73e-12814c1d571f/
         ATSZIO.sys,962e2ac84c28ed5e373d4d4ccb434eceee011974,ATSZIO Driver,ATSZIO Driver,0.2.2.3,0.2.2.3,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/6ec5ddda-f302-4008-a73e-12814c1d571f/
+        szkg64.sys,d7698828cdc3c96cc17fe2d4ff6d93bb0cd355d8,Stopzilla,szkg Device Driver,5.0.95.0,3.0.24,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/375e8de3-aae4-488d-8273-66744978b45f/
         AODDriver.sys,5ce273aa80ed3b0394e593a999059096682736ae,AMD OverDrive Service Driver,AMD OverDrive Service Driver,4.2.0,4.2.0 built by: WinDDK,I386,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a3c52cbe-90ca-432c-9520-761b60e7d9cb/
         AODDriver.sys,e5bfb18f63fcfb7dc09b0292602112ea7837ef7a,,,,,I386,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a3c52cbe-90ca-432c-9520-761b60e7d9cb/
         AODDriver.sys,0f2fdfb249c260c892334e62ab77ac88fcb8b5e4,AMD OverDrive Service Driver,AMD OverDrive Service Driver,3.1.0,3.1.0 built by: WinDDK,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a3c52cbe-90ca-432c-9520-761b60e7d9cb/
@@ -1005,6 +1006,7 @@ parameters:
         EneIo64.sys,b4d014b5edd6e19ce0e8395a64faedf49688ecb5,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/9b65dba4-81a0-48cc-8ff0-a4f353881062/
         ADV64DRV.sys,2261198385d62d2117f50f631652eded0ecc71db,MicrosoftR WindowsR Operating System,,"2, 0, 0, 0","2, 0, 0, 0",AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/24fb7bab-b8c3-46ea-a370-c84d2f0ff614/
         kdriver.sys,b1266873fa36a2104fd5d7f498a9957bc3d9d450,,,,,AMD64,vulnerable drivers,Elevate privileges,https://www.loldrivers.io/drivers/51808fa6-89a4-4f4d-aabc-0a7b0e99e34d/
+        dellinstrumentation.sys,6cf726ad47c47e01147645700233917619ea1714,DellInstrumentation,DellInstrumentation,2.8.9.4,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/86b9c8d6-9c59-4fd4-befd-ab9a36a19e36/
         BS_HWMIo64.sys,9c24dd75e4074041dbe03bf21f050c77d748b8e9,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/d158321b-4d56-49c5-9a18-bcff9f4a2ebe/
         directio32_legacy.sys,75c924435e87f38f20e5e77b7f2c382b9c9b974b,,,,,I386,vulnerable drivers,Elevate privileges,https://www.loldrivers.io/drivers/7a0842ca-1a64-4ad1-9d66-25eb983d1742/
         asas.sys,d10a054c6c3b1243cb13ff6648cd5de21a0b6548,,,,,AMD64,vulnerable drivers,Elevate privileges,https://www.loldrivers.io/drivers/dbb58de1-a1e5-4c7f-8fe0-4033502b1c63/
