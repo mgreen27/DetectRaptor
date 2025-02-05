@@ -164,7 +164,7 @@ parameters:
         RMM - ISL Light,^islalwaysonmonitor\.exe$|^isllight\.exe$|^isllightservice\.exe$,.,,ISL Light - islonline.com,Medium
         RMM - JumpCloud,^JumpCloud Remote Assist\.exe$,.,,JumpCloud - https://jumpcloud.com/support/understand-remote-assist-agent,Medium
         RMM - Jump Desktop,^jumpclient\.exe$|^jumpdesktop\.exe$|^jumpservice\.exe$,.,,Jump Desktop - jumpdesktop.com,Medium
-        RMM - JWrapper Remote,"^(https?([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}[0-9]{1,5}|serviceconfig.xml)$",JWrapper-Remote,,In field - actor use,Medium
+        RMM - JWrapper Remote,"^(https?([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}[0-9]{1,5})|serviceconfig.xml)$",JWrapper-Remote,,In field - actor use,Medium
         RMM - Kabuto,^kabuto\.exe$,.,,Kabuto - repairtechsolutions.com/kabuto/,Medium
         RMM - Kaseya (aka Unigma),^agentmon\.exe$,.,,Kaseya (aka Unigma) - kaseya.com,Medium
         RMM - KickIdler,^kickidler$,.,,KickIdler - kickidler.com,Medium
@@ -181,7 +181,7 @@ parameters:
         RMM - Mikogo,^mikogo\.exe$|^mikogolauncher\.exe$|^mikogo-service\.exe$|^mikogo-starter\.exe$,.,,Mikogo - mikogo.com,Medium
         RMM - MioNet (Also known as WD Anywhere Access),^mionet\.exe$|^mionetmanager\.exe$,.,,MioNet (Also known as WD Anywhere Access) - ,Medium
         RMM - mRemoteNG,^mRemoteNG$|^mRemoteNG-Installer\.exe$,.,,mRemoteNG - mremoteng.org,Medium
-        RMM. - MSP360,^msp360$,.,,MSP360 - msp360.com,Medium
+        RMM - MSP360,^msp360$,.,,MSP360 - msp360.com,Medium
         RMM - MyIVO,^myivomanager\.exe$|^myivomgr\.exe$,.,,MyIVO - myivo-server.software.informer.com,Medium
         RMM - Naverisk,^Naverisk$,.,,Naverisk - naverisk.com,Medium
         RMM - N-ABLE Remote Access Software,^Nable$,.,,N-ABLE Remote Access Software - n-able.com,Medium
