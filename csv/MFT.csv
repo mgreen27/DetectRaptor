@@ -151,7 +151,7 @@ RMM - MeshCentral (MeshAgent),^mesh*\.exe$|^MeshCmd\.exe$|^MeshCentralInstaller\
 RMM - Mikogo,^mikogo\.exe$|^mikogolauncher\.exe$|^mikogo-service\.exe$|^mikogo-starter\.exe$,.,,Mikogo - mikogo.com,Medium
 RMM - MioNet (Also known as WD Anywhere Access),^mionet\.exe$|^mionetmanager\.exe$,.,,MioNet (Also known as WD Anywhere Access) - ,Medium
 RMM - mRemoteNG,^mRemoteNG$|^mRemoteNG-Installer\.exe$,.,,mRemoteNG - mremoteng.org,Medium
-RMM. - MSP360,^msp360$,.,,MSP360 - msp360.com,Medium
+RMM - MSP360,^msp360$,.,,MSP360 - msp360.com,Medium
 RMM - MyIVO,^myivomanager\.exe$|^myivomgr\.exe$,.,,MyIVO - myivo-server.software.informer.com,Medium
 RMM - Naverisk,^Naverisk$,.,,Naverisk - naverisk.com,Medium
 RMM - N-ABLE Remote Access Software,^Nable$,.,,N-ABLE Remote Access Software - n-able.com,Medium
