@@ -79,6 +79,9 @@ for file in target_files:
                     if 'pe.signatures' in rule['raw_condition']:
                         print(f"Dropping {rule['rule_name']}: pe.signatures hits SSL issue" )
                         continue
+                    if 'pe.rich_signature' in rule['raw_condition']:
+                        print(f"Dropping {rule['rule_name']}: pe.rich_signature hits SSL issue" )
+                        continue
                     if 'ESET_Not_Ms_PRIVATE' in rule['raw_condition']:
                         print(f"Dropping {rule['rule_name']}: pe.number_of_signatures hits SSL issue" )
                         continue
