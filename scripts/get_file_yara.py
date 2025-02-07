@@ -71,8 +71,8 @@ for file in target_files:
             for rule in os_rules:
                 # hacky fix for private rule with conflict
                 if 'windows' in output_path:
-                    if '(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)' in rule['raw_condition']:
-                        rule['raw_condition'] = rule['raw_condition'].replace('(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)','AVASTTI_EXE_PRIVATE')
+                    if 'AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE' in rule['raw_condition']:
+                        rule['raw_condition'] = rule['raw_condition'].replace('AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE','AVASTTI_EXE_PRIVATE')
                     if 'pe.number_of_signatures' in rule['raw_condition']:
                         print(f"Dropping {rule['rule_name']}: pe.number_of_signatures hits SSL issue" )
                         continue
