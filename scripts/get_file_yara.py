@@ -112,4 +112,3 @@ for file in target_files:
 
 
 parser.clear()
-
