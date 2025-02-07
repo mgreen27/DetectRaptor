@@ -74,10 +74,13 @@ for file in target_files:
                     if '(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)' in rule['raw_condition']:
                         rule['raw_condition'] = rule['raw_condition'].replace('(AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE)','AVASTTI_EXE_PRIVATE')
                     if 'pe.number_of_signatures' in rule['raw_condition']:
-                        print(f"Dropping {rule['rule_name']}: pe.number_of_signatures issue (currently working on a fix)" )
+                        print(f"Dropping {rule['rule_name']}: pe.number_of_signatures hits SSL issue" )
+                        continue
+                    if 'pe.signatures' in rule['raw_condition']:
+                        print(f"Dropping {rule['rule_name']}: pe.signatures hits SSL issue" )
                         continue
                     if 'ESET_Not_Ms_PRIVATE' in rule['raw_condition']:
-                        print(f"Dropping {rule['rule_name']}: pe.number_of_signatures issue (currently working on a fix)" )
+                        print(f"Dropping {rule['rule_name']}: pe.number_of_signatures hits SSL issue" )
                         continue
 
                 if rule.get('tags'):
