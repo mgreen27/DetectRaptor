@@ -37,7 +37,8 @@ sources:
       LET IocCsv <= SELECT * FROM parse_csv(filename=AllCsv,accessor='data') 
     
       LET dllname_hits = SELECT EntryNumber,InUse,ParentEntryNumber,
-            OSPath, FileName, FileSize,ReferenceCount,SI_Lt_FN,uSecZeros,
+            regex_replace(source=OSPath,re='''^\\\\\.\\''',replace='') as OSPath, 
+            FileName, FileSize,ReferenceCount,SI_Lt_FN,uSecZeros,
             LastModified0x10,LastAccess0x10,LastRecordChange0x10,Created0x10,
             LastModified0x30,LastAccess0x30,LastRecordChange0x30,Created0x30
         FROM Artifact.Windows.NTFS.MFT(FileRegex='^(' + join(array=IocCsv.DllName,sep='|') + ')$')

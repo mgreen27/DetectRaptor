@@ -43,6 +43,7 @@ def convert_env(variable):
     variable = re.sub(r'\.', '\\.', variable)
     variable = re.sub(r'\(', '\\(', variable)
     variable = re.sub(r'\)', '\\)', variable)
+    variable = re.sub(r'\+', '\\+', variable)
     variable = re.sub('%WINDIR%', r'\\\\Windows', variable)
     variable = re.sub('%SYSTEM32%', r'\\\\Windows\\\\System32', variable)
     variable = re.sub('%SYSWOW64%', r'\\\\Windows\\\\SysWOW64', variable)
