@@ -48,7 +48,7 @@ def convert_env(variable):
     variable = re.sub('%SYSTEM32%', r'\\\\Windows\\\\System32', variable)
     variable = re.sub('%SYSWOW64%', r'\\\\Windows\\\\SysWOW64', variable)
     variable = re.sub('%VERSION%', r'[^\\\\]+', variable)
-    variable = re.sub('%PROGRAMFILES%', r'\\\\Windows\\\\Program Files( \\(x86\\))?', variable)
+    variable = re.sub('%PROGRAMFILES%', r'\\\\Program Files( \\(x86\\))?', variable)
     variable = re.sub('%PROGRAMDATA%', r'\\\\Programdata', variable)
     variable = re.sub('%APPDATA%', r'\\\\(Users\\\\[^\\\\]+|windows\\\\(System32|SysWOW64)\\\\config\\\\systemprofile)\\\\AppData\\\\[^\\\\]+', variable)
     variable = re.sub('%LOCALAPPDATA%', r'\\\\(Users\\\\[^\\\\]+|windows\\\\(System32|SysWOW64)\\\\config\\\\systemprofile)\\\\AppData\\\\[^\\\\]+', variable)

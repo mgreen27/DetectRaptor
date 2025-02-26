@@ -65,8 +65,7 @@ sources:
       }, workers = 20 )
 
       SELECT HijackLibInfo,
-            OSPath, FileName, FileSize,ReferenceCount,SI_Lt_FN,uSecZeros,
-            EntryNumber,InUse,ParentEntryNumber,TimestampsSI,TimestampsFN,
+            OSPath, FileName, FileSize,
             parse_pe(file=OSPath) AS DllInfo,
             authenticode(filename=OSPath) AS DllAuthenticode,
             hash(path=OSPath) as DllHash,
