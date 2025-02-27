@@ -158,6 +158,7 @@ if __name__ == "__main__":
     # build vql artifacts
     build_vql(lookup_table,template,output_path)   
     
+    ''' removed building env version
     ## use pandas to group by DllName and join hijacklibs data
     # env variables version
     df = pd.DataFrame(env_flattened_data[1:], columns=env_flattened_data[0])
@@ -183,3 +184,4 @@ if __name__ == "__main__":
 
     # build vql artifacts
     build_vql(lookup_table,template,output_path)  
+    '''
