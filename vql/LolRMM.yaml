@@ -1,5 +1,5 @@
 name: Windows.Detection.LolRMM
-author: Matt Green - @mgreen27
+author: Matt Green - @mgreen27 and Herbert Bärschneider
 description: |
   This artifact hunts for Remote Monitoring and Management (RMM) tools using the 
   LolRMM project. The goal is to detect installed or running instances.
