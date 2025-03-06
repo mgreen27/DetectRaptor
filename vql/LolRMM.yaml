@@ -2,7 +2,7 @@ name: Windows.Detection.LolRMM
 author: Matt Green - @mgreen27
 description: |
   This artifact hunts for Remote Monitoring and Management (RMM) tools using the 
-  LolRMM project.
+  LolRMM project. The goal is to detect installed or running instances.
   
   Detectraptor generates a Regex csv that is pulled locally to the Velociraptor 
   server via the tools management capability.
@@ -65,6 +65,7 @@ sources:
                         ( Name AND DisplayName =~ Name )
                         OR ( PathRegex AND InstallLocation =~ PathRegex )
                 },workers=20)
+      WHERE NOT ( Name = 'ToDesk' AND Event.DisplayName =~ '^Autodesk' )
                 
   - name: Processes
     query: |
