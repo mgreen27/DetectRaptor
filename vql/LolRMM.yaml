@@ -1,0 +1,117 @@
+name: Windows.Detection.LolRMM
+author: Matt Green - @mgreen27
+description: |
+  This artifact hunts for Remote Monitoring and Management (RMM) tools using the 
+  LolRMM project.
+  
+  Detectraptor generates a Regex csv that is pulled locally to the Velociraptor 
+  server via the tools management capability.
+  
+  NOTE: This artifact may not detect RMMs that are not installed, renamed or 
+  using custom DNS.
+  
+  Special thanks to Herbert Bärschneider for inspiring this artifact on the 
+  Artifact Exchange. :)
+
+reference:
+  - https://github.com/mgreen27/DetectRaptor
+  - https://lolrmm.io/
+  - https://attack.mitre.org/techniques/T1219/
+
+tools:
+  - name: DetectRaptorLolRMM
+    url: https://github.com/mgreen27/DetectRaptor/raw/master/csv/lolrmm.csv
+    serve_locally: true
+
+type: CLIENT
+resources:
+  timeout: 1200
+
+sources:
+  - query: |
+      LET lolrmm <= SELECT OSPath FROM Artifact.Generic.Utils.FetchBinary(
+                ToolName='DetectRaptorLolRMM',
+                IsExecutable='N' )
+      
+      LET lolrmm_csv <= SELECT Name, Description, LolRMMLink, PathRegex, DomainRegex 
+        FROM parse_csv(filename=lolrmm[0].OSPath)
+        
+      LET process_hits = SELECT Pid,Name as ProcessName,CommandLine,Exe,Authenticode,
+            parse_pe(file=Exe).VersionInformation as VersionInformation,
+            _Source
+        FROM Artifact.Windows.System.Pslist()
+        WHERE 
+            ProcessName =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+            OR Exe =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+            OR VersionInformation.OriginalFilename =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+            OR VersionInformation.InternalFileName =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+                
+      LET process = SELECT * FROM foreach(row=process_hits, 
+                query={
+                    SELECT _Source as Source,
+                        Name,Description,LolRMMLink, 
+                        dict( PathRegex = PathRegex,
+                              DomainRegex=DomainRegex
+                            ) as HitRegex,
+                        dict(Pid=Pid,
+                             ProcessName=Name,
+                             Exe=Exe,
+                             CommandLine=CommandLine,
+                             VersionInformation=VersionInformation,
+                             Authenticode=Authenticode
+                            ) as Event
+                    FROM lolrmm_csv
+                    WHERE PathRegex 
+                        AND ( ProcessName =~ PathRegex 
+                                OR Exe =~ PathRegex
+                                OR VersionInformation.OriginalFilename =~ PathRegex
+                                OR VersionInformation.InternalFileName  =~ PathRegex )
+                },workers=20)
+                
+      LET program_hits = SELECT * FROM Artifact.Windows.Sys.Programs()
+        WHERE DisplayName =~ join(array=filter(list=lolrmm_csv.Name, regex="^[^$]"),sep='|')
+            OR ProcessName =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+        
+      SELECT * FROM foreach(row=program_hits, 
+                query={
+                    SELECT _Source as Source,
+                        Name,Description,LolRMMLink, 
+                        dict( 
+                            PathRegex = PathRegex,
+                            DomainRegex=DomainRegex
+                                ) as HitRegex,
+                        dict(
+                            DisplayName=DisplayName,
+                            DisplayVersion=DisplayVersion,
+                            InstallLocation=InstallLocation,
+                            InstallSource=InstallSource,
+                            Publisher=Publisher,
+                            UninstallString=UninstallString,
+                            InstallDate=InstallDate
+                                ) as Event
+                    FROM lolrmm_csv
+                    WHERE 
+                        ( Name AND DisplayName =~ Name )
+                        OR ( PathRegex AND InstallLocation =~ PathRegex )
+                },workers=20)
+                
+  - name: ResolvedDomains
+    query: |
+      LET dns_hits = SELECT Name as DNSName, *, _Source as Source FROM Artifact.Windows.System.DNSCache()
+        WHERE DNSName =~ join(array=filter(list=lolrmm_csv.DomainRegex, regex="^[^$]"),sep='|')
+        
+      SELECT * FROM foreach(row=dns_hits, 
+                query={
+                    SELECT Source, 
+                        Name,Description,LolRMMLink, 
+                        dict( PathRegex = PathRegex,
+                              DomainRegex=DomainRegex
+                            ) as HitRegex,
+                        dict(DNSName=DNSName,
+                             Record=Record,
+                             RecordType=RecordType,
+                             TTL=TTL
+                            ) as Event
+                    FROM lolrmm_csv
+                    WHERE DomainRegex AND DNSName =~ DomainRegex
+                },workers=20)
