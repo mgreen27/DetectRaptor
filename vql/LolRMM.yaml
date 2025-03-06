@@ -35,10 +35,13 @@ sources:
       
       LET lolrmm_csv <= SELECT Name, Description, LolRMMLink, PathRegex, DomainRegex 
         FROM parse_csv(filename=lolrmm[0].OSPath)
+        
+      LET AllNameRegex <= join(array=filter(list=lolrmm_csv.Name, regex="^[^$]"),sep='|')
+      LET AllPathRegex <= join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
                 
       LET program_hits = SELECT * FROM Artifact.Windows.Sys.Programs()
-        WHERE DisplayName =~ join(array=filter(list=lolrmm_csv.Name, regex="^[^$]"),sep='|')
-            OR ProcessName =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+        WHERE DisplayName =~ AllNameRegex
+            OR ProcessName =~ AllPathRegex
         
       SELECT * FROM foreach(row=program_hits, 
                 query={
@@ -70,10 +73,10 @@ sources:
             _Source
         FROM Artifact.Windows.System.Pslist()
         WHERE 
-            ProcessName =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
-            OR Exe =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
-            OR VersionInformation.OriginalFilename =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
-            OR VersionInformation.InternalFileName =~ join(array=filter(list=lolrmm_csv.PathRegex, regex="^[^$]"),sep='|')
+            ProcessName =~ AllPathRegex
+            OR Exe =~ AllPathRegex
+            OR VersionInformation.OriginalFilename =~ AllPathRegex
+            OR VersionInformation.InternalFileName =~ AllPathRegex
                 
       SELECT * FROM foreach(row=process_hits, 
             query={
@@ -119,3 +122,26 @@ sources:
                     FROM lolrmm_csv
                     WHERE DomainRegex AND DNSName =~ DomainRegex
                 },workers=20)
+
+    notebook:
+      - type: vql_suggestion
+        name: Add Tags and stack all results
+        template: |
+            /*
+            # Add Tags and stack all results
+            */
+            
+            LET DoIt = False
+            SELECT *, 
+                if(condition=DoIt, 
+                    then= label(client_id=ClientId,op='set',labels='RMM:' + Name),
+                    else= 'Set DotIt as True to add tag - RMM:' + Name)  as Tag
+            FROM chain(
+                    a= { SELECT * FROM source(artifact="DetectRaptor.Windows.Detection.LolRMM") },
+                    b= { SELECT * FROM source(artifact="DetectRaptor.Windows.Detection.LolRMM/Processes") },
+                    c= { SELECT * FROM source(artifact="DetectRaptor.Windows.Detection.LolRMM/ResolvedDomains") })
+            WHERE TRUE
+                -- Try to filter by individual event to ensure we dont filter out TPs masquerading
+                AND NOT Event.DisplayName = 'Rapid7 Insight Agent' 
+                AND NOT ( Event.Authenticode.SubjectName = "C=US, ST=Massachusetts, L=Boston, O=Rapid7 LLC, CN=Rapid7 LLC" AND Event.Authenticode.Trusted = "trusted" ) 
+                AND NOT Event.DNSName =~ '''\.rapid7\.com$'''
