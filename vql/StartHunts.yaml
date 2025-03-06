@@ -30,6 +30,7 @@ parameters:
         DetectRaptor.Windows.Detection.Webhistory,,,,
         DetectRaptor.Windows.Detection.HijackLibsMFT,,,,
         DetectRaptor.Windows.Detection.Applications,,,,
+        DetectRaptor.Windows.Detection.LolRMM,,,,
         DetectRaptor.Windows.Detection.MFT,,,,
         DetectRaptor.Windows.Detection.HijackLibsEnv,,,,
         DetectRaptor.Generic.Detection.YaraFile,,,,

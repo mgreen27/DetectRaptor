@@ -16,6 +16,7 @@ Current artifacts include:
 - Windows.Detection.HijackLibsMFT
 - Windows.Detection.LolDriversMalicious
 - Windows.Detection.LolDriversVulnerable
+- Windows.Detection.LolRMM
 - Windows.Detection.MFT
 - Windows.Detection.NamedPipes
 - Windows.Detection.Powershell.ISEAutoSave
@@ -33,5 +34,6 @@ Some contributing repositories:
 - https://www.bootloaders.io/
 - https://hijacklibs.net/
 - https://www.loldrivers.io/
+- https://www.lolrmm.io/
 - https://github.com/SigmaHQ/sigma
 - https://yarahq.github.io/
