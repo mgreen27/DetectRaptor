@@ -2,7 +2,7 @@
 """
 This script builds LOLRMM csv for Velociraptor DetetRaptor
 
-https://www.loldrivers.io//
+https://www.lolrmm.io//
 
 """
 
