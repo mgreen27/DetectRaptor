@@ -26,6 +26,7 @@ jobs:
           pip install PyYAML==6.0 -q
           pip install requests -q
           pip install pandas -q
+          pip install regex -q
 
     - name: Update project items and build vql
       run: |
