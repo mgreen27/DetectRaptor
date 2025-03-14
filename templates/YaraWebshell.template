@@ -36,11 +36,6 @@ parameters:
   - name: DateBefore
     type: timestamp
     description: Search for events before this date.
-  - name: YaraRule
-    type: hidden
-    description: Final Yara option and the default if no other options provided.
-    default: |
-%splitme%
   - name: NumberOfHits
     description: This artifact will stop by default at one hit. This setting allows additional hits
     default: 1
@@ -52,6 +47,8 @@ parameters:
 
 sources:
   - query: |
+      LET YaraRules = gunzip(string=base64decode(string="%splitme%"))
+      
       -- time testing
       LET time_test(stamp) =
             if(condition= DateBefore AND DateAfter,
@@ -104,7 +101,7 @@ sources:
                                     then= Size,
                                     else= String.Offset + ContextBytes) ]
                             )) as HitContext
-                FROM yara(rules=YaraRule,files=OSPath,
+                FROM yara(rules=YaraRules,files=OSPath,
                   context=ContextBytes,number=NumberOfHits)
             })
 
