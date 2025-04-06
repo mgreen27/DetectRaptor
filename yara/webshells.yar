@@ -1,5 +1,5 @@
-import "math"
 import "pe"
+import "math"
 rule ELASTIC_Linux_Webshell_Generic_E80Ff633 : FILE MEMORY {
     meta:
 		description = "Detects Linux Webshell Generic (Linux.Webshell.Generic)"
