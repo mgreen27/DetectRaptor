@@ -1554,6 +1554,7 @@ parameters:
         NTIOLib.sys,6bfeac43be3ebd8d95a5eba963e18d97d76d2b05,NTIOLib,NTIOLib,1.0.0.0,1.0.0.0,I386,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/7f9842a0-8118-462e-8860-227265ff4379/
         NTIOLib.sys,4a7324ca485973d514fd087699f6d759ff32743b,NTIOLib,NTIOLib,1.0.0.0,1.0.0.0,I386,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/7f9842a0-8118-462e-8860-227265ff4379/
         SysDrv3S.sys,e1069365cb580e3525090f2fa28efd4127223588,SysDrv3S,SysDrv3S,3.5.6.0,"3,5,6,0",AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/cf49f43c-d7b4-4c1a-a40d-1be36ea64bff/
+        TPwSav.sys,c1130e09831c7a2e0cc8ba7335e702910b25f526,,IO Driver,,"2, 0, 0, 2",AMD64,vulnerable driver,"Elevate privileges, Blind EDR",https://www.loldrivers.io/drivers/c0634ed7-840e-4a7e-8b34-33efe50405c2/
         AsrAutoChkUpdDrv_1_0_32.sys,d028783637b9b3ca567dcef0fb50156bf1620836,AsrAutoChkUpdDrv_1_0_32 Driver,AsrAutoChkUpdDrv_1_0_32 Driver,1.00.00.0000,1.00.00.0000 built by: WinDDK,AMD64,vulnerable drivers,Elevate privileges,https://www.loldrivers.io/drivers/02e4a30f-8aa8-4ff0-8e02-1bff1d0f088f/
         gvcidrv64.sys,d302ae7f016299af323a3542d840004888ab91ff,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/56cdac8e-d87d-49c8-b281-6e096c2390d1/
         gvcidrv64.sys,1586f121d38cc42e5d04fe2f56091e91c6cdd8fa,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/56cdac8e-d87d-49c8-b281-6e096c2390d1/
