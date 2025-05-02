@@ -1,5 +1,5 @@
 name: Windows.Detection.Webhistory
-author: Matt Green - @mgreen27
+author: Matt Green - @mgreen27, special thanks to JLockwood and @anrgy-bender for sqlite queries
 description: |
    Bulk indicator hunt over Velociraptor Webhistory artifacts.
 
@@ -230,48 +230,268 @@ parameters:
         URL Shortener,^u\.no,,Free Custom URL Shortener Branded URLs Link Management
         URL Shortener,urlz\.fr,,
 
+  - name: ChromiumURL
+    type: hidden
+    default: |
+        SELECT urls.id AS ID, 
+            urls.title AS Title, 
+            urls.url AS URL,
+            visits.visit_time AS Visit_Date,
+            urls.last_visit_time AS Last_Visit_Date 
+        FROM urls
+        JOIN visits ON urls.id = visits.url
+  - name: FirefoxURL
+    type: hidden
+    default: |
+        SELECT moz_places.id AS ID,
+            moz_places.title AS Title,
+            moz_places.url AS URL,
+            moz_places.last_visit_date AS Last_Visit_Date,
+            moz_historyvisits.visit_date AS Visit_Date
+        FROM moz_places
+        JOIN moz_historyvisits ON moz_places.id = moz_historyvisits.place_id
+  - name: ChromiumDownload
+    type: hidden
+    default: |
+        SELECT downloads.id AS ID, 
+            downloads.end_time as Download_Date, 
+            downloads.current_path AS Current_Path, 
+            downloads.target_path AS Target_Path, 
+            downloads.tab_url AS Tab_URL, 
+            downloads.tab_referrer_url as Tab_Referrer_URL,
+            downloads.mime_type as Mime_Type
+        FROM downloads
+  - name: FirefoxDownload
+    type: hidden
+    default: |
+        SELECT moz_annos.id as ID, 
+            moz_annos.dateAdded AS Download_Date,
+            moz_annos.content AS Content,
+            moz_annos.lastModified AS Last_Modified_Date,
+            moz_places.url AS Places_URL
+        FROM moz_annos
+        JOIN moz_places ON moz_places.id=moz_annos.place_id
 
 sources:
   - precondition:
-      SELECT OS From info() where OS = 'windows'
+      SELECT OS FROM info() where OS = 'windows'
 
     query: |
-      -- run first pass to extract any DomainRegex hits
-      LET hits = SELECT *,
-            parse_string_with_regex(string=VisitedURL, regex='^.+://([^:/\\s]+)').g1 as Domain
-        FROM chain(
-            chrome = {
-                SELECT *,
-                    "Chrome" as BrowserArtifact,
-                    visited_url || visted_url as VisitedURL
-                FROM Artifact.Windows.Applications.Chrome.History(userRegex=UserRegex)
-            },
-            edge = {
-                SELECT *, "Edge" as BrowserArtifact,
-                    visited_url || visted_url as VisitedURL
-                FROM Artifact.Windows.Applications.Edge.History(userRegex=UserRegex)
-            },
-            firefox = {
-                SELECT *, "Firefox" as BrowserArtifact,
-                    url_visited as VisitedURL
-                FROM Artifact.Windows.Applications.Firefox.History(userRegex=UserRegex)
+      LET target_users <= SELECT Uid, Name AS User,
+          expand(path=Directory) AS HomeDirectory
+        FROM Artifact.Windows.Sys.Users()
+        WHERE Name =~ UserRegex
+             
+      LET ChromeHistoryFile <= SELECT * FROM foreach(
+            row=target_users,
+            query={
+                SELECT User, OSPath, Mtime
+                FROM glob(
+                    root=HomeDirectory,
+                    globs='/AppData/Local/Google/Chrome/User Data/*/History'
+                )
             })
-          WHERE Domain =~ join(array=IOCs.DomainRegex,sep='|')
+
+      LET EdgeHistoryFile <= SELECT * FROM foreach(
+            row=target_users,
+            query={
+                SELECT User, OSPath, Mtime
+                FROM glob(
+                    root=HomeDirectory,
+                    globs='/AppData/Local/Microsoft/Edge/User Data/*/History'
+                )
+            })
+            
+      LET FirefoxHistoryFile <= SELECT * FROM foreach(
+            row=target_users,
+            query={
+                SELECT User, OSPath, Mtime
+                FROM glob(
+                    root=HomeDirectory,
+                    globs='/AppData/Roaming/Mozilla/Firefox/Profiles/*/places.sqlite'
+                )
+            })
+    
+    
+      -- run first pass to extract any DomainRegex hits
+      LET hits = SELECT BrowserArtifact,
+            parse_string_with_regex(string=VisitedURL, regex='^.+://([^:/\\s]+)').g1 as Domain,
+            ArtifactData
+        FROM chain(
+            chromehistory = {
+                SELECT "Chrome History" as BrowserArtifact,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Visit_Date=Visit_Date,
+                        Title=Title,
+                        URL=URL,
+                        Last_Visit_Date=Last_Visit_Date
+                    ) as ArtifactData,
+                    URL as VisitedURL
+                FROM foreach(row=ChromeHistoryFile,
+                    query={
+                        SELECT User,
+                            ID,
+                            timestamp(epoch=(Visit_Date - 11644473600)) AS Visit_Date,
+                            Title,
+                            URL,
+                            timestamp(epoch=(Last_Visit_Date - 11644473600)) AS Last_Visit_Date
+                        FROM sqlite(
+                          file=OSPath,
+                          query=ChromiumURL)
+                        ORDER BY Visit_Date DESC
+                      })
+            },
+            chromedownload = {
+                SELECT "Chrome Download" as BrowserArtifact,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Download_Date=Download_Date,
+                        Current_Path=Current_Path,
+                        Target_Path=Target_Path,
+                        Tab_URL=Tab_URL,
+                        Tab_Referrer_URL=Tab_Referrer_URL,
+                        Mime_Type=Mime_Type
+                    ) as ArtifactData,
+                    Tab_URL as VisitedURL
+                FROM foreach(row=ChromeHistoryFile,
+                    query={
+                        SELECT User,
+                            ID, 
+                            timestamp(epoch=(Download_Date - 11644473600)) AS Download_Date, 
+                            Current_Path, 
+                            Target_Path, 
+                            Tab_URL, 
+                            Tab_Referrer_URL, 
+                            Mime_Type
+                        FROM sqlite(
+                            file=OSPath,
+                            query=ChromiumDownload)
+                        ORDER BY Download_Date DESC
+                    })
+            },
+            edgehistory = {
+                SELECT "Edge History" as BrowserArtifact,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Visit_Date=Visit_Date,
+                        Title=Title,
+                        URL=URL,
+                        Last_Visit_Date=Last_Visit_Date
+                    ) as ArtifactData,
+                    URL as VisitedURL
+                FROM foreach(row=EdgeHistoryFile,
+                    query={
+                        SELECT User,
+                            ID,
+                            timestamp(epoch=(Visit_Date - 11644473600)) AS Visit_Date,
+                            Title,
+                            URL,
+                            timestamp(epoch=(Last_Visit_Date - 11644473600)) AS Last_Visit_Date
+                        FROM sqlite(
+                          file=OSPath,
+                          query=ChromiumURL)
+                        ORDER BY Visit_Date DESC
+                    })
+            },
+            edgedownload = {
+                SELECT "Edge Download" as BrowserArtifact,
+                    Tab_URL as VisitedURL,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Download_Date=Download_Date,
+                        Current_Path=Current_Path,
+                        Target_Path=Target_Path,
+                        Tab_URL=Tab_URL,
+                        Tab_Referrer_URL=Tab_Referrer_URL,
+                        Mime_Type=Mime_Type
+                    ) as ArtifactData   
+                FROM foreach(row=EdgeHistoryFile,
+                    query={
+                        SELECT User,
+                            ID, 
+                            timestamp(epoch=(Download_Date - 11644473600)) AS Download_Date, 
+                            Current_Path, 
+                            Target_Path, 
+                            Tab_URL, 
+                            Tab_Referrer_URL, 
+                            Mime_Type
+                        FROM sqlite(
+                            file=OSPath,
+                            query=ChromiumDownload)
+                        ORDER BY Download_Date DESC
+                    })
+            },
+            firefoxhistory = {
+                SELECT "Firefox History" as BrowserArtifact, 
+                    URL as VisitedURL,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Visit_Date=Visit_Date,
+                        Title=Title,
+                        URL=URL,
+                        Last_Visit_Date=Last_Visit_Date
+                    ) as ArtifactData
+                FROM foreach(row=FirefoxHistoryFile,
+                    query={
+                        SELECT User,
+                            ID,
+                            timestamp(epoch=Visit_Date /1000000) AS Visit_Date,
+                            Title,
+                            URL,
+                            timestamp(epoch=Last_Visit_Date/1000000) AS Last_Visit_Date
+                        FROM sqlite(
+                          file=OSPath,
+                          query=FirefoxURL)
+                        ORDER BY Visit_Date DESC
+                      })
+            },
+            firefoxdownload = {
+                SELECT "Firefox Download" as BrowserArtifact,
+                    Places_URL as VisitedURL,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Download_Date=Download_Date,
+                        Content=Content,
+                        Places_URL=Places_URL,
+                        Last_Modified_Date=Last_Modified_Date
+                    ) as ArtifactData
+                FROM foreach(row=FirefoxHistoryFile,
+                    query={
+                    SELECT User,
+                        ID,
+                        timestamp(epoch=Download_Date/1000000) AS Download_Date,
+                        Content,
+                        Places_URL,
+                        timestamp(epoch=Last_Modified_Date/1000000) AS Last_Modified_Date
+                    FROM sqlite(
+                      file=OSPath,
+                      query=FirefoxDownload)
+                    ORDER BY Download_Date DESC
+                  })
+            })
+        WHERE Domain =~ join(array=IOCs.DomainRegex,sep='|')
 
       -- output rows with enrichment
       SELECT * FROM foreach(row=hits,
         query={
             SELECT
+                BrowserArtifact,
                 Category,
                 Domain,
-                VisitedURL,
-                visit_time as VisitTime,
-                title as Title,
-                visit_count as VisitCount,
-                BrowserArtifact,
-                DomainRegex,
-                AllowRegex,
-                Comment
+                ArtifactData,
+                dict(
+                    Category=Category,
+                    DomainRegex=DomainRegex,
+                    AllowRegex=AllowRegex,
+                    Comment=Comment   
+                ) as Detection
             FROM IOCs
             WHERE Domain =~ DomainRegex
                 AND NOT if(condition= AllowRegex,
