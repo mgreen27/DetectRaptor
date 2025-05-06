@@ -1,0 +1,29 @@
+name: Sync with Upstream DetectRaptor
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 6am UTC
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout upstream-sync
+        uses: actions/checkout@v3
+        with:
+          ref: upstream-sync
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream and merge
+        run: |
+          git remote add upstream https://github.com/mgreen27/DetectRaptor.git
+          git fetch upstream
+          git merge upstream/master --no-edit || true
+          git push origin upstream-sync
