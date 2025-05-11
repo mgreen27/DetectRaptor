@@ -26,38 +26,6 @@ rule BINARYALERT_Hacktool_Macos_Macpmem {
 	condition:
 		BINARYALERT_Macho_PRIVATE and 2 of ( $a* ) or all of ( $b* )
 }
-rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
-    meta:
-		description = "SOCKS5 proxy tool used to relay connections."
-		author = "threatintel@volexity.com"
-		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
-		date = "2024-01-09"
-		modified = "2024-01-09"
-		reference = "TIB-20240109"
-		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L85-L111"
-		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10065
-		version = 3
-
-	strings:
-		$s1 = "proxy_loop" ascii
-		$s2 = "connect_to_dst" ascii
-		$s3 = "request_client" ascii
-		$s4 = "subnegotiation_client" ascii
-		$s5 = "bind_port" ascii
-
-	condition:
-		all of them
-}
 rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
     meta:
 		description = "Detection for fake macOS VPN client used by CharmingCypress."
@@ -89,6 +57,38 @@ rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY
 
 	condition:
 		2 of ( $s* )
+}
+rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
+    meta:
+		description = "SOCKS5 proxy tool used to relay connections."
+		author = "threatintel@volexity.com"
+		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
+		date = "2024-01-09"
+		modified = "2024-01-09"
+		reference = "TIB-20240109"
+		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L85-L111"
+		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10065
+		version = 3
+
+	strings:
+		$s1 = "proxy_loop" ascii
+		$s2 = "connect_to_dst" ascii
+		$s3 = "request_client" ascii
+		$s4 = "subnegotiation_client" ascii
+		$s5 = "bind_port" ascii
+
+	condition:
+		all of them
 }
 rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
     meta:
@@ -154,66 +154,6 @@ rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
 
 	condition:
 		any of ( $proj_* ) or 4 of ( $fun_* )
-}
-rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
-    meta:
-		description = "Detects a opensource malware available on github using strings in the ELF. DISGOMOJI used by UTA0137 is based on this malware."
-		author = "threatintel@volexity.com"
-		id = "6816d264-4311-5e90-948b-2e27cdf0b720"
-		date = "2024-03-28"
-		modified = "2024-03-28"
-		reference = "TIB-20240229"
-		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L215-L241"
-		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "de32e96d1f151cc787841c12fad88d0a2276a93d202fc19f93631462512fffaf"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10390
-		version = 2
-
-	strings:
-		$s1 = "File is bigger than 8MB" wide ascii
-		$s2 = "Uploaded file to" wide ascii
-		$s3 = "sess-%d" wide ascii
-		$s4 = "Session *%s* opened" wide ascii
-		$s5 = "%s%d_%dx%d.png" wide ascii
-
-	condition:
-		4 of them
-}
-rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
-    meta:
-		description = "Detects a opensource malware available on github using strings in the ELF. DISGOMOJI used by UTA0137 is based on this malware."
-		author = "threatintel@volexity.com"
-		id = "1ddbf476-ba2d-5cbb-ad95-38e0ae8db71b"
-		date = "2024-02-22"
-		modified = "2024-03-28"
-		reference = "https://github.com/bmdyy/discord-c2"
-		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L243-L265"
-		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "d9f29a626857fa251393f056e454dfc02de53288ebe89a282bad38d03f614529"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10264
-		version = 10
-
-	strings:
-		$s1 = "**IP**: %s\n**User**: %s\n**Hostname**: %s\n**OS**: %s\n**CWD**" wide ascii
-
-	condition:
-		$s1
 }
 rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
     meta:
@@ -427,4 +367,64 @@ rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
 
 	condition:
 		3 of ( $s_* ) or any of ( $url_* ) or $path_1
+}
+rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
+    meta:
+		description = "Detects a opensource malware available on github using strings in the ELF. DISGOMOJI used by UTA0137 is based on this malware."
+		author = "threatintel@volexity.com"
+		id = "6816d264-4311-5e90-948b-2e27cdf0b720"
+		date = "2024-03-28"
+		modified = "2024-03-28"
+		reference = "TIB-20240229"
+		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L215-L241"
+		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "de32e96d1f151cc787841c12fad88d0a2276a93d202fc19f93631462512fffaf"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10390
+		version = 2
+
+	strings:
+		$s1 = "File is bigger than 8MB" wide ascii
+		$s2 = "Uploaded file to" wide ascii
+		$s3 = "sess-%d" wide ascii
+		$s4 = "Session *%s* opened" wide ascii
+		$s5 = "%s%d_%dx%d.png" wide ascii
+
+	condition:
+		4 of them
+}
+rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
+    meta:
+		description = "Detects a opensource malware available on github using strings in the ELF. DISGOMOJI used by UTA0137 is based on this malware."
+		author = "threatintel@volexity.com"
+		id = "1ddbf476-ba2d-5cbb-ad95-38e0ae8db71b"
+		date = "2024-02-22"
+		modified = "2024-03-28"
+		reference = "https://github.com/bmdyy/discord-c2"
+		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L243-L265"
+		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "d9f29a626857fa251393f056e454dfc02de53288ebe89a282bad38d03f614529"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10264
+		version = 10
+
+	strings:
+		$s1 = "**IP**: %s\n**User**: %s\n**Hostname**: %s\n**OS**: %s\n**CWD**" wide ascii
+
+	condition:
+		$s1
 }

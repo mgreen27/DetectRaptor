@@ -30,6 +30,38 @@ parameters:
     type: yara
     description: Final Yara option and the default if no other options provided.
     default: |
+        rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
+            meta:
+        		description = "Detection for fake macOS VPN client used by CharmingCypress."
+        		author = "threatintel@volexity.com"
+        		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
+        		date = "2023-10-17"
+        		modified = "2023-10-27"
+        		reference = "TIB-20231027"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-02-13 CharmingCypress/rules.yar#L236-L261"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
+        		score = 75
+        		quality = 80
+        		tags = "CHARMINGCYPRESS, FILE, MEMORY"
+        		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
+        		os = "darwin,linux"
+        		os_arch = "all"
+        		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
+        		scan_context = "file,memory"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 9770
+        		version = 3
+        
+        	strings:
+        		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
+        		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
+        		$s3 = "New file imported successfully." ascii
+        		$s4 = "Error in importing the File." ascii
+        
+        	condition:
+        		2 of ( $s* )
+        }
         rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
             meta:
         		description = "Detection for the COMPLYSHELL webshell."
@@ -89,38 +121,6 @@ parameters:
         
         	condition:
         		all of them
-        }
-        rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
-            meta:
-        		description = "Detection for fake macOS VPN client used by CharmingCypress."
-        		author = "threatintel@volexity.com"
-        		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
-        		date = "2023-10-17"
-        		modified = "2023-10-27"
-        		reference = "TIB-20231027"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-02-13 CharmingCypress/rules.yar#L236-L261"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
-        		score = 75
-        		quality = 80
-        		tags = "CHARMINGCYPRESS, FILE, MEMORY"
-        		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
-        		os = "darwin,linux"
-        		os_arch = "all"
-        		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
-        		scan_context = "file,memory"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 9770
-        		version = 3
-        
-        	strings:
-        		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
-        		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
-        		$s3 = "New file imported successfully." ascii
-        		$s4 = "Error in importing the File." ascii
-        
-        	condition:
-        		2 of ( $s* )
         }
         rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
             meta:
@@ -221,6 +221,202 @@ parameters:
         
         	condition:
         		any of ( $proj_* ) or 4 of ( $fun_* )
+        }
+        rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
+            meta:
+        		description = "Detection for RELOADEXT, a Google Chrome extension malware."
+        		author = "threatintel@volexity.com"
+        		id = "6c6c8bee-2a13-5645-89ef-779f00264fd9"
+        		date = "2024-02-23"
+        		modified = "2024-08-02"
+        		reference = "TIB-20240227"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "2b11f8fc5b6260ebf00bde83585cd7469709a4979ca579cdf065724bc15052fc"
+        		score = 75
+        		quality = 80
+        		tags = "STORMBAMBOO, FILE, MEMORY"
+        		hash1 = "9d0928b3cc21ee5e1f2868f692421165f46b5014a901636c2a2b32a4c500f761"
+        		os = "all"
+        		os_arch = "all"
+        		scan_context = "file,memory"
+        		severity = "critical"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 10282
+        		version = 4
+        
+        	strings:
+        		$man1 = "Reload page with Internet Explorer compatible mode."
+        		$man2 = "\"http://*/*\""
+        		$code1 = ";chrome["
+        		$code2 = "XMLHttpRequest(),_"
+        		$code3 = "0x400*0x400"
+        
+        	condition:
+        		all of ( $man* ) or ( #code1 > 8 and #code2 >= 2 and #code3 >= 2 )
+        }
+        rule VOLEXITY_Apt_Malware_Any_Macma_A : STORMBAMBOO FILE MEMORY {
+            meta:
+        		description = "Detects variants of the MACMA backdoor, variants of MACMA have been discovered for Windows, macOS and android."
+        		author = "threatintel@volexity.com"
+        		id = "6ab45af1-41e5-53fc-9297-e2bc07ebf797"
+        		date = "2021-11-12"
+        		modified = "2024-08-02"
+        		reference = "https://blog.google/threat-analysis-group/analyzing-watering-hole-campaign-using-macos-exploits/"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L64-L112"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "7ebaff9fddf6491d6b1ed9ab14c1b87dc8df850536e55aa723d625a593b33ed7"
+        		score = 75
+        		quality = 53
+        		tags = "STORMBAMBOO, FILE, MEMORY"
+        		hash1 = "cf5edcff4053e29cb236d3ed1fe06ca93ae6f64f26e25117d68ee130b9bc60c8"
+        		hash2 = "9b71fad3280cf36501fe110e022845b29c1fb1343d5250769eada7c36bc45f70"
+        		hash3 = "623f99cbe20af8b79cbfea7f485d47d3462d927153d24cac4745d7043c15619a"
+        		hash4 = "d599d7814adbab0f1442f5a10074e00f3a776ce183ea924abcd6154f0d068bb4"
+        		os = "all"
+        		os_arch = "all"
+        		report1 = "TIB-20231221"
+        		report2 = "TIB-20240227"
+        		scan_context = "file,memory"
+        		severity = "critical"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 6114
+        		version = 8
+        
+        	strings:
+        		$magic1 = "curl -o %s http://cgi1.apnic.net/cgi-bin/my-ip.php" fullword ascii
+        		$magic2 = "[FST%d]: WhyUserCancel UNKNOW: %d" fullword ascii
+        		$magic3 = "[FST%d]: wait C2 prepare ready TIMEOUT, fd: %d" fullword ascii
+        		$magic4 = "[FST%d]: wait C2 ack file content TIMEOUT, fd: %d" fullword ascii
+        		$magic5 = "[FST%d]: TIMER_CHECK_CANCEL WhyUserCancel UNKNOW: %d" fullword ascii
+        		$magic6 = "[FST%d]: encrypt file info key=%s, crc v1=0x%p, v2=0x%p" fullword ascii
+        		$s1 = "auto bbbbbaaend:%d path %s" fullword ascii
+        		$s2 = "0keyboardRecirderStopv" fullword ascii
+        		$s3 = "curl begin..." fullword ascii
+        		$s4 = "curl over!" fullword ascii
+        		$s5 = "kAgent fail" fullword ascii
+        		$s6 = "put !!!!" fullword ascii
+        		$s7 = "vret!!!!!! %d" fullword ascii
+        		$s8 = "save Setting Success" fullword ascii
+        		$s9 = "Start Filesyste Search." fullword ascii
+        		$s10 = "./SearchFileTool" fullword ascii
+        		$s11 = "put unknow exception in MonitorQueue" fullword ascii
+        		$s12 = "./netcfg2.ini" fullword ascii
+        		$s13 = ".killchecker_" fullword ascii
+        		$s14 = "./param.ini" fullword ascii
+        
+        	condition:
+        		any of ( $magic* ) or 7 of ( $s* )
+        }
+        rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
+            meta:
+        		description = "Detects Python script used by KPlayer to update, modified by attackers to download a malicious payload."
+        		author = "threatintel@volexity.com"
+        		id = "446d2eef-c60a-50ed-9ff1-df86b6210dff"
+        		date = "2023-07-21"
+        		modified = "2024-08-02"
+        		reference = "TIB-20231221"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L243-L279"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "bb3a70dad28181534e27abbbd618165652c137264bfd3726ae4480c642493a3b"
+        		score = 75
+        		quality = 80
+        		tags = "STORMBAMBOO, FILE, MEMORY"
+        		os = "all"
+        		os_arch = "all"
+        		scan_context = "file,memory"
+        		severity = "critical"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 9530
+        		version = 4
+        
+        	strings:
+        		$s_1 = "def count_md5(src)"
+        		$s_2 = "urllib.request.urlretrieve(image_url,main)"
+        		$s_3 = "m1 != '4c8a326899272d2fe30e818181f6f67f'"
+        		$s_4 = "os.path.split(os.path.realpath(__file__))[0]"
+        		$s_5 = "r_v = os.system('curl '+ini_url+cc)"
+        		$s_6 = "b41ef5f591226a0d5adce99cb2e629d8"
+        		$s_7 = "1df495e7c85e59ad0de1b9e50912f8d0"
+        		$s_8 = "tasklist | findstr mediainfo.exe"
+        		$url_1 = "http://dl1.5kplayer.com/youtube/youtube_dl.png"
+        		$url_2 = "http://dl1.5kplayer.com/youtube/youtube.ini?fire="
+        		$path_1 = "C:\\\\ProgramData\\\\Digiarty\\\\mediainfo.exe"
+        
+        	condition:
+        		3 of ( $s_* ) or any of ( $url_* ) or $path_1
+        }
+        rule VOLEXITY_Apt_Malware_Elf_Catchdns_Aug20_Memory : DRIFTINGBAMBOO FILE MEMORY {
+            meta:
+        		description = "Looks for strings from CatchDNS component used to intercept and modify DNS responses, and likely also intercept/monitor http. This rule would only match against memory in the example file analyzed by Volexity."
+        		author = "threatintel@volexity.com"
+        		id = "95306735-cdae-5407-ad49-d465d245378d"
+        		date = "2020-08-20"
+        		modified = "2024-08-02"
+        		reference = "https://github.com/volexity/threat-intel"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L313-L387"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		hash = "4f3d35f4f8b810362cbd4c59bfe5a961e559fe5713c9478294ccb3af2d306515"
+        		logic_hash = "a7d677d7eecf388df7e7c2343fd3e46188594473c01075bf8a0b54292a51db94"
+        		score = 75
+        		quality = 55
+        		tags = "DRIFTINGBAMBOO, FILE, MEMORY"
+        		os = "linux"
+        		os_arch = "all"
+        		report1 = "MAR-20221222"
+        		report2 = "TIB-20231221"
+        		scan_context = "file,memory"
+        		severity = "critical"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 227
+        		version = 10
+        
+        	strings:
+        		$os1 = "current thread policy=%d" ascii wide
+        		$os2 = "OS_CreatShareMem %s-->%x" ascii wide
+        		$os3 = "sem_open fail" ascii wide
+        		$os4 = "int OS_GetCurRunPath(char*, int)" ascii wide
+        		$os5 = "int OS_GetCurModName(char*, int)" ascii wide
+        		$os6 = "int OS_StrToTime(char*, time_t*)" ascii wide
+        		$os7 = "int OS_TimeToStr(time_t, char*)" ascii wide
+        		$os8 = "int OS_TimeToStrYearMothDay(time_t, char*)" ascii wide
+        		$os9 = "bool OS_Access(const char*)" ascii wide
+        		$os10 = "int OS_Memicmp(const void*, const void*, unsigned int)" ascii wide
+        		$os11 = "int OS_Mkdir(char*)" ascii wide
+        		$os12 = "OS_ConnectSem" ascii wide
+        		$msg1 = "client: last send packet iseq: %x, the ack :%x" ascii wide
+        		$msg2 = "server: last send packet iseq: %x, the iseq :%x" ascii wide
+        		$msg3 = "send packet failed!" ascii wide
+        		$msg4 = "will hijack dns:%s, ip:%s " ascii wide
+        		$msg5 = "dns send ok:%s" ascii wide
+        		$msg6 = "tcp send ok" ascii wide
+        		$msg7 = "FilePath:%s;" ascii wide
+        		$msg8 = "Line:%d,Fun:%s,ErrorCode:%u;" ascii wide
+        		$msg9 = "Description:%s;" ascii wide
+        		$msg10 = "Line:%d,Fun:%s,ErrorCode:%u;" ascii wide
+        		$msg11 = "get msg from ini is error" ascii wide
+        		$msg12 = "on build eth send_msg or payload is null" ascii wide
+        		$msg13 = "on build udp send_msg or payload is null" ascii wide
+        		$conf1 = "%d.%d.%d.%d" ascii wide
+        		$conf2 = "%s.tty" ascii wide
+        		$conf3 = "dns.ini" ascii wide
+        		$netw1 = "LISTEN_DEV" ascii wide
+        		$netw2 = "SEND_DEV" ascii wide
+        		$netw3 = "SERVER_IP" ascii wide
+        		$netw4 = "DNSDomain" ascii wide
+        		$netw5 = "IpLimit" ascii wide
+        		$netw6 = "HttpConfig" ascii wide
+        		$netw7 = "buildhead" ascii wide
+        		$netw8 = "sendlimit" ascii wide
+        		$netw9 = "content-type" ascii wide
+        		$netw10 = "otherhead_" ascii wide
+        		$netw11 = "configfile" ascii wide
+        		$apache = {48 54 54 50 2F 31 2E 31 20 32 30 30 20 4F 4B 0D 0A 53 65 72 76 65 72 3A 20 41 70 61 63 68 65 0D 0A 43 6F 6E 6E 65 63 74 69 6F 6E 3A 20 63 6C 6F 73 65 0D 0A 43 6F 6E 74 65 6E 74 2D 54 79 70 65 3A 20 25 73 0D 0A 43 6F 6E 74 65 6E 74 2D 4C 65 6E 67 74 68 3A 20 25 64 0D 0A}
+        		$cpp1 = "src/os.cpp"
+        		$cpp2 = "src/test_catch_dns.cpp"
+        
+        	condition:
+        		9 of ( $os* ) or 3 of ( $msg* ) or all of ( $conf* ) or all of ( $netw* ) or $apache or all of ( $cpp* )
         }
         rule VOLEXITY_Apt_Malware_Linux_Disgomoji_Modules : UTA0137 FILE MEMORY {
             meta:
@@ -436,202 +632,6 @@ parameters:
         
         	condition:
         		$s1
-        }
-        rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
-            meta:
-        		description = "Detection for RELOADEXT, a Google Chrome extension malware."
-        		author = "threatintel@volexity.com"
-        		id = "6c6c8bee-2a13-5645-89ef-779f00264fd9"
-        		date = "2024-02-23"
-        		modified = "2024-08-02"
-        		reference = "TIB-20240227"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "2b11f8fc5b6260ebf00bde83585cd7469709a4979ca579cdf065724bc15052fc"
-        		score = 75
-        		quality = 80
-        		tags = "STORMBAMBOO, FILE, MEMORY"
-        		hash1 = "9d0928b3cc21ee5e1f2868f692421165f46b5014a901636c2a2b32a4c500f761"
-        		os = "all"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 10282
-        		version = 4
-        
-        	strings:
-        		$man1 = "Reload page with Internet Explorer compatible mode."
-        		$man2 = "\"http://*/*\""
-        		$code1 = ";chrome["
-        		$code2 = "XMLHttpRequest(),_"
-        		$code3 = "0x400*0x400"
-        
-        	condition:
-        		all of ( $man* ) or ( #code1 > 8 and #code2 >= 2 and #code3 >= 2 )
-        }
-        rule VOLEXITY_Apt_Malware_Any_Macma_A : STORMBAMBOO FILE MEMORY {
-            meta:
-        		description = "Detects variants of the MACMA backdoor, variants of MACMA have been discovered for Windows, macOS and android."
-        		author = "threatintel@volexity.com"
-        		id = "6ab45af1-41e5-53fc-9297-e2bc07ebf797"
-        		date = "2021-11-12"
-        		modified = "2024-08-02"
-        		reference = "https://blog.google/threat-analysis-group/analyzing-watering-hole-campaign-using-macos-exploits/"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L64-L112"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "7ebaff9fddf6491d6b1ed9ab14c1b87dc8df850536e55aa723d625a593b33ed7"
-        		score = 75
-        		quality = 53
-        		tags = "STORMBAMBOO, FILE, MEMORY"
-        		hash1 = "cf5edcff4053e29cb236d3ed1fe06ca93ae6f64f26e25117d68ee130b9bc60c8"
-        		hash2 = "9b71fad3280cf36501fe110e022845b29c1fb1343d5250769eada7c36bc45f70"
-        		hash3 = "623f99cbe20af8b79cbfea7f485d47d3462d927153d24cac4745d7043c15619a"
-        		hash4 = "d599d7814adbab0f1442f5a10074e00f3a776ce183ea924abcd6154f0d068bb4"
-        		os = "all"
-        		os_arch = "all"
-        		report1 = "TIB-20231221"
-        		report2 = "TIB-20240227"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 6114
-        		version = 8
-        
-        	strings:
-        		$magic1 = "curl -o %s http://cgi1.apnic.net/cgi-bin/my-ip.php" fullword ascii
-        		$magic2 = "[FST%d]: WhyUserCancel UNKNOW: %d" fullword ascii
-        		$magic3 = "[FST%d]: wait C2 prepare ready TIMEOUT, fd: %d" fullword ascii
-        		$magic4 = "[FST%d]: wait C2 ack file content TIMEOUT, fd: %d" fullword ascii
-        		$magic5 = "[FST%d]: TIMER_CHECK_CANCEL WhyUserCancel UNKNOW: %d" fullword ascii
-        		$magic6 = "[FST%d]: encrypt file info key=%s, crc v1=0x%p, v2=0x%p" fullword ascii
-        		$s1 = "auto bbbbbaaend:%d path %s" fullword ascii
-        		$s2 = "0keyboardRecirderStopv" fullword ascii
-        		$s3 = "curl begin..." fullword ascii
-        		$s4 = "curl over!" fullword ascii
-        		$s5 = "kAgent fail" fullword ascii
-        		$s6 = "put !!!!" fullword ascii
-        		$s7 = "vret!!!!!! %d" fullword ascii
-        		$s8 = "save Setting Success" fullword ascii
-        		$s9 = "Start Filesyste Search." fullword ascii
-        		$s10 = "./SearchFileTool" fullword ascii
-        		$s11 = "put unknow exception in MonitorQueue" fullword ascii
-        		$s12 = "./netcfg2.ini" fullword ascii
-        		$s13 = ".killchecker_" fullword ascii
-        		$s14 = "./param.ini" fullword ascii
-        
-        	condition:
-        		any of ( $magic* ) or 7 of ( $s* )
-        }
-        rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
-            meta:
-        		description = "Detects Python script used by KPlayer to update, modified by attackers to download a malicious payload."
-        		author = "threatintel@volexity.com"
-        		id = "446d2eef-c60a-50ed-9ff1-df86b6210dff"
-        		date = "2023-07-21"
-        		modified = "2024-08-02"
-        		reference = "TIB-20231221"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L243-L279"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "bb3a70dad28181534e27abbbd618165652c137264bfd3726ae4480c642493a3b"
-        		score = 75
-        		quality = 80
-        		tags = "STORMBAMBOO, FILE, MEMORY"
-        		os = "all"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 9530
-        		version = 4
-        
-        	strings:
-        		$s_1 = "def count_md5(src)"
-        		$s_2 = "urllib.request.urlretrieve(image_url,main)"
-        		$s_3 = "m1 != '4c8a326899272d2fe30e818181f6f67f'"
-        		$s_4 = "os.path.split(os.path.realpath(__file__))[0]"
-        		$s_5 = "r_v = os.system('curl '+ini_url+cc)"
-        		$s_6 = "b41ef5f591226a0d5adce99cb2e629d8"
-        		$s_7 = "1df495e7c85e59ad0de1b9e50912f8d0"
-        		$s_8 = "tasklist | findstr mediainfo.exe"
-        		$url_1 = "http://dl1.5kplayer.com/youtube/youtube_dl.png"
-        		$url_2 = "http://dl1.5kplayer.com/youtube/youtube.ini?fire="
-        		$path_1 = "C:\\\\ProgramData\\\\Digiarty\\\\mediainfo.exe"
-        
-        	condition:
-        		3 of ( $s_* ) or any of ( $url_* ) or $path_1
-        }
-        rule VOLEXITY_Apt_Malware_Elf_Catchdns_Aug20_Memory : DRIFTINGBAMBOO FILE MEMORY {
-            meta:
-        		description = "Looks for strings from CatchDNS component used to intercept and modify DNS responses, and likely also intercept/monitor http. This rule would only match against memory in the example file analyzed by Volexity."
-        		author = "threatintel@volexity.com"
-        		id = "95306735-cdae-5407-ad49-d465d245378d"
-        		date = "2020-08-20"
-        		modified = "2024-08-02"
-        		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-08-02 StormBamboo/rules.yar#L313-L387"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		hash = "4f3d35f4f8b810362cbd4c59bfe5a961e559fe5713c9478294ccb3af2d306515"
-        		logic_hash = "a7d677d7eecf388df7e7c2343fd3e46188594473c01075bf8a0b54292a51db94"
-        		score = 75
-        		quality = 55
-        		tags = "DRIFTINGBAMBOO, FILE, MEMORY"
-        		os = "linux"
-        		os_arch = "all"
-        		report1 = "MAR-20221222"
-        		report2 = "TIB-20231221"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 227
-        		version = 10
-        
-        	strings:
-        		$os1 = "current thread policy=%d" ascii wide
-        		$os2 = "OS_CreatShareMem %s-->%x" ascii wide
-        		$os3 = "sem_open fail" ascii wide
-        		$os4 = "int OS_GetCurRunPath(char*, int)" ascii wide
-        		$os5 = "int OS_GetCurModName(char*, int)" ascii wide
-        		$os6 = "int OS_StrToTime(char*, time_t*)" ascii wide
-        		$os7 = "int OS_TimeToStr(time_t, char*)" ascii wide
-        		$os8 = "int OS_TimeToStrYearMothDay(time_t, char*)" ascii wide
-        		$os9 = "bool OS_Access(const char*)" ascii wide
-        		$os10 = "int OS_Memicmp(const void*, const void*, unsigned int)" ascii wide
-        		$os11 = "int OS_Mkdir(char*)" ascii wide
-        		$os12 = "OS_ConnectSem" ascii wide
-        		$msg1 = "client: last send packet iseq: %x, the ack :%x" ascii wide
-        		$msg2 = "server: last send packet iseq: %x, the iseq :%x" ascii wide
-        		$msg3 = "send packet failed!" ascii wide
-        		$msg4 = "will hijack dns:%s, ip:%s " ascii wide
-        		$msg5 = "dns send ok:%s" ascii wide
-        		$msg6 = "tcp send ok" ascii wide
-        		$msg7 = "FilePath:%s;" ascii wide
-        		$msg8 = "Line:%d,Fun:%s,ErrorCode:%u;" ascii wide
-        		$msg9 = "Description:%s;" ascii wide
-        		$msg10 = "Line:%d,Fun:%s,ErrorCode:%u;" ascii wide
-        		$msg11 = "get msg from ini is error" ascii wide
-        		$msg12 = "on build eth send_msg or payload is null" ascii wide
-        		$msg13 = "on build udp send_msg or payload is null" ascii wide
-        		$conf1 = "%d.%d.%d.%d" ascii wide
-        		$conf2 = "%s.tty" ascii wide
-        		$conf3 = "dns.ini" ascii wide
-        		$netw1 = "LISTEN_DEV" ascii wide
-        		$netw2 = "SEND_DEV" ascii wide
-        		$netw3 = "SERVER_IP" ascii wide
-        		$netw4 = "DNSDomain" ascii wide
-        		$netw5 = "IpLimit" ascii wide
-        		$netw6 = "HttpConfig" ascii wide
-        		$netw7 = "buildhead" ascii wide
-        		$netw8 = "sendlimit" ascii wide
-        		$netw9 = "content-type" ascii wide
-        		$netw10 = "otherhead_" ascii wide
-        		$netw11 = "configfile" ascii wide
-        		$apache = {48 54 54 50 2F 31 2E 31 20 32 30 30 20 4F 4B 0D 0A 53 65 72 76 65 72 3A 20 41 70 61 63 68 65 0D 0A 43 6F 6E 6E 65 63 74 69 6F 6E 3A 20 63 6C 6F 73 65 0D 0A 43 6F 6E 74 65 6E 74 2D 54 79 70 65 3A 20 25 73 0D 0A 43 6F 6E 74 65 6E 74 2D 4C 65 6E 67 74 68 3A 20 25 64 0D 0A}
-        		$cpp1 = "src/os.cpp"
-        		$cpp2 = "src/test_catch_dns.cpp"
-        
-        	condition:
-        		9 of ( $os* ) or 3 of ( $msg* ) or all of ( $conf* ) or all of ( $netw* ) or $apache or all of ( $cpp* )
         }
         rule HARFANGLAB_Nhas_Reverse_Shell_Elf_Inmem_Large {
             meta:
