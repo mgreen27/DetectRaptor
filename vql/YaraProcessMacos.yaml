@@ -60,135 +60,6 @@ parameters:
         	condition:
         		BINARYALERT_Macho_PRIVATE and 2 of ( $a* ) or all of ( $b* )
         }
-        rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
-            meta:
-        		description = "Detection for fake macOS VPN client used by CharmingCypress."
-        		author = "threatintel@volexity.com"
-        		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
-        		date = "2023-10-17"
-        		modified = "2023-10-27"
-        		reference = "TIB-20231027"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-02-13 CharmingCypress/rules.yar#L236-L261"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
-        		score = 75
-        		quality = 80
-        		tags = "CHARMINGCYPRESS, FILE, MEMORY"
-        		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
-        		os = "darwin,linux"
-        		os_arch = "all"
-        		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
-        		scan_context = "file,memory"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 9770
-        		version = 3
-        
-        	strings:
-        		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
-        		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
-        		$s3 = "New file imported successfully." ascii
-        		$s4 = "Error in importing the File." ascii
-        
-        	condition:
-        		2 of ( $s* )
-        }
-        rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
-            meta:
-        		description = "SOCKS5 proxy tool used to relay connections."
-        		author = "threatintel@volexity.com"
-        		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
-        		date = "2024-01-09"
-        		modified = "2024-01-09"
-        		reference = "TIB-20240109"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L85-L111"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
-        		score = 75
-        		quality = 80
-        		tags = "FILE, MEMORY"
-        		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
-        		os = "all"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 10065
-        		version = 3
-        
-        	strings:
-        		$s1 = "proxy_loop" ascii
-        		$s2 = "connect_to_dst" ascii
-        		$s3 = "request_client" ascii
-        		$s4 = "subnegotiation_client" ascii
-        		$s5 = "bind_port" ascii
-        
-        	condition:
-        		all of them
-        }
-        rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
-            meta:
-        		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
-        		author = "threatintel@volexity.com"
-        		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
-        		date = "2024-04-10"
-        		modified = "2024-04-12"
-        		reference = "TIB-20240412"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L57-L78"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
-        		score = 50
-        		quality = 80
-        		tags = "FILE, MEMORY"
-        		hash1 = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
-        		os = "all"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 10424
-        		version = 4
-        
-        	strings:
-        		$proj_1 = "/home/jarischf/"
-        
-        	condition:
-        		any of ( $proj_* )
-        }
-        rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
-            meta:
-        		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
-        		author = "threatintel@volexity.com"
-        		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
-        		date = "2024-04-10"
-        		modified = "2024-04-12"
-        		reference = "TIB-20240412"
-        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L79-L112"
-        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
-        		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
-        		score = 75
-        		quality = 80
-        		tags = "FILE, MEMORY"
-        		hash1 = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
-        		os = "all"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 10423
-        		version = 5
-        
-        	strings:
-        		$fun_1 = "createLocalPortForwardingCallback"
-        		$fun_2 = "createReversePortForwardingCallback"
-        		$fun_3 = "createPasswordHandler"
-        		$fun_4 = "createPublicKeyHandler"
-        		$fun_5 = "createSFTPHandler"
-        		$fun_6 = "dialHomeAndListen"
-        		$fun_7 = "createExtraInfoHandler"
-        		$fun_8 = "createSSHSessionHandler"
-        		$fun_9 = "createReversePortForwardingCallback"
-        		$proj_1 = "github.com/Fahrj/reverse-ssh"
-        
-        	condition:
-        		any of ( $proj_* ) or 4 of ( $fun_* )
-        }
         rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
             meta:
         		description = "Detection for RELOADEXT, a Google Chrome extension malware."
@@ -401,6 +272,135 @@ parameters:
         
         	condition:
         		3 of ( $s_* ) or any of ( $url_* ) or $path_1
+        }
+        rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
+            meta:
+        		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
+        		author = "threatintel@volexity.com"
+        		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
+        		date = "2024-04-10"
+        		modified = "2024-04-12"
+        		reference = "TIB-20240412"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L57-L78"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
+        		score = 50
+        		quality = 80
+        		tags = "FILE, MEMORY"
+        		hash1 = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
+        		os = "all"
+        		os_arch = "all"
+        		scan_context = "file,memory"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 10424
+        		version = 4
+        
+        	strings:
+        		$proj_1 = "/home/jarischf/"
+        
+        	condition:
+        		any of ( $proj_* )
+        }
+        rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
+            meta:
+        		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
+        		author = "threatintel@volexity.com"
+        		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
+        		date = "2024-04-10"
+        		modified = "2024-04-12"
+        		reference = "TIB-20240412"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L79-L112"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
+        		score = 75
+        		quality = 80
+        		tags = "FILE, MEMORY"
+        		hash1 = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
+        		os = "all"
+        		os_arch = "all"
+        		scan_context = "file,memory"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 10423
+        		version = 5
+        
+        	strings:
+        		$fun_1 = "createLocalPortForwardingCallback"
+        		$fun_2 = "createReversePortForwardingCallback"
+        		$fun_3 = "createPasswordHandler"
+        		$fun_4 = "createPublicKeyHandler"
+        		$fun_5 = "createSFTPHandler"
+        		$fun_6 = "dialHomeAndListen"
+        		$fun_7 = "createExtraInfoHandler"
+        		$fun_8 = "createSSHSessionHandler"
+        		$fun_9 = "createReversePortForwardingCallback"
+        		$proj_1 = "github.com/Fahrj/reverse-ssh"
+        
+        	condition:
+        		any of ( $proj_* ) or 4 of ( $fun_* )
+        }
+        rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
+            meta:
+        		description = "Detection for fake macOS VPN client used by CharmingCypress."
+        		author = "threatintel@volexity.com"
+        		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
+        		date = "2023-10-17"
+        		modified = "2023-10-27"
+        		reference = "TIB-20231027"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-02-13 CharmingCypress/rules.yar#L236-L261"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
+        		score = 75
+        		quality = 80
+        		tags = "CHARMINGCYPRESS, FILE, MEMORY"
+        		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
+        		os = "darwin,linux"
+        		os_arch = "all"
+        		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
+        		scan_context = "file,memory"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 9770
+        		version = 3
+        
+        	strings:
+        		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
+        		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
+        		$s3 = "New file imported successfully." ascii
+        		$s4 = "Error in importing the File." ascii
+        
+        	condition:
+        		2 of ( $s* )
+        }
+        rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
+            meta:
+        		description = "SOCKS5 proxy tool used to relay connections."
+        		author = "threatintel@volexity.com"
+        		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
+        		date = "2024-01-09"
+        		modified = "2024-01-09"
+        		reference = "TIB-20240109"
+        		source_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L85-L111"
+        		license_url = "https://github.com/volexity/threat-intel/blob/2df1665d51ea9560af4b36d2ae21926798b2e0f9/LICENSE.txt"
+        		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
+        		score = 75
+        		quality = 80
+        		tags = "FILE, MEMORY"
+        		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
+        		os = "all"
+        		os_arch = "all"
+        		scan_context = "file,memory"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 10065
+        		version = 3
+        
+        	strings:
+        		$s1 = "proxy_loop" ascii
+        		$s2 = "connect_to_dst" ascii
+        		$s3 = "request_client" ascii
+        		$s4 = "subnegotiation_client" ascii
+        		$s5 = "bind_port" ascii
+        
+        	condition:
+        		all of them
         }
         rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
             meta:
