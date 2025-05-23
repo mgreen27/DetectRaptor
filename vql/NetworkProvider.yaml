@@ -1,0 +1,105 @@
+name: Windows.Registry.NetworkProvider
+author: Matt Green - @mgreen27
+description: |
+    Adversaries may register malicious network provider dynamic link libraries 
+    (DLLs) to capture cleartext user credentials during the authentication process. 
+    Network provider DLLs allow Windows to interface with specific network 
+    protocols and can also support add-on credential management functions.
+    
+    This artifact enumerates NetworkProvider ProviderPath registry key entries 
+    and enriches DLLPath for triage assitance. If there are rows generated we also 
+    enumerate the ProviderOrder key.
+    
+    NOTE: By default we exclude common providers with validated authenticode. 
+    In some rare cases there may be issues enriching results, check for hash value.
+    
+    `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order\ProviderOrder`
+    - Specifies the order in which software-based network providers are accessed 
+    by Windows when connecting or enumerating network resources.
+    
+    `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetworkProvider\HWOrder\ProviderOrder` 
+    - Specifies the order for hardware-based network providers. This can include 
+    network resources managed by specific hardware adapters or hardware-optimized network connections.
+    
+    HWOrder\ProviderOrder Often mirrors the software provider order but may 
+    include specialized or hardware-specific providers, depending on installed 
+    hardware or network devices.
+
+reference:
+    - https://attack.mitre.org/techniques/T1556/008/
+    - https://www.huntress.com/blog/cleartext-shenanigans-gifting-user-passwords-to-adversaries-with-nppspy
+
+
+parameters:
+    - name: NetworkProviderGlob
+      default: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\*\NetworkProvider\ProviderPath
+      description: Glob for provider order keys
+    - name: ProviderOrderGlob
+      default: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetworkProvider\**\ProviderOrder
+      description: Glob for provider order keys
+    - name: ExcludeTrustedSubjectRegex
+      default: 'CN=Microsoft Windows|CN=Citrix Systems, Inc.$|CN=Symantec Corporation$|CN=Check Point Software Technologies Ltd.$'
+      description: Will exlcude trusted Authenticode with SubjectName regex specified
+    - name: ShowAll
+      type: bool
+      description: Show all Network Providers
+
+
+precondition: SELECT OS From info() where OS = 'windows'
+
+sources:
+  - query: |
+      -- We validate path and attempt to use System32 as default path if required
+      LET validate_path(path) = if(condition= path =~ '.:', then= path,
+                        else='''C:\\Windows\\System32\\'''+ basename(path=path) )
+                        
+      LET results <= SELECT ModTime AS MTime,
+            path_split(path=OSPath)[4] AS Provider,
+            Data.value AS DLLPath,
+            authenticode(filename=validate_path(path=expand(path=Data.value))) AS Authenticode,
+            parse_pe(file=validate_path(path=expand(path=Data.value))) AS PEInfo,
+            hash(path=validate_path(path=expand(path=Data.value))) AS Hashes,
+            OSPath
+        FROM glob(globs=NetworkProviderGlob, accessor='registry')
+        WHERE NOT if(condition=ShowAll, then= False,
+                        else= ( Authenticode.Trusted = 'trusted' 
+                            AND Authenticode.SubjectName =~ ExcludeTrustedSubjectRegex ))
+      
+      SELECT * FROM results
+
+
+  - name: ProviderOrder
+    query: |
+      LET provider_order = SELECT
+              ModTime AS MTime,
+              OSPath as KeyPath,
+              Data.value AS ProviderOrder
+        FROM glob(globs=ProviderOrderGlob, accessor='registry')
+        WHERE NOT Data.type = 'key'
+      
+      SELECT * FROM if(condition=results,then=provider_order)
+
+    
+    notebook:
+      - type: vql_suggestion
+        name: Network Providers Stack
+        template: |
+            SELECT 
+                DLLPath,
+                Authenticode.Trusted as Trusded,
+                Authenticode.IssuerName as IssuerName,
+                Authenticode.SubjectName as SubjectName,
+                Authenticode,
+                PEInfo,
+                count() as Total 
+            FROM source(artifact="DetectRaptor.Windows.Registry.NetworkProvider")
+            GROUP BY lowcase(string=DLLPath)
+            ORDER BY Total 
+      - type: vql_suggestion
+        name: Provider Order Stack
+        template: |            
+            SELECT 
+                ProviderOrder, 
+                count() as Total 
+            FROM source(artifact="DetectRaptor.Windows.Registry.NetworkProvider/ProviderOrder")
+            GROUP BY ProviderOrder
