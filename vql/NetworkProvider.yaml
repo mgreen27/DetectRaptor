@@ -86,7 +86,7 @@ sources:
         template: |
             SELECT 
                 DLLPath,
-                Authenticode.Trusted as Trusded,
+                Authenticode.Trusted as Trusted,
                 Authenticode.IssuerName as IssuerName,
                 Authenticode.SubjectName as SubjectName,
                 Authenticode,
