@@ -621,34 +621,3 @@ sources:
             WHERE lowcase(string=Hash.SHA256) = SHA256
                OR lowcase(string=PEInfo.AuthenticodeHash.SHA256) = AuthentiSHA256
         })
-
-- name: StandardDisk
-  query: |
-      LET hits = SELECT OSPath,Size,Mtime,Atime,Ctime,Btime,
-            parse_pe(file=OSPath) as PEInfo,
-            magic(path=OSPath) as Magic,
-            authenticode(filename=OSPath) as Authenticode,
-            hash(path=OSPath) as Hash
-        FROM glob(globs=TargetGlob)
-        WHERE lowcase(string=Hash.SHA256) in IOCcsv.SHA256
-            OR lowcase(string=PEInfo.AuthenticodeHash.SHA256) in IOCcsv.AuthentiSHA256
-        
-      SELECT * FROM foreach(row= hits,
-        query={
-            SELECT 
-                dict(
-                    Name=Name,
-                    Category=Category,
-                    Filename=Filename,
-                    MachineType=MachineType,
-                    SHA256=SHA256,
-                    AuthentiSHA256=AuthentiSHA256,
-                    BootloadersUrl=BootloadersUrl
-                ) as Detection,
-                OSPath,Size,
-                Mtime,Atime,Ctime,Btime,
-                PEInfo,Authenticode,Hash
-            FROM IOCcsv
-            WHERE lowcase(string=Hash.SHA256) = SHA256
-               OR lowcase(string=PEInfo.AuthenticodeHash.SHA256) = AuthentiSHA256
-        })
