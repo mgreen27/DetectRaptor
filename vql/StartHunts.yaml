@@ -48,6 +48,7 @@ parameters:
         DetectRaptor.Windows.Detection.ZoneIdentifier,,,,
         DetectRaptor.Windows.Detection.Powershell.ISEAutoSave,,,,
         DetectRaptor.Windows.Detection.BinaryRename,,,,
+        DetectRaptor.Windows.Detection.Yara.LolDrivers,,,,
  
 
 sources:
