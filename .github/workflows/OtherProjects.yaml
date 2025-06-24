@@ -35,6 +35,7 @@ jobs:
           python bootloaders.py
           python hijacklibs.py
           python loldrivers.py
+          python loldrivers_yara.py
           python lolrmm.py
           
     - name: Git Auto Commit
