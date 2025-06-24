@@ -27,6 +27,8 @@ parameters:
   - name: CustomYara
     description: Use a custom YARA rule and ignore Malware and Vulnerability.
     type: yara
+  - name: CustomTargetGlob
+    description: Use a custom Glob for targeting.
   - name: UploadMatches
     description: Whether to upload matching files.
     type: bool
@@ -50,7 +52,7 @@ sources:
        LET hits = SELECT
            OSPath,
            Size,
-           dict(Mtime=Mtime, Atime=Atime, Ctime=Ctime, Btime=Btime) AS Timestamps,
+           dict(Mtime=Mtime, Atime=Atime, Ctime=Ctime, Btime=Btime) AS Timstamps,
            Rule,
            Tags,
            Meta,
@@ -59,7 +61,7 @@ sources:
            HitContext,
            parse_pe(file=OSPath) AS PEInfo
          FROM Artifact.Windows.Detection.Yara.Glob(
-           PathGlob=driver_dirs.FolderGlob,
+           PathGlob=CustomTargetGlob||driver_dirs.FolderGlob,
            YaraRule=YaraRules,
            NumberOfHits=1)
        
