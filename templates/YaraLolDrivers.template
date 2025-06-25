@@ -44,10 +44,10 @@ sources:
                                     if(condition=ScanVulnerability,
                                             then=VulnYara)
        
-       LET driver_dirs <= SELECT
+       LET driver_dirs = SELECT
            lowcase(string=pathspec(parse=PathName).Dirname) + '/*' AS FolderGlob
          FROM wmi(query="SELECT PathName FROM Win32_SystemDriver")
-         GROUP BY Folder
+         GROUP BY FolderGlob
        
        LET hits = SELECT
            OSPath,
