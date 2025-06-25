@@ -52,7 +52,7 @@ sources:
        LET hits = SELECT
            OSPath,
            Size,
-           dict(Mtime=Mtime, Atime=Atime, Ctime=Ctime, Btime=Btime) AS Timstamps,
+           dict(Mtime=Mtime, Atime=Atime, Ctime=Ctime, Btime=Btime) AS Timestamps,
            Rule,
            Tags,
            Meta,
