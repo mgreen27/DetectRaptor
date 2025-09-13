@@ -88,24 +88,26 @@ sources:
           NOT IsDir AND NOT IsLink
 
       -- scan files and prepare hit metadata
-      LET hits = SELECT 
-            FileName as OSPath,
-            File.Size as Size,
-            File.Mtime as Mtime, 
-            File.Atime as Atime, 
-            File.Ctime as Ctime, 
-            File.Btime as Btime,
-            Rule, Tags,
-            Meta,
-            String.Name as YaraString,
-            String.Offset as HitOffset,
-            String.Data as HitContext
-        FROM yara(
+      LET hits = SELECT * FROM foreach(row=files, query={
+            SELECT
+                FileName as OSPath,
+                File.Size as Size,
+                File.Mtime as Mtime, 
+                File.Atime as Atime, 
+                File.Ctime as Ctime, 
+                File.Btime as Btime,
+                Rule, Tags,
+                Meta,
+                String.Name as YaraString,
+                String.Offset as HitOffset,
+                String.Data as HitContext
+            FROM yara(
                 rules=read_file(filename=rules[0].OSPath,accessor='gzip',length=Length),
-                files=files.OSPath,
+                files=OSPath,
                 context=ContextBytes,
-                number=NumberOfHits )
-
+                number=NumberOfHits,
+                vars=dict(filepath=OSPath) )
+        })
       -- upload files if selected
       LET upload_hits = SELECT *, upload(file=OSPath,name=OSPath) as Upload 
         FROM hits
