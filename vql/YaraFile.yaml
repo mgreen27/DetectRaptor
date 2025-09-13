@@ -90,7 +90,7 @@ sources:
       -- scan files and prepare hit metadata
       LET hits = SELECT * FROM foreach(row=files, query={
             SELECT
-                FileName as OSPath,
+                OSPath,
                 File.Size as Size,
                 File.Mtime as Mtime, 
                 File.Atime as Atime, 
@@ -106,7 +106,7 @@ sources:
                 files=OSPath,
                 context=ContextBytes,
                 number=NumberOfHits,
-                vars=dict(filepath=OSPath) )
+                vars=dict(filepath=str(str=OSPath)) )
         })
       -- upload files if selected
       LET upload_hits = SELECT *, upload(file=OSPath,name=OSPath) as Upload 
