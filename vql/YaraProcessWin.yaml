@@ -3417,7 +3417,7 @@ sources:
 
     query: |
       -- find velociraptor process
-      LET me = SELECT Pid FROM pslist(pid=getpid())
+      LET me <= SELECT Pid FROM pslist(pid=getpid())
 
       -- find all processes and add filters
       LET processes = SELECT Name as ProcessName, Exe as ExePath, CommandLine, Pid, WorkingSetSize
@@ -3455,7 +3455,8 @@ sources:
                 accessor='process',
                 rules=YaraRule,
                 context=ContextBytes,
-                number=NumberOfHits)
+                number=NumberOfHits,
+                vars=dict(filepath=ExePath) )
           })
 
       -- upload hits using proc_dump plugin

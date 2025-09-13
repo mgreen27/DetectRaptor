@@ -670,11 +670,12 @@ sources:
 
     query: |
       -- find velociraptor process
-      LET me = SELECT Pid FROM pslist(pid=getpid())
+      LET me <= SELECT Pid FROM pslist(pid=getpid())
 
       -- find all processes and add filters
       LET processes = SELECT
              Name as ProcessName,
+             Exe as ProcessPath,
              CommandLine, Pid
         FROM pslist()
         WHERE
@@ -692,6 +693,7 @@ sources:
         query={
             SELECT
                 ProcessName,
+                ProcessPath,
                 CommandLine,
                 Pid,
                 Rule,
@@ -708,7 +710,8 @@ sources:
                         pid=Pid,
                         rules=YaraRule,
                         context=ContextBytes,
-                        number=NumberOfHits
+                        number=NumberOfHits,
+                        vars=dict(filepath=ProcessPath)
                     )
           })
 
