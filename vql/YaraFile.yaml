@@ -88,7 +88,7 @@ sources:
           NOT IsDir AND NOT IsLink
 
       -- scan files and prepare hit metadata
-      LET hits = SELECT * FROM foreach(row=files,query={
+      LET hits = SELECT * FROM foreach(row=files, query={
             SELECT
                 FileName as OSPath,
                 File.Size as Size,
@@ -107,7 +107,7 @@ sources:
                 context=ContextBytes,
                 number=NumberOfHits,
                 vars=dict(filepath=OSPath) )
-      })
+        })
       -- upload files if selected
       LET upload_hits = SELECT *, upload(file=OSPath,name=OSPath) as Upload 
         FROM hits
