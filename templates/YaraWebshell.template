@@ -103,8 +103,8 @@ sources:
                             )) as HitContext
                 FROM yara(rules=YaraRules,files=OSPath,
                   context=ContextBytes,number=NumberOfHits,
-                  vars=dict(filepath=OSPath) )
-            })
+                  vars=dict(filepath=str(str=OSPath)) )
+               })
 
       -- upload files if selected
       LET upload_hits = SELECT *, upload(file=OSPath,name=OSPath) as Upload FROM hits
