@@ -29,6 +29,7 @@ parameters:
         powershell,win_powershell_tcpsocket^(4103|4104)$,C2-Powershell Socket Connection,^(4103|4104)$,Net\.Sockets\.TCPClient,\\ProgramData\\Microsoft\\Windows Defender Advanced Threat Protection\\Downloads\\PSScript_.+\.ps1
         powershell,win_powershell_dns,Powershell potential DNS disruption,^(4103|4104)$,Add-DnsClientNrptRule|New-NetRoute|drivers\\etc\\hosts,Microsoft\.PowerShell\.Cmdletization\.MethodParameter
         powershell,win_powershell_downgrade,Powershell potential downgrade attack,^(4103|4104)$,-ve*r*s*i*o*n*\s+2|powershell -version,
+        powershell,win_powershell_large_b64,Powershell large Base64 blob,^(4103|4104)$,[a-z0-9+\/]{44,}([a-z0-9+\/]{4}|[a-z0-9+\/]{3}=|[a-z0-9+\/]{2}==),
 
 
 sources:
