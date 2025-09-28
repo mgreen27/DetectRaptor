@@ -101,67 +101,38 @@ rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
 	condition:
 		any of ( $proj_* ) or 4 of ( $fun_* )
 }
-rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
+rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
     meta:
-		description = "Detection for the COMPLYSHELL webshell."
+		description = "Detection for fake macOS VPN client used by CharmingCypress."
 		author = "threatintel@volexity.com"
-		id = "6b44b5bc-a75f-573c-b9c3-562b7874e408"
-		date = "2023-12-13"
-		modified = "2024-01-12"
-		reference = "TIB-20231215"
-		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
+		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
+		date = "2023-10-17"
+		modified = "2023-10-27"
+		reference = "TIB-20231027"
+		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2024/2024-02-13 CharmingCypress/rules.yar#L246-L272"
 		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
-		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
+		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
 		score = 75
 		quality = 80
-		tags = "UTA0178, FILE, MEMORY"
-		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
-		os = "linux"
+		tags = "CHARMINGCYPRESS, FILE, MEMORY"
+		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
+		os = "darwin,linux"
 		os_arch = "all"
+		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 9995
-		version = 4
-
-	strings:
-		$s = "eval{my $c=Crypt::RC4->new("
-
-	condition:
-		$s
-}
-rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
-    meta:
-		description = "SOCKS5 proxy tool used to relay connections."
-		author = "threatintel@volexity.com"
-		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
-		date = "2024-01-09"
-		modified = "2024-01-09"
-		reference = "TIB-20240109"
-		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
-		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
-		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10065
+		rule_id = 9770
 		version = 3
 
 	strings:
-		$s1 = "proxy_loop" ascii
-		$s2 = "connect_to_dst" ascii
-		$s3 = "request_client" ascii
-		$s4 = "subnegotiation_client" ascii
-		$s5 = "bind_port" ascii
+		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
+		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
+		$s3 = "New file imported successfully." ascii
+		$s4 = "Error in importing the File." ascii
 
 	condition:
-		all of them
+		2 of ( $s* )
 }
 rule VOLEXITY_Apt_Malware_Linux_Disgomoji_Modules : TRANSPARENTJASMINE FILE MEMORY {
     meta:
@@ -582,38 +553,116 @@ rule VOLEXITY_Apt_Malware_Elf_Catchdns_Aug20_Memory : DRIFTINGBAMBOO FILE MEMORY
 	condition:
 		9 of ( $os* ) or 3 of ( $msg* ) or all of ( $conf* ) or all of ( $netw* ) or $apache or all of ( $cpp* )
 }
-rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
+rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
     meta:
-		description = "Detection for fake macOS VPN client used by CharmingCypress."
+		description = "Detection for the COMPLYSHELL webshell."
 		author = "threatintel@volexity.com"
-		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
-		date = "2023-10-17"
-		modified = "2023-10-27"
-		reference = "TIB-20231027"
-		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2024/2024-02-13 CharmingCypress/rules.yar#L246-L272"
+		id = "6b44b5bc-a75f-573c-b9c3-562b7874e408"
+		date = "2023-12-13"
+		modified = "2024-01-12"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
 		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
-		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
+		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
 		score = 75
 		quality = 80
-		tags = "CHARMINGCYPRESS, FILE, MEMORY"
-		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
-		os = "darwin,linux"
+		tags = "UTA0178, FILE, MEMORY"
+		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
+		os = "linux"
 		os_arch = "all"
-		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 9770
+		rule_id = 9995
+		version = 4
+
+	strings:
+		$s = "eval{my $c=Crypt::RC4->new("
+
+	condition:
+		$s
+}
+rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
+    meta:
+		description = "SOCKS5 proxy tool used to relay connections."
+		author = "threatintel@volexity.com"
+		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
+		date = "2024-01-09"
+		modified = "2024-01-09"
+		reference = "TIB-20240109"
+		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
+		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
+		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10065
 		version = 3
 
 	strings:
-		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
-		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
-		$s3 = "New file imported successfully." ascii
-		$s4 = "Error in importing the File." ascii
+		$s1 = "proxy_loop" ascii
+		$s2 = "connect_to_dst" ascii
+		$s3 = "request_client" ascii
+		$s4 = "subnegotiation_client" ascii
+		$s5 = "bind_port" ascii
 
 	condition:
-		2 of ( $s* )
+		all of them
+}
+rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
+    meta:
+		description = "A malicious Chrome browser extension used by the SharpPine threat actor to steal Gmail data from a victim."
+		author = "threatintel@volexity.com"
+		id = "61b5176a-ff73-5fce-bc70-c9e09bb5afed"
+		date = "2021-09-14"
+		modified = "2025-05-21"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
+		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
+		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
+		score = 75
+		quality = 80
+		tags = "SHARPPINE, FILE, MEMORY"
+		hash1 = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
+		hash2 = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
+		hash3 = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 5916
+		version = 5
+
+	strings:
+		$s1 = "\"mode=attach&name=\"" ascii
+		$s2 = "\"mode=new&mid=\"" ascii
+		$s3 = "\"mode=attlist\"" ascii
+		$s4 = "\"mode=list\"" ascii
+		$s5 = "\"mode=domain\"" ascii
+		$s6 = "\"mode=black\"" ascii
+		$s7 = "\"mode=newD&d=\"" ascii
+		$mark1 = "chrome.runtime.onMessage.addListener" ascii
+		$mark2 = "chrome.webNavigation.onCompleted.addListener" ascii
+		$enc1 = "function BSue(string){" ascii
+		$enc2 = "function BSE(input){" ascii
+		$enc3 = "function bin2hex(byteArray)" ascii
+		$xhr1 = ".send(\"mode=cd1" ascii
+		$xhr2 = ".send(\"mode=black" ascii
+		$xhr3 = ".send(\"mode=domain" ascii
+		$xhr4 = ".send(\"mode=list" ascii
+		$manifest1 = "\"description\":\"advanced font\"," ascii
+		$manifest2 = "\"scripts\":[\"bg.js\"]" ascii
+		$manifest3 = "\"devtools_page\":\"dev.html\"" ascii
+
+	condition:
+		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
 }
 rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
     meta:
@@ -678,6 +727,65 @@ rule VOLEXITY_Susp_Jsp_General_Runtime_Exec_Req : FILE MEMORY {
 
 	condition:
 		$s1
+}
+rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
+    meta:
+		description = "Detects CONVERGE - a file upload webshell observed in incident involving compromise of Confluence server via CVE-2022-26134."
+		author = "threatintel@volexity.com"
+		id = "2a74678e-cb00-567c-a2e0-2e095f3e5ee8"
+		date = "2022-06-01"
+		modified = "2024-09-20"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
+		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
+		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY, CVE-2022-26134"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6788
+		version = 5
+
+	strings:
+		$s1 = "if (request.getParameter(\"name\")!=null && request.getParameter(\"name\").length()!=0){" ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
+    meta:
+		description = "Detects the RealCMD webshell, one of the payloads for BEHINDER."
+		author = "threatintel@volexity.com"
+		id = "60b30ccc-bcfa-51e6-a3f5-88037d19213e"
+		date = "2022-06-01"
+		modified = "2024-07-30"
+		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
+		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
+		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
+		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6786
+		version = 4
+
+	strings:
+		$fn1 = "runCmd" wide ascii fullword
+		$fn2 = "RealCMD" ascii wide fullword
+		$fn3 = "buildJson" ascii wide fullword
+
+	condition:
+		all of ( $fn* )
 }
 rule VOLEXITY_Webshell_Java_Behinder_Shellservice : FILE MEMORY {
     meta:
@@ -788,114 +896,6 @@ rule VOLEXITY_Malware_Any_Pupyrat_B : FILE MEMORY {
 
 	condition:
 		any of ( $elf* ) or all of ( $pupy* ) or all of ( $s* )
-}
-rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
-    meta:
-		description = "A malicious Chrome browser extension used by the SharpPine threat actor to steal Gmail data from a victim."
-		author = "threatintel@volexity.com"
-		id = "61b5176a-ff73-5fce-bc70-c9e09bb5afed"
-		date = "2021-09-14"
-		modified = "2025-05-21"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
-		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
-		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
-		score = 75
-		quality = 80
-		tags = "SHARPPINE, FILE, MEMORY"
-		hash1 = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
-		hash2 = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
-		hash3 = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 5916
-		version = 5
-
-	strings:
-		$s1 = "\"mode=attach&name=\"" ascii
-		$s2 = "\"mode=new&mid=\"" ascii
-		$s3 = "\"mode=attlist\"" ascii
-		$s4 = "\"mode=list\"" ascii
-		$s5 = "\"mode=domain\"" ascii
-		$s6 = "\"mode=black\"" ascii
-		$s7 = "\"mode=newD&d=\"" ascii
-		$mark1 = "chrome.runtime.onMessage.addListener" ascii
-		$mark2 = "chrome.webNavigation.onCompleted.addListener" ascii
-		$enc1 = "function BSue(string){" ascii
-		$enc2 = "function BSE(input){" ascii
-		$enc3 = "function bin2hex(byteArray)" ascii
-		$xhr1 = ".send(\"mode=cd1" ascii
-		$xhr2 = ".send(\"mode=black" ascii
-		$xhr3 = ".send(\"mode=domain" ascii
-		$xhr4 = ".send(\"mode=list" ascii
-		$manifest1 = "\"description\":\"advanced font\"," ascii
-		$manifest2 = "\"scripts\":[\"bg.js\"]" ascii
-		$manifest3 = "\"devtools_page\":\"dev.html\"" ascii
-
-	condition:
-		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
-}
-rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
-    meta:
-		description = "Detects CONVERGE - a file upload webshell observed in incident involving compromise of Confluence server via CVE-2022-26134."
-		author = "threatintel@volexity.com"
-		id = "2a74678e-cb00-567c-a2e0-2e095f3e5ee8"
-		date = "2022-06-01"
-		modified = "2024-09-20"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
-		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
-		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY, CVE-2022-26134"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6788
-		version = 5
-
-	strings:
-		$s1 = "if (request.getParameter(\"name\")!=null && request.getParameter(\"name\").length()!=0){" ascii
-
-	condition:
-		$s1
-}
-rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
-    meta:
-		description = "Detects the RealCMD webshell, one of the payloads for BEHINDER."
-		author = "threatintel@volexity.com"
-		id = "60b30ccc-bcfa-51e6-a3f5-88037d19213e"
-		date = "2022-06-01"
-		modified = "2024-07-30"
-		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
-		source_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
-		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
-		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6786
-		version = 4
-
-	strings:
-		$fn1 = "runCmd" wide ascii fullword
-		$fn2 = "RealCMD" ascii wide fullword
-		$fn3 = "buildJson" ascii wide fullword
-
-	condition:
-		all of ( $fn* )
 }
 rule HARFANGLAB_Nhas_Reverse_Shell_Elf_Inmem_Large {
     meta:
