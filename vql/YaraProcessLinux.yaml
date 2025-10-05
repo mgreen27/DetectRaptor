@@ -708,7 +708,7 @@ parameters:
         		license_url = "https://github.com/volexity/threat-intel/blob/809e5e28363540d57393bd4362af89066b1f2fbf/LICENSE.txt"
         		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
         		score = 75
-        		quality = 80
+        		quality = 55
         		tags = "FILE, MEMORY"
         		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
         		os = "win,linux"
