@@ -126,6 +126,56 @@ sources:
 
     notebook:
       - type: vql_suggestion
+        name: Installed programs RMM summary
+        template: |
+            /*
+            ## Installed programs RMM summary
+            */
+            SELECT Name,Description,
+                Event.DisplayName as DisplayName,
+                Event.DisplayVersion as DisplayVersion,
+                count() as Total
+            FROM source(artifact="DetectRaptor.Windows.Detection.LolRMM")
+            GROUP BY Name,DisplayVersion,DisplayName
+            ORDER BY DisplayName
+
+      - type: vql_suggestion
+        name: Running processes RMM summary
+        template: |
+            /*
+            ## Running processes RMM summary
+            */
+            SELECT Name,Description,Event.Exe as Exe,
+                count() as Total
+            FROM source(artifact="DetectRaptor.Windows.Detection.LolRMM/Processes")
+            GROUP BY name,Description,Exe
+            ORDER By Exe
+
+      - type: vql_suggestion
+        name: DNS resolver RMM summary
+        template: |
+            /*
+            ## DNS resolver RMM summary
+            */
+            LET results <= SELECT *
+              FROM source(artifact="DetectRaptor.Windows.Detection.LolRMM/ResolvedDomains")
+
+            LET x(name) = SELECT *, Event.DNSName as DNSName FROM results 
+              WHERE Name = name
+              GROUP BY DNSName
+
+            LET y(name) = SELECT *, Event.Record as Record FROM results 
+              WHERE Name = name
+              GROUP BY Record
+
+            SELECT Name,Description,
+                  count() as Total,
+                  x(name=Name).DNSName as DNSNames,
+                  y(name=Name).Record as Records
+              FROM results
+              GROUP BY Name,Description
+              
+      - type: vql_suggestion
         name: Add Tags and stack all results
         template: |
             /*
