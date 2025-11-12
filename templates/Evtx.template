@@ -80,13 +80,16 @@ sources:
             ### Detection filter  
             Use this notebook to modify filter and target specific Detections.
             */
-            
+
+            LET FilterRegex = ADD FILTER STRINGS|BACKSLASHES\\ARE\\ESCAPED
+
             SELECT EventTime,Computer, 
                 Detection.Name,
-                Channel,EventID,
-                --EventData,
+                Channel,
+                EventID,
+                EventData,
                 Message
             FROM source(artifact="DetectRaptor.Windows.Detection.Evtx")
-            WHERE NOT Message =~ '''ADD FILTER STRINGS|BACKSLASHES\\ARE\\ESCAPED'''
+            WHERE NOT Message =~ FilterRegex AND NOT EventData =~ FilterRegex
                 AND `Detection.Name` =~ 'T1059.001-Suspicious Powershell Commandlets|T0884-Connection Proxy'
             ORDER BY EventTime DESC
