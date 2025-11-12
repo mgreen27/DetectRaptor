@@ -81,7 +81,7 @@ sources:
             Use this notebook to modify filter and target specific Detections.
             */
 
-            LET FilterRegex = ADD FILTER STRINGS|BACKSLASHES\\ARE\\ESCAPED
+            LET FilterRegex = '''ADD FILTER STRINGS|BACKSLASHES\\ARE\\ESCAPED'''
 
             SELECT EventTime,Computer, 
                 Detection.Name,
