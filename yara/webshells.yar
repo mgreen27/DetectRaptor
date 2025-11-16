@@ -1,5 +1,5 @@
-import "math"
 import "pe"
+import "math"
 rule ARKBIRD_SOLG_APT_UNC2452_Webshell_Chopper_Mar_2021_1 : FILE {
     meta:
 		description = "Detect exploit listener in the exchange configuration for Webshell Chopper used by UNC2452 group"
@@ -5193,7 +5193,7 @@ rule SIGNATURE_BASE_WEBSHELL_Compiled_Webshell_Mar2021_1 : FILE {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/72d12c2f43c845ceafba3e7011c166df020fb990/LICENSE"
 		logic_hash = "d2e5f91f7bb50984c491eb9632d3863febc986760e4d03c8255872887ce4dc4a"
 		score = 75
-		quality = 56
+		quality = 81
 		tags = "FILE"
 
 	strings:
@@ -22101,6 +22101,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Base64_Encoded_Payloads : FILE {
 		hash = "e2b1dfcfaa61e92526a3a444be6c65330a8db4e692543a421e19711760f6ffe2"
 		logic_hash = "8f606dc3e1e688cca144fe769af50980b4c25fa69b08c67aca8c676a6a060010"
 		score = 75
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22248,7 +22249,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Generic_Eval : FILE {
 		hash = "dd5d8a9b4bb406e0b8f868165a1714fe54ffb18e621582210f96f6e5ae850b33"
 		logic_hash = "4b7759e4761f5897bfb5e576df645a2e99cec4e703fb28d0fc275cf8f8848263"
 		score = 75
-		quality = 60
+		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22552,7 +22553,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Str_Replace : FILE {
 		hash = "e1a2af3477d62a58f9e6431f5a4a123fb897ea80"
 		logic_hash = "74fb86a7ee7342ede9f49ef004a92fb7bdf06ca62f8e8f0ea1c6adcff96bcb2d"
 		score = 75
-		quality = 21
+		quality = 46
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22900,7 +22901,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Eval : FILE {
 		hash = "b51a6d208ec3a44a67cce16dcc1e93cdb06fe150acf16222815333ddf52d4db8"
 		logic_hash = "a7e9632c495e5d4cc883e2593c8ebe41cdf6a18b54bd6dfd3aec85352f19321c"
 		score = 75
-		quality = 21
+		quality = 46
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22938,7 +22939,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Tiny : FILE {
 		hash = "b3b0274cda28292813096a5a7a3f5f77378b8905205bda7bb7e1a679a7845004"
 		logic_hash = "e1efb6384009def30d845650fd0dd77319c3c7b4402cca074ca5c2a06372ab58"
 		score = 75
-		quality = 17
+		quality = 42
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23346,6 +23347,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_By_String_Known_Webshell : FILE {
 		hash = "d52128bcfff5e9a121eab3d76382420c3eebbdb33cd0879fbef7c3426e819695"
 		logic_hash = "8909bf77b7bacdae092fd7a94099224bf1660a6d341e113412e93f864298851b"
 		score = 70
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23440,7 +23442,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Strings_SUSP : FILE {
 		hash = "1ab3ae4d613b120f9681f6aa8933d66fa38e4886"
 		logic_hash = "5c3837ab761ee2209fab5fc333b050a56d80addb03b088ae28040c7393429bb3"
 		score = 50
-		quality = 15
+		quality = 40
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23572,7 +23574,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Writer : FILE {
 		hash = "20281d16838f707c86b1ff1428a293ed6aec0e97"
 		logic_hash = "34bae0c02156d1c9fd24d674443322409eba0a43e094fc6c05df94bbbe15aa64"
 		score = 50
-		quality = 17
+		quality = 42
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23828,6 +23830,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Generic_Eval_On_Input : FILE {
 		hash = "069ea990d32fc980939fffdf1aed77384bf7806bc57c0a7faaff33bd1a3447f6"
 		logic_hash = "f7b9f43cf2fd6d08b7438f003242e9a19dcea282959c7a1fdff3a35e261a031e"
 		score = 75
+		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -24744,6 +24747,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Runtime_Compile : FILE {
 		hash = "8ce4eaf111c66c2e6c08a271d849204832713f8b66aceb5dadc293b818ccca9e"
 		logic_hash = "6699a44e396eedebb3bafa0e89c3b6d080586a158ed056ec7220bdf2ad764444"
 		score = 75
+		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25017,7 +25021,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_HTTP_Proxy : FILE {
 		hash = "2f9b647660923c5262636a5344e2665512a947a4"
 		logic_hash = "7183902d43fc633db06a41b4a6bc02d2eb5662b7ee08080b57563783b8b67568"
 		score = 75
-		quality = 25
+		quality = 50
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25058,7 +25062,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Writer_Nano : FILE {
 		hash = "5e241d9d3a045d3ade7b6ff6af6c57b149fa356e"
 		logic_hash = "44c11570c610b849ba9c7506fd9ef3575d270e79d7aaf5c26d54ab3f64cfc94f"
 		score = 75
-		quality = 23
+		quality = 48
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25355,6 +25359,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Classloader : FILE {
 		hash = "8e544a5f0c242d1f7be503e045738369405d39731fcd553a38b568e0889af1f2"
 		logic_hash = "109c0063f4e8db6172fd872b3b93d4f069234f28bbf033fbd2c5f135051df77e"
 		score = 75
+		quality = 0
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25397,7 +25402,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Encoded_Shell : FILE {
 		hash = "62e6c6065b5ca45819c1fc049518c81d7d165744"
 		logic_hash = "74f45478e5bd7bb300e4ec493c2d3ef9a26340a141c3512a722618b3a3731500"
 		score = 75
-		quality = 58
+		quality = 83
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25428,6 +25433,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Netspy : FILE {
 		hash = "3870b31f26975a7cb424eab6521fc9bffc2af580"
 		logic_hash = "65432e42ad2626b62b1d1a6298c301513c2fb03d89193a77b053069cebcb45e9"
 		score = 75
+		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25483,6 +25489,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_By_String : FILE {
 		hash = "850f998753fde301d7c688b4eca784a045130039512cf51292fcb678187c560b"
 		logic_hash = "ab8d8df32ab745d8dd02d63d89264df2fbc0087daf6b4f91900ad03ab6e7949e"
 		score = 75
+		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25543,7 +25550,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Input_Upload_Write : FILE {
 		hash = "19eca79163259d80375ebebbc440b9545163e6a3"
 		logic_hash = "33b08a6118134819ec72a2eab0daf723c25c8869e0fa8a83f690b93e2667d15c"
 		score = 75
-		quality = 21
+		quality = 46
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
