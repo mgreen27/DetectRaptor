@@ -557,7 +557,7 @@ rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
 		license_url = "https://github.com/volexity/threat-intel/blob/c24b8d9bea44ac757193a3152b1fd9dbf34fe503/LICENSE.txt"
 		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
 		score = 75
-		quality = 30
+		quality = 55
 		tags = "UTA0178, FILE, MEMORY"
 		hash1 = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
 		os = "win"
@@ -840,7 +840,7 @@ rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
 		license_url = "https://github.com/volexity/threat-intel/blob/c24b8d9bea44ac757193a3152b1fd9dbf34fe503/LICENSE.txt"
 		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
 		score = 75
-		quality = 55
+		quality = 80
 		tags = "FILE, MEMORY"
 		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
 		os = "win,linux"
@@ -1267,7 +1267,7 @@ rule VOLEXITY_Apt_Malware_Rb_Rokrat_Loader : INKYPINE FILE MEMORY {
 		license_url = "https://github.com/volexity/threat-intel/blob/c24b8d9bea44ac757193a3152b1fd9dbf34fe503/LICENSE.txt"
 		logic_hash = "30ae14fd55a3ab60e791064f69377f3b9de9b871adfd055f435df657f89f8007"
 		score = 75
-		quality = 55
+		quality = 80
 		tags = "INKYPINE, FILE, MEMORY"
 		hash1 = "5bc52f6c1c0d0131cee30b4f192ce738ad70bcb56e84180f464a5125d1a784b2"
 		os = "win"
@@ -3361,7 +3361,7 @@ rule SIGNATURE_BASE_Pos_Malware_Malumpos {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/72d12c2f43c845ceafba3e7011c166df020fb990/LICENSE"
 		logic_hash = "ece32e51a12adf0d68420c8d98efbe7df27b9061ddfe4dcedf151f9f06287eee"
 		score = 75
-		quality = 60
+		quality = 85
 		tags = ""
 		sample_filtype = "exe"
 
