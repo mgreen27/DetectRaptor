@@ -104,7 +104,7 @@ rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
 		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
 		score = 75
-		quality = 30
+		quality = 55
 		tags = "UTA0178, FILE, MEMORY"
 		hash1 = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
 		os = "win"
@@ -169,7 +169,7 @@ rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
 		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
 		score = 75
-		quality = 55
+		quality = 80
 		tags = "FILE, MEMORY"
 		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
 		os = "win,linux"
@@ -487,8 +487,8 @@ rule SEKOIA_Weevely_Webshell_Payload : FILE {
 		date = "2024-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/weevely_webshell_payload.yar#L1-L17"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/weevely_webshell_payload.yar#L1-L17"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		logic_hash = "bb02ec519d77526cc81ebd7743336b333b9498f79079f7008970cf1bb51c4948"
 		score = 75
 		quality = 80
@@ -512,8 +512,8 @@ rule SEKOIA_Tool_Webshell_B374K_Strings : FILE {
 		date = "2024-09-06"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		hash = "1d27b23fceecbb9e854c41f6a8fb878e"
 		hash = "71fd853a3f3efc3dc2846e866187ee59"
 		hash = "187e001c32487d0d68197ddb7e7796c3"
@@ -541,8 +541,8 @@ rule SEKOIA_Apt_Unk_Hrserv_Webshell_Strings : FILE {
 		date = "2023-11-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		logic_hash = "b5650e08227bbdb82c635bd67abae57e3107be9126639619809bfbe2a7ffee89"
 		score = 75
 		quality = 80
@@ -570,8 +570,8 @@ rule SEKOIA_Generic_Php_Webshell : FILE {
 		date = "2023-12-08"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/generic_php_webshell.yar#L1-L15"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/generic_php_webshell.yar#L1-L15"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		logic_hash = "617264a785b8e9e87a39e12d7b72963d94e0686a174716347369fe71ab7a78af"
 		score = 75
 		quality = 80
@@ -593,8 +593,8 @@ rule SEKOIA_Apt_Oilrig_Webshell : FILE {
 		date = "2024-10-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/apt_oilrig_webshell.yar#L1-L18"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/apt_oilrig_webshell.yar#L1-L18"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		logic_hash = "0e0879bafa1becf7e4aef008229a79ab8e0c50eda03232abd5cbb8fc59f482d3"
 		score = 75
 		quality = 80
@@ -619,8 +619,8 @@ rule SEKOIA_Tool_Pivotnacci_Webshell : FILE {
 		date = "2024-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/tool_pivotnacci_webshell.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/tool_pivotnacci_webshell.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		logic_hash = "a57792915b4c888547ebe0b08b928e4bc32b3526c98a3ccc9fca0193cedee20a"
 		score = 75
 		quality = 80
@@ -650,8 +650,8 @@ rule SEKOIA_Webshell_Icesword_Strings : FILE {
 		date = "2024-11-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/webshell_icesword_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/webshell_icesword_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		hash = "0447352827e61696304a8e3d34e1d270"
 		hash = "f49cfcda0abdefa385eda7ec7e7a5411"
 		hash = "e1518388375ba772ed20503ec6dc6c8a"
@@ -678,8 +678,8 @@ rule SEKOIA_Webshell_Wso_Webshell_Strings {
 		date = "2022-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/de548d649241062f22c143496dc0ce4cf043cf97/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a89e17a1c6580e917950e3ead768322d8466f020/LICENSE.md"
 		logic_hash = "4d6966a34dc8e7390913857144da106affea14668d1c2c11a05be62a6e625c8f"
 		score = 75
 		quality = 80
@@ -942,7 +942,7 @@ rule SIGNATURE_BASE_FE_APT_Webshell_PL_PULSECHECK_1 {
 		hash = "a1dcdf62aafc36dd8cf64774dea80d79fb4e24ba2a82adf4d944d9186acd1cc1"
 		logic_hash = "aba457dd33232ef37ca145c5b7cd9c5fe809730339a55c5e90ac46b4a136f6cb"
 		score = 75
-		quality = 35
+		quality = 60
 		tags = ""
 
 	strings:
@@ -4672,7 +4672,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Compiled_Sharepoint_Drop_CVE_2025_53770_Jul25_
 		hash = "7e9b77da1f51d03ee2f96bc976f6aeb781f801cf633862a4b8c356cbb555927d"
 		logic_hash = "df11e5bd293cf094f3a147b54ecaafbe0804d7d575fcc22f38e77ab155c7ebdc"
 		score = 75
-		quality = 58
+		quality = 83
 		tags = "CVE-2025-53770, FILE"
 
 	strings:
@@ -5243,7 +5243,7 @@ rule SIGNATURE_BASE_WEBSHELL_Compiled_Webshell_Mar2021_1 : FILE {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/b7b39a44b6bbfcd5a7078248d442b628bdd4286a/LICENSE"
 		logic_hash = "d2e5f91f7bb50984c491eb9632d3863febc986760e4d03c8255872887ce4dc4a"
 		score = 75
-		quality = 56
+		quality = 81
 		tags = "FILE"
 
 	strings:
@@ -21677,7 +21677,7 @@ rule SIGNATURE_BASE_SUSP_WEBSHELL_Cmd_Indicator_Apr25 {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/b7b39a44b6bbfcd5a7078248d442b628bdd4286a/LICENSE"
 		logic_hash = "b992786a58389749db40fc90363f00c5df374d514374afc2d6fdff4429cb1ec0"
 		score = 60
-		quality = 60
+		quality = 85
 		tags = ""
 
 	strings:
@@ -22151,6 +22151,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Base64_Encoded_Payloads : FILE {
 		hash = "e2b1dfcfaa61e92526a3a444be6c65330a8db4e692543a421e19711760f6ffe2"
 		logic_hash = "8f606dc3e1e688cca144fe769af50980b4c25fa69b08c67aca8c676a6a060010"
 		score = 75
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22500,6 +22501,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Encoded_Mixed_Dec_And_Hex : FILE {
 		hash = "0ff05e6695074f98b0dee6200697a997c509a652f746d2c1c92c0b0a0552ca47"
 		logic_hash = "d9b4d224d43915cf08050c173627b314c3e41a30ecfffe28038281eadc114e51"
 		score = 75
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22602,7 +22604,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Str_Replace : FILE {
 		hash = "e1a2af3477d62a58f9e6431f5a4a123fb897ea80"
 		logic_hash = "74fb86a7ee7342ede9f49ef004a92fb7bdf06ca62f8e8f0ea1c6adcff96bcb2d"
 		score = 75
-		quality = 21
+		quality = 46
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22691,7 +22693,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Gzinflated : FILE {
 		hash = "07eb6634f28549ebf26583e8b154c6a579b8a733"
 		logic_hash = "d2edb7050c986a00889fd01b709ec0aa1409ce2e40a15b7942562d12596b190e"
 		score = 75
-		quality = 7
+		quality = 32
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22950,7 +22952,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Eval : FILE {
 		hash = "b51a6d208ec3a44a67cce16dcc1e93cdb06fe150acf16222815333ddf52d4db8"
 		logic_hash = "a7e9632c495e5d4cc883e2593c8ebe41cdf6a18b54bd6dfd3aec85352f19321c"
 		score = 75
-		quality = 21
+		quality = 46
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22988,7 +22990,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Tiny : FILE {
 		hash = "b3b0274cda28292813096a5a7a3f5f77378b8905205bda7bb7e1a679a7845004"
 		logic_hash = "e1efb6384009def30d845650fd0dd77319c3c7b4402cca074ca5c2a06372ab58"
 		score = 75
-		quality = 17
+		quality = 42
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23396,6 +23398,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_By_String_Known_Webshell : FILE {
 		hash = "d52128bcfff5e9a121eab3d76382420c3eebbdb33cd0879fbef7c3426e819695"
 		logic_hash = "8909bf77b7bacdae092fd7a94099224bf1660a6d341e113412e93f864298851b"
 		score = 70
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23490,7 +23493,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Strings_SUSP : FILE {
 		hash = "1ab3ae4d613b120f9681f6aa8933d66fa38e4886"
 		logic_hash = "5c3837ab761ee2209fab5fc333b050a56d80addb03b088ae28040c7393429bb3"
 		score = 50
-		quality = 15
+		quality = 40
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23878,6 +23881,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Generic_Eval_On_Input : FILE {
 		hash = "069ea990d32fc980939fffdf1aed77384bf7806bc57c0a7faaff33bd1a3447f6"
 		logic_hash = "f7b9f43cf2fd6d08b7438f003242e9a19dcea282959c7a1fdff3a35e261a031e"
 		score = 75
+		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -24794,6 +24798,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Runtime_Compile : FILE {
 		hash = "8ce4eaf111c66c2e6c08a271d849204832713f8b66aceb5dadc293b818ccca9e"
 		logic_hash = "6699a44e396eedebb3bafa0e89c3b6d080586a158ed056ec7220bdf2ad764444"
 		score = 75
+		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25027,7 +25032,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Regeorg : FILE {
 		hash = "9108a33058aa9a2fb6118b719c5b1318f33f0989"
 		logic_hash = "9d4c60a4daaadf6cefe8bf1d84b1e4af491cd23136332db4a022715b265c8f4e"
 		score = 75
-		quality = 25
+		quality = 50
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25067,7 +25072,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_HTTP_Proxy : FILE {
 		hash = "2f9b647660923c5262636a5344e2665512a947a4"
 		logic_hash = "7183902d43fc633db06a41b4a6bc02d2eb5662b7ee08080b57563783b8b67568"
 		score = 75
-		quality = 25
+		quality = 50
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25108,7 +25113,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Writer_Nano : FILE {
 		hash = "5e241d9d3a045d3ade7b6ff6af6c57b149fa356e"
 		logic_hash = "44c11570c610b849ba9c7506fd9ef3575d270e79d7aaf5c26d54ab3f64cfc94f"
 		score = 75
-		quality = 23
+		quality = 48
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25158,7 +25163,7 @@ rule SIGNATURE_BASE_EXT_WEBSHELL_JSP_Generic_Tiny : FILE {
 		hash = "1aa6af726137bf261849c05d18d0a630d95530588832aadd5101af28acc034b5"
 		logic_hash = "a6bf86961bc07b312fc24362d70d22ce826a2e918e1e0e8679bd415783d8500a"
 		score = 75
-		quality = 23
+		quality = 48
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25268,7 +25273,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Base64 : FILE {
 		hash = "1b916afdd415dfa4e77cecf47321fd676ba2184d"
 		logic_hash = "1787b7c6e587e1745930faaac5d28338a86baf6abc19be7c0ffe875029ff6ca1"
 		score = 75
-		quality = 23
+		quality = 48
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25357,6 +25362,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Reflection : FILE {
 		hash = "bf0ff88cbb72c719a291c722ae3115b91748d5c4920afe7a00a0d921d562e188"
 		logic_hash = "386aeb3745c5dd815f00bbc941450a2c3f1ddfc2956c67ecd5bee9318b1756ef"
 		score = 75
+		quality = 0
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25448,7 +25454,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Encoded_Shell : FILE {
 		hash = "62e6c6065b5ca45819c1fc049518c81d7d165744"
 		logic_hash = "74f45478e5bd7bb300e4ec493c2d3ef9a26340a141c3512a722618b3a3731500"
 		score = 75
-		quality = 58
+		quality = 83
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25479,6 +25485,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Netspy : FILE {
 		hash = "3870b31f26975a7cb424eab6521fc9bffc2af580"
 		logic_hash = "65432e42ad2626b62b1d1a6298c301513c2fb03d89193a77b053069cebcb45e9"
 		score = 75
+		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25534,6 +25541,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_By_String : FILE {
 		hash = "850f998753fde301d7c688b4eca784a045130039512cf51292fcb678187c560b"
 		logic_hash = "ab8d8df32ab745d8dd02d63d89264df2fbc0087daf6b4f91900ad03ab6e7949e"
 		score = 75
+		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25594,7 +25602,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Input_Upload_Write : FILE {
 		hash = "19eca79163259d80375ebebbc440b9545163e6a3"
 		logic_hash = "33b08a6118134819ec72a2eab0daf723c25c8869e0fa8a83f690b93e2667d15c"
 		score = 75
-		quality = 21
+		quality = 46
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
