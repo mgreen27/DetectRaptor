@@ -1,5 +1,484 @@
 import "math"
 import "pe"
+rule ARKBIRD_SOLG_APT_UNC2452_Webshell_Chopper_Mar_2021_1 : FILE {
+    meta:
+		description = "Detect exploit listener in the exchange configuration for Webshell Chopper used by UNC2452 group"
+		author = "Arkbird_SOLG"
+		id = "174af8e1-0df0-5ad7-ac7d-a208f64cb765"
+		date = "2021-03-07"
+		modified = "2021-03-07"
+		reference = "Internal Research"
+		source_url = "https://github.com/StrangerealIntel/DailyIOC/blob/a873ff1298c43705e9c67286f3014f4300dd04f7/2021-03-07/UNC2452/APT_UNC2452_Webshell_Chopper_Mar_2021_1.yar#L1-L26"
+		license_url = "N/A"
+		logic_hash = "77bd7e5c10aa9cf2b407b37a76954b4eed163e36653e1fb3cde5de853f824cf0"
+		score = 75
+		quality = 73
+		tags = "FILE"
+
+	strings:
+		$l1 = { 20 68 74 74 70 3a 2f 2f ?? 2f 3c 73 63 72 69 70 74 20 4c 61 6e 67 75 61 67 65 3d 22 63 23 22 20 72 75 6e 61 74 3d 22 73 65 72 76 65 72 22 3e 76 6f 69 64 20 50 61 67 65 5f 4c 6f 61 64 28 6f 62 6a 65 63 74 20 73 65 6e 64 65 72 2c 20 45 76 65 6e 74 41 72 67 73 20 65 29 7b 69 66 20 28 52 65 71 75 65 73 74 2e 46 69 6c 65 73 2e 43 6f 75 6e 74 21 3d 30 29 20 7b 20 52 65 71 75 65 73 74 2e 46 69 6c 65 73 5b 30 5d 2e 53 61 76 65 41 73 28 53 65 72 76 65 72 2e 4d 61 70 50 61 74 68 28 22 [5-14] 22 29 29 3b 7d 7d 3c 2f 73 63 72 69 70 74 3e }
+		$l2 = { 68 74 74 70 3a 2f 2f ?? 2f 73 63 72 69 70 74 20 6c 61 6e 67 75 61 67 65 3d 22 4a 53 63 72 69 70 74 22 20 72 75 6e 61 74 3d 22 73 65 72 76 65 72 22 3e 66 75 6e 63 74 69 6f 6e 20 50 61 67 65 5f 4c 6f 61 64 28 29 7b 65 76 61 6c 28 [-] 2c 22 75 6e 73 61 66 65 22 29 3b 7d 3c 2f 73 63 72 69 70 74 3e }
+		$c1 = { 5c 4f 41 42 20 28 44 65 66 61 75 6c 74 20 57 65 62 20 53 69 74 65 29 }
+		$c2 = "ExternalUrl" fullword ascii
+		$c3 = { 49 49 53 3a 2f 2f [10-30] 2f 57 33 53 56 43 2f [1-3] 2f 52 4f 4f 54 2f 4f 41 42 }
+		$c4 = "FrontEnd\\HttpProxy\\OAB" fullword ascii
+		$c5 = "/Configuration/Schema/ms-Exch-OAB-Virtual-Directory" fullword ascii
+
+	condition:
+		filesize > 1KB and 1 of ( $l* ) and 3 of ( $c* )
+}
+rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
+    meta:
+		description = "Detect the UPSTYLE webshell."
+		author = "threatintel@volexity.com"
+		id = "45726f35-8b3e-5095-b145-9e7f6da6838b"
+		date = "2024-04-11"
+		modified = "2024-04-12"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
+		score = 75
+		quality = 80
+		tags = "UTA0218, FILE, MEMORY"
+		hash1 = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
+		hash2 = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
+		hash3 = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10429
+		version = 2
+
+	strings:
+		$stage1_str1 = "/opt/pancfg/mgmt/licenses/PA_VM"
+		$stage1_str2 = "exec(base64."
+		$stage2_str1 = "signal.signal(signal.SIGTERM,stop)"
+		$stage2_str2 = "exec(base64."
+		$stage3_str1 = "write(\"/*\"+output+\"*/\")"
+		$stage3_str2 = "SHELL_PATTERN"
+
+	condition:
+		all of ( $stage1* ) or all of ( $stage2* ) or all of ( $stage3* )
+}
+rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
+    meta:
+		description = "Detection for the COMPLYSHELL webshell."
+		author = "threatintel@volexity.com"
+		id = "6b44b5bc-a75f-573c-b9c3-562b7874e408"
+		date = "2023-12-13"
+		modified = "2024-01-12"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
+		score = 75
+		quality = 80
+		tags = "UTA0178, FILE, MEMORY"
+		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 9995
+		version = 4
+
+	strings:
+		$s = "eval{my $c=Crypt::RC4->new("
+
+	condition:
+		$s
+}
+rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
+    meta:
+		description = "Detection for a custom webshell seen on Exchange server. The webshell contains two functions, the first is to act as a Tunnel, using code borrowed from reGeorg, the second is custom code to execute arbitrary .NET code."
+		author = "threatintel@volexity.com"
+		id = "2f07748a-a52f-5ac7-9d3e-50fd3ecea271"
+		date = "2023-12-12"
+		modified = "2024-09-30"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L26-L52"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
+		score = 75
+		quality = 30
+		tags = "UTA0178, FILE, MEMORY"
+		hash1 = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 9994
+		version = 6
+
+	strings:
+		$s1 = "=Convert.FromBase64String(System.Text.Encoding.Default.GetString(" ascii
+		$re = /Assembly\.Load\(errors\)\.CreateInstance\("[a-z0-9A-Z]{4,12}"\).GetHashCode\(\);/
+
+	condition:
+		for any i in ( 0 .. math.min ( #s1 , 100 ) ) : ( $re in ( @s1 [ i ] .. @s1 [ i ] + 512 ) )
+}
+rule VOLEXITY_Webshell_Aspx_Regeorg : FILE MEMORY {
+    meta:
+		description = "Detects the reGeorg webshell based on common strings in the webshell. May also detect other webshells which borrow code from ReGeorg."
+		author = "threatintel@volexity.com"
+		id = "02365a30-769e-5c47-8d36-a79608ffd121"
+		date = "2018-08-29"
+		modified = "2024-01-09"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L53-L86"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		hash = "9d901f1a494ffa98d967ee6ee30a46402c12a807ce425d5f51252eb69941d988"
+		logic_hash = "4fed023e85a32052917f6db1e2e155c91586538938c03acc59f200a8264888ca"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 410
+		version = 7
+
+	strings:
+		$a1 = "every office needs a tool like Georg" ascii
+		$a2 = "cmd = Request.QueryString.Get(\"cmd\")" ascii
+		$a3 = "exKak.Message" ascii
+		$proxy1 = "if (rkey != \"Content-Length\" && rkey != \"Transfer-Encoding\")"
+		$proxy_b1 = "StreamReader repBody = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(\"UTF-8\"));" ascii
+		$proxy_b2 = "string rbody = repBody.ReadToEnd();" ascii
+		$proxy_b3 = "Response.AddHeader(\"Content-Length\", rbody.Length.ToString());" ascii
+
+	condition:
+		any of ( $a* ) or $proxy1 or all of ( $proxy_b* )
+}
+rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
+    meta:
+		description = "Detects the JSP implementation of the Godzilla Webshell."
+		author = "threatintel@volexity.com"
+		id = "47c8eab8-84d7-5566-b757-5a6dcc7579b7"
+		date = "2021-11-08"
+		modified = "2024-07-30"
+		reference = "https://unit42.paloaltonetworks.com/manageengine-godzilla-nglite-kdcsponge/"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L1-L34"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
+		score = 75
+		quality = 55
+		tags = "FILE, MEMORY"
+		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
+		os = "win,linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6100
+		version = 6
+
+	strings:
+		$s1 = ".getWriter().write(base64Encode(" wide ascii
+		$s2 = ".getAttribute(" ascii wide
+		$s3 = "java.security.MessageDigest" ascii wide
+		$auth1 = /String xc=\"[a-f0-9]{16}\"/ ascii wide
+		$auth2 = "String pass=\"" ascii wide
+		$magic = "class X extends ClassLoader{public X(ClassLoader z){super(z);}public Class Q"
+		$magic2 = "<%@page import=\"java.util.*,javax.crypto.*,javax.crypto.spec.*\"%><%!class"
+
+	condition:
+		all of ( $s* ) or all of ( $auth* ) or any of ( $magic* )
+}
+rule VOLEXITY_Susp_Jsp_General_Runtime_Exec_Req : FILE MEMORY {
+    meta:
+		description = "Looks for a common design pattern in webshells where a request attribute is passed as an argument to exec()."
+		author = "threatintel@volexity.com"
+		id = "7f1539bd-a2f0-50dd-b500-ada4e0971d13"
+		date = "2022-02-02"
+		modified = "2024-07-30"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L35-L56"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "d3048aba80c1c39f1673931cd2d7c5ed83045603b0ad204073fd788d0103a6c8"
+		score = 65
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "4935f0c50057e28efa7376c734a4c66018f8d20157b6584399146b6c79a6de15"
+		os = "win,linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6450
+		version = 3
+
+	strings:
+		$s1 = "Runtime.getRuntime().exec(request." ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Webshell_Jsp_Regeorg : FILE MEMORY {
+    meta:
+		description = "Detects the reGeorg webshells' JSP version."
+		author = "threatintel@volexity.com"
+		id = "205ee383-4298-5469-a509-4ce3eaf9dd0e"
+		date = "2022-03-08"
+		modified = "2024-09-20"
+		reference = "https://github.com/SecWiki/WebShell-2/blob/master/reGeorg-master/tunnel.jsp"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L57-L86"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "cecb71605d9112d509823c26e40e1cf9cd6db581db448db5c9ffc63a2bfe529e"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "f9b20324f4239a8c82042d8207e35776d6777b6305974964cd9ccc09d431b845"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6575
+		version = 5
+
+	strings:
+		$magic = "socketChannel.connect(new InetSocketAddress(target, port))" ascii
+		$a1 = ".connect(new InetSocketAddress" ascii
+		$a2 = ".configureBlocking(false)" ascii
+		$a3 = ".setHeader(" ascii
+		$a4 = ".getHeader(" ascii
+		$a5 = ".flip();" ascii
+
+	condition:
+		$magic or all of ( $a* )
+}
+rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
+    meta:
+		description = "Detects CONVERGE - a file upload webshell observed in incident involving compromise of Confluence server via CVE-2022-26134."
+		author = "threatintel@volexity.com"
+		id = "2a74678e-cb00-567c-a2e0-2e095f3e5ee8"
+		date = "2022-06-01"
+		modified = "2024-09-20"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY, CVE-2022-26134"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6788
+		version = 5
+
+	strings:
+		$s1 = "if (request.getParameter(\"name\")!=null && request.getParameter(\"name\").length()!=0){" ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
+    meta:
+		description = "Detects the RealCMD webshell, one of the payloads for BEHINDER."
+		author = "threatintel@volexity.com"
+		id = "60b30ccc-bcfa-51e6-a3f5-88037d19213e"
+		date = "2022-06-01"
+		modified = "2024-07-30"
+		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6786
+		version = 4
+
+	strings:
+		$fn1 = "runCmd" wide ascii fullword
+		$fn2 = "RealCMD" ascii wide fullword
+		$fn3 = "buildJson" ascii wide fullword
+
+	condition:
+		all of ( $fn* )
+}
+rule VOLEXITY_Webshell_Java_Behinder_Shellservice : FILE MEMORY {
+    meta:
+		description = "Looks for artifacts generated (generally seen in .class files) related to the Behinder webshell."
+		author = "threatintel@volexity.com"
+		id = "21c1e3e9-d048-5c60-9c21-8e54b27f359a"
+		date = "2022-03-18"
+		modified = "2024-07-30"
+		reference = "https://github.com/MountCloud/BehinderClientSource/blob/master/src/main/java/net/rebeyond/behinder/core/ShellService.java"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L1-L29"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "373a8d4ef81e9bbbf1f24ebf0389e7da4b73f88786cc8e1d286ccc9f4c36debc"
+		score = 75
+		quality = 30
+		tags = "FILE, MEMORY"
+		hash1 = "9a9882f9082a506ed0fc4ddaedd50570c5762deadcaf789ac81ecdbb8cf6eff2"
+		os = "win,linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6615
+		version = 3
+
+	strings:
+		$s1 = "CONNECT" ascii fullword
+		$s2 = "DISCONNECT" ascii fullword
+		$s3 = "socket_" ascii fullword
+		$s4 = "targetIP" ascii fullword
+		$s5 = "targetPort" ascii fullword
+		$s6 = "socketHash" ascii fullword
+		$s7 = "extraData" ascii fullword
+
+	condition:
+		all of them
+}
+rule VOLEXITY_Susp_Php_Call_User_Func : FILE {
+    meta:
+		description = "Webshells using call_user_func() function against an object from a file input or POST variable."
+		author = "threatintel@volexity.com"
+		id = "48c7857e-7dda-5e3f-b82c-7d34c251f083"
+		date = "2021-06-16"
+		modified = "2024-07-30"
+		reference = "https://zhuanlan.zhihu.com/p/354906657"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L183-L205"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "46c999da97682023861e58f9cd2c8651480db990a0361c1985c6d5c35b5bf0ea"
+		score = 65
+		quality = 80
+		tags = "FILE"
+		hash1 = "40b053a2f3c8f47d252b960a9807b030b463ef793228b1670eda89f07b55b252"
+		os = "win,linux"
+		os_arch = "all"
+		scan_context = "file"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 5582
+		version = 4
+
+	strings:
+		$s1 = "@call_user_func(new C()" wide ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Webshell_Aspx_Regeorgtunnel : FILE MEMORY {
+    meta:
+		description = "A variation of the reGeorgtunnel open-source webshell."
+		author = "threatintel@volexity.com"
+		id = "b8aa27c9-a28a-5051-8f81-1184f28842ed"
+		date = "2021-03-02"
+		modified = "2024-10-18"
+		reference = "https://github.com/sensepost/reGeorg/blob/master/tunnel.aspx"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L26-L56"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		hash = "406b680edc9a1bb0e2c7c451c56904857848b5f15570401450b73b232ff38928"
+		logic_hash = "ea3d0532cb609682922469e8272dc8061efca3b3ae27df738ef2646e30404c6f"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 4979
+		version = 4
+
+	strings:
+		$s1 = "System.Net.Sockets"
+		$s2 = "System.Text.Encoding.Default.GetString(Convert.FromBase64String(StrTr(Request.Headers.Get"
+		$t1 = ".Split('|')"
+		$t2 = "Request.Headers.Get"
+		$t3 = ".Substring("
+		$t4 = "new Socket("
+		$t5 = "IPAddress ip;"
+
+	condition:
+		all of ( $s* ) or all of ( $t* )
+}
+rule VOLEXITY_Apt_Webshell_Aspx_Sportsball : FILE MEMORY {
+    meta:
+		description = "The SPORTSBALL webshell, observed in targeted Microsoft Exchange attacks in 2021. SPORTSBALL was later discovered to be a variant of HYPERSHELL, a publicly available webshell."
+		author = "threatintel@volexity.com"
+		id = "25b23a4c-8fc7-5d6f-b4b5-46fe2c1546d8"
+		date = "2021-03-01"
+		modified = "2025-07-24"
+		reference = "https://github.com/misterch0c/APT34/blob/e62f3d14ec78bea5c98d3c895162ca1e47676c18/Webshells_and_Panel/HyperShell/HyperShell/Shell/simple.aspx"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L57-L89"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		hash = "2fa06333188795110bba14a482020699a96f76fb1ceb80cbfa2df9d3008b5b0a"
+		logic_hash = "5ec5e52922e97a3080d397b69b2f42f09daa995271e218ea085fa2ec4e3abad2"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 4968
+		version = 6
+
+	strings:
+		$uniq1 = "HttpCookie newcook = new HttpCookie(\"fqrspt\", HttpContext.Current.Request.Form"
+		$uniq2 = "ZN2aDAB4rXsszEvCLrzgcvQ4oi5J1TuiRULlQbYwldE="
+		$s1 = "Result.InnerText = string.Empty;"
+		$s2 = "newcook.Expires = DateTime.Now.AddDays("
+		$s3 = "System.Diagnostics.Process process = new System.Diagnostics.Process();"
+		$s4 = "process.StandardInput.WriteLine(HttpContext.Current.Request.Form[\""
+		$s5 = "else if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form[\""
+		$s6 = "<input type=\"submit\" value=\"Upload\" />"
+
+	condition:
+		any of ( $uniq* ) or all of ( $s* )
+}
+rule VOLEXITY_Malware_Win_Iis_Shellsave : WHEELEDASH FILE MEMORY {
+    meta:
+		description = "Detects an AutoIT backdoor designed to run on IIS servers and to install a webshell."
+		author = "threatintel@volexity.com"
+		id = "a89defa5-4b22-5650-a0c0-f4b3cf3377a7"
+		date = "2021-11-17"
+		modified = "2023-08-17"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-12-06 - XEGroup/indicators/yara.yar#L27-L49"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "f34d6f4ecaa4cde5965f6b0deac55c7133a2be96f5c466f34775be6e7f730493"
+		score = 75
+		quality = 80
+		tags = "WHEELEDASH, FILE, MEMORY"
+		hash1 = "21683e02e11c166d0cf616ff9a1a4405598db7f4adfc87b205082ae94f83c742"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6146
+		version = 4
+
+	strings:
+		$s1 = "getdownloadshell" ascii
+		$s2 = "deleteisme" ascii
+		$s3 = "sitepapplication" ascii
+		$s4 = "getapplicationpool" ascii
+
+	condition:
+		all of them
+}
 rule SEKOIA_Weevely_Webshell_Payload : FILE {
     meta:
 		description = "Detects weevely webshell"
@@ -219,6 +698,53 @@ rule SEKOIA_Webshell_Wso_Webshell_Strings {
 	condition:
 		3 of them
 }
+rule SYNACKTIV_SYNACKTIV_WEBSHELL_ASPX_Suo5_May25 : WEBSHELL COMMODITY FILE {
+    meta:
+		description = "Detects the .NET version of the suo5 webshell"
+		author = "Synacktiv, Maxence Fossat [@cybiosity]"
+		id = "d30a7232-f00b-45ab-9419-f43b1611445a"
+		date = "2025-05-12"
+		modified = "2025-05-12"
+		reference = "https://www.synacktiv.com/en/publications/open-source-toolset-of-an-ivanti-csa-attacker"
+		source_url = "https://github.com/synacktiv/synacktiv-rules/blob/d234cc4da0783db7dca56ae8dd5252afdc248df8/2025/offensive_tools/webshell_aspx_suo5.yar#L1-L46"
+		license_url = "https://github.com/synacktiv/synacktiv-rules/blob/d234cc4da0783db7dca56ae8dd5252afdc248df8/LICENSE.md"
+		hash = "06710575d20cacd123f83eb82994879367e07f267e821873bf93f4db6312a97b"
+		hash = "e6979d7df0876679fc2481aa68fcec5b6ddc82d854f63da2bddb674064384f9a"
+		hash = "3bbbef1b4ead98c61fba60dd6291fe1ff08f5eac54d820e47c38d348e4a7b1ec"
+		hash = "345c383dd439eb523b01e1087a0866e13f04ff53bb8cc11f3c70b4a382f10c7e"
+		hash = "838840dd76ff34cee45996fdc9a87856c9a0f14138e65cb9eb6603ed157d1515"
+		hash = "d9657ac8dd562bdd39e8fcc1fff37ddced10f7f3f118d9cd4da6118a223dcc45"
+		logic_hash = "68dc29b2cedc26e638eaa12bf2a2d0415de323097baf5ea61dba52bd20b5beee"
+		score = 75
+		quality = 80
+		tags = "WEBSHELL, COMMODITY, FILE"
+		license = "DRL-1.1"
+		tlp = "TLP:CLEAR"
+		pap = "PAP:CLEAR"
+
+	strings:
+		$user_agent = ".Equals(\"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.1.2.3\")" ascii
+		$header = "Response.AddHeader(\"X-Accel-Buffering\", \"no\")" ascii
+		$xor = /= \(byte\)\(\w{1,1023}\[\w{1,1023}\] \^ \w{1,1023}\);/
+		$s1 = "Request.Headers.Get(\"User-Agent\")" ascii
+		$s2 = "if (Request.ContentType.Equals(\"application/plain\"))" ascii
+		$s3 = "Response.ContentType = \"application/octet-stream\";" ascii
+		$s4 = "= Request.BinaryRead(Request.ContentLength);" ascii
+		$s5 = "= Response.OutputStream;" ascii
+		$s6 = "new TcpClient()" ascii
+		$s7 = ".BeginConnect(" ascii
+		$s8 = ".GetStream().Write(" ascii
+		$s9 = "new BinaryWriter(" ascii
+		$s10 = "new BinaryReader(" ascii
+		$s11 = ".ReadBytes(4)" ascii
+		$s12 = "BitConverter.GetBytes((Int32)" ascii
+		$s13 = "BitConverter.ToInt32(" ascii
+		$s14 = "Array.Reverse(" ascii
+		$s15 = "new Random().NextBytes(" ascii
+
+	condition:
+		filesize < 100KB and ( $user_agent or ( ( $header or $xor ) and 8 of ( $s* ) ) or 12 of ( $s* ) )
+}
 rule SIGNATURE_BASE_WEBSHELL_G_APT_Backdoorwebshell_SLAYSTYLE_1 : FILE {
     meta:
 		description = "Detects webshell used by APT group UNC5221 (China Nexus)"
@@ -364,7 +890,7 @@ rule SIGNATURE_BASE_FE_Webshell_PL_ATRIUM_1 {
 		hash = "ca0175d86049fa7c796ea06b413857a3"
 		logic_hash = "869b397616495c644beb997602eac84ddcdbacce4c14755c555f5bda36663ca2"
 		score = 75
-		quality = 60
+		quality = 35
 		tags = ""
 
 	strings:
@@ -4676,63 +5202,6 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Simpleseesharp : WEBSHELL UNCLASSIFIED FILE {
 
 	condition:
 		$header at 0 and $body and filesize < 1KB
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Regeorgtunnel : WEBSHELL COMMODITY {
-    meta:
-		description = "variation on reGeorgtunnel"
-		author = "threatintel@volexity.com"
-		id = "b8aa27c9-a28a-5051-8f81-1184f28842ed"
-		date = "2021-03-01"
-		modified = "2023-12-05"
-		reference = "https://github.com/sensepost/reGeorg/blob/master/tunnel.aspx"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_hafnium.yar#L138-L157"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
-		hash = "406b680edc9a1bb0e2c7c451c56904857848b5f15570401450b73b232ff38928"
-		logic_hash = "ea3d0532cb609682922469e8272dc8061efca3b3ae27df738ef2646e30404c6f"
-		score = 75
-		quality = 85
-		tags = "WEBSHELL, COMMODITY"
-
-	strings:
-		$s1 = "System.Net.Sockets"
-		$s2 = "System.Text.Encoding.Default.GetString(Convert.FromBase64String(StrTr(Request.Headers.Get"
-		$t1 = ".Split('|')"
-		$t2 = "Request.Headers.Get"
-		$t3 = ".Substring("
-		$t4 = "new Socket("
-		$t5 = "IPAddress ip;"
-
-	condition:
-		all of ( $s* ) or all of ( $t* )
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Sportsball {
-    meta:
-		description = "The SPORTSBALL webshell allows attackers to upload files or execute commands on the system."
-		author = "threatintel@volexity.com"
-		id = "25b23a4c-8fc7-5d6f-b4b5-46fe2c1546d8"
-		date = "2021-03-01"
-		modified = "2023-12-05"
-		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_hafnium.yar#L159-L180"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
-		hash = "2fa06333188795110bba14a482020699a96f76fb1ceb80cbfa2df9d3008b5b0a"
-		logic_hash = "5ec5e52922e97a3080d397b69b2f42f09daa995271e218ea085fa2ec4e3abad2"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$uniq1 = "HttpCookie newcook = new HttpCookie(\"fqrspt\", HttpContext.Current.Request.Form"
-		$uniq2 = "ZN2aDAB4rXsszEvCLrzgcvQ4oi5J1TuiRULlQbYwldE="
-		$var1 = "Result.InnerText = string.Empty;"
-		$var2 = "newcook.Expires = DateTime.Now.AddDays("
-		$var3 = "System.Diagnostics.Process process = new System.Diagnostics.Process();"
-		$var4 = "process.StandardInput.WriteLine(HttpContext.Current.Request.Form[\""
-		$var5 = "else if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form[\""
-		$var6 = "<input type=\"submit\" value=\"Upload\" />"
-
-	condition:
-		any of ( $uniq* ) or all of ( $var* )
 }
 rule SIGNATURE_BASE_WEBSHELL_CVE_2021_27065_Webshells : CVE_2021_27065 FILE {
     meta:
@@ -21208,7 +21677,7 @@ rule SIGNATURE_BASE_SUSP_WEBSHELL_Cmd_Indicator_Apr25 {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
 		logic_hash = "b992786a58389749db40fc90363f00c5df374d514374afc2d6fdff4429cb1ec0"
 		score = 60
-		quality = 60
+		quality = 35
 		tags = ""
 
 	strings:
@@ -21682,7 +22151,6 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Base64_Encoded_Payloads : FILE {
 		hash = "e2b1dfcfaa61e92526a3a444be6c65330a8db4e692543a421e19711760f6ffe2"
 		logic_hash = "8f606dc3e1e688cca144fe769af50980b4c25fa69b08c67aca8c676a6a060010"
 		score = 75
-		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22134,7 +22602,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Str_Replace : FILE {
 		hash = "e1a2af3477d62a58f9e6431f5a4a123fb897ea80"
 		logic_hash = "74fb86a7ee7342ede9f49ef004a92fb7bdf06ca62f8e8f0ea1c6adcff96bcb2d"
 		score = 75
-		quality = 46
+		quality = 21
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22174,7 +22642,6 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Fopo : FILE {
 		hash = "a698441f817a9a72908a0d93a34133469f33a7b34972af3e351bdccae0737d99"
 		logic_hash = "076c0c256e5951cdcb2b7bc55030f55bec48c1bea953b8bd85559a3230e387ae"
 		score = 75
-		quality = 15
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23022,6 +23489,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Strings_SUSP : FILE {
 		hash = "1ab3ae4d613b120f9681f6aa8933d66fa38e4886"
 		logic_hash = "5c3837ab761ee2209fab5fc333b050a56d80addb03b088ae28040c7393429bb3"
 		score = 50
+		quality = 15
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -24325,7 +24793,6 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Runtime_Compile : FILE {
 		hash = "8ce4eaf111c66c2e6c08a271d849204832713f8b66aceb5dadc293b818ccca9e"
 		logic_hash = "6699a44e396eedebb3bafa0e89c3b6d080586a158ed056ec7220bdf2ad764444"
 		score = 75
-		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -24599,7 +25066,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_HTTP_Proxy : FILE {
 		hash = "2f9b647660923c5262636a5344e2665512a947a4"
 		logic_hash = "7183902d43fc633db06a41b4a6bc02d2eb5662b7ee08080b57563783b8b67568"
 		score = 75
-		quality = 50
+		quality = 25
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
