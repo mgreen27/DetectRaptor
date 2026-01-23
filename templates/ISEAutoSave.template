@@ -1,4 +1,4 @@
-name: Windows.Detection.Powershell.ISEAutoSave
+name: DetectRaptor.Windows.Detection.Powershell.ISEAutoSave
 author: Matt Green - @mgreen27
 description: |
    Bulk indicator hunt over Powershell ISEAutoSave files.

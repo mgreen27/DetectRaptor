@@ -1,4 +1,4 @@
-name: Windows.Detection.HijackLibsMFT
+name: DetectRaptor.Windows.Detection.HijackLibsMFT
 author: Matt Green - @mgreen27
 description: |
    Bulk indicator hunt over Windows.NTFS.MFT for potential hijacked dlls.

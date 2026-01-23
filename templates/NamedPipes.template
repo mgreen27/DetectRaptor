@@ -1,4 +1,4 @@
-name: Windows.Detection.NamedPipes
+name: DetectRaptor.Windows.Detection.NamedPipes
 author: Matt Green - @mgreen27
 description: |
    Bulk indicator hunt over NamedPipes in velociraptor. The 

@@ -1,4 +1,4 @@
-name: Windows.Detection.Applications
+name: DetectRaptor.Windows.Detection.Applications
 author: Matt Green - @mgreen27
 description: |
    Bulk indicator hunt over Windows.Sys.Programs.

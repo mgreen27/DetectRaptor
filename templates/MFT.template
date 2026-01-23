@@ -1,4 +1,4 @@
-name: Windows.Detection.MFT
+name: DetectRaptor.Windows.Detection.MFT
 author: Matt Green - @mgreen27
 description: |
    Bulk indicator hunt over Windows.NTFS.MFT.
