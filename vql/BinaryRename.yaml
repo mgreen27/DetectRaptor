@@ -1,4 +1,4 @@
-name: Windows.Detection.BinaryRename
+name: DetectRaptor.Windows.Detection.BinaryRename
 author: "Matt Green - @mgreen27"
 description: |
     This artifact will detect renamed binaries commonly abused by adversaries.

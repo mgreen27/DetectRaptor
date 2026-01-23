@@ -1,4 +1,4 @@
-name: Windows.Detection.Webhistory
+name: DetectRaptor.Windows.Detection.Webhistory
 author: Matt Green - @mgreen27, special thanks to JLockwood and @anrgy-bender for sqlite queries
 description: |
    Bulk indicator hunt over Velociraptor Webhistory artifacts.

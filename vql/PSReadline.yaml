@@ -1,4 +1,4 @@
-name: Windows.Detection.Powershell.PSReadline
+name: DetectRaptor.Windows.Detection.Powershell.PSReadline
 author: Zach Stanford - @svch0st, Matt Green -@mgreen27
 description: |
    Bulk indicator hunt over Windows.System.Powershell.PSReadline

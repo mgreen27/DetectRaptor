@@ -1,4 +1,4 @@
-name: Windows.Detection.Amcache
+name: DetectRaptor.Windows.Detection.Amcache
 author: Zach Stanford - @svch0st
 description: |
    Bulk indicator hunt over Amcache

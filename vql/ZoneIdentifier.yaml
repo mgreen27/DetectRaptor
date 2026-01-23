@@ -1,4 +1,4 @@
-name: Windows.Detection.ZoneIdentifier
+name: DetectRaptor.Windows.Detection.ZoneIdentifier
 author: Matt Green - @mgreen27
 description: |
    Bulk indicator hunt over Windows.NTFS.ADSHunter checking for files with 
