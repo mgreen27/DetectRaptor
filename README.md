@@ -16,30 +16,34 @@ This should import the "Import DetectRaptor" artifact.
 ![image](https://github.com/user-attachments/assets/d75ade94-455d-40a1-94be-ea45b8e0fa30)
 
 
-
-
 Current artifacts include:
-- Windows.Detection.Amcache
-- Windows.Detection.Applications
-- Windows.Detection.BinaryRename
-- Windows.Detection.Bootloaders
-- Windows.Detection.Evtx
-- Windows.Detection.HijackLibsEnv
-- Windows.Detection.HijackLibsMFT
-- Windows.Detection.LolDriversMalicious
-- Windows.Detection.LolDriversVulnerable
-- Windows.Detection.LolRMM
-- Windows.Detection.MFT
-- Windows.Detection.NamedPipes
-- Windows.Detection.Powershell.ISEAutoSave
-- Windows.Detection.Powershell.PSReadline
-- Windows.Detection.Webhistory
-- Windows.Detection.ZoneIdentifier
-- Generic.Detection.WebshellYara
-- Linux.Detection.YaraProcessLinux
-- Windows.Detection.YaraProcessWin
-- Macos.Detection.YaraProcessMacos
-- Server.StartHunts
+- DetectRaptor.Windows.Detection.Amcache
+- DetectRaptor.Windows.Detection.Applications
+- DetectRaptor.Windows.Detection.BinaryRename
+- DetectRaptor.Windows.Detection.Bootloaders
+- DetectRaptor.Windows.Detection.Evtx
+- DetectRaptor.Windows.Detection.HijackLibsEnv
+- DetectRaptor.Windows.Detection.HijackLibsMFT
+- DetectRaptor.Windows.Detection.Powershell.ISEAutoSave
+- DetectRaptor.Windows.Detection.LolDriversMalicious
+- DetectRaptor.Windows.Detection.LolDriversVulnerable
+- DetectRaptor.Windows.Detection.Yara.LolDrivers
+- DetectRaptor.Windows.Detection.LolRMM
+- DetectRaptor.Windows.Detection.MFT
+- DetectRaptor.Windows.Detection.NamedPipes
+- DetectRaptor.Windows.Registry.NetworkProvider
+- DetectRaptor.Windows.Detection.Powershell.PSReadline
+- DetectRaptor.Windows.Detection.Webhistory
+- DetectRaptor.Generic.Detection.YaraFile
+- DetectRaptor.Linux.Detection.YaraProcessLinux
+- DetectRaptor.Macos.Detection.YaraProcessMacos
+- DetectRaptor.Windows.Detection.YaraProcessWin
+- DetectRaptor.Generic.Detection.YaraWebshell
+- DetectRaptor.Windows.Detection.ZoneIdentifier
+
+Server artifacts:
+- DetectRaptor.Server.StartHunts
+- DetectRaptor.Server.ManageContent
 
 Some contributing repositories:
 - https://github.com/svch0stz/velociraptor-detections
