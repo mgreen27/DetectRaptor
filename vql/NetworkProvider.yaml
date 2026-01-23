@@ -1,4 +1,4 @@
-name: Windows.Registry.NetworkProvider
+name: DetectRaptor.Windows.Registry.NetworkProvider
 author: Matt Green - @mgreen27
 description: |
     Adversaries may register malicious network provider dynamic link libraries 

@@ -1,4 +1,4 @@
-name: Windows.Detection.Yara.LolDrivers
+name: DetectRaptor.Windows.Detection.Yara.LolDrivers
 author: Matt Green - @mgreen27 - inspired by Kaizar Lehri and Blake McDermott from the artifact exchange
 description: |
   Scans system driver directories using Malware and Vulnerability yara rules 

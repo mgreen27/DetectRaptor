@@ -1,4 +1,4 @@
-name: Server.ManageContent
+name: DetectRaptor.Server.ManageContent
 author: Matt Green - @mgreen27
 description: |
    This artifact is used to manage DetectRaptor VQL content into Velociraptor. 

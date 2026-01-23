@@ -1,4 +1,4 @@
-name: Windows.Detection.YaraProcessWin
+name: DetectRaptor.Windows.Detection.YaraProcessWin
 author: Matt Green - @mgreen27
 description: |
    This artifact is a bulk yara hunt for Windows Process Yara.

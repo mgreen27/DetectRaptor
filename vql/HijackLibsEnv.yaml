@@ -1,4 +1,4 @@
-name: Windows.Detection.HijackLibsEnv
+name: DetectRaptor.Windows.Detection.HijackLibsEnv
 author: Matt Green - @mgreen27
 description: |
    This artifact searches for Environment Variables (default systemroot|windir)

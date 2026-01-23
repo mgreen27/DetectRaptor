@@ -1,4 +1,4 @@
-name: Macos.Detection.YaraProcessMacos
+name: DetectRaptor.Macos.Detection.YaraProcessMacos
 author: Matt Green - @mgreen27
 description: |
    This artifact is a bulk yara hunt for Macos Process Yara.

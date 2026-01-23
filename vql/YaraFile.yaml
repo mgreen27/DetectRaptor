@@ -1,4 +1,4 @@
-name: Generic.Detection.YaraFile
+name: DetectRaptor.Generic.Detection.YaraFile
 author: Matt Green - @mgreen27
 description: |
   This artifact is a bulk yara file hunt.

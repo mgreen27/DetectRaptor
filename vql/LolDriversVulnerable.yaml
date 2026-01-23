@@ -1,4 +1,4 @@
-name: Windows.Detection.LolDriversVulnerable
+name: DetectRaptor.Windows.Detection.LolDriversVulnerable
 author: Matt Green - @mgreen27
 description: |
    This artifact collects AMCache entries with a matching SHA1 in the 

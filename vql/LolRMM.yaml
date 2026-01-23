@@ -1,4 +1,4 @@
-name: Windows.Detection.LolRMM
+name: DetectRaptor.Windows.Detection.LolRMM
 author: Matt Green - @mgreen27 and Herbert Bärschneider
 description: |
   This artifact hunts for Remote Monitoring and Management (RMM) tools using the 

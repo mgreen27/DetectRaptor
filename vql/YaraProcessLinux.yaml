@@ -1,4 +1,4 @@
-name: Linux.Detection.YaraProcessLinux
+name: DetectRaptor.Linux.Detection.YaraProcessLinux
 author: Matt Green - @mgreen27
 description: |
    This artifact is a bulk yara hunt for Linux Process Yara.
