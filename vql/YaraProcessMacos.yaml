@@ -675,6 +675,7 @@ sources:
       -- find all processes and add filters
       LET processes = SELECT
              Name as ProcessName,
+             Exe as ProcessPath,
              CommandLine, Pid
         FROM pslist()
         WHERE
@@ -708,7 +709,8 @@ sources:
                         pid=Pid,
                         rules=YaraRule,
                         context=ContextBytes,
-                        number=NumberOfHits
+                        number=NumberOfHits,
+                        vars=dict(filepath=ProcessPath)
                     )
           })
 
