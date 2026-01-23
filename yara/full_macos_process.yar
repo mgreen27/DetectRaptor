@@ -34,8 +34,8 @@ rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
 		date = "2024-04-10"
 		modified = "2024-04-15"
 		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
 		score = 50
 		quality = 80
@@ -63,8 +63,8 @@ rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
 		date = "2024-04-10"
 		modified = "2024-04-12"
 		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
 		score = 75
 		quality = 80
@@ -93,38 +93,38 @@ rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
 	condition:
 		any of ( $proj_* ) or 4 of ( $fun_* )
 }
-rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
+rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
     meta:
-		description = "SOCKS5 proxy tool used to relay connections."
+		description = "Detection for fake macOS VPN client used by CharmingCypress."
 		author = "threatintel@volexity.com"
-		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
-		date = "2024-01-09"
-		modified = "2024-01-09"
-		reference = "TIB-20240109"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
-		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
+		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
+		date = "2023-10-17"
+		modified = "2023-10-27"
+		reference = "TIB-20231027"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-02-13 CharmingCypress/rules.yar#L246-L272"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
 		score = 75
 		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
-		os = "all"
+		tags = "CHARMINGCYPRESS, FILE, MEMORY"
+		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
+		os = "darwin,linux"
 		os_arch = "all"
+		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10065
+		rule_id = 9770
 		version = 3
 
 	strings:
-		$s1 = "proxy_loop" ascii
-		$s2 = "connect_to_dst" ascii
-		$s3 = "request_client" ascii
-		$s4 = "subnegotiation_client" ascii
-		$s5 = "bind_port" ascii
+		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
+		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
+		$s3 = "New file imported successfully." ascii
+		$s4 = "Error in importing the File." ascii
 
 	condition:
-		all of them
+		2 of ( $s* )
 }
 rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
     meta:
@@ -134,8 +134,8 @@ rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
 		date = "2024-03-28"
 		modified = "2024-07-05"
 		reference = "TIB-20240229"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L216-L243"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L216-L243"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
 		score = 75
 		quality = 80
@@ -167,8 +167,8 @@ rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
 		date = "2024-02-22"
 		modified = "2024-07-05"
 		reference = "https://github.com/bmdyy/discord-c2"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L244-L267"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L244-L267"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
 		score = 75
 		quality = 80
@@ -196,8 +196,8 @@ rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
 		date = "2024-02-23"
 		modified = "2024-08-02"
 		reference = "TIB-20240227"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "2b11f8fc5b6260ebf00bde83585cd7469709a4979ca579cdf065724bc15052fc"
 		score = 75
 		quality = 80
@@ -229,8 +229,8 @@ rule VOLEXITY_Apt_Malware_Macos_Reloadext_Installer : STORMBAMBOO FILE MEMORY {
 		date = "2024-02-23"
 		modified = "2024-08-02"
 		reference = "TIB-20240227"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-08-02 StormBamboo/rules.yar#L37-L62"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-08-02 StormBamboo/rules.yar#L37-L62"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "8688796839202d95ded15e10262a7a7c7cbbae4a332b60305402e5984005d452"
 		score = 75
 		quality = 80
@@ -261,8 +261,8 @@ rule VOLEXITY_Apt_Malware_Any_Macma_A : STORMBAMBOO FILE MEMORY {
 		date = "2021-11-12"
 		modified = "2024-08-02"
 		reference = "https://blog.google/threat-analysis-group/analyzing-watering-hole-campaign-using-macos-exploits/"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-08-02 StormBamboo/rules.yar#L63-L111"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-08-02 StormBamboo/rules.yar#L63-L111"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "7ebaff9fddf6491d6b1ed9ab14c1b87dc8df850536e55aa723d625a593b33ed7"
 		score = 75
 		quality = 53
@@ -314,8 +314,8 @@ rule VOLEXITY_Apt_Malware_Macos_Gimmick : STORMBAMBOO FILE MEMORY {
 		date = "2021-10-18"
 		modified = "2024-08-02"
 		reference = "https://www.volexity.com/blog/2022/03/22/storm-cloud-on-the-horizon-gimmick-malware-strikes-at-macos/"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-08-02 StormBamboo/rules.yar#L112-L170"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-08-02 StormBamboo/rules.yar#L112-L170"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "00fba9df2212874a45d44b3d098a7b76c97fcd53ff083c76b784d2b510a4a467"
 		score = 75
 		quality = 78
@@ -371,8 +371,8 @@ rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
 		date = "2023-07-21"
 		modified = "2024-08-02"
 		reference = "TIB-20231221"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-08-02 StormBamboo/rules.yar#L236-L270"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-08-02 StormBamboo/rules.yar#L236-L270"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "bb3a70dad28181534e27abbbd618165652c137264bfd3726ae4480c642493a3b"
 		score = 75
 		quality = 80
@@ -401,113 +401,38 @@ rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
 	condition:
 		3 of ( $s_* ) or any of ( $url_* ) or $path_1
 }
-rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
+rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
     meta:
-		description = "Detection for fake macOS VPN client used by CharmingCypress."
+		description = "SOCKS5 proxy tool used to relay connections."
 		author = "threatintel@volexity.com"
-		id = "e0957936-dc6e-5de6-bb23-d0ef61655029"
-		date = "2023-10-17"
-		modified = "2023-10-27"
-		reference = "TIB-20231027"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2024/2024-02-13 CharmingCypress/rules.yar#L245-L271"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
-		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
-		score = 75
-		quality = 80
-		tags = "CHARMINGCYPRESS, FILE, MEMORY"
-		hash1 = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
-		os = "darwin,linux"
-		os_arch = "all"
-		parent_hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 9770
-		version = 3
-
-	strings:
-		$s1 = "networksetup -setsocksfirewallproxystate wi-fi off" ascii
-		$s2 = "networksetup -setsocksfirewallproxy wi-fi ___serverAdd___ ___portNum___; networksetup -setsocksfirewallproxystate wi-fi on" ascii
-		$s3 = "New file imported successfully." ascii
-		$s4 = "Error in importing the File." ascii
-
-	condition:
-		2 of ( $s* )
-}
-rule VOLEXITY_Malware_Golang_Pantegana : FILE MEMORY {
-    meta:
-		description = "Detects PANTEGANA, a Golang backdoor used by a range of threat actors due to its public availability."
-		author = "threatintel@volexity.com"
-		id = "b6154165-68e0-5986-a0cf-5631d369c230"
-		date = "2022-03-30"
-		modified = "2025-03-21"
-		reference = "https://github.com/elleven11/pantegana"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L89-L119"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
-		logic_hash = "791a664a6b4b98051cbfacb451099de085cbab74d73771709377ab68a5a23d2b"
+		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
+		date = "2024-01-09"
+		modified = "2024-01-09"
+		reference = "TIB-20240109"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
-		hash1 = "8297c99391aae918f154077c61ea94a99c7a339166e7981d9912b7fdc2e0d4f0"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6631
-		version = 3
-
-	strings:
-		$s1 = "RunFingerprinter" ascii
-		$s2 = "SendSysInfo" ascii
-		$s3 = "ExecAndGetOutput" ascii
-		$s4 = "RequestCommand" ascii
-		$s5 = "bindataRead" ascii
-		$s6 = "RunClient" ascii
-		$magic = "github.com/elleven11/pantegana" ascii
-
-	condition:
-		5 of ( $s* ) or $magic
-}
-rule VOLEXITY_Malware_Any_Pupyrat_B : FILE MEMORY {
-    meta:
-		description = "Detects the PUPYRAT malware family, a cross-platform RAT written in Python."
-		author = "threatintel@volexity.com"
-		id = "ec8d0448-f47d-5c6e-bcf9-8f40ae83a96f"
-		date = "2022-04-07"
-		modified = "2025-03-21"
-		reference = "https://github.com/n1nj4sec/pupy"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L120-L157"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
-		logic_hash = "f5b5f35ee783ff1163072591c6d48a85894729156935650a0fd166ae22a2ea00"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		hash1 = "7474a6008b99e45686678f216af7d6357bb70a054c6d9b05e1817c8d80d536b4"
+		hash1 = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
 		os = "all"
 		os_arch = "all"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6689
-		version = 4
+		rule_id = 10065
+		version = 3
 
 	strings:
-		$elf1 = "LD_PRELOAD=%s HOOK_EXIT=%d CLEANUP=%d exec %s 1>/dev/null 2>/dev/null" ascii
-		$elf2 = "reflective_inject_dll" fullword ascii
-		$elf3 = "ld_preload_inject_dll" fullword ascii
-		$pupy1 = "_pupy.error" ascii
-		$pupy2 = "pupy://" ascii
-		$s1 = "Args not passed" ascii
-		$s2 = "Too many args" ascii
-		$s3 = "Can't execute" ascii
-		$s4 = "mexec:stdin" ascii
-		$s5 = "mexec:stdout" ascii
-		$s6 = "mexec:stderr" ascii
-		$s7 = "LZMA error" ascii
+		$s1 = "proxy_loop" ascii
+		$s2 = "connect_to_dst" ascii
+		$s3 = "request_client" ascii
+		$s4 = "subnegotiation_client" ascii
+		$s5 = "bind_port" ascii
 
 	condition:
-		any of ( $elf* ) or all of ( $pupy* ) or all of ( $s* )
+		all of them
 }
 rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
     meta:
@@ -517,8 +442,8 @@ rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
 		date = "2021-09-14"
 		modified = "2025-05-21"
 		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
 		score = 75
 		quality = 80
@@ -566,8 +491,8 @@ rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
 		date = "2022-06-01"
 		modified = "2024-09-20"
 		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
 		score = 75
 		quality = 80
@@ -594,8 +519,8 @@ rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
 		date = "2022-06-01"
 		modified = "2024-07-30"
 		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
-		source_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
-		license_url = "https://github.com/volexity/threat-intel/blob/1ef34c2e4704d1e6e6768c2d6800863bbae05a0d/LICENSE.txt"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
 		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
 		score = 75
 		quality = 80
@@ -616,4 +541,79 @@ rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
 
 	condition:
 		all of ( $fn* )
+}
+rule VOLEXITY_Malware_Golang_Pantegana : FILE MEMORY {
+    meta:
+		description = "Detects PANTEGANA, a Golang backdoor used by a range of threat actors due to its public availability."
+		author = "threatintel@volexity.com"
+		id = "b6154165-68e0-5986-a0cf-5631d369c230"
+		date = "2022-03-30"
+		modified = "2025-03-21"
+		reference = "https://github.com/elleven11/pantegana"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L90-L120"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "791a664a6b4b98051cbfacb451099de085cbab74d73771709377ab68a5a23d2b"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "8297c99391aae918f154077c61ea94a99c7a339166e7981d9912b7fdc2e0d4f0"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6631
+		version = 3
+
+	strings:
+		$s1 = "RunFingerprinter" ascii
+		$s2 = "SendSysInfo" ascii
+		$s3 = "ExecAndGetOutput" ascii
+		$s4 = "RequestCommand" ascii
+		$s5 = "bindataRead" ascii
+		$s6 = "RunClient" ascii
+		$magic = "github.com/elleven11/pantegana" ascii
+
+	condition:
+		5 of ( $s* ) or $magic
+}
+rule VOLEXITY_Malware_Any_Pupyrat_B : FILE MEMORY {
+    meta:
+		description = "Detects the PUPYRAT malware family, a cross-platform RAT written in Python."
+		author = "threatintel@volexity.com"
+		id = "ec8d0448-f47d-5c6e-bcf9-8f40ae83a96f"
+		date = "2022-04-07"
+		modified = "2025-03-21"
+		reference = "https://github.com/n1nj4sec/pupy"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L121-L158"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "f5b5f35ee783ff1163072591c6d48a85894729156935650a0fd166ae22a2ea00"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		hash1 = "7474a6008b99e45686678f216af7d6357bb70a054c6d9b05e1817c8d80d536b4"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6689
+		version = 4
+
+	strings:
+		$elf1 = "LD_PRELOAD=%s HOOK_EXIT=%d CLEANUP=%d exec %s 1>/dev/null 2>/dev/null" ascii
+		$elf2 = "reflective_inject_dll" fullword ascii
+		$elf3 = "ld_preload_inject_dll" fullword ascii
+		$pupy1 = "_pupy.error" ascii
+		$pupy2 = "pupy://" ascii
+		$s1 = "Args not passed" ascii
+		$s2 = "Too many args" ascii
+		$s3 = "Can't execute" ascii
+		$s4 = "mexec:stdin" ascii
+		$s5 = "mexec:stdout" ascii
+		$s6 = "mexec:stderr" ascii
+		$s7 = "LZMA error" ascii
+
+	condition:
+		any of ( $elf* ) or all of ( $pupy* ) or all of ( $s* )
 }
