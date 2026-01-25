@@ -1,5 +1,5 @@
-import "pe"
 import "math"
+import "pe"
 rule ARKBIRD_SOLG_APT_UNC2452_Webshell_Chopper_Mar_2021_1 : FILE {
     meta:
 		description = "Detect exploit listener in the exchange configuration for Webshell Chopper used by UNC2452 group"
@@ -890,7 +890,7 @@ rule SIGNATURE_BASE_FE_Webshell_PL_ATRIUM_1 {
 		hash = "ca0175d86049fa7c796ea06b413857a3"
 		logic_hash = "869b397616495c644beb997602eac84ddcdbacce4c14755c555f5bda36663ca2"
 		score = 75
-		quality = 35
+		quality = 60
 		tags = ""
 
 	strings:
@@ -21677,7 +21677,7 @@ rule SIGNATURE_BASE_SUSP_WEBSHELL_Cmd_Indicator_Apr25 {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
 		logic_hash = "b992786a58389749db40fc90363f00c5df374d514374afc2d6fdff4429cb1ec0"
 		score = 60
-		quality = 35
+		quality = 60
 		tags = ""
 
 	strings:
@@ -22642,6 +22642,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Fopo : FILE {
 		hash = "a698441f817a9a72908a0d93a34133469f33a7b34972af3e351bdccae0737d99"
 		logic_hash = "076c0c256e5951cdcb2b7bc55030f55bec48c1bea953b8bd85559a3230e387ae"
 		score = 75
+		quality = 15
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -23576,7 +23577,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Function_Via_Get : FILE {
 		hash = "73fa97372b3bb829835270a5e20259163ecc3fdbf73ef2a99cb80709ea4572be"
 		logic_hash = "309203db8e7374531d359e3a723418d47bead45034c4a7bd726fb714622dc039"
 		score = 75
-		quality = 58
+		quality = 8
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
