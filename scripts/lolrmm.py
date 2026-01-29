@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-This script builds LOLRMM csv for Velociraptor DetetRaptor
+This script builds LOLRMM csv for Velociraptor DetectRaptor
 
-https://www.lolrmm.io//
+https://www.lolrmm.io/
 
 """
 

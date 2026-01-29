@@ -32,7 +32,7 @@ sources:
       SELECT OS From info() where OS = 'windows'
 
     query: |
-      -- firsly split IOCs by path or filename focus
+      -- firstly split IOCs by path or filename focus
       LET all_the_things <= SELECT * FROM IOCs
         WHERE NOT KeywordRegex = '.' AND Criticality =~ CriticalityLevel
         GROUP BY KeywordRegex

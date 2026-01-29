@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script converts a Installed software list to a velociraptor 
+This script converts a Installed software list to a Velociraptor 
 Suspicious Application detection artifact.
 
 Simply set variables and run the script.

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script adds a YARA rule set to a Velociraptor YARA glob artifacts.
+This script adds a YARA rule set to Velociraptor YARA glob artifacts.
 
 Simply set variables and run the script.
 """

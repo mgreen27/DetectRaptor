@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script converts a evtx IOC list to a velociraptor artifact.
+This script converts a evtx IOC list to a Velociraptor artifact.
 
 Simply set variables and run the script.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script builds Server.StartHunt
+This script builds DetectRaptor.Server.StartHunts.
 
 Simply set variables and run the script.
 
@@ -11,7 +11,6 @@ from base_functions import *
 # set variables
 template_vql = '../templates/StartHunts.template'
 output_path = '../vql/'
-prefix = 'DetectRaptor.'
     
 if __name__ == "__main__":
     print('Building Server.StartHunts')
@@ -23,7 +22,7 @@ if __name__ == "__main__":
       if not (artifact=='StartHunts.yaml' or artifact=='ManageContent.yaml'):
         with open(output_path + artifact, 'r') as stream:
           try:
-              lookup_table.append(prefix + yaml.safe_load(stream)['name'] + ',,,,' + '\n')
+              lookup_table.append(yaml.safe_load(stream)['name'] + ',,,,' + '\n')
           except yaml.YAMLError as exc:
               print(exc)
 

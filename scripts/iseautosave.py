@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script converts Evtx IOC list to a velociraptor ISEAutoSave artifact.
+This script converts Evtx IOC list to a Velociraptor ISEAutoSave artifact.
 
 Simply set variables and run the script.
 
