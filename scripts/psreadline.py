@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This script converts a powershell evtx IOC list to a PSReadline 
-velociraptor artifact.
+This script converts a PowerShell evtx IOC list to a PSReadline 
+Velociraptor artifact.
 
 Simply set variables and run the script.
 

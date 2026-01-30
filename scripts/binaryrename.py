@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script converts a PE.VersionInformation IOC list to a velociraptor artifact.
+This script converts a PE.VersionInformation IOC list to a Velociraptor artifact.
 
 Simply set variables and run the script.
 

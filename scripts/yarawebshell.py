@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script Adds a yara rule set to a velociraptor YaraWebshell artifact.
+This script adds a YARA rule set to a Velociraptor YaraWebshell artifact.
 
 Simply set variables and run the script.
 

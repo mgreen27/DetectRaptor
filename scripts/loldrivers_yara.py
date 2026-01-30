@@ -2,7 +2,7 @@
 """
 This script builds Living Off The Land Drivers based Velociraptor artifacts
 
-https://https://www.lolrmm.io/
+https://www.loldrivers.io/
 
 """
 
@@ -23,9 +23,9 @@ output_path = '../vql/'
 
 
 if __name__ == "__main__":
-    print('Building LolDrivers yara artifact')
+    print('Building LolDrivers YARA artifact')
 
-    # first download loldrivers csv and build regex csv
+    # first download loldrivers yar and build regex csv
     mal_yara = requests.get(mal_drivers).text
     vuln_yara = requests.get(vlun_drivers).text
 

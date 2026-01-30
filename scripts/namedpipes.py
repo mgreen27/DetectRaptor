@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script converts a Domain IOC list to a velociraptor 
+This script converts a Domain IOC list to a Velociraptor 
 NamedPipes detection artifact.
 
 Simply set variables and run the script.

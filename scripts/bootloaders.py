@@ -2,7 +2,7 @@
 """
 This script builds EFI Bootloaders based Velociraptor artifacts
 
-https://https://bootloaders.io/
+https://bootloaders.io/
 
 """
 
@@ -11,9 +11,9 @@ import requests
 import csv
 import json
 
-#Malicious Vulnerable driver    
+#Malicious Bootloader    
 # set variables
-loldrivers_url = 'https://www.bootloaders.io/api/bootloaders.json'
+bootloaders_url = 'https://www.bootloaders.io/api/bootloaders.json'
 ioc_csv = '../csv/bootloaders.csv'
 
 template_vql = '../templates/Bootloaders.template'
@@ -22,8 +22,8 @@ output_path = '../vql/'
 if __name__ == "__main__":
     print('Building Bootloaders artifact')
 
-    # first download loldrivers csv and build regex csv
-    data = requests.get(loldrivers_url).json()
+    # first download bootloaders json and build regex csv
+    data = requests.get(bootloaders_url).json()
 
     flattened = []
 
