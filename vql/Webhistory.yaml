@@ -282,23 +282,20 @@ sources:
         FROM Artifact.Windows.Sys.Users()
         WHERE Name =~ UserRegex
              
-      LET ChromeHistoryFile <= SELECT * FROM foreach(
+      LET ChromiumHistoryFile <= SELECT * FROM foreach(
             row=target_users,
             query={
                 SELECT User, OSPath, Mtime
                 FROM glob(
                     root=HomeDirectory,
-                    globs='/AppData/Local/Google/Chrome/User Data/*/History'
-                )
-            })
-
-      LET EdgeHistoryFile <= SELECT * FROM foreach(
-            row=target_users,
-            query={
-                SELECT User, OSPath, Mtime
-                FROM glob(
-                    root=HomeDirectory,
-                    globs='/AppData/Local/Microsoft/Edge/User Data/*/History'
+                    globs=[
+                        '/AppData/{Roaming,Local}/*/*/User Data/*/History',
+                        '/AppData/{Roaming,Local}/*/*/User Data/Snapshots/*/*/History',
+                        '/AppData/{Roaming,Local}/*/User Data/*/History',
+                        '/AppData/{Roaming,Local}/*/User Data/Snapshots/*/*/History',
+                        '/AppData/{Roaming,Local}/Opera Software/Opera*/*/History',
+                        '/AppData/Local/Packages/TheBrowserCompany.Arc_*/LocalCache/Local/Arc/User Data/*/History'
+                    ]
                 )
             })
             
@@ -308,7 +305,10 @@ sources:
                 SELECT User, OSPath, Mtime
                 FROM glob(
                     root=HomeDirectory,
-                    globs='/AppData/Roaming/Mozilla/Firefox/Profiles/*/places.sqlite'
+                    globs=[
+                        '/AppData/{Roaming,Local}/*/*/Profiles/*/places.sqlite',
+                        '/AppData/{Roaming,Local}/*/Profiles/*/places.sqlite'
+                    ]
                 )
             })
     
@@ -319,24 +319,26 @@ sources:
             ArtifactData
         FROM chain(
             chromehistory = {
-                SELECT "Chrome History" as BrowserArtifact,
+                SELECT "Chromium History" as BrowserArtifact,
                     dict(
                         User=User,
                         ID=ID,
                         Visit_Date=Visit_Date,
                         Title=Title,
                         URL=URL,
-                        Last_Visit_Date=Last_Visit_Date
+                        Last_Visit_Date=Last_Visit_Date,
+                        OSPath=OSPath
                     ) as ArtifactData,
                     URL as VisitedURL
-                FROM foreach(row=ChromeHistoryFile,
+                FROM foreach(row=ChromiumHistoryFile,
                     query={
                         SELECT User,
                             ID,
                             timestamp(epoch=(Visit_Date - 11644473600)) AS Visit_Date,
                             Title,
                             URL,
-                            timestamp(epoch=(Last_Visit_Date - 11644473600)) AS Last_Visit_Date
+                            timestamp(epoch=(Last_Visit_Date - 11644473600)) AS Last_Visit_Date,
+                            OSPath
                         FROM sqlite(
                           file=OSPath,
                           query=ChromiumURL)
@@ -344,7 +346,7 @@ sources:
                       })
             },
             chromedownload = {
-                SELECT "Chrome Download" as BrowserArtifact,
+                SELECT "Chromium Download" as BrowserArtifact,
                     dict(
                         User=User,
                         ID=ID,
@@ -353,10 +355,11 @@ sources:
                         Target_Path=Target_Path,
                         Tab_URL=Tab_URL,
                         Tab_Referrer_URL=Tab_Referrer_URL,
-                        Mime_Type=Mime_Type
+                        Mime_Type=Mime_Type,
+                        OSPath=OSPath
                     ) as ArtifactData,
                     Tab_URL as VisitedURL
-                FROM foreach(row=ChromeHistoryFile,
+                FROM foreach(row=ChromiumHistoryFile,
                     query={
                         SELECT User,
                             ID, 
@@ -365,61 +368,8 @@ sources:
                             Target_Path, 
                             Tab_URL, 
                             Tab_Referrer_URL, 
-                            Mime_Type
-                        FROM sqlite(
-                            file=OSPath,
-                            query=ChromiumDownload)
-                        ORDER BY Download_Date DESC
-                    })
-            },
-            edgehistory = {
-                SELECT "Edge History" as BrowserArtifact,
-                    dict(
-                        User=User,
-                        ID=ID,
-                        Visit_Date=Visit_Date,
-                        Title=Title,
-                        URL=URL,
-                        Last_Visit_Date=Last_Visit_Date
-                    ) as ArtifactData,
-                    URL as VisitedURL
-                FROM foreach(row=EdgeHistoryFile,
-                    query={
-                        SELECT User,
-                            ID,
-                            timestamp(epoch=(Visit_Date - 11644473600)) AS Visit_Date,
-                            Title,
-                            URL,
-                            timestamp(epoch=(Last_Visit_Date - 11644473600)) AS Last_Visit_Date
-                        FROM sqlite(
-                          file=OSPath,
-                          query=ChromiumURL)
-                        ORDER BY Visit_Date DESC
-                    })
-            },
-            edgedownload = {
-                SELECT "Edge Download" as BrowserArtifact,
-                    Tab_URL as VisitedURL,
-                    dict(
-                        User=User,
-                        ID=ID,
-                        Download_Date=Download_Date,
-                        Current_Path=Current_Path,
-                        Target_Path=Target_Path,
-                        Tab_URL=Tab_URL,
-                        Tab_Referrer_URL=Tab_Referrer_URL,
-                        Mime_Type=Mime_Type
-                    ) as ArtifactData   
-                FROM foreach(row=EdgeHistoryFile,
-                    query={
-                        SELECT User,
-                            ID, 
-                            timestamp(epoch=(Download_Date - 11644473600)) AS Download_Date, 
-                            Current_Path, 
-                            Target_Path, 
-                            Tab_URL, 
-                            Tab_Referrer_URL, 
-                            Mime_Type
+                            Mime_Type,
+                            OSPath
                         FROM sqlite(
                             file=OSPath,
                             query=ChromiumDownload)
@@ -435,7 +385,8 @@ sources:
                         Visit_Date=Visit_Date,
                         Title=Title,
                         URL=URL,
-                        Last_Visit_Date=Last_Visit_Date
+                        Last_Visit_Date=Last_Visit_Date,
+                        OSPath=OSPath
                     ) as ArtifactData
                 FROM foreach(row=FirefoxHistoryFile,
                     query={
@@ -444,7 +395,8 @@ sources:
                             timestamp(epoch=Visit_Date /1000000) AS Visit_Date,
                             Title,
                             URL,
-                            timestamp(epoch=Last_Visit_Date/1000000) AS Last_Visit_Date
+                            timestamp(epoch=Last_Visit_Date/1000000) AS Last_Visit_Date,
+                            OSPath
                         FROM sqlite(
                           file=OSPath,
                           query=FirefoxURL)
@@ -460,7 +412,8 @@ sources:
                         Download_Date=Download_Date,
                         Content=Content,
                         Places_URL=Places_URL,
-                        Last_Modified_Date=Last_Modified_Date
+                        Last_Modified_Date=Last_Modified_Date,
+                        OSPath=OSPath
                     ) as ArtifactData
                 FROM foreach(row=FirefoxHistoryFile,
                     query={
@@ -469,7 +422,8 @@ sources:
                         timestamp(epoch=Download_Date/1000000) AS Download_Date,
                         Content,
                         Places_URL,
-                        timestamp(epoch=Last_Modified_Date/1000000) AS Last_Modified_Date
+                        timestamp(epoch=Last_Modified_Date/1000000) AS Last_Modified_Date,
+                        OSPath
                     FROM sqlite(
                       file=OSPath,
                       query=FirefoxDownload)
