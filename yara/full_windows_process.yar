@@ -39,7 +39,7 @@ rule TRELLIX_ARC_Sodinokobi : RANSOMWARE {
 		description = "This rule detect Sodinokobi Ransomware in memory in old samples and perhaps future."
 		author = "McAfee ATR team"
 		id = "dd05ce31-9699-50a9-944c-5883340791af"
-		date = "2026-01-01"
+		date = "2026-02-01"
 		modified = "2025-03-18"
 		reference = "https://github.com/advanced-threat-research/Yara-Rules/"
 		source_url = "https://github.com/advanced-threat-research/Yara-Rules//blob/1919562a59f190bda60c982424f6a24c542ee3e0/ransomware/RANSOM_Sodinokibi.yar#L32-L53"
@@ -2560,6 +2560,207 @@ rule JPCERTCC_Asyncrat {
 	condition:
 		($salt and ( 2 of ( $s* ) or 1 of ( $b* ) ) ) or ( all of ( $b* ) and 2 of ( $s* ) )
 }
+rule CHECK_POINT_Malware_Bumblebee_Packed {
+    meta:
+		description = "Detects the packer used by bumblebee, the rule is based on the code responsible for allocating memory for a critical structure in its logic."
+		author = "Marc Salinas @ CheckPoint Research"
+		id = "35f00c87-c26e-5189-b66d-15d5a1b1dd20"
+		date = "2022-07-13"
+		modified = "2023-04-10"
+		reference = "https://research.checkpoint.com/2022/bumblebee-increasing-its-capacity-and-evolving-its-ttps/"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/Checkpoint/malware_bumblebee_packed.yar#L1-L31"
+		license_url = "N/A"
+		logic_hash = "063209aad7ab8a0be46fd578a16b04afc086f930cbdb6c2f7b02824f704d7330"
+		score = 75
+		quality = 85
+		tags = ""
+		malware_family = "BumbleBee"
+		dll_jul = "6bc2ab410376c1587717b2293f2f3ce47cb341f4c527a729da28ce00adaaa8db"
+		dll_jun = "82aab01a3776e83695437f63dacda88a7e382af65af4af1306b5dbddbf34f9eb"
+		dll_may = "a5bcb48c0d29fbe956236107b074e66ffc61900bc5abfb127087bb1f4928615c"
+		iso_jul = "ca9da17b4b24bb5b24cc4274cc7040525092dffdaa5922f4a381e5e21ebf33aa"
+		iso_jun = "13c573cad2740d61e676440657b09033a5bec1e96aa1f404eed62ba819858d78"
+		iso_may = "b2c28cdc4468f65e6fe2f5ef3691fa682057ed51c4347ad6b9672a9e19b5565e"
+		zip_jun = "7024ec02c9670d02462764dcf99b9a66b29907eae5462edb7ae974fe2efeebad"
+		zip_may = "68ac44d1a9d77c25a97d2c443435459d757136f0d447bfe79027f7ef23a89fce"
+
+	strings:
+		$heapalloc = {  
+            48 8? EC [1-6]           // sub     rsp, 80h 
+            FF 15 ?? ?? 0? 00 [0-5]  // call    cs:GetProcessHeap 
+            33 D2                    // xor     edx, edx        ; dwFlags 
+            4? [2-5]                 // mov     rcx, rax        ; hHeap 
+            4? ?? ??                 // mov     r8d, ebx        ; dwBytes 
+            FF 15 ?? ?? 0? 00        // call    cs:HeapAlloc 
+            [8 - 11]                 // (load params) 
+            48 89 05 ?? ?? ?? 00     // mov     cs:HeapBufferPtr, rax 
+            E8 ?? ?? ?? ??           // call    memset 
+            4? 8B ?? ?? ?? ?? 00     // mov     r14, cs:HeapBufferPtr 
+        }
+
+	condition:
+		$heapalloc
+}
+rule DRAGON_THREAT_LABS_Apt_C16_Win_Memory_Pcclient : MEMORY APT {
+    meta:
+		description = "File matching the md5 above tends to only live in memory, hence the lack of MZ header check."
+		author = "@dragonthreatlab"
+		id = "59333cd4-b532-510e-afe5-fc3b2e96698f"
+		date = "2015-01-11"
+		modified = "2016-09-27"
+		reference = "http://blog.dragonthreatlabs.com/2015/01/dtl-12012015-01-hong-kong-swc-attack.html"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/Dragonthreatlabs/dragonthreatlabs_index.yara#L4-L19"
+		license_url = "N/A"
+		hash = "ec532bbe9d0882d403473102e9724557"
+		logic_hash = "e863fcbcbde61db569a34509061732371143f38734a0213dc856dc3c9188b042"
+		score = 75
+		quality = 80
+		tags = "MEMORY, APT"
+
+	strings:
+		$str1 = "Kill You" ascii
+		$str2 = "%4d-%02d-%02d %02d:%02d:%02d" ascii
+		$str3 = "%4.2f  KB" ascii
+		$encodefunc = {8A 08 32 CA 02 CA 88 08 40 4E 75 F4}
+
+	condition:
+		all of them
+}
+rule DRAGON_THREAT_LABS_Apt_C16_Win_Swisyn : MEMORY FILE {
+    meta:
+		description = "File matching the md5 above tends to only live in memory, hence the lack of MZ header check."
+		author = "@dragonthreatlab"
+		id = "af369075-aca3-576d-a10b-849703ffb4f1"
+		date = "2015-01-11"
+		modified = "2016-09-27"
+		reference = "http://blog.dragonthreatlabs.com/2015/01/dtl-12012015-01-hong-kong-swc-attack.html"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/Dragonthreatlabs/dragonthreatlabs_index.yara#L54-L70"
+		license_url = "N/A"
+		hash = "a6a18c846e5179259eba9de238f67e41"
+		logic_hash = "2fa29d3b17aa37501131132640953645d0089c9bc5ec13ffed7a498ad89c1558"
+		score = 75
+		quality = 28
+		tags = "MEMORY, FILE"
+
+	strings:
+		$mz = {4D 5A}
+		$str1 = "/ShowWU" ascii
+		$str2 = "IsWow64Process"
+		$str3 = "regsvr32 "
+		$str4 = {8A 11 2A 55 FC 8B 45 08 88 10 8B 4D 08 8A 11 32 55 FC 8B 45 08 88 10}
+
+	condition:
+		$mz at 0 and all of ( $str* )
+}
+rule NCSC_Sparrowdoor_Xor {
+    meta:
+		description = "Highlights XOR routines in SparrowDoor. No MZ/PE match as the backdoor has no header. Targeting in memory."
+		author = "NCSC"
+		id = "9c07feea-91fc-528e-91ac-14d09fa1fc10"
+		date = "2022-02-28"
+		modified = "2022-07-06"
+		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_xor.yar#L1-L14"
+		license_url = "N/A"
+		logic_hash = "3244e9017e5a0bf1c54e03b3191a5c695b2c1586b3ed4c529742f9b48903a348"
+		score = 75
+		quality = 80
+		tags = ""
+		hash1 = "c1890a6447c991880467b86a013dbeaa66cc615f"
+
+	strings:
+		$xor_routine_outbound = {B8 39 8E E3 38 F7 E1 D1 EA 8D 14 D2 8B C1 2B C2 8A [4] 00 30 14 39 41 3B CE}
+		$xor_routine_inbound = {B8 25 49 92 24 F7 E1 8B C1 2B C2 D1 E8 03 C2 C1 E8 02 8D 14 C5 [4] 2B D0 8B C1 2B C2}
+		$xor_routine_config = {8B D9 83 E3 07 0F [6] 30 18 8D 1C 07 83 E3 07 0F [6] 30 58 01 8D 1C 28 83 E3 07 0F [6] 30 58 02 8D 1C 02 83 E3 07 0F [6] 30 58 03 8B DE 83 E3 07 0F [6] 30 58 04 83 C6 05 83 C1 05}
+
+	condition:
+		2 of them
+}
+rule NCSC_Sparrowdoor_Shellcode {
+    meta:
+		description = "Targets code features of the reflective loader for SparrowDoor. Targeting in memory."
+		author = "NCSC"
+		id = "572187fb-1a11-54f2-9fe7-2b7468b56556"
+		date = "2022-02-28"
+		modified = "2022-07-06"
+		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_shellcode.yar#L1-L15"
+		license_url = "N/A"
+		logic_hash = "7186bab23114b4825161f58fb02ff397ec8278385482232a4086c86c6fc47082"
+		score = 75
+		quality = 80
+		tags = ""
+		hash1 = "c1890a6447c991880467b86a013dbeaa66cc615f"
+
+	strings:
+		$peb = {8B 48 08 89 4D FC 8B 51 3C 8B 54 0A 78 8B 74 0A 20 03 D1 03 F1 B3 64}
+		$getp_match = {8B 06 03 C1 80 38 47 75 34 80 78 01 65 75 2E 80 78 02 74 75 28 80 78 03 50 75 22 80 78 04 72 75 1C 80 78 06 63 75 16 80 78 05 6F 75 10 80 78 07 41 75 0A}
+		$k_check = {8B 48 20 8A 09 80 F9 6B 74 05 80 F9 4B 75 05}
+		$resolve_load_lib = {C7 45 C4 4C 6F 61 64 C7 45 C8 4C 69 62 72 C7 45 CC 61 72 79 41 C7 45 D0 00 00 00 00 FF 75 FC FF 55 E4}
+
+	condition:
+		3 of them
+}
+rule NCSC_Sparrowdoor_Apipatch {
+    meta:
+		description = "Identifies code segments in SparrowDoor responsible for patching APIs. No MZ/PE match as the backdoor has no header. Targeting in memory."
+		author = "NCSC"
+		id = "119b7f3a-1850-53ab-a5d1-8882e34a34b4"
+		date = "2022-02-28"
+		modified = "2022-07-06"
+		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_apipatch.yar#L1-L17"
+		license_url = "N/A"
+		logic_hash = "302ad7fc0354636c57e6ec86876c7d4a5baaa784f5ecf0f2d51ce47631b8542a"
+		score = 75
+		quality = 80
+		tags = ""
+		hash1 = "c1890a6447c991880467b86a013dbeaa66cc615f"
+
+	strings:
+		$save = {8B 06 89 07 8A 4E 04}
+		$vp_1 = {89 10 8A 4E 04 8B D6 2B D0 88 48 04 83 EA 05 C6 40 05 E9 89 50 06}
+		$vp_2 = {50 8B D6 6A 40 2B D7 88 4F 04 83 EA 05 6A 05 C6 47 05 E9 89 57 06 56}
+		$vp_3 = {51 52 2B DE 6A 05 83 EB 05 56 C6 06 E9 89 5E 01}
+		$va = {6A 40 68 00 10 00 00 68 00 10 00 00 6A 00}
+		$s_patch = {50 68 7F FF FF FF 68 FF FF 00 00 56}
+
+	condition:
+		3 of them
+}
+rule NCSC_Sparrowdoor_Strings {
+    meta:
+		description = "Strings that appear in SparrowDoor’s backdoor. Targeting in memory."
+		author = "NCSC"
+		id = "6f96a577-fb59-57db-a66a-f514ecfbf982"
+		date = "2022-02-28"
+		modified = "2022-07-06"
+		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_strings.yar#L1-L23"
+		license_url = "N/A"
+		logic_hash = "65ec5d266ecd81ab8e4cfbcb352173f825bdae92fd4737b577cb209bace2a943"
+		score = 75
+		quality = 80
+		tags = ""
+		hash1 = "c1890a6447c991880467b86a013dbeaa66cc615f"
+
+	strings:
+		$reg = "Software\\Microsoft\\Windows\\CurrentVersion\\Run" ascii
+		$http_headers = {55 73 65 72 2D 41 67 65 6E 74 3A 20 4D 6F 7A 69 6C 6C 61 2F 34 2E 30 20 28 63 6F 6D 70 61 74 69 62 6C 65 3B 20 4D 53 49 45 20 35 2E 30 3B 20 57 69 6E 64 6F 77 73 20 4E 54 20 35 2E 30 29 0D 0A 41 63 63 65 70 74 2D 4C 61 6E 67 75 61 67 65 3A 20 65 6E 2D 55 53 0D 0A 41 63 63 65 70 74 3A 20 2A 2F 2A 0D 0A}
+		$http_proxy = "HTTPS=HTTPS://%s:%d" ascii
+		$debug = "SeDebugPrivilege" ascii
+		$av1 = "avp.exe" ascii
+		$av2 = "ZhuDongFangYu.exe" ascii
+		$av3 = "egui.exe" ascii
+		$av4 = "TMBMSRV.exe" ascii
+		$av5 = "ccSetMgr.exe" ascii
+		$clipshot = "clipshot" ascii
+		$ComSpec = "ComSpec" ascii
+		$export = "curl_easy_init" ascii
+
+	condition:
+		10 of them
+}
 rule SBOUSSEADEN_Hunt_Evtmutehook_Memory {
     meta:
 		description = "memory hunt for default wevtsv EtwEventCallback hook pattern to apply to eventlog svchost memory dump"
@@ -2700,9 +2901,9 @@ rule HARFANGLAB_Allasenhamaycampaign_Executorloader {
 		author = "HarfangLab"
 		id = "0a09414d-cd86-54a4-99e4-121a7df7624b"
 		date = "2024-05-28"
-		modified = "2025-10-21"
+		modified = "2026-01-29"
 		reference = "TRR240501"
-		source_url = "https://github.com/HarfangLab/iocs/blob/1770ec1114cc8c83eea7d0ab8f9f29c267b11a2d/hl_public_reports_master.yar#L96-L114"
+		source_url = "https://github.com/HarfangLab/iocs/blob/278c38e11e99d35af836cb9140e0857fd9226574/hl_public_reports_master.yar#L96-L114"
 		license_url = "N/A"
 		logic_hash = "61aa0bf180574856e57d0b26442bfa6f4b1e25844611d6eadaed529e1bb86625"
 		score = 75
@@ -2727,9 +2928,9 @@ rule HARFANGLAB_Allasenhamaycampaign_Allasenha {
 		author = "HarfangLab"
 		id = "787c4e66-2053-5f14-a52e-6b0415700e8c"
 		date = "2024-05-28"
-		modified = "2025-10-21"
+		modified = "2026-01-29"
 		reference = "TRR240501"
-		source_url = "https://github.com/HarfangLab/iocs/blob/1770ec1114cc8c83eea7d0ab8f9f29c267b11a2d/hl_public_reports_master.yar#L115-L137"
+		source_url = "https://github.com/HarfangLab/iocs/blob/278c38e11e99d35af836cb9140e0857fd9226574/hl_public_reports_master.yar#L115-L137"
 		license_url = "N/A"
 		logic_hash = "affe75ade6c8d9eeba00006f78678a48b1cfc5ffa9f9675fdea6ffd6cb3a02bd"
 		score = 75
@@ -2759,9 +2960,9 @@ rule HARFANGLAB_Nhas_Reverse_Shell_Pe_Inmem_Large {
 		author = "HarfangLab"
 		id = "f6b38e11-c405-5623-bea3-3a8d96b435af"
 		date = "2024-09-24"
-		modified = "2025-10-21"
+		modified = "2026-01-29"
 		reference = "TRR250201"
-		source_url = "https://github.com/HarfangLab/iocs/blob/1770ec1114cc8c83eea7d0ab8f9f29c267b11a2d/hl_public_reports_master.yar#L276-L294"
+		source_url = "https://github.com/HarfangLab/iocs/blob/278c38e11e99d35af836cb9140e0857fd9226574/hl_public_reports_master.yar#L319-L337"
 		license_url = "N/A"
 		hash = "7798b45ffc488356f7253805dc9c8d2210552bee39db9082f772185430360574"
 		logic_hash = "b9bbbbd93dc39f8c16c7f8275fa73f4c345c3ba8f21da76ae491e89d3a22c473"
@@ -2789,8 +2990,8 @@ rule SEKOIA_Apt_Unk_Hrserv_Memory_Commands_Strings {
 		date = "2023-11-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a92ecc9714a549f152ac9acae011dcc84dc526af/yara_rules/apt_unk_hrserv_memory_commands_strings.yar#L1-L19"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a92ecc9714a549f152ac9acae011dcc84dc526af/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/80f51fd7496e3df4d2e166a34f8235e76f4aa1bf/yara_rules/apt_unk_hrserv_memory_commands_strings.yar#L1-L19"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/80f51fd7496e3df4d2e166a34f8235e76f4aa1bf/LICENSE.md"
 		logic_hash = "a87c35658ded301c098f9ee8ee5886a54e89537eabd145cf82b0286c703a77d2"
 		score = 75
 		quality = 80
@@ -2816,8 +3017,8 @@ rule SIGNATURE_BASE_Opcloudhopper_Wmidll_Inmemory {
 		date = "2017-04-07"
 		modified = "2023-12-05"
 		reference = "https://www.pwc.co.uk/cyber-security/pdf/cloud-hopper-annex-b-final.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_op_cloudhopper.yar#L281-L293"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_op_cloudhopper.yar#L281-L293"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "6dddda4e519eeaa67eb4c21151cab10553420a23a077751e0fc45fcae0bf6e69"
 		score = 75
 		quality = 85
@@ -2838,8 +3039,8 @@ rule SIGNATURE_BASE_Mimikatz_Memory_Rule_1 : APT {
 		date = "2014-12-22"
 		modified = "2023-07-04"
 		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/gen_mimikatz.yar#L5-L26"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/gen_mimikatz.yar#L5-L26"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "22064af570b8e0a93ca0d45484848eda3fbecfd27c88247ef0897fe53be4b7fc"
 		score = 70
 		quality = 85
@@ -2867,8 +3068,8 @@ rule SIGNATURE_BASE_HKTL_Mimikatz_Skeletonkey_In_Memory_Aug20_1 {
 		date = "2020-08-09"
 		modified = "2023-12-05"
 		reference = "https://twitter.com/sbousseaden/status/1292143504131600384?s=12"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/gen_mimikatz.yar#L178-L190"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/gen_mimikatz.yar#L178-L190"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "0cc9a4d3b63e07a695df342bd2c96a55570502d6fd0ab9a1b61d63e28e1c3e05"
 		score = 75
 		quality = 85
@@ -2889,8 +3090,8 @@ rule SIGNATURE_BASE_HKTL_Mimikatz_Memssp_Hookfn {
 		date = "2020-08-26"
 		modified = "2023-12-05"
 		reference = "https://github.com/sbousseaden/YaraHunts/blob/master/mimikatz_memssp_hookfn.yara"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/gen_mimikatz.yar#L192-L216"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/gen_mimikatz.yar#L192-L216"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "27cf87f801111f17af76ab4c4f8329b73165f24f755d33edbb22d845bba6d3ff"
 		score = 70
 		quality = 85
@@ -2921,8 +3122,8 @@ rule SIGNATURE_BASE_APT_Backdoor_Win_Gorat_Memory_1 {
 		date = "2020-12-08"
 		modified = "2025-02-12"
 		reference = "https://www.fireeye.com/blog/products-and-services/2020/12/fireeye-shares-details-of-recent-cyber-attack-actions-to-protect-community.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/gen_fireeye_redteam_tools.yar#L1013-L1039"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/gen_fireeye_redteam_tools.yar#L1013-L1039"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		hash = "3b926b5762e13ceec7ac3a61e85c93bb"
 		logic_hash = "bf8d80b7a7d35c1bcb353ff66d10bc95c2e6502043acc6554887465a467cdcf7"
 		score = 75
@@ -2954,8 +3155,8 @@ rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_Strings {
 		date = "2021-03-16"
 		modified = "2023-12-05"
 		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_cobaltstrike.yar#L54-L67"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_cobaltstrike.yar#L54-L67"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "4349a7ad94df2269217b55c2aef9628c4eef078566c276936accdd4f996ba2cf"
 		score = 75
 		quality = 85
@@ -2977,8 +3178,8 @@ rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_XOR_Strings {
 		date = "2021-03-16"
 		modified = "2023-12-05"
 		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_cobaltstrike.yar#L69-L88"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_cobaltstrike.yar#L69-L88"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "b5009c29055784ce6371100417b862f723d7e3c1b4081c563fcd8770db48051f"
 		score = 75
 		quality = 85
@@ -3004,8 +3205,8 @@ rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_4_2_Decrypt {
 		date = "2021-03-16"
 		modified = "2023-12-05"
 		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_cobaltstrike.yar#L90-L102"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_cobaltstrike.yar#L90-L102"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "8685b1626c8d263f49ccf129dcd4fe1b42482fcdb37c2e109cedcecaed8c2407"
 		score = 75
 		quality = 85
@@ -3026,8 +3227,8 @@ rule SIGNATURE_BASE_Hvs_APT27_Hyperbro_Stage3_C2 {
 		date = "2022-02-07"
 		modified = "2023-12-05"
 		reference = "https://www.hvs-consulting.de/en/threat-intelligence-report-emissary-panda-apt27"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_apt27_hyperbro.yar#L86-L100"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_apt27_hyperbro.yar#L86-L100"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "676df1eaa782c6b876df138a0ddddc3c63e277b84d4414b044314ee219674420"
 		score = 50
 		quality = 81
@@ -3049,8 +3250,8 @@ rule SIGNATURE_BASE_APT_Dropper_Raw64_TEARDROP_1 {
 		date = "2020-12-14"
 		modified = "2023-12-05"
 		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_solarwinds_sunburst.yar#L141-L156"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_solarwinds_sunburst.yar#L141-L156"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "6ab5197e7a1a123055b361a2ef79f8a77a7935606fccc8f163ea5914c94cd14d"
 		score = 85
 		quality = 85
@@ -3072,8 +3273,8 @@ rule SIGNATURE_BASE_EXPL_React_Server_CVE_2025_55182_POC_Dec25 : CVE_2025_55182 
 		date = "2025-12-05"
 		modified = "2025-12-12"
 		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/react_pocs_indicators_dec25.yar#L1-L19"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/react_pocs_indicators_dec25.yar#L1-L19"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "a4f27fc85807e8f94e6947523a09d87ceed0658334756a9724322181c3eecd20"
 		score = 70
 		quality = 85
@@ -3098,8 +3299,8 @@ rule SIGNATURE_BASE_Malware_Sakula_Memory {
 		date = "2016-06-13"
 		modified = "2023-12-05"
 		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_sakula.yar#L20-L45"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_sakula.yar#L20-L45"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		hash = "b3852b9e7f2b8954be447121bb6b65c3"
 		logic_hash = "ba6d93a1fc5fd81748eb462fc55b681987126ba853ddb677a5f1f9b74ba5cde8"
 		score = 75
@@ -3129,8 +3330,8 @@ rule SIGNATURE_BASE_WCE_In_Memory {
 		date = "2016-08-28"
 		modified = "2025-12-18"
 		reference = "Internal Research"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/thor-hacktools.yar#L3256-L3270"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/thor-hacktools.yar#L3256-L3270"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "74ab7772db5b1de8a4eae03370e2be3cd35004730f84d472677688109a1d6d88"
 		score = 80
 		quality = 85
@@ -3152,8 +3353,8 @@ rule SIGNATURE_BASE_APT_MAL_RU_WIN_Snake_Malware_May23_1 : MEMORY {
 		date = "2023-05-10"
 		modified = "2025-03-21"
 		reference = "https://media.defense.gov/2023/May/09/2003218554/-1/-1/0/JOINT_CSA_HUNTING_RU_INTEL_SNAKE_MALWARE_20230509.PDF"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_mal_ru_snake_may23.yar#L17-L42"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_mal_ru_snake_may23.yar#L17-L42"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "7cff7152259bb17a9b72b91f0fbef220aad2f35a1d2758d7225316a9896bf845"
 		score = 70
 		quality = 71
@@ -3182,8 +3383,8 @@ rule SIGNATURE_BASE_Pos_Malware_Malumpos {
 		date = "2015-05-25"
 		modified = "2023-12-05"
 		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/crime_malumpos.yar#L1-L17"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/crime_malumpos.yar#L1-L17"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "ece32e51a12adf0d68420c8d98efbe7df27b9061ddfe4dcedf151f9f06287eee"
 		score = 75
 		quality = 60
@@ -3208,8 +3409,8 @@ rule SIGNATURE_BASE_Fidelis_Advisory_Cedt370 {
 		date = "2015-06-09"
 		modified = "2023-12-05"
 		reference = "http://goo.gl/ZjJyti"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/apt_fidelis_phishing_plain_sight.yar#L16-L30"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/apt_fidelis_phishing_plain_sight.yar#L16-L30"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "1070d3c63a7091c0982e67134f9dc3cd790bb0b5c2ac08f3a00e3b97ef53d64b"
 		score = 75
 		quality = 85
@@ -3232,8 +3433,8 @@ rule SIGNATURE_BASE_HKTL_Meterpreter_Inmemory {
 		date = "2020-06-29"
 		modified = "2023-04-21"
 		reference = "https://www.reddit.com/r/purpleteamsec/comments/hjux11/meterpreter_memory_indicators_detection_tooling/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/yara/gen_metasploit_payloads.yar#L341-L363"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/42eae6fef41552e3faa3b3f82166ff4eecba9146/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/yara/gen_metasploit_payloads.yar#L341-L363"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/6a18e50cdc09a14f850d17e6ae9c1f05f5ed9ba6/LICENSE"
 		logic_hash = "4b39dbcb276842a1306205cf2e51ce86b6d2aa21353d277df15f4ea3b3d97678"
 		score = 85
 		quality = 85
