@@ -21,7 +21,15 @@ parameters:
     type: csv
     default: |
         Category,DomainRegex,AllowRegex,Comment
+        Archive Utilities,7-zip.org,,7-Zip
+        Archive Utilities,rarlab.com|win-rar.com,,WinRAR
+        Data Transfer,filezilla-project.org,,FileZilla
+        Data Transfer,rclone.org,,Rclone
+        Data Transfer,winscp.net,,WinSCP
         Direct IP address,"\d{1,3}\.\d{1,3}\.\d{1,3}",^(127\.0\.0\.1|10\.|192\.168\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[0-1]\.),Generic IP regex
+        Enumeration,advanced-ip-scanner.com,,Advanced IP Scanner
+        Enumeration,advanced-port-scanner.com,,Advanced Port Scanner
+        Enumeration,angryip.org,,Angry IP Scanner
         Enumeration,joeware.net,,Adfind
         Enumeration,softperfect.com,,SoftPerfect Network Scanner
         Generic Bad,duckdns.org,,
@@ -166,6 +174,7 @@ parameters:
         Malware Hosting and Exfiltration,surgesend.com,,
         Malware Hosting and Exfiltration,teknik.io,,
         Malware Hosting and Exfiltration,temp.sh,,
+        Malware Hosting and Exfiltration,termbin.com,,
         Malware Hosting and Exfiltration,tmpfiles.org,,https://unit42.paloaltonetworks.com/cuba-ransomware-tropical-scorpius/
         Malware Hosting and Exfiltration,transfer.midrive.io,,
         Malware Hosting and Exfiltration,transfer.sh,,
