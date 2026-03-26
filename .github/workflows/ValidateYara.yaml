@@ -23,8 +23,14 @@ jobs:
           )"
           LINUX="$(
             curl -s https://api.github.com/repos/Velocidex/velociraptor/releases/tags/v$VERSION \
-            | grep browser_download_url | cut -d '"' -f 4 | grep linux-amd64-musl
+            | grep browser_download_url \
+            | cut -d '"' -f 4 \
+            | grep 'linux-amd64-musl$' \
+            | head -n 1
           )"
+          echo "VERSION=$VERSION"
+          echo "LINUX=$LINUX"
+          test -n "$LINUX"
           curl -L "$LINUX" -o ./velociraptor
           chmod +x ./velociraptor
           ./velociraptor version
