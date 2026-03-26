@@ -25,12 +25,7 @@ jobs:
             curl -s https://api.github.com/repos/Velocidex/velociraptor/releases/tags/v$VERSION \
             | grep browser_download_url | cut -d '"' -f 4 | grep linux-amd64-musl
           )"
-          WINDOWS="$(
-            curl -s https://api.github.com/repos/Velocidex/velociraptor/releases/tags/v$VERSION \
-            | grep browser_download_url | cut -d '"' -f 4 | grep 'windows-amd64\.exe'
-          )"
           curl -L "$LINUX" -o ./velociraptor
-          curl -L "$WINDOWS" -o ./velociraptor.exe
           chmod +x ./velociraptor
           ./velociraptor version
 
