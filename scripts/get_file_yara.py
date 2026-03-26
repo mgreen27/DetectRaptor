@@ -7,8 +7,16 @@ Simply set variables and run the script.
 import gzip
 import io
 import shutil
+from pathlib import Path
 
 from base_functions_yara import *
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+YARA_DIR = REPO_ROOT / "yara"
+EXCLUDED_RULE_NAMES = {
+    "WITHSECURELABS_Andariel_Tomcryptor",
+}
 
 # Set variables
 windows_yar = 'windows_file.yar'
@@ -17,8 +25,8 @@ macos_yar = 'macos_file.yar'
 urls = [
     "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip"
 ]
-extract_dir = "./yara-forge-rules"
-unsupported_modules = [ "hash", "dotnet", "console" ]
+extract_dir = str(SCRIPT_DIR / "yara-forge-rules")
+unsupported_modules = [ "hash", "dotnet", "console", "string" ]
 
 download_rules(urls,extract_dir)
 
@@ -31,7 +39,11 @@ for file in target_files:
     with open(file, 'r') as yara_file:
         lines = yara_file.readlines()
 
-    cleaned_lines = [line for line in lines if not is_corrupted(line)]
+    cleaned_lines = [
+        normalize_xor_ranges(normalize_string_escapes(line))
+        for line in lines
+        if not is_corrupted(line)
+    ]
     with open(file, 'w') as yara_file:
         yara_file.writelines(cleaned_lines)
 
@@ -39,9 +51,9 @@ parser = plyara.Plyara()
 
 for file in target_files:
     package = os.path.basename(file).split('.')[0].split('-')[-1]
-    windows_path = f'../yara/{package}_{windows_yar}'
-    linux_path = f'../yara/{package}_{linux_yar}'
-    macos_path = f'../yara/{package}_{macos_yar}'
+    windows_path = str(YARA_DIR / f'{package}_{windows_yar}')
+    linux_path = str(YARA_DIR / f'{package}_{linux_yar}')
+    macos_path = str(YARA_DIR / f'{package}_{macos_yar}')
 
     with open(file, 'r') as data:
         parsed_rules = parser.parse_string(data.read())
@@ -69,6 +81,10 @@ for file in target_files:
                 filtered_rules = f'import "{i}"\n' + filtered_rules
 
             for rule in os_rules:
+                if rule['rule_name'] in EXCLUDED_RULE_NAMES:
+                    print(f"Dropping {rule['rule_name']}: explicitly excluded")
+                    continue
+
                 # hacky fix for private rule with conflict
                 if 'windows' in output_path:
                     if 'AVASTTI_EXE_PRIVATE or AVASTTI_ELF_PRIVATE' in rule['raw_condition']:
@@ -86,10 +102,7 @@ for file in target_files:
                         print(f"Dropping {rule['rule_name']}: pe.number_of_signatures hits SSL issue" )
                         continue
 
-                if rule.get('tags'):
-                    filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
-                else:
-                    filtered_rules += f"rule {rule['rule_name']} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
+                filtered_rules += render_rule(rule)
 
             with open(output_path, 'w') as final_yara:
                 final_yara.write(filtered_rules)
@@ -108,7 +121,7 @@ for file in target_files:
                 continue
 
     # finally copy yara forge to yara folder for licence reference
-    shutil.copy(file, '../yara/' + os.path.basename(file))
+    shutil.copy(file, YARA_DIR / os.path.basename(file))
 
 
 parser.clear()

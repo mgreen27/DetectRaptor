@@ -1,0 +1,32 @@
+{
+  "linux_file_bundle": [
+    {
+      "Filename": "full_linux_file.yar"
+    }
+  ],
+  "linux_process_bundle": [
+    {
+      "Filename": "full_linux_process.yar"
+    }
+  ],
+  "macos_file_bundle": [
+    {
+      "Filename": "full_macos_file.yar"
+    }
+  ],
+  "webshell_bundle": [
+    {
+      "Filename": "webshells.yar"
+    }
+  ],
+  "windows_file_bundle": [
+    {
+      "Filename": "full_windows_file.yar"
+    }
+  ],
+  "windows_process_bundle": [
+    {
+      "Filename": "full_windows_process.yar"
+    }
+  ]
+}

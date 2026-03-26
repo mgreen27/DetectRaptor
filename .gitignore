@@ -2,3 +2,17 @@
 *.DS_Store
 **/.DS_Store
 
+# Python cache
+__pycache__/
+*.pyc
+
+# Local/generated YARA Forge downloads
+scripts/yara-forge-rules/
+scripts/yara-forge-rules-full.zip
+
+# Local build artifact
+DetectRaptorVQL.zip
+
+# Local Velociraptor binaries for validation
+velociraptor
+velociraptor.exe

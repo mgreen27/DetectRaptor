@@ -6,12 +6,18 @@ Simply set variables and run the script.
 
 """
 
+from pathlib import Path
+
 from base_functions_yara import *
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+YARA_DIR = REPO_ROOT / "yara"
+
 # set variables
-output_path = '../yara/webshells.yar'
+output_path = str(YARA_DIR / 'webshells.yar')
 urls = ["https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip"]
-extract_dir = "yara-forge-rules"
+extract_dir = str(SCRIPT_DIR / "yara-forge-rules")
 unsupported_modules = [ "hash", "dotnet", "console" ]
 
 download_rules(urls,extract_dir)
@@ -25,7 +31,11 @@ for root, _, files in os.walk(extract_dir):
     for file in target_files:
         with open(file, 'r') as yara_file:
             lines = yara_file.readlines()
-        cleaned_lines = [line for line in lines if not is_corrupted(line)]
+        cleaned_lines = [
+            normalize_xor_ranges(normalize_string_escapes(line))
+            for line in lines
+            if not is_corrupted(line)
+        ]
         with open(file, 'w') as yara_file:
             yara_file.writelines(cleaned_lines)
 
@@ -44,10 +54,7 @@ for file in target_files:
             filtered_rules = f'import "{i}"\n' + filtered_rules
 
         for rule in parsed_rules:
-            if rule.get('tags'):
-                filtered_rules += f"rule {rule['rule_name']} : {' '.join(rule['tags'])} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
-            else:
-                filtered_rules += f"rule {rule['rule_name']} {{\n    {rule.get('raw_meta','')}{rule.get('raw_strings','')}{rule['raw_condition']}}}\n"
+            filtered_rules += render_rule(rule)
 
         with open(output_path, 'w') as final_yara:
             final_yara.write(filtered_rules)

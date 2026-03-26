@@ -10,20 +10,30 @@ import requests
 import zipfile
 import fnmatch
 import plyara
+import re
 
 from base_functions import shasum  # Assuming this is defined in base_functions
 
 def download_rules(urls,extract_dir):
+    for root, _, files in os.walk(extract_dir):
+        if any(filename.endswith(".yar") for filename in files):
+            print(f"Using existing extracted rules in {extract_dir}")
+            return
+
     for url in urls:
         filename = os.path.basename(url)
 
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open(filename, 'wb') as file:
-                file.write(response.content)
-            print(f"Downloaded {filename}")
+        if os.path.exists(filename):
+            print(f"Using existing archive {filename}")
         else:
-            print(f"Failed to download file: Status code {response.status_code}")
+            response = requests.get(url)
+            if response.status_code == 200:
+                with open(filename, 'wb') as file:
+                    file.write(response.content)
+                print(f"Downloaded {filename}")
+            else:
+                print(f"Failed to download file: Status code {response.status_code}")
+                continue
 
         # Extract files scope target files
         os.makedirs(extract_dir, exist_ok=True)
@@ -36,6 +46,62 @@ def is_corrupted(line):
     corrupted_items = ['quality = -', 'score = -']
     # Check if the line contains any of the corrupted items
     return any(item in line for item in corrupted_items)
+
+
+def normalize_string_escapes(line):
+    # plyara rejects some valid YARA string escapes such as \r. Rewrite only
+    # the unsupported single-escaped sequences inside double-quoted strings.
+    unsupported = {
+        'r': '\\x0d',
+        'v': '\\x0b',
+        'a': '\\x07',
+    }
+
+    def replace_string(match):
+        content = match.group(1)
+        normalized = []
+        i = 0
+
+        while i < len(content):
+            ch = content[i]
+            if ch != '\\':
+                normalized.append(ch)
+                i += 1
+                continue
+
+            slash_count = 1
+            while i + slash_count < len(content) and content[i + slash_count] == '\\':
+                slash_count += 1
+
+            next_index = i + slash_count
+            if next_index < len(content) and slash_count % 2 == 1:
+                next_char = content[next_index]
+                if next_char in unsupported:
+                    normalized.append('\\' * (slash_count - 1))
+                    normalized.append(unsupported[next_char])
+                    i = next_index + 1
+                    continue
+
+            normalized.append('\\' * slash_count)
+            i += slash_count
+
+        return f'"{"".join(normalized)}"'
+
+    return re.sub(r'"((?:[^"\\]|\\.)*)"', replace_string, line)
+
+
+def normalize_xor_ranges(line):
+    # Plyara accepts decimal xor ranges more reliably than hex literals.
+    def replace_xor(match):
+        start = int(match.group(1), 16)
+        end = int(match.group(2), 16)
+        return f"xor({start}-{end})"
+
+    return re.sub(
+        r'xor\(\s*0x([0-9a-fA-F]+)\s*-\s*0x([0-9a-fA-F]+)\s*\)',
+        replace_xor,
+        line,
+    )
 
 # function to search for the string in the rule names and metadata
 def search_in_rules(rules, search_string, tag_ignore):
@@ -137,6 +203,17 @@ def find_modules_used(rules):
     return seen_modules
 
 
+def render_rule(rule):
+    scopes = ' '.join(rule.get('scopes', []))
+    scope_prefix = f"{scopes} " if scopes else ""
+    tags = f" : {' '.join(rule['tags'])}" if rule.get('tags') else ""
+    return (
+        f"{scope_prefix}rule {rule['rule_name']}{tags} {{\n"
+        f"    {rule.get('raw_meta', '')}{rule.get('raw_strings', '')}{rule['raw_condition']}"
+        f"}}\n"
+    )
+
+
 def drop_memory_only(rules):
     matching_rules = []
     seen_rule_names = set()
@@ -168,6 +245,21 @@ def find_windows(rules):
         tags = [tag.lower() for tag in rule.get('tags', [])]
         imports = [i.lower() for i in rule.get('imports', [])]
         is_windows = False
+
+        # Keep Linux/ELF-specific rules out of the Windows bundle even if the
+        # rule was otherwise picked up by the broad fallback logic below.
+        if any('elf' in import_name for import_name in imports):
+            continue
+
+        if any('linux' in tag or 'elf' in tag or 'macos' in tag or 'macho' in tag for tag in tags):
+            continue
+
+        if any(
+            'linux' in str(value).lower() or ' elf ' in str(value).lower() or 'macos' in str(value).lower() or 'macho' in str(value).lower()
+            for item in metadata
+            for value in item.values()
+        ):
+            continue
 
         # Check for the search string in tags
         for tag in tags:
