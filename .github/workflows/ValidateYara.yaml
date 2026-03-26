@@ -35,4 +35,4 @@ jobs:
           ./velociraptor version
 
     - name: Validate generated YARA bundles
-      run: bash ./scripts/validate_yara_with_velociraptor.sh ./velociraptor ./velociraptor.exe
+      run: bash ./scripts/validate_yara_with_velociraptor.sh
