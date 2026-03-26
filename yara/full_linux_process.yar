@@ -564,7 +564,7 @@ rule VOLEXITY_Apt_Malware_Elf_Catchdns_Aug20_Memory : DRIFTINGBAMBOO FILE MEMORY
 		$netw9 = "content-type" ascii wide
 		$netw10 = "otherhead_" ascii wide
 		$netw11 = "configfile" ascii wide
-		$apache = "HTTP/1.1 200 OK\r\nServer: Apache\r\nConnection: close\r\nContent-Type: %s\r\nContent-Length: %d\r\n"
+		$apache = "HTTP/1.1 200 OK\x0d\nServer: Apache\x0d\nConnection: close\x0d\nContent-Type: %s\x0d\nContent-Length: %d\x0d\n"
 		$cpp1 = "src/os.cpp"
 		$cpp2 = "src/test_catch_dns.cpp"
 

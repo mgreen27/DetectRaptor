@@ -93,70 +93,6 @@ parameters:
         	condition:
         		all of them
         }
-        rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
-            meta:
-        		description = "Detects the JSP implementation of the Godzilla Webshell."
-        		author = "threatintel@volexity.com"
-        		id = "47c8eab8-84d7-5566-b757-5a6dcc7579b7"
-        		date = "2021-11-08"
-        		modified = "2024-07-30"
-        		reference = "https://unit42.paloaltonetworks.com/manageengine-godzilla-nglite-kdcsponge/"
-        		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L1-L34"
-        		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-        		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
-        		score = 75
-        		quality = 80
-        		tags = "FILE, MEMORY"
-        		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
-        		os = "win,linux"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 6100
-        		version = 6
-        
-        	strings:
-        		$s1 = ".getWriter().write(base64Encode(" wide ascii
-        		$s2 = ".getAttribute(" ascii wide
-        		$s3 = "java.security.MessageDigest" ascii wide
-        		$auth1 = /String xc=\"[a-f0-9]{16}\"/ ascii wide
-        		$auth2 = "String pass=\"" ascii wide
-        		$magic = "class X extends ClassLoader{public X(ClassLoader z){super(z);}public Class Q"
-        		$magic2 = "<%@page import=\"java.util.*,javax.crypto.*,javax.crypto.spec.*\"%><%!class"
-        
-        	condition:
-        		all of ( $s* ) or all of ( $auth* ) or any of ( $magic* )
-        }
-        rule VOLEXITY_Susp_Jsp_General_Runtime_Exec_Req : FILE MEMORY {
-            meta:
-        		description = "Looks for a common design pattern in webshells where a request attribute is passed as an argument to exec()."
-        		author = "threatintel@volexity.com"
-        		id = "7f1539bd-a2f0-50dd-b500-ada4e0971d13"
-        		date = "2022-02-02"
-        		modified = "2024-07-30"
-        		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L35-L56"
-        		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-        		logic_hash = "d3048aba80c1c39f1673931cd2d7c5ed83045603b0ad204073fd788d0103a6c8"
-        		score = 65
-        		quality = 80
-        		tags = "FILE, MEMORY"
-        		hash1 = "4935f0c50057e28efa7376c734a4c66018f8d20157b6584399146b6c79a6de15"
-        		os = "win,linux"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "high"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 6450
-        		version = 3
-        
-        	strings:
-        		$s1 = "Runtime.getRuntime().exec(request." ascii
-        
-        	condition:
-        		$s1
-        }
         rule VOLEXITY_Webshell_Jsp_Regeorg : FILE MEMORY {
             meta:
         		description = "Detects the reGeorg webshells' JSP version."
@@ -410,41 +346,6 @@ parameters:
         	condition:
         		all of them
         }
-        rule VOLEXITY_Webshell_Java_Behinder_Shellservice : FILE MEMORY {
-            meta:
-        		description = "Looks for artifacts generated (generally seen in .class files) related to the Behinder webshell."
-        		author = "threatintel@volexity.com"
-        		id = "21c1e3e9-d048-5c60-9c21-8e54b27f359a"
-        		date = "2022-03-18"
-        		modified = "2024-07-30"
-        		reference = "https://github.com/MountCloud/BehinderClientSource/blob/master/src/main/java/net/rebeyond/behinder/core/ShellService.java"
-        		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L1-L29"
-        		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-        		logic_hash = "373a8d4ef81e9bbbf1f24ebf0389e7da4b73f88786cc8e1d286ccc9f4c36debc"
-        		score = 75
-        		quality = 30
-        		tags = "FILE, MEMORY"
-        		hash1 = "9a9882f9082a506ed0fc4ddaedd50570c5762deadcaf789ac81ecdbb8cf6eff2"
-        		os = "win,linux"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 6615
-        		version = 3
-        
-        	strings:
-        		$s1 = "CONNECT" ascii fullword
-        		$s2 = "DISCONNECT" ascii fullword
-        		$s3 = "socket_" ascii fullword
-        		$s4 = "targetIP" ascii fullword
-        		$s5 = "targetPort" ascii fullword
-        		$s6 = "socketHash" ascii fullword
-        		$s7 = "extraData" ascii fullword
-        
-        	condition:
-        		all of them
-        }
         rule VOLEXITY_Malware_Golang_Pantegana : FILE MEMORY {
             meta:
         		description = "Detects PANTEGANA, a Golang backdoor used by a range of threat actors due to its public availability."
@@ -568,35 +469,6 @@ parameters:
         
         	condition:
         		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
-        }
-        rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
-            meta:
-        		description = "Detection for the COMPLYSHELL webshell."
-        		author = "threatintel@volexity.com"
-        		id = "6b44b5bc-a75f-573c-b9c3-562b7874e408"
-        		date = "2023-12-13"
-        		modified = "2024-01-12"
-        		reference = "TIB-20231215"
-        		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
-        		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-        		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
-        		score = 75
-        		quality = 80
-        		tags = "UTA0178, FILE, MEMORY"
-        		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
-        		os = "linux"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 9995
-        		version = 4
-        
-        	strings:
-        		$s = "eval{my $c=Crypt::RC4->new("
-        
-        	condition:
-        		$s
         }
         rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
             meta:
@@ -995,59 +867,6 @@ parameters:
         	condition:
         		all of ( $man* ) or ( #code1 > 8 and #code2 >= 2 and #code3 >= 2 )
         }
-        rule VOLEXITY_Apt_Malware_Any_Macma_A : STORMBAMBOO FILE MEMORY {
-            meta:
-        		description = "Detects variants of the MACMA backdoor, variants of MACMA have been discovered for macOS and android."
-        		author = "threatintel@volexity.com"
-        		id = "6ab45af1-41e5-53fc-9297-e2bc07ebf797"
-        		date = "2021-11-12"
-        		modified = "2024-08-02"
-        		reference = "https://blog.google/threat-analysis-group/analyzing-watering-hole-campaign-using-macos-exploits/"
-        		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-08-02 StormBamboo/rules.yar#L63-L111"
-        		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-        		logic_hash = "7ebaff9fddf6491d6b1ed9ab14c1b87dc8df850536e55aa723d625a593b33ed7"
-        		score = 75
-        		quality = 53
-        		tags = "STORMBAMBOO, FILE, MEMORY"
-        		hash1 = "cf5edcff4053e29cb236d3ed1fe06ca93ae6f64f26e25117d68ee130b9bc60c8"
-        		hash2 = "9b71fad3280cf36501fe110e022845b29c1fb1343d5250769eada7c36bc45f70"
-        		hash3 = "623f99cbe20af8b79cbfea7f485d47d3462d927153d24cac4745d7043c15619a"
-        		hash4 = "d599d7814adbab0f1442f5a10074e00f3a776ce183ea924abcd6154f0d068bb4"
-        		os = "all"
-        		os_arch = "all"
-        		report1 = "TIB-20231221"
-        		report2 = "TIB-20240227"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 6114
-        		version = 9
-        
-        	strings:
-        		$magic1 = "curl -o %s http://cgi1.apnic.net/cgi-bin/my-ip.php" fullword ascii
-        		$magic2 = "[FST%d]: WhyUserCancel UNKNOW: %d" fullword ascii
-        		$magic3 = "[FST%d]: wait C2 prepare ready TIMEOUT, fd: %d" fullword ascii
-        		$magic4 = "[FST%d]: wait C2 ack file content TIMEOUT, fd: %d" fullword ascii
-        		$magic5 = "[FST%d]: TIMER_CHECK_CANCEL WhyUserCancel UNKNOW: %d" fullword ascii
-        		$magic6 = "[FST%d]: encrypt file info key=%s, crc v1=0x%p, v2=0x%p" fullword ascii
-        		$s1 = "auto bbbbbaaend:%d path %s" fullword ascii
-        		$s2 = "0keyboardRecirderStopv" fullword ascii
-        		$s3 = "curl begin..." fullword ascii
-        		$s4 = "curl over!" fullword ascii
-        		$s5 = "kAgent fail" fullword ascii
-        		$s6 = "put !!!!" fullword ascii
-        		$s7 = "vret!!!!!! %d" fullword ascii
-        		$s8 = "save Setting Success" fullword ascii
-        		$s9 = "Start Filesyste Search." fullword ascii
-        		$s10 = "./SearchFileTool" fullword ascii
-        		$s11 = "put unknow exception in MonitorQueue" fullword ascii
-        		$s12 = "./netcfg2.ini" fullword ascii
-        		$s13 = ".killchecker_" fullword ascii
-        		$s14 = "./param.ini" fullword ascii
-        
-        	condition:
-        		any of ( $magic* ) or 7 of ( $s* )
-        }
         rule VOLEXITY_Apt_Malware_Win_Pocostick_Jul23 : STORMBAMBOO FILE MEMORY {
             meta:
         		description = "Detects the July 2023 POCOSTICK variant. These strings are only visible in memory after several rounds of shellcode decryption."
@@ -1183,42 +1002,6 @@ parameters:
         
         	condition:
         		$s1
-        }
-        rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
-            meta:
-        		description = "Detect the UPSTYLE webshell."
-        		author = "threatintel@volexity.com"
-        		id = "45726f35-8b3e-5095-b145-9e7f6da6838b"
-        		date = "2024-04-11"
-        		modified = "2024-04-12"
-        		reference = "TIB-20240412"
-        		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
-        		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-        		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
-        		score = 75
-        		quality = 80
-        		tags = "UTA0218, FILE, MEMORY"
-        		hash1 = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
-        		hash2 = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
-        		hash3 = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
-        		os = "linux"
-        		os_arch = "all"
-        		scan_context = "file,memory"
-        		severity = "critical"
-        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-        		rule_id = 10429
-        		version = 2
-        
-        	strings:
-        		$stage1_str1 = "/opt/pancfg/mgmt/licenses/PA_VM"
-        		$stage1_str2 = "exec(base64."
-        		$stage2_str1 = "signal.signal(signal.SIGTERM,stop)"
-        		$stage2_str2 = "exec(base64."
-        		$stage3_str1 = "write(\"/*\"+output+\"*/\")"
-        		$stage3_str2 = "SHELL_PATTERN"
-        
-        	condition:
-        		all of ( $stage1* ) or all of ( $stage2* ) or all of ( $stage3* )
         }
         rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
             meta:
@@ -3372,9 +3155,9 @@ parameters:
         		xor_s3 = "%s as %s\\%s: %d"
         
         	strings:
-        		$s1 = "%02d/%02d/%02d %02d:%02d:%02d" xor(0x01-0xff)
-        		$s2 = "Started service %s on %s" xor(0x01-0xff)
-        		$s3 = "%s as %s\\%s: %d" xor(0x01-0xff)
+        		$s1 = "%02d/%02d/%02d %02d:%02d:%02d" xor(1-255)
+        		$s2 = "Started service %s on %s" xor(1-255)
+        		$s3 = "%s as %s\\%s: %d" xor(1-255)
         		$fp1 = "MalwareRemovalTool"
         
         	condition:
