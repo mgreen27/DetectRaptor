@@ -1,17 +1,23 @@
 name: Validate generated YARA
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  workflow_run:
+    workflows:
+      - Weekly yara file update
+      - Weekly yara process update
+      - Weekly webshell update
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
   validate:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: master
 
     - name: Download Velociraptor binaries
       run: |
