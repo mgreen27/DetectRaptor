@@ -27,6 +27,237 @@ rule ARKBIRD_SOLG_APT_UNC2452_Webshell_Chopper_Mar_2021_1 : FILE {
 	condition:
 		filesize > 1KB and 1 of ( $l* ) and 3 of ( $c* )
 }
+rule VOLEXITY_Malware_Win_Iis_Shellsave : WHEELEDASH FILE MEMORY {
+    meta:
+		description = "Detects an AutoIT backdoor designed to run on IIS servers and to install a webshell."
+		author = "threatintel@volexity.com"
+		id = "a89defa5-4b22-5650-a0c0-f4b3cf3377a7"
+		date = "2021-11-17"
+		modified = "2023-08-17"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-12-06 - XEGroup/indicators/yara.yar#L27-L49"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "f34d6f4ecaa4cde5965f6b0deac55c7133a2be96f5c466f34775be6e7f730493"
+		score = 75
+		quality = 80
+		tags = "WHEELEDASH, FILE, MEMORY"
+		hash1 = "21683e02e11c166d0cf616ff9a1a4405598db7f4adfc87b205082ae94f83c742"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6146
+		version = 4
+
+	strings:
+		$s1 = "getdownloadshell" ascii
+		$s2 = "deleteisme" ascii
+		$s3 = "sitepapplication" ascii
+		$s4 = "getapplicationpool" ascii
+
+	condition:
+		all of them
+}
+rule VOLEXITY_Webshell_Aspx_Regeorgtunnel : FILE MEMORY {
+    meta:
+		description = "A variation of the reGeorgtunnel open-source webshell."
+		author = "threatintel@volexity.com"
+		id = "b8aa27c9-a28a-5051-8f81-1184f28842ed"
+		date = "2021-03-02"
+		modified = "2024-10-18"
+		reference = "https://github.com/sensepost/reGeorg/blob/master/tunnel.aspx"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L26-L56"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		hash = "406b680edc9a1bb0e2c7c451c56904857848b5f15570401450b73b232ff38928"
+		logic_hash = "ea3d0532cb609682922469e8272dc8061efca3b3ae27df738ef2646e30404c6f"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 4979
+		version = 4
+
+	strings:
+		$s1 = "System.Net.Sockets"
+		$s2 = "System.Text.Encoding.Default.GetString(Convert.FromBase64String(StrTr(Request.Headers.Get"
+		$t1 = ".Split('|')"
+		$t2 = "Request.Headers.Get"
+		$t3 = ".Substring("
+		$t4 = "new Socket("
+		$t5 = "IPAddress ip;"
+
+	condition:
+		all of ( $s* ) or all of ( $t* )
+}
+rule VOLEXITY_Apt_Webshell_Aspx_Sportsball : FILE MEMORY {
+    meta:
+		description = "The SPORTSBALL webshell, observed in targeted Microsoft Exchange attacks in 2021. SPORTSBALL was later discovered to be a variant of HYPERSHELL, a publicly available webshell."
+		author = "threatintel@volexity.com"
+		id = "25b23a4c-8fc7-5d6f-b4b5-46fe2c1546d8"
+		date = "2021-03-01"
+		modified = "2025-07-24"
+		reference = "https://github.com/misterch0c/APT34/blob/e62f3d14ec78bea5c98d3c895162ca1e47676c18/Webshells_and_Panel/HyperShell/HyperShell/Shell/simple.aspx"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L57-L89"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		hash = "2fa06333188795110bba14a482020699a96f76fb1ceb80cbfa2df9d3008b5b0a"
+		logic_hash = "5ec5e52922e97a3080d397b69b2f42f09daa995271e218ea085fa2ec4e3abad2"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 4968
+		version = 6
+
+	strings:
+		$uniq1 = "HttpCookie newcook = new HttpCookie(\"fqrspt\", HttpContext.Current.Request.Form"
+		$uniq2 = "ZN2aDAB4rXsszEvCLrzgcvQ4oi5J1TuiRULlQbYwldE="
+		$s1 = "Result.InnerText = string.Empty;"
+		$s2 = "newcook.Expires = DateTime.Now.AddDays("
+		$s3 = "System.Diagnostics.Process process = new System.Diagnostics.Process();"
+		$s4 = "process.StandardInput.WriteLine(HttpContext.Current.Request.Form[\""
+		$s5 = "else if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form[\""
+		$s6 = "<input type=\"submit\" value=\"Upload\" />"
+
+	condition:
+		any of ( $uniq* ) or all of ( $s* )
+}
+rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
+    meta:
+		description = "Detect the UPSTYLE webshell."
+		author = "threatintel@volexity.com"
+		id = "45726f35-8b3e-5095-b145-9e7f6da6838b"
+		date = "2024-04-11"
+		modified = "2024-04-12"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
+		score = 75
+		quality = 80
+		tags = "UTA0218, FILE, MEMORY"
+		hash1 = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
+		hash2 = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
+		hash3 = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10429
+		version = 2
+
+	strings:
+		$stage1_str1 = "/opt/pancfg/mgmt/licenses/PA_VM"
+		$stage1_str2 = "exec(base64."
+		$stage2_str1 = "signal.signal(signal.SIGTERM,stop)"
+		$stage2_str2 = "exec(base64."
+		$stage3_str1 = "write(\"/*\"+output+\"*/\")"
+		$stage3_str2 = "SHELL_PATTERN"
+
+	condition:
+		all of ( $stage1* ) or all of ( $stage2* ) or all of ( $stage3* )
+}
+rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
+    meta:
+		description = "Detection for the COMPLYSHELL webshell."
+		author = "threatintel@volexity.com"
+		id = "6b44b5bc-a75f-573c-b9c3-562b7874e408"
+		date = "2023-12-13"
+		modified = "2024-01-12"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
+		score = 75
+		quality = 80
+		tags = "UTA0178, FILE, MEMORY"
+		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 9995
+		version = 4
+
+	strings:
+		$s = "eval{my $c=Crypt::RC4->new("
+
+	condition:
+		$s
+}
+rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
+    meta:
+		description = "Detection for a custom webshell seen on Exchange server. The webshell contains two functions, the first is to act as a Tunnel, using code borrowed from reGeorg, the second is custom code to execute arbitrary .NET code."
+		author = "threatintel@volexity.com"
+		id = "2f07748a-a52f-5ac7-9d3e-50fd3ecea271"
+		date = "2023-12-12"
+		modified = "2024-09-30"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L26-L52"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
+		score = 75
+		quality = 30
+		tags = "UTA0178, FILE, MEMORY"
+		hash1 = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 9994
+		version = 6
+
+	strings:
+		$s1 = "=Convert.FromBase64String(System.Text.Encoding.Default.GetString(" ascii
+		$re = /Assembly\.Load\(errors\)\.CreateInstance\("[a-z0-9A-Z]{4,12}"\).GetHashCode\(\);/
+
+	condition:
+		for any i in ( 0 .. math.min ( #s1 , 100 ) ) : ( $re in ( @s1 [ i ] .. @s1 [ i ] + 512 ) )
+}
+rule VOLEXITY_Webshell_Aspx_Regeorg : FILE MEMORY {
+    meta:
+		description = "Detects the reGeorg webshell based on common strings in the webshell. May also detect other webshells which borrow code from ReGeorg."
+		author = "threatintel@volexity.com"
+		id = "02365a30-769e-5c47-8d36-a79608ffd121"
+		date = "2018-08-29"
+		modified = "2024-01-09"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L53-L86"
+		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
+		hash = "9d901f1a494ffa98d967ee6ee30a46402c12a807ce425d5f51252eb69941d988"
+		logic_hash = "4fed023e85a32052917f6db1e2e155c91586538938c03acc59f200a8264888ca"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 410
+		version = 7
+
+	strings:
+		$a1 = "every office needs a tool like Georg" ascii
+		$a2 = "cmd = Request.QueryString.Get(\"cmd\")" ascii
+		$a3 = "exKak.Message" ascii
+		$proxy1 = "if (rkey != \"Content-Length\" && rkey != \"Transfer-Encoding\")"
+		$proxy_b1 = "StreamReader repBody = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(\"UTF-8\"));" ascii
+		$proxy_b2 = "string rbody = repBody.ReadToEnd();" ascii
+		$proxy_b3 = "Response.AddHeader(\"Content-Length\", rbody.Length.ToString());" ascii
+
+	condition:
+		any of ( $a* ) or $proxy1 or all of ( $proxy_b* )
+}
 rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
     meta:
 		description = "Detects the JSP implementation of the Godzilla Webshell."
@@ -248,236 +479,62 @@ rule VOLEXITY_Susp_Php_Call_User_Func : FILE {
 	condition:
 		$s1
 }
-rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
+rule SEKOIA_Apt_Unk_Hrserv_Webshell_Strings : FILE {
     meta:
-		description = "Detection for the COMPLYSHELL webshell."
-		author = "threatintel@volexity.com"
-		id = "6b44b5bc-a75f-573c-b9c3-562b7874e408"
-		date = "2023-12-13"
-		modified = "2024-01-12"
-		reference = "TIB-20231215"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
+		description = "Detects HrServ web shell based on strings"
+		author = "Sekoia.io"
+		id = "684fd41c-9ea6-4f4e-8db4-82325a2ff80b"
+		date = "2023-11-23"
+		modified = "2024-12-19"
+		reference = "https://github.com/SEKOIA-IO/Community"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/LICENSE.md"
+		logic_hash = "b5650e08227bbdb82c635bd67abae57e3107be9126639619809bfbe2a7ffee89"
 		score = 75
 		quality = 80
-		tags = "UTA0178, FILE, MEMORY"
-		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
-		os = "linux"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 9995
-		version = 4
+		tags = "FILE"
+		version = "1.0"
+		classification = "TLP:CLEAR"
 
 	strings:
-		$s = "eval{my $c=Crypt::RC4->new("
+		$ = "open file error!"
+		$ = "create file error!"
+		$ = "[!] CreatePipe failed."
+		$ = "[!] CreateProcess failed."
+		$ = "[!] CreateProcess success,no result return."
+		$ = "; cadataIV="
+		$ = "cadataKey="
 
 	condition:
-		$s
+		uint16be( 0 ) == 0x4d5a and filesize < 300KB and 5 of them
 }
-rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
+rule SEKOIA_Webshell_Wso_Webshell_Strings {
     meta:
-		description = "Detection for a custom webshell seen on Exchange server. The webshell contains two functions, the first is to act as a Tunnel, using code borrowed from reGeorg, the second is custom code to execute arbitrary .NET code."
-		author = "threatintel@volexity.com"
-		id = "2f07748a-a52f-5ac7-9d3e-50fd3ecea271"
-		date = "2023-12-12"
-		modified = "2024-09-30"
-		reference = "TIB-20231215"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L26-L52"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
-		score = 75
-		quality = 55
-		tags = "UTA0178, FILE, MEMORY"
-		hash1 = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 9994
-		version = 6
-
-	strings:
-		$s1 = "=Convert.FromBase64String(System.Text.Encoding.Default.GetString(" ascii
-		$re = /Assembly\.Load\(errors\)\.CreateInstance\("[a-z0-9A-Z]{4,12}"\).GetHashCode\(\);/
-
-	condition:
-		for any i in ( 0 .. math.min ( #s1 , 100 ) ) : ( $re in ( @s1 [ i ] .. @s1 [ i ] + 512 ) )
-}
-rule VOLEXITY_Webshell_Aspx_Regeorg : FILE MEMORY {
-    meta:
-		description = "Detects the reGeorg webshell based on common strings in the webshell. May also detect other webshells which borrow code from ReGeorg."
-		author = "threatintel@volexity.com"
-		id = "02365a30-769e-5c47-8d36-a79608ffd121"
-		date = "2018-08-29"
-		modified = "2024-01-09"
-		reference = "TIB-20231215"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L53-L86"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		hash = "9d901f1a494ffa98d967ee6ee30a46402c12a807ce425d5f51252eb69941d988"
-		logic_hash = "4fed023e85a32052917f6db1e2e155c91586538938c03acc59f200a8264888ca"
+		description = "Detects the WSO webshells"
+		author = "Sekoia.io"
+		id = "84340792-73a4-4d61-9957-6cfa1f6444a7"
+		date = "2022-04-22"
+		modified = "2024-12-19"
+		reference = "https://github.com/SEKOIA-IO/Community"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/LICENSE.md"
+		logic_hash = "4d6966a34dc8e7390913857144da106affea14668d1c2c11a05be62a6e625c8f"
 		score = 75
 		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 410
-		version = 7
+		tags = ""
+		version = "1.0"
+		classification = "TLP:CLEAR"
 
 	strings:
-		$a1 = "every office needs a tool like Georg" ascii
-		$a2 = "cmd = Request.QueryString.Get(\"cmd\")" ascii
-		$a3 = "exKak.Message" ascii
-		$proxy1 = "if (rkey != \"Content-Length\" && rkey != \"Transfer-Encoding\")"
-		$proxy_b1 = "StreamReader repBody = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(\"UTF-8\"));" ascii
-		$proxy_b2 = "string rbody = repBody.ReadToEnd();" ascii
-		$proxy_b3 = "Response.AddHeader(\"Content-Length\", rbody.Length.ToString());" ascii
+		$ = "decrypt($str,$pwd){$pwd=base64_encode($pwd);"
+		$ = "prototype(md5($_SERVER['HTTP_HOST'])"
+		$ = "$_COOKIE[md5($_SERVER['HTTP_HOST'])."
+		$ = "set(a,c,p1,p2,p3,charset)"
+		$ = "(($p & 0x0008) ? (($p & 0x0400)"
+		$ = "gcc','lcc','cc','ld','make','php"
 
 	condition:
-		any of ( $a* ) or $proxy1 or all of ( $proxy_b* )
-}
-rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
-    meta:
-		description = "Detect the UPSTYLE webshell."
-		author = "threatintel@volexity.com"
-		id = "45726f35-8b3e-5095-b145-9e7f6da6838b"
-		date = "2024-04-11"
-		modified = "2024-04-12"
-		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
-		score = 75
-		quality = 80
-		tags = "UTA0218, FILE, MEMORY"
-		hash1 = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
-		hash2 = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
-		hash3 = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
-		os = "linux"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10429
-		version = 2
-
-	strings:
-		$stage1_str1 = "/opt/pancfg/mgmt/licenses/PA_VM"
-		$stage1_str2 = "exec(base64."
-		$stage2_str1 = "signal.signal(signal.SIGTERM,stop)"
-		$stage2_str2 = "exec(base64."
-		$stage3_str1 = "write(\"/*\"+output+\"*/\")"
-		$stage3_str2 = "SHELL_PATTERN"
-
-	condition:
-		all of ( $stage1* ) or all of ( $stage2* ) or all of ( $stage3* )
-}
-rule VOLEXITY_Webshell_Aspx_Regeorgtunnel : FILE MEMORY {
-    meta:
-		description = "A variation of the reGeorgtunnel open-source webshell."
-		author = "threatintel@volexity.com"
-		id = "b8aa27c9-a28a-5051-8f81-1184f28842ed"
-		date = "2021-03-02"
-		modified = "2024-10-18"
-		reference = "https://github.com/sensepost/reGeorg/blob/master/tunnel.aspx"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L26-L56"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		hash = "406b680edc9a1bb0e2c7c451c56904857848b5f15570401450b73b232ff38928"
-		logic_hash = "ea3d0532cb609682922469e8272dc8061efca3b3ae27df738ef2646e30404c6f"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 4979
-		version = 4
-
-	strings:
-		$s1 = "System.Net.Sockets"
-		$s2 = "System.Text.Encoding.Default.GetString(Convert.FromBase64String(StrTr(Request.Headers.Get"
-		$t1 = ".Split('|')"
-		$t2 = "Request.Headers.Get"
-		$t3 = ".Substring("
-		$t4 = "new Socket("
-		$t5 = "IPAddress ip;"
-
-	condition:
-		all of ( $s* ) or all of ( $t* )
-}
-rule VOLEXITY_Apt_Webshell_Aspx_Sportsball : FILE MEMORY {
-    meta:
-		description = "The SPORTSBALL webshell, observed in targeted Microsoft Exchange attacks in 2021. SPORTSBALL was later discovered to be a variant of HYPERSHELL, a publicly available webshell."
-		author = "threatintel@volexity.com"
-		id = "25b23a4c-8fc7-5d6f-b4b5-46fe2c1546d8"
-		date = "2021-03-01"
-		modified = "2025-07-24"
-		reference = "https://github.com/misterch0c/APT34/blob/e62f3d14ec78bea5c98d3c895162ca1e47676c18/Webshells_and_Panel/HyperShell/HyperShell/Shell/simple.aspx"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L57-L89"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		hash = "2fa06333188795110bba14a482020699a96f76fb1ceb80cbfa2df9d3008b5b0a"
-		logic_hash = "5ec5e52922e97a3080d397b69b2f42f09daa995271e218ea085fa2ec4e3abad2"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 4968
-		version = 6
-
-	strings:
-		$uniq1 = "HttpCookie newcook = new HttpCookie(\"fqrspt\", HttpContext.Current.Request.Form"
-		$uniq2 = "ZN2aDAB4rXsszEvCLrzgcvQ4oi5J1TuiRULlQbYwldE="
-		$s1 = "Result.InnerText = string.Empty;"
-		$s2 = "newcook.Expires = DateTime.Now.AddDays("
-		$s3 = "System.Diagnostics.Process process = new System.Diagnostics.Process();"
-		$s4 = "process.StandardInput.WriteLine(HttpContext.Current.Request.Form[\""
-		$s5 = "else if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form[\""
-		$s6 = "<input type=\"submit\" value=\"Upload\" />"
-
-	condition:
-		any of ( $uniq* ) or all of ( $s* )
-}
-rule VOLEXITY_Malware_Win_Iis_Shellsave : WHEELEDASH FILE MEMORY {
-    meta:
-		description = "Detects an AutoIT backdoor designed to run on IIS servers and to install a webshell."
-		author = "threatintel@volexity.com"
-		id = "a89defa5-4b22-5650-a0c0-f4b3cf3377a7"
-		date = "2021-11-17"
-		modified = "2023-08-17"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/2021/2021-12-06 - XEGroup/indicators/yara.yar#L27-L49"
-		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
-		logic_hash = "f34d6f4ecaa4cde5965f6b0deac55c7133a2be96f5c466f34775be6e7f730493"
-		score = 75
-		quality = 80
-		tags = "WHEELEDASH, FILE, MEMORY"
-		hash1 = "21683e02e11c166d0cf616ff9a1a4405598db7f4adfc87b205082ae94f83c742"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6146
-		version = 4
-
-	strings:
-		$s1 = "getdownloadshell" ascii
-		$s2 = "deleteisme" ascii
-		$s3 = "sitepapplication" ascii
-		$s4 = "getapplicationpool" ascii
-
-	condition:
-		all of them
+		3 of them
 }
 rule SEKOIA_Tool_Pivotnacci_Webshell : FILE {
     meta:
@@ -510,35 +567,6 @@ rule SEKOIA_Tool_Pivotnacci_Webshell : FILE {
 	condition:
 		3 of them and filesize < 10KB
 }
-rule SEKOIA_Apt_Unk_Hrserv_Webshell_Strings : FILE {
-    meta:
-		description = "Detects HrServ web shell based on strings"
-		author = "Sekoia.io"
-		id = "684fd41c-9ea6-4f4e-8db4-82325a2ff80b"
-		date = "2023-11-23"
-		modified = "2024-12-19"
-		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/LICENSE.md"
-		logic_hash = "b5650e08227bbdb82c635bd67abae57e3107be9126639619809bfbe2a7ffee89"
-		score = 75
-		quality = 80
-		tags = "FILE"
-		version = "1.0"
-		classification = "TLP:CLEAR"
-
-	strings:
-		$ = "open file error!"
-		$ = "create file error!"
-		$ = "[!] CreatePipe failed."
-		$ = "[!] CreateProcess failed."
-		$ = "[!] CreateProcess success,no result return."
-		$ = "; cadataIV="
-		$ = "cadataKey="
-
-	condition:
-		uint16be( 0 ) == 0x4d5a and filesize < 300KB and 5 of them
-}
 rule SEKOIA_Apt_Oilrig_Webshell : FILE {
     meta:
 		description = "Detects a webshell used by OilRig"
@@ -564,35 +592,6 @@ rule SEKOIA_Apt_Oilrig_Webshell : FILE {
 
 	condition:
 		2 of them and filesize < 80KB
-}
-rule SEKOIA_Tool_Webshell_B374K_Strings : FILE {
-    meta:
-		description = "Detects b374k webshell"
-		author = "Sekoia.io"
-		id = "f53fc668-e1fc-4b85-b850-59aceefb6418"
-		date = "2024-09-06"
-		modified = "2024-12-19"
-		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/LICENSE.md"
-		hash = "1d27b23fceecbb9e854c41f6a8fb878e"
-		hash = "71fd853a3f3efc3dc2846e866187ee59"
-		hash = "187e001c32487d0d68197ddb7e7796c3"
-		hash = "6eac497dfc1020a8475e95542fad197e"
-		hash = "61c6a0bc15efa442853f04bb276ac96e"
-		logic_hash = "b085a50d50fc1fd06d6f75397cf1fa6fa1bc4a0d18b56ed3458990f4abde0632"
-		score = 75
-		quality = 80
-		tags = "FILE"
-		version = "1.0"
-		classification = "TLP:CLEAR"
-
-	strings:
-		$ = "$func('$x','ev'.'al'.'("
-		$ = "(ba'.'se'.'64'.'_de'.'co'.'de($x)))"
-
-	condition:
-		2 of them and filesize < 1MB
 }
 rule SEKOIA_Webshell_Icesword_Strings : FILE {
     meta:
@@ -622,34 +621,6 @@ rule SEKOIA_Webshell_Icesword_Strings : FILE {
 	condition:
 		2 of them and filesize < 100KB
 }
-rule SEKOIA_Webshell_Wso_Webshell_Strings {
-    meta:
-		description = "Detects the WSO webshells"
-		author = "Sekoia.io"
-		id = "84340792-73a4-4d61-9957-6cfa1f6444a7"
-		date = "2022-04-22"
-		modified = "2024-12-19"
-		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/LICENSE.md"
-		logic_hash = "4d6966a34dc8e7390913857144da106affea14668d1c2c11a05be62a6e625c8f"
-		score = 75
-		quality = 80
-		tags = ""
-		version = "1.0"
-		classification = "TLP:CLEAR"
-
-	strings:
-		$ = "decrypt($str,$pwd){$pwd=base64_encode($pwd);"
-		$ = "prototype(md5($_SERVER['HTTP_HOST'])"
-		$ = "$_COOKIE[md5($_SERVER['HTTP_HOST'])."
-		$ = "set(a,c,p1,p2,p3,charset)"
-		$ = "(($p & 0x0008) ? (($p & 0x0400)"
-		$ = "gcc','lcc','cc','ld','make','php"
-
-	condition:
-		3 of them
-}
 rule SEKOIA_Generic_Php_Webshell : FILE {
     meta:
 		description = "Detects generic webshell"
@@ -672,6 +643,35 @@ rule SEKOIA_Generic_Php_Webshell : FILE {
 
 	condition:
 		all of them and filesize < 500
+}
+rule SEKOIA_Tool_Webshell_B374K_Strings : FILE {
+    meta:
+		description = "Detects b374k webshell"
+		author = "Sekoia.io"
+		id = "f53fc668-e1fc-4b85-b850-59aceefb6418"
+		date = "2024-09-06"
+		modified = "2024-12-19"
+		reference = "https://github.com/SEKOIA-IO/Community"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/a599920e60b655ef05924b8557bbf8bac0b343bb/LICENSE.md"
+		hash = "1d27b23fceecbb9e854c41f6a8fb878e"
+		hash = "71fd853a3f3efc3dc2846e866187ee59"
+		hash = "187e001c32487d0d68197ddb7e7796c3"
+		hash = "6eac497dfc1020a8475e95542fad197e"
+		hash = "61c6a0bc15efa442853f04bb276ac96e"
+		logic_hash = "b085a50d50fc1fd06d6f75397cf1fa6fa1bc4a0d18b56ed3458990f4abde0632"
+		score = 75
+		quality = 80
+		tags = "FILE"
+		version = "1.0"
+		classification = "TLP:CLEAR"
+
+	strings:
+		$ = "$func('$x','ev'.'al'.'("
+		$ = "(ba'.'se'.'64'.'_de'.'co'.'de($x)))"
+
+	condition:
+		2 of them and filesize < 1MB
 }
 rule SEKOIA_Weevely_Webshell_Payload : FILE {
     meta:
@@ -745,1714 +745,307 @@ rule SYNACKTIV_SYNACKTIV_WEBSHELL_ASPX_Suo5_May25 : WEBSHELL COMMODITY FILE {
 	condition:
 		filesize < 100KB and ( $user_agent or ( ( $header or $xor ) and 8 of ( $s* ) ) or 12 of ( $s* ) )
 }
-rule SIGNATURE_BASE_Chinachopper_Generic : FILE {
+rule SIGNATURE_BASE_WEBSHELL_JSP_Nov21_1 : FILE {
     meta:
-		description = "China Chopper Webshells - PHP and ASPX"
+		description = "Detects JSP webshells"
 		author = "Florian Roth (Nextron Systems)"
-		id = "2473cef1-88cf-5b76-a87a-2978e6780b4f"
-		date = "2015-03-10"
-		modified = "2022-10-27"
-		reference = "https://www.fireeye.com/content/dam/legacy/resources/pdfs/fireeye-china-chopper-report.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_webshell_chinachopper.yar#L2-L19"
+		id = "117eed28-c44e-5983-b4c7-b555fc06d923"
+		date = "2021-11-23"
+		modified = "2023-12-05"
+		reference = "https://www.ic3.gov/Media/News/2021/211117-2.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_spring4shell.yar#L2-L17"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "34cb81b077d6dae5b4565001b2ab28897c6c554f00aa102601fb9c416c6c0f09"
-		score = 75
+		logic_hash = "1dac7706421961c71ba6f8d7a223b80e4b77bf206bfb64ee18c7cc894b062a3c"
+		score = 70
 		quality = 85
 		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 
 	strings:
-		$x_aspx = /%@\sPage\sLanguage=.Jscript.%><%eval\(Request\.Item\[.{,100}unsafe/
-		$x_php = /<?php.\@eval\(\$_POST./
-		$fp1 = "GET /"
-		$fp2 = "POST /"
+		$x1 = "request.getParameter(\"pwd\")" ascii
+		$x2 = "excuteCmd(request.getParameter(" ascii
+		$x3 = "getRuntime().exec (request.getParameter(" ascii
+		$x4 = "private static final String PW = \"whoami\"" ascii
 
 	condition:
-		filesize < 300KB and 1 of ( $x* ) and not 1 of ( $fp* )
+		filesize < 400KB and 1 of them
 }
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Sharepoint_Drop_CVE_2025_53770_Jul25 : CVE_2025_53770 FILE {
+rule SIGNATURE_BASE_EXPL_POC_Springcore_0Day_Webshell_Mar22_1 : FILE {
     meta:
-		description = "Detects ASPX web shell dropped during the exploitation of SharePoint RCE vulnerability CVE-2025-53770"
+		description = "Detects webshell found after SpringCore exploitation attempts POC script"
+		author = "Florian Roth (Nextron Systems)"
+		id = "e7047c98-3c60-5211-9ad5-2bfdfb35d493"
+		date = "2022-03-30"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/vxunderground/status/1509170582469943303"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_spring4shell.yar#L36-L50"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "17282b66899356a6051f0b47a7a3f02265737283d760f2256e03a2b934bb63b8"
+		score = 70
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$x1 = ".getInputStream(); int a = -1; byte[] b = new byte[2048];"
+		$x2 = "if(\"j\".equals(request.getParameter(\"pwd\")"
+		$x3 = ".getRuntime().exec(request.getParameter(\"cmd\")).getInputStream();"
+
+	condition:
+		filesize < 200KB and 1 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_DLL_Moveit_Jun23_1 : FILE {
+    meta:
+		description = "Detects compiled ASPX web shells found being used in MOVEit Transfer exploitation"
 		author = "Florian Roth"
-		id = "136ab1a3-647b-5196-9e08-12c3b913bd55"
-		date = "2025-07-20"
-		modified = "2025-07-25"
-		reference = "https://research.eye.security/sharepoint-under-siege/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_sharepoint_jul25.yar#L1-L20"
+		id = "47db8602-9a9e-5efc-b8b9-fbc4f3c8d4e9"
+		date = "2023-06-01"
+		modified = "2023-12-05"
+		reference = "https://www.trustedsec.com/blog/critical-vulnerability-in-progress-moveit-transfer-technical-analysis-and-recommendations/?utm_content=251159938&utm_medium=social&utm_source=twitter&hss_channel=tw-403811306"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/vuln_moveit_0day_jun23.yar#L2-L22"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "27c45b8ed7b8a7e5fff473b50c24028bd028a9fe8e25e5cea2bf5e676e531014"
-		hash = "92bb4ddb98eeaf11fc15bb32e71d0a63256a0ed826a03ba293ce3a8bf057a514"
-		hash = "b336f936be13b3d01a8544ea3906193608022b40c28dd8f1f281e361c9b64e93"
-		logic_hash = "3c7bb848fc73418d5a3ecae6e9f637a7d07bf45a75b1bd0a278fdbfae428d619"
-		score = 80
+		logic_hash = "47c2ec1e833852941434586b61d6f435b9acb32b2ff48e0a9e8006e0f9ff8056"
+		score = 85
 		quality = 85
-		tags = "CVE-2025-53770, FILE"
+		tags = "FILE"
+		hash1 = "6cbf38f5f27e6a3eaf32e2ac73ed02898cbb5961566bb445e3c511906e2da1fa"
 
 	strings:
-		$x1 = "var sy = System.Reflection.Assembly.Load(" ascii
-		$x2 = "Response.Write(cg.ValidationKey+" ascii
-		$s1 = "<script runat=\"server\" language=\"c#\" CODEPAGE=\"65001\">" ascii fullword
+		$x1 = "human2_aspx" ascii fullword
+		$x2 = "X-siLock-Comment" wide
+		$x3 = "x-siLock-Step1" wide
+		$a1 = "MOVEit.DMZ.Core.Data" ascii fullword
 
 	condition:
-		filesize < 4KB and 1 of ( $x* ) or all of them
+		uint16( 0 ) == 0x5a4d and filesize < 40KB and ( 1 of ( $x* ) and $a1 ) or all of them
 }
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Compiled_Sharepoint_Drop_CVE_2025_53770_Jul25_2 : CVE_2025_53770 FILE {
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Moveit_Jun23_1 : FILE {
     meta:
-		description = "Detects compiled ASPX web shell dropped during the exploitation of SharePoint RCE vulnerability CVE-2025-53770"
-		author = "Florian Roth, Marius Benthin"
-		id = "2feef057-7100-59d5-83f1-cee3bd5bd791"
-		date = "2025-07-20"
-		modified = "2025-07-25"
-		reference = "https://research.eye.security/sharepoint-under-siege/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_sharepoint_jul25.yar#L22-L51"
+		description = "Detects ASPX web shells as being used in MOVEit Transfer exploitation"
+		author = "Florian Roth"
+		id = "2c789b9c-5ec5-5fd1-84e3-6bf7735a9488"
+		date = "2023-06-01"
+		modified = "2023-12-05"
+		reference = "https://www.rapid7.com/blog/post/2023/06/01/rapid7-observed-exploitation-of-critical-moveit-transfer-vulnerability/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/vuln_moveit_0day_jun23.yar#L24-L41"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "8d3d3f3a17d233bc8562765e61f7314ca7a08130ac0fb153ffd091612920b0f2"
-		hash = "d8ca5e5d6400ac34ac4cc138efa89d2ec4d5c0e968a78fa3ba5dbc04c7550649"
-		hash = "7e9b77da1f51d03ee2f96bc976f6aeb781f801cf633862a4b8c356cbb555927d"
-		logic_hash = "df11e5bd293cf094f3a147b54ecaafbe0804d7d575fcc22f38e77ab155c7ebdc"
+		logic_hash = "436f9a503ad938541faa8f34604310ba6d932e40a41dc189ccd293b7191a7621"
+		score = 85
+		quality = 85
+		tags = "FILE"
+		hash1 = "2413b5d0750c23b07999ec33a5b4930be224b661aaf290a0118db803f31acbc5"
+		hash2 = "48367d94ccb4411f15d7ef9c455c92125f3ad812f2363c4d2e949ce1b615429a"
+		hash3 = "e8012a15b6f6b404a33f293205b602ece486d01337b8b3ec331cd99ccadb562e"
+
+	strings:
+		$s1 = "X-siLock-Comment" ascii fullword
+		$s2 = "]; string x = null;" ascii
+		$s3 = ";  if (!String.Equals(pass, " ascii
+
+	condition:
+		filesize < 150KB and 2 of them
+}
+rule SIGNATURE_BASE_Webshell_Caterpillar_ASPX {
+    meta:
+		description = "Volatile Cedar Webshell - from file caterpillar.aspx"
+		author = "Florian Roth (Nextron Systems)"
+		id = "9af48c64-3768-5765-8245-38df000598a7"
+		date = "2015-04-03"
+		modified = "2023-12-05"
+		reference = "http://goo.gl/emons5"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_volatile_cedar.yar#L106-L126"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "9df2e4a25052136d6e622273f917bd15df410869a8cf3075c773a14ea62a2a55"
 		score = 75
-		quality = 83
-		tags = "CVE-2025-53770, FILE"
-
-	strings:
-		$x1 = /App_Web_spinstall\d{0,1}.aspx/ wide
-		$x2 = /spinstall[\w]?[\._]aspx/ ascii
-		$x3 = /\/_layouts\/1[0-9]\/spinstall/ wide
-		$x4 = /\/_layouts\/1[0-9]\/ghostfile/ wide
-		$s1 = "System.Web.Configuration.MachineKeySection" wide
-		$s2 = "Page_load" ascii fullword
-		$s3 = "GetApplicationConfig" wide fullword
-
-	condition:
-		uint16( 0 ) == 0x5a4d and filesize < 20KB and ( 1 of ( $x* ) or all of ( $s* ) ) or 2 of ( $x* ) or 4 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php5 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php5.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "ee063c4c-af06-520f-acfe-fba758b84d3c"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L8-L23"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "0fd91b6ad400a857a6a65c8132c39e6a16712f19"
-		logic_hash = "e882f115a67fe31ece1a81e1a2770b46370a92ac3aa23e348a12cdb5735e8a0e"
-		score = 70
 		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "else if(isset($_POST['reverse'])) { if(@ftp_login($connection,$user,strrev($user" ascii
-		$s20 = "echo sr(35,in('hidden','dir',0,$dir).in('hidden','cmd',0,'mysql_dump').\"<b>\".$" ascii
-
-	condition:
-		uint16( 0 ) == 0x3f3c and filesize < 300KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Test3693 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file test3693.war"
-		author = "Florian Roth (Nextron Systems)"
-		id = "58fe4445-b2e1-5d5f-8c46-39c6ae78f845"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L25-L40"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "246d629ae3ad980b5bfe7e941fe90b855155dbfc"
-		logic_hash = "a10618d54fb7adbbd89a10f2e1ac067ccd1832140bcaf3b92394ebe7323f2d1e"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "Process p=Runtime.getRuntime().exec(\"cmd /c \"+strCmd);" fullword ascii
-		$s2 = "http://www.topronet.com </font>\",\" <font color=red> Thanks for your support - " ascii
-
-	condition:
-		uint16( 0 ) == 0x4b50 and filesize < 50KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Mycode12 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file mycode12.cfm"
-		author = "Florian Roth (Nextron Systems)"
-		id = "2ce7368c-7565-5b32-94d1-c87023404c5b"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L42-L57"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "64be8760be5ab5c2dcf829e3f87d3e50b1922f17"
-		logic_hash = "94cb0e414634af753db9ec0c63a3a34b4f9104e93e01d67cebab7b3a0c471198"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "<cfexecute name=\"cmd.exe\"" fullword ascii
-		$s2 = "<cfoutput>#cmd#</cfoutput>" fullword ascii
-
-	condition:
-		filesize < 4KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Offlibrary : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file offlibrary.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "c01f7c8b-a6bd-5094-9574-8cc853698607"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L59-L74"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "eb5275f99211106ae10a23b7e565d208a94c402b"
-		logic_hash = "ffec24bedfe0794e8f92da5067c41932339e61ec23d71a67ed4b634434cd10d6"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "';$i=$g->query(\"SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1) AS User, SUBSTRING" ascii
-		$s12 = "if(jushRoot){var script=document.createElement('script');script.src=jushRoot+'ju" ascii
-
-	condition:
-		filesize < 1005KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Cfm_Xl : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file xl.cfm"
-		author = "Florian Roth (Nextron Systems)"
-		id = "5c8d1301-fe20-50e0-86ac-99a220cd4be1"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L76-L91"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "49c3d16ee970945367a7d6ae86b7ade7cb3b5447"
-		logic_hash = "b6683a24ad58a9444ec91f13e7da5db3e3e768afded09a23e1bbd0a0c23cf6b9"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<input name=\"DESTINATION\" value=\"" ascii
-		$s1 = "<CFFILE ACTION=\"Write\" FILE=\"#Form.path#\" OUTPUT=\"#Form.cmd#\">" fullword ascii
-
-	condition:
-		uint16( 0 ) == 0x433c and filesize < 13KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Linux : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file linux.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "8d94f1c5-2139-5d0d-8af9-9c30a0359910"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L93-L108"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "78339abb4e2bb00fe8a012a0a5b7ffce305f4e06"
-		logic_hash = "2c6278acd123e0d41ed4f0f8f0da27d5de1ad56efb8102c9eae442838a0416d0"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<form name=form1 action=exploit.php method=post>" fullword ascii
-		$s1 = "<title>Changing CHMOD Permissions Exploit " fullword ascii
-
-	condition:
-		uint16( 0 ) == 0x696c and filesize < 6KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Interception3389_Get : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file get.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "b17a793f-ffb7-5cdc-ba21-b0e2f0d14490"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L110-L126"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "ceb6306f6379c2c1634b5058e1894b43abcf0296"
-		logic_hash = "649e611c9d8948e60811af4209d737b3e797e6b42beba42439541ae543b062d6"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "userip = Request.ServerVariables(\"HTTP_X_FORWARDED_FOR\")" fullword ascii
-		$s1 = "file.writeline  szTime + \" HostName:\" + szhostname + \" IP:\" + userip+\":\"+n" ascii
-		$s3 = "set file=fs.OpenTextFile(server.MapPath(\"WinlogonHack.txt\"),8,True)" fullword ascii
-
-	condition:
-		filesize < 3KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Nc_1 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file 1.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "fe83df79-f7cb-50b8-bb34-9bfc5fbe3de2"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L128-L143"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "51d83961171db000fe4476f36d703ef3de409676"
-		logic_hash = "80ea8f16d943a3775fe9999131272af9e7f1af60d413109e58ecdef036484760"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Mozilla/4.0 " ascii
-		$s2 = "<%if session(\"pw\")<>\"go\" then %>" fullword ascii
-
-	condition:
-		filesize < 11KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Blacksky : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php6.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "741bb4db-6296-5222-8480-1169a6f44fd8"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L145-L160"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "a60a599c6c8b6a6c0d9da93201d116af257636d7"
-		logic_hash = "3b92f63f536361d8ba0cde853fb546f271abdec3a7c1d44688a42610f5f90c57"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "eval(gzinflate(base64_decode('" ascii
-		$s1 = "B1ac7Sky-->" fullword ascii
-
-	condition:
-		filesize < 641KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp3 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file asp3.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "0cb01c07-b424-532d-8aef-5ec25dfe3f19"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L162-L177"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "87c5a76989bf08da5562e0b75c196dcb3087a27b"
-		logic_hash = "e5f30a445be30c491e669c633bf2df08cbfb1017ecfc91f9ed83275550488304"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "if shellpath=\"\" then shellpath = \"cmd.exe\"" fullword ascii
-		$s2 = "c.open \"GET\", \"http://127.0.0.1:\" & port & \"/M_Schumacher/upadmin/s3\", Tru" ascii
-
-	condition:
-		filesize < 444KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Sniff : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file sniff.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "8cf47d71-1b97-5967-ad70-2ea6fad7cc29"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L179-L194"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "e246256696be90189e6d50a4ebc880e6d9e28dfd"
-		logic_hash = "198442e75422055e7d65c5d1aef55819036a99077aa79dbd5006ba97c4fe4af8"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "IPHostEntry HosyEntry = Dns.GetHostEntry((Dns.GetHostName()));" fullword ascii
-		$s2 = "if (!logIt && my_s_smtp && (dport == 25 || sport == 25))" fullword ascii
-
-	condition:
-		filesize < 91KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Udf_Udf : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file udf.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "07252f2d-1a99-5f21-940d-899a4821b511"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L196-L211"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "df63372ccab190f2f1d852f709f6b97a8d9d22b9"
-		logic_hash = "c7db32b5e66601e0b8322ac67b6b9ba8d6222891ed01db557bfac9985140421a"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "<?php // Source  My : Meiam  " fullword ascii
-		$s2 = "$OOO0O0O00=__FILE__;$OOO000000=urldecode('" ascii
-
-	condition:
-		filesize < 430KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_JSP_Jsp : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file jsp.html"
-		author = "Florian Roth (Nextron Systems)"
-		id = "46f2fb10-2c0c-5bc2-b3bb-eba4c74bcad7"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L213-L228"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "c58fed3d3d1e82e5591509b04ed09cb3675dc33a"
-		logic_hash = "089e1a553900d149a4087ac81254295d74de15d9baaf73e60ce4f061e450e8c7"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "<input name=f size=30 value=shell.jsp>" fullword ascii
-		$s2 = "<font color=red>www.i0day.com  By:" fullword ascii
-
-	condition:
-		filesize < 3KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_T00Ls_Lpk_Sethc_V4_Mail : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file mail.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "2f7d8a4d-9d94-5f23-9768-cc3712678d93"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L230-L245"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "0a9b7b438591ee78ee573028cbb805a9dbb9da96"
-		logic_hash = "b835a6d0c736116e0a8b277dadbf25c2ac333b0d7937a6f67ed59887c610a57a"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "if (!$this->smtp_putcmd(\"AUTH LOGIN\", base64_encode($this->user)))" fullword ascii
-		$s2 = "$this->smtp_debug(\"> \".$cmd.\"\\n\");" fullword ascii
-
-	condition:
-		filesize < 39KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Phpwebbackup : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file phpwebbackup.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "eb737ea6-231c-5e8d-b976-75f1044f9f54"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L247-L262"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "c788cb280b7ad0429313837082fe84e9a49efab6"
-		logic_hash = "45452fc415fbafe170a1b1f5a58df40f0ec65a9a6678e675b40a8c54e2d8bd6c"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<?php // Code By isosky www.nbst.org" fullword ascii
-		$s2 = "$OOO0O0O00=__FILE__;$OOO000000=urldecode('" ascii
-
-	condition:
-		uint16( 0 ) == 0x3f3c and filesize < 67KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Dz_Phpcms_Phpbb : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file dz_phpcms_phpbb.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "f7e5413f-a7c9-51d4-8422-30c3e2462be2"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L264-L281"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "33f23c41df452f8ca2768545ac6e740f30c44d1f"
-		logic_hash = "1455df58f51c3ae7558b89c940d97ea5870f261217b2a09727bb6678bcbd5500"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "if($pwd == md5(md5($password).$salt))" fullword ascii
-		$s2 = "function test_1($password)" fullword ascii
-		$s3 = ":\".$pwd.\"\\n---------------------------------\\n\";exit;" fullword ascii
-		$s4 = ":user=\".$user.\"\\n\";echo \"pwd=\".$pwd.\"\\n\";echo \"salt=\".$salt.\"\\n\";" fullword ascii
-
-	condition:
-		filesize < 22KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Picloaked_1 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file 1.gif"
-		author = "Florian Roth (Nextron Systems)"
-		id = "2ff44c4a-ed97-5635-9926-8d54a8364fab"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L283-L299"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "3eab1798cbc9ab3b2c67d3da7b418d07e775db70"
-		logic_hash = "a816ac9e98b7c5208f075ffcb9a6525016d6a5c468005d78ecab90d651423705"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<?php eval($_POST[" ascii
-		$s1 = ";<%execute(request(" ascii
-		$s3 = "GIF89a" fullword ascii
-
-	condition:
-		filesize < 6KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Assembly : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file assembly.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "7639e81d-fe21-5a12-9a20-fe894eefef73"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L301-L315"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "2bcb4d22758b20df6b9135d3fb3c8f35a9d9028e"
-		logic_hash = "34dc47b2f91a15a62175f3cab88d5ff24d2a3aa62f74fb9e43a4aaae96ced999"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "response.write oScriptlhn.exec(\"cmd.exe /c\" & request(\"c\")).stdout.readall" fullword ascii
-
-	condition:
-		filesize < 1KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php8 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php8.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "8b25b7f3-b94e-5887-b102-b52d340a4316"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L317-L334"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "b7b49f1d6645865691eccd025e140c521ff01cce"
-		logic_hash = "435ceb72c082f702284c464979a907a59a42bb4aa07311f9b2da1a9831efac11"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<a href=\"http://hi.baidu.com/ca3tie1/home\" target=\"_blank\">Ca3tie1's Blog</a" ascii
-		$s1 = "function startfile($path = 'dodo.zip')" fullword ascii
-		$s3 = "<form name=\"myform\" method=\"post\" action=\"\">" fullword ascii
-		$s5 = "$_REQUEST[zipname] = \"dodozip.zip\"; " fullword ascii
-
-	condition:
-		filesize < 25KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Xx : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file xx.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "72a04950-b82d-516f-a376-5253b7de1158"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L336-L352"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "2f39f1d9846ae72fc673f9166536dc21d8f396aa"
-		logic_hash = "67c542f172fd1b97fbee4697fd42bab9486e3d779ce62993617e5a5205bd75d4"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "$mysql.=\"insert into `$table`($keys) values($vals);\\r\\n\";" fullword ascii
-		$s2 = "$mysql_link=@mysql_connect($mysql_servername , $mysql_username , $mysql_password" ascii
-		$s16 = "mysql_query(\"SET NAMES gbk\");" fullword ascii
-
-	condition:
-		filesize < 2KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_JSPMSSQL : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file JSPMSSQL.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "061c1e53-edd0-5838-8d0f-6fb8f4fa078a"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L354-L369"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "c6b4faecd743d151fe0a4634e37c9a5f6533655f"
-		logic_hash = "c08e69345cb09e41840a81dcd8a015f9e1be93d570b64c310be74631e5314e2f"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "<form action=\"?action=operator&cmd=execute\"" fullword ascii
-		$s2 = "String sql = request.getParameter(\"sqlcmd\");" fullword ascii
-
-	condition:
-		filesize < 35KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Injection_Transit_Jmpost : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file jmPost.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "892f747e-6065-5baf-b928-8d69d8792483"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L371-L386"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "f80ec26bbdc803786925e8e0450ad7146b2478ff"
-		logic_hash = "6c7f52cf7ff6df9867ea2c46cd8f40ef0e077d4e1d9033cde0649a209bffe21b"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "response.write  PostData(JMUrl,JmStr,JmCok,JmRef)" fullword ascii
-		$s2 = "JmdcwName=request(\"jmdcw\")" fullword ascii
-
-	condition:
-		filesize < 9KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Web_Asp : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file web.asp.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "67e03591-770a-5b32-9579-c899894740fc"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L388-L403"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "aebf6530e89af2ad332062c6aae4a8ca91517c76"
-		logic_hash = "5d2d7e6b9340ee4fd845ff05c99526c919214974b1a0def66492fe3cd4a75fe9"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<FORM method=post target=_blank>ShellUrl: <INPUT " fullword ascii
-		$s1 = "\" >[Copy code]</a> 4ngr7&nbsp; &nbsp;</td>" fullword ascii
-
-	condition:
-		filesize < 13KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Wshell_Asp : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file wshell-asp.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "294f0d00-7102-553d-92e2-c0a0e017385c"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L405-L421"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "4a0afdf5a45a759c14e99eb5315964368ca53e9c"
-		logic_hash = "f3c4af85e4798d3a809d8edd9cc46d1df44453f14ed050b002fe789da4d6096f"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "file1.Write(\"<%response.clear:execute request(\\\"root\\\"):response.End%>\");" fullword ascii
-		$s2 = "hello word !  " fullword ascii
-		$s3 = "root.asp " fullword ascii
-
-	condition:
-		filesize < 5KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp404 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file asp404.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4125bb40-3f5c-53f5-b906-54fa77b119f5"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L423-L439"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "bed51971288aeabba6dabbfb80d2843ec0c4ebf6"
-		logic_hash = "c84be2e561a08317be11cdb0fe103f8ad182a64d8cd1bf987163ebbeabe20f00"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "temp1 = Len(folderspec) - Len(server.MapPath(\"./\")) -1" fullword ascii
-		$s1 = "<form name=\"form1\" method=\"post\" action=\"<%= url%>?action=chklogin\">" fullword ascii
-		$s2 = "<td>&nbsp;<a href=\"<%=tempurl+f1.name%>\" target=\"_blank\"><%=f1.name%></a></t" ascii
-
-	condition:
-		filesize < 113KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_Asp : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file Serv-U asp.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "06a58a05-92bd-5124-a172-2bfd9491c2fc"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L441-L457"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "cee91cd462a459d31a95ac08fe80c70d2f9c1611"
-		logic_hash = "c98c3f4db5ea812827b6108ef88b57116621142202248f4f26f0c71bd76e33ec"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "newuser = \"-SETUSERSETUP\" & vbCrLf & \"-IP=0.0.0.0\" & vbCrLf & \"-PortNo=\" &" ascii
-		$s2 = "<td><input name=\"c\" type=\"text\" id=\"c\" value=\"cmd /c net user goldsun lov" ascii
-		$s3 = "deldomain = \"-DELETEDOMAIN\" & vbCrLf & \"-IP=0.0.0.0\" & vbCrLf & \" PortNo=\"" ascii
-
-	condition:
-		filesize < 30KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Cfm_List : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file list.cfm"
-		author = "Florian Roth (Nextron Systems)"
-		id = "98302eef-d1e8-5524-a57e-d49c0e92c7e0"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L459-L474"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "85d445b13d2aef1df3b264c9b66d73f0ff345cec"
-		logic_hash = "41c7c5ba6187a8871dec83bcd859b9377813d60cea8ef2b4ad390c67de04e010"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "<TD><a href=\"javascript:ShowFile('#mydirectory.name#')\">#mydirectory.name#</a>" ascii
-		$s2 = "<TD>#mydirectory.size#</TD>" fullword ascii
-
-	condition:
-		filesize < 10KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php2.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "377ff89d-a9ba-526c-97a1-388f9ccb48ba"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L476-L491"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "bf12e1d741075cd1bd324a143ec26c732a241dea"
-		logic_hash = "707e2795d82636fbbc4d9f5324e509a526f77f9ead8f3c4d59dd0e95bc94f11e"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "$OOO0O0O00=__FILE__;$OOO000000=urldecode('" ascii
-		$s2 = "<?php // Black" fullword ascii
-
-	condition:
-		filesize < 12KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Oracle : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file oracle.jsp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "adc8dea6-8031-580b-b19a-e5520d41528f"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L493-L509"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "fc7043aaac0ee2d860d11f18ddfffbede9d07957"
-		logic_hash = "3ad4207e426ed2f9df0e0bac0e906af437b0774ba2ebb541afbe7e29b395ad63"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "String url=\"jdbc:oracle:thin:@localhost:1521:orcl\";" fullword ascii
-		$s2 = "String user=\"oracle_admin\";" fullword ascii
-		$s3 = "String sql=\"SELECT 1,2,3,4,5,6,7,8,9,10 from user_info\";" fullword ascii
-
-	condition:
-		filesize < 7KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx4 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file aspx4.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4a13c809-48f7-54f7-9ce3-10d6d48104fb"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L511-L527"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "200a8f15ffb6e3af31d28c55588003b5025497eb"
-		logic_hash = "0aab8e327b4477cb0b8cd5d4b1e4b52c160180656dad57b0498654da1c8d7a29"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s4 = "File.Delete(cdir.FullName + \"\\\\test\");" fullword ascii
-		$s5 = "start<asp:TextBox ID=\"Fport_TextBox\" runat=\"server\" Text=\"c:\\\" Width=\"60" ascii
-		$s6 = "<div>Code By <a href =\"http://www.hkmjj.com\">Www.hkmjj.Com</a></div>" fullword ascii
-
-	condition:
-		filesize < 11KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file aspx.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4a13c809-48f7-54f7-9ce3-10d6d48104fb"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L529-L546"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "8378619b2a7d446477946eabaa1e6744dec651c1"
-		logic_hash = "b59684633fd72bd1804a96850a8b358db98c169415b6e65fe3ecfb4d9fde72d0"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "string iVDT=\"-SETUSERSETUP\\r\\n-IP=0.0.0.0\\r\\n-PortNo=52521\\r\\n-User=bin" ascii
-		$s1 = "SQLExec : <asp:DropDownList runat=\"server\" ID=\"FGEy\" AutoPostBack=\"True\" O" ascii
-		$s2 = "td.Text=\"<a href=\\\"javascript:Bin_PostBack('urJG','\"+dt.Rows[j][\"ProcessID" ascii
-		$s3 = "vyX.Text+=\"<a href=\\\"javascript:Bin_PostBack('Bin_Regread','\"+MVVJ(rootkey)+" ascii
-
-	condition:
-		filesize < 353KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Su7_X_9_X : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file su7.x-9.x.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "5d546ce8-6f8f-5b0b-9472-23f283ef9f80"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L548-L563"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "808396b51023cc8356f8049cfe279b349ca08f1a"
-		logic_hash = "2d2398cf0f9e253eea343d39b6555f2633f92f627f1c93cc28123d5a7f3d1bf1"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "returns=httpopen(\"LoginID=\"&user&\"&FullName=&Password=\"&pass&\"&ComboPasswor" ascii
-		$s1 = "returns=httpopen(\"\",\"POST\",\"http://127.0.0.1:\"&port&\"/Admin/XML/User.xml?" ascii
-
-	condition:
-		filesize < 59KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Cfmshell : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file cfmShell.cfm"
-		author = "Florian Roth (Nextron Systems)"
-		id = "40d50ddb-2963-5d8e-b93a-bb44a8944229"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L565-L580"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "740796909b5d011128b6c54954788d14faea9117"
-		logic_hash = "0767012ec8fd4a18a64eca04d459efb55fafd29ed052dab8a0eb1b8f4ce7aa66"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<cfexecute name=\"C:\\Winnt\\System32\\cmd.exe\"" fullword ascii
-		$s4 = "<cfif FileExists(\"#GetTempDirectory()#foobar.txt\") is \"Yes\">" fullword ascii
-
-	condition:
-		filesize < 4KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp4 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file asp4.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4125bb40-3f5c-53f5-b906-54fa77b119f5"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L582-L598"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "4005b83ced1c032dc657283341617c410bc007b8"
-		logic_hash = "ae02d1efc975a8592a00cbab823355fb778fbb589f5752dd913aa432b316c3a4"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s2 = "if ShellPath=\"\" Then ShellPath = \"cmd.exe\"" fullword ascii
-		$s6 = "Response.Cookies(Cookie_Login) = sPwd" fullword ascii
-		$s8 = "Set DD=CM.exec(ShellPath&\" /c \"&DefCmd)" fullword ascii
-
-	condition:
-		filesize < 150KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_2_Admin_By_Lake2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file Serv-U 2 admin by lake2.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "8fce8835-a4ed-58df-a725-0c1fc04becaa"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L600-L617"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "cb8039f213e611ab2687edd23e63956c55f30578"
-		logic_hash = "a67c08b3a4bed2385d2fa8c007615bfb37a2d739cc13ee2e0f5eda00536b6ea8"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "xPost3.Open \"POST\", \"http://127.0.0.1:\"& port &\"/lake2\", True" fullword ascii
-		$s2 = "response.write \"FTP user lake  pass admin123 :)<br><BR>\"" fullword ascii
-		$s8 = "<p>Serv-U Local Get SYSTEM Shell with ASP" fullword ascii
-		$s9 = "\"-HomeDir=c:\\\\\" & vbcrlf & \"-LoginMesFile=\" & vbcrlf & \"-Disable=0\" & vb" ascii
-
-	condition:
-		filesize < 17KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php3 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php3.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "3000ac40-35de-5d24-85fb-4d105b07c2e7"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L619-L634"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "e2924cb0537f4cdfd6f1bd44caaaf68a73419b9d"
-		logic_hash = "ba3892feacbbe3d7c6b6308a22ca22b19ae84b6490df2c976852260da2a96ca1"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "} elseif(@is_resource($f = @popen($cfe,\"r\"))) {" fullword ascii
-		$s2 = "cf('/tmp/.bc',$back_connect);" fullword ascii
-
-	condition:
-		filesize < 8KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_By_Goldsun : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file Serv-U_by_Goldsun.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "d8b85c33-b05d-531a-9c0a-a1dddcae0da4"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L636-L653"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "d4d7a632af65a961a1dbd0cff80d5a5c2b397e8c"
-		logic_hash = "962b2e75c03f716fc039cf26aa238e9a3faf5a7ea8fb3d4da556fa601790055a"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "b.open \"GET\", \"http://127.0.0.1:\" & ftpport & \"/goldsun/upadmin/s2\", True," ascii
-		$s2 = "newuser = \"-SETUSERSETUP\" & vbCrLf & \"-IP=0.0.0.0\" & vbCrLf & \"-PortNo=\" &" ascii
-		$s3 = "127.0.0.1:<%=port%>," fullword ascii
-		$s4 = "GName=\"http://\" & request.servervariables(\"server_name\")&\":\"&request.serve" ascii
-
-	condition:
-		filesize < 30KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php10 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php10.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "5fe78cc6-8be3-595f-a082-e361259938e5"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L655-L670"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "3698c566a0ae07234c8957112cdb34b79362b494"
-		logic_hash = "76bb2dfd518173f031cc3c93b2098edaef4aca09f0dd8228223257b0b7df452b"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "dumpTable($N,$M,$Hc=false){if($_POST[\"format\"]!=\"sql\"){echo\"\\xef\\xbb\\xbf" ascii
-		$s2 = "';if(DB==\"\"||!$od){echo\"<a href='\".h(ME).\"sql='\".bold(isset($_GET[\"sql\"]" ascii
-
-	condition:
-		filesize < 600KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_Servu : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file servu.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "3e50d991-7297-5766-b68a-e74aa34ce042"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L671-L686"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "7de701b86820096e486e64ca34f1fa9f2fbba641"
-		logic_hash = "d3956b6daa0649233372aea4176e0d43c44d866146884222f92b7efe01f288bb"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "fputs ($conn_id, \"SITE EXEC \".$dir.\"cmd.exe /c \".$cmd.\"\\r\\n\");" fullword ascii
-		$s1 = "function ftpcmd($ftpport,$user,$password,$dir,$cmd){" fullword ascii
-
-	condition:
-		filesize < 41KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Portrecall_Jsp2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file jsp2.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "cd34cb47-c5e0-5094-a501-6a8a00d94018"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L688-L704"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "412ed15eb0d24298ba41731502018800ffc24bfc"
-		logic_hash = "1ec77a1b0d30cdebce1b5b07445247016230b733a594d8d1de642c2c8af63031"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "final String remoteIP =request.getParameter(\"remoteIP\");" fullword ascii
-		$s4 = "final String localIP = request.getParameter(\"localIP\");" fullword ascii
-		$s20 = "final String localPort = \"3390\";//request.getParameter(\"localPort\");" fullword ascii
-
-	condition:
-		filesize < 23KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file aspx2.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "0da59fde-2214-5677-943f-05b8da4fd9d4"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L706-L723"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "95db7a60f4a9245ffd04c4d9724c2745da55e9fd"
-		logic_hash = "7af90992bc3f708d877dcd5841c0d132793e41a0796607907084516d955b3ae0"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "if (password.Equals(this.txtPass.Text))" fullword ascii
-		$s1 = "<head runat=\"server\">" fullword ascii
-		$s2 = ":<asp:TextBox runat=\"server\" ID=\"txtPass\" Width=\"400px\"></asp:TextBox>" fullword ascii
-		$s3 = "this.lblthispath.Text = Server.MapPath(Request.ServerVariables[\"PATH_INFO\"]);" fullword ascii
-
-	condition:
-		uint16( 0 ) == 0x253c and filesize < 9KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Hy2006A : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file hy2006a.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "115651d3-63e1-58e3-b27c-42271111bb91"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L725-L740"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "20da92b2075e6d96636f883dcdd3db4a38c01090"
-		logic_hash = "a24bf11a2728bb8d18ea005b057648770956694e0b257d4464ad15ee3e24eda2"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s15 = "Const myCmdDotExeFile = \"command.com\"" fullword ascii
-		$s16 = "If LCase(appName) = \"cmd.exe\" And appArgs <> \"\" Then" fullword ascii
-
-	condition:
-		filesize < 406KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php1 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php1.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "5fe78cc6-8be3-595f-a082-e361259938e5"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L742-L758"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "c2f4b150f53c78777928921b3a985ec678bfae32"
-		logic_hash = "aadf47ac6231b41e720efdd85c481ebac8fccb572e57b86b27a95dd367c0d81b"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s7 = "$sendbuf = \"site exec \".$_POST[\"SUCommand\"].\"\\r\\n\";" fullword ascii
-		$s8 = "elseif(function_exists('passthru')){@ob_start();@passthru($cmd);$res = @ob_get_c" ascii
-		$s18 = "echo Exec_Run($perlpath.' /tmp/spider_bc '.$_POST['yourip'].' '.$_POST['yourport" ascii
-
-	condition:
-		filesize < 621KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Jspshell2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file jspshell2.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "ff72f94b-1c0a-5615-b35f-35f69c920292"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L760-L775"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "cc7bc1460416663012fc93d52e2078c0a277ff79"
-		logic_hash = "3a60991fa557655fbd2450739976ac612a0ea2a3df22873382b05438cac12762"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s10 = "if (cmd == null) cmd = \"cmd.exe /c set\";" fullword ascii
-		$s11 = "if (program == null) program = \"cmd.exe /c net start > \"+SHELL_DIR+\"/Log.txt" ascii
-
-	condition:
-		filesize < 424KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Mysql : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file mysql.aspx"
-		author = "Florian Roth (Nextron Systems)"
-		id = "fa0627fb-a40c-5856-ae78-17d33910878f"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L777-L791"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "8e242c40aabba48687cfb135b51848af4f2d389d"
-		logic_hash = "bde2ea1ccfc88138456a1b255a32a7323f5ef0f677499db6dc6670987cc37585"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "txtpassword.Attributes.Add(\"onkeydown\", \"SubmitKeyClick('btnLogin');\");" fullword ascii
-		$s2 = "connString = string.Format(\"Host = {0}; UserName = {1}; Password = {2}; Databas" ascii
-
-	condition:
-		filesize < 202KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php9 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php9.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "c8cbee10-78ea-5a6f-9c80-7e51a9c38440"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L793-L807"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "cd3962b1dba9f1b389212e38857568b69ca76725"
-		logic_hash = "bea117862ebc9220a4d9aee091c808274f9907fceb83b528055998ddcc90aa5f"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "Str[17] = \"select shell('c:\\windows\\system32\\cmd.exe /c net user b4che10r ab" ascii
-
-	condition:
-		filesize < 1087KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Portrecall_Jsp : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file jsp.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "cd34cb47-c5e0-5094-a501-6a8a00d94018"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L809-L823"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "65e8e4d13ad257c820cad12eef853c6d0134fce8"
-		logic_hash = "98f279c3e50308f67f88ecf8459943187ea152664fe0206c4a7d3435242df2a6"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "lcx.jsp?localIP=202.91.246.59&localPort=88&remoteIP=218.232.111.187&remotePort=2" ascii
-
-	condition:
-		filesize < 1KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx3 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file aspx3.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4f835136-744a-5324-a1f4-02d1cfa2cab6"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L825-L840"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "dd61481771f67d9593214e605e63b62d5400c72f"
-		logic_hash = "11bf511ee70ff4bde0a9320cb80dd9efa0f437d432c78a859153cfcc8e80db01"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "Process p1 = Process.Start(\"\\\"\" + txtRarPath.Value + \"\\\"\", \" a -y -k -m" ascii
-		$s12 = "if (_Debug) System.Console.WriteLine(\"\\ninserting filename into CDS:" ascii
-
-	condition:
-		filesize < 100KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Shell_Shell : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file shell.aspx"
-		author = "Florian Roth (Nextron Systems)"
-		id = "8fbcae22-07b7-5afe-9f15-06e2f426b5ca"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L842-L857"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "1816006827d16ed73cefdd2f11bd4c47c8af43e4"
-		logic_hash = "ac22d89353b4316289bf6c6e13332ac401f4b57f6c29b71861cb48359c1e55f9"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<%try{ System.Reflection.Assembly.Load(Request.BinaryRead(int.Parse(Request.Cook" ascii
-		$s1 = "<%@ Page Language=\"C#\" ValidateRequest=\"false\" %>" fullword ascii
-
-	condition:
-		filesize < 1KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell__Php1_Php7_Php9 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - from files php1.txt, php7.txt, php9.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "cfc2f624-976f-5ff6-bd07-10948b9290bc"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L859-L878"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "6ea5b362f8d8f2e99725d4dd4d2ada5c3939a45a3dde0084571600452ab4673c"
-		score = 70
-		quality = 85
-		tags = "FILE"
+		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "c2f4b150f53c78777928921b3a985ec678bfae32"
-		hash1 = "05a3f93dbb6c3705fd5151b6ffb64b53bc555575"
-		hash2 = "cd3962b1dba9f1b389212e38857568b69ca76725"
+		hash0 = "af4c99208fb92dc42bc98c4f96c3536ec8f3fe56"
 
 	strings:
-		$s1 = "<a href=\"?s=h&o=wscript\">[WScript.shell]</a> " fullword ascii
-		$s2 = "document.getElementById('cmd').value = Str[i];" fullword ascii
-		$s3 = "Str[7] = \"copy c:\\\\\\\\1.php d:\\\\\\\\2.php\";" fullword ascii
+		$s0 = "Dim objNewRequest As WebRequest = HttpWebRequest.Create(sURL)" fullword
+		$s1 = "command = \"ipconfig /all\"" fullword
+		$s3 = "For Each xfile In mydir.GetFiles()" fullword
+		$s6 = "Dim oScriptNet = Server.CreateObject(\"WSCRIPT.NETWORK\")" fullword
+		$s10 = "recResult = adoConn.Execute(strQuery)" fullword
+		$s12 = "b = Request.QueryString(\"src\")" fullword
+		$s13 = "rw(\"<a href='\" + link + \"' target='\" + target + \"'>\" + title + \"</a>\")" fullword
 
 	condition:
-		filesize < 300KB and all of them
+		all of them
 }
-rule SIGNATURE_BASE_CN_Honker_Webshell__Serv_U_By_Goldsun_Asp3_Serv_U_Asp : FILE {
+rule SIGNATURE_BASE_LOG_APT_WEBSHELL_Solarwinds_SUNBURST_Report_Webshell_Dec20_2 {
     meta:
-		description = "Webshell from CN Honker Pentest Toolset - from files Serv-U_by_Goldsun.asp, asp3.txt, Serv-U asp.txt"
+		description = "Detects webshell access mentioned in FireEye's SUNBURST report"
 		author = "Florian Roth (Nextron Systems)"
-		id = "e91e05e8-0f6d-57a7-a649-a834733f17c8"
-		date = "2015-06-23"
+		id = "fb86164d-13de-5357-8f52-c597b51127ff"
+		date = "2020-12-21"
 		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L880-L899"
+		reference = "https://www.guidepointsecurity.com/supernova-solarwinds-net-webshell-analysis/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_solarwinds_susp_sunburst.yar#L21-L32"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "b733e80f234a85a4f65eedd94f535860b4da464adb80a91afc547a8d96b5dc7a"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		super_rule = 1
-		hash0 = "d4d7a632af65a961a1dbd0cff80d5a5c2b397e8c"
-		hash1 = "87c5a76989bf08da5562e0b75c196dcb3087a27b"
-		hash2 = "cee91cd462a459d31a95ac08fe80c70d2f9c1611"
+		logic_hash = "ec52e244a483ace0f6932b553b159b23b767c00d1f64a4711e5f359832e846f5"
+		score = 75
+		quality = 60
+		tags = ""
 
 	strings:
-		$s1 = "c.send loginuser & loginpass & mt & deldomain & quit" fullword ascii
-		$s2 = "loginpass = \"Pass \" & pass & vbCrLf" fullword ascii
-		$s3 = "b.send \"User go\" & vbCrLf & \"pass od\" & vbCrLf & \"site exec \" & cmd & vbCr" ascii
+		$xr1 = /logoimagehandler.ashx[^\n\s]{1,400}clazz=/ ascii wide
 
 	condition:
-		filesize < 444KB and all of them
+		$xr1
 }
-rule SIGNATURE_BASE_CN_Honker_Webshell__Asp4_Asp4_MSSQL__MSSQL_ : FILE {
+rule SIGNATURE_BASE_Hvs_APT37_Webshell_Img_Thumbs_Asp : FILE {
     meta:
-		description = "Webshell from CN Honker Pentest Toolset - from files asp4.txt, asp4.txt, MSSQL_.asp, MSSQL_.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "e0070f0d-35d0-5024-88e7-e0e04b29f485"
-		date = "2015-06-23"
+		description = "Webshell named img.asp, thumbs.asp or thumb.asp used by APT37"
+		author = "Moritz Oettle"
+		id = "e45d4507-81de-5f72-9ce2-4f0e3e5c62b1"
+		date = "2020-12-15"
 		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L901-L921"
+		reference = "https://www.hvs-consulting.de/media/downloads/ThreatReport-Lazarus.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_lazarus_dec20.yar#L68-L95"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "a8ec5ad87c83c16f47391c3ce08cee74c6be1e42c288eec6d1559867d28489c6"
-		score = 70
+		hash = "94d2448d3794ae3f29678a7337473d259b5cfd1c7f703fe53ee6c84dd10a48ef"
+		logic_hash = "58ccee11c08330c8cd4148e623a2e59e024d6d5f3067331dbdd962d0f6a8daa4"
+		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		super_rule = 1
-		hash0 = "4005b83ced1c032dc657283341617c410bc007b8"
-		hash1 = "4005b83ced1c032dc657283341617c410bc007b8"
-		hash2 = "7097c21f92306983add3b5b29a517204cd6cd819"
-		hash3 = "7097c21f92306983add3b5b29a517204cd6cd819"
 
 	strings:
-		$s0 = "\"<form name=\"\"searchfileform\"\" action=\"\"?action=searchfile\"\" method=\"" ascii
-		$s1 = "\"<TD ALIGN=\"\"Left\"\" colspan=\"\"5\"\">[\"& DbName & \"]" fullword ascii
-		$s2 = "Set Conn = Nothing " fullword ascii
+		$s1 = "strMsg = \"E : F\"" fullword ascii
+		$s2 = "strMsg = \"S : \" & Len(fileData)" fullword ascii
+		$s3 = "Left(workDir, InStrRev(workDir, \"/\")) & \"video\""
+		$a1 = "Server.CreateObject(\"Scripting.FileSystemObject\")" fullword ascii
+		$a2 = "Dim tmpPath, workDir" fullword ascii
+		$a3 = "Dim objFSO, objTextStream" fullword ascii
+		$a4 = "workDir = Request.ServerVariables(\"URL\")" fullword ascii
+		$a5 = "InStrRev(workDir, \"/\")" ascii
+		$g1 = "WriteFile = 0" fullword ascii
+		$g2 = "fileData = Request.Form(\"fp\")" fullword ascii
+		$g3 = "fileName = Request.Form(\"fr\")" fullword ascii
+		$g4 = "Err.Clear()" fullword ascii
+		$g5 = "Option Explicit" fullword ascii
 
 	condition:
-		filesize < 341KB and all of them
+		filesize < 2KB and ( ( 1 of ( $s* ) ) or ( 3 of ( $a* ) ) or ( 5 of ( $g* ) ) )
 }
-rule SIGNATURE_BASE_CN_Honker_Webshell__Injection_Jmcook_Jmpost_Manualinjection : FILE {
+rule SIGNATURE_BASE_Hvs_APT37_Webshell_Template_Query_Asp : FILE {
     meta:
-		description = "Webshell from CN Honker Pentest Toolset - from files Injection.exe, jmCook.asp, jmPost.asp, ManualInjection.exe"
-		author = "Florian Roth (Nextron Systems)"
-		id = "e154ecb5-9d56-520a-b76a-635a8864f0a8"
-		date = "2015-06-23"
+		description = "Webshell named template-query.aspimg.asp used by APT37"
+		author = "Moritz Oettle"
+		id = "dc006b46-4c51-59cd-8b7d-adbfec86cd2e"
+		date = "2020-12-15"
 		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L923-L942"
+		reference = "https://www.hvs-consulting.de/media/downloads/ThreatReport-Lazarus.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_lazarus_dec20.yar#L97-L120"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "0f3a4f81326154a6a6ac448d18be29ad534917bc39aba26cc458f06b43001681"
-		score = 70
+		hash = "961a66d01c86fa5982e0538215b17fb9fae2991331dfea812b8c031e2ceb0d90"
+		logic_hash = "d8bd017e9103bddb0b8a86effa8a4b0617b54bd643bcc36b6f678a3e60f8559f"
+		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		super_rule = 1
-		hash0 = "3484ed16e6f9e0d603cbc5cb44e46b8b7e775d35"
-		hash1 = "5e1851c77ce922e682333a3cb83b8506e1d7395d"
-		hash2 = "f80ec26bbdc803786925e8e0450ad7146b2478ff"
-		hash3 = "e83d427f44783088a84e9c231c6816c214434526"
 
 	strings:
-		$s1 = "response.write  PostData(JMUrl,JmStr,JmCok,JmRef)" fullword ascii
-		$s2 = "strReturn=Replace(strReturn,chr(43),\"%2B\")  'JMDCW" fullword ascii
+		$g1 = "server.scripttimeout=600" fullword ascii
+		$g2 = "response.buffer=true" fullword ascii
+		$g3 = "response.expires=-1" fullword ascii
+		$g4 = "session.timeout=600" fullword ascii
+		$a1 = "redhat hacker" ascii
+		$a2 = "want_pre.asp" ascii
+		$a3 = "vgo=\"admin\"" ascii
+		$a4 = "ywc=false" ascii
+		$s1 = "public  br,ygv,gbc,ydo,yka,wzd,sod,vmd" fullword ascii
 
 	condition:
-		filesize < 7342KB and all of them
+		filesize > 70KB and filesize < 200KB and ( ( 1 of ( $s* ) ) or ( 2 of ( $a* ) ) or ( 3 of ( $g* ) ) )
 }
-rule SIGNATURE_BASE_CN_Honker_Webshell_Cmfshell : FILE {
+rule SIGNATURE_BASE_Hvs_APT37_Webshell_Controllers_Asp : FILE {
     meta:
-		description = "Webshell from CN Honker Pentest Toolset - file cmfshell.cmf"
-		author = "Florian Roth (Nextron Systems)"
-		id = "c5670deb-952c-5ba4-949a-097cc09bb108"
-		date = "2015-06-23"
+		description = "Webshell named controllers.asp or inc-basket-offer.asp used by APT37"
+		author = "Moritz Oettle"
+		id = "82370415-30f4-514d-8806-e2daced96f07"
+		date = "2020-12-15"
 		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L944-L959"
+		reference = "https://www.hvs-consulting.de/media/downloads/ThreatReport-Lazarus.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_lazarus_dec20.yar#L140-L218"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "b9b2107c946431e4ad1a8f5e53ac05e132935c0e"
-		logic_hash = "f138a82c2d6a831626fe200308eb89cb50ffeec2f2722599eb4ccbd082bad73d"
-		score = 70
-		quality = 85
+		hash = "829462fc6d84aae04a962dfc919d0a392265fbf255eab399980d2b021e385517"
+		logic_hash = "a6e53e99f7500683d3b62a7630cecb53ee6c13b335cbf9912366675db964aefe"
+		score = 75
+		quality = 28
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 
 	strings:
-		$s1 = "<cfexecute name=\"C:\\Winnt\\System32\\cmd.exe\"" fullword ascii
-		$s2 = "<form action=\"<cfoutput>#CGI.SCRIPT_NAME#</cfoutput>\" method=\"post\">" fullword ascii
+		$s0 = "<%@Language=VBScript.Encode" ascii
+		$x1 = { 64 7F 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x2 = { 64 7F 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x3 = { 64 7F 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x4 = { 64 7F 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x5 = { 64 7F 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x6 = { 64 7F 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x7 = { 64 7F 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x8 = { 64 41 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x9 = { 64 41 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x10 = { 64 41 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x11 = { 64 41 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x12 = { 64 7F 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x13 = { 64 41 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x14 = { 64 41 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x15 = { 64 41 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x16 = { 64 41 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x17 = { 64 41 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x18 = { 64 41 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x19 = { 64 41 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x20 = { 64 41 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x21 = { 64 41 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x22 = { 64 41 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x23 = { 64 7F 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x24 = { 64 41 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x25 = { 64 41 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x26 = { 6A 7F 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x27 = { 6A 7F 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x28 = { 6A 7F 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x29 = { 6A 7F 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x30 = { 6A 7F 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x31 = { 6A 7F 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x32 = { 6A 7F 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x33 = { 6A 7F 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x34 = { 64 7F 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x35 = { 6A 7F 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x36 = { 6A 7F 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x37 = { 6A 7F 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x38 = { 6A 7F 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x39 = { 6A 7F 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x40 = { 6A 7F 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x41 = { 6A 7F 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x42 = { 6A 7F 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x43 = { 6A 41 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x44 = { 6A 41 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x45 = { 64 7F 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x46 = { 6A 41 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x47 = { 6A 41 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x48 = { 6A 41 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x49 = { 6A 41 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x50 = { 6A 41 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x51 = { 6A 41 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x52 = { 6A 41 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x53 = { 6A 41 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x54 = { 6A 41 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x55 = { 6A 41 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x56 = { 64 7F 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x57 = { 6A 41 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x58 = { 6A 41 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x59 = { 6A 41 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x60 = { 6A 41 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x61 = { 64 7F 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x62 = { 64 7F 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x63 = { 64 7F 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
+		$x64 = { 64 7F 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
 
 	condition:
-		filesize < 4KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php4 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php4.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "82446dff-dd1e-54a8-bb70-570bedc805b5"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L961-L975"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "179975f632baff6ee4d674fe3fabc324724fee9e"
-		logic_hash = "e625b6d1fd2c1e62306ccae2775ee7b53ddcdd7a6baef55b386dfcd92dc2e764"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "nc -l -vv -p port(" ascii
-
-	condition:
-		uint16( 0 ) == 0x4850 and filesize < 1KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Linux_2_6_Exploit : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file 2.6.9"
-		author = "Florian Roth (Nextron Systems)"
-		id = "22e2aca7-418f-598f-af0c-99942aaf3278"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L977-L991"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "ec22fac0510d0dc2c29d56c55ff7135239b0aeee"
-		logic_hash = "7f3e2937796358a949ce980210ddeb1a606a7b9c2b4d9c4a4acad49bb556dfc8"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "[+] Failed to get root :( Something's wrong.  Maybe the kernel isn't vulnerable?" fullword ascii
-
-	condition:
-		filesize < 56KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file asp2.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "e5296405-c345-55dc-acd9-be6aca86c60b"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L993-L1009"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "b3ac478e72a0457798a3532f6799adeaf4a7fc87"
-		logic_hash = "6107afe9895c4e0c865e78bece160246815a0d3c589bfc79f8b369b94481cd89"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "<%=server.mappath(request.servervariables(\"script_name\"))%>" fullword ascii
-		$s2 = "webshell</font> <font color=#00FF00>" fullword ascii
-		$s3 = "Userpwd = \"admin\"   'User Password" fullword ascii
-
-	condition:
-		filesize < 10KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_FTP_MYSQL_MSSQL_SSH : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file FTP MYSQL MSSQL SSH.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "dd619901-6f0e-527e-9926-808176641c09"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1011-L1029"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "fe63b215473584564ef2e08651c77f764999e8ac"
-		logic_hash = "a66884c71ce0cce05ba6607bf66dc55bfae5393746328c06f5c9ca98005d0caf"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "$_SESSION['hostlist'] = $hostlist = $_POST['hostlist'];" fullword ascii
-		$s2 = "Codz by <a href=\"http://www.sablog.net/blog\">4ngel</a><br />" fullword ascii
-		$s3 = "if ($conn_id = @ftp_connect($host, $ftpport)) {" fullword ascii
-		$s4 = "$_SESSION['sshport'] = $mssqlport = $_POST['sshport'];" fullword ascii
-		$s5 = "<title>ScanPass(FTP/MYSQL/MSSQL/SSH) by 4ngel</title>" fullword ascii
-
-	condition:
-		filesize < 20KB and 3 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Shell : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file shell.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "fdfc3fc1-9400-533b-978b-1a1fac112e1f"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1031-L1047"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "b7b34215c2293ace70fc06cbb9ce73743e867289"
-		logic_hash = "be3961d6568acfaadfa09efda2f914259a59f4e30725c7d434e89f6020e40515"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "xPost.Open \"GET\",\"http://www.i0day.com/1.txt\",False //" fullword ascii
-		$s2 = "sGet.SaveToFile Server.MapPath(\"test.asp\"),2 //" fullword ascii
-		$s3 = "http://hi.baidu.com/xahacker/fuck.txt" fullword ascii
-
-	condition:
-		filesize < 1KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php7 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file php7.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "f21bb0db-d18a-58c0-a227-5baf5536c57b"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1049-L1064"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "05a3f93dbb6c3705fd5151b6ffb64b53bc555575"
-		logic_hash = "70804d914c6f31422632943bf663f997eb747a290a13b27bfcc66bc3129f136d"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "---> '.$ports[$i].'<br>'; ob_flush(); flush(); } } echo '</div>'; return true; }" ascii
-		$s1 = "$getfile = isset($_POST['downfile']) ? $_POST['downfile'] : ''; $getaction = iss" ascii
-
-	condition:
-		filesize < 300KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Rootkit : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file rootkit.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "ab51abca-0790-541c-9f18-1568809ef113"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1066-L1081"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "3bfc1c95782e702cf56184e7d438edcf5802eab3"
-		logic_hash = "5569a179f011ece9802676542d5556fe8d2a2b144e26065b9e0c5bd06c970201"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "set ss=zsckm.get(\"Win32_ProcessSta\"&uyy&\"rtup\")" fullword ascii
-		$s1 = "If jzgm=\"\"Then jzgm=\"cmd.exe /c net user\"" fullword ascii
-
-	condition:
-		filesize < 80KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Jspshell : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file jspshell.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "ff72f94b-1c0a-5615-b35f-35f69c920292"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1083-L1098"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "d16af622f7688d4e0856a2678c4064d3d120e14b"
-		logic_hash = "9b952f941eb87d7a1b4f747f4e0b0b5ee8876190c6f684b811057a2c78044047"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "else if(Z.equals(\"M\")){String[] c={z1.substring(2),z1.substring(0,2),z2};Proce" ascii
-		$s2 = "String Z=EC(request.getParameter(Pwd)+\"\",cs);String z1=EC(request.getParameter" ascii
-
-	condition:
-		filesize < 30KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_Serv_U : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file serv-u.php"
-		author = "Florian Roth (Nextron Systems)"
-		id = "dd37b2c3-e06d-5245-97d7-40e5eeadb76f"
-		date = "2015-06-23"
-		modified = "2023-01-27"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1100-L1117"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "1c6415a247c08a63e3359b06575b36017befc0c0"
-		logic_hash = "89cfcbaa38c3b0b6c31af634b4588dcc8bc7a5aa3edac955a162173341d03622"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "@readfile(\"c:\\\\winnt\\\\system32\\" ascii
-		$s2 = "$sendbuf = \"PASS \".$_POST[\"password\"].\"\\r\\n\";" fullword ascii
-		$s3 = "$cmd=\"cmd /c rundll32.exe $path,install $openPort $activeStr\";" fullword ascii
-
-	condition:
-		filesize < 435KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Webshell : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file WebShell.cgi"
-		author = "Florian Roth (Nextron Systems)"
-		id = "9fe4c8fd-3955-5405-add2-835e6f64e8f2"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1119-L1135"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "7ef773df7a2f221468cc8f7683e1ace6b1e8139a"
-		logic_hash = "7d80390a86b1858d2cf4f2be56df7e734aea402de0878adf40ef36721719ca74"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "$login = crypt($WebShell::Configuration::password, $salt);" fullword ascii
-		$s2 = "my $error = \"This command is not available in the restricted mode.\\n\";" fullword ascii
-		$s3 = "warn \"command: '$command'\\n\";" fullword ascii
-
-	condition:
-		filesize < 30KB and 2 of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Mssql_2 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file mssql.asp"
-		author = "Florian Roth (Nextron Systems)"
-		id = "3f9706d6-7f6e-5120-945a-d5d928d79507"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1137-L1153"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "ad55512afa109b205e4b1b7968a89df0cf781dc9"
-		logic_hash = "1d4b75eeeddda6e92b8ec38679d5e2b9d21abf2d2b467b91a066dcf628725f0a"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "sqlpass=request(\"sqlpass\")" fullword ascii
-		$s2 = "set file=fso.createtextfile(server.mappath(request(\"filename\")),8,true)" fullword ascii
-		$s3 = "<blockquote> ServerIP:&nbsp;&nbsp;&nbsp;" fullword ascii
-
-	condition:
-		filesize < 3KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp1 : FILE {
-    meta:
-		description = "Webshell from CN Honker Pentest Toolset - file asp1.txt"
-		author = "Florian Roth (Nextron Systems)"
-		id = "bf0b1f1e-cf7b-5afb-8e0a-bcfd70fc8887"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1155-L1171"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "78b5889b363043ed8a60bed939744b4b19503552"
-		logic_hash = "3b454b1254d05b2208aee02e966c9c56a338dd3d33a2c6acc2c4df3208314055"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "SItEuRl=" ascii
-		$s2 = "<%@ LANGUAGE = VBScript.Encode %><%" fullword ascii
-		$s3 = "Server.ScriptTimeout=" ascii
-
-	condition:
-		filesize < 200KB and all of them
+		filesize > 50KB and filesize < 200KB and ( $s0 and 1 of ( $x* ) )
 }
 rule SIGNATURE_BASE_WEBSHELL_H4Ntu_Shell_Powered_Tsoi_3 {
     meta:
@@ -18434,375 +17027,107 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Mar21_1 : FILE {
 	condition:
 		uint16( 0 ) == 0x253c and filesize < 6KB and all of them
 }
-rule SIGNATURE_BASE_Gifcloaked_Webshell_A : FILE {
+rule SIGNATURE_BASE_WEBSHELL_G_APT_Backdoorwebshell_SLAYSTYLE_1 : FILE {
     meta:
-		description = "Looks like a webshell cloaked as GIF"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4fdef65c-204a-5019-9b4f-c5877c3e39d4"
-		date = "2018-03-12"
-		modified = "2026-02-04"
-		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/yara_mixed_ext_vars.yar#L176-L197"
+		description = "Detects webshell used by APT group UNC5221 (China Nexus)"
+		author = "Google Threat Intelligence Group (GTIG) (modified by Florian Roth)"
+		id = "a5107e4e-3618-5d08-b187-342d5cb1b12f"
+		date = "2025-09-25"
+		modified = "2025-10-07"
+		reference = "https://cloud.google.com/blog/topics/threat-intelligence/brickstorm-espionage-campaign"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_cn_brickstorm_sep25.yar#L94-L112"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "f1c95b13a71ca3629a0bb79601fcacf57cdfcf768806a71b26f2448f8c1d5d24"
-		logic_hash = "0c4570373d50c40745cd0523dcf8c34ee3cae1c298982b3a39d4a33e054aa779"
-		score = 60
+		logic_hash = "7a56238218e60a69049f5d9c756df4fb6f0de772fbc437a14c5db7192f971be6"
+		score = 75
+		quality = 83
+		tags = "FILE"
+
+	strings:
+		$str1_alt = "=request.getParameter(\""
+		$str2 = "=new String(java.util.Base64.getDecoder().decode(" ascii wide nocase
+		$str21_alt = "={\"/bin/sh\",\"-c\"," ascii
+		$str3 = "= Runtime.getRuntime().exec(" ascii
+		$str4 = "java.io.InputStream" ascii
+		$str5 = "java.util.Base64.getEncoder().encodeToString(org.apache.commons.io.IOUtils.toByteArray(" ascii
+
+	condition:
+		filesize < 5MB and all of them
+}
+rule SIGNATURE_BASE_WEBSHELL_G_APT_Backdoorwebshell_SLAYSTYLE_2 : FILE {
+    meta:
+		description = "Detects webshell used by APT group UNC5221 (China Nexus)"
+		author = "Google Threat Intelligence Group (GTIG) (modified by Florian Roth)"
+		id = "a7c3e453-c071-5863-887a-6eca6d74d2fe"
+		date = "2025-09-25"
+		modified = "2025-10-07"
+		reference = "https://cloud.google.com/blog/topics/threat-intelligence/brickstorm-espionage-campaign"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_cn_brickstorm_sep25.yar#L114-L129"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "d2d1003f77a2066b48df1c27feab79c0a1951ebb62c3198de8366bcfee42e30a"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$str1 = "request.getParameter"
+		$str2 = "/bin/sh"
+		$str3 = "java.io.InputStream"
+		$str4 = "Runtime.getRuntime().exec("
+		$str5 = "2>&1"
+
+	condition:
+		( uint16( 0 ) != 0x5A4D and uint32( 0 ) != 0x464C457F ) and filesize < 7KB and all of them and @str4 > @str2
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell : FILE {
+    meta:
+		description = "Sample from CN Honker Pentest Toolset - file Webshell.exe"
+		author = "Florian Roth (Nextron Systems)"
+		id = "12870766-2b85-522d-9ad8-abba2786caaf"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_tools.yar#L487-L503"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "c85bd09d241c2a75b4e4301091aa11ddd5ad6d59"
+		logic_hash = "d48a10313afcb5a2084229937703bbc11958a5cd11f8f27fbc8dae15ddfd5ed1"
+		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 
 	strings:
-		$s0 = "input type"
-		$s1 = "<%eval request"
-		$s2 = "<%eval(Request.Item["
-		$s3 = "LANGUAGE='VBScript'"
-		$s4 = "$_REQUEST" fullword
-		$s5 = ";eval("
-		$s6 = "base64_decode"
-		$fp1 = "<form name=\"social_form\""
+		$s1 = "Windows NT users: Please note that having the WinIce/SoftIce" fullword ascii
+		$s2 = "Do you want to cancel the file download?" fullword ascii
+		$s3 = "Downloading: %s" fullword ascii
 
 	condition:
-		uint32( 0 ) == 0x38464947 and ( 1 of ( $s* ) ) and not 1 of ( $fp* )
+		uint16( 0 ) == 0x5a4d and filesize < 381KB and all of them
 }
-rule SIGNATURE_BASE_APT_Webshell_Tiny_1 : FILE {
+rule SIGNATURE_BASE_CN_Honker_Getwebshell : FILE {
     meta:
-		description = "Detetcs a tiny webshell involved in the Australian Parliament House network compromise"
+		description = "Sample from CN Honker Pentest Toolset - file GetWebShell.exe"
 		author = "Florian Roth (Nextron Systems)"
-		id = "e65a8920-0684-5aae-a2b8-079c2beae08a"
-		date = "2019-02-18"
+		id = "919883f4-af66-5d07-ad41-8cba3e049396"
+		date = "2015-06-23"
 		modified = "2023-12-05"
-		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L12-L23"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_tools.yar#L913-L930"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "277162f720195c94d36fd3350d0dda785007e8cc6ed2ab2aa1a6a6262f2993fa"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$x1 = "eval(" ascii wide
-
-	condition:
-		( uint16( 0 ) == 0x3f3c or uint16( 0 ) == 0x253c ) and filesize < 40 and $x1
-}
-rule SIGNATURE_BASE_APT_Webshell_AUS_Tiny_2 : FILE {
-    meta:
-		description = "Detetcs a tiny webshell involved in the Australian Parliament House network compromise"
-		author = "Florian Roth (Nextron Systems)"
-		id = "4746d4ce-628a-59b0-9032-7e0759d96ad3"
-		date = "2019-02-18"
-		modified = "2023-12-05"
-		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L25-L38"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "e26c265d2b1606257d8c843921601f14cae2beaf246f8e37daeeb6c5ff12f289"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		hash1 = "0d6209d86f77a0a69451b0f27b476580c14e0cda15fa6a5003aab57a93e7e5a5"
-
-	strings:
-		$x1 = "Request.Item[System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(\"[password]\"))];" ascii
-		$x2 = "eval(arguments,System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(\"" ascii
-
-	condition:
-		( uint16( 0 ) == 0x3f3c or uint16( 0 ) == 0x253c ) and filesize < 1KB and 1 of them
-}
-rule SIGNATURE_BASE_APT_Webshell_AUS_Jscript_3 : FILE {
-    meta:
-		description = "Detetcs a webshell involved in the Australian Parliament House network compromise"
-		author = "Florian Roth (Nextron Systems)"
-		id = "ff7e780b-ccf9-53b6-b741-f04a8cbaf580"
-		date = "2019-02-18"
-		modified = "2023-12-05"
-		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L40-L53"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "e144e555dd80e15ac9072a645e629a86ca1a6b52949d236ec3daedbf06bd6718"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		hash1 = "7ac6f973f7fccf8c3d58d766dec4ab7eb6867a487aa71bc11d5f05da9322582d"
-
-	strings:
-		$s1 = "<%@ Page Language=\"Jscript\" validateRequest=\"false\"%><%try{eval(System.Text.Encoding.UTF8.GetString(Convert.FromBase64String" ascii
-		$s2 = ".Item[\"[password]\"])),\"unsafe\");}" ascii
-
-	condition:
-		uint16( 0 ) == 0x6568 and filesize < 1KB and all of them
-}
-rule SIGNATURE_BASE_APT_Webshell_AUS_4 : FILE {
-    meta:
-		description = "Detetcs a webshell involved in the Australian Parliament House network compromise"
-		author = "Florian Roth (Nextron Systems)"
-		id = "bb5b10d1-3528-5361-92fc-8440c65dcda4"
-		date = "2019-02-18"
-		modified = "2023-12-05"
-		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L56-L71"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "4a4f26b50631021979e4a8246a1e1c10150f4fb03eb7d77a1042e41ef57b3961"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		hash1 = "83321c02339bb51735fbcd9a80c056bd3b89655f3dc41e5fef07ca46af09bb71"
-
-	strings:
-		$s1 = "wProxy.Credentials = new System.Net.NetworkCredential(pusr, ppwd);" fullword ascii
-		$s2 = "{return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(" ascii
-		$s3 = ".Equals('User-Agent', StringComparison.OrdinalIgnoreCase))" ascii
-		$s4 = "gen.Emit(System.Reflection.Emit.OpCodes.Ret);" fullword ascii
-
-	condition:
-		uint16( 0 ) == 0x7566 and filesize < 10KB and 3 of them
-}
-rule SIGNATURE_BASE_APT_Webshell_AUS_5 : FILE {
-    meta:
-		description = "Detetcs a webshell involved in the Australian Parliament House network compromise"
-		author = "Florian Roth (Nextron Systems)"
-		id = "59b3f6aa-2d3b-54b4-b543-57bd9d981e87"
-		date = "2019-02-18"
-		modified = "2023-12-05"
-		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L92-L111"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "fb0e53e5561f7f14f2ad6afcda2798d353cf4d54d12ae3354b03d62ed0c00bf3"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		hash1 = "54a17fb257db2d09d61af510753fd5aa00537638a81d0a8762a5645b4ef977e4"
-
-	strings:
-		$a1 = "function DEC(d){return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(d));}" fullword ascii
-		$a2 = "function ENC(d){return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(d));}" fullword ascii
-		$s1 = "var hash=DEC(Request.Item['" ascii
-		$s2 = "Response.Write(ENC(SET_ASS_SUCCESS));" fullword ascii
-		$s3 = "hashtable[hash] = assCode;" fullword ascii
-		$s4 = "Response.Write(ss);" fullword ascii
-		$s5 = "var hashtable = Application[CachePtr];" fullword ascii
-
-	condition:
-		uint16( 0 ) == 0x7566 and filesize < 2KB and 4 of them
-}
-rule SIGNATURE_BASE_EXPL_React_Server_CVE_2025_55182_POC_Dec25 : CVE_2025_55182 {
-    meta:
-		description = "Detects in-memory webshell indicators related to the proof-of-concept code for the React Server Remote Code Execution Vulnerability (CVE-2025-55182)"
-		author = "Florian Roth"
-		id = "6ce94e2d-64bf-5b1c-8f9a-1a22470cad76"
-		date = "2025-12-05"
-		modified = "2025-12-12"
-		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/react_pocs_indicators_dec25.yar#L1-L19"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "a4f27fc85807e8f94e6947523a09d87ceed0658334756a9724322181c3eecd20"
+		hash = "b63b53259260a7a316932c0a4b643862f65ee9f8"
+		logic_hash = "5d6638596607884950e702144416eb6fd3b009c88e4af5f81a50f346d7491c95"
 		score = 70
-		quality = 85
-		tags = "CVE-2025-55182"
-
-	strings:
-		$xs1 = "{const cmd=p.query.cmd;if(!cmd)(s.writeHead(400);"
-		$s1 = ";if(p.pathname=="
-		$s2 = ".writeHead(400);"
-		$s3 = ".writeHead(200,{'Content-Type':"
-		$s4 = ".execSync("
-		$s5 = ",stdio:'pipe'})"
-
-	condition:
-		1 of ( $x* ) or all of ( $s* )
-}
-rule SIGNATURE_BASE_SUSP_WEBSHELL_LOG_Signatures_Dec25 : FILE {
-    meta:
-		description = "Detects indicators related simple webshells that use the same exec/cmd pattern"
-		author = "Florian Roth"
-		id = "ac589f51-dfec-5bac-a402-0f304bcb9422"
-		date = "2025-12-05"
-		modified = "2025-12-12"
-		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/react_pocs_indicators_dec25.yar#L21-L37"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "d9bc32a48e37708928a658d171f6cac7c363b346d201e7aed17c8cbe48bab115"
-		score = 60
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$xa1 = "/exec?cmd=ls"
-		$xa2 = "/exec?cmd=whoami"
-		$xa3 = "/exec?cmd=id"
-		$xa4 = "/exec?cmd=uname%20-a"
-
-	condition:
-		1 of them and not uint16( 0 ) == 0x3c3f
-}
-rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell : FILE {
-    meta:
-		description = "Detects P.A.S. PHP webshell - Based on DHS/FBI JAR-16-2029 (Grizzly  Steppe)"
-		author = "FR/ANSSI/SDO (modified by Florian Roth)"
-		id = "862aab77-936e-524c-8669-4f48730f4ed5"
-		date = "2021-02-15"
-		modified = "2024-05-25"
-		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L10-L28"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "977ee0fdf0e92ccea6b71fea7b2c7aed2965c6966d8af86230ccb0f95b286694"
-		score = 70
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$php = "<?php"
-		$strreplace = "(str_replace("
-		$md5 = ".substr(md5(strrev($"
-		$gzinflate = "gzinflate"
-		$cookie = "_COOKIE"
-		$isset = "isset"
-
-	condition:
-		( filesize > 20KB and filesize < 200KB ) and all of them
-}
-rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell_Ziparchivefile {
-    meta:
-		description = "Detects an archive file created by P.A.S. for download operation"
-		author = "FR/ANSSI/SDO (modified by Florian Roth)"
-		id = "081cc65b-e51c-59fc-a518-cd986e8ee2f7"
-		date = "2021-02-15"
-		modified = "2024-05-25"
-		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L30-L42"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "c15e7022f45ec211ba635d6cd31bab16f4fb0d3038fb19d5765e0f751c14a826"
-		score = 80
-		quality = 85
-		tags = ""
-
-	strings:
-		$s1 = "Archive created by P.A.S. v."
-
-	condition:
-		$s1
-}
-rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell_Perlnetworkscript : FILE {
-    meta:
-		description = "Detects PERL scripts created by P.A.S. webshell"
-		author = "FR/ANSSI/SDO"
-		id = "1625b63f-ead7-5712-92b4-0ce6ecc49fd4"
-		date = "2021-02-15"
-		modified = "2024-05-25"
-		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L44-L62"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "b170c07a005e737c8069f2cc63f869d4d3ff6593b3bfca5bcaf02d7808da6852"
-		score = 90
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$pl_start = "#!/usr/bin/perl\n$SIG{'CHLD'}='IGNORE'; use IO::Socket; use FileHandle;"
-		$pl_status = "$o=\" [OK]\";$e=\" Error: \""
-		$pl_socket = "socket(SOCKET, PF_INET, SOCK_STREAM,$tcp) or die print \"$l$e$!$l"
-		$msg1 = "print \"$l OK! I\\'m successful connected.$l\""
-		$msg2 = "print \"$l OK! I\\'m accept connection.$l\""
-
-	condition:
-		filesize < 6000 and ( $pl_start at 0 and all of ( $pl* ) ) or any of ( $msg* )
-}
-rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell_Sqldumpfile {
-    meta:
-		description = "Detects SQL dump file created by P.A.S. webshell"
-		author = "FR/ANSSI/SDO"
-		id = "4c26feeb-3031-5c91-9eeb-4b5fe9702e39"
-		date = "2021-02-15"
-		modified = "2024-05-25"
-		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L64-L76"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "c34abcada22fdf462fd66cc2da18ab9e54215defc6f7a7a95b5a80d1155a2ffe"
-		score = 90
-		quality = 85
-		tags = ""
-
-	strings:
-		$ = "-- [ SQL Dump created by P.A.S. ] --"
-
-	condition:
-		1 of them
-}
-rule SIGNATURE_BASE_WEBSHELL_JSP_Nov21_1 : FILE {
-    meta:
-		description = "Detects JSP webshells"
-		author = "Florian Roth (Nextron Systems)"
-		id = "117eed28-c44e-5983-b4c7-b555fc06d923"
-		date = "2021-11-23"
-		modified = "2023-12-05"
-		reference = "https://www.ic3.gov/Media/News/2021/211117-2.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_spring4shell.yar#L2-L17"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "1dac7706421961c71ba6f8d7a223b80e4b77bf206bfb64ee18c7cc894b062a3c"
-		score = 70
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$x1 = "request.getParameter(\"pwd\")" ascii
-		$x2 = "excuteCmd(request.getParameter(" ascii
-		$x3 = "getRuntime().exec (request.getParameter(" ascii
-		$x4 = "private static final String PW = \"whoami\"" ascii
-
-	condition:
-		filesize < 400KB and 1 of them
-}
-rule SIGNATURE_BASE_EXPL_POC_Springcore_0Day_Webshell_Mar22_1 : FILE {
-    meta:
-		description = "Detects webshell found after SpringCore exploitation attempts POC script"
-		author = "Florian Roth (Nextron Systems)"
-		id = "e7047c98-3c60-5211-9ad5-2bfdfb35d493"
-		date = "2022-03-30"
-		modified = "2023-12-05"
-		reference = "https://twitter.com/vxunderground/status/1509170582469943303"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_spring4shell.yar#L36-L50"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "17282b66899356a6051f0b47a7a3f02265737283d760f2256e03a2b934bb63b8"
-		score = 70
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$x1 = ".getInputStream(); int a = -1; byte[] b = new byte[2048];"
-		$x2 = "if(\"j\".equals(request.getParameter(\"pwd\")"
-		$x3 = ".getRuntime().exec(request.getParameter(\"cmd\")).getInputStream();"
-
-	condition:
-		filesize < 200KB and 1 of them
-}
-rule SIGNATURE_BASE_WEBSHELL_APT_PHP_DEWMODE_UNC2546_Feb21_1 : FILE {
-    meta:
-		description = "Detects DEWMODE webshells"
-		author = "Florian Roth (Nextron Systems)"
-		id = "ea883f25-0e9b-5617-b05e-191a4a5c5a52"
-		date = "2021-02-22"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2021/02/accellion-fta-exploited-for-data-theft-and-extortion.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_unc2546_dewmode.yar#L2-L25"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "86ce185f6350eb7485bce5bd31d91085fed25aa8ce78813e1c3c3dffbaae58ff"
-		score = 75
 		quality = 60
 		tags = "FILE"
-		hash1 = "2e0df09fa37eabcae645302d9865913b818ee0993199a6d904728f3093ff48c7"
-		hash2 = "5fa2b9546770241da7305356d6427847598288290866837626f621d794692c1b"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 
 	strings:
-		$x1 = "<font size=4>Cleanup Shell</font></a>';" ascii fullword
-		$x2 = "$(sh /tmp/.scr)"
-		$x3 = "@system('sudo /usr/local/bin/admin.pl --mount_cifs=" ascii
-		$s1 = "target=\\\"_blank\\\">Download</a></td>\";" ascii
-		$s2 = ",PASSWORD 1>/dev/null 2>/dev/null');" ascii
-		$s3 = ",base64_decode('" ascii
-		$s4 = "include \"remote.inc\";" ascii
-		$s5 = "@system('sudo /usr/local" ascii
+		$s0 = "echo P.Open \"GET\",\"http://www.baidu.com/ma.exe\",0 >>run.vbs" fullword ascii
+		$s5 = "http://127.0.0.1/sql.asp?id=1" fullword wide
+		$s14 = "net user admin$ hack /add" fullword wide
+		$s15 = ";Drop table [hack];create table [dbo].[hack] ([cmd] [image])--" fullword wide
 
 	condition:
-		uint16( 0 ) == 0x3f3c and filesize < 9KB and ( 1 of ( $x* ) or 2 of them ) or 3 of them
+		uint16( 0 ) == 0x5a4d and filesize < 70KB and 1 of them
 }
 rule SIGNATURE_BASE_Tools_Cmd : FILE {
     meta:
@@ -19832,6 +18157,3015 @@ rule SIGNATURE_BASE_Txt_Hello : FILE {
 	condition:
 		filesize < 25KB and all of them
 }
+rule SIGNATURE_BASE_EXPL_React_Server_CVE_2025_55182_POC_Dec25 : CVE_2025_55182 {
+    meta:
+		description = "Detects in-memory webshell indicators related to the proof-of-concept code for the React Server Remote Code Execution Vulnerability (CVE-2025-55182)"
+		author = "Florian Roth"
+		id = "6ce94e2d-64bf-5b1c-8f9a-1a22470cad76"
+		date = "2025-12-05"
+		modified = "2025-12-12"
+		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/react_pocs_indicators_dec25.yar#L1-L19"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "a4f27fc85807e8f94e6947523a09d87ceed0658334756a9724322181c3eecd20"
+		score = 70
+		quality = 85
+		tags = "CVE-2025-55182"
+
+	strings:
+		$xs1 = "{const cmd=p.query.cmd;if(!cmd)(s.writeHead(400);"
+		$s1 = ";if(p.pathname=="
+		$s2 = ".writeHead(400);"
+		$s3 = ".writeHead(200,{'Content-Type':"
+		$s4 = ".execSync("
+		$s5 = ",stdio:'pipe'})"
+
+	condition:
+		1 of ( $x* ) or all of ( $s* )
+}
+rule SIGNATURE_BASE_SUSP_WEBSHELL_LOG_Signatures_Dec25 : FILE {
+    meta:
+		description = "Detects indicators related simple webshells that use the same exec/cmd pattern"
+		author = "Florian Roth"
+		id = "ac589f51-dfec-5bac-a402-0f304bcb9422"
+		date = "2025-12-05"
+		modified = "2025-12-12"
+		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/react_pocs_indicators_dec25.yar#L21-L37"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "d9bc32a48e37708928a658d171f6cac7c363b346d201e7aed17c8cbe48bab115"
+		score = 60
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$xa1 = "/exec?cmd=ls"
+		$xa2 = "/exec?cmd=whoami"
+		$xa3 = "/exec?cmd=id"
+		$xa4 = "/exec?cmd=uname%20-a"
+
+	condition:
+		1 of them and not uint16( 0 ) == 0x3c3f
+}
+rule SIGNATURE_BASE_M_Hunting_Webshell_LIGHTWIRE_2 : FILE {
+    meta:
+		description = "Detects LIGHTWIRE based on the RC4 decoding and execution 1-liner."
+		author = "Mandiant (modified by Florian Roth)"
+		id = "9451da63-c68e-51e8-b4b1-c3082d46fbf6"
+		date = "2024-01-11"
+		modified = "2024-01-12"
+		reference = "https://www.mandiant.com/resources/blog/suspected-apt-targets-ivanti-zero-day"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_report_ivanti_mandiant_jan24.yar#L60-L81"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "3d97f55a03ceb4f71671aa2ecf5b24e9"
+		logic_hash = "37b22a6c45dd53bc7b3f0c75cc5072e990246fea24591d192176c0b496e92084"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$s1 = "eval{my"
+		$s2 = "Crypt::RC4->new(\""
+		$s3 = "->RC4(decode_base64(CGI::param('"
+		$s4 = ";eval $"
+		$s5 = "\"Compatibility check: $@\";}"
+
+	condition:
+		filesize < 10KB and all of them
+}
+rule SIGNATURE_BASE_EXPL_Citrix_Netscaler_ADC_Forensicartifacts_CVE_2023_3519_Jul23_2 : CVE_2023_3519 FILE {
+    meta:
+		description = "Detects forensic artifacts found after an exploitation of Citrix NetScaler ADC CVE-2023-3519"
+		author = "Florian Roth"
+		id = "471ce547-0133-5836-b9d1-02c932ecfd1e"
+		date = "2023-07-21"
+		modified = "2023-12-05"
+		reference = "https://www.cisa.gov/sites/default/files/2023-07/aa23-201a_csa_threat_actors_exploiting_citrix-cve-2023-3519_to_implant_webshells.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_citrix_netscaler_adc_exploitation_cve_2023_3519.yar#L27-L41"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "48d4225d0935084003f7a98c554d7c4722a91290dfe190001da52bce332b3f7d"
+		score = 70
+		quality = 85
+		tags = "CVE-2023-3519, FILE"
+
+	strings:
+		$s1 = "tar -czvf - /var/tmp/all.txt" ascii fullword
+		$s2 = "-out /var/tmp/test.tar.gz" ascii
+		$s3 = "/test.tar.gz /netscaler/"
+
+	condition:
+		filesize < 10MB and 1 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_SECRETSAUCE_Jul23_1 : CVE_2023_3519 FILE {
+    meta:
+		description = "Detects SECRETSAUCE PHP webshells (found after an exploitation of Citrix NetScaler ADC CVE-2023-3519)"
+		author = "Florian Roth"
+		id = "db0542e7-648e-5f60-9838-e07498f58b51"
+		date = "2023-07-24"
+		modified = "2023-12-05"
+		reference = "https://www.mandiant.com/resources/blog/citrix-zero-day-espionage"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_citrix_netscaler_adc_exploitation_cve_2023_3519.yar#L79-L100"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "c762d46ae43a3e10453c2ee17039812a06086ac85bdb000cf8308f5196a9dee2"
+		score = 85
+		quality = 85
+		tags = "CVE-2023-3519, FILE"
+
+	strings:
+		$sa1 = "for ($x=0; $x<=1; $x++) {" ascii
+		$sa2 = "$_REQUEST[" ascii
+		$sa3 = "@eval" ascii
+		$sb1 = "public $cmd;" ascii
+		$sb2 = "return @eval($a);" ascii
+		$sb3 = "$z->run($z->get('openssl_public_decrypt'));"
+
+	condition:
+		filesize < 100KB and ( all of ( $sa* ) or 2 of ( $sb* ) )
+}
+rule SIGNATURE_BASE_Chinachopper_Generic : FILE {
+    meta:
+		description = "China Chopper Webshells - PHP and ASPX"
+		author = "Florian Roth (Nextron Systems)"
+		id = "2473cef1-88cf-5b76-a87a-2978e6780b4f"
+		date = "2015-03-10"
+		modified = "2022-10-27"
+		reference = "https://www.fireeye.com/content/dam/legacy/resources/pdfs/fireeye-china-chopper-report.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_webshell_chinachopper.yar#L2-L19"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "34cb81b077d6dae5b4565001b2ab28897c6c554f00aa102601fb9c416c6c0f09"
+		score = 75
+		quality = 60
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$x_aspx = /%@\sPage\sLanguage=.Jscript.%><%eval\(Request\.Item\[.{,100}unsafe/
+		$x_php = /<?php.\@eval\(\$_POST./
+		$fp1 = "GET /"
+		$fp2 = "POST /"
+
+	condition:
+		filesize < 300KB and 1 of ( $x* ) and not 1 of ( $fp* )
+}
+rule SIGNATURE_BASE_SUSP_WEBSHELL_Cmd_Indicator_Apr25 {
+    meta:
+		description = "Detects a pattern which is often related to web shell activity"
+		author = "Florian Roth"
+		id = "735359b2-9f94-5618-8ec5-7ab8f5e5e16d"
+		date = "2025-04-25"
+		modified = "2025-05-07"
+		reference = "https://regex101.com/r/N6oZ2h/2"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_sap_netweaver_apr25.yar#L29-L41"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "b992786a58389749db40fc90363f00c5df374d514374afc2d6fdff4429cb1ec0"
+		score = 60
+		quality = 60
+		tags = ""
+
+	strings:
+		$xr01 = /\.(asp|aspx|jsp|php)\?cmd=[a-z0-9%+\-\/\.]{3,20} HTTP\/1\.[01]["']? 200/
+
+	condition:
+		1 of them
+}
+rule SIGNATURE_BASE_APT_Webshell_Tiny_1 : FILE {
+    meta:
+		description = "Detetcs a tiny webshell involved in the Australian Parliament House network compromise"
+		author = "Florian Roth (Nextron Systems)"
+		id = "e65a8920-0684-5aae-a2b8-079c2beae08a"
+		date = "2019-02-18"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L12-L23"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "277162f720195c94d36fd3350d0dda785007e8cc6ed2ab2aa1a6a6262f2993fa"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$x1 = "eval(" ascii wide
+
+	condition:
+		( uint16( 0 ) == 0x3f3c or uint16( 0 ) == 0x253c ) and filesize < 40 and $x1
+}
+rule SIGNATURE_BASE_APT_Webshell_AUS_Tiny_2 : FILE {
+    meta:
+		description = "Detetcs a tiny webshell involved in the Australian Parliament House network compromise"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4746d4ce-628a-59b0-9032-7e0759d96ad3"
+		date = "2019-02-18"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L25-L38"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "e26c265d2b1606257d8c843921601f14cae2beaf246f8e37daeeb6c5ff12f289"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		hash1 = "0d6209d86f77a0a69451b0f27b476580c14e0cda15fa6a5003aab57a93e7e5a5"
+
+	strings:
+		$x1 = "Request.Item[System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(\"[password]\"))];" ascii
+		$x2 = "eval(arguments,System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(\"" ascii
+
+	condition:
+		( uint16( 0 ) == 0x3f3c or uint16( 0 ) == 0x253c ) and filesize < 1KB and 1 of them
+}
+rule SIGNATURE_BASE_APT_Webshell_AUS_Jscript_3 : FILE {
+    meta:
+		description = "Detetcs a webshell involved in the Australian Parliament House network compromise"
+		author = "Florian Roth (Nextron Systems)"
+		id = "ff7e780b-ccf9-53b6-b741-f04a8cbaf580"
+		date = "2019-02-18"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L40-L53"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "e144e555dd80e15ac9072a645e629a86ca1a6b52949d236ec3daedbf06bd6718"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		hash1 = "7ac6f973f7fccf8c3d58d766dec4ab7eb6867a487aa71bc11d5f05da9322582d"
+
+	strings:
+		$s1 = "<%@ Page Language=\"Jscript\" validateRequest=\"false\"%><%try{eval(System.Text.Encoding.UTF8.GetString(Convert.FromBase64String" ascii
+		$s2 = ".Item[\"[password]\"])),\"unsafe\");}" ascii
+
+	condition:
+		uint16( 0 ) == 0x6568 and filesize < 1KB and all of them
+}
+rule SIGNATURE_BASE_APT_Webshell_AUS_4 : FILE {
+    meta:
+		description = "Detetcs a webshell involved in the Australian Parliament House network compromise"
+		author = "Florian Roth (Nextron Systems)"
+		id = "bb5b10d1-3528-5361-92fc-8440c65dcda4"
+		date = "2019-02-18"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L56-L71"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "4a4f26b50631021979e4a8246a1e1c10150f4fb03eb7d77a1042e41ef57b3961"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		hash1 = "83321c02339bb51735fbcd9a80c056bd3b89655f3dc41e5fef07ca46af09bb71"
+
+	strings:
+		$s1 = "wProxy.Credentials = new System.Net.NetworkCredential(pusr, ppwd);" fullword ascii
+		$s2 = "{return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(" ascii
+		$s3 = ".Equals('User-Agent', StringComparison.OrdinalIgnoreCase))" ascii
+		$s4 = "gen.Emit(System.Reflection.Emit.OpCodes.Ret);" fullword ascii
+
+	condition:
+		uint16( 0 ) == 0x7566 and filesize < 10KB and 3 of them
+}
+rule SIGNATURE_BASE_APT_Webshell_AUS_5 : FILE {
+    meta:
+		description = "Detetcs a webshell involved in the Australian Parliament House network compromise"
+		author = "Florian Roth (Nextron Systems)"
+		id = "59b3f6aa-2d3b-54b4-b543-57bd9d981e87"
+		date = "2019-02-18"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_aus_parl_compromise.yar#L92-L111"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "fb0e53e5561f7f14f2ad6afcda2798d353cf4d54d12ae3354b03d62ed0c00bf3"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		hash1 = "54a17fb257db2d09d61af510753fd5aa00537638a81d0a8762a5645b4ef977e4"
+
+	strings:
+		$a1 = "function DEC(d){return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(d));}" fullword ascii
+		$a2 = "function ENC(d){return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(d));}" fullword ascii
+		$s1 = "var hash=DEC(Request.Item['" ascii
+		$s2 = "Response.Write(ENC(SET_ASS_SUCCESS));" fullword ascii
+		$s3 = "hashtable[hash] = assCode;" fullword ascii
+		$s4 = "Response.Write(ss);" fullword ascii
+		$s5 = "var hashtable = Application[CachePtr];" fullword ascii
+
+	condition:
+		uint16( 0 ) == 0x7566 and filesize < 2KB and 4 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_JAVA_Versamem_JAR_Aug24_1 : FILE {
+    meta:
+		description = "Detects VersaMem Java webshell samples (as used by Volt Typhoon)"
+		author = "blacklotuslabs (modified by Florian Roth and X__Junior)"
+		id = "9b666e61-cfa8-58b3-a362-772cd907c57c"
+		date = "2024-08-27"
+		modified = "2024-08-29"
+		reference = "https://x.com/ryanaraine/status/1828440883315999117"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_volttyphoon_versamem.yar#L2-L24"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "d21558eb6c8e700b8a4cb86fdaa5487179828152af68828e878397859d6d3952"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$sa1 = "com.versa.vnms.ui.TestMain"
+		$sa2 = "captureLoginPasswordCode"
+		$sa3 = "com/versa/vnms/ui/services/impl/VersaAuthenticationServiceImpl"
+		$sa4 = "/tmp/.temp.data"
+		$sa5 = "getInsertCode"
+		$sa6 = "VersaMem"
+		$sa7 = "Versa-Auth"
+		$sb1 = "/tmp/.java_pid"
+		$sb2 = {2f 75 73 72 2f 62 69 6e 2f 70 67 72 65 70 01 00 02 2d 66 01 00 25 6f 72 67 2e 61 70 61 63 68 65 2e 63 61 74 61 6c 69 6e 61 2e 73 74 61 72 74 75 70 2e 42 6f 6f 74 73 74 72 61 70 07}
+
+	condition:
+		filesize < 5MB and ( 3 of them or all of ( $sb* ) )
+}
+rule SIGNATURE_BASE_WEBSHELL_JAVA_Versamem_JAR_Aug24_2 : FILE {
+    meta:
+		description = "Detects VersaMem Java webshell samples (as used by Volt Typhoon)"
+		author = "Florian Roth"
+		id = "5ca598ed-5d0a-563d-a5e8-f8229af2c949"
+		date = "2024-08-29"
+		modified = "2024-12-12"
+		reference = "https://x.com/craiu/status/1828687700884336990"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_volttyphoon_versamem.yar#L27-L43"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "0bdf3bf5130c51c1355f179704933ca473a702595c580642035c8d3b9aad5725"
+		score = 75
+		quality = 60
+		tags = "FILE"
+		hash1 = "4bcedac20a75e8f8833f4725adfc87577c32990c3783bf6c743f14599a176c37"
+
+	strings:
+		$x1 = "tomcat_memShell" ascii
+		$x2 = "versa/vnms/ui/config/" ascii fullword
+
+	condition:
+		uint16( 0 ) == 0x4b50 and filesize < 3000KB and 1 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Xsltransform_Aug21 : FILE {
+    meta:
+		description = "Detects an ASPX webshell utilizing XSL Transformations"
+		author = "Max Altgelt"
+		id = "44254084-a717-59e6-a3ac-eca3c1c864a8"
+		date = "2020-02-23"
+		modified = "2023-12-05"
+		reference = "https://gist.github.com/JohnHammond/cdae03ca5bc2a14a735ad0334dcb93d6"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/webshell_xsl_transform.yar#L1-L19"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "3ac0b50adc4c56769d0248e213e9426a22e0f5086bf081da57f835ff1c77b716"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$csharpshell = "Language=\"C#\"" nocase
+		$x1 = "<root>1</root>"
+		$x2 = ".LoadXml(System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String("
+		$s1 = "XsltSettings.TrustedXslt"
+		$s2 = "Xml.XmlUrlResolver"
+		$s3 = "FromBase64String(Request[\""
+
+	condition:
+		filesize < 500KB and $csharpshell and ( 1 of ( $x* ) or all of ( $s* ) )
+}
+rule SIGNATURE_BASE_Ironpanda_Webshell_JSP : FILE {
+    meta:
+		description = "Iron Panda Malware JSP"
+		author = "Florian Roth (Nextron Systems)"
+		id = "38125418-7867-5073-a731-4f1d64e07588"
+		date = "2015-09-16"
+		modified = "2023-12-05"
+		reference = "https://goo.gl/E4qia9"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_irontiger.yar#L57-L72"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "3be95477e1d9f3877b4355cff3fbcdd3589bb7f6349fd4ba6451e1e9d32b7fa6"
+		logic_hash = "747ce812b156bf03f8d14ef84e7d2e8535c7c70590dfcb50ce3e957bec745efc"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "Bin_ExecSql(\"exec master..xp_cmdshell'bcp \\\"select safile from \" + db + \"..bin_temp\\\" queryout \\\"\" + Bin_TextBox_SaveP" ascii
+		$s2 = "tc.Text=\"<a href=\\\"javascript:Bin_PostBack('zcg_ClosePM','\"+Bin_ToBase64(de.Key.ToString())+\"')\\\">Close</a>\";" fullword ascii
+		$s3 = "Bin_ExecSql(\"IF OBJECT_ID('bin_temp')IS NOT NULL DROP TABLE bin_temp\");" fullword ascii
+
+	condition:
+		filesize < 330KB and 1 of them
+}
+rule SIGNATURE_BASE_Gifcloaked_Webshell_A : FILE {
+    meta:
+		description = "Looks like a webshell cloaked as GIF"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4fdef65c-204a-5019-9b4f-c5877c3e39d4"
+		date = "2018-03-12"
+		modified = "2026-02-04"
+		reference = "https://github.com/Neo23x0/signature-base"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/yara_mixed_ext_vars.yar#L176-L197"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "f1c95b13a71ca3629a0bb79601fcacf57cdfcf768806a71b26f2448f8c1d5d24"
+		logic_hash = "0c4570373d50c40745cd0523dcf8c34ee3cae1c298982b3a39d4a33e054aa779"
+		score = 60
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "input type"
+		$s1 = "<%eval request"
+		$s2 = "<%eval(Request.Item["
+		$s3 = "LANGUAGE='VBScript'"
+		$s4 = "$_REQUEST" fullword
+		$s5 = ";eval("
+		$s6 = "base64_decode"
+		$fp1 = "<form name=\"social_form\""
+
+	condition:
+		uint32( 0 ) == 0x38464947 and ( 1 of ( $s* ) ) and not 1 of ( $fp* )
+}
+rule SIGNATURE_BASE_APT_Webshell_SUPERNOVA_1 : FILE {
+    meta:
+		description = "SUPERNOVA is a .NET web shell backdoor masquerading as a legitimate SolarWinds web service handler. SUPERNOVA inspects and responds to HTTP requests with the appropriate HTTP query strings, Cookies, and/or HTML form values (e.g. named codes, class, method, and args). This rule is looking for specific strings and attributes related to SUPERNOVA."
+		author = "FireEye"
+		id = "73a27fa2-a846-5f4b-8182-064ac06c71a8"
+		date = "2020-12-14"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_solarwinds_sunburst.yar#L80-L99"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "8471e6b3675e7e9ccfe5b81ab4c599668f2de528f3b179a675f50aa1fd7814b2"
+		score = 85
+		quality = 81
+		tags = "FILE"
+
+	strings:
+		$compile1 = "CompileAssemblyFromSource"
+		$compile2 = "CreateCompiler"
+		$context = "ProcessRequest"
+		$httpmodule = "IHttpHandler" ascii
+		$string1 = "clazz"
+		$string2 = "//NetPerfMon//images//NoLogo.gif" wide
+		$string3 = "SolarWinds" ascii nocase wide
+
+	condition:
+		uint16( 0 ) == 0x5a4d and uint32( uint32( 0x3C ) ) == 0x00004550 and filesize < 10KB and pe.imports ( "mscoree.dll" , "_CorDllMain" ) and $httpmodule and $context and all of ( $compile* ) and all of ( $string* )
+}
+rule SIGNATURE_BASE_APT_Webshell_SUPERNOVA_2 : FILE {
+    meta:
+		description = "This rule is looking for specific strings related to SUPERNOVA. SUPERNOVA is a .NET web shell backdoor masquerading as a legitimate SolarWinds web service handler. SUPERNOVA inspects and responds to HTTP requests with the appropriate HTTP query strings, Cookies, and/or HTML form values (e.g. named codes, class, method, and args)."
+		author = "FireEye"
+		id = "c39bf9ba-fd62-5619-92b6-1633375ef197"
+		date = "2020-12-14"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_solarwinds_sunburst.yar#L100-L118"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "96e344bd2ba3ee07784852db3e9935352762c2fa7b6be88f00cac10a90706ffc"
+		score = 85
+		quality = 83
+		tags = "FILE"
+
+	strings:
+		$dynamic = "DynamicRun"
+		$solar = "Solarwinds" nocase
+		$string1 = "codes"
+		$string2 = "clazz"
+		$string3 = "method"
+		$string4 = "args"
+
+	condition:
+		uint16( 0 ) == 0x5a4d and uint32( uint32( 0x3C ) ) == 0x00004550 and filesize < 10KB and 3 of ( $string* ) and $dynamic and $solar
+}
+rule SIGNATURE_BASE_WEBSHELL_Csharp_Hash_String_Oct22 : FILE {
+    meta:
+		description = "C# webshell using specific hash check for the password."
+		author = "Nils Kuhnert (modified by Florian Roth)"
+		id = "c7d459be-5e61-57b7-b738-051c0cec62d2"
+		date = "2022-10-27"
+		modified = "2023-12-05"
+		reference = "https://github.com/Neo23x0/signature-base"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/gen_webshell_csharp.yar#L2-L25"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "29c187ad46d3059dc25d5f0958e0e8789fb2a51b9daaf90ea27f001b1a9a603c"
+		logic_hash = "28a07f3dd17fc469388867fa82a0e21abeee9c4e114af245b684535e4e194891"
+		score = 60
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$gen1 = "void Page_Load" ascii
+		$gen2 = "FromBase64String" ascii
+		$gen3 = "CryptoServiceProvider" ascii
+		$gen4 = "ComputeHash" ascii
+		$hashing1 = "BitConverter.ToString(" ascii
+		$hashing2 = ").Replace(\"-\", \"\") == \"" ascii
+		$filter1 = "BitConverter.ToString((" ascii
+
+	condition:
+		filesize < 10KB and all of ( $gen* ) and all of ( $hashing* ) and not 1 of ( $filter* )
+}
+rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Console_Jsp {
+    meta:
+		description = "Strings from the console.jsp webshell"
+		author = "Fox-IT SRT"
+		id = "1afdfc34-d2e3-58c7-80ea-ee5632e42469"
+		date = "2019-12-20"
+		modified = "2023-12-05"
+		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L318-L335"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "e70c15ef10b63a011edbcedc773a8e2917fd915c3ecc273c3bf2b78eb10fc570"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$a = "String strLogo = request.getParameter(\"image\")"
+		$b = "!strLogo.equals(\"web.gif\")"
+		$c = "<font color=red>Save Failed!</font>"
+		$d = "<font color=red>Save Success!</font>"
+		$e = "Save path:<br><input type=text"
+		$f = "if (newfile.exists() && newfile.length()>0) { out.println"
+
+	condition:
+		1 of them
+}
+rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Index_Jsp {
+    meta:
+		description = "Strings from the index.jsp socket tunnel"
+		author = "Fox-IT SRT"
+		id = "9c226ccd-6c69-523c-bca4-371e55274667"
+		date = "2019-12-20"
+		modified = "2023-12-05"
+		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L337-L353"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "870dad9fb5456f8edbd9f3c2d0b8764cf1143399626ce4df53c93919bcb1a0cb"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$x1 = "X-CMD"
+		$x2 = "X-STATUS"
+		$x3 = "X-TARGET"
+		$x4 = "X-ERROR"
+		$a = "out.print(\"All seems fine.\");"
+
+	condition:
+		all of ( $x* ) and $a
+}
+rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Ver_Jsp {
+    meta:
+		description = "Strings from the ver.jsp webshell"
+		author = "Fox-IT SRT"
+		id = "b2828b84-8934-5111-9345-683a07025070"
+		date = "2019-12-20"
+		modified = "2023-12-05"
+		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L355-L372"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "ada6de4b07a76e79bb17793cda2b51f96554a35992a73f59c360487638ae3be3"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$a = "String strLogo = request.getParameter(\"id\")"
+		$b = "!strLogo.equals(\"256\")"
+		$c = "boolean chkos = msg.startsWith"
+		$d = "while((c = er.read()) != -1)"
+		$e = "out.print((char)c);}in.close()"
+		$f = "out.print((char)c);}er.close()"
+
+	condition:
+		1 of them
+}
+rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Webinfo {
+    meta:
+		description = "Generic strings from webinfo.war webshells"
+		author = "Fox-IT SRT"
+		id = "b8477f62-f3f6-5526-b0e3-9b794fefaa1f"
+		date = "2019-12-20"
+		modified = "2023-12-05"
+		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L374-L394"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "711737a56067f24f422cc7d5aeba4389741fe18a0e66f2715fce626c3b6aef19"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$var1 = "String strLogo = request.getParameter"
+		$var2 = "String content = request.getParameter(\"content\");"
+		$var3 = "String basePath=request.getScheme()"
+		$var4 = "!strLogo.equals("
+		$var5 = "if(path!=null && !path.equals(\"\") && content!=null"
+		$var6 = "File newfile=new File(path);"
+		$str1 = "Save Success!"
+		$str2 = "Save Failed!"
+
+	condition:
+		2 of ( $var* ) or ( all of ( $str* ) and 1 of ( $var* ) )
+}
+rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell : FILE {
+    meta:
+		description = "Detects P.A.S. PHP webshell - Based on DHS/FBI JAR-16-2029 (Grizzly  Steppe)"
+		author = "FR/ANSSI/SDO (modified by Florian Roth)"
+		id = "862aab77-936e-524c-8669-4f48730f4ed5"
+		date = "2021-02-15"
+		modified = "2024-05-25"
+		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L10-L28"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "977ee0fdf0e92ccea6b71fea7b2c7aed2965c6966d8af86230ccb0f95b286694"
+		score = 70
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$php = "<?php"
+		$strreplace = "(str_replace("
+		$md5 = ".substr(md5(strrev($"
+		$gzinflate = "gzinflate"
+		$cookie = "_COOKIE"
+		$isset = "isset"
+
+	condition:
+		( filesize > 20KB and filesize < 200KB ) and all of them
+}
+rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell_Ziparchivefile {
+    meta:
+		description = "Detects an archive file created by P.A.S. for download operation"
+		author = "FR/ANSSI/SDO (modified by Florian Roth)"
+		id = "081cc65b-e51c-59fc-a518-cd986e8ee2f7"
+		date = "2021-02-15"
+		modified = "2024-05-25"
+		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L30-L42"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "c15e7022f45ec211ba635d6cd31bab16f4fb0d3038fb19d5765e0f751c14a826"
+		score = 80
+		quality = 85
+		tags = ""
+
+	strings:
+		$s1 = "Archive created by P.A.S. v."
+
+	condition:
+		$s1
+}
+rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell_Perlnetworkscript : FILE {
+    meta:
+		description = "Detects PERL scripts created by P.A.S. webshell"
+		author = "FR/ANSSI/SDO"
+		id = "1625b63f-ead7-5712-92b4-0ce6ecc49fd4"
+		date = "2021-02-15"
+		modified = "2024-05-25"
+		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L44-L62"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "b170c07a005e737c8069f2cc63f869d4d3ff6593b3bfca5bcaf02d7808da6852"
+		score = 90
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$pl_start = "#!/usr/bin/perl\n$SIG{'CHLD'}='IGNORE'; use IO::Socket; use FileHandle;"
+		$pl_status = "$o=\" [OK]\";$e=\" Error: \""
+		$pl_socket = "socket(SOCKET, PF_INET, SOCK_STREAM,$tcp) or die print \"$l$e$!$l"
+		$msg1 = "print \"$l OK! I\\'m successful connected.$l\""
+		$msg2 = "print \"$l OK! I\\'m accept connection.$l\""
+
+	condition:
+		filesize < 6000 and ( $pl_start at 0 and all of ( $pl* ) ) or any of ( $msg* )
+}
+rule SIGNATURE_BASE_WEBSHELL_PAS_Webshell_Sqldumpfile {
+    meta:
+		description = "Detects SQL dump file created by P.A.S. webshell"
+		author = "FR/ANSSI/SDO"
+		id = "4c26feeb-3031-5c91-9eeb-4b5fe9702e39"
+		date = "2021-02-15"
+		modified = "2024-05-25"
+		reference = "https://www.cert.ssi.gouv.fr/uploads/CERTFR-2021-CTI-005.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_centreon.yar#L64-L76"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "c34abcada22fdf462fd66cc2da18ab9e54215defc6f7a7a95b5a80d1155a2ffe"
+		score = 90
+		quality = 85
+		tags = ""
+
+	strings:
+		$ = "-- [ SQL Dump created by P.A.S. ] --"
+
+	condition:
+		1 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_Z_Webshell_2 : FILE {
+    meta:
+		description = "Detection for the z_webshell"
+		author = "DHS NCCIC Hunt and Incident Response Team"
+		id = "9a54925f-de10-567f-a1ea-5e7522b47dfd"
+		date = "2018-01-25"
+		modified = "2023-12-05"
+		old_rule_name = "z_webshell"
+		reference = "https://github.com/Neo23x0/signature-base"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_ta18_074A.yar#L9-L24"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "2c9095c965a55efc46e16b86f9b7d6c6"
+		logic_hash = "d41aa107e54af5d45531a46d24b24f9f14635dbcb50ed26f7c787883854f961f"
+		score = 75
+		quality = 81
+		tags = "FILE"
+
+	strings:
+		$webshell_name = "public string z_progname =" nocase ascii wide
+		$webshell_password = "public string Password =" nocase ascii wide
+
+	condition:
+		( uint32( 0 ) == 0x2040253c or uint32( 0 ) == 0x7073613c ) and filesize < 100KB and 2 of ( $webshell_* )
+}
+rule SIGNATURE_BASE_APT_WEBSHELL_PHP_Sandworm_May20_1 : FILE {
+    meta:
+		description = "Detects GIF header PHP webshell used by Sandworm on compromised machines"
+		author = "Florian Roth (Nextron Systems)"
+		id = "b9ec02c2-fa83-5f21-95cf-3528047b2d01"
+		date = "2020-05-28"
+		modified = "2023-12-05"
+		reference = "https://media.defense.gov/2020/May/28/2002306626/-1/-1/0/CSA%20Sandworm%20Actors%20Exploiting%20Vulnerability%20in%20Exim%20Transfer%20Agent%2020200528.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_exim_expl.yar#L86-L101"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "0d10f618c7b465c7691d6054e994a76f56c12eb0a36d2d98b5accd2c1e2c1da7"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		hash1 = "dc074464e50502459038ac127b50b8c68ed52817a61c2f97f0add33447c8f730"
+		hash2 = "538d713cb47a6b5ec6a3416404e0fc1ebcbc219a127315529f519f936420c80e"
+
+	strings:
+		$h1 = "GIF89a <?php $" ascii
+		$s1 = "str_replace(" ascii
+
+	condition:
+		filesize < 10KB and $h1 at 0 and $s1
+}
+rule SIGNATURE_BASE_FE_Webshell_PL_ATRIUM_1 {
+    meta:
+		description = "Detects samples mentioned in PulseSecure report"
+		author = "Mandiant"
+		id = "b2663343-0bae-5215-a443-866ab8626bff"
+		date = "2021-04-16"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L12-L27"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "ca0175d86049fa7c796ea06b413857a3"
+		logic_hash = "869b397616495c644beb997602eac84ddcdbacce4c14755c555f5bda36663ca2"
+		score = 75
+		quality = 60
+		tags = ""
+
+	strings:
+		$s1 = "CGI::param("
+		$s2 = "system("
+		$s3 = /if[\x09\x20]{0,32}\(CGI::param\([\x22\x27]\w{1,64}[\x22\x27]\)\)\s{0,128}\{[\x09\x20]{0,32}print [\x22\x27]Cache-Control: no-cache\\n[\x22\x27][\x09\x20]{0,32};\s{0,128}print [\x22\x27]Content-type: text\/html\\n\\n[\x22\x27][\x09\x20]{0,32};\s{0,128}my \$\w{1,64}[\x09\x20]{0,32}=[\x09\x20]{0,32}CGI::param\([\x22\x27]\w{1,64}[\x22\x27]\)[\x09\x20]{0,32};\s{0,128}system\([\x22\x27]\$/
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_FE_APT_Webshell_PL_HARDPULSE {
+    meta:
+		description = "Detects samples mentioned in PulseSecure report"
+		author = "Mandiant"
+		id = "f9a2922e-6b8e-5f92-a947-3215ee8883ac"
+		date = "2021-04-16"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L46-L65"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "980cba9e82faf194edb6f3cc20dc73ff"
+		logic_hash = "37fc40fd998d3294edb05707170bc2deec524fc6451bff212901f9ac3e34bb35"
+		score = 75
+		quality = 58
+		tags = ""
+
+	strings:
+		$r1 = /if[\x09\x20]{0,32}\(\$\w{1,64}[\x09\x20]{1,32}eq[\x09\x20]{1,32}[\x22\x27]\w{1,64}[\x22\x27]\)\s{0,128}\{\s{1,128}my[\x09\x20]{1,32}\$\w{1,64}[\x09\x20]{0,32}\x3b\s{1,128}unless[\x09\x20]{0,32}\(open\(\$\w{1,64},[\x09\x20]{0,32}\$\w{1,64}\)\)\s{0,128}\{\s{1,128}goto[\x09\x20]{1,32}\w{1,64}[\x09\x20]{0,32}\x3b\s{1,128}return[\x09\x20]{1,32}0[\x09\x20]{0,32}\x3b\s{0,128}\}/
+		$r2 = /open[\x09\x20]{0,32}\(\*\w{1,64}[\x09\x20]{0,32},[\x09\x20]{0,32}[\x22\x27]>/
+		$r3 = /if[\x09\x20]{0,32}\(\$\w{1,64}[\x09\x20]{1,32}eq[\x09\x20]{1,32}[\x22\x27]\w{1,64}[\x22\x27]\)\s{0,128}\{\s{1,128}print[\x09\x20]{0,32}[\x22\x27]Content-type/
+		$s1 = "CGI::request_method()"
+		$s2 = "CGI::param("
+		$s3 = "syswrite("
+		$s4 = "print $_"
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_FE_APT_Webshell_PL_PULSECHECK_1 {
+    meta:
+		description = "Detects samples mentioned in PulseSecure report"
+		author = "Mandiant"
+		id = "f375fdd8-567b-569b-85f4-af54a35d2a93"
+		date = "2021-04-16"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L116-L136"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "a1dcdf62aafc36dd8cf64774dea80d79fb4e24ba2a82adf4d944d9186acd1cc1"
+		logic_hash = "aba457dd33232ef37ca145c5b7cd9c5fe809730339a55c5e90ac46b4a136f6cb"
+		score = 75
+		quality = 60
+		tags = ""
+
+	strings:
+		$r1 = /while[\x09\x20]{0,32}\(<\w{1,64}>\)[\x09\x20]{0,32}\{\s{1,256}\$\w{1,64}[\x09\x20]{0,32}\.=[\x09\x20]{0,32}\$_;\s{0,256}\}/
+		$s1 = "use Crypt::RC4;"
+		$s2 = "use MIME::Base64"
+		$s3 = "MIME::Base64::decode("
+		$s4 = "popen("
+		$s5 = " .= $_;"
+		$s6 = "print MIME::Base64::encode(RC4("
+		$s7 = "HTTP_X_"
+
+	condition:
+		$s1 and $s2 and ( @s3 [ 1 ] < @s4 [ 1 ] ) and ( @s4 [ 1 ] < @s5 [ 1 ] ) and ( @s5 [ 1 ] < @s6 [ 1 ] ) and ( #s7 > 2 ) and $r1
+}
+rule SIGNATURE_BASE_FE_APT_Webshell_PL_STEADYPULSE_1 {
+    meta:
+		description = "Detects samples mentioned in PulseSecure report"
+		author = "Mandiant"
+		id = "49457fbb-9288-565f-909d-e8228c21c1e4"
+		date = "2021-04-16"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L265-L284"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "168976797d5af7071df257e91fcc31ce1d6e59c72ca9e2f50c8b5b3177ad83cc"
+		logic_hash = "a0e3ebdd02ccf5cc8fc0a83c1d0224aed45dc5094eb85bd855e5b74b34e3aaaf"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$s1 = "parse_parameters"
+		$s2 = "s/\\+/ /g"
+		$s3 = "s/%(..)/pack("
+		$s4 = "MIME::Base64::encode($"
+		$s5 = "$|=1;"
+		$s6 = "RC4("
+		$s7 = "$FORM{'cmd'}"
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_Webshell_PHP_Web_Kit_V3 : FILE {
+    meta:
+		description = "Detects PAS Tool PHP Web Kit"
+		author = "Florian Roth (Nextron Systems)"
+		id = "dc5fa2c9-3e1e-594d-be4f-141e1f4915f1"
+		date = "2016-01-01"
+		modified = "2023-12-05"
+		reference = "https://github.com/wordfence/grizzly"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_apt29_grizzly_steppe.yar#L76-L95"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "21bf0afcd3f8de813ddfe41ef32e45806e9f9d7d3b08ae7ce65017c35e32a868"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$php = "<?php $"
+		$php2 = "@assert(base64_decode($_REQUEST["
+		$s1 = "(str_replace(\"\\n\", '', '"
+		$s2 = "(strrev($" ascii
+		$s3 = "de'.'code';" ascii
+
+	condition:
+		(( uint32( 0 ) == 0x68703f3c and $php at 0 ) or $php2 ) and filesize > 8KB and filesize < 100KB and all of ( $s* )
+}
+rule SIGNATURE_BASE_Webshell_PHP_Web_Kit_V4 : FILE {
+    meta:
+		description = "Detects PAS Tool PHP Web Kit"
+		author = "Florian Roth (Nextron Systems)"
+		id = "a5f915cd-b9c5-5cd3-b0a2-c15f6124737a"
+		date = "2016-01-01"
+		modified = "2023-12-05"
+		reference = "https://github.com/wordfence/grizzly"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_apt29_grizzly_steppe.yar#L97-L116"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "e2eaa0abd14f4dd08815c44797df707a08df1ea4e04ae69ba67d128a0fe4eff5"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$php = "<?php $"
+		$s1 = "(StR_ReplAcE(\"\\n\",'',"
+		$s2 = ";if(PHP_VERSION<'5'){" ascii
+		$s3 = "=SuBstr_rePlACe(" ascii
+
+	condition:
+		uint32( 0 ) == 0x68703f3c and $php at 0 and filesize > 8KB and filesize < 100KB and 2 of ( $s* )
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Aug21_2 : FILE {
+    meta:
+		description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be PST), size and content"
+		author = "Florian Roth (Nextron Systems)"
+		id = "a351a466-695e-570e-8c7f-9c6c0534839c"
+		date = "2021-08-13"
+		modified = "2025-11-03"
+		reference = "https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-servers-are-getting-hacked-via-proxyshell-exploits/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L35-L48"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "4ede197d482f0a9e553ba857b5049e7b7405e3df92460e19418fa0653c844982"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$s1 = "Page Language=" ascii nocase
+
+	condition:
+		uint32( 0 ) == 0x4e444221 and filesize < 2MB and $s1
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Aug21_3 : FILE {
+    meta:
+		description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be DER), size and content"
+		author = "Max Altgelt"
+		id = "a7bca62b-c8f1-5a38-81df-f3d4582a590b"
+		date = "2021-08-23"
+		modified = "2025-11-03"
+		reference = "https://twitter.com/gossithedog/status/1429175908905127938?s=12"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L50-L64"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "f071aaa8918b359f786f2ac7447eeaedb5a6fca9e0a0c0e8820e011244424503"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$s1 = "Page Language=" ascii nocase
+
+	condition:
+		uint16( 0 ) == 0x8230 and filesize < 10KB and $s1
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Sep21_1 : FILE {
+    meta:
+		description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be PST) and base64 decoded request"
+		author = "Tobias Michalski"
+		id = "d0d23e17-6b6a-51d1-afd9-59cc2404bcd8"
+		date = "2021-09-17"
+		modified = "2025-11-03"
+		reference = "Internal Research"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L66-L80"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "219468c10d2b9d61a8ae70dc8b6d2824ca8fbe4e53bbd925eeca270fef0fd640"
+		logic_hash = "233ec15dff8da5f2beaa931eb06849aa37e548947c1068d688a1695d977605d8"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$s = ".FromBase64String(Request["
+
+	condition:
+		uint32( 0 ) == 0x4e444221 and any of them
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Exploitation_Aug21_1 : FILE {
+    meta:
+		description = "Detects unknown malicious loaders noticed in August 2021"
+		author = "Florian Roth (Nextron Systems)"
+		id = "1fa563fc-c91c-5f4e-98f1-b895e1acb4f4"
+		date = "2021-08-25"
+		modified = "2025-11-03"
+		reference = "https://twitter.com/VirITeXplorer/status/1430206853733097473"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L107-L119"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "8a2417bb85c7f91d98143d2f4c26d30416b3a01ba8abc1445ccfae5609825b4d"
+		score = 90
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$x1 = ");eval/*asf" ascii
+
+	condition:
+		filesize < 600KB and 1 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Aug15 : FILE {
+    meta:
+		description = "Webshells iisstart.aspx and Logout.aspx"
+		author = "Moritz Oettle"
+		id = "b1e6c0f3-787f-59b8-8123-4045522047ca"
+		date = "2021-09-04"
+		modified = "2025-11-03"
+		reference = "https://github.com/hvs-consulting/ioc_signatures/tree/main/Proxyshell"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L121-L152"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "46c37f1d80c777acafa6ee64d7df18a6b94768f4463d9196027111a84a63a24f"
+		score = 75
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$g1 = "language=\"JScript\"" ascii
+		$g2 = "function getErrorWord" ascii
+		$g3 = "errorWord" ascii
+		$g4 = "Response.Redirect" ascii
+		$g5 = "function Page_Load" ascii
+		$g6 = "runat=\"server\"" ascii
+		$g7 = "Request[" ascii
+		$g8 = "eval/*" ascii
+		$s1 = "AppcacheVer" ascii
+		$s3 = "LaTkWfI64XeDAXZS6pU1KrsvLAcGH7AZOQXjrFkT816RnFYJQR" ascii
+		$fp1 = "<input type=\"submit\" Value=\"Refresh This Page\""
+
+	condition:
+		filesize < 1KB and ( 1 of ( $s* ) or 4 of ( $g* ) ) and not 1 of ( $fp* )
+}
+rule SIGNATURE_BASE_WEBSHELL_Mailbox_Export_PST_Proxyshell_Aug26 : FILE {
+    meta:
+		description = "Webshells generated by an Mailbox export to PST and stored as aspx: 570221043.aspx 689193944.aspx luifdecggoqmansn.aspx"
+		author = "Moritz Oettle"
+		id = "6aea414f-d27c-5202-84f8-b8620782fc90"
+		date = "2021-09-04"
+		modified = "2025-11-03"
+		reference = "https://github.com/hvs-consulting/ioc_signatures/tree/main/Proxyshell"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L154-L180"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "07acbf74a4bf169fc128cd085759f33e89917e217703b3c6557ba5f954822fd4"
+		score = 85
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$x1 = "!BDN"
+		$g1 = "Page language=" ascii
+		$g2 = "<%@ Page" ascii
+		$g3 = "Request.Item[" ascii
+		$g4 = "\"unsafe\");" ascii
+		$g5 = "<%eval(" ascii
+		$g6 = "script language=" ascii
+		$g7 = "Request[" ascii
+		$s1 = "gold8899" ascii
+		$s2 = "exec_code" ascii
+		$s3 = "orangenb" ascii
+
+	condition:
+		filesize < 500KB and $x1 at 0 and ( 1 of ( $s* ) or 3 of ( $g* ) )
+}
+rule SIGNATURE_BASE_WEBSHELL_Proxyshell_Exploitation_Nov21_1 {
+    meta:
+		description = "Detects webshells dropped by DropHell malware"
+		author = "Florian Roth (Nextron Systems)"
+		id = "300eaadf-db0c-5591-84fc-abdf7cdd90c1"
+		date = "2021-11-01"
+		modified = "2025-11-03"
+		reference = "https://www.deepinstinct.com/blog/do-not-exchange-it-has-a-shell-inside"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L257-L271"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "d9812d3f53c346c4e318609e0c7de66811b27ffa7528a6ddeb6ac8436da59ef5"
+		score = 85
+		quality = 85
+		tags = ""
+
+	strings:
+		$s01 = ".LoadXml(System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(Request[" ascii wide
+		$s02 = "new System.IO.MemoryStream()" ascii wide
+		$s03 = "Transform(" ascii wide
+
+	condition:
+		all of ( $s* )
+}
+rule SIGNATURE_BASE_WEBSHELL_APT_PHP_DEWMODE_UNC2546_Feb21_1 : FILE {
+    meta:
+		description = "Detects DEWMODE webshells"
+		author = "Florian Roth (Nextron Systems)"
+		id = "ea883f25-0e9b-5617-b05e-191a4a5c5a52"
+		date = "2021-02-22"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2021/02/accellion-fta-exploited-for-data-theft-and-extortion.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_unc2546_dewmode.yar#L2-L25"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "86ce185f6350eb7485bce5bd31d91085fed25aa8ce78813e1c3c3dffbaae58ff"
+		score = 75
+		quality = 60
+		tags = "FILE"
+		hash1 = "2e0df09fa37eabcae645302d9865913b818ee0993199a6d904728f3093ff48c7"
+		hash2 = "5fa2b9546770241da7305356d6427847598288290866837626f621d794692c1b"
+
+	strings:
+		$x1 = "<font size=4>Cleanup Shell</font></a>';" ascii fullword
+		$x2 = "$(sh /tmp/.scr)"
+		$x3 = "@system('sudo /usr/local/bin/admin.pl --mount_cifs=" ascii
+		$s1 = "target=\\\"_blank\\\">Download</a></td>\";" ascii
+		$s2 = ",PASSWORD 1>/dev/null 2>/dev/null');" ascii
+		$s3 = ",base64_decode('" ascii
+		$s4 = "include \"remote.inc\";" ascii
+		$s5 = "@system('sudo /usr/local" ascii
+
+	condition:
+		uint16( 0 ) == 0x3f3c and filesize < 9KB and ( 1 of ( $x* ) or 2 of them ) or 3 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_ASP_Embedded_Mar21_1 : FILE {
+    meta:
+		description = "Detects ASP webshells"
+		author = "Florian Roth (Nextron Systems)"
+		id = "7cf7db9d-8f8a-51db-a0e6-84748e8f9e1f"
+		date = "2021-03-05"
+		modified = "2023-12-05"
+		reference = "Internal Research"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L2-L16"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "4a8b4cea6f53dad9771cb694ec55f305f04dfdbd8e663154cad672ca414c138c"
+		score = 85
+		quality = 85
+		tags = "FILE"
+
+	strings:
+		$s1 = "<script runat=\"server\">" nocase
+		$s2 = "new System.IO.StreamWriter(Request.Form["
+		$s3 = ".Write(Request.Form["
+
+	condition:
+		filesize < 100KB and all of them
+}
+rule SIGNATURE_BASE_APT_WEBSHELL_HAFNIUM_Secchecker_Mar21_1 : FILE {
+    meta:
+		description = "Detects HAFNIUM SecChecker webshell"
+		author = "Florian Roth (Nextron Systems)"
+		id = "73db3d78-7ece-53be-9efb-d19801993d5e"
+		date = "2021-03-05"
+		modified = "2023-12-05"
+		reference = "https://twitter.com/markus_neis/status/1367794681237667840"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L18-L33"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "e0e4df860bdde7d5c277f596535c493d926095be6f46f6ba41b6177afbfc5cd9"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		hash1 = "b75f163ca9b9240bf4b37ad92bc7556b40a17e27c2b8ed5c8991385fe07d17d0"
+
+	strings:
+		$x1 = "<%if(System.IO.File.Exists(\"c:\\\\program files (x86)\\\\fireeye\\\\xagt.exe" ascii
+		$x2 = "\\csfalconservice.exe\")){Response.Write( \"3\");}%></head>" ascii fullword
+
+	condition:
+		uint16( 0 ) == 0x253c and filesize < 1KB and 1 of them or 2 of them
+}
+rule SIGNATURE_BASE_APT_WEBSHELL_HAFNIUM_Chopper_Webshell : APT HAFNIUM WEBSHELL FILE {
+    meta:
+		description = "Detects Chopper WebShell Injection Variant (not only Hafnium related)"
+		author = "Markus Neis,Swisscom"
+		id = "25dcf166-4aea-5680-b161-c5fc8d74b987"
+		date = "2021-03-05"
+		modified = "2023-12-05"
+		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L50-L65"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "c185a8da2a18fa59a8eeb36dbd95ba12c9c61717efc5f2d19d2d5b27ee243f2b"
+		score = 75
+		quality = 85
+		tags = "APT, HAFNIUM, WEBSHELL, FILE"
+
+	strings:
+		$x1 = "runat=\"server\">" nocase
+		$s1 = "<script language=\"JScript\" runat=\"server\">function Page_Load(){eval(Request" nocase
+		$s2 = "protected void Page_Load(object sender, EventArgs e){System.IO.StreamWriter sw = new System.IO.StreamWriter(Request.Form[\"p\"] , false, Encoding.Default);sw.Write(Request.Form[\"f\"]);"
+		$s3 = "<script language=\"JScript\" runat=\"server\"> function Page_Load(){eval (Request[\"" nocase
+
+	condition:
+		filesize < 10KB and $x1 and 1 of ( $s* )
+}
+rule SIGNATURE_BASE_APT_WEBSHELL_Tiny_Webshell : APT HAFNIUM WEBSHELL FILE {
+    meta:
+		description = "Detects WebShell Injection"
+		author = "Markus Neis,Swisscom"
+		id = "aa2fcecc-4c8b-570d-a81a-5dfb16c04e05"
+		date = "2021-03-05"
+		modified = "2023-12-05"
+		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L67-L82"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "099c8625c58b315b6c11f5baeb859f4c"
+		logic_hash = "9309f9b57353b6fe292048d00794699a8637a3e6e429c562fb36c7e459003a3b"
+		score = 75
+		quality = 85
+		tags = "APT, HAFNIUM, WEBSHELL, FILE"
+
+	strings:
+		$x1 = "<%@ Page Language=\"Jscript\" Debug=true%>"
+		$s1 = "=Request.Form(\""
+		$s2 = "eval("
+
+	condition:
+		filesize < 300 and all of ( $s* ) and $x1
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Simpleseesharp : WEBSHELL UNCLASSIFIED FILE {
+    meta:
+		description = "A simple ASPX Webshell that allows an attacker to write further files to disk."
+		author = "threatintel@volexity.com"
+		id = "469fdf5c-e09e-5d44-a2e6-0864dcd0e18a"
+		date = "2021-03-01"
+		modified = "2023-12-05"
+		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L121-L136"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "893cd3583b49cb706b3e55ecb2ed0757b977a21f5c72e041392d1256f31166e2"
+		logic_hash = "6f62249a68bae94e5cbdb4319ea5cde9dc071ec7a4760df3aafe78bc1e072c30"
+		score = 75
+		quality = 85
+		tags = "WEBSHELL, UNCLASSIFIED, FILE"
+
+	strings:
+		$header = "<%@ Page Language=\"C#\" %>"
+		$body = "<% HttpPostedFile thisFile = Request.Files[0];thisFile.SaveAs(Path.Combine"
+
+	condition:
+		$header at 0 and $body and filesize < 1KB
+}
+rule SIGNATURE_BASE_WEBSHELL_CVE_2021_27065_Webshells : CVE_2021_27065 FILE {
+    meta:
+		description = "Detects web shells dropped by CVE-2021-27065. All actors, not specific to HAFNIUM. TLP:WHITE"
+		author = "Joe Hannon, Microsoft Threat Intelligence Center (MSTIC)"
+		id = "27677f35-24a3-59cc-a3ad-b83884128da7"
+		date = "2021-03-05"
+		modified = "2023-12-05"
+		reference = "https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L182-L200"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "71795ba67bc8a4cea06b93da34b6291029ff74b200e37eb66f6ac51a6ff194cd"
+		score = 75
+		quality = 61
+		tags = "CVE-2021-27065, FILE"
+
+	strings:
+		$script1 = "script language" ascii wide nocase
+		$script2 = "page language" ascii wide nocase
+		$script3 = "runat=\"server\"" ascii wide nocase
+		$script4 = "/script" ascii wide nocase
+		$externalurl = "externalurl" ascii wide nocase
+		$internalurl = "internalurl" ascii wide nocase
+		$internalauthenticationmethods = "internalauthenticationmethods" ascii wide nocase
+		$extendedprotectiontokenchecking = "extendedprotectiontokenchecking" ascii wide nocase
+
+	condition:
+		filesize < 50KB and any of ( $script* ) and ( $externalurl or $internalurl ) and $internalauthenticationmethods and $extendedprotectiontokenchecking
+}
+rule SIGNATURE_BASE_WEBSHELL_Compiled_Webshell_Mar2021_1 : FILE {
+    meta:
+		description = "Triggers on temporary pe files containing strings commonly used in webshells."
+		author = "Bundesamt fuer Sicherheit in der Informationstechnik"
+		id = "9336bd2c-791c-5c3e-9733-724a6a23864a"
+		date = "2021-03-05"
+		modified = "2021-03-12"
+		reference = "https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Cyber-Sicherheit/Vorfaelle/Exchange-Schwachstellen-2021/MSExchange_Schwachstelle_Detektion_Reaktion.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L275-L295"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "d2e5f91f7bb50984c491eb9632d3863febc986760e4d03c8255872887ce4dc4a"
+		score = 75
+		quality = 56
+		tags = "FILE"
+
+	strings:
+		$x1 = /App_Web_[a-zA-Z0-9]{7,8}.dll/ ascii wide fullword
+		$a1 = "~/aspnet_client/" ascii wide nocase
+		$a2 = "~/auth/" ascii wide nocase
+		$b1 = "JScriptEvaluate" ascii wide fullword
+		$c1 = "get_Request" ascii wide fullword
+		$c2 = "get_Files" ascii wide fullword
+		$c3 = "get_Count" ascii wide fullword
+		$c4 = "get_Item" ascii wide fullword
+		$c5 = "get_Server" ascii wide fullword
+
+	condition:
+		uint16( 0 ) == 0x5a4d and filesize > 5KB and filesize < 40KB and all of ( $x* ) and 1 of ( $a* ) and ( all of ( $b* ) or all of ( $c* ) )
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Fileexplorer_Mar21_1 : FILE {
+    meta:
+		description = "Detects Chopper like ASPX Webshells"
+		author = "Florian Roth (Nextron Systems)"
+		id = "edcaa2a8-6fea-584e-90c2-307a2dfc9f7f"
+		date = "2021-03-31"
+		modified = "2023-12-05"
+		reference = "Internal Research"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L363-L397"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "7b4ffd222b38e76455fff2650b72bdcaff281323103f342b427013cd3fffdc21"
+		score = 80
+		quality = 85
+		tags = "FILE"
+		hash1 = "a8c63c418609c1c291b3e731ca85ded4b3e0fba83f3489c21a3199173b176a75"
+
+	strings:
+		$x1 = "<span style=\"background-color: #778899; color: #fff; padding: 5px; cursor: pointer\" onclick=" ascii
+		$xc1 = { 3C 61 73 70 3A 48 69 64 64 65 6E 46 69 65 6C 64
+               20 72 75 6E 61 74 3D 22 73 65 72 76 65 72 22 20
+               49 44 3D 22 ?? ?? ?? ?? ?? 22 20 2F 3E 3C 62 72
+               20 2F 3E 3C 62 72 20 2F 3E 20 50 72 6F 63 65 73
+               73 20 4E 61 6D 65 3A 3C 61 73 70 3A 54 65 78 74
+               42 6F 78 20 49 44 3D }
+		$xc2 = { 22 3E 43 6F 6D 6D 61 6E 64 3C 2F 6C 61 62 65 6C
+               3E 3C 69 6E 70 75 74 20 69 64 3D 22 ?? ?? ?? ??
+               ?? 22 20 74 79 70 65 3D 22 72 61 64 69 6F 22 20
+               6E 61 6D 65 3D 22 74 61 62 73 22 3E 3C 6C 61 62
+               65 6C 20 66 6F 72 3D 22 ?? ?? ?? ?? ?? 22 3E 46
+               69 6C 65 20 45 78 70 6C 6F 72 65 72 3C 2F 6C 61
+               62 65 6C 3E 3C 25 2D 2D }
+		$r1 = "(Request.Form[" ascii
+		$s1 = ".Text + \" Created!\";" ascii
+		$s2 = "DriveInfo.GetDrives()" ascii
+		$s3 = "Encoding.UTF8.GetString(FromBase64String(str.Replace(" ascii
+		$s4 = "encodeURIComponent(btoa(String.fromCharCode.apply(null, new Uint8Array(bytes))));;"
+
+	condition:
+		uint16( 0 ) == 0x253c and filesize < 100KB and ( 1 of ( $x* ) or 2 of them ) or 4 of them
+}
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Chopper_Like_Mar21_1 : FILE {
+    meta:
+		description = "Detects Chopper like ASPX Webshells"
+		author = "Florian Roth (Nextron Systems)"
+		id = "a4dc1880-865f-5e20-89a2-3a642c453ef9"
+		date = "2021-03-31"
+		modified = "2023-12-05"
+		reference = "Internal Research"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L399-L416"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "baa9eb1e3c4ac5ce49d27b1c3f75c8b6590567e25d98761a8b704478f2cee970"
+		score = 85
+		quality = 85
+		tags = "FILE"
+		hash1 = "ac44513e5ef93d8cbc17219350682c2246af6d5eb85c1b4302141d94c3b06c90"
+
+	strings:
+		$s1 = "http://f/<script language=\"JScript\" runat=\"server\">var _0x" ascii
+		$s2 = "));function Page_Load(){var _0x" ascii
+		$s3 = ";eval(Request[_0x" ascii
+		$s4 = "','orange','unsafe','" ascii
+
+	condition:
+		filesize < 3KB and 1 of them or 2 of them
+}
+rule SIGNATURE_BASE_REGEORG_Tuneller_Generic : FILE {
+    meta:
+		description = "No description has been set in the source file - Signature Base"
+		author = "Mandiant"
+		id = "a87979b7-2732-5a32-b3f3-a815a58b6589"
+		date = "2021-12-20"
+		modified = "2023-12-05"
+		reference = "https://www.mandiant.com/resources/unc3524-eye-spy-email"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/webshell_regeorg.yar#L1-L20"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "ba22992ce835dadcd06bff4ab7b162f9"
+		logic_hash = "1657928875c3cd2d5bf774929b0497d78f0211b321f8a4138cc9b8c80b9f99d6"
+		score = 75
+		quality = 85
+		tags = "FILE"
+		date_modified = "2021-12-20"
+
+	strings:
+		$s1 = "System.Net.IPEndPoint"
+		$s2 = "Response.AddHeader"
+		$s3 = "Request.InputStream.Read"
+		$s4 = "Request.Headers.Get"
+		$s5 = "Response.Write"
+		$s6 = "System.Buffer.BlockCopy"
+		$s7 = "Response.BinaryWrite"
+		$s8 = "SocketException soex"
+
+	condition:
+		filesize < 1MB and 7 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php5 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php5.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "ee063c4c-af06-520f-acfe-fba758b84d3c"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L8-L23"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "0fd91b6ad400a857a6a65c8132c39e6a16712f19"
+		logic_hash = "e882f115a67fe31ece1a81e1a2770b46370a92ac3aa23e348a12cdb5735e8a0e"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "else if(isset($_POST['reverse'])) { if(@ftp_login($connection,$user,strrev($user" ascii
+		$s20 = "echo sr(35,in('hidden','dir',0,$dir).in('hidden','cmd',0,'mysql_dump').\"<b>\".$" ascii
+
+	condition:
+		uint16( 0 ) == 0x3f3c and filesize < 300KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Test3693 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file test3693.war"
+		author = "Florian Roth (Nextron Systems)"
+		id = "58fe4445-b2e1-5d5f-8c46-39c6ae78f845"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L25-L40"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "246d629ae3ad980b5bfe7e941fe90b855155dbfc"
+		logic_hash = "a10618d54fb7adbbd89a10f2e1ac067ccd1832140bcaf3b92394ebe7323f2d1e"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "Process p=Runtime.getRuntime().exec(\"cmd /c \"+strCmd);" fullword ascii
+		$s2 = "http://www.topronet.com </font>\",\" <font color=red> Thanks for your support - " ascii
+
+	condition:
+		uint16( 0 ) == 0x4b50 and filesize < 50KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Mycode12 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file mycode12.cfm"
+		author = "Florian Roth (Nextron Systems)"
+		id = "2ce7368c-7565-5b32-94d1-c87023404c5b"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L42-L57"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "64be8760be5ab5c2dcf829e3f87d3e50b1922f17"
+		logic_hash = "94cb0e414634af753db9ec0c63a3a34b4f9104e93e01d67cebab7b3a0c471198"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<cfexecute name=\"cmd.exe\"" fullword ascii
+		$s2 = "<cfoutput>#cmd#</cfoutput>" fullword ascii
+
+	condition:
+		filesize < 4KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Offlibrary : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file offlibrary.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "c01f7c8b-a6bd-5094-9574-8cc853698607"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L59-L74"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "eb5275f99211106ae10a23b7e565d208a94c402b"
+		logic_hash = "ffec24bedfe0794e8f92da5067c41932339e61ec23d71a67ed4b634434cd10d6"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "';$i=$g->query(\"SELECT SUBSTRING_INDEX(CURRENT_USER, '@', 1) AS User, SUBSTRING" ascii
+		$s12 = "if(jushRoot){var script=document.createElement('script');script.src=jushRoot+'ju" ascii
+
+	condition:
+		filesize < 1005KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Cfm_Xl : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file xl.cfm"
+		author = "Florian Roth (Nextron Systems)"
+		id = "5c8d1301-fe20-50e0-86ac-99a220cd4be1"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L76-L91"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "49c3d16ee970945367a7d6ae86b7ade7cb3b5447"
+		logic_hash = "b6683a24ad58a9444ec91f13e7da5db3e3e768afded09a23e1bbd0a0c23cf6b9"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<input name=\"DESTINATION\" value=\"" ascii
+		$s1 = "<CFFILE ACTION=\"Write\" FILE=\"#Form.path#\" OUTPUT=\"#Form.cmd#\">" fullword ascii
+
+	condition:
+		uint16( 0 ) == 0x433c and filesize < 13KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Linux : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file linux.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "8d94f1c5-2139-5d0d-8af9-9c30a0359910"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L93-L108"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "78339abb4e2bb00fe8a012a0a5b7ffce305f4e06"
+		logic_hash = "2c6278acd123e0d41ed4f0f8f0da27d5de1ad56efb8102c9eae442838a0416d0"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<form name=form1 action=exploit.php method=post>" fullword ascii
+		$s1 = "<title>Changing CHMOD Permissions Exploit " fullword ascii
+
+	condition:
+		uint16( 0 ) == 0x696c and filesize < 6KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Interception3389_Get : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file get.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "b17a793f-ffb7-5cdc-ba21-b0e2f0d14490"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L110-L126"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "ceb6306f6379c2c1634b5058e1894b43abcf0296"
+		logic_hash = "649e611c9d8948e60811af4209d737b3e797e6b42beba42439541ae543b062d6"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "userip = Request.ServerVariables(\"HTTP_X_FORWARDED_FOR\")" fullword ascii
+		$s1 = "file.writeline  szTime + \" HostName:\" + szhostname + \" IP:\" + userip+\":\"+n" ascii
+		$s3 = "set file=fs.OpenTextFile(server.MapPath(\"WinlogonHack.txt\"),8,True)" fullword ascii
+
+	condition:
+		filesize < 3KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Nc_1 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file 1.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "fe83df79-f7cb-50b8-bb34-9bfc5fbe3de2"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L128-L143"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "51d83961171db000fe4476f36d703ef3de409676"
+		logic_hash = "80ea8f16d943a3775fe9999131272af9e7f1af60d413109e58ecdef036484760"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Mozilla/4.0 " ascii
+		$s2 = "<%if session(\"pw\")<>\"go\" then %>" fullword ascii
+
+	condition:
+		filesize < 11KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Blacksky : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php6.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "741bb4db-6296-5222-8480-1169a6f44fd8"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L145-L160"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "a60a599c6c8b6a6c0d9da93201d116af257636d7"
+		logic_hash = "3b92f63f536361d8ba0cde853fb546f271abdec3a7c1d44688a42610f5f90c57"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "eval(gzinflate(base64_decode('" ascii
+		$s1 = "B1ac7Sky-->" fullword ascii
+
+	condition:
+		filesize < 641KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp3 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file asp3.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "0cb01c07-b424-532d-8aef-5ec25dfe3f19"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L162-L177"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "87c5a76989bf08da5562e0b75c196dcb3087a27b"
+		logic_hash = "e5f30a445be30c491e669c633bf2df08cbfb1017ecfc91f9ed83275550488304"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "if shellpath=\"\" then shellpath = \"cmd.exe\"" fullword ascii
+		$s2 = "c.open \"GET\", \"http://127.0.0.1:\" & port & \"/M_Schumacher/upadmin/s3\", Tru" ascii
+
+	condition:
+		filesize < 444KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Sniff : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file sniff.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "8cf47d71-1b97-5967-ad70-2ea6fad7cc29"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L179-L194"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "e246256696be90189e6d50a4ebc880e6d9e28dfd"
+		logic_hash = "198442e75422055e7d65c5d1aef55819036a99077aa79dbd5006ba97c4fe4af8"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "IPHostEntry HosyEntry = Dns.GetHostEntry((Dns.GetHostName()));" fullword ascii
+		$s2 = "if (!logIt && my_s_smtp && (dport == 25 || sport == 25))" fullword ascii
+
+	condition:
+		filesize < 91KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Udf_Udf : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file udf.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "07252f2d-1a99-5f21-940d-899a4821b511"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L196-L211"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "df63372ccab190f2f1d852f709f6b97a8d9d22b9"
+		logic_hash = "c7db32b5e66601e0b8322ac67b6b9ba8d6222891ed01db557bfac9985140421a"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<?php // Source  My : Meiam  " fullword ascii
+		$s2 = "$OOO0O0O00=__FILE__;$OOO000000=urldecode('" ascii
+
+	condition:
+		filesize < 430KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_JSP_Jsp : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file jsp.html"
+		author = "Florian Roth (Nextron Systems)"
+		id = "46f2fb10-2c0c-5bc2-b3bb-eba4c74bcad7"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L213-L228"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "c58fed3d3d1e82e5591509b04ed09cb3675dc33a"
+		logic_hash = "089e1a553900d149a4087ac81254295d74de15d9baaf73e60ce4f061e450e8c7"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<input name=f size=30 value=shell.jsp>" fullword ascii
+		$s2 = "<font color=red>www.i0day.com  By:" fullword ascii
+
+	condition:
+		filesize < 3KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_T00Ls_Lpk_Sethc_V4_Mail : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file mail.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "2f7d8a4d-9d94-5f23-9768-cc3712678d93"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L230-L245"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "0a9b7b438591ee78ee573028cbb805a9dbb9da96"
+		logic_hash = "b835a6d0c736116e0a8b277dadbf25c2ac333b0d7937a6f67ed59887c610a57a"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "if (!$this->smtp_putcmd(\"AUTH LOGIN\", base64_encode($this->user)))" fullword ascii
+		$s2 = "$this->smtp_debug(\"> \".$cmd.\"\\n\");" fullword ascii
+
+	condition:
+		filesize < 39KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Phpwebbackup : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file phpwebbackup.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "eb737ea6-231c-5e8d-b976-75f1044f9f54"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L247-L262"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "c788cb280b7ad0429313837082fe84e9a49efab6"
+		logic_hash = "45452fc415fbafe170a1b1f5a58df40f0ec65a9a6678e675b40a8c54e2d8bd6c"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<?php // Code By isosky www.nbst.org" fullword ascii
+		$s2 = "$OOO0O0O00=__FILE__;$OOO000000=urldecode('" ascii
+
+	condition:
+		uint16( 0 ) == 0x3f3c and filesize < 67KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Dz_Phpcms_Phpbb : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file dz_phpcms_phpbb.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "f7e5413f-a7c9-51d4-8422-30c3e2462be2"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L264-L281"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "33f23c41df452f8ca2768545ac6e740f30c44d1f"
+		logic_hash = "1455df58f51c3ae7558b89c940d97ea5870f261217b2a09727bb6678bcbd5500"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "if($pwd == md5(md5($password).$salt))" fullword ascii
+		$s2 = "function test_1($password)" fullword ascii
+		$s3 = ":\".$pwd.\"\\n---------------------------------\\n\";exit;" fullword ascii
+		$s4 = ":user=\".$user.\"\\n\";echo \"pwd=\".$pwd.\"\\n\";echo \"salt=\".$salt.\"\\n\";" fullword ascii
+
+	condition:
+		filesize < 22KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Picloaked_1 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file 1.gif"
+		author = "Florian Roth (Nextron Systems)"
+		id = "2ff44c4a-ed97-5635-9926-8d54a8364fab"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L283-L299"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "3eab1798cbc9ab3b2c67d3da7b418d07e775db70"
+		logic_hash = "a816ac9e98b7c5208f075ffcb9a6525016d6a5c468005d78ecab90d651423705"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<?php eval($_POST[" ascii
+		$s1 = ";<%execute(request(" ascii
+		$s3 = "GIF89a" fullword ascii
+
+	condition:
+		filesize < 6KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Assembly : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file assembly.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "7639e81d-fe21-5a12-9a20-fe894eefef73"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L301-L315"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "2bcb4d22758b20df6b9135d3fb3c8f35a9d9028e"
+		logic_hash = "34dc47b2f91a15a62175f3cab88d5ff24d2a3aa62f74fb9e43a4aaae96ced999"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "response.write oScriptlhn.exec(\"cmd.exe /c\" & request(\"c\")).stdout.readall" fullword ascii
+
+	condition:
+		filesize < 1KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php8 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php8.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "8b25b7f3-b94e-5887-b102-b52d340a4316"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L317-L334"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "b7b49f1d6645865691eccd025e140c521ff01cce"
+		logic_hash = "435ceb72c082f702284c464979a907a59a42bb4aa07311f9b2da1a9831efac11"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<a href=\"http://hi.baidu.com/ca3tie1/home\" target=\"_blank\">Ca3tie1's Blog</a" ascii
+		$s1 = "function startfile($path = 'dodo.zip')" fullword ascii
+		$s3 = "<form name=\"myform\" method=\"post\" action=\"\">" fullword ascii
+		$s5 = "$_REQUEST[zipname] = \"dodozip.zip\"; " fullword ascii
+
+	condition:
+		filesize < 25KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Xx : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file xx.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "72a04950-b82d-516f-a376-5253b7de1158"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L336-L352"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "2f39f1d9846ae72fc673f9166536dc21d8f396aa"
+		logic_hash = "67c542f172fd1b97fbee4697fd42bab9486e3d779ce62993617e5a5205bd75d4"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "$mysql.=\"insert into `$table`($keys) values($vals);\\r\\n\";" fullword ascii
+		$s2 = "$mysql_link=@mysql_connect($mysql_servername , $mysql_username , $mysql_password" ascii
+		$s16 = "mysql_query(\"SET NAMES gbk\");" fullword ascii
+
+	condition:
+		filesize < 2KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_JSPMSSQL : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file JSPMSSQL.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "061c1e53-edd0-5838-8d0f-6fb8f4fa078a"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L354-L369"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "c6b4faecd743d151fe0a4634e37c9a5f6533655f"
+		logic_hash = "c08e69345cb09e41840a81dcd8a015f9e1be93d570b64c310be74631e5314e2f"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<form action=\"?action=operator&cmd=execute\"" fullword ascii
+		$s2 = "String sql = request.getParameter(\"sqlcmd\");" fullword ascii
+
+	condition:
+		filesize < 35KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Injection_Transit_Jmpost : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file jmPost.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "892f747e-6065-5baf-b928-8d69d8792483"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L371-L386"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "f80ec26bbdc803786925e8e0450ad7146b2478ff"
+		logic_hash = "6c7f52cf7ff6df9867ea2c46cd8f40ef0e077d4e1d9033cde0649a209bffe21b"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "response.write  PostData(JMUrl,JmStr,JmCok,JmRef)" fullword ascii
+		$s2 = "JmdcwName=request(\"jmdcw\")" fullword ascii
+
+	condition:
+		filesize < 9KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Web_Asp : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file web.asp.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "67e03591-770a-5b32-9579-c899894740fc"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L388-L403"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "aebf6530e89af2ad332062c6aae4a8ca91517c76"
+		logic_hash = "5d2d7e6b9340ee4fd845ff05c99526c919214974b1a0def66492fe3cd4a75fe9"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<FORM method=post target=_blank>ShellUrl: <INPUT " fullword ascii
+		$s1 = "\" >[Copy code]</a> 4ngr7&nbsp; &nbsp;</td>" fullword ascii
+
+	condition:
+		filesize < 13KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Wshell_Asp : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file wshell-asp.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "294f0d00-7102-553d-92e2-c0a0e017385c"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L405-L421"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "4a0afdf5a45a759c14e99eb5315964368ca53e9c"
+		logic_hash = "f3c4af85e4798d3a809d8edd9cc46d1df44453f14ed050b002fe789da4d6096f"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "file1.Write(\"<%response.clear:execute request(\\\"root\\\"):response.End%>\");" fullword ascii
+		$s2 = "hello word !  " fullword ascii
+		$s3 = "root.asp " fullword ascii
+
+	condition:
+		filesize < 5KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp404 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file asp404.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4125bb40-3f5c-53f5-b906-54fa77b119f5"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L423-L439"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "bed51971288aeabba6dabbfb80d2843ec0c4ebf6"
+		logic_hash = "c84be2e561a08317be11cdb0fe103f8ad182a64d8cd1bf987163ebbeabe20f00"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "temp1 = Len(folderspec) - Len(server.MapPath(\"./\")) -1" fullword ascii
+		$s1 = "<form name=\"form1\" method=\"post\" action=\"<%= url%>?action=chklogin\">" fullword ascii
+		$s2 = "<td>&nbsp;<a href=\"<%=tempurl+f1.name%>\" target=\"_blank\"><%=f1.name%></a></t" ascii
+
+	condition:
+		filesize < 113KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_Asp : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file Serv-U asp.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "06a58a05-92bd-5124-a172-2bfd9491c2fc"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L441-L457"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "cee91cd462a459d31a95ac08fe80c70d2f9c1611"
+		logic_hash = "c98c3f4db5ea812827b6108ef88b57116621142202248f4f26f0c71bd76e33ec"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "newuser = \"-SETUSERSETUP\" & vbCrLf & \"-IP=0.0.0.0\" & vbCrLf & \"-PortNo=\" &" ascii
+		$s2 = "<td><input name=\"c\" type=\"text\" id=\"c\" value=\"cmd /c net user goldsun lov" ascii
+		$s3 = "deldomain = \"-DELETEDOMAIN\" & vbCrLf & \"-IP=0.0.0.0\" & vbCrLf & \" PortNo=\"" ascii
+
+	condition:
+		filesize < 30KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Cfm_List : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file list.cfm"
+		author = "Florian Roth (Nextron Systems)"
+		id = "98302eef-d1e8-5524-a57e-d49c0e92c7e0"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L459-L474"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "85d445b13d2aef1df3b264c9b66d73f0ff345cec"
+		logic_hash = "41c7c5ba6187a8871dec83bcd859b9377813d60cea8ef2b4ad390c67de04e010"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<TD><a href=\"javascript:ShowFile('#mydirectory.name#')\">#mydirectory.name#</a>" ascii
+		$s2 = "<TD>#mydirectory.size#</TD>" fullword ascii
+
+	condition:
+		filesize < 10KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php2.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "377ff89d-a9ba-526c-97a1-388f9ccb48ba"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L476-L491"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "bf12e1d741075cd1bd324a143ec26c732a241dea"
+		logic_hash = "707e2795d82636fbbc4d9f5324e509a526f77f9ead8f3c4d59dd0e95bc94f11e"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "$OOO0O0O00=__FILE__;$OOO000000=urldecode('" ascii
+		$s2 = "<?php // Black" fullword ascii
+
+	condition:
+		filesize < 12KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Oracle : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file oracle.jsp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "adc8dea6-8031-580b-b19a-e5520d41528f"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L493-L509"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "fc7043aaac0ee2d860d11f18ddfffbede9d07957"
+		logic_hash = "3ad4207e426ed2f9df0e0bac0e906af437b0774ba2ebb541afbe7e29b395ad63"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "String url=\"jdbc:oracle:thin:@localhost:1521:orcl\";" fullword ascii
+		$s2 = "String user=\"oracle_admin\";" fullword ascii
+		$s3 = "String sql=\"SELECT 1,2,3,4,5,6,7,8,9,10 from user_info\";" fullword ascii
+
+	condition:
+		filesize < 7KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx4 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file aspx4.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4a13c809-48f7-54f7-9ce3-10d6d48104fb"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L511-L527"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "200a8f15ffb6e3af31d28c55588003b5025497eb"
+		logic_hash = "0aab8e327b4477cb0b8cd5d4b1e4b52c160180656dad57b0498654da1c8d7a29"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s4 = "File.Delete(cdir.FullName + \"\\\\test\");" fullword ascii
+		$s5 = "start<asp:TextBox ID=\"Fport_TextBox\" runat=\"server\" Text=\"c:\\\" Width=\"60" ascii
+		$s6 = "<div>Code By <a href =\"http://www.hkmjj.com\">Www.hkmjj.Com</a></div>" fullword ascii
+
+	condition:
+		filesize < 11KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file aspx.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4a13c809-48f7-54f7-9ce3-10d6d48104fb"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L529-L546"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "8378619b2a7d446477946eabaa1e6744dec651c1"
+		logic_hash = "b59684633fd72bd1804a96850a8b358db98c169415b6e65fe3ecfb4d9fde72d0"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "string iVDT=\"-SETUSERSETUP\\r\\n-IP=0.0.0.0\\r\\n-PortNo=52521\\r\\n-User=bin" ascii
+		$s1 = "SQLExec : <asp:DropDownList runat=\"server\" ID=\"FGEy\" AutoPostBack=\"True\" O" ascii
+		$s2 = "td.Text=\"<a href=\\\"javascript:Bin_PostBack('urJG','\"+dt.Rows[j][\"ProcessID" ascii
+		$s3 = "vyX.Text+=\"<a href=\\\"javascript:Bin_PostBack('Bin_Regread','\"+MVVJ(rootkey)+" ascii
+
+	condition:
+		filesize < 353KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Su7_X_9_X : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file su7.x-9.x.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "5d546ce8-6f8f-5b0b-9472-23f283ef9f80"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L548-L563"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "808396b51023cc8356f8049cfe279b349ca08f1a"
+		logic_hash = "2d2398cf0f9e253eea343d39b6555f2633f92f627f1c93cc28123d5a7f3d1bf1"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "returns=httpopen(\"LoginID=\"&user&\"&FullName=&Password=\"&pass&\"&ComboPasswor" ascii
+		$s1 = "returns=httpopen(\"\",\"POST\",\"http://127.0.0.1:\"&port&\"/Admin/XML/User.xml?" ascii
+
+	condition:
+		filesize < 59KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Cfmshell : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file cfmShell.cfm"
+		author = "Florian Roth (Nextron Systems)"
+		id = "40d50ddb-2963-5d8e-b93a-bb44a8944229"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L565-L580"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "740796909b5d011128b6c54954788d14faea9117"
+		logic_hash = "0767012ec8fd4a18a64eca04d459efb55fafd29ed052dab8a0eb1b8f4ce7aa66"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<cfexecute name=\"C:\\Winnt\\System32\\cmd.exe\"" fullword ascii
+		$s4 = "<cfif FileExists(\"#GetTempDirectory()#foobar.txt\") is \"Yes\">" fullword ascii
+
+	condition:
+		filesize < 4KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp4 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file asp4.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4125bb40-3f5c-53f5-b906-54fa77b119f5"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L582-L598"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "4005b83ced1c032dc657283341617c410bc007b8"
+		logic_hash = "ae02d1efc975a8592a00cbab823355fb778fbb589f5752dd913aa432b316c3a4"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s2 = "if ShellPath=\"\" Then ShellPath = \"cmd.exe\"" fullword ascii
+		$s6 = "Response.Cookies(Cookie_Login) = sPwd" fullword ascii
+		$s8 = "Set DD=CM.exec(ShellPath&\" /c \"&DefCmd)" fullword ascii
+
+	condition:
+		filesize < 150KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_2_Admin_By_Lake2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file Serv-U 2 admin by lake2.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "8fce8835-a4ed-58df-a725-0c1fc04becaa"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L600-L617"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "cb8039f213e611ab2687edd23e63956c55f30578"
+		logic_hash = "a67c08b3a4bed2385d2fa8c007615bfb37a2d739cc13ee2e0f5eda00536b6ea8"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "xPost3.Open \"POST\", \"http://127.0.0.1:\"& port &\"/lake2\", True" fullword ascii
+		$s2 = "response.write \"FTP user lake  pass admin123 :)<br><BR>\"" fullword ascii
+		$s8 = "<p>Serv-U Local Get SYSTEM Shell with ASP" fullword ascii
+		$s9 = "\"-HomeDir=c:\\\\\" & vbcrlf & \"-LoginMesFile=\" & vbcrlf & \"-Disable=0\" & vb" ascii
+
+	condition:
+		filesize < 17KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php3 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php3.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "3000ac40-35de-5d24-85fb-4d105b07c2e7"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L619-L634"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "e2924cb0537f4cdfd6f1bd44caaaf68a73419b9d"
+		logic_hash = "ba3892feacbbe3d7c6b6308a22ca22b19ae84b6490df2c976852260da2a96ca1"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "} elseif(@is_resource($f = @popen($cfe,\"r\"))) {" fullword ascii
+		$s2 = "cf('/tmp/.bc',$back_connect);" fullword ascii
+
+	condition:
+		filesize < 8KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_By_Goldsun : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file Serv-U_by_Goldsun.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "d8b85c33-b05d-531a-9c0a-a1dddcae0da4"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L636-L653"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "d4d7a632af65a961a1dbd0cff80d5a5c2b397e8c"
+		logic_hash = "962b2e75c03f716fc039cf26aa238e9a3faf5a7ea8fb3d4da556fa601790055a"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "b.open \"GET\", \"http://127.0.0.1:\" & ftpport & \"/goldsun/upadmin/s2\", True," ascii
+		$s2 = "newuser = \"-SETUSERSETUP\" & vbCrLf & \"-IP=0.0.0.0\" & vbCrLf & \"-PortNo=\" &" ascii
+		$s3 = "127.0.0.1:<%=port%>," fullword ascii
+		$s4 = "GName=\"http://\" & request.servervariables(\"server_name\")&\":\"&request.serve" ascii
+
+	condition:
+		filesize < 30KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php10 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php10.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "5fe78cc6-8be3-595f-a082-e361259938e5"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L655-L670"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "3698c566a0ae07234c8957112cdb34b79362b494"
+		logic_hash = "76bb2dfd518173f031cc3c93b2098edaef4aca09f0dd8228223257b0b7df452b"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "dumpTable($N,$M,$Hc=false){if($_POST[\"format\"]!=\"sql\"){echo\"\\xef\\xbb\\xbf" ascii
+		$s2 = "';if(DB==\"\"||!$od){echo\"<a href='\".h(ME).\"sql='\".bold(isset($_GET[\"sql\"]" ascii
+
+	condition:
+		filesize < 600KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_Servu : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file servu.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "3e50d991-7297-5766-b68a-e74aa34ce042"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L671-L686"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "7de701b86820096e486e64ca34f1fa9f2fbba641"
+		logic_hash = "d3956b6daa0649233372aea4176e0d43c44d866146884222f92b7efe01f288bb"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "fputs ($conn_id, \"SITE EXEC \".$dir.\"cmd.exe /c \".$cmd.\"\\r\\n\");" fullword ascii
+		$s1 = "function ftpcmd($ftpport,$user,$password,$dir,$cmd){" fullword ascii
+
+	condition:
+		filesize < 41KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Portrecall_Jsp2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file jsp2.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "cd34cb47-c5e0-5094-a501-6a8a00d94018"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L688-L704"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "412ed15eb0d24298ba41731502018800ffc24bfc"
+		logic_hash = "1ec77a1b0d30cdebce1b5b07445247016230b733a594d8d1de642c2c8af63031"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "final String remoteIP =request.getParameter(\"remoteIP\");" fullword ascii
+		$s4 = "final String localIP = request.getParameter(\"localIP\");" fullword ascii
+		$s20 = "final String localPort = \"3390\";//request.getParameter(\"localPort\");" fullword ascii
+
+	condition:
+		filesize < 23KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file aspx2.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "0da59fde-2214-5677-943f-05b8da4fd9d4"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L706-L723"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "95db7a60f4a9245ffd04c4d9724c2745da55e9fd"
+		logic_hash = "7af90992bc3f708d877dcd5841c0d132793e41a0796607907084516d955b3ae0"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "if (password.Equals(this.txtPass.Text))" fullword ascii
+		$s1 = "<head runat=\"server\">" fullword ascii
+		$s2 = ":<asp:TextBox runat=\"server\" ID=\"txtPass\" Width=\"400px\"></asp:TextBox>" fullword ascii
+		$s3 = "this.lblthispath.Text = Server.MapPath(Request.ServerVariables[\"PATH_INFO\"]);" fullword ascii
+
+	condition:
+		uint16( 0 ) == 0x253c and filesize < 9KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Hy2006A : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file hy2006a.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "115651d3-63e1-58e3-b27c-42271111bb91"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L725-L740"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "20da92b2075e6d96636f883dcdd3db4a38c01090"
+		logic_hash = "a24bf11a2728bb8d18ea005b057648770956694e0b257d4464ad15ee3e24eda2"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s15 = "Const myCmdDotExeFile = \"command.com\"" fullword ascii
+		$s16 = "If LCase(appName) = \"cmd.exe\" And appArgs <> \"\" Then" fullword ascii
+
+	condition:
+		filesize < 406KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php1 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php1.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "5fe78cc6-8be3-595f-a082-e361259938e5"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L742-L758"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "c2f4b150f53c78777928921b3a985ec678bfae32"
+		logic_hash = "aadf47ac6231b41e720efdd85c481ebac8fccb572e57b86b27a95dd367c0d81b"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s7 = "$sendbuf = \"site exec \".$_POST[\"SUCommand\"].\"\\r\\n\";" fullword ascii
+		$s8 = "elseif(function_exists('passthru')){@ob_start();@passthru($cmd);$res = @ob_get_c" ascii
+		$s18 = "echo Exec_Run($perlpath.' /tmp/spider_bc '.$_POST['yourip'].' '.$_POST['yourport" ascii
+
+	condition:
+		filesize < 621KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Jspshell2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file jspshell2.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "ff72f94b-1c0a-5615-b35f-35f69c920292"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L760-L775"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "cc7bc1460416663012fc93d52e2078c0a277ff79"
+		logic_hash = "3a60991fa557655fbd2450739976ac612a0ea2a3df22873382b05438cac12762"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s10 = "if (cmd == null) cmd = \"cmd.exe /c set\";" fullword ascii
+		$s11 = "if (program == null) program = \"cmd.exe /c net start > \"+SHELL_DIR+\"/Log.txt" ascii
+
+	condition:
+		filesize < 424KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Mysql : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file mysql.aspx"
+		author = "Florian Roth (Nextron Systems)"
+		id = "fa0627fb-a40c-5856-ae78-17d33910878f"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L777-L791"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "8e242c40aabba48687cfb135b51848af4f2d389d"
+		logic_hash = "bde2ea1ccfc88138456a1b255a32a7323f5ef0f677499db6dc6670987cc37585"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "txtpassword.Attributes.Add(\"onkeydown\", \"SubmitKeyClick('btnLogin');\");" fullword ascii
+		$s2 = "connString = string.Format(\"Host = {0}; UserName = {1}; Password = {2}; Databas" ascii
+
+	condition:
+		filesize < 202KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php9 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php9.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "c8cbee10-78ea-5a6f-9c80-7e51a9c38440"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L793-L807"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "cd3962b1dba9f1b389212e38857568b69ca76725"
+		logic_hash = "bea117862ebc9220a4d9aee091c808274f9907fceb83b528055998ddcc90aa5f"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "Str[17] = \"select shell('c:\\windows\\system32\\cmd.exe /c net user b4che10r ab" ascii
+
+	condition:
+		filesize < 1087KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Portrecall_Jsp : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file jsp.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "cd34cb47-c5e0-5094-a501-6a8a00d94018"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L809-L823"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "65e8e4d13ad257c820cad12eef853c6d0134fce8"
+		logic_hash = "98f279c3e50308f67f88ecf8459943187ea152664fe0206c4a7d3435242df2a6"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "lcx.jsp?localIP=202.91.246.59&localPort=88&remoteIP=218.232.111.187&remotePort=2" ascii
+
+	condition:
+		filesize < 1KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Aspx3 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file aspx3.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "4f835136-744a-5324-a1f4-02d1cfa2cab6"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L825-L840"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "dd61481771f67d9593214e605e63b62d5400c72f"
+		logic_hash = "11bf511ee70ff4bde0a9320cb80dd9efa0f437d432c78a859153cfcc8e80db01"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "Process p1 = Process.Start(\"\\\"\" + txtRarPath.Value + \"\\\"\", \" a -y -k -m" ascii
+		$s12 = "if (_Debug) System.Console.WriteLine(\"\\ninserting filename into CDS:" ascii
+
+	condition:
+		filesize < 100KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASPX_Shell_Shell : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file shell.aspx"
+		author = "Florian Roth (Nextron Systems)"
+		id = "8fbcae22-07b7-5afe-9f15-06e2f426b5ca"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L842-L857"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "1816006827d16ed73cefdd2f11bd4c47c8af43e4"
+		logic_hash = "ac22d89353b4316289bf6c6e13332ac401f4b57f6c29b71861cb48359c1e55f9"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "<%try{ System.Reflection.Assembly.Load(Request.BinaryRead(int.Parse(Request.Cook" ascii
+		$s1 = "<%@ Page Language=\"C#\" ValidateRequest=\"false\" %>" fullword ascii
+
+	condition:
+		filesize < 1KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell__Php1_Php7_Php9 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - from files php1.txt, php7.txt, php9.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "cfc2f624-976f-5ff6-bd07-10948b9290bc"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L859-L878"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "6ea5b362f8d8f2e99725d4dd4d2ada5c3939a45a3dde0084571600452ab4673c"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		super_rule = 1
+		hash0 = "c2f4b150f53c78777928921b3a985ec678bfae32"
+		hash1 = "05a3f93dbb6c3705fd5151b6ffb64b53bc555575"
+		hash2 = "cd3962b1dba9f1b389212e38857568b69ca76725"
+
+	strings:
+		$s1 = "<a href=\"?s=h&o=wscript\">[WScript.shell]</a> " fullword ascii
+		$s2 = "document.getElementById('cmd').value = Str[i];" fullword ascii
+		$s3 = "Str[7] = \"copy c:\\\\\\\\1.php d:\\\\\\\\2.php\";" fullword ascii
+
+	condition:
+		filesize < 300KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell__Serv_U_By_Goldsun_Asp3_Serv_U_Asp : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - from files Serv-U_by_Goldsun.asp, asp3.txt, Serv-U asp.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "e91e05e8-0f6d-57a7-a649-a834733f17c8"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L880-L899"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "b733e80f234a85a4f65eedd94f535860b4da464adb80a91afc547a8d96b5dc7a"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		super_rule = 1
+		hash0 = "d4d7a632af65a961a1dbd0cff80d5a5c2b397e8c"
+		hash1 = "87c5a76989bf08da5562e0b75c196dcb3087a27b"
+		hash2 = "cee91cd462a459d31a95ac08fe80c70d2f9c1611"
+
+	strings:
+		$s1 = "c.send loginuser & loginpass & mt & deldomain & quit" fullword ascii
+		$s2 = "loginpass = \"Pass \" & pass & vbCrLf" fullword ascii
+		$s3 = "b.send \"User go\" & vbCrLf & \"pass od\" & vbCrLf & \"site exec \" & cmd & vbCr" ascii
+
+	condition:
+		filesize < 444KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell__Asp4_Asp4_MSSQL__MSSQL_ : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - from files asp4.txt, asp4.txt, MSSQL_.asp, MSSQL_.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "e0070f0d-35d0-5024-88e7-e0e04b29f485"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L901-L921"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "a8ec5ad87c83c16f47391c3ce08cee74c6be1e42c288eec6d1559867d28489c6"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		super_rule = 1
+		hash0 = "4005b83ced1c032dc657283341617c410bc007b8"
+		hash1 = "4005b83ced1c032dc657283341617c410bc007b8"
+		hash2 = "7097c21f92306983add3b5b29a517204cd6cd819"
+		hash3 = "7097c21f92306983add3b5b29a517204cd6cd819"
+
+	strings:
+		$s0 = "\"<form name=\"\"searchfileform\"\" action=\"\"?action=searchfile\"\" method=\"" ascii
+		$s1 = "\"<TD ALIGN=\"\"Left\"\" colspan=\"\"5\"\">[\"& DbName & \"]" fullword ascii
+		$s2 = "Set Conn = Nothing " fullword ascii
+
+	condition:
+		filesize < 341KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell__Injection_Jmcook_Jmpost_Manualinjection : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - from files Injection.exe, jmCook.asp, jmPost.asp, ManualInjection.exe"
+		author = "Florian Roth (Nextron Systems)"
+		id = "e154ecb5-9d56-520a-b76a-635a8864f0a8"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L923-L942"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		logic_hash = "0f3a4f81326154a6a6ac448d18be29ad534917bc39aba26cc458f06b43001681"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		super_rule = 1
+		hash0 = "3484ed16e6f9e0d603cbc5cb44e46b8b7e775d35"
+		hash1 = "5e1851c77ce922e682333a3cb83b8506e1d7395d"
+		hash2 = "f80ec26bbdc803786925e8e0450ad7146b2478ff"
+		hash3 = "e83d427f44783088a84e9c231c6816c214434526"
+
+	strings:
+		$s1 = "response.write  PostData(JMUrl,JmStr,JmCok,JmRef)" fullword ascii
+		$s2 = "strReturn=Replace(strReturn,chr(43),\"%2B\")  'JMDCW" fullword ascii
+
+	condition:
+		filesize < 7342KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Cmfshell : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file cmfshell.cmf"
+		author = "Florian Roth (Nextron Systems)"
+		id = "c5670deb-952c-5ba4-949a-097cc09bb108"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L944-L959"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "b9b2107c946431e4ad1a8f5e53ac05e132935c0e"
+		logic_hash = "f138a82c2d6a831626fe200308eb89cb50ffeec2f2722599eb4ccbd082bad73d"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<cfexecute name=\"C:\\Winnt\\System32\\cmd.exe\"" fullword ascii
+		$s2 = "<form action=\"<cfoutput>#CGI.SCRIPT_NAME#</cfoutput>\" method=\"post\">" fullword ascii
+
+	condition:
+		filesize < 4KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php4 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php4.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "82446dff-dd1e-54a8-bb70-570bedc805b5"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L961-L975"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "179975f632baff6ee4d674fe3fabc324724fee9e"
+		logic_hash = "e625b6d1fd2c1e62306ccae2775ee7b53ddcdd7a6baef55b386dfcd92dc2e764"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "nc -l -vv -p port(" ascii
+
+	condition:
+		uint16( 0 ) == 0x4850 and filesize < 1KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Linux_2_6_Exploit : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file 2.6.9"
+		author = "Florian Roth (Nextron Systems)"
+		id = "22e2aca7-418f-598f-af0c-99942aaf3278"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L977-L991"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "ec22fac0510d0dc2c29d56c55ff7135239b0aeee"
+		logic_hash = "7f3e2937796358a949ce980210ddeb1a606a7b9c2b4d9c4a4acad49bb556dfc8"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "[+] Failed to get root :( Something's wrong.  Maybe the kernel isn't vulnerable?" fullword ascii
+
+	condition:
+		filesize < 56KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file asp2.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "e5296405-c345-55dc-acd9-be6aca86c60b"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L993-L1009"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "b3ac478e72a0457798a3532f6799adeaf4a7fc87"
+		logic_hash = "6107afe9895c4e0c865e78bece160246815a0d3c589bfc79f8b369b94481cd89"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "<%=server.mappath(request.servervariables(\"script_name\"))%>" fullword ascii
+		$s2 = "webshell</font> <font color=#00FF00>" fullword ascii
+		$s3 = "Userpwd = \"admin\"   'User Password" fullword ascii
+
+	condition:
+		filesize < 10KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_FTP_MYSQL_MSSQL_SSH : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file FTP MYSQL MSSQL SSH.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "dd619901-6f0e-527e-9926-808176641c09"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1011-L1029"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "fe63b215473584564ef2e08651c77f764999e8ac"
+		logic_hash = "a66884c71ce0cce05ba6607bf66dc55bfae5393746328c06f5c9ca98005d0caf"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "$_SESSION['hostlist'] = $hostlist = $_POST['hostlist'];" fullword ascii
+		$s2 = "Codz by <a href=\"http://www.sablog.net/blog\">4ngel</a><br />" fullword ascii
+		$s3 = "if ($conn_id = @ftp_connect($host, $ftpport)) {" fullword ascii
+		$s4 = "$_SESSION['sshport'] = $mssqlport = $_POST['sshport'];" fullword ascii
+		$s5 = "<title>ScanPass(FTP/MYSQL/MSSQL/SSH) by 4ngel</title>" fullword ascii
+
+	condition:
+		filesize < 20KB and 3 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Shell : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file shell.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "fdfc3fc1-9400-533b-978b-1a1fac112e1f"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1031-L1047"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "b7b34215c2293ace70fc06cbb9ce73743e867289"
+		logic_hash = "be3961d6568acfaadfa09efda2f914259a59f4e30725c7d434e89f6020e40515"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "xPost.Open \"GET\",\"http://www.i0day.com/1.txt\",False //" fullword ascii
+		$s2 = "sGet.SaveToFile Server.MapPath(\"test.asp\"),2 //" fullword ascii
+		$s3 = "http://hi.baidu.com/xahacker/fuck.txt" fullword ascii
+
+	condition:
+		filesize < 1KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_PHP_Php7 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file php7.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "f21bb0db-d18a-58c0-a227-5baf5536c57b"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1049-L1064"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "05a3f93dbb6c3705fd5151b6ffb64b53bc555575"
+		logic_hash = "70804d914c6f31422632943bf663f997eb747a290a13b27bfcc66bc3129f136d"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "---> '.$ports[$i].'<br>'; ob_flush(); flush(); } } echo '</div>'; return true; }" ascii
+		$s1 = "$getfile = isset($_POST['downfile']) ? $_POST['downfile'] : ''; $getaction = iss" ascii
+
+	condition:
+		filesize < 300KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Rootkit : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file rootkit.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "ab51abca-0790-541c-9f18-1568809ef113"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1066-L1081"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "3bfc1c95782e702cf56184e7d438edcf5802eab3"
+		logic_hash = "5569a179f011ece9802676542d5556fe8d2a2b144e26065b9e0c5bd06c970201"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s0 = "set ss=zsckm.get(\"Win32_ProcessSta\"&uyy&\"rtup\")" fullword ascii
+		$s1 = "If jzgm=\"\"Then jzgm=\"cmd.exe /c net user\"" fullword ascii
+
+	condition:
+		filesize < 80KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Jspshell : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file jspshell.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "ff72f94b-1c0a-5615-b35f-35f69c920292"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1083-L1098"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "d16af622f7688d4e0856a2678c4064d3d120e14b"
+		logic_hash = "9b952f941eb87d7a1b4f747f4e0b0b5ee8876190c6f684b811057a2c78044047"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "else if(Z.equals(\"M\")){String[] c={z1.substring(2),z1.substring(0,2),z2};Proce" ascii
+		$s2 = "String Z=EC(request.getParameter(Pwd)+\"\",cs);String z1=EC(request.getParameter" ascii
+
+	condition:
+		filesize < 30KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Serv_U_Serv_U : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file serv-u.php"
+		author = "Florian Roth (Nextron Systems)"
+		id = "dd37b2c3-e06d-5245-97d7-40e5eeadb76f"
+		date = "2015-06-23"
+		modified = "2023-01-27"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1100-L1117"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "1c6415a247c08a63e3359b06575b36017befc0c0"
+		logic_hash = "89cfcbaa38c3b0b6c31af634b4588dcc8bc7a5aa3edac955a162173341d03622"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "@readfile(\"c:\\\\winnt\\\\system32\\" ascii
+		$s2 = "$sendbuf = \"PASS \".$_POST[\"password\"].\"\\r\\n\";" fullword ascii
+		$s3 = "$cmd=\"cmd /c rundll32.exe $path,install $openPort $activeStr\";" fullword ascii
+
+	condition:
+		filesize < 435KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Webshell : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file WebShell.cgi"
+		author = "Florian Roth (Nextron Systems)"
+		id = "9fe4c8fd-3955-5405-add2-835e6f64e8f2"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1119-L1135"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "7ef773df7a2f221468cc8f7683e1ace6b1e8139a"
+		logic_hash = "7d80390a86b1858d2cf4f2be56df7e734aea402de0878adf40ef36721719ca74"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "$login = crypt($WebShell::Configuration::password, $salt);" fullword ascii
+		$s2 = "my $error = \"This command is not available in the restricted mode.\\n\";" fullword ascii
+		$s3 = "warn \"command: '$command'\\n\";" fullword ascii
+
+	condition:
+		filesize < 30KB and 2 of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_Tuoku_Script_Mssql_2 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file mssql.asp"
+		author = "Florian Roth (Nextron Systems)"
+		id = "3f9706d6-7f6e-5120-945a-d5d928d79507"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1137-L1153"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "ad55512afa109b205e4b1b7968a89df0cf781dc9"
+		logic_hash = "1d4b75eeeddda6e92b8ec38679d5e2b9d21abf2d2b467b91a066dcf628725f0a"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "sqlpass=request(\"sqlpass\")" fullword ascii
+		$s2 = "set file=fso.createtextfile(server.mappath(request(\"filename\")),8,true)" fullword ascii
+		$s3 = "<blockquote> ServerIP:&nbsp;&nbsp;&nbsp;" fullword ascii
+
+	condition:
+		filesize < 3KB and all of them
+}
+rule SIGNATURE_BASE_CN_Honker_Webshell_ASP_Asp1 : FILE {
+    meta:
+		description = "Webshell from CN Honker Pentest Toolset - file asp1.txt"
+		author = "Florian Roth (Nextron Systems)"
+		id = "bf0b1f1e-cf7b-5afb-8e0a-bcfd70fc8887"
+		date = "2015-06-23"
+		modified = "2023-12-05"
+		reference = "Disclosed CN Honker Pentest Toolset"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_webshells.yar#L1155-L1171"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
+		hash = "78b5889b363043ed8a60bed939744b4b19503552"
+		logic_hash = "3b454b1254d05b2208aee02e966c9c56a338dd3d33a2c6acc2c4df3208314055"
+		score = 70
+		quality = 85
+		tags = "FILE"
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "SItEuRl=" ascii
+		$s2 = "<%@ LANGUAGE = VBScript.Encode %><%" fullword ascii
+		$s3 = "Server.ScriptTimeout=" ascii
+
+	condition:
+		filesize < 200KB and all of them
+}
 rule SIGNATURE_BASE_Asp_File : FILE {
     meta:
 		description = "Laudanum Injector Tools - file file.asp"
@@ -20289,612 +21623,6 @@ rule SIGNATURE_BASE_Laudanum_Tools_Generic : FILE {
 	condition:
 		filesize < 60KB and all of them
 }
-rule SIGNATURE_BASE_Hvs_APT37_Webshell_Img_Thumbs_Asp : FILE {
-    meta:
-		description = "Webshell named img.asp, thumbs.asp or thumb.asp used by APT37"
-		author = "Moritz Oettle"
-		id = "e45d4507-81de-5f72-9ce2-4f0e3e5c62b1"
-		date = "2020-12-15"
-		modified = "2023-12-05"
-		reference = "https://www.hvs-consulting.de/media/downloads/ThreatReport-Lazarus.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_lazarus_dec20.yar#L68-L95"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "94d2448d3794ae3f29678a7337473d259b5cfd1c7f703fe53ee6c84dd10a48ef"
-		logic_hash = "58ccee11c08330c8cd4148e623a2e59e024d6d5f3067331dbdd962d0f6a8daa4"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "strMsg = \"E : F\"" fullword ascii
-		$s2 = "strMsg = \"S : \" & Len(fileData)" fullword ascii
-		$s3 = "Left(workDir, InStrRev(workDir, \"/\")) & \"video\""
-		$a1 = "Server.CreateObject(\"Scripting.FileSystemObject\")" fullword ascii
-		$a2 = "Dim tmpPath, workDir" fullword ascii
-		$a3 = "Dim objFSO, objTextStream" fullword ascii
-		$a4 = "workDir = Request.ServerVariables(\"URL\")" fullword ascii
-		$a5 = "InStrRev(workDir, \"/\")" ascii
-		$g1 = "WriteFile = 0" fullword ascii
-		$g2 = "fileData = Request.Form(\"fp\")" fullword ascii
-		$g3 = "fileName = Request.Form(\"fr\")" fullword ascii
-		$g4 = "Err.Clear()" fullword ascii
-		$g5 = "Option Explicit" fullword ascii
-
-	condition:
-		filesize < 2KB and ( ( 1 of ( $s* ) ) or ( 3 of ( $a* ) ) or ( 5 of ( $g* ) ) )
-}
-rule SIGNATURE_BASE_Hvs_APT37_Webshell_Template_Query_Asp : FILE {
-    meta:
-		description = "Webshell named template-query.aspimg.asp used by APT37"
-		author = "Moritz Oettle"
-		id = "dc006b46-4c51-59cd-8b7d-adbfec86cd2e"
-		date = "2020-12-15"
-		modified = "2023-12-05"
-		reference = "https://www.hvs-consulting.de/media/downloads/ThreatReport-Lazarus.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_lazarus_dec20.yar#L97-L120"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "961a66d01c86fa5982e0538215b17fb9fae2991331dfea812b8c031e2ceb0d90"
-		logic_hash = "d8bd017e9103bddb0b8a86effa8a4b0617b54bd643bcc36b6f678a3e60f8559f"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$g1 = "server.scripttimeout=600" fullword ascii
-		$g2 = "response.buffer=true" fullword ascii
-		$g3 = "response.expires=-1" fullword ascii
-		$g4 = "session.timeout=600" fullword ascii
-		$a1 = "redhat hacker" ascii
-		$a2 = "want_pre.asp" ascii
-		$a3 = "vgo=\"admin\"" ascii
-		$a4 = "ywc=false" ascii
-		$s1 = "public  br,ygv,gbc,ydo,yka,wzd,sod,vmd" fullword ascii
-
-	condition:
-		filesize > 70KB and filesize < 200KB and ( ( 1 of ( $s* ) ) or ( 2 of ( $a* ) ) or ( 3 of ( $g* ) ) )
-}
-rule SIGNATURE_BASE_Hvs_APT37_Webshell_Controllers_Asp : FILE {
-    meta:
-		description = "Webshell named controllers.asp or inc-basket-offer.asp used by APT37"
-		author = "Moritz Oettle"
-		id = "82370415-30f4-514d-8806-e2daced96f07"
-		date = "2020-12-15"
-		modified = "2023-12-05"
-		reference = "https://www.hvs-consulting.de/media/downloads/ThreatReport-Lazarus.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_lazarus_dec20.yar#L140-L218"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "829462fc6d84aae04a962dfc919d0a392265fbf255eab399980d2b021e385517"
-		logic_hash = "a6e53e99f7500683d3b62a7630cecb53ee6c13b335cbf9912366675db964aefe"
-		score = 75
-		quality = 28
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "<%@Language=VBScript.Encode" ascii
-		$x1 = { 64 7F 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x2 = { 64 7F 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x3 = { 64 7F 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x4 = { 64 7F 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x5 = { 64 7F 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x6 = { 64 7F 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x7 = { 64 7F 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x8 = { 64 41 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x9 = { 64 41 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x10 = { 64 41 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x11 = { 64 41 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x12 = { 64 7F 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x13 = { 64 41 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x14 = { 64 41 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x15 = { 64 41 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x16 = { 64 41 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x17 = { 64 41 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x18 = { 64 41 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x19 = { 64 41 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x20 = { 64 41 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x21 = { 64 41 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x22 = { 64 41 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x23 = { 64 7F 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x24 = { 64 41 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x25 = { 64 41 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x26 = { 6A 7F 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x27 = { 6A 7F 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x28 = { 6A 7F 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x29 = { 6A 7F 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x30 = { 6A 7F 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x31 = { 6A 7F 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x32 = { 6A 7F 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x33 = { 6A 7F 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x34 = { 64 7F 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x35 = { 6A 7F 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x36 = { 6A 7F 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x37 = { 6A 7F 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x38 = { 6A 7F 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x39 = { 6A 7F 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x40 = { 6A 7F 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x41 = { 6A 7F 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x42 = { 6A 7F 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x43 = { 6A 41 44 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x44 = { 6A 41 44 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x45 = { 64 7F 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x46 = { 6A 41 44 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x47 = { 6A 41 44 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x48 = { 6A 41 44 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x49 = { 6A 41 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x50 = { 6A 41 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x51 = { 6A 41 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x52 = { 6A 41 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x53 = { 6A 41 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x54 = { 6A 41 49 2D 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x55 = { 6A 41 49 2D 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x56 = { 64 7F 44 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x57 = { 6A 41 49 23 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x58 = { 6A 41 49 23 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x59 = { 6A 41 49 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x60 = { 6A 41 49 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x61 = { 64 7F 44 23 41 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x62 = { 64 7F 44 23 41 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x63 = { 64 7F 49 2D 7F 44 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-		$x64 = { 64 7F 49 2D 7F 49 63 2F 6D 4D 6B 61 4F 59 62 3A 6E 72 21 59 }
-
-	condition:
-		filesize > 50KB and filesize < 200KB and ( $s0 and 1 of ( $x* ) )
-}
-rule SIGNATURE_BASE_SUSP_WEBSHELL_Cmd_Indicator_Apr25 {
-    meta:
-		description = "Detects a pattern which is often related to web shell activity"
-		author = "Florian Roth"
-		id = "735359b2-9f94-5618-8ec5-7ab8f5e5e16d"
-		date = "2025-04-25"
-		modified = "2025-05-07"
-		reference = "https://regex101.com/r/N6oZ2h/2"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_sap_netweaver_apr25.yar#L29-L41"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "b992786a58389749db40fc90363f00c5df374d514374afc2d6fdff4429cb1ec0"
-		score = 60
-		quality = 85
-		tags = ""
-
-	strings:
-		$xr01 = /\.(asp|aspx|jsp|php)\?cmd=[a-z0-9%+\-\/\.]{3,20} HTTP\/1\.[01]["']? 200/
-
-	condition:
-		1 of them
-}
-rule SIGNATURE_BASE_LOG_APT_WEBSHELL_Solarwinds_SUNBURST_Report_Webshell_Dec20_2 {
-    meta:
-		description = "Detects webshell access mentioned in FireEye's SUNBURST report"
-		author = "Florian Roth (Nextron Systems)"
-		id = "fb86164d-13de-5357-8f52-c597b51127ff"
-		date = "2020-12-21"
-		modified = "2023-12-05"
-		reference = "https://www.guidepointsecurity.com/supernova-solarwinds-net-webshell-analysis/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_solarwinds_susp_sunburst.yar#L21-L32"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "ec52e244a483ace0f6932b553b159b23b767c00d1f64a4711e5f359832e846f5"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$xr1 = /logoimagehandler.ashx[^\n\s]{1,400}clazz=/ ascii wide
-
-	condition:
-		$xr1
-}
-rule SIGNATURE_BASE_Webshell_Caterpillar_ASPX {
-    meta:
-		description = "Volatile Cedar Webshell - from file caterpillar.aspx"
-		author = "Florian Roth (Nextron Systems)"
-		id = "9af48c64-3768-5765-8245-38df000598a7"
-		date = "2015-04-03"
-		modified = "2023-12-05"
-		reference = "http://goo.gl/emons5"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_volatile_cedar.yar#L106-L126"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "9df2e4a25052136d6e622273f917bd15df410869a8cf3075c773a14ea62a2a55"
-		score = 75
-		quality = 85
-		tags = ""
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		super_rule = 1
-		hash0 = "af4c99208fb92dc42bc98c4f96c3536ec8f3fe56"
-
-	strings:
-		$s0 = "Dim objNewRequest As WebRequest = HttpWebRequest.Create(sURL)" fullword
-		$s1 = "command = \"ipconfig /all\"" fullword
-		$s3 = "For Each xfile In mydir.GetFiles()" fullword
-		$s6 = "Dim oScriptNet = Server.CreateObject(\"WSCRIPT.NETWORK\")" fullword
-		$s10 = "recResult = adoConn.Execute(strQuery)" fullword
-		$s12 = "b = Request.QueryString(\"src\")" fullword
-		$s13 = "rw(\"<a href='\" + link + \"' target='\" + target + \"'>\" + title + \"</a>\")" fullword
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_EXPL_Citrix_Netscaler_ADC_Forensicartifacts_CVE_2023_3519_Jul23_2 : CVE_2023_3519 FILE {
-    meta:
-		description = "Detects forensic artifacts found after an exploitation of Citrix NetScaler ADC CVE-2023-3519"
-		author = "Florian Roth"
-		id = "471ce547-0133-5836-b9d1-02c932ecfd1e"
-		date = "2023-07-21"
-		modified = "2023-12-05"
-		reference = "https://www.cisa.gov/sites/default/files/2023-07/aa23-201a_csa_threat_actors_exploiting_citrix-cve-2023-3519_to_implant_webshells.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_citrix_netscaler_adc_exploitation_cve_2023_3519.yar#L27-L41"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "48d4225d0935084003f7a98c554d7c4722a91290dfe190001da52bce332b3f7d"
-		score = 70
-		quality = 85
-		tags = "CVE-2023-3519, FILE"
-
-	strings:
-		$s1 = "tar -czvf - /var/tmp/all.txt" ascii fullword
-		$s2 = "-out /var/tmp/test.tar.gz" ascii
-		$s3 = "/test.tar.gz /netscaler/"
-
-	condition:
-		filesize < 10MB and 1 of them
-}
-rule SIGNATURE_BASE_WEBSHELL_SECRETSAUCE_Jul23_1 : CVE_2023_3519 FILE {
-    meta:
-		description = "Detects SECRETSAUCE PHP webshells (found after an exploitation of Citrix NetScaler ADC CVE-2023-3519)"
-		author = "Florian Roth"
-		id = "db0542e7-648e-5f60-9838-e07498f58b51"
-		date = "2023-07-24"
-		modified = "2023-12-05"
-		reference = "https://www.mandiant.com/resources/blog/citrix-zero-day-espionage"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_citrix_netscaler_adc_exploitation_cve_2023_3519.yar#L79-L100"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "c762d46ae43a3e10453c2ee17039812a06086ac85bdb000cf8308f5196a9dee2"
-		score = 85
-		quality = 85
-		tags = "CVE-2023-3519, FILE"
-
-	strings:
-		$sa1 = "for ($x=0; $x<=1; $x++) {" ascii
-		$sa2 = "$_REQUEST[" ascii
-		$sa3 = "@eval" ascii
-		$sb1 = "public $cmd;" ascii
-		$sb2 = "return @eval($a);" ascii
-		$sb3 = "$z->run($z->get('openssl_public_decrypt'));"
-
-	condition:
-		filesize < 100KB and ( all of ( $sa* ) or 2 of ( $sb* ) )
-}
-rule SIGNATURE_BASE_REGEORG_Tuneller_Generic : FILE {
-    meta:
-		description = "No description has been set in the source file - Signature Base"
-		author = "Mandiant"
-		id = "a87979b7-2732-5a32-b3f3-a815a58b6589"
-		date = "2021-12-20"
-		modified = "2023-12-05"
-		reference = "https://www.mandiant.com/resources/unc3524-eye-spy-email"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/webshell_regeorg.yar#L1-L20"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "ba22992ce835dadcd06bff4ab7b162f9"
-		logic_hash = "1657928875c3cd2d5bf774929b0497d78f0211b321f8a4138cc9b8c80b9f99d6"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		date_modified = "2021-12-20"
-
-	strings:
-		$s1 = "System.Net.IPEndPoint"
-		$s2 = "Response.AddHeader"
-		$s3 = "Request.InputStream.Read"
-		$s4 = "Request.Headers.Get"
-		$s5 = "Response.Write"
-		$s6 = "System.Buffer.BlockCopy"
-		$s7 = "Response.BinaryWrite"
-		$s8 = "SocketException soex"
-
-	condition:
-		filesize < 1MB and 7 of them
-}
-rule SIGNATURE_BASE_M_Hunting_Webshell_LIGHTWIRE_2 : FILE {
-    meta:
-		description = "Detects LIGHTWIRE based on the RC4 decoding and execution 1-liner."
-		author = "Mandiant (modified by Florian Roth)"
-		id = "9451da63-c68e-51e8-b4b1-c3082d46fbf6"
-		date = "2024-01-11"
-		modified = "2024-01-12"
-		reference = "https://www.mandiant.com/resources/blog/suspected-apt-targets-ivanti-zero-day"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_report_ivanti_mandiant_jan24.yar#L60-L81"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "3d97f55a03ceb4f71671aa2ecf5b24e9"
-		logic_hash = "37b22a6c45dd53bc7b3f0c75cc5072e990246fea24591d192176c0b496e92084"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$s1 = "eval{my"
-		$s2 = "Crypt::RC4->new(\""
-		$s3 = "->RC4(decode_base64(CGI::param('"
-		$s4 = ";eval $"
-		$s5 = "\"Compatibility check: $@\";}"
-
-	condition:
-		filesize < 10KB and all of them
-}
-rule SIGNATURE_BASE_WEBSHELL_Z_Webshell_2 : FILE {
-    meta:
-		description = "Detection for the z_webshell"
-		author = "DHS NCCIC Hunt and Incident Response Team"
-		id = "9a54925f-de10-567f-a1ea-5e7522b47dfd"
-		date = "2018-01-25"
-		modified = "2023-12-05"
-		old_rule_name = "z_webshell"
-		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_ta18_074A.yar#L9-L24"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "2c9095c965a55efc46e16b86f9b7d6c6"
-		logic_hash = "d41aa107e54af5d45531a46d24b24f9f14635dbcb50ed26f7c787883854f961f"
-		score = 75
-		quality = 81
-		tags = "FILE"
-
-	strings:
-		$webshell_name = "public string z_progname =" nocase ascii wide
-		$webshell_password = "public string Password =" nocase ascii wide
-
-	condition:
-		( uint32( 0 ) == 0x2040253c or uint32( 0 ) == 0x7073613c ) and filesize < 100KB and 2 of ( $webshell_* )
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Aug21_2 : FILE {
-    meta:
-		description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be PST), size and content"
-		author = "Florian Roth (Nextron Systems)"
-		id = "a351a466-695e-570e-8c7f-9c6c0534839c"
-		date = "2021-08-13"
-		modified = "2025-11-03"
-		reference = "https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-servers-are-getting-hacked-via-proxyshell-exploits/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L35-L48"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "4ede197d482f0a9e553ba857b5049e7b7405e3df92460e19418fa0653c844982"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$s1 = "Page Language=" ascii nocase
-
-	condition:
-		uint32( 0 ) == 0x4e444221 and filesize < 2MB and $s1
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Aug21_3 : FILE {
-    meta:
-		description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be DER), size and content"
-		author = "Max Altgelt"
-		id = "a7bca62b-c8f1-5a38-81df-f3d4582a590b"
-		date = "2021-08-23"
-		modified = "2025-11-03"
-		reference = "https://twitter.com/gossithedog/status/1429175908905127938?s=12"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L50-L64"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "f071aaa8918b359f786f2ac7447eeaedb5a6fca9e0a0c0e8820e011244424503"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$s1 = "Page Language=" ascii nocase
-
-	condition:
-		uint16( 0 ) == 0x8230 and filesize < 10KB and $s1
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Sep21_1 : FILE {
-    meta:
-		description = "Detects webshells dropped by ProxyShell exploitation based on their file header (must be PST) and base64 decoded request"
-		author = "Tobias Michalski"
-		id = "d0d23e17-6b6a-51d1-afd9-59cc2404bcd8"
-		date = "2021-09-17"
-		modified = "2025-11-03"
-		reference = "Internal Research"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L66-L80"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "219468c10d2b9d61a8ae70dc8b6d2824ca8fbe4e53bbd925eeca270fef0fd640"
-		logic_hash = "233ec15dff8da5f2beaa931eb06849aa37e548947c1068d688a1695d977605d8"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$s = ".FromBase64String(Request["
-
-	condition:
-		uint32( 0 ) == 0x4e444221 and any of them
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Exploitation_Aug21_1 : FILE {
-    meta:
-		description = "Detects unknown malicious loaders noticed in August 2021"
-		author = "Florian Roth (Nextron Systems)"
-		id = "1fa563fc-c91c-5f4e-98f1-b895e1acb4f4"
-		date = "2021-08-25"
-		modified = "2025-11-03"
-		reference = "https://twitter.com/VirITeXplorer/status/1430206853733097473"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L107-L119"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "8a2417bb85c7f91d98143d2f4c26d30416b3a01ba8abc1445ccfae5609825b4d"
-		score = 90
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$x1 = ");eval/*asf" ascii
-
-	condition:
-		filesize < 600KB and 1 of them
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Proxyshell_Aug15 : FILE {
-    meta:
-		description = "Webshells iisstart.aspx and Logout.aspx"
-		author = "Moritz Oettle"
-		id = "b1e6c0f3-787f-59b8-8123-4045522047ca"
-		date = "2021-09-04"
-		modified = "2025-11-03"
-		reference = "https://github.com/hvs-consulting/ioc_signatures/tree/main/Proxyshell"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L121-L152"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "46c37f1d80c777acafa6ee64d7df18a6b94768f4463d9196027111a84a63a24f"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$g1 = "language=\"JScript\"" ascii
-		$g2 = "function getErrorWord" ascii
-		$g3 = "errorWord" ascii
-		$g4 = "Response.Redirect" ascii
-		$g5 = "function Page_Load" ascii
-		$g6 = "runat=\"server\"" ascii
-		$g7 = "Request[" ascii
-		$g8 = "eval/*" ascii
-		$s1 = "AppcacheVer" ascii
-		$s3 = "LaTkWfI64XeDAXZS6pU1KrsvLAcGH7AZOQXjrFkT816RnFYJQR" ascii
-		$fp1 = "<input type=\"submit\" Value=\"Refresh This Page\""
-
-	condition:
-		filesize < 1KB and ( 1 of ( $s* ) or 4 of ( $g* ) ) and not 1 of ( $fp* )
-}
-rule SIGNATURE_BASE_WEBSHELL_Mailbox_Export_PST_Proxyshell_Aug26 : FILE {
-    meta:
-		description = "Webshells generated by an Mailbox export to PST and stored as aspx: 570221043.aspx 689193944.aspx luifdecggoqmansn.aspx"
-		author = "Moritz Oettle"
-		id = "6aea414f-d27c-5202-84f8-b8620782fc90"
-		date = "2021-09-04"
-		modified = "2025-11-03"
-		reference = "https://github.com/hvs-consulting/ioc_signatures/tree/main/Proxyshell"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L154-L180"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "07acbf74a4bf169fc128cd085759f33e89917e217703b3c6557ba5f954822fd4"
-		score = 85
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$x1 = "!BDN"
-		$g1 = "Page language=" ascii
-		$g2 = "<%@ Page" ascii
-		$g3 = "Request.Item[" ascii
-		$g4 = "\"unsafe\");" ascii
-		$g5 = "<%eval(" ascii
-		$g6 = "script language=" ascii
-		$g7 = "Request[" ascii
-		$s1 = "gold8899" ascii
-		$s2 = "exec_code" ascii
-		$s3 = "orangenb" ascii
-
-	condition:
-		filesize < 500KB and $x1 at 0 and ( 1 of ( $s* ) or 3 of ( $g* ) )
-}
-rule SIGNATURE_BASE_WEBSHELL_Proxyshell_Exploitation_Nov21_1 {
-    meta:
-		description = "Detects webshells dropped by DropHell malware"
-		author = "Florian Roth (Nextron Systems)"
-		id = "300eaadf-db0c-5591-84fc-abdf7cdd90c1"
-		date = "2021-11-01"
-		modified = "2025-11-03"
-		reference = "https://www.deepinstinct.com/blog/do-not-exchange-it-has-a-shell-inside"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_proxyshell.yar#L257-L271"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "d9812d3f53c346c4e318609e0c7de66811b27ffa7528a6ddeb6ac8436da59ef5"
-		score = 85
-		quality = 85
-		tags = ""
-
-	strings:
-		$s01 = ".LoadXml(System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(Request[" ascii wide
-		$s02 = "new System.IO.MemoryStream()" ascii wide
-		$s03 = "Transform(" ascii wide
-
-	condition:
-		all of ( $s* )
-}
-rule SIGNATURE_BASE_APT_Webshell_SUPERNOVA_1 : FILE {
-    meta:
-		description = "SUPERNOVA is a .NET web shell backdoor masquerading as a legitimate SolarWinds web service handler. SUPERNOVA inspects and responds to HTTP requests with the appropriate HTTP query strings, Cookies, and/or HTML form values (e.g. named codes, class, method, and args). This rule is looking for specific strings and attributes related to SUPERNOVA."
-		author = "FireEye"
-		id = "73a27fa2-a846-5f4b-8182-064ac06c71a8"
-		date = "2020-12-14"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_solarwinds_sunburst.yar#L80-L99"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "8471e6b3675e7e9ccfe5b81ab4c599668f2de528f3b179a675f50aa1fd7814b2"
-		score = 85
-		quality = 81
-		tags = "FILE"
-
-	strings:
-		$compile1 = "CompileAssemblyFromSource"
-		$compile2 = "CreateCompiler"
-		$context = "ProcessRequest"
-		$httpmodule = "IHttpHandler" ascii
-		$string1 = "clazz"
-		$string2 = "//NetPerfMon//images//NoLogo.gif" wide
-		$string3 = "SolarWinds" ascii nocase wide
-
-	condition:
-		uint16( 0 ) == 0x5a4d and uint32( uint32( 0x3C ) ) == 0x00004550 and filesize < 10KB and pe.imports ( "mscoree.dll" , "_CorDllMain" ) and $httpmodule and $context and all of ( $compile* ) and all of ( $string* )
-}
-rule SIGNATURE_BASE_APT_Webshell_SUPERNOVA_2 : FILE {
-    meta:
-		description = "This rule is looking for specific strings related to SUPERNOVA. SUPERNOVA is a .NET web shell backdoor masquerading as a legitimate SolarWinds web service handler. SUPERNOVA inspects and responds to HTTP requests with the appropriate HTTP query strings, Cookies, and/or HTML form values (e.g. named codes, class, method, and args)."
-		author = "FireEye"
-		id = "c39bf9ba-fd62-5619-92b6-1633375ef197"
-		date = "2020-12-14"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_solarwinds_sunburst.yar#L100-L118"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "96e344bd2ba3ee07784852db3e9935352762c2fa7b6be88f00cac10a90706ffc"
-		score = 85
-		quality = 83
-		tags = "FILE"
-
-	strings:
-		$dynamic = "DynamicRun"
-		$solar = "Solarwinds" nocase
-		$string1 = "codes"
-		$string2 = "clazz"
-		$string3 = "method"
-		$string4 = "args"
-
-	condition:
-		uint16( 0 ) == 0x5a4d and uint32( uint32( 0x3C ) ) == 0x00004550 and filesize < 10KB and 3 of ( $string* ) and $dynamic and $solar
-}
-rule SIGNATURE_BASE_WEBSHELL_Csharp_Hash_String_Oct22 : FILE {
-    meta:
-		description = "C# webshell using specific hash check for the password."
-		author = "Nils Kuhnert (modified by Florian Roth)"
-		id = "c7d459be-5e61-57b7-b738-051c0cec62d2"
-		date = "2022-10-27"
-		modified = "2023-12-05"
-		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/gen_webshell_csharp.yar#L2-L25"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "29c187ad46d3059dc25d5f0958e0e8789fb2a51b9daaf90ea27f001b1a9a603c"
-		logic_hash = "28a07f3dd17fc469388867fa82a0e21abeee9c4e114af245b684535e4e194891"
-		score = 60
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$gen1 = "void Page_Load" ascii
-		$gen2 = "FromBase64String" ascii
-		$gen3 = "CryptoServiceProvider" ascii
-		$gen4 = "ComputeHash" ascii
-		$hashing1 = "BitConverter.ToString(" ascii
-		$hashing2 = ").Replace(\"-\", \"\") == \"" ascii
-		$filter1 = "BitConverter.ToString((" ascii
-
-	condition:
-		filesize < 10KB and all of ( $gen* ) and all of ( $hashing* ) and not 1 of ( $filter* )
-}
 rule SIGNATURE_BASE_WEBSHELL_Z_Webshell_1 {
     meta:
 		description = "Detects Z Webshell from NCSC report"
@@ -20921,580 +21649,61 @@ rule SIGNATURE_BASE_WEBSHELL_Z_Webshell_1 {
 	condition:
 		3 of them
 }
-rule SIGNATURE_BASE_WEBSHELL_ASPX_DLL_Moveit_Jun23_1 : FILE {
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Sharepoint_Drop_CVE_2025_53770_Jul25 : CVE_2025_53770 FILE {
     meta:
-		description = "Detects compiled ASPX web shells found being used in MOVEit Transfer exploitation"
+		description = "Detects ASPX web shell dropped during the exploitation of SharePoint RCE vulnerability CVE-2025-53770"
 		author = "Florian Roth"
-		id = "47db8602-9a9e-5efc-b8b9-fbc4f3c8d4e9"
-		date = "2023-06-01"
-		modified = "2023-12-05"
-		reference = "https://www.trustedsec.com/blog/critical-vulnerability-in-progress-moveit-transfer-technical-analysis-and-recommendations/?utm_content=251159938&utm_medium=social&utm_source=twitter&hss_channel=tw-403811306"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/vuln_moveit_0day_jun23.yar#L2-L22"
+		id = "136ab1a3-647b-5196-9e08-12c3b913bd55"
+		date = "2025-07-20"
+		modified = "2025-07-25"
+		reference = "https://research.eye.security/sharepoint-under-siege/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_sharepoint_jul25.yar#L1-L20"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "47c2ec1e833852941434586b61d6f435b9acb32b2ff48e0a9e8006e0f9ff8056"
-		score = 85
-		quality = 85
-		tags = "FILE"
-		hash1 = "6cbf38f5f27e6a3eaf32e2ac73ed02898cbb5961566bb445e3c511906e2da1fa"
-
-	strings:
-		$x1 = "human2_aspx" ascii fullword
-		$x2 = "X-siLock-Comment" wide
-		$x3 = "x-siLock-Step1" wide
-		$a1 = "MOVEit.DMZ.Core.Data" ascii fullword
-
-	condition:
-		uint16( 0 ) == 0x5a4d and filesize < 40KB and ( 1 of ( $x* ) and $a1 ) or all of them
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Moveit_Jun23_1 : FILE {
-    meta:
-		description = "Detects ASPX web shells as being used in MOVEit Transfer exploitation"
-		author = "Florian Roth"
-		id = "2c789b9c-5ec5-5fd1-84e3-6bf7735a9488"
-		date = "2023-06-01"
-		modified = "2023-12-05"
-		reference = "https://www.rapid7.com/blog/post/2023/06/01/rapid7-observed-exploitation-of-critical-moveit-transfer-vulnerability/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/vuln_moveit_0day_jun23.yar#L24-L41"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "436f9a503ad938541faa8f34604310ba6d932e40a41dc189ccd293b7191a7621"
-		score = 85
-		quality = 85
-		tags = "FILE"
-		hash1 = "2413b5d0750c23b07999ec33a5b4930be224b661aaf290a0118db803f31acbc5"
-		hash2 = "48367d94ccb4411f15d7ef9c455c92125f3ad812f2363c4d2e949ce1b615429a"
-		hash3 = "e8012a15b6f6b404a33f293205b602ece486d01337b8b3ec331cd99ccadb562e"
-
-	strings:
-		$s1 = "X-siLock-Comment" ascii fullword
-		$s2 = "]; string x = null;" ascii
-		$s3 = ";  if (!String.Equals(pass, " ascii
-
-	condition:
-		filesize < 150KB and 2 of them
-}
-rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Console_Jsp {
-    meta:
-		description = "Strings from the console.jsp webshell"
-		author = "Fox-IT SRT"
-		id = "1afdfc34-d2e3-58c7-80ea-ee5632e42469"
-		date = "2019-12-20"
-		modified = "2023-12-05"
-		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L318-L335"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "e70c15ef10b63a011edbcedc773a8e2917fd915c3ecc273c3bf2b78eb10fc570"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$a = "String strLogo = request.getParameter(\"image\")"
-		$b = "!strLogo.equals(\"web.gif\")"
-		$c = "<font color=red>Save Failed!</font>"
-		$d = "<font color=red>Save Success!</font>"
-		$e = "Save path:<br><input type=text"
-		$f = "if (newfile.exists() && newfile.length()>0) { out.println"
-
-	condition:
-		1 of them
-}
-rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Index_Jsp {
-    meta:
-		description = "Strings from the index.jsp socket tunnel"
-		author = "Fox-IT SRT"
-		id = "9c226ccd-6c69-523c-bca4-371e55274667"
-		date = "2019-12-20"
-		modified = "2023-12-05"
-		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L337-L353"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "870dad9fb5456f8edbd9f3c2d0b8764cf1143399626ce4df53c93919bcb1a0cb"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$x1 = "X-CMD"
-		$x2 = "X-STATUS"
-		$x3 = "X-TARGET"
-		$x4 = "X-ERROR"
-		$a = "out.print(\"All seems fine.\");"
-
-	condition:
-		all of ( $x* ) and $a
-}
-rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Ver_Jsp {
-    meta:
-		description = "Strings from the ver.jsp webshell"
-		author = "Fox-IT SRT"
-		id = "b2828b84-8934-5111-9345-683a07025070"
-		date = "2019-12-20"
-		modified = "2023-12-05"
-		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L355-L372"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "ada6de4b07a76e79bb17793cda2b51f96554a35992a73f59c360487638ae3be3"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$a = "String strLogo = request.getParameter(\"id\")"
-		$b = "!strLogo.equals(\"256\")"
-		$c = "boolean chkos = msg.startsWith"
-		$d = "while((c = er.read()) != -1)"
-		$e = "out.print((char)c);}in.close()"
-		$f = "out.print((char)c);}er.close()"
-
-	condition:
-		1 of them
-}
-rule SIGNATURE_BASE_APT_MAL_CN_Wocao_Webshell_Webinfo {
-    meta:
-		description = "Generic strings from webinfo.war webshells"
-		author = "Fox-IT SRT"
-		id = "b8477f62-f3f6-5526-b0e3-9b794fefaa1f"
-		date = "2019-12-20"
-		modified = "2023-12-05"
-		reference = "https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_op_wocao.yar#L374-L394"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "711737a56067f24f422cc7d5aeba4389741fe18a0e66f2715fce626c3b6aef19"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$var1 = "String strLogo = request.getParameter"
-		$var2 = "String content = request.getParameter(\"content\");"
-		$var3 = "String basePath=request.getScheme()"
-		$var4 = "!strLogo.equals("
-		$var5 = "if(path!=null && !path.equals(\"\") && content!=null"
-		$var6 = "File newfile=new File(path);"
-		$str1 = "Save Success!"
-		$str2 = "Save Failed!"
-
-	condition:
-		2 of ( $var* ) or ( all of ( $str* ) and 1 of ( $var* ) )
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Xsltransform_Aug21 : FILE {
-    meta:
-		description = "Detects an ASPX webshell utilizing XSL Transformations"
-		author = "Max Altgelt"
-		id = "44254084-a717-59e6-a3ac-eca3c1c864a8"
-		date = "2020-02-23"
-		modified = "2023-12-05"
-		reference = "https://gist.github.com/JohnHammond/cdae03ca5bc2a14a735ad0334dcb93d6"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/webshell_xsl_transform.yar#L1-L19"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "3ac0b50adc4c56769d0248e213e9426a22e0f5086bf081da57f835ff1c77b716"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$csharpshell = "Language=\"C#\"" nocase
-		$x1 = "<root>1</root>"
-		$x2 = ".LoadXml(System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String("
-		$s1 = "XsltSettings.TrustedXslt"
-		$s2 = "Xml.XmlUrlResolver"
-		$s3 = "FromBase64String(Request[\""
-
-	condition:
-		filesize < 500KB and $csharpshell and ( 1 of ( $x* ) or all of ( $s* ) )
-}
-rule SIGNATURE_BASE_WEBSHELL_JAVA_Versamem_JAR_Aug24_1 : FILE {
-    meta:
-		description = "Detects VersaMem Java webshell samples (as used by Volt Typhoon)"
-		author = "blacklotuslabs (modified by Florian Roth and X__Junior)"
-		id = "9b666e61-cfa8-58b3-a362-772cd907c57c"
-		date = "2024-08-27"
-		modified = "2024-08-29"
-		reference = "https://x.com/ryanaraine/status/1828440883315999117"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_volttyphoon_versamem.yar#L2-L24"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "d21558eb6c8e700b8a4cb86fdaa5487179828152af68828e878397859d6d3952"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$sa1 = "com.versa.vnms.ui.TestMain"
-		$sa2 = "captureLoginPasswordCode"
-		$sa3 = "com/versa/vnms/ui/services/impl/VersaAuthenticationServiceImpl"
-		$sa4 = "/tmp/.temp.data"
-		$sa5 = "getInsertCode"
-		$sa6 = "VersaMem"
-		$sa7 = "Versa-Auth"
-		$sb1 = "/tmp/.java_pid"
-		$sb2 = {2f 75 73 72 2f 62 69 6e 2f 70 67 72 65 70 01 00 02 2d 66 01 00 25 6f 72 67 2e 61 70 61 63 68 65 2e 63 61 74 61 6c 69 6e 61 2e 73 74 61 72 74 75 70 2e 42 6f 6f 74 73 74 72 61 70 07}
-
-	condition:
-		filesize < 5MB and ( 3 of them or all of ( $sb* ) )
-}
-rule SIGNATURE_BASE_WEBSHELL_JAVA_Versamem_JAR_Aug24_2 : FILE {
-    meta:
-		description = "Detects VersaMem Java webshell samples (as used by Volt Typhoon)"
-		author = "Florian Roth"
-		id = "5ca598ed-5d0a-563d-a5e8-f8229af2c949"
-		date = "2024-08-29"
-		modified = "2024-12-12"
-		reference = "https://x.com/craiu/status/1828687700884336990"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_volttyphoon_versamem.yar#L27-L43"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "0bdf3bf5130c51c1355f179704933ca473a702595c580642035c8d3b9aad5725"
-		score = 75
-		quality = 60
-		tags = "FILE"
-		hash1 = "4bcedac20a75e8f8833f4725adfc87577c32990c3783bf6c743f14599a176c37"
-
-	strings:
-		$x1 = "tomcat_memShell" ascii
-		$x2 = "versa/vnms/ui/config/" ascii fullword
-
-	condition:
-		uint16( 0 ) == 0x4b50 and filesize < 3000KB and 1 of them
-}
-rule SIGNATURE_BASE_WEBSHELL_G_APT_Backdoorwebshell_SLAYSTYLE_1 : FILE {
-    meta:
-		description = "Detects webshell used by APT group UNC5221 (China Nexus)"
-		author = "Google Threat Intelligence Group (GTIG) (modified by Florian Roth)"
-		id = "a5107e4e-3618-5d08-b187-342d5cb1b12f"
-		date = "2025-09-25"
-		modified = "2025-10-07"
-		reference = "https://cloud.google.com/blog/topics/threat-intelligence/brickstorm-espionage-campaign"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_cn_brickstorm_sep25.yar#L94-L112"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "7a56238218e60a69049f5d9c756df4fb6f0de772fbc437a14c5db7192f971be6"
-		score = 75
-		quality = 83
-		tags = "FILE"
-
-	strings:
-		$str1_alt = "=request.getParameter(\""
-		$str2 = "=new String(java.util.Base64.getDecoder().decode(" ascii wide nocase
-		$str21_alt = "={\"/bin/sh\",\"-c\"," ascii
-		$str3 = "= Runtime.getRuntime().exec(" ascii
-		$str4 = "java.io.InputStream" ascii
-		$str5 = "java.util.Base64.getEncoder().encodeToString(org.apache.commons.io.IOUtils.toByteArray(" ascii
-
-	condition:
-		filesize < 5MB and all of them
-}
-rule SIGNATURE_BASE_WEBSHELL_G_APT_Backdoorwebshell_SLAYSTYLE_2 : FILE {
-    meta:
-		description = "Detects webshell used by APT group UNC5221 (China Nexus)"
-		author = "Google Threat Intelligence Group (GTIG) (modified by Florian Roth)"
-		id = "a7c3e453-c071-5863-887a-6eca6d74d2fe"
-		date = "2025-09-25"
-		modified = "2025-10-07"
-		reference = "https://cloud.google.com/blog/topics/threat-intelligence/brickstorm-espionage-campaign"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_cn_brickstorm_sep25.yar#L114-L129"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "d2d1003f77a2066b48df1c27feab79c0a1951ebb62c3198de8366bcfee42e30a"
-		score = 75
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$str1 = "request.getParameter"
-		$str2 = "/bin/sh"
-		$str3 = "java.io.InputStream"
-		$str4 = "Runtime.getRuntime().exec("
-		$str5 = "2>&1"
-
-	condition:
-		( uint16( 0 ) != 0x5A4D and uint32( 0 ) != 0x464C457F ) and filesize < 7KB and all of them and @str4 > @str2
-}
-rule SIGNATURE_BASE_WEBSHELL_ASP_Embedded_Mar21_1 : FILE {
-    meta:
-		description = "Detects ASP webshells"
-		author = "Florian Roth (Nextron Systems)"
-		id = "7cf7db9d-8f8a-51db-a0e6-84748e8f9e1f"
-		date = "2021-03-05"
-		modified = "2023-12-05"
-		reference = "Internal Research"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L2-L16"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "4a8b4cea6f53dad9771cb694ec55f305f04dfdbd8e663154cad672ca414c138c"
-		score = 85
-		quality = 85
-		tags = "FILE"
-
-	strings:
-		$s1 = "<script runat=\"server\">" nocase
-		$s2 = "new System.IO.StreamWriter(Request.Form["
-		$s3 = ".Write(Request.Form["
-
-	condition:
-		filesize < 100KB and all of them
-}
-rule SIGNATURE_BASE_APT_WEBSHELL_HAFNIUM_Secchecker_Mar21_1 : FILE {
-    meta:
-		description = "Detects HAFNIUM SecChecker webshell"
-		author = "Florian Roth (Nextron Systems)"
-		id = "73db3d78-7ece-53be-9efb-d19801993d5e"
-		date = "2021-03-05"
-		modified = "2023-12-05"
-		reference = "https://twitter.com/markus_neis/status/1367794681237667840"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L18-L33"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "e0e4df860bdde7d5c277f596535c493d926095be6f46f6ba41b6177afbfc5cd9"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		hash1 = "b75f163ca9b9240bf4b37ad92bc7556b40a17e27c2b8ed5c8991385fe07d17d0"
-
-	strings:
-		$x1 = "<%if(System.IO.File.Exists(\"c:\\\\program files (x86)\\\\fireeye\\\\xagt.exe" ascii
-		$x2 = "\\csfalconservice.exe\")){Response.Write( \"3\");}%></head>" ascii fullword
-
-	condition:
-		uint16( 0 ) == 0x253c and filesize < 1KB and 1 of them or 2 of them
-}
-rule SIGNATURE_BASE_APT_WEBSHELL_HAFNIUM_Chopper_Webshell : APT HAFNIUM WEBSHELL FILE {
-    meta:
-		description = "Detects Chopper WebShell Injection Variant (not only Hafnium related)"
-		author = "Markus Neis,Swisscom"
-		id = "25dcf166-4aea-5680-b161-c5fc8d74b987"
-		date = "2021-03-05"
-		modified = "2023-12-05"
-		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L50-L65"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "c185a8da2a18fa59a8eeb36dbd95ba12c9c61717efc5f2d19d2d5b27ee243f2b"
-		score = 75
-		quality = 85
-		tags = "APT, HAFNIUM, WEBSHELL, FILE"
-
-	strings:
-		$x1 = "runat=\"server\">" nocase
-		$s1 = "<script language=\"JScript\" runat=\"server\">function Page_Load(){eval(Request" nocase
-		$s2 = "protected void Page_Load(object sender, EventArgs e){System.IO.StreamWriter sw = new System.IO.StreamWriter(Request.Form[\"p\"] , false, Encoding.Default);sw.Write(Request.Form[\"f\"]);"
-		$s3 = "<script language=\"JScript\" runat=\"server\"> function Page_Load(){eval (Request[\"" nocase
-
-	condition:
-		filesize < 10KB and $x1 and 1 of ( $s* )
-}
-rule SIGNATURE_BASE_APT_WEBSHELL_Tiny_Webshell : APT HAFNIUM WEBSHELL FILE {
-    meta:
-		description = "Detects WebShell Injection"
-		author = "Markus Neis,Swisscom"
-		id = "aa2fcecc-4c8b-570d-a81a-5dfb16c04e05"
-		date = "2021-03-05"
-		modified = "2023-12-05"
-		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L67-L82"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "099c8625c58b315b6c11f5baeb859f4c"
-		logic_hash = "9309f9b57353b6fe292048d00794699a8637a3e6e429c562fb36c7e459003a3b"
-		score = 75
-		quality = 85
-		tags = "APT, HAFNIUM, WEBSHELL, FILE"
-
-	strings:
-		$x1 = "<%@ Page Language=\"Jscript\" Debug=true%>"
-		$s1 = "=Request.Form(\""
-		$s2 = "eval("
-
-	condition:
-		filesize < 300 and all of ( $s* ) and $x1
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Simpleseesharp : WEBSHELL UNCLASSIFIED FILE {
-    meta:
-		description = "A simple ASPX Webshell that allows an attacker to write further files to disk."
-		author = "threatintel@volexity.com"
-		id = "469fdf5c-e09e-5d44-a2e6-0864dcd0e18a"
-		date = "2021-03-01"
-		modified = "2023-12-05"
-		reference = "https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L121-L136"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "893cd3583b49cb706b3e55ecb2ed0757b977a21f5c72e041392d1256f31166e2"
-		logic_hash = "6f62249a68bae94e5cbdb4319ea5cde9dc071ec7a4760df3aafe78bc1e072c30"
-		score = 75
-		quality = 85
-		tags = "WEBSHELL, UNCLASSIFIED, FILE"
-
-	strings:
-		$header = "<%@ Page Language=\"C#\" %>"
-		$body = "<% HttpPostedFile thisFile = Request.Files[0];thisFile.SaveAs(Path.Combine"
-
-	condition:
-		$header at 0 and $body and filesize < 1KB
-}
-rule SIGNATURE_BASE_WEBSHELL_CVE_2021_27065_Webshells : CVE_2021_27065 FILE {
-    meta:
-		description = "Detects web shells dropped by CVE-2021-27065. All actors, not specific to HAFNIUM. TLP:WHITE"
-		author = "Joe Hannon, Microsoft Threat Intelligence Center (MSTIC)"
-		id = "27677f35-24a3-59cc-a3ad-b83884128da7"
-		date = "2021-03-05"
-		modified = "2023-12-05"
-		reference = "https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L182-L200"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "71795ba67bc8a4cea06b93da34b6291029ff74b200e37eb66f6ac51a6ff194cd"
-		score = 75
-		quality = 61
-		tags = "CVE-2021-27065, FILE"
-
-	strings:
-		$script1 = "script language" ascii wide nocase
-		$script2 = "page language" ascii wide nocase
-		$script3 = "runat=\"server\"" ascii wide nocase
-		$script4 = "/script" ascii wide nocase
-		$externalurl = "externalurl" ascii wide nocase
-		$internalurl = "internalurl" ascii wide nocase
-		$internalauthenticationmethods = "internalauthenticationmethods" ascii wide nocase
-		$extendedprotectiontokenchecking = "extendedprotectiontokenchecking" ascii wide nocase
-
-	condition:
-		filesize < 50KB and any of ( $script* ) and ( $externalurl or $internalurl ) and $internalauthenticationmethods and $extendedprotectiontokenchecking
-}
-rule SIGNATURE_BASE_WEBSHELL_Compiled_Webshell_Mar2021_1 : FILE {
-    meta:
-		description = "Triggers on temporary pe files containing strings commonly used in webshells."
-		author = "Bundesamt fuer Sicherheit in der Informationstechnik"
-		id = "9336bd2c-791c-5c3e-9733-724a6a23864a"
-		date = "2021-03-05"
-		modified = "2021-03-12"
-		reference = "https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Cyber-Sicherheit/Vorfaelle/Exchange-Schwachstellen-2021/MSExchange_Schwachstelle_Detektion_Reaktion.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L275-L295"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "d2e5f91f7bb50984c491eb9632d3863febc986760e4d03c8255872887ce4dc4a"
-		score = 75
-		quality = 81
-		tags = "FILE"
-
-	strings:
-		$x1 = /App_Web_[a-zA-Z0-9]{7,8}.dll/ ascii wide fullword
-		$a1 = "~/aspnet_client/" ascii wide nocase
-		$a2 = "~/auth/" ascii wide nocase
-		$b1 = "JScriptEvaluate" ascii wide fullword
-		$c1 = "get_Request" ascii wide fullword
-		$c2 = "get_Files" ascii wide fullword
-		$c3 = "get_Count" ascii wide fullword
-		$c4 = "get_Item" ascii wide fullword
-		$c5 = "get_Server" ascii wide fullword
-
-	condition:
-		uint16( 0 ) == 0x5a4d and filesize > 5KB and filesize < 40KB and all of ( $x* ) and 1 of ( $a* ) and ( all of ( $b* ) or all of ( $c* ) )
-}
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Fileexplorer_Mar21_1 : FILE {
-    meta:
-		description = "Detects Chopper like ASPX Webshells"
-		author = "Florian Roth (Nextron Systems)"
-		id = "edcaa2a8-6fea-584e-90c2-307a2dfc9f7f"
-		date = "2021-03-31"
-		modified = "2023-12-05"
-		reference = "Internal Research"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L363-L397"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "7b4ffd222b38e76455fff2650b72bdcaff281323103f342b427013cd3fffdc21"
+		hash = "27c45b8ed7b8a7e5fff473b50c24028bd028a9fe8e25e5cea2bf5e676e531014"
+		hash = "92bb4ddb98eeaf11fc15bb32e71d0a63256a0ed826a03ba293ce3a8bf057a514"
+		hash = "b336f936be13b3d01a8544ea3906193608022b40c28dd8f1f281e361c9b64e93"
+		logic_hash = "3c7bb848fc73418d5a3ecae6e9f637a7d07bf45a75b1bd0a278fdbfae428d619"
 		score = 80
 		quality = 85
-		tags = "FILE"
-		hash1 = "a8c63c418609c1c291b3e731ca85ded4b3e0fba83f3489c21a3199173b176a75"
+		tags = "CVE-2025-53770, FILE"
 
 	strings:
-		$x1 = "<span style=\"background-color: #778899; color: #fff; padding: 5px; cursor: pointer\" onclick=" ascii
-		$xc1 = { 3C 61 73 70 3A 48 69 64 64 65 6E 46 69 65 6C 64
-               20 72 75 6E 61 74 3D 22 73 65 72 76 65 72 22 20
-               49 44 3D 22 ?? ?? ?? ?? ?? 22 20 2F 3E 3C 62 72
-               20 2F 3E 3C 62 72 20 2F 3E 20 50 72 6F 63 65 73
-               73 20 4E 61 6D 65 3A 3C 61 73 70 3A 54 65 78 74
-               42 6F 78 20 49 44 3D }
-		$xc2 = { 22 3E 43 6F 6D 6D 61 6E 64 3C 2F 6C 61 62 65 6C
-               3E 3C 69 6E 70 75 74 20 69 64 3D 22 ?? ?? ?? ??
-               ?? 22 20 74 79 70 65 3D 22 72 61 64 69 6F 22 20
-               6E 61 6D 65 3D 22 74 61 62 73 22 3E 3C 6C 61 62
-               65 6C 20 66 6F 72 3D 22 ?? ?? ?? ?? ?? 22 3E 46
-               69 6C 65 20 45 78 70 6C 6F 72 65 72 3C 2F 6C 61
-               62 65 6C 3E 3C 25 2D 2D }
-		$r1 = "(Request.Form[" ascii
-		$s1 = ".Text + \" Created!\";" ascii
-		$s2 = "DriveInfo.GetDrives()" ascii
-		$s3 = "Encoding.UTF8.GetString(FromBase64String(str.Replace(" ascii
-		$s4 = "encodeURIComponent(btoa(String.fromCharCode.apply(null, new Uint8Array(bytes))));;"
+		$x1 = "var sy = System.Reflection.Assembly.Load(" ascii
+		$x2 = "Response.Write(cg.ValidationKey+" ascii
+		$s1 = "<script runat=\"server\" language=\"c#\" CODEPAGE=\"65001\">" ascii fullword
 
 	condition:
-		uint16( 0 ) == 0x253c and filesize < 100KB and ( 1 of ( $x* ) or 2 of them ) or 4 of them
+		filesize < 4KB and 1 of ( $x* ) or all of them
 }
-rule SIGNATURE_BASE_WEBSHELL_ASPX_Chopper_Like_Mar21_1 : FILE {
+rule SIGNATURE_BASE_WEBSHELL_ASPX_Compiled_Sharepoint_Drop_CVE_2025_53770_Jul25_2 : CVE_2025_53770 FILE {
     meta:
-		description = "Detects Chopper like ASPX Webshells"
-		author = "Florian Roth (Nextron Systems)"
-		id = "a4dc1880-865f-5e20-89a2-3a642c453ef9"
-		date = "2021-03-31"
-		modified = "2023-12-05"
-		reference = "Internal Research"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_hafnium.yar#L399-L416"
+		description = "Detects compiled ASPX web shell dropped during the exploitation of SharePoint RCE vulnerability CVE-2025-53770"
+		author = "Florian Roth, Marius Benthin"
+		id = "2feef057-7100-59d5-83f1-cee3bd5bd791"
+		date = "2025-07-20"
+		modified = "2025-07-25"
+		reference = "https://research.eye.security/sharepoint-under-siege/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/expl_sharepoint_jul25.yar#L22-L51"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "baa9eb1e3c4ac5ce49d27b1c3f75c8b6590567e25d98761a8b704478f2cee970"
-		score = 85
-		quality = 85
-		tags = "FILE"
-		hash1 = "ac44513e5ef93d8cbc17219350682c2246af6d5eb85c1b4302141d94c3b06c90"
-
-	strings:
-		$s1 = "http://f/<script language=\"JScript\" runat=\"server\">var _0x" ascii
-		$s2 = "));function Page_Load(){var _0x" ascii
-		$s3 = ";eval(Request[_0x" ascii
-		$s4 = "','orange','unsafe','" ascii
-
-	condition:
-		filesize < 3KB and 1 of them or 2 of them
-}
-rule SIGNATURE_BASE_Webshell_PHP_Web_Kit_V3 : FILE {
-    meta:
-		description = "Detects PAS Tool PHP Web Kit"
-		author = "Florian Roth (Nextron Systems)"
-		id = "dc5fa2c9-3e1e-594d-be4f-141e1f4915f1"
-		date = "2016-01-01"
-		modified = "2023-12-05"
-		reference = "https://github.com/wordfence/grizzly"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_apt29_grizzly_steppe.yar#L76-L95"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "21bf0afcd3f8de813ddfe41ef32e45806e9f9d7d3b08ae7ce65017c35e32a868"
+		hash = "8d3d3f3a17d233bc8562765e61f7314ca7a08130ac0fb153ffd091612920b0f2"
+		hash = "d8ca5e5d6400ac34ac4cc138efa89d2ec4d5c0e968a78fa3ba5dbc04c7550649"
+		hash = "7e9b77da1f51d03ee2f96bc976f6aeb781f801cf633862a4b8c356cbb555927d"
+		logic_hash = "df11e5bd293cf094f3a147b54ecaafbe0804d7d575fcc22f38e77ab155c7ebdc"
 		score = 75
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+		quality = 83
+		tags = "CVE-2025-53770, FILE"
 
 	strings:
-		$php = "<?php $"
-		$php2 = "@assert(base64_decode($_REQUEST["
-		$s1 = "(str_replace(\"\\n\", '', '"
-		$s2 = "(strrev($" ascii
-		$s3 = "de'.'code';" ascii
+		$x1 = /App_Web_spinstall\d{0,1}.aspx/ wide
+		$x2 = /spinstall[\w]?[\._]aspx/ ascii
+		$x3 = /\/_layouts\/1[0-9]\/spinstall/ wide
+		$x4 = /\/_layouts\/1[0-9]\/ghostfile/ wide
+		$s1 = "System.Web.Configuration.MachineKeySection" wide
+		$s2 = "Page_load" ascii fullword
+		$s3 = "GetApplicationConfig" wide fullword
 
 	condition:
-		(( uint32( 0 ) == 0x68703f3c and $php at 0 ) or $php2 ) and filesize > 8KB and filesize < 100KB and all of ( $s* )
-}
-rule SIGNATURE_BASE_Webshell_PHP_Web_Kit_V4 : FILE {
-    meta:
-		description = "Detects PAS Tool PHP Web Kit"
-		author = "Florian Roth (Nextron Systems)"
-		id = "a5f915cd-b9c5-5cd3-b0a2-c15f6124737a"
-		date = "2016-01-01"
-		modified = "2023-12-05"
-		reference = "https://github.com/wordfence/grizzly"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_apt29_grizzly_steppe.yar#L97-L116"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "e2eaa0abd14f4dd08815c44797df707a08df1ea4e04ae69ba67d128a0fe4eff5"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$php = "<?php $"
-		$s1 = "(StR_ReplAcE(\"\\n\",'',"
-		$s2 = ";if(PHP_VERSION<'5'){" ascii
-		$s3 = "=SuBstr_rePlACe(" ascii
-
-	condition:
-		uint32( 0 ) == 0x68703f3c and $php at 0 and filesize > 8KB and filesize < 100KB and 2 of ( $s* )
+		uint16( 0 ) == 0x5a4d and filesize < 20KB and ( 1 of ( $x* ) or all of ( $s* ) ) or 2 of ( $x* ) or 4 of them
 }
 rule SIGNATURE_BASE_WEBSHELL_PHP_Generic : FILE {
     meta:
@@ -21961,7 +22170,6 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Base64_Encoded_Payloads : FILE {
 		hash = "e2b1dfcfaa61e92526a3a444be6c65330a8db4e692543a421e19711760f6ffe2"
 		logic_hash = "8f606dc3e1e688cca144fe769af50980b4c25fa69b08c67aca8c676a6a060010"
 		score = 75
-		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22151,7 +22359,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Double_Eval_Tiny : FILE {
 		hash = "006620d2a701de73d995fc950691665c0692af11"
 		logic_hash = "ca7c0a7c8e58dbc15dffb4e388408f904fe56b51481ae976e2aa9fe7d32bd58d"
 		score = 70
-		quality = 42
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22415,7 +22623,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Str_Replace : FILE {
 		hash = "e1a2af3477d62a58f9e6431f5a4a123fb897ea80"
 		logic_hash = "74fb86a7ee7342ede9f49ef004a92fb7bdf06ca62f8e8f0ea1c6adcff96bcb2d"
 		score = 75
-		quality = 46
+		quality = 21
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -22801,7 +23009,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Tiny : FILE {
 		hash = "b3b0274cda28292813096a5a7a3f5f77378b8905205bda7bb7e1a679a7845004"
 		logic_hash = "e1efb6384009def30d845650fd0dd77319c3c7b4402cca074ca5c2a06372ab58"
 		score = 75
-		quality = 42
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25265,7 +25473,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Encoded_Shell : FILE {
 		hash = "62e6c6065b5ca45819c1fc049518c81d7d165744"
 		logic_hash = "74f45478e5bd7bb300e4ec493c2d3ef9a26340a141c3512a722618b3a3731500"
 		score = 75
-		quality = 58
+		quality = 83
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -25713,213 +25921,4 @@ rule SIGNATURE_BASE_WEBSHELL_Cookie_Post_Obfuscation : FILE {
 
 	condition:
 		( uint16( 0 ) == 0x3f3c and filesize < 100KB and ( all of them ) )
-}
-rule SIGNATURE_BASE_APT_WEBSHELL_PHP_Sandworm_May20_1 : FILE {
-    meta:
-		description = "Detects GIF header PHP webshell used by Sandworm on compromised machines"
-		author = "Florian Roth (Nextron Systems)"
-		id = "b9ec02c2-fa83-5f21-95cf-3528047b2d01"
-		date = "2020-05-28"
-		modified = "2023-12-05"
-		reference = "https://media.defense.gov/2020/May/28/2002306626/-1/-1/0/CSA%20Sandworm%20Actors%20Exploiting%20Vulnerability%20in%20Exim%20Transfer%20Agent%2020200528.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_sandworm_exim_expl.yar#L86-L101"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		logic_hash = "0d10f618c7b465c7691d6054e994a76f56c12eb0a36d2d98b5accd2c1e2c1da7"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		hash1 = "dc074464e50502459038ac127b50b8c68ed52817a61c2f97f0add33447c8f730"
-		hash2 = "538d713cb47a6b5ec6a3416404e0fc1ebcbc219a127315529f519f936420c80e"
-
-	strings:
-		$h1 = "GIF89a <?php $" ascii
-		$s1 = "str_replace(" ascii
-
-	condition:
-		filesize < 10KB and $h1 at 0 and $s1
-}
-rule SIGNATURE_BASE_FE_Webshell_PL_ATRIUM_1 {
-    meta:
-		description = "Detects samples mentioned in PulseSecure report"
-		author = "Mandiant"
-		id = "b2663343-0bae-5215-a443-866ab8626bff"
-		date = "2021-04-16"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L12-L27"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "ca0175d86049fa7c796ea06b413857a3"
-		logic_hash = "869b397616495c644beb997602eac84ddcdbacce4c14755c555f5bda36663ca2"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$s1 = "CGI::param("
-		$s2 = "system("
-		$s3 = /if[\x09\x20]{0,32}\(CGI::param\([\x22\x27]\w{1,64}[\x22\x27]\)\)\s{0,128}\{[\x09\x20]{0,32}print [\x22\x27]Cache-Control: no-cache\\n[\x22\x27][\x09\x20]{0,32};\s{0,128}print [\x22\x27]Content-type: text\/html\\n\\n[\x22\x27][\x09\x20]{0,32};\s{0,128}my \$\w{1,64}[\x09\x20]{0,32}=[\x09\x20]{0,32}CGI::param\([\x22\x27]\w{1,64}[\x22\x27]\)[\x09\x20]{0,32};\s{0,128}system\([\x22\x27]\$/
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_FE_APT_Webshell_PL_HARDPULSE {
-    meta:
-		description = "Detects samples mentioned in PulseSecure report"
-		author = "Mandiant"
-		id = "f9a2922e-6b8e-5f92-a947-3215ee8883ac"
-		date = "2021-04-16"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L46-L65"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "980cba9e82faf194edb6f3cc20dc73ff"
-		logic_hash = "37fc40fd998d3294edb05707170bc2deec524fc6451bff212901f9ac3e34bb35"
-		score = 75
-		quality = 83
-		tags = ""
-
-	strings:
-		$r1 = /if[\x09\x20]{0,32}\(\$\w{1,64}[\x09\x20]{1,32}eq[\x09\x20]{1,32}[\x22\x27]\w{1,64}[\x22\x27]\)\s{0,128}\{\s{1,128}my[\x09\x20]{1,32}\$\w{1,64}[\x09\x20]{0,32}\x3b\s{1,128}unless[\x09\x20]{0,32}\(open\(\$\w{1,64},[\x09\x20]{0,32}\$\w{1,64}\)\)\s{0,128}\{\s{1,128}goto[\x09\x20]{1,32}\w{1,64}[\x09\x20]{0,32}\x3b\s{1,128}return[\x09\x20]{1,32}0[\x09\x20]{0,32}\x3b\s{0,128}\}/
-		$r2 = /open[\x09\x20]{0,32}\(\*\w{1,64}[\x09\x20]{0,32},[\x09\x20]{0,32}[\x22\x27]>/
-		$r3 = /if[\x09\x20]{0,32}\(\$\w{1,64}[\x09\x20]{1,32}eq[\x09\x20]{1,32}[\x22\x27]\w{1,64}[\x22\x27]\)\s{0,128}\{\s{1,128}print[\x09\x20]{0,32}[\x22\x27]Content-type/
-		$s1 = "CGI::request_method()"
-		$s2 = "CGI::param("
-		$s3 = "syswrite("
-		$s4 = "print $_"
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_FE_APT_Webshell_PL_PULSECHECK_1 {
-    meta:
-		description = "Detects samples mentioned in PulseSecure report"
-		author = "Mandiant"
-		id = "f375fdd8-567b-569b-85f4-af54a35d2a93"
-		date = "2021-04-16"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L116-L136"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "a1dcdf62aafc36dd8cf64774dea80d79fb4e24ba2a82adf4d944d9186acd1cc1"
-		logic_hash = "aba457dd33232ef37ca145c5b7cd9c5fe809730339a55c5e90ac46b4a136f6cb"
-		score = 75
-		quality = 60
-		tags = ""
-
-	strings:
-		$r1 = /while[\x09\x20]{0,32}\(<\w{1,64}>\)[\x09\x20]{0,32}\{\s{1,256}\$\w{1,64}[\x09\x20]{0,32}\.=[\x09\x20]{0,32}\$_;\s{0,256}\}/
-		$s1 = "use Crypt::RC4;"
-		$s2 = "use MIME::Base64"
-		$s3 = "MIME::Base64::decode("
-		$s4 = "popen("
-		$s5 = " .= $_;"
-		$s6 = "print MIME::Base64::encode(RC4("
-		$s7 = "HTTP_X_"
-
-	condition:
-		$s1 and $s2 and ( @s3 [ 1 ] < @s4 [ 1 ] ) and ( @s4 [ 1 ] < @s5 [ 1 ] ) and ( @s5 [ 1 ] < @s6 [ 1 ] ) and ( #s7 > 2 ) and $r1
-}
-rule SIGNATURE_BASE_FE_APT_Webshell_PL_STEADYPULSE_1 {
-    meta:
-		description = "Detects samples mentioned in PulseSecure report"
-		author = "Mandiant"
-		id = "49457fbb-9288-565f-909d-e8228c21c1e4"
-		date = "2021-04-16"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2021/04/suspected-apt-actors-leverage-bypass-techniques-pulse-secure-zero-day.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_pulsesecure.yar#L265-L284"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "168976797d5af7071df257e91fcc31ce1d6e59c72ca9e2f50c8b5b3177ad83cc"
-		logic_hash = "a0e3ebdd02ccf5cc8fc0a83c1d0224aed45dc5094eb85bd855e5b74b34e3aaaf"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$s1 = "parse_parameters"
-		$s2 = "s/\\+/ /g"
-		$s3 = "s/%(..)/pack("
-		$s4 = "MIME::Base64::encode($"
-		$s5 = "$|=1;"
-		$s6 = "RC4("
-		$s7 = "$FORM{'cmd'}"
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Webshell : FILE {
-    meta:
-		description = "Sample from CN Honker Pentest Toolset - file Webshell.exe"
-		author = "Florian Roth (Nextron Systems)"
-		id = "12870766-2b85-522d-9ad8-abba2786caaf"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_tools.yar#L487-L503"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "c85bd09d241c2a75b4e4301091aa11ddd5ad6d59"
-		logic_hash = "d48a10313afcb5a2084229937703bbc11958a5cd11f8f27fbc8dae15ddfd5ed1"
-		score = 70
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "Windows NT users: Please note that having the WinIce/SoftIce" fullword ascii
-		$s2 = "Do you want to cancel the file download?" fullword ascii
-		$s3 = "Downloading: %s" fullword ascii
-
-	condition:
-		uint16( 0 ) == 0x5a4d and filesize < 381KB and all of them
-}
-rule SIGNATURE_BASE_CN_Honker_Getwebshell : FILE {
-    meta:
-		description = "Sample from CN Honker Pentest Toolset - file GetWebShell.exe"
-		author = "Florian Roth (Nextron Systems)"
-		id = "919883f4-af66-5d07-ad41-8cba3e049396"
-		date = "2015-06-23"
-		modified = "2023-12-05"
-		reference = "Disclosed CN Honker Pentest Toolset"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/cn_pentestset_tools.yar#L913-L930"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "b63b53259260a7a316932c0a4b643862f65ee9f8"
-		logic_hash = "5d6638596607884950e702144416eb6fd3b009c88e4af5f81a50f346d7491c95"
-		score = 70
-		quality = 60
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s0 = "echo P.Open \"GET\",\"http://www.baidu.com/ma.exe\",0 >>run.vbs" fullword ascii
-		$s5 = "http://127.0.0.1/sql.asp?id=1" fullword wide
-		$s14 = "net user admin$ hack /add" fullword wide
-		$s15 = ";Drop table [hack];create table [dbo].[hack] ([cmd] [image])--" fullword wide
-
-	condition:
-		uint16( 0 ) == 0x5a4d and filesize < 70KB and 1 of them
-}
-rule SIGNATURE_BASE_Ironpanda_Webshell_JSP : FILE {
-    meta:
-		description = "Iron Panda Malware JSP"
-		author = "Florian Roth (Nextron Systems)"
-		id = "38125418-7867-5073-a731-4f1d64e07588"
-		date = "2015-09-16"
-		modified = "2023-12-05"
-		reference = "https://goo.gl/E4qia9"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/yara/apt_irontiger.yar#L57-L72"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e7efbd7ce8d9d3ee1182baa383fa38ac2584e392/LICENSE"
-		hash = "3be95477e1d9f3877b4355cff3fbcdd3589bb7f6349fd4ba6451e1e9d32b7fa6"
-		logic_hash = "747ce812b156bf03f8d14ef84e7d2e8535c7c70590dfcb50ce3e957bec745efc"
-		score = 75
-		quality = 85
-		tags = "FILE"
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "Bin_ExecSql(\"exec master..xp_cmdshell'bcp \\\"select safile from \" + db + \"..bin_temp\\\" queryout \\\"\" + Bin_TextBox_SaveP" ascii
-		$s2 = "tc.Text=\"<a href=\\\"javascript:Bin_PostBack('zcg_ClosePM','\"+Bin_ToBase64(de.Key.ToString())+\"')\\\">Close</a>\";" fullword ascii
-		$s3 = "Bin_ExecSql(\"IF OBJECT_ID('bin_temp')IS NOT NULL DROP TABLE bin_temp\");" fullword ascii
-
-	condition:
-		filesize < 330KB and 1 of them
 }
