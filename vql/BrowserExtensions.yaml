@@ -1,0 +1,155 @@
+name: DetectRaptor.Generic.Detection.BrowserExtensions
+author: Matt Green - @mgreen27
+description: |
+  Detects browser extensions associated with known malicious or suspicious 
+  activity by matching installed extension IDs against the extsentry dataset.
+
+  This artifact enumerates extensions across Chromium-based browsers on Windows, 
+  macOS, and Linux systems.
+
+  For Chromium-based browsers, extension identifiers are derived directly from 
+  the filesystem path (Extensions/<extension_id>/<version>/manifest.json). 
+  For Firefox, extension identifiers are extracted from the extensions.json 
+  profile metadata.
+
+  The collected extension IDs are compared against the ExtSentry threat 
+  intelligence feed to identify:
+  
+    - Known malicious extensions (e.g. credential stealers, RAT-like browser extensions)
+    - Suspicious or privacy-invasive extensions (e.g. data harvesting, cryptocurrency-related tooling)
+
+
+reference:
+  - https://extsentry.github.io/
+  - https://github.com/mthcht/awesome-lists
+  - https://github.com/mgreen27/DetectRaptor
+
+tools:
+  - name: extsentry
+    url: https://extsentry.github.io/feeds/extsentry_feed.json
+    serve_locally: true
+    
+type: CLIENT
+
+parameters:
+  - name: Accessor
+    default: auto
+
+  - name: ExtensionTargets
+    type: csv
+    default: |
+      Glob,Description,OS
+      C:\Users\*\AppData\Local\Google\Chrome\User Data\*\Extensions\*\*\manifest.json,Chrome,windows
+      C:\Users\*\AppData\Local\Microsoft\Edge\User Data\*\Extensions\*\*\manifest.json,Edge,windows
+      C:\Users\*\AppData\Local\BraveSoftware\Brave-Browser\User Data\*\Extensions\*\*\manifest.json,Brave,windows
+      C:\Users\*\AppData\Roaming\Opera Software\Opera Stable\Extensions\*\*\manifest.json,Opera,windows
+      C:\Users\*\AppData\Local\Vivaldi\User Data\*\Extensions\*\*\manifest.json,Vivaldi,windows
+      C:\Users\*\AppData\Roaming\Mozilla\Firefox\Profiles\*\extensions.json,Firefox,windows
+
+      /Users/*/Library/Application Support/Google/Chrome/*/Extensions/*/*/manifest.json,Chrome,macos
+      /Users/*/Library/Application Support/Microsoft Edge/*/Extensions/*/*/manifest.json,Edge,macos
+      /Users/*/Library/Application Support/BraveSoftware/Brave-Browser/*/Extensions/*/*/manifest.json,Brave,macos
+      /Users/*/Library/Application Support/com.operasoftware.Opera/Extensions/*/*/manifest.json,Opera,macos
+      /Users/*/Library/Application Support/Vivaldi/*/Extensions/*/*/manifest.json,Vivaldi,macos
+      /Users/*/Library/Application Support/Firefox/Profiles/*/extensions.json,Firefox,macos
+
+      /home/*/.config/google-chrome/*/Extensions/*/*/manifest.json,Chrome,linux
+      /home/*/.config/chromium/*/Extensions/*/*/manifest.json,Chromium,linux
+      /home/*/.config/microsoft-edge/*/Extensions/*/*/manifest.json,Edge,linux
+      /home/*/.config/BraveSoftware/Brave-Browser/*/Extensions/*/*/manifest.json,Brave,linux
+      /home/*/.config/opera/*/Extensions/*/*/manifest.json,Opera,linux
+      /home/*/.config/vivaldi/*/Extensions/*/*/manifest.json,Vivaldi,linux
+      /home/*/.mozilla/firefox/*/extensions.json,Firefox,linux
+      /root/.config/google-chrome/*/Extensions/*/*/manifest.json,Chrome,linux
+      /root/.config/chromium/*/Extensions/*/*/manifest.json,Chromium,linux
+      /root/.config/microsoft-edge/*/Extensions/*/*/manifest.json,Edge,linux
+      /root/.config/BraveSoftware/Brave-Browser/*/Extensions/*/*/manifest.json,Brave,linux
+      /root/.mozilla/firefox/*/extensions.json,Firefox,linux
+
+
+sources:
+  - query: |
+      LET CurrentOS <= SELECT OS
+        FROM info()
+      
+      LET TargetGlobs <= SELECT *
+        FROM ExtensionTargets
+        WHERE OS =~ CurrentOS[0].OS
+      
+      
+      LET Extensions <= SELECT
+          OSPath,
+          Mtime,
+          if(condition= Name='extensions.json',
+            then= "",
+            else= basename(path=dirname(path=dirname(path=OSPath))) 
+              ) AS ExtensionId
+        FROM glob(globs=TargetGlobs.Glob, accessor=Accessor)
+        
+      LET parse_path(path) = parse_json(data=read_file(filename=path)).addons
+      
+      LET FF_Extensions = SELECT * FROM foreach(row={ 
+          SELECT * FROM Extensions WHERE NOT ExtensionId
+        }, query= { 
+          SELECT OSPath,
+            Mtime,
+            id as ExtensionId, 
+            * 
+          FROM parse_path(path=OSPath)
+        } )
+      
+      LET extsentry = SELECT OSPath,
+                             parse_json(data=read_file(filename=OSPath)) AS Content
+        FROM Artifact.Generic.Utils.FetchBinary(ToolName="extsentry",
+                                                IsExecutable='N')
+                                                
+      LET target_iocs = SELECT *
+        FROM foreach(row=extsentry.Content.indicators,
+                     query={
+            SELECT *
+            FROM foreach(row=_value)
+          })
+      
+      LET chrome_hits = SELECT * FROM foreach(row=target_iocs,
+        query={
+          SELECT 
+            extension_id,
+            extension_name,
+            category,
+            threat_type,
+            reference_url,
+            description,
+            crx_sha256,
+            chrome_webstore_url,
+            OSPath,
+            Mtime,
+            basename(path=dirname(path=OSPath)) AS version,
+            parse_json(data=read_file(filename=OSPath, accessor=Accessor)) AS Metadata
+          FROM Extensions
+          WHERE extension_id in ExtensionId
+        })
+        
+      LET ff_hits = SELECT * FROM foreach(row=target_iocs,
+        query={
+          SELECT 
+            extension_id,
+            extension_name,
+            category,
+            threat_type,
+            reference_url,
+            description,
+            crx_sha256,
+            chrome_webstore_url,
+            OSPath,
+            Mtime,
+            version,
+            { SELECT * FROM FF_Extensions WHERE ExtensionId = extension_id } as Metadata
+          FROM FF_Extensions
+          WHERE extension_id in ExtensionId
+        })
+        
+      SELECT * 
+      FROM chain(
+          chrome = chrome_hits,
+          firefox= ff_hits 
+        )
