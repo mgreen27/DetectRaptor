@@ -209,6 +209,11 @@ parameters:
         RMM,logmeinrescue.com,,
         RMM,splashtop.com,,
         RMM,teamviewer.com,,
+        RMM,github\.com,.*,Komari GitHub browsing/download evidence - path checked manually
+        RMM,raw\.githubusercontent\.com,.*,Komari raw GitHub installer/download evidence - path checked manually
+        RMM,ghcr\.io,,Komari GitHub Container Registry image reference
+        RMM,komari-document\.pages\.dev,,Komari documentation
+        RMM,www\.komari\.wiki,,Komari documentation mirror
         TLD,\.am$,telegr\.am,https://unit42.paloaltonetworks.com/top-level-domains-cybercrime/
         TLD,\.bd$,,https://unit42.paloaltonetworks.com/top-level-domains-cybercrime/
         TLD,\.casino$,,https://unit42.paloaltonetworks.com/top-level-domains-cybercrime/

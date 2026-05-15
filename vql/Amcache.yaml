@@ -317,7 +317,7 @@ parameters:
         Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,,Medium
         Suspicious Location,\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,\\Perflogs\\|\\ProgramData\\[^\\]+$|\\Users\\Public\\|\\Appdata\\(Roaming|Local)\\.+\\[^\\]$,\\eclipse\\|\\WebSphere\\|com\.ibm\.websphere,Internal,High
         Web Browsing History,BrowsingHistoryView,.,,BrowsingHistoryView,Low
-
+        RMM - Komari,komari|komari\.exe|komari-agent|komari-agent\.exe|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)(\.exe)?|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)(\.exe)?,.*(\\|/)(Komari|komari)(\\|/).*|.*(\\|/)opt(\\|/)komari(\\|/).*|.*(\\|/)usr(\\|/)local(\\|/)komari(\\|/).*,.*,Medium,Komari server or agent path/filename indicator
 
 sources:
   - precondition:
