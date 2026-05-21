@@ -38,7 +38,7 @@ sources:
                             Line,
                             rule as RuleRegex,
                             dict(
-                                FullPath = Stat.FullPath,
+                                OSPath = Stat.OSPath,
                                 Size = Stat.Size,
                                 Mtime = Stat.Mtime,
                                 Ctime = Stat.Ctime,
