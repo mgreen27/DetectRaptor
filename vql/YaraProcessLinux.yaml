@@ -150,7 +150,7 @@ parameters:
         		license_url = "https://github.com/volexity/threat-intel/blob/92353b1ccc638f5ed0e7db43a26cb40fad7f03df/LICENSE.txt"
         		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
         		score = 75
-        		quality = 55
+        		quality = 80
         		tags = "FILE, MEMORY"
         		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
         		os = "win,linux"
@@ -935,9 +935,9 @@ parameters:
         		author = "HarfangLab"
         		id = "cd6f7b81-b8df-5e2b-9da6-981d1f62c131"
         		date = "2024-09-24"
-        		modified = "2026-01-29"
+        		modified = "2026-05-18"
         		reference = "TRR250201"
-        		source_url = "https://github.com/HarfangLab/iocs/blob/62063a5d2f13e52d290cd332c695e084cd828456/hl_public_reports_master.yar#L338-L355"
+        		source_url = "https://github.com/HarfangLab/iocs/blob/3e2b674bf2f591ac46301420671ba553de094dea/hl_public_reports_master.yar#L430-L447"
         		license_url = "N/A"
         		hash = "9f97997581f513166aae47b3664ca23c4f4ea90c24916874ff82891e2cd6e01e"
         		logic_hash = "54ba4fc366fb6e4a252d51528ede3ec418b369881ad98e9119d1a9650b6a1bab"
