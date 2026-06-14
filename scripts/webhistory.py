@@ -10,12 +10,16 @@ Simply set variables and run the script.
 from base_functions import *
 
 # set variables
-template_vql = '../templates/Webhistory.template'
+template_vql_paths = [
+    '../templates/Webhistory.template',
+    '../templates/WebhistoryMacos.template'
+]
+
 ioc_csv = '../csv/WebBrowsers.csv'
 output_path = '../vql/'
     
 if __name__ == "__main__":
-    print('Building Webhistory IOC artifact')
+    print('Building Webhistory IOC artifacts')
 
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:
@@ -24,9 +28,13 @@ if __name__ == "__main__":
     # format lookup table txt for VQL insertion
     lookup_table = ''.join(["        " + x for x in lookup_table])
 
-    #grab VQL template
-    with open(template_vql, 'r') as file:
-      template = file.read()
+    # loop through each template and build artifacts
+    for template_vql in template_vql_paths:
+        print(f'Processing template: {template_vql}')
 
-    # build vql artifacts
-    build_vql(lookup_table,template,output_path)
+        # grab VQL template
+        with open(template_vql, 'r') as file:
+            template = file.read()
+
+        # build vql artifact
+        build_vql(lookup_table,template,output_path)
