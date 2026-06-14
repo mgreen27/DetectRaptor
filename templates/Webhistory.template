@@ -125,10 +125,10 @@ sources:
                     query={
                         SELECT User,
                             ID,
-                            timestamp(epoch=(Visit_Date - 11644473600)) AS Visit_Date,
+                            timestamp(winfiletime=(Visit_Date * 10) || 0) AS Visit_Date,
                             Title,
                             URL,
-                            timestamp(epoch=(Last_Visit_Date - 11644473600)) AS Last_Visit_Date,
+                            timestamp(winfiletime=(Last_Visit_Date * 10) || 0) AS Last_Visit_Date,
                             OSPath
                         FROM sqlite(
                           file=OSPath,
@@ -154,7 +154,7 @@ sources:
                     query={
                         SELECT User,
                             ID, 
-                            timestamp(epoch=(Download_Date - 11644473600)) AS Download_Date, 
+                            timestamp(winfiletime=(Download_Date * 10) || 0) AS Download_Date, 
                             Current_Path, 
                             Target_Path, 
                             Tab_URL, 
