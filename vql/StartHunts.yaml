@@ -31,6 +31,7 @@ parameters:
         DetectRaptor.Windows.Detection.Webhistory,,,,
         DetectRaptor.Windows.Detection.HijackLibsEnv,,,,
         DetectRaptor.Windows.Detection.Evtx,,,,
+        DetectRaptor.Macos.Detection.WebhistoryMacos,,,,
         DetectRaptor.Windows.Detection.YaraProcessWin,,,,
         DetectRaptor.Linux.Detection.YaraProcessLinux,,,,
         DetectRaptor.Windows.Detection.BinaryRename,,,,
