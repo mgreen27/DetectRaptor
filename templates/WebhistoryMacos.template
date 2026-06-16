@@ -62,6 +62,16 @@ parameters:
             moz_places.url AS Places_URL
         FROM moz_annos
         JOIN moz_places ON moz_places.id=moz_annos.place_id
+  - name: SafariURL
+    type: hidden
+    default: |
+        SELECT hi.id AS ID, 
+            hv.title AS Title, 
+            hi.url AS URL,
+            hv.visit_time AS Visit_Date,
+            hv.origin AS Origin 
+        FROM history_items hi
+        JOIN history_visits hv ON hi.id = hv.history_item
 
 sources:
   - precondition:
@@ -100,7 +110,18 @@ sources:
                 )
             })
     
-    
+      LET SafariHistoryFile <= SELECT * FROM foreach(
+            row=target_users,
+            query={
+                SELECT User, OSPath, Mtime
+                FROM glob(
+                    root=HomeDirectory,
+                    globs=[
+                        '/Library/Safari/History.db'
+                    ]
+                )
+            })
+
       -- run first pass to extract any DomainRegex hits
       LET hits = SELECT BrowserArtifact,
             parse_string_with_regex(string=VisitedURL, regex='^.+://([^:/\\s]+)').g1 as Domain,
@@ -217,6 +238,35 @@ sources:
                       query=FirefoxDownload)
                     ORDER BY Download_Date DESC
                   })
+            },
+            safarihistory = {
+                SELECT "Safari History" as BrowserArtifact, 
+                    URL as VisitedURL,
+                    dict(
+                        User=User,
+                        ID=ID,
+                        Visit_Date=Visit_Date,
+                        Title=Title,
+                        URL=URL,
+                        Origin=Origin,
+                        OSPath=OSPath
+                    ) as ArtifactData
+                FROM foreach(row=SafariHistoryFile,
+                    query={
+                        SELECT User,
+                            ID,
+                            timestamp(epoch=Visit_Date + 978307200) AS Visit_Date,
+                            Title,
+                            URL,
+                            if(condition=Origin = 0,
+                              then="Local",
+                              else="iCloud Sync") AS Origin,
+                            OSPath
+                        FROM sqlite(
+                          file=OSPath,
+                          query=SafariURL)
+                        ORDER BY Visit_Date DESC
+                      })
             })
         WHERE Domain =~ join(array=IOCs.DomainRegex,sep='|')
 
