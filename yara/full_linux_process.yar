@@ -10,7 +10,7 @@ rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
 		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
 		score = 75
-		quality = 80
+		quality = 55
 		tags = "FILE, MEMORY"
 		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
 		os = "win,linux"
