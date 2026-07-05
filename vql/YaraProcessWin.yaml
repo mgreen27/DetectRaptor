@@ -71,7 +71,7 @@ parameters:
         		description = "This rule detect Sodinokobi Ransomware in memory in old samples and perhaps future."
         		author = "McAfee ATR team"
         		id = "dd05ce31-9699-50a9-944c-5883340791af"
-        		date = "2026-06-01"
+        		date = "2026-07-01"
         		modified = "2025-03-18"
         		reference = "https://github.com/advanced-threat-research/Yara-Rules/"
         		source_url = "https://github.com/advanced-threat-research/Yara-Rules//blob/1919562a59f190bda60c982424f6a24c542ee3e0/ransomware/RANSOM_Sodinokibi.yar#L32-L53"
