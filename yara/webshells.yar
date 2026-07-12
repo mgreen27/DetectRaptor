@@ -37,11 +37,11 @@ rule VOLEXITY_Malware_Win_Iis_Shellsave : WHEELEDASH FILE MEMORY {
 		reference = "https://github.com/volexity/threat-intel"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2021/2021-12-06 - XEGroup/indicators/yara.yar#L27-L49"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "21683e02e11c166d0cf616ff9a1a4405598db7f4adfc87b205082ae94f83c742"
 		logic_hash = "f34d6f4ecaa4cde5965f6b0deac55c7133a2be96f5c466f34775be6e7f730493"
 		score = 75
 		quality = 80
 		tags = "WHEELEDASH, FILE, MEMORY"
-		hash1 = "21683e02e11c166d0cf616ff9a1a4405598db7f4adfc87b205082ae94f83c742"
 		scan_context = "file,memory"
 		severity = "high"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
@@ -138,11 +138,11 @@ rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
 		reference = "https://unit42.paloaltonetworks.com/manageengine-godzilla-nglite-kdcsponge/"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L1-L34"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
 		logic_hash = "52cba9545f662da18ca6e07340d7a9be637b89e7ed702dd58cac545c702a00e3"
 		score = 75
 		quality = 55
 		tags = "FILE, MEMORY"
-		hash1 = "2786d2dc738529a34ecde10ffeda69b7f40762bf13e7771451f13a24ab7fc5fe"
 		os = "win,linux"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -173,11 +173,11 @@ rule VOLEXITY_Susp_Jsp_General_Runtime_Exec_Req : FILE MEMORY {
 		reference = "https://github.com/volexity/threat-intel"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L35-L56"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "4935f0c50057e28efa7376c734a4c66018f8d20157b6584399146b6c79a6de15"
 		logic_hash = "d3048aba80c1c39f1673931cd2d7c5ed83045603b0ad204073fd788d0103a6c8"
 		score = 65
 		quality = 80
 		tags = "FILE, MEMORY"
-		hash1 = "4935f0c50057e28efa7376c734a4c66018f8d20157b6584399146b6c79a6de15"
 		os = "win,linux"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -202,11 +202,11 @@ rule VOLEXITY_Webshell_Jsp_Regeorg : FILE MEMORY {
 		reference = "https://github.com/SecWiki/WebShell-2/blob/master/reGeorg-master/tunnel.jsp"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L57-L86"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "f9b20324f4239a8c82042d8207e35776d6777b6305974964cd9ccc09d431b845"
 		logic_hash = "cecb71605d9112d509823c26e40e1cf9cd6db581db448db5c9ffc63a2bfe529e"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
-		hash1 = "f9b20324f4239a8c82042d8207e35776d6777b6305974964cd9ccc09d431b845"
 		os = "win"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -264,11 +264,11 @@ rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
 		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
 		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
-		hash1 = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
 		os = "all"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -295,11 +295,11 @@ rule VOLEXITY_Webshell_Java_Behinder_Shellservice : FILE MEMORY {
 		reference = "https://github.com/MountCloud/BehinderClientSource/blob/master/src/main/java/net/rebeyond/behinder/core/ShellService.java"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L1-L29"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "9a9882f9082a506ed0fc4ddaedd50570c5762deadcaf789ac81ecdbb8cf6eff2"
 		logic_hash = "373a8d4ef81e9bbbf1f24ebf0389e7da4b73f88786cc8e1d286ccc9f4c36debc"
 		score = 75
 		quality = 30
 		tags = "FILE, MEMORY"
-		hash1 = "9a9882f9082a506ed0fc4ddaedd50570c5762deadcaf789ac81ecdbb8cf6eff2"
 		os = "win,linux"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -330,11 +330,11 @@ rule VOLEXITY_Susp_Php_Call_User_Func : FILE {
 		reference = "https://zhuanlan.zhihu.com/p/354906657"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L183-L205"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "40b053a2f3c8f47d252b960a9807b030b463ef793228b1670eda89f07b55b252"
 		logic_hash = "46c999da97682023861e58f9cd2c8651480db990a0361c1985c6d5c35b5bf0ea"
 		score = 65
 		quality = 80
 		tags = "FILE"
-		hash1 = "40b053a2f3c8f47d252b960a9807b030b463ef793228b1670eda89f07b55b252"
 		os = "win,linux"
 		os_arch = "all"
 		scan_context = "file"
@@ -359,11 +359,11 @@ rule VOLEXITY_Apt_Webshell_Pl_Complyshell : UTA0178 FILE MEMORY {
 		reference = "TIB-20231215"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L3-L25"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
 		logic_hash = "ff46691f1add20cff30fe996e2fb199ce42408e86d5642a8a43c430f2245b1f5"
 		score = 75
 		quality = 80
 		tags = "UTA0178, FILE, MEMORY"
-		hash1 = "8bc8f4da98ee05c9d403d2cb76097818de0b524d90bea8ed846615e42cb031d2"
 		os = "linux"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -388,11 +388,11 @@ rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
 		reference = "TIB-20231215"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L26-L52"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
 		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
 		score = 75
 		quality = 30
 		tags = "UTA0178, FILE, MEMORY"
-		hash1 = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
 		os = "win"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -453,13 +453,13 @@ rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
 		reference = "TIB-20240412"
 		source_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
 		license_url = "https://github.com/volexity/threat-intel/blob/5fd84467b3ecfddb0db2f2b9ae747d70c6d56492/LICENSE.txt"
+		hash = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
+		hash = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
+		hash = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
 		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
 		score = 75
 		quality = 80
 		tags = "UTA0218, FILE, MEMORY"
-		hash1 = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
-		hash2 = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
-		hash3 = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
 		os = "linux"
 		os_arch = "all"
 		scan_context = "file,memory"
@@ -487,8 +487,8 @@ rule SEKOIA_Weevely_Webshell_Payload : FILE {
 		date = "2024-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/weevely_webshell_payload.yar#L1-L17"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/weevely_webshell_payload.yar#L1-L17"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		logic_hash = "bb02ec519d77526cc81ebd7743336b333b9498f79079f7008970cf1bb51c4948"
 		score = 75
 		quality = 80
@@ -512,8 +512,8 @@ rule SEKOIA_Tool_Webshell_B374K_Strings : FILE {
 		date = "2024-09-06"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		hash = "1d27b23fceecbb9e854c41f6a8fb878e"
 		hash = "71fd853a3f3efc3dc2846e866187ee59"
 		hash = "187e001c32487d0d68197ddb7e7796c3"
@@ -541,8 +541,8 @@ rule SEKOIA_Webshell_Icesword_Strings : FILE {
 		date = "2024-11-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/webshell_icesword_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/webshell_icesword_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		hash = "0447352827e61696304a8e3d34e1d270"
 		hash = "f49cfcda0abdefa385eda7ec7e7a5411"
 		hash = "e1518388375ba772ed20503ec6dc6c8a"
@@ -569,8 +569,8 @@ rule SEKOIA_Tool_Pivotnacci_Webshell : FILE {
 		date = "2024-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/tool_pivotnacci_webshell.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/tool_pivotnacci_webshell.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		logic_hash = "a57792915b4c888547ebe0b08b928e4bc32b3526c98a3ccc9fca0193cedee20a"
 		score = 75
 		quality = 80
@@ -600,8 +600,8 @@ rule SEKOIA_Generic_Php_Webshell : FILE {
 		date = "2023-12-08"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/generic_php_webshell.yar#L1-L15"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/generic_php_webshell.yar#L1-L15"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		logic_hash = "617264a785b8e9e87a39e12d7b72963d94e0686a174716347369fe71ab7a78af"
 		score = 75
 		quality = 80
@@ -623,8 +623,8 @@ rule SEKOIA_Apt_Unk_Hrserv_Webshell_Strings : FILE {
 		date = "2023-11-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		logic_hash = "b5650e08227bbdb82c635bd67abae57e3107be9126639619809bfbe2a7ffee89"
 		score = 75
 		quality = 80
@@ -652,8 +652,8 @@ rule SEKOIA_Webshell_Wso_Webshell_Strings {
 		date = "2022-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		logic_hash = "4d6966a34dc8e7390913857144da106affea14668d1c2c11a05be62a6e625c8f"
 		score = 75
 		quality = 80
@@ -680,8 +680,8 @@ rule SEKOIA_Apt_Oilrig_Webshell : FILE {
 		date = "2024-10-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/yara_rules/apt_oilrig_webshell.yar#L1-L18"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/d605fba69917a170633b2681f423e7d0026671a7/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/apt_oilrig_webshell.yar#L1-L18"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
 		logic_hash = "0e0879bafa1becf7e4aef008229a79ab8e0c50eda03232abd5cbb8fc59f482d3"
 		score = 75
 		quality = 80
@@ -1026,12 +1026,12 @@ rule SIGNATURE_BASE_WEBSHELL_APT_PHP_DEWMODE_UNC2546_Feb21_1 : FILE {
 		reference = "https://www.fireeye.com/blog/threat-research/2021/02/accellion-fta-exploited-for-data-theft-and-extortion.html"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_unc2546_dewmode.yar#L2-L25"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2e0df09fa37eabcae645302d9865913b818ee0993199a6d904728f3093ff48c7"
+		hash = "5fa2b9546770241da7305356d6427847598288290866837626f621d794692c1b"
 		logic_hash = "86ce185f6350eb7485bce5bd31d91085fed25aa8ce78813e1c3c3dffbaae58ff"
 		score = 75
 		quality = 60
 		tags = "FILE"
-		hash1 = "2e0df09fa37eabcae645302d9865913b818ee0993199a6d904728f3093ff48c7"
-		hash2 = "5fa2b9546770241da7305356d6427847598288290866837626f621d794692c1b"
 
 	strings:
 		$x1 = "<font size=4>Cleanup Shell</font></a>';" ascii fullword
@@ -1161,12 +1161,12 @@ rule SIGNATURE_BASE_APT_WEBSHELL_PHP_Sandworm_May20_1 : FILE {
 		reference = "https://media.defense.gov/2020/May/28/2002306626/-1/-1/0/CSA%20Sandworm%20Actors%20Exploiting%20Vulnerability%20in%20Exim%20Transfer%20Agent%2020200528.pdf"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_sandworm_exim_expl.yar#L86-L101"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "dc074464e50502459038ac127b50b8c68ed52817a61c2f97f0add33447c8f730"
+		hash = "538d713cb47a6b5ec6a3416404e0fc1ebcbc219a127315529f519f936420c80e"
 		logic_hash = "0d10f618c7b465c7691d6054e994a76f56c12eb0a36d2d98b5accd2c1e2c1da7"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "dc074464e50502459038ac127b50b8c68ed52817a61c2f97f0add33447c8f730"
-		hash2 = "538d713cb47a6b5ec6a3416404e0fc1ebcbc219a127315529f519f936420c80e"
 
 	strings:
 		$h1 = "GIF89a <?php $" ascii
@@ -1208,11 +1208,11 @@ rule SIGNATURE_BASE_APT_WEBSHELL_HAFNIUM_Secchecker_Mar21_1 : FILE {
 		reference = "https://twitter.com/markus_neis/status/1367794681237667840"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_hafnium.yar#L18-L33"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b75f163ca9b9240bf4b37ad92bc7556b40a17e27c2b8ed5c8991385fe07d17d0"
 		logic_hash = "e0e4df860bdde7d5c277f596535c493d926095be6f46f6ba41b6177afbfc5cd9"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "b75f163ca9b9240bf4b37ad92bc7556b40a17e27c2b8ed5c8991385fe07d17d0"
 
 	strings:
 		$x1 = "<%if(System.IO.File.Exists(\"c:\\\\program files (x86)\\\\fireeye\\\\xagt.exe" ascii
@@ -1332,7 +1332,7 @@ rule SIGNATURE_BASE_WEBSHELL_Compiled_Webshell_Mar2021_1 : FILE {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
 		logic_hash = "d2e5f91f7bb50984c491eb9632d3863febc986760e4d03c8255872887ce4dc4a"
 		score = 75
-		quality = 81
+		quality = 56
 		tags = "FILE"
 
 	strings:
@@ -1359,11 +1359,11 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Fileexplorer_Mar21_1 : FILE {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_hafnium.yar#L363-L397"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "a8c63c418609c1c291b3e731ca85ded4b3e0fba83f3489c21a3199173b176a75"
 		logic_hash = "7b4ffd222b38e76455fff2650b72bdcaff281323103f342b427013cd3fffdc21"
 		score = 80
 		quality = 85
 		tags = "FILE"
-		hash1 = "a8c63c418609c1c291b3e731ca85ded4b3e0fba83f3489c21a3199173b176a75"
 
 	strings:
 		$x1 = "<span style=\"background-color: #778899; color: #fff; padding: 5px; cursor: pointer\" onclick=" ascii
@@ -1399,11 +1399,11 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Chopper_Like_Mar21_1 : FILE {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_hafnium.yar#L399-L416"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ac44513e5ef93d8cbc17219350682c2246af6d5eb85c1b4302141d94c3b06c90"
 		logic_hash = "baa9eb1e3c4ac5ce49d27b1c3f75c8b6590567e25d98761a8b704478f2cee970"
 		score = 85
 		quality = 85
 		tags = "FILE"
-		hash1 = "ac44513e5ef93d8cbc17219350682c2246af6d5eb85c1b4302141d94c3b06c90"
 
 	strings:
 		$s1 = "http://f/<script language=\"JScript\" runat=\"server\">var _0x" ascii
@@ -2120,29 +2120,29 @@ rule SIGNATURE_BASE_Laudanum_Tools_Generic : FILE {
 		reference = "http://laudanum.inguardians.com/"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_laudanum_webshells.yar#L314-L345"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "076aa781a004ecb2bf545357fd36dcbafdd68b1a"
+		hash = "885e1783b07c73e7d47d3283be303c9719419b92"
+		hash = "01d5d16d876c55d77e094ce2b9c237de43b21a16"
+		hash = "7421d33e8007c92c8642a36cba7351c7f95a4335"
+		hash = "f49291aef9165ee4904d2d8c3cf5a6515ca0794f"
+		hash = "c0dee56ee68719d5ec39e773621ffe40b144fda5"
+		hash = "f32b9c2cc3a61fa326e9caebce28ef94a7a00c9a"
+		hash = "dc5c03a21267d024ef0f5ab96a34e3f6423dfcd6"
+		hash = "fd498c8b195967db01f68776ff5e36a06c9dfbfe"
+		hash = "b50ae35fcf767466f6ca25984cc008b7629676b8"
+		hash = "5570d10244d90ef53b74e2ac287fc657e38200f0"
+		hash = "42bcb491a11b4703c125daf1747cf2a40a1b36f3"
+		hash = "83e4eaaa2cf6898d7f83ab80158b64b1d48096f4"
+		hash = "dec7ea322898690a7f91db9377f035ad7072b8d7"
+		hash = "a2272b8a4221c6cc373915f0cc555fe55d65ac4d"
+		hash = "588739b9e4ef2dbb0b4cf630b73295d8134cc801"
+		hash = "43320dc23fb2ed26b882512e7c0bfdc64e2c1849"
 		logic_hash = "52c6d3be4fc91e8a61645886fa89bf78eddad51960702ff2ac83ec01d5d529ef"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "076aa781a004ecb2bf545357fd36dcbafdd68b1a"
-		hash1 = "885e1783b07c73e7d47d3283be303c9719419b92"
-		hash2 = "01d5d16d876c55d77e094ce2b9c237de43b21a16"
-		hash3 = "7421d33e8007c92c8642a36cba7351c7f95a4335"
-		hash4 = "f49291aef9165ee4904d2d8c3cf5a6515ca0794f"
-		hash5 = "c0dee56ee68719d5ec39e773621ffe40b144fda5"
-		hash6 = "f32b9c2cc3a61fa326e9caebce28ef94a7a00c9a"
-		hash7 = "dc5c03a21267d024ef0f5ab96a34e3f6423dfcd6"
-		hash8 = "fd498c8b195967db01f68776ff5e36a06c9dfbfe"
-		hash9 = "b50ae35fcf767466f6ca25984cc008b7629676b8"
-		hash10 = "5570d10244d90ef53b74e2ac287fc657e38200f0"
-		hash11 = "42bcb491a11b4703c125daf1747cf2a40a1b36f3"
-		hash12 = "83e4eaaa2cf6898d7f83ab80158b64b1d48096f4"
-		hash13 = "dec7ea322898690a7f91db9377f035ad7072b8d7"
-		hash14 = "a2272b8a4221c6cc373915f0cc555fe55d65ac4d"
-		hash15 = "588739b9e4ef2dbb0b4cf630b73295d8134cc801"
-		hash16 = "43320dc23fb2ed26b882512e7c0bfdc64e2c1849"
 
 	strings:
 		$s1 = "***  laudanum@secureideas.net" fullword ascii
@@ -4069,7 +4069,6 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_OBFUSC_Encoded_Mixed_Dec_And_Hex : FILE {
 		hash = "0ff05e6695074f98b0dee6200697a997c509a652f746d2c1c92c0b0a0552ca47"
 		logic_hash = "d9b4d224d43915cf08050c173627b314c3e41a30ecfffe28038281eadc114e51"
 		score = 75
-		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -4261,7 +4260,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Gzinflated : FILE {
 		hash = "07eb6634f28549ebf26583e8b154c6a579b8a733"
 		logic_hash = "d2edb7050c986a00889fd01b709ec0aa1409ce2e40a15b7942562d12596b190e"
 		score = 75
-		quality = 32
+		quality = 7
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -4520,6 +4519,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Eval : FILE {
 		hash = "b51a6d208ec3a44a67cce16dcc1e93cdb06fe150acf16222815333ddf52d4db8"
 		logic_hash = "a7e9632c495e5d4cc883e2593c8ebe41cdf6a18b54bd6dfd3aec85352f19321c"
 		score = 75
+		quality = 21
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -4557,7 +4557,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Includer_Tiny : FILE {
 		hash = "b3b0274cda28292813096a5a7a3f5f77378b8905205bda7bb7e1a679a7845004"
 		logic_hash = "e1efb6384009def30d845650fd0dd77319c3c7b4402cca074ca5c2a06372ab58"
 		score = 75
-		quality = 42
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -4878,7 +4878,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Generic_Backticks : FILE {
 		hash = "8db86ad90883cd208cf86acd45e67c03f994998804441705d690cb6526614d00"
 		logic_hash = "faa064686a5632788497d0300ba017c3e564f3b70f07a01f2e49bf7c934feb28"
 		score = 75
-		quality = 44
+		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -4965,7 +4965,6 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_By_String_Known_Webshell : FILE {
 		hash = "d52128bcfff5e9a121eab3d76382420c3eebbdb33cd0879fbef7c3426e819695"
 		logic_hash = "8909bf77b7bacdae092fd7a94099224bf1660a6d341e113412e93f864298851b"
 		score = 70
-		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -5192,7 +5191,7 @@ rule SIGNATURE_BASE_WEBSHELL_PHP_Writer : FILE {
 		hash = "20281d16838f707c86b1ff1428a293ed6aec0e97"
 		logic_hash = "34bae0c02156d1c9fd24d674443322409eba0a43e094fc6c05df94bbbe15aa64"
 		score = 50
-		quality = 42
+		quality = 17
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -5448,7 +5447,6 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Generic_Eval_On_Input : FILE {
 		hash = "069ea990d32fc980939fffdf1aed77384bf7806bc57c0a7faaff33bd1a3447f6"
 		logic_hash = "f7b9f43cf2fd6d08b7438f003242e9a19dcea282959c7a1fdff3a35e261a031e"
 		score = 75
-		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6365,7 +6363,6 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Runtime_Compile : FILE {
 		hash = "8ce4eaf111c66c2e6c08a271d849204832713f8b66aceb5dadc293b818ccca9e"
 		logic_hash = "6699a44e396eedebb3bafa0e89c3b6d080586a158ed056ec7220bdf2ad764444"
 		score = 75
-		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6599,7 +6596,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Regeorg : FILE {
 		hash = "9108a33058aa9a2fb6118b719c5b1318f33f0989"
 		logic_hash = "9d4c60a4daaadf6cefe8bf1d84b1e4af491cd23136332db4a022715b265c8f4e"
 		score = 75
-		quality = 50
+		quality = 25
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6639,7 +6636,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_HTTP_Proxy : FILE {
 		hash = "2f9b647660923c5262636a5344e2665512a947a4"
 		logic_hash = "7183902d43fc633db06a41b4a6bc02d2eb5662b7ee08080b57563783b8b67568"
 		score = 75
-		quality = 50
+		quality = 25
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6680,7 +6677,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Writer_Nano : FILE {
 		hash = "5e241d9d3a045d3ade7b6ff6af6c57b149fa356e"
 		logic_hash = "44c11570c610b849ba9c7506fd9ef3575d270e79d7aaf5c26d54ab3f64cfc94f"
 		score = 75
-		quality = 48
+		quality = 23
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6730,7 +6727,7 @@ rule SIGNATURE_BASE_EXT_WEBSHELL_JSP_Generic_Tiny : FILE {
 		hash = "1aa6af726137bf261849c05d18d0a630d95530588832aadd5101af28acc034b5"
 		logic_hash = "a6bf86961bc07b312fc24362d70d22ce826a2e918e1e0e8679bd415783d8500a"
 		score = 75
-		quality = 48
+		quality = 23
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6840,7 +6837,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Base64 : FILE {
 		hash = "1b916afdd415dfa4e77cecf47321fd676ba2184d"
 		logic_hash = "1787b7c6e587e1745930faaac5d28338a86baf6abc19be7c0ffe875029ff6ca1"
 		score = 75
-		quality = 48
+		quality = 23
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6929,7 +6926,6 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Reflection : FILE {
 		hash = "bf0ff88cbb72c719a291c722ae3115b91748d5c4920afe7a00a0d921d562e188"
 		logic_hash = "386aeb3745c5dd815f00bbc941450a2c3f1ddfc2956c67ecd5bee9318b1756ef"
 		score = 75
-		quality = 0
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -6978,7 +6974,6 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Classloader : FILE {
 		hash = "8e544a5f0c242d1f7be503e045738369405d39731fcd553a38b568e0889af1f2"
 		logic_hash = "109c0063f4e8db6172fd872b3b93d4f069234f28bbf033fbd2c5f135051df77e"
 		score = 75
-		quality = 0
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -7021,7 +7016,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Generic_Encoded_Shell : FILE {
 		hash = "62e6c6065b5ca45819c1fc049518c81d7d165744"
 		logic_hash = "74f45478e5bd7bb300e4ec493c2d3ef9a26340a141c3512a722618b3a3731500"
 		score = 75
-		quality = 83
+		quality = 58
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -7052,7 +7047,6 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Netspy : FILE {
 		hash = "3870b31f26975a7cb424eab6521fc9bffc2af580"
 		logic_hash = "65432e42ad2626b62b1d1a6298c301513c2fb03d89193a77b053069cebcb45e9"
 		score = 75
-		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -7108,7 +7102,6 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_By_String : FILE {
 		hash = "850f998753fde301d7c688b4eca784a045130039512cf51292fcb678187c560b"
 		logic_hash = "ab8d8df32ab745d8dd02d63d89264df2fbc0087daf6b4f91900ad03ab6e7949e"
 		score = 75
-		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -7169,7 +7162,7 @@ rule SIGNATURE_BASE_WEBSHELL_JSP_Input_Upload_Write : FILE {
 		hash = "19eca79163259d80375ebebbc440b9545163e6a3"
 		logic_hash = "33b08a6118134819ec72a2eab0daf723c25c8869e0fa8a83f690b93e2667d15c"
 		score = 75
-		quality = 46
+		quality = 21
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -7414,16 +7407,16 @@ rule SIGNATURE_BASE_WEBSHELL_Mixed_OBFUSC : FILE {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/gen_webshells.yar#L6857-L6881"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "8c4e5c6bdfcc86fa27bdfb075a7c9a769423ec6d53b73c80cbc71a6f8dd5aace"
+		hash = "78f2086b6308315f5f0795aeaa75544128f14889a794205f5fc97d7ca639335b"
+		hash = "3bca764d44074820618e1c831449168f220121698a7c82e9909f8eab2e297cbd"
+		hash = "b26b5e5cba45482f486ff7c75b54c90b7d1957fd8e272ddb4b2488ec65a2936e"
+		hash = "e217be2c533bfddbbdb6dc6a628e0d8756a217c3ddc083894e07fd3a7408756c"
 		logic_hash = "76cc6390cbdb81055c72edb124db2bf52e3d0b975406367a9c49a0ee6621d30b"
 		score = 50
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "8c4e5c6bdfcc86fa27bdfb075a7c9a769423ec6d53b73c80cbc71a6f8dd5aace"
-		hash2 = "78f2086b6308315f5f0795aeaa75544128f14889a794205f5fc97d7ca639335b"
-		hash3 = "3bca764d44074820618e1c831449168f220121698a7c82e9909f8eab2e297cbd"
-		hash4 = "b26b5e5cba45482f486ff7c75b54c90b7d1957fd8e272ddb4b2488ec65a2936e"
-		hash5 = "e217be2c533bfddbbdb6dc6a628e0d8756a217c3ddc083894e07fd3a7408756c"
 		importance = 70
 
 	strings:
@@ -7480,13 +7473,13 @@ rule SIGNATURE_BASE_Webshell_Caterpillar_ASPX {
 		reference = "http://goo.gl/emons5"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_volatile_cedar.yar#L106-L126"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "af4c99208fb92dc42bc98c4f96c3536ec8f3fe56"
 		logic_hash = "9df2e4a25052136d6e622273f917bd15df410869a8cf3075c773a14ea62a2a55"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "af4c99208fb92dc42bc98c4f96c3536ec8f3fe56"
 
 	strings:
 		$s0 = "Dim objNewRequest As WebRequest = HttpWebRequest.Create(sURL)" fullword
@@ -10729,15 +10722,15 @@ rule SIGNATURE_BASE_Webshell_Config_Myxx_Zend {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2073-L2089"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d44df8b1543b837e57cc8f25a0a68d92"
+		hash = "e0354099bee243702eb11df8d0e046df"
+		hash = "591ca89a25f06cf01e4345f98a22845c"
 		logic_hash = "161dc712f279e73ea8cab4b0298cc2ca3799c6d9107050c4231a81021caed37f"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "d44df8b1543b837e57cc8f25a0a68d92"
-		hash1 = "e0354099bee243702eb11df8d0e046df"
-		hash2 = "591ca89a25f06cf01e4345f98a22845c"
 
 	strings:
 		$s3 = ".println(\"<a href=\\\"javascript:alert('You Are In File Now ! Can Not Pack !');"
@@ -10755,17 +10748,17 @@ rule SIGNATURE_BASE_Webshell_Browser_201_3_Ma_Download {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2090-L2109"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "37603e44ee6dc1c359feb68a0d566f76"
+		hash = "a7e25b8ac605753ed0c438db93f6c498"
+		hash = "fb8c6c3a69b93e5e7193036fd31a958d"
+		hash = "4cc68fa572e88b669bce606c7ace0ae9"
+		hash = "fa87bbd7201021c1aefee6fcc5b8e25a"
 		logic_hash = "3605e1304fb314c13d6c94d6ac9337731c6ee4fef679444d599cb3ae29023b56"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "37603e44ee6dc1c359feb68a0d566f76"
-		hash1 = "a7e25b8ac605753ed0c438db93f6c498"
-		hash2 = "fb8c6c3a69b93e5e7193036fd31a958d"
-		hash3 = "4cc68fa572e88b669bce606c7ace0ae9"
-		hash4 = "fa87bbd7201021c1aefee6fcc5b8e25a"
 
 	strings:
 		$s2 = "<small>jsp File Browser version <%= VERSION_NR%> by <a"
@@ -10784,15 +10777,15 @@ rule SIGNATURE_BASE_Webshell_Itsec_Itsecteam_Shell_Jhn {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2110-L2127"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "8ae9d2b50dc382f0571cd7492f079836"
+		hash = "bd6d3b2763c705a01cc2b3f105a25fa4"
+		hash = "40c6ecf77253e805ace85f119fe1cebb"
 		logic_hash = "2775d7e47a26e06ea716bdca32a0f768eccf4d269caa3d107b4a78f8684ce741"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "8ae9d2b50dc382f0571cd7492f079836"
-		hash1 = "bd6d3b2763c705a01cc2b3f105a25fa4"
-		hash2 = "40c6ecf77253e805ace85f119fe1cebb"
 
 	strings:
 		$s4 = "echo $head.\"<font face='Tahoma' size='2'>Operating System : \".php_uname().\"<b"
@@ -10811,15 +10804,15 @@ rule SIGNATURE_BASE_Webshell_Ghost_Source_Icesword_Silic {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2128-L2145"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "cbf64a56306c1b5d98898468fc1fdbd8"
+		hash = "6e20b41c040efb453d57780025a292ae"
+		hash = "437d30c94f8eef92dc2f064de4998695"
 		logic_hash = "22879d5279866e3c25a5b41a98b44595f191cfcac6489208b0bdb6b7ca7201e5"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "cbf64a56306c1b5d98898468fc1fdbd8"
-		hash1 = "6e20b41c040efb453d57780025a292ae"
-		hash2 = "437d30c94f8eef92dc2f064de4998695"
 
 	strings:
 		$s3 = "if(eregi('WHERE|LIMIT',$_POST['nsql']) && eregi('SELECT|FROM',$_POST['nsql'])) $"
@@ -10838,41 +10831,41 @@ rule SIGNATURE_BASE_Webshell_Jspspy_Jspspyjdk5_Jspspyjdk51_Luci_Jsp_Spy2009_M_Ma
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2146-L2189"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2eeb8bf151221373ee3fd89d58ed4d38"
+		hash = "059058a27a7b0059e2c2f007ad4675ef"
+		hash = "ae76c77fb7a234380cd0ebb6fe1bcddf"
+		hash = "76037ebd781ad0eac363d56fc81f4b4f"
+		hash = "8b457934da3821ba58b06a113e0d53d9"
+		hash = "fc44f6b4387a2cb50e1a63c66a8cb81c"
+		hash = "14e9688c86b454ed48171a9d4f48ace8"
+		hash = "b330a6c2d49124ef0729539761d6ef0b"
+		hash = "d71716df5042880ef84427acee8b121e"
+		hash = "341298482cf90febebb8616426080d1d"
+		hash = "29aebe333d6332f0ebc2258def94d57e"
+		hash = "42654af68e5d4ea217e6ece5389eb302"
+		hash = "88fc87e7c58249a398efd5ceae636073"
+		hash = "4a812678308475c64132a9b56254edbc"
+		hash = "9626eef1a8b9b8d773a3b2af09306a10"
+		hash = "344f9073576a066142b2023629539ebd"
+		hash = "32dea47d9c13f9000c4c807561341bee"
+		hash = "90a5ba0c94199269ba33a58bc6a4ad99"
+		hash = "655722eaa6c646437c8ae93daac46ae0"
+		hash = "b9744f6876919c46a29ea05b1d95b1c3"
+		hash = "9c94637f76e68487fa33f7b0030dd932"
+		hash = "6acc82544be056580c3a1caaa4999956"
+		hash = "6aa32a6392840e161a018f3907a86968"
+		hash = "349ec229e3f8eda0f9eb918c74a8bf4c"
+		hash = "3ea688e3439a1f56b16694667938316d"
+		hash = "ab77e4d1006259d7cbc15884416ca88c"
+		hash = "71097537a91fac6b01f46f66ee2d7749"
+		hash = "2434a7a07cb47ce25b41d30bc291cacc"
+		hash = "7a4b090619ecce6f7bd838fe5c58554b"
 		logic_hash = "6c61e5ccd4800f0cfd20532ab43f917f39a7367cc09cbe92e5320eb2c97fabf3"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "2eeb8bf151221373ee3fd89d58ed4d38"
-		hash1 = "059058a27a7b0059e2c2f007ad4675ef"
-		hash2 = "ae76c77fb7a234380cd0ebb6fe1bcddf"
-		hash3 = "76037ebd781ad0eac363d56fc81f4b4f"
-		hash4 = "8b457934da3821ba58b06a113e0d53d9"
-		hash5 = "fc44f6b4387a2cb50e1a63c66a8cb81c"
-		hash6 = "14e9688c86b454ed48171a9d4f48ace8"
-		hash7 = "b330a6c2d49124ef0729539761d6ef0b"
-		hash8 = "d71716df5042880ef84427acee8b121e"
-		hash9 = "341298482cf90febebb8616426080d1d"
-		hash10 = "29aebe333d6332f0ebc2258def94d57e"
-		hash11 = "42654af68e5d4ea217e6ece5389eb302"
-		hash12 = "88fc87e7c58249a398efd5ceae636073"
-		hash13 = "4a812678308475c64132a9b56254edbc"
-		hash14 = "9626eef1a8b9b8d773a3b2af09306a10"
-		hash15 = "344f9073576a066142b2023629539ebd"
-		hash16 = "32dea47d9c13f9000c4c807561341bee"
-		hash17 = "90a5ba0c94199269ba33a58bc6a4ad99"
-		hash18 = "655722eaa6c646437c8ae93daac46ae0"
-		hash19 = "b9744f6876919c46a29ea05b1d95b1c3"
-		hash20 = "9c94637f76e68487fa33f7b0030dd932"
-		hash21 = "6acc82544be056580c3a1caaa4999956"
-		hash22 = "6aa32a6392840e161a018f3907a86968"
-		hash23 = "349ec229e3f8eda0f9eb918c74a8bf4c"
-		hash24 = "3ea688e3439a1f56b16694667938316d"
-		hash25 = "ab77e4d1006259d7cbc15884416ca88c"
-		hash26 = "71097537a91fac6b01f46f66ee2d7749"
-		hash27 = "2434a7a07cb47ce25b41d30bc291cacc"
-		hash28 = "7a4b090619ecce6f7bd838fe5c58554b"
 
 	strings:
 		$s8 = "\"<form action=\\\"\"+SHELL_NAME+\"?o=upload\\\" method=\\\"POST\\\" enctype="
@@ -10891,18 +10884,18 @@ rule SIGNATURE_BASE_Webshell_2_520_Job_Ma1_Ma4_2 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2190-L2210"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "64a3bf9142b045b9062b204db39d4d57"
+		hash = "9abd397c6498c41967b4dd327cf8b55a"
+		hash = "56c005690da2558690c4aa305a31ad37"
+		hash = "532b93e02cddfbb548ce5938fe2f5559"
+		hash = "6e0fa491d620d4af4b67bae9162844ae"
+		hash = "7eabe0f60975c0c73d625b7ddf7b9cbd"
 		logic_hash = "db76ff42079b20d9e5c40661d7b30206e6bffc828f55daa4dc210662068f8e27"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "64a3bf9142b045b9062b204db39d4d57"
-		hash1 = "9abd397c6498c41967b4dd327cf8b55a"
-		hash2 = "56c005690da2558690c4aa305a31ad37"
-		hash3 = "532b93e02cddfbb548ce5938fe2f5559"
-		hash4 = "6e0fa491d620d4af4b67bae9162844ae"
-		hash5 = "7eabe0f60975c0c73d625b7ddf7b9cbd"
 
 	strings:
 		$s4 = "_url = \"jdbc:microsoft:sqlserver://\" + dbServer + \":\" + dbPort + \";User=\" "
@@ -10921,44 +10914,44 @@ rule SIGNATURE_BASE_Webshell_000_403_807_A_C5_Config_Css_Dm_He1P_Jspspy_Jspspyjd
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2211-L2257"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2eeb8bf151221373ee3fd89d58ed4d38"
+		hash = "059058a27a7b0059e2c2f007ad4675ef"
+		hash = "ae76c77fb7a234380cd0ebb6fe1bcddf"
+		hash = "76037ebd781ad0eac363d56fc81f4b4f"
+		hash = "8b457934da3821ba58b06a113e0d53d9"
+		hash = "d44df8b1543b837e57cc8f25a0a68d92"
+		hash = "fc44f6b4387a2cb50e1a63c66a8cb81c"
+		hash = "14e9688c86b454ed48171a9d4f48ace8"
+		hash = "b330a6c2d49124ef0729539761d6ef0b"
+		hash = "d71716df5042880ef84427acee8b121e"
+		hash = "341298482cf90febebb8616426080d1d"
+		hash = "29aebe333d6332f0ebc2258def94d57e"
+		hash = "42654af68e5d4ea217e6ece5389eb302"
+		hash = "88fc87e7c58249a398efd5ceae636073"
+		hash = "4a812678308475c64132a9b56254edbc"
+		hash = "9626eef1a8b9b8d773a3b2af09306a10"
+		hash = "e0354099bee243702eb11df8d0e046df"
+		hash = "344f9073576a066142b2023629539ebd"
+		hash = "32dea47d9c13f9000c4c807561341bee"
+		hash = "90a5ba0c94199269ba33a58bc6a4ad99"
+		hash = "655722eaa6c646437c8ae93daac46ae0"
+		hash = "b9744f6876919c46a29ea05b1d95b1c3"
+		hash = "9c94637f76e68487fa33f7b0030dd932"
+		hash = "6acc82544be056580c3a1caaa4999956"
+		hash = "6aa32a6392840e161a018f3907a86968"
+		hash = "591ca89a25f06cf01e4345f98a22845c"
+		hash = "349ec229e3f8eda0f9eb918c74a8bf4c"
+		hash = "3ea688e3439a1f56b16694667938316d"
+		hash = "ab77e4d1006259d7cbc15884416ca88c"
+		hash = "71097537a91fac6b01f46f66ee2d7749"
+		hash = "2434a7a07cb47ce25b41d30bc291cacc"
+		hash = "7a4b090619ecce6f7bd838fe5c58554b"
 		logic_hash = "cda47d7967b0f4b2a274ff2196d27d2e108b00917812093bbb3f033a8a1d1c3c"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "2eeb8bf151221373ee3fd89d58ed4d38"
-		hash1 = "059058a27a7b0059e2c2f007ad4675ef"
-		hash2 = "ae76c77fb7a234380cd0ebb6fe1bcddf"
-		hash3 = "76037ebd781ad0eac363d56fc81f4b4f"
-		hash4 = "8b457934da3821ba58b06a113e0d53d9"
-		hash5 = "d44df8b1543b837e57cc8f25a0a68d92"
-		hash6 = "fc44f6b4387a2cb50e1a63c66a8cb81c"
-		hash7 = "14e9688c86b454ed48171a9d4f48ace8"
-		hash8 = "b330a6c2d49124ef0729539761d6ef0b"
-		hash9 = "d71716df5042880ef84427acee8b121e"
-		hash10 = "341298482cf90febebb8616426080d1d"
-		hash11 = "29aebe333d6332f0ebc2258def94d57e"
-		hash12 = "42654af68e5d4ea217e6ece5389eb302"
-		hash13 = "88fc87e7c58249a398efd5ceae636073"
-		hash14 = "4a812678308475c64132a9b56254edbc"
-		hash15 = "9626eef1a8b9b8d773a3b2af09306a10"
-		hash16 = "e0354099bee243702eb11df8d0e046df"
-		hash17 = "344f9073576a066142b2023629539ebd"
-		hash18 = "32dea47d9c13f9000c4c807561341bee"
-		hash19 = "90a5ba0c94199269ba33a58bc6a4ad99"
-		hash20 = "655722eaa6c646437c8ae93daac46ae0"
-		hash21 = "b9744f6876919c46a29ea05b1d95b1c3"
-		hash22 = "9c94637f76e68487fa33f7b0030dd932"
-		hash23 = "6acc82544be056580c3a1caaa4999956"
-		hash24 = "6aa32a6392840e161a018f3907a86968"
-		hash25 = "591ca89a25f06cf01e4345f98a22845c"
-		hash26 = "349ec229e3f8eda0f9eb918c74a8bf4c"
-		hash27 = "3ea688e3439a1f56b16694667938316d"
-		hash28 = "ab77e4d1006259d7cbc15884416ca88c"
-		hash29 = "71097537a91fac6b01f46f66ee2d7749"
-		hash30 = "2434a7a07cb47ce25b41d30bc291cacc"
-		hash31 = "7a4b090619ecce6f7bd838fe5c58554b"
 
 	strings:
 		$s0 = "ports = \"21,25,80,110,1433,1723,3306,3389,4899,5631,43958,65500\";" fullword
@@ -10977,15 +10970,15 @@ rule SIGNATURE_BASE_Webshell_Wso2_5_1_Wso2_5_Wso2 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2258-L2275"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "dbeecd555a2ef80615f0894027ad75dc"
+		hash = "7c8e5d31aad28eb1f0a9a53145551e05"
+		hash = "cbc44fb78220958f81b739b493024688"
 		logic_hash = "f2dce52f1b8d2c33cd8478a468383a87f13712dc6e5c9050fea6ede4f0d24cc5"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "dbeecd555a2ef80615f0894027ad75dc"
-		hash1 = "7c8e5d31aad28eb1f0a9a53145551e05"
-		hash2 = "cbc44fb78220958f81b739b493024688"
 
 	strings:
 		$s7 = "$opt_charsets .= '<option value=\"'.$item.'\" '.($_POST['charset']==$item?'selec"
@@ -11004,18 +10997,18 @@ rule SIGNATURE_BASE_Webshell_000_403_C5_Querydong_Spyjsp2010_T00Ls {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2276-L2296"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2eeb8bf151221373ee3fd89d58ed4d38"
+		hash = "059058a27a7b0059e2c2f007ad4675ef"
+		hash = "8b457934da3821ba58b06a113e0d53d9"
+		hash = "90a5ba0c94199269ba33a58bc6a4ad99"
+		hash = "655722eaa6c646437c8ae93daac46ae0"
+		hash = "9c94637f76e68487fa33f7b0030dd932"
 		logic_hash = "6f507499304a7cf4d14a134a4c0781fed9a94c40fe3257a4168bacdf3910ffec"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "2eeb8bf151221373ee3fd89d58ed4d38"
-		hash1 = "059058a27a7b0059e2c2f007ad4675ef"
-		hash2 = "8b457934da3821ba58b06a113e0d53d9"
-		hash3 = "90a5ba0c94199269ba33a58bc6a4ad99"
-		hash4 = "655722eaa6c646437c8ae93daac46ae0"
-		hash5 = "9c94637f76e68487fa33f7b0030dd932"
 
 	strings:
 		$s8 = "table.append(\"<td nowrap> <a href=\\\"#\\\" onclick=\\\"view('\"+tbName+\"')"
@@ -11034,15 +11027,15 @@ rule SIGNATURE_BASE_Webshell_404_Data_Suiyue {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2297-L2313"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7066f4469c3ec20f4890535b5f299122"
+		hash = "9f54aa7b43797be9bab7d094f238b4ff"
+		hash = "c93d5bdf5cf62fe22e299d0f2b865ea7"
 		logic_hash = "7f4ab5dbd2a72574c5d188e14ae98e599359b2d662266fc4c3a39d3d4405c208"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "7066f4469c3ec20f4890535b5f299122"
-		hash1 = "9f54aa7b43797be9bab7d094f238b4ff"
-		hash2 = "c93d5bdf5cf62fe22e299d0f2b865ea7"
 
 	strings:
 		$s3 = " sbCopy.append(\"<input type=button name=goback value=' \"+strBack[languageNo]+"
@@ -11060,22 +11053,22 @@ rule SIGNATURE_BASE_Webshell_R57Shell_R57Shell127_Sniper_SA_Shell_Egy_Spider_She
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2314-L2339"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ef43fef943e9df90ddb6257950b3538f"
+		hash = "ae025c886fbe7f9ed159f49593674832"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "697dae78c040150daff7db751fc0c03c"
+		hash = "513b7be8bd0595c377283a7c87b44b2e"
+		hash = "1d912c55b96e2efe8ca873d6040e3b30"
+		hash = "e5b2131dd1db0dbdb43b53c5ce99016a"
+		hash = "4108f28a9792b50d95f95b9e5314fa1e"
+		hash = "41af6fd253648885c7ad2ed524e0692d"
+		hash = "6fcc283470465eed4870bcc3e2d7f14d"
 		logic_hash = "04a58352202538d5446f1000c07341ea70434f00403f116233f335213687636e"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ef43fef943e9df90ddb6257950b3538f"
-		hash1 = "ae025c886fbe7f9ed159f49593674832"
-		hash2 = "911195a9b7c010f61b66439d9048f400"
-		hash3 = "697dae78c040150daff7db751fc0c03c"
-		hash4 = "513b7be8bd0595c377283a7c87b44b2e"
-		hash5 = "1d912c55b96e2efe8ca873d6040e3b30"
-		hash6 = "e5b2131dd1db0dbdb43b53c5ce99016a"
-		hash7 = "4108f28a9792b50d95f95b9e5314fa1e"
-		hash8 = "41af6fd253648885c7ad2ed524e0692d"
-		hash9 = "6fcc283470465eed4870bcc3e2d7f14d"
 
 	strings:
 		$s2 = "echo sr(15,\"<b>\".$lang[$language.'_text58'].$arrow.\"</b>\",in('text','mk_name"
@@ -11095,35 +11088,35 @@ rule SIGNATURE_BASE_Webshell_807_A_Css_Dm_He1P_Jspspy_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2340-L2378"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ae76c77fb7a234380cd0ebb6fe1bcddf"
+		hash = "76037ebd781ad0eac363d56fc81f4b4f"
+		hash = "fc44f6b4387a2cb50e1a63c66a8cb81c"
+		hash = "14e9688c86b454ed48171a9d4f48ace8"
+		hash = "b330a6c2d49124ef0729539761d6ef0b"
+		hash = "d71716df5042880ef84427acee8b121e"
+		hash = "341298482cf90febebb8616426080d1d"
+		hash = "29aebe333d6332f0ebc2258def94d57e"
+		hash = "42654af68e5d4ea217e6ece5389eb302"
+		hash = "88fc87e7c58249a398efd5ceae636073"
+		hash = "4a812678308475c64132a9b56254edbc"
+		hash = "9626eef1a8b9b8d773a3b2af09306a10"
+		hash = "344f9073576a066142b2023629539ebd"
+		hash = "32dea47d9c13f9000c4c807561341bee"
+		hash = "b9744f6876919c46a29ea05b1d95b1c3"
+		hash = "6acc82544be056580c3a1caaa4999956"
+		hash = "6aa32a6392840e161a018f3907a86968"
+		hash = "349ec229e3f8eda0f9eb918c74a8bf4c"
+		hash = "3ea688e3439a1f56b16694667938316d"
+		hash = "ab77e4d1006259d7cbc15884416ca88c"
+		hash = "71097537a91fac6b01f46f66ee2d7749"
+		hash = "2434a7a07cb47ce25b41d30bc291cacc"
+		hash = "7a4b090619ecce6f7bd838fe5c58554b"
 		logic_hash = "eb045425a9f519dd7bf028a7795b16b89768682f5850b6a4d45f0991bfeb6431"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ae76c77fb7a234380cd0ebb6fe1bcddf"
-		hash1 = "76037ebd781ad0eac363d56fc81f4b4f"
-		hash2 = "fc44f6b4387a2cb50e1a63c66a8cb81c"
-		hash3 = "14e9688c86b454ed48171a9d4f48ace8"
-		hash4 = "b330a6c2d49124ef0729539761d6ef0b"
-		hash5 = "d71716df5042880ef84427acee8b121e"
-		hash6 = "341298482cf90febebb8616426080d1d"
-		hash7 = "29aebe333d6332f0ebc2258def94d57e"
-		hash8 = "42654af68e5d4ea217e6ece5389eb302"
-		hash9 = "88fc87e7c58249a398efd5ceae636073"
-		hash10 = "4a812678308475c64132a9b56254edbc"
-		hash11 = "9626eef1a8b9b8d773a3b2af09306a10"
-		hash12 = "344f9073576a066142b2023629539ebd"
-		hash13 = "32dea47d9c13f9000c4c807561341bee"
-		hash14 = "b9744f6876919c46a29ea05b1d95b1c3"
-		hash15 = "6acc82544be056580c3a1caaa4999956"
-		hash16 = "6aa32a6392840e161a018f3907a86968"
-		hash17 = "349ec229e3f8eda0f9eb918c74a8bf4c"
-		hash18 = "3ea688e3439a1f56b16694667938316d"
-		hash19 = "ab77e4d1006259d7cbc15884416ca88c"
-		hash20 = "71097537a91fac6b01f46f66ee2d7749"
-		hash21 = "2434a7a07cb47ce25b41d30bc291cacc"
-		hash22 = "7a4b090619ecce6f7bd838fe5c58554b"
 
 	strings:
 		$s1 = "\"<h2>Remote Control &raquo;</h2><input class=\\\"bt\\\" onclick=\\\"var"
@@ -11143,16 +11136,16 @@ rule SIGNATURE_BASE_Webshell_201_3_Ma_Download {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2379-L2398"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "a7e25b8ac605753ed0c438db93f6c498"
+		hash = "fb8c6c3a69b93e5e7193036fd31a958d"
+		hash = "4cc68fa572e88b669bce606c7ace0ae9"
+		hash = "fa87bbd7201021c1aefee6fcc5b8e25a"
 		logic_hash = "14eccd07e7bef9d570f75fc4adc204d175dcfbb5b950bdb3e25a65d3c5bb0310"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "a7e25b8ac605753ed0c438db93f6c498"
-		hash1 = "fb8c6c3a69b93e5e7193036fd31a958d"
-		hash2 = "4cc68fa572e88b669bce606c7ace0ae9"
-		hash3 = "fa87bbd7201021c1aefee6fcc5b8e25a"
 
 	strings:
 		$s0 = "<input title=\"Upload selected file to the current working directory\" type=\"Su"
@@ -11172,25 +11165,25 @@ rule SIGNATURE_BASE_Webshell_Browser_201_3_400_In_Jfolder_Jfolder01_Jsp_Leo_Ma_W
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2399-L2426"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "37603e44ee6dc1c359feb68a0d566f76"
+		hash = "a7e25b8ac605753ed0c438db93f6c498"
+		hash = "fb8c6c3a69b93e5e7193036fd31a958d"
+		hash = "36331f2c81bad763528d0ae00edf55be"
+		hash = "793b3d0a740dbf355df3e6f68b8217a4"
+		hash = "8979594423b68489024447474d113894"
+		hash = "ec482fc969d182e5440521c913bab9bd"
+		hash = "f98d2b33cd777e160d1489afed96de39"
+		hash = "4b4c12b3002fad88ca6346a873855209"
+		hash = "4cc68fa572e88b669bce606c7ace0ae9"
+		hash = "e9a5280f77537e23da2545306f6a19ad"
+		hash = "598eef7544935cf2139d1eada4375bb5"
+		hash = "fa87bbd7201021c1aefee6fcc5b8e25a"
 		logic_hash = "0bf0fd37b542c9362a47180ee03ea28995b48d483f72273e472292a320a3ddee"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "37603e44ee6dc1c359feb68a0d566f76"
-		hash1 = "a7e25b8ac605753ed0c438db93f6c498"
-		hash2 = "fb8c6c3a69b93e5e7193036fd31a958d"
-		hash3 = "36331f2c81bad763528d0ae00edf55be"
-		hash4 = "793b3d0a740dbf355df3e6f68b8217a4"
-		hash5 = "8979594423b68489024447474d113894"
-		hash6 = "ec482fc969d182e5440521c913bab9bd"
-		hash7 = "f98d2b33cd777e160d1489afed96de39"
-		hash8 = "4b4c12b3002fad88ca6346a873855209"
-		hash9 = "4cc68fa572e88b669bce606c7ace0ae9"
-		hash10 = "e9a5280f77537e23da2545306f6a19ad"
-		hash11 = "598eef7544935cf2139d1eada4375bb5"
-		hash12 = "fa87bbd7201021c1aefee6fcc5b8e25a"
 
 	strings:
 		$s4 = "UplInfo info = UploadMonitor.getInfo(fi.clientFileName);" fullword
@@ -11209,15 +11202,15 @@ rule SIGNATURE_BASE_Webshell_Shell_Phpspy_2006_Arabicspy {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2427-L2444"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "791708057d8b429d91357d38edf43cc0"
+		hash = "40a1f840111996ff7200d18968e42cfe"
+		hash = "e0202adff532b28ef1ba206cf95962f2"
 		logic_hash = "bd9f1ffdbf94dd5a871fc7c3b31d2357e99265d02bfe1c836f82d251053dce7d"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "791708057d8b429d91357d38edf43cc0"
-		hash1 = "40a1f840111996ff7200d18968e42cfe"
-		hash2 = "e0202adff532b28ef1ba206cf95962f2"
 
 	strings:
 		$s0 = "elseif(($regwrite) AND !empty($_POST['writeregname']) AND !empty($_POST['regtype"
@@ -11236,18 +11229,18 @@ rule SIGNATURE_BASE_Webshell_In_Jfolder_Jfolder01_Jsp_Leo_Warn {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2445-L2465"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "793b3d0a740dbf355df3e6f68b8217a4"
+		hash = "8979594423b68489024447474d113894"
+		hash = "ec482fc969d182e5440521c913bab9bd"
+		hash = "f98d2b33cd777e160d1489afed96de39"
+		hash = "4b4c12b3002fad88ca6346a873855209"
+		hash = "e9a5280f77537e23da2545306f6a19ad"
 		logic_hash = "00c3667438a688b990cf1c8bb6db52be7c6d1b36192dece4e8b07edda68f4b72"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "793b3d0a740dbf355df3e6f68b8217a4"
-		hash1 = "8979594423b68489024447474d113894"
-		hash2 = "ec482fc969d182e5440521c913bab9bd"
-		hash3 = "f98d2b33cd777e160d1489afed96de39"
-		hash4 = "4b4c12b3002fad88ca6346a873855209"
-		hash5 = "e9a5280f77537e23da2545306f6a19ad"
 
 	strings:
 		$s4 = "sbFile.append(\"  &nbsp;<a href=\\\"javascript:doForm('down','\"+formatPath(strD"
@@ -11266,19 +11259,19 @@ rule SIGNATURE_BASE_Webshell_2_520_Icesword_Job_Ma1_Ma4_2 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2466-L2488"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "64a3bf9142b045b9062b204db39d4d57"
+		hash = "9abd397c6498c41967b4dd327cf8b55a"
+		hash = "077f4b1b6d705d223b6d644a4f3eebae"
+		hash = "56c005690da2558690c4aa305a31ad37"
+		hash = "532b93e02cddfbb548ce5938fe2f5559"
+		hash = "6e0fa491d620d4af4b67bae9162844ae"
+		hash = "7eabe0f60975c0c73d625b7ddf7b9cbd"
 		logic_hash = "765efb4f776d9ffe5dab1b5decbb60df654e1de9ab8ae7e0437c5c8f717642b9"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "64a3bf9142b045b9062b204db39d4d57"
-		hash1 = "9abd397c6498c41967b4dd327cf8b55a"
-		hash2 = "077f4b1b6d705d223b6d644a4f3eebae"
-		hash3 = "56c005690da2558690c4aa305a31ad37"
-		hash4 = "532b93e02cddfbb548ce5938fe2f5559"
-		hash5 = "6e0fa491d620d4af4b67bae9162844ae"
-		hash6 = "7eabe0f60975c0c73d625b7ddf7b9cbd"
 
 	strings:
 		$s2 = "private String[] _textFileTypes = {\"txt\", \"htm\", \"html\", \"asp\", \"jsp\","
@@ -11298,15 +11291,15 @@ rule SIGNATURE_BASE_Webshell_Phpspy_2005_Full_Phpspy_2005_Lite_PHPSPY {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2489-L2507"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b68bfafc6059fd26732fa07fb6f7f640"
+		hash = "42f211cec8032eb0881e87ebdb3d7224"
+		hash = "0712e3dc262b4e1f98ed25760b206836"
 		logic_hash = "80c8e7b50aea91284a25ffd3a07d8705c24b6a95a58f42ec6043ececcff32dbb"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "b68bfafc6059fd26732fa07fb6f7f640"
-		hash1 = "42f211cec8032eb0881e87ebdb3d7224"
-		hash2 = "0712e3dc262b4e1f98ed25760b206836"
 
 	strings:
 		$s6 = "<input type=\"text\" name=\"command\" size=\"60\" value=\"<?=$_POST['comma"
@@ -11326,16 +11319,16 @@ rule SIGNATURE_BASE_Webshell_Shell_Phpspy_2006_Arabicspy_Hkrkoz {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2508-L2525"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "791708057d8b429d91357d38edf43cc0"
+		hash = "40a1f840111996ff7200d18968e42cfe"
+		hash = "e0202adff532b28ef1ba206cf95962f2"
+		hash = "802f5cae46d394b297482fd0c27cb2fc"
 		logic_hash = "228e0a73f14da2957f75ae898fdbcf2386deb366df6ddc312162ab723bac44ba"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "791708057d8b429d91357d38edf43cc0"
-		hash1 = "40a1f840111996ff7200d18968e42cfe"
-		hash2 = "e0202adff532b28ef1ba206cf95962f2"
-		hash3 = "802f5cae46d394b297482fd0c27cb2fc"
 
 	strings:
 		$s5 = "$prog = isset($_POST['prog']) ? $_POST['prog'] : \"/c net start > \".$pathname."
@@ -11353,18 +11346,18 @@ rule SIGNATURE_BASE_Webshell_C99_Shell_Ci_Biz_Was_Here_C100_V_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2526-L2545"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "61a92ce63369e2fa4919ef0ff7c51167"
+		hash = "f2fa878de03732fbf5c86d656467ff50"
+		hash = "27786d1e0b1046a1a7f67ee41c64bf4c"
+		hash = "0f5b9238d281bc6ac13406bb24ac2a5b"
+		hash = "68c0629d08b1664f5bcce7d7f5f71d22"
+		hash = "048ccc01b873b40d57ce25a4c56ea717"
 		logic_hash = "ccc3cb553f7b5d089a43612d48522cc4a66b4a8ab433321ae1a716a8fa57b62c"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "61a92ce63369e2fa4919ef0ff7c51167"
-		hash1 = "f2fa878de03732fbf5c86d656467ff50"
-		hash2 = "27786d1e0b1046a1a7f67ee41c64bf4c"
-		hash3 = "0f5b9238d281bc6ac13406bb24ac2a5b"
-		hash4 = "68c0629d08b1664f5bcce7d7f5f71d22"
-		hash5 = "048ccc01b873b40d57ce25a4c56ea717"
 
 	strings:
 		$s8 = "else {echo \"Running datapipe... ok! Connect to <b>\".getenv(\"SERVER_ADDR\""
@@ -11382,15 +11375,15 @@ rule SIGNATURE_BASE_Webshell_2008_2009Lite_2009Mssql {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2546-L2563"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "3e4ba470d4c38765e4b16ed930facf2c"
+		hash = "3f4d454d27ecc0013e783ed921eeecde"
+		hash = "aa17b71bb93c6789911bd1c9df834ff9"
 		logic_hash = "ae33048856440e25972aa5483b60e775f50f60a9ef5e77a58edd60eacdcd9ee3"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "3e4ba470d4c38765e4b16ed930facf2c"
-		hash1 = "3f4d454d27ecc0013e783ed921eeecde"
-		hash2 = "aa17b71bb93c6789911bd1c9df834ff9"
 
 	strings:
 		$s0 = "<a href=\"javascript:godir(\\''.$drive->Path.'/\\');"
@@ -11409,19 +11402,19 @@ rule SIGNATURE_BASE_Webshell_Shell_Phpspy_2005_Full_Phpspy_2005_Lite_Phpspy_2006
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2564-L2585"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "791708057d8b429d91357d38edf43cc0"
+		hash = "b68bfafc6059fd26732fa07fb6f7f640"
+		hash = "42f211cec8032eb0881e87ebdb3d7224"
+		hash = "40a1f840111996ff7200d18968e42cfe"
+		hash = "e0202adff532b28ef1ba206cf95962f2"
+		hash = "0712e3dc262b4e1f98ed25760b206836"
+		hash = "802f5cae46d394b297482fd0c27cb2fc"
 		logic_hash = "5da06481cf789e71969a5b54a33bfab41e08a1961cc056604a696203fef48422"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "791708057d8b429d91357d38edf43cc0"
-		hash1 = "b68bfafc6059fd26732fa07fb6f7f640"
-		hash2 = "42f211cec8032eb0881e87ebdb3d7224"
-		hash3 = "40a1f840111996ff7200d18968e42cfe"
-		hash4 = "e0202adff532b28ef1ba206cf95962f2"
-		hash5 = "0712e3dc262b4e1f98ed25760b206836"
-		hash6 = "802f5cae46d394b297482fd0c27cb2fc"
 
 	strings:
 		$s0 = "$mainpath_info           = explode('/', $mainpath);" fullword
@@ -11440,17 +11433,17 @@ rule SIGNATURE_BASE_Webshell_807_Dm_Jspspyjdk5_M_Cofigrue {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2586-L2605"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ae76c77fb7a234380cd0ebb6fe1bcddf"
+		hash = "14e9688c86b454ed48171a9d4f48ace8"
+		hash = "341298482cf90febebb8616426080d1d"
+		hash = "88fc87e7c58249a398efd5ceae636073"
+		hash = "349ec229e3f8eda0f9eb918c74a8bf4c"
 		logic_hash = "0fc7ac740e147bd3703dac74743b19148aa7bb359cc5f347acf3b0dbe26bf752"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ae76c77fb7a234380cd0ebb6fe1bcddf"
-		hash1 = "14e9688c86b454ed48171a9d4f48ace8"
-		hash2 = "341298482cf90febebb8616426080d1d"
-		hash3 = "88fc87e7c58249a398efd5ceae636073"
-		hash4 = "349ec229e3f8eda0f9eb918c74a8bf4c"
 
 	strings:
 		$s1 = "url_con.setRequestProperty(\"REFERER\", \"\"+fckal+\"\");" fullword
@@ -11469,15 +11462,15 @@ rule SIGNATURE_BASE_Webshell_Dive_Shell_1_0_Emperor_Hacking_Team_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2606-L2623"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "1b5102bdc41a7bc439eea8f0010310a5"
+		hash = "f8a6d5306fb37414c5c772315a27832f"
+		hash = "37cb1db26b1b0161a4bf678a6b4565bd"
 		logic_hash = "8bf11041a16060fa32431adfe33727863355bae7fec2cf841dcc919092db5c80"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "1b5102bdc41a7bc439eea8f0010310a5"
-		hash1 = "f8a6d5306fb37414c5c772315a27832f"
-		hash2 = "37cb1db26b1b0161a4bf678a6b4565bd"
 
 	strings:
 		$s1 = "if (($i = array_search($_REQUEST['command'], $_SESSION['history'])) !== fals"
@@ -11496,21 +11489,21 @@ rule SIGNATURE_BASE_Webshell_404_Data_In_Jfolder_Jfolder01_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2624-L2646"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7066f4469c3ec20f4890535b5f299122"
+		hash = "9f54aa7b43797be9bab7d094f238b4ff"
+		hash = "793b3d0a740dbf355df3e6f68b8217a4"
+		hash = "8979594423b68489024447474d113894"
+		hash = "ec482fc969d182e5440521c913bab9bd"
+		hash = "f98d2b33cd777e160d1489afed96de39"
+		hash = "4b4c12b3002fad88ca6346a873855209"
+		hash = "c93d5bdf5cf62fe22e299d0f2b865ea7"
+		hash = "e9a5280f77537e23da2545306f6a19ad"
 		logic_hash = "171b811c1b93f99f3070692a91a0462f80d9d52ecf26d7fb7297a8bdd9a4c014"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "7066f4469c3ec20f4890535b5f299122"
-		hash1 = "9f54aa7b43797be9bab7d094f238b4ff"
-		hash2 = "793b3d0a740dbf355df3e6f68b8217a4"
-		hash3 = "8979594423b68489024447474d113894"
-		hash4 = "ec482fc969d182e5440521c913bab9bd"
-		hash5 = "f98d2b33cd777e160d1489afed96de39"
-		hash6 = "4b4c12b3002fad88ca6346a873855209"
-		hash7 = "c93d5bdf5cf62fe22e299d0f2b865ea7"
-		hash8 = "e9a5280f77537e23da2545306f6a19ad"
 
 	strings:
 		$s4 = "&nbsp;<TEXTAREA NAME=\"cqq\" ROWS=\"20\" COLS=\"100%\"><%=sbCmd.toString()%></TE"
@@ -11528,15 +11521,15 @@ rule SIGNATURE_BASE_Webshell_Jsp_Reverse_Jsp_Reverse_Jspbd {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2647-L2665"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "8b0e6779f25a17f0ffb3df14122ba594"
+		hash = "ea87f0c1f0535610becadf5a98aca2fc"
+		hash = "7d5e9732766cf5b8edca9b7ae2b6028f"
 		logic_hash = "cd7409bb6ace3044f3d0bf380133c4fe4a7c0c0309f9d800b397439aa95f81fc"
 		score = 50
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "8b0e6779f25a17f0ffb3df14122ba594"
-		hash1 = "ea87f0c1f0535610becadf5a98aca2fc"
-		hash2 = "7d5e9732766cf5b8edca9b7ae2b6028f"
 
 	strings:
 		$s0 = "osw = new BufferedWriter(new OutputStreamWriter(os));" fullword
@@ -11556,20 +11549,20 @@ rule SIGNATURE_BASE_Webshell_400_In_Jfolder_Jfolder01_Jsp_Leo_Warn_Webshell_Nc {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2666-L2690"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "36331f2c81bad763528d0ae00edf55be"
+		hash = "793b3d0a740dbf355df3e6f68b8217a4"
+		hash = "8979594423b68489024447474d113894"
+		hash = "ec482fc969d182e5440521c913bab9bd"
+		hash = "f98d2b33cd777e160d1489afed96de39"
+		hash = "4b4c12b3002fad88ca6346a873855209"
+		hash = "e9a5280f77537e23da2545306f6a19ad"
+		hash = "598eef7544935cf2139d1eada4375bb5"
 		logic_hash = "74e31e51f2cb46a042e8591ffb44fe68fb591d202c8171c6afb556eddb381f6f"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "36331f2c81bad763528d0ae00edf55be"
-		hash1 = "793b3d0a740dbf355df3e6f68b8217a4"
-		hash2 = "8979594423b68489024447474d113894"
-		hash3 = "ec482fc969d182e5440521c913bab9bd"
-		hash4 = "f98d2b33cd777e160d1489afed96de39"
-		hash5 = "4b4c12b3002fad88ca6346a873855209"
-		hash6 = "e9a5280f77537e23da2545306f6a19ad"
-		hash7 = "598eef7544935cf2139d1eada4375bb5"
 
 	strings:
 		$s0 = "sbFolder.append(\"<tr><td >&nbsp;</td><td>\");" fullword
@@ -11590,19 +11583,19 @@ rule SIGNATURE_BASE_Webshell_2_520_Job_Jspwebshell_1_2_Ma1_Ma4_2 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2691-L2713"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "64a3bf9142b045b9062b204db39d4d57"
+		hash = "9abd397c6498c41967b4dd327cf8b55a"
+		hash = "56c005690da2558690c4aa305a31ad37"
+		hash = "70a0ee2624e5bbe5525ccadc467519f6"
+		hash = "532b93e02cddfbb548ce5938fe2f5559"
+		hash = "6e0fa491d620d4af4b67bae9162844ae"
+		hash = "7eabe0f60975c0c73d625b7ddf7b9cbd"
 		logic_hash = "49614b2a42210fa134f85fa52c66e12809f2bb9eaf56c17b69d21e5fbfc8888b"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "64a3bf9142b045b9062b204db39d4d57"
-		hash1 = "9abd397c6498c41967b4dd327cf8b55a"
-		hash2 = "56c005690da2558690c4aa305a31ad37"
-		hash3 = "70a0ee2624e5bbe5525ccadc467519f6"
-		hash4 = "532b93e02cddfbb548ce5938fe2f5559"
-		hash5 = "6e0fa491d620d4af4b67bae9162844ae"
-		hash6 = "7eabe0f60975c0c73d625b7ddf7b9cbd"
 
 	strings:
 		$s1 = "while ((nRet = insReader.read(tmpBuffer, 0, 1024)) != -1) {" fullword
@@ -11622,19 +11615,19 @@ rule SIGNATURE_BASE_Webshell_Shell_2008_2009Mssql_Phpspy_2005_Full_Phpspy_2006_A
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2714-L2738"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "791708057d8b429d91357d38edf43cc0"
+		hash = "3e4ba470d4c38765e4b16ed930facf2c"
+		hash = "aa17b71bb93c6789911bd1c9df834ff9"
+		hash = "b68bfafc6059fd26732fa07fb6f7f640"
+		hash = "40a1f840111996ff7200d18968e42cfe"
+		hash = "e0202adff532b28ef1ba206cf95962f2"
+		hash = "802f5cae46d394b297482fd0c27cb2fc"
 		logic_hash = "140af92ab61059649a872bef96b916f2c402fd9891301d4a1ba1f389a45af003"
 		score = 60
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "791708057d8b429d91357d38edf43cc0"
-		hash1 = "3e4ba470d4c38765e4b16ed930facf2c"
-		hash2 = "aa17b71bb93c6789911bd1c9df834ff9"
-		hash3 = "b68bfafc6059fd26732fa07fb6f7f640"
-		hash4 = "40a1f840111996ff7200d18968e42cfe"
-		hash5 = "e0202adff532b28ef1ba206cf95962f2"
-		hash6 = "802f5cae46d394b297482fd0c27cb2fc"
 
 	strings:
 		$s0 = "$tabledump .= \"'\".mysql_escape_string($row[$fieldcounter]).\"'\";" fullword
@@ -11656,23 +11649,23 @@ rule SIGNATURE_BASE_Webshell_Gfs_Sh_R57Shell_R57Shell127_Sniper_SA_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2739-L2764"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "a2516ac6ee41a7cf931cbaef1134a9e4"
+		hash = "ef43fef943e9df90ddb6257950b3538f"
+		hash = "ae025c886fbe7f9ed159f49593674832"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "697dae78c040150daff7db751fc0c03c"
+		hash = "513b7be8bd0595c377283a7c87b44b2e"
+		hash = "1d912c55b96e2efe8ca873d6040e3b30"
+		hash = "e5b2131dd1db0dbdb43b53c5ce99016a"
+		hash = "4108f28a9792b50d95f95b9e5314fa1e"
+		hash = "41af6fd253648885c7ad2ed524e0692d"
+		hash = "6fcc283470465eed4870bcc3e2d7f14d"
 		logic_hash = "24d93f9ae5e174873a32abdf8dca6c00f03cbb4c5e2ad531ac7fa34f8fc90794"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "a2516ac6ee41a7cf931cbaef1134a9e4"
-		hash1 = "ef43fef943e9df90ddb6257950b3538f"
-		hash2 = "ae025c886fbe7f9ed159f49593674832"
-		hash3 = "911195a9b7c010f61b66439d9048f400"
-		hash4 = "697dae78c040150daff7db751fc0c03c"
-		hash5 = "513b7be8bd0595c377283a7c87b44b2e"
-		hash6 = "1d912c55b96e2efe8ca873d6040e3b30"
-		hash7 = "e5b2131dd1db0dbdb43b53c5ce99016a"
-		hash8 = "4108f28a9792b50d95f95b9e5314fa1e"
-		hash9 = "41af6fd253648885c7ad2ed524e0692d"
-		hash10 = "6fcc283470465eed4870bcc3e2d7f14d"
 
 	strings:
 		$s0 = "kVycm9yOiAkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuI"
@@ -11691,16 +11684,16 @@ rule SIGNATURE_BASE_Webshell_Itsec_Phpjackal_Itsecteam_Shell_Jhn {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2765-L2784"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "8ae9d2b50dc382f0571cd7492f079836"
+		hash = "e2830d3286001d1455479849aacbbb38"
+		hash = "bd6d3b2763c705a01cc2b3f105a25fa4"
+		hash = "40c6ecf77253e805ace85f119fe1cebb"
 		logic_hash = "0c97731c28f59a6fbab2b7882fae171da8d71add73ec92ab6093dec57fcd7207"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "8ae9d2b50dc382f0571cd7492f079836"
-		hash1 = "e2830d3286001d1455479849aacbbb38"
-		hash2 = "bd6d3b2763c705a01cc2b3f105a25fa4"
-		hash3 = "40c6ecf77253e805ace85f119fe1cebb"
 
 	strings:
 		$s0 = "$link=pg_connect(\"host=$host dbname=$db user=$user password=$pass\");" fullword
@@ -11720,15 +11713,15 @@ rule SIGNATURE_BASE_Webshell_Shell_Ci_Biz_Was_Here_C100_V_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2785-L2805"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "f2fa878de03732fbf5c86d656467ff50"
+		hash = "27786d1e0b1046a1a7f67ee41c64bf4c"
+		hash = "68c0629d08b1664f5bcce7d7f5f71d22"
 		logic_hash = "a7841dec442877648a589045849f7f1b80316a30dda5a44ccc4bb626dbd2cdea"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "f2fa878de03732fbf5c86d656467ff50"
-		hash1 = "27786d1e0b1046a1a7f67ee41c64bf4c"
-		hash2 = "68c0629d08b1664f5bcce7d7f5f71d22"
 
 	strings:
 		$s2 = "if ($data{0} == \"\\x99\" and $data{1} == \"\\x01\") {return \"Error: \".$stri"
@@ -11750,15 +11743,15 @@ rule SIGNATURE_BASE_Webshell_NIX_REMOTE_WEB_SHELL_NIX_REMOTE_WEB_Xxx1 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2806-L2825"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0b19e9de790cd2f4325f8c24b22af540"
+		hash = "f3ca29b7999643507081caab926e2e74"
+		hash = "527cf81f9272919bf872007e21c4bdda"
 		logic_hash = "95d25e9dc75a9af91e23b8c53acb384616f5d8a78605200bdb94f016a7f160f6"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "0b19e9de790cd2f4325f8c24b22af540"
-		hash1 = "f3ca29b7999643507081caab926e2e74"
-		hash2 = "527cf81f9272919bf872007e21c4bdda"
 
 	strings:
 		$s1 = "<td><input size=\"48\" value=\"$docr/\" name=\"path\" type=\"text\"><input type="
@@ -11779,22 +11772,22 @@ rule SIGNATURE_BASE_Webshell_C99_C99Shell_C99_W4Cking_Shell_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2826-L2854"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "61a92ce63369e2fa4919ef0ff7c51167"
+		hash = "d3f38a6dc54a73d304932d9227a739ec"
+		hash = "9c34adbc8fd8d908cbb341734830f971"
+		hash = "f2fa878de03732fbf5c86d656467ff50"
+		hash = "b8f261a3cdf23398d573aaf55eaf63b5"
+		hash = "27786d1e0b1046a1a7f67ee41c64bf4c"
+		hash = "0f5b9238d281bc6ac13406bb24ac2a5b"
+		hash = "68c0629d08b1664f5bcce7d7f5f71d22"
+		hash = "157b4ac3c7ba3a36e546e81e9279eab5"
+		hash = "048ccc01b873b40d57ce25a4c56ea717"
 		logic_hash = "731bbf06208d20874c1d8464472e6a66a2e9b0bc2dc0475783763b99eb70fefa"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "61a92ce63369e2fa4919ef0ff7c51167"
-		hash1 = "d3f38a6dc54a73d304932d9227a739ec"
-		hash2 = "9c34adbc8fd8d908cbb341734830f971"
-		hash3 = "f2fa878de03732fbf5c86d656467ff50"
-		hash4 = "b8f261a3cdf23398d573aaf55eaf63b5"
-		hash5 = "27786d1e0b1046a1a7f67ee41c64bf4c"
-		hash6 = "0f5b9238d281bc6ac13406bb24ac2a5b"
-		hash7 = "68c0629d08b1664f5bcce7d7f5f71d22"
-		hash8 = "157b4ac3c7ba3a36e546e81e9279eab5"
-		hash9 = "048ccc01b873b40d57ce25a4c56ea717"
 
 	strings:
 		$s0 = "echo \"<b>HEXDUMP:</b><nobr>"
@@ -11817,18 +11810,18 @@ rule SIGNATURE_BASE_Webshell_2008_2009Mssql_Phpspy_2005_Full_Phpspy_2006_Arabics
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2855-L2877"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "3e4ba470d4c38765e4b16ed930facf2c"
+		hash = "aa17b71bb93c6789911bd1c9df834ff9"
+		hash = "b68bfafc6059fd26732fa07fb6f7f640"
+		hash = "40a1f840111996ff7200d18968e42cfe"
+		hash = "e0202adff532b28ef1ba206cf95962f2"
+		hash = "802f5cae46d394b297482fd0c27cb2fc"
 		logic_hash = "2d78db4d45a35d6a78d4288e00a382a0937e3806f0570bd353b88955664a47f6"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "3e4ba470d4c38765e4b16ed930facf2c"
-		hash1 = "aa17b71bb93c6789911bd1c9df834ff9"
-		hash2 = "b68bfafc6059fd26732fa07fb6f7f640"
-		hash3 = "40a1f840111996ff7200d18968e42cfe"
-		hash4 = "e0202adff532b28ef1ba206cf95962f2"
-		hash5 = "802f5cae46d394b297482fd0c27cb2fc"
 
 	strings:
 		$s0 = "$this -> addFile($content, $filename);" fullword
@@ -11849,16 +11842,16 @@ rule SIGNATURE_BASE_Webshell_C99_C66_C99_Shadows_Mod_C99Shell {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2878-L2900"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "61a92ce63369e2fa4919ef0ff7c51167"
+		hash = "0f5b9238d281bc6ac13406bb24ac2a5b"
+		hash = "68c0629d08b1664f5bcce7d7f5f71d22"
+		hash = "048ccc01b873b40d57ce25a4c56ea717"
 		logic_hash = "b50a6124f25bbb6fcc9d16d1de26d833a4b968db8e8033e76f3a74695577017e"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "61a92ce63369e2fa4919ef0ff7c51167"
-		hash1 = "0f5b9238d281bc6ac13406bb24ac2a5b"
-		hash2 = "68c0629d08b1664f5bcce7d7f5f71d22"
-		hash3 = "048ccc01b873b40d57ce25a4c56ea717"
 
 	strings:
 		$s2 = "  if (unlink(_FILE_)) {@ob_clean(); echo \"Thanks for using c99shell v.\".$shv"
@@ -11881,19 +11874,19 @@ rule SIGNATURE_BASE_Webshell_He1P_Jspspy_Nogfw_Ok_Style_1_Jspspy1 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2901-L2924"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b330a6c2d49124ef0729539761d6ef0b"
+		hash = "d71716df5042880ef84427acee8b121e"
+		hash = "344f9073576a066142b2023629539ebd"
+		hash = "32dea47d9c13f9000c4c807561341bee"
+		hash = "b9744f6876919c46a29ea05b1d95b1c3"
+		hash = "3ea688e3439a1f56b16694667938316d"
+		hash = "2434a7a07cb47ce25b41d30bc291cacc"
 		logic_hash = "522ba5f797e33c27fef3ae8d89889c31799073ed3c770a49401f4d42ead04640"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "b330a6c2d49124ef0729539761d6ef0b"
-		hash1 = "d71716df5042880ef84427acee8b121e"
-		hash2 = "344f9073576a066142b2023629539ebd"
-		hash3 = "32dea47d9c13f9000c4c807561341bee"
-		hash4 = "b9744f6876919c46a29ea05b1d95b1c3"
-		hash5 = "3ea688e3439a1f56b16694667938316d"
-		hash6 = "2434a7a07cb47ce25b41d30bc291cacc"
 
 	strings:
 		$s0 = "\"\"+f.canRead()+\" / \"+f.canWrite()+\" / \"+f.canExecute()+\"</td>\"+" fullword
@@ -11914,20 +11907,20 @@ rule SIGNATURE_BASE_Webshell_000_403_C5_Config_Myxx_Querydong_Spyjsp2010_Zend {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2925-L2948"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2eeb8bf151221373ee3fd89d58ed4d38"
+		hash = "059058a27a7b0059e2c2f007ad4675ef"
+		hash = "8b457934da3821ba58b06a113e0d53d9"
+		hash = "d44df8b1543b837e57cc8f25a0a68d92"
+		hash = "e0354099bee243702eb11df8d0e046df"
+		hash = "90a5ba0c94199269ba33a58bc6a4ad99"
+		hash = "655722eaa6c646437c8ae93daac46ae0"
+		hash = "591ca89a25f06cf01e4345f98a22845c"
 		logic_hash = "7ca710973592718c5455508c5798b3c51dce994d5ebd33aa3a59d1b03c096bdf"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "2eeb8bf151221373ee3fd89d58ed4d38"
-		hash1 = "059058a27a7b0059e2c2f007ad4675ef"
-		hash2 = "8b457934da3821ba58b06a113e0d53d9"
-		hash3 = "d44df8b1543b837e57cc8f25a0a68d92"
-		hash4 = "e0354099bee243702eb11df8d0e046df"
-		hash5 = "90a5ba0c94199269ba33a58bc6a4ad99"
-		hash6 = "655722eaa6c646437c8ae93daac46ae0"
-		hash7 = "591ca89a25f06cf01e4345f98a22845c"
 
 	strings:
 		$s0 = "return new Double(format.format(value)).doubleValue();" fullword
@@ -11947,16 +11940,16 @@ rule SIGNATURE_BASE_Webshell_C99_C99Shell_C99_C99Shell {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2949-L2967"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "61a92ce63369e2fa4919ef0ff7c51167"
+		hash = "d3f38a6dc54a73d304932d9227a739ec"
+		hash = "157b4ac3c7ba3a36e546e81e9279eab5"
+		hash = "048ccc01b873b40d57ce25a4c56ea717"
 		logic_hash = "b999b1a8307e228fb97772799369e292fb806d614159f2b2abfc7a71c5bdb225"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "61a92ce63369e2fa4919ef0ff7c51167"
-		hash1 = "d3f38a6dc54a73d304932d9227a739ec"
-		hash2 = "157b4ac3c7ba3a36e546e81e9279eab5"
-		hash3 = "048ccc01b873b40d57ce25a4c56ea717"
 
 	strings:
 		$s2 = "$bindport_pass = \"c99\";" fullword
@@ -11975,17 +11968,17 @@ rule SIGNATURE_BASE_Webshell_R57Shell127_R57_Ifx_R57_Kartal_R57_Antichat {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2968-L2989"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ae025c886fbe7f9ed159f49593674832"
+		hash = "513b7be8bd0595c377283a7c87b44b2e"
+		hash = "1d912c55b96e2efe8ca873d6040e3b30"
+		hash = "4108f28a9792b50d95f95b9e5314fa1e"
+		hash = "3f71175985848ee46cc13282fbed2269"
 		logic_hash = "23887963068f7dd2e4c85b11079276a00786d1a753f22e3b63f01139087a7f4c"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ae025c886fbe7f9ed159f49593674832"
-		hash1 = "513b7be8bd0595c377283a7c87b44b2e"
-		hash2 = "1d912c55b96e2efe8ca873d6040e3b30"
-		hash3 = "4108f28a9792b50d95f95b9e5314fa1e"
-		hash4 = "3f71175985848ee46cc13282fbed2269"
 
 	strings:
 		$s6 = "$res   = @mysql_query(\"SHOW CREATE TABLE `\".$_POST['mysql_tbl'].\"`\", $d"
@@ -12006,16 +11999,16 @@ rule SIGNATURE_BASE_Webshell_NIX_REMOTE_WEB_SHELL_Nstview_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L2990-L3009"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0b19e9de790cd2f4325f8c24b22af540"
+		hash = "4745d510fed4378e4b1730f56f25e569"
+		hash = "f3ca29b7999643507081caab926e2e74"
+		hash = "46a18979750fa458a04343cf58faa9bd"
 		logic_hash = "b10e89c6b1851f88a2bbb9116969ea3770366c162b911cb8a2c3a033da3a46bc"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "0b19e9de790cd2f4325f8c24b22af540"
-		hash1 = "4745d510fed4378e4b1730f56f25e569"
-		hash2 = "f3ca29b7999643507081caab926e2e74"
-		hash3 = "46a18979750fa458a04343cf58faa9bd"
 
 	strings:
 		$s3 = "BODY, TD, TR {" fullword
@@ -12035,43 +12028,43 @@ rule SIGNATURE_BASE_Webshell_000_403_807_A_C5_Config_Css_Dm_He1P_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3010-L3060"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2eeb8bf151221373ee3fd89d58ed4d38"
+		hash = "059058a27a7b0059e2c2f007ad4675ef"
+		hash = "ae76c77fb7a234380cd0ebb6fe1bcddf"
+		hash = "76037ebd781ad0eac363d56fc81f4b4f"
+		hash = "8b457934da3821ba58b06a113e0d53d9"
+		hash = "d44df8b1543b837e57cc8f25a0a68d92"
+		hash = "fc44f6b4387a2cb50e1a63c66a8cb81c"
+		hash = "14e9688c86b454ed48171a9d4f48ace8"
+		hash = "b330a6c2d49124ef0729539761d6ef0b"
+		hash = "d71716df5042880ef84427acee8b121e"
+		hash = "341298482cf90febebb8616426080d1d"
+		hash = "29aebe333d6332f0ebc2258def94d57e"
+		hash = "42654af68e5d4ea217e6ece5389eb302"
+		hash = "88fc87e7c58249a398efd5ceae636073"
+		hash = "4a812678308475c64132a9b56254edbc"
+		hash = "9626eef1a8b9b8d773a3b2af09306a10"
+		hash = "e0354099bee243702eb11df8d0e046df"
+		hash = "344f9073576a066142b2023629539ebd"
+		hash = "32dea47d9c13f9000c4c807561341bee"
+		hash = "90a5ba0c94199269ba33a58bc6a4ad99"
+		hash = "655722eaa6c646437c8ae93daac46ae0"
+		hash = "b9744f6876919c46a29ea05b1d95b1c3"
+		hash = "6acc82544be056580c3a1caaa4999956"
+		hash = "6aa32a6392840e161a018f3907a86968"
+		hash = "591ca89a25f06cf01e4345f98a22845c"
+		hash = "349ec229e3f8eda0f9eb918c74a8bf4c"
+		hash = "3ea688e3439a1f56b16694667938316d"
+		hash = "ab77e4d1006259d7cbc15884416ca88c"
+		hash = "71097537a91fac6b01f46f66ee2d7749"
+		hash = "2434a7a07cb47ce25b41d30bc291cacc"
+		hash = "7a4b090619ecce6f7bd838fe5c58554b"
 		logic_hash = "46eede3a1af29e344ed5107fc0af4bd13cd1492bff340d61063911bbb474e7b3"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "2eeb8bf151221373ee3fd89d58ed4d38"
-		hash1 = "059058a27a7b0059e2c2f007ad4675ef"
-		hash2 = "ae76c77fb7a234380cd0ebb6fe1bcddf"
-		hash3 = "76037ebd781ad0eac363d56fc81f4b4f"
-		hash4 = "8b457934da3821ba58b06a113e0d53d9"
-		hash5 = "d44df8b1543b837e57cc8f25a0a68d92"
-		hash6 = "fc44f6b4387a2cb50e1a63c66a8cb81c"
-		hash7 = "14e9688c86b454ed48171a9d4f48ace8"
-		hash8 = "b330a6c2d49124ef0729539761d6ef0b"
-		hash9 = "d71716df5042880ef84427acee8b121e"
-		hash10 = "341298482cf90febebb8616426080d1d"
-		hash11 = "29aebe333d6332f0ebc2258def94d57e"
-		hash12 = "42654af68e5d4ea217e6ece5389eb302"
-		hash13 = "88fc87e7c58249a398efd5ceae636073"
-		hash14 = "4a812678308475c64132a9b56254edbc"
-		hash15 = "9626eef1a8b9b8d773a3b2af09306a10"
-		hash16 = "e0354099bee243702eb11df8d0e046df"
-		hash17 = "344f9073576a066142b2023629539ebd"
-		hash18 = "32dea47d9c13f9000c4c807561341bee"
-		hash19 = "90a5ba0c94199269ba33a58bc6a4ad99"
-		hash20 = "655722eaa6c646437c8ae93daac46ae0"
-		hash21 = "b9744f6876919c46a29ea05b1d95b1c3"
-		hash22 = "6acc82544be056580c3a1caaa4999956"
-		hash23 = "6aa32a6392840e161a018f3907a86968"
-		hash24 = "591ca89a25f06cf01e4345f98a22845c"
-		hash25 = "349ec229e3f8eda0f9eb918c74a8bf4c"
-		hash26 = "3ea688e3439a1f56b16694667938316d"
-		hash27 = "ab77e4d1006259d7cbc15884416ca88c"
-		hash28 = "71097537a91fac6b01f46f66ee2d7749"
-		hash29 = "2434a7a07cb47ce25b41d30bc291cacc"
-		hash30 = "7a4b090619ecce6f7bd838fe5c58554b"
 
 	strings:
 		$s3 = "String savePath = request.getParameter(\"savepath\");" fullword
@@ -12095,17 +12088,17 @@ rule SIGNATURE_BASE_Webshell_2_520_Icesword_Job_Ma1 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3061-L3081"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "64a3bf9142b045b9062b204db39d4d57"
+		hash = "9abd397c6498c41967b4dd327cf8b55a"
+		hash = "077f4b1b6d705d223b6d644a4f3eebae"
+		hash = "56c005690da2558690c4aa305a31ad37"
+		hash = "532b93e02cddfbb548ce5938fe2f5559"
 		logic_hash = "795eb586310d87a3c6b53117bf2c8cbcfadcb177f5a5129c17fd21f0b64c385c"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "64a3bf9142b045b9062b204db39d4d57"
-		hash1 = "9abd397c6498c41967b4dd327cf8b55a"
-		hash2 = "077f4b1b6d705d223b6d644a4f3eebae"
-		hash3 = "56c005690da2558690c4aa305a31ad37"
-		hash4 = "532b93e02cddfbb548ce5938fe2f5559"
 
 	strings:
 		$s1 = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\"></head>" fullword
@@ -12125,20 +12118,20 @@ rule SIGNATURE_BASE_Webshell_404_Data_In_Jfolder_Jfolder01_Jsp_Suiyue_Warn {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3082-L3106"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7066f4469c3ec20f4890535b5f299122"
+		hash = "9f54aa7b43797be9bab7d094f238b4ff"
+		hash = "793b3d0a740dbf355df3e6f68b8217a4"
+		hash = "8979594423b68489024447474d113894"
+		hash = "ec482fc969d182e5440521c913bab9bd"
+		hash = "f98d2b33cd777e160d1489afed96de39"
+		hash = "c93d5bdf5cf62fe22e299d0f2b865ea7"
+		hash = "e9a5280f77537e23da2545306f6a19ad"
 		logic_hash = "5e0da29499d76539fb1f5cfbe0a00331eeb0bb8fa861f2e2d686130ee4939fac"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "7066f4469c3ec20f4890535b5f299122"
-		hash1 = "9f54aa7b43797be9bab7d094f238b4ff"
-		hash2 = "793b3d0a740dbf355df3e6f68b8217a4"
-		hash3 = "8979594423b68489024447474d113894"
-		hash4 = "ec482fc969d182e5440521c913bab9bd"
-		hash5 = "f98d2b33cd777e160d1489afed96de39"
-		hash6 = "c93d5bdf5cf62fe22e299d0f2b865ea7"
-		hash7 = "e9a5280f77537e23da2545306f6a19ad"
 
 	strings:
 		$s0 = "<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\" bordercol"
@@ -12159,16 +12152,16 @@ rule SIGNATURE_BASE_Webshell_Phpspy_2005_Full_Phpspy_2005_Lite_Phpspy_2006_PHPSP
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3108-L3128"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b68bfafc6059fd26732fa07fb6f7f640"
+		hash = "42f211cec8032eb0881e87ebdb3d7224"
+		hash = "40a1f840111996ff7200d18968e42cfe"
+		hash = "0712e3dc262b4e1f98ed25760b206836"
 		logic_hash = "fc47a50c5964574fb9b9caf3fb94041f028998577bf4ccf21884a41fa1876572"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "b68bfafc6059fd26732fa07fb6f7f640"
-		hash1 = "42f211cec8032eb0881e87ebdb3d7224"
-		hash2 = "40a1f840111996ff7200d18968e42cfe"
-		hash3 = "0712e3dc262b4e1f98ed25760b206836"
 
 	strings:
 		$s4 = "http://www.4ngel.net" fullword
@@ -12189,26 +12182,26 @@ rule SIGNATURE_BASE_Webshell_C99_Locus7S_C99_W4Cking_Xxx {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3129-L3158"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38fd7e45f9c11a37463c3ded1c76af4c"
+		hash = "9c34adbc8fd8d908cbb341734830f971"
+		hash = "ef43fef943e9df90ddb6257950b3538f"
+		hash = "ae025c886fbe7f9ed159f49593674832"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "697dae78c040150daff7db751fc0c03c"
+		hash = "513b7be8bd0595c377283a7c87b44b2e"
+		hash = "1d912c55b96e2efe8ca873d6040e3b30"
+		hash = "e5b2131dd1db0dbdb43b53c5ce99016a"
+		hash = "4108f28a9792b50d95f95b9e5314fa1e"
+		hash = "b8f261a3cdf23398d573aaf55eaf63b5"
+		hash = "0d2c2c151ed839e6bafc7aa9c69be715"
+		hash = "41af6fd253648885c7ad2ed524e0692d"
+		hash = "6fcc283470465eed4870bcc3e2d7f14d"
 		logic_hash = "4afadac41e729f77711eb3ea3ee8f6e8ce61e19294e90db024e5334e214d9647"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "38fd7e45f9c11a37463c3ded1c76af4c"
-		hash1 = "9c34adbc8fd8d908cbb341734830f971"
-		hash2 = "ef43fef943e9df90ddb6257950b3538f"
-		hash3 = "ae025c886fbe7f9ed159f49593674832"
-		hash4 = "911195a9b7c010f61b66439d9048f400"
-		hash5 = "697dae78c040150daff7db751fc0c03c"
-		hash6 = "513b7be8bd0595c377283a7c87b44b2e"
-		hash7 = "1d912c55b96e2efe8ca873d6040e3b30"
-		hash8 = "e5b2131dd1db0dbdb43b53c5ce99016a"
-		hash9 = "4108f28a9792b50d95f95b9e5314fa1e"
-		hash10 = "b8f261a3cdf23398d573aaf55eaf63b5"
-		hash11 = "0d2c2c151ed839e6bafc7aa9c69be715"
-		hash12 = "41af6fd253648885c7ad2ed524e0692d"
-		hash13 = "6fcc283470465eed4870bcc3e2d7f14d"
 
 	strings:
 		$s1 = "$res = @shell_exec($cfe);" fullword
@@ -12228,18 +12221,18 @@ rule SIGNATURE_BASE_Webshell_Browser_201_3_Ma_Ma2_Download {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3159-L3180"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "37603e44ee6dc1c359feb68a0d566f76"
+		hash = "a7e25b8ac605753ed0c438db93f6c498"
+		hash = "fb8c6c3a69b93e5e7193036fd31a958d"
+		hash = "4cc68fa572e88b669bce606c7ace0ae9"
+		hash = "4b45715fa3fa5473640e17f49ef5513d"
+		hash = "fa87bbd7201021c1aefee6fcc5b8e25a"
 		logic_hash = "3b8bb6ca2eb146f8c170d629612ba12d4663445d443b681f2859af25d50ab6fe"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "37603e44ee6dc1c359feb68a0d566f76"
-		hash1 = "a7e25b8ac605753ed0c438db93f6c498"
-		hash2 = "fb8c6c3a69b93e5e7193036fd31a958d"
-		hash3 = "4cc68fa572e88b669bce606c7ace0ae9"
-		hash4 = "4b45715fa3fa5473640e17f49ef5513d"
-		hash5 = "fa87bbd7201021c1aefee6fcc5b8e25a"
 
 	strings:
 		$s1 = "private static final int EDITFIELD_ROWS = 30;" fullword
@@ -12259,17 +12252,17 @@ rule SIGNATURE_BASE_Webshell_000_403_C5_Querydong_Spyjsp2010 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3181-L3202"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2eeb8bf151221373ee3fd89d58ed4d38"
+		hash = "059058a27a7b0059e2c2f007ad4675ef"
+		hash = "8b457934da3821ba58b06a113e0d53d9"
+		hash = "90a5ba0c94199269ba33a58bc6a4ad99"
+		hash = "655722eaa6c646437c8ae93daac46ae0"
 		logic_hash = "dd01bb059d741fedaee17d46355c7cd8a845d714b20ae37db36424544b954d2f"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "2eeb8bf151221373ee3fd89d58ed4d38"
-		hash1 = "059058a27a7b0059e2c2f007ad4675ef"
-		hash2 = "8b457934da3821ba58b06a113e0d53d9"
-		hash3 = "90a5ba0c94199269ba33a58bc6a4ad99"
-		hash4 = "655722eaa6c646437c8ae93daac46ae0"
 
 	strings:
 		$s2 = "\" <select name='encode' class='input'><option value=''>ANSI</option><option val"
@@ -12290,15 +12283,15 @@ rule SIGNATURE_BASE_Webshell_R57Shell127_R57_Kartal_R57 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L3203-L3221"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ae025c886fbe7f9ed159f49593674832"
+		hash = "1d912c55b96e2efe8ca873d6040e3b30"
+		hash = "4108f28a9792b50d95f95b9e5314fa1e"
 		logic_hash = "fd849f76f8348ee57a9c96eed91c8cac416fdc45a08c93e93ebc952375de27a3"
 		score = 70
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ae025c886fbe7f9ed159f49593674832"
-		hash1 = "1d912c55b96e2efe8ca873d6040e3b30"
-		hash2 = "4108f28a9792b50d95f95b9e5314fa1e"
 
 	strings:
 		$s2 = "$handle = @opendir($dir) or die(\"Can't open directory $dir\");" fullword
@@ -15393,14 +15386,14 @@ rule SIGNATURE_BASE__1_C2007_Php_Php_C100_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L4975-L4989"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "44542e5c3e9790815c49d5f9beffbbf2"
+		hash = "d089e7168373a0634e1ac18c0ee00085"
+		hash = "38fd7e45f9c11a37463c3ded1c76af4c"
 		logic_hash = "6f6cb7c210bcd0f84c2ccff52850b1d673622ae49b83d614d63b5bbba7392327"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "44542e5c3e9790815c49d5f9beffbbf2"
-		hash1 = "d089e7168373a0634e1ac18c0ee00085"
-		hash2 = "38fd7e45f9c11a37463c3ded1c76af4c"
 
 	strings:
 		$s0 = "echo \"<b>Changing file-mode (\".$d.$f.\"), \".view_perms_color($d.$f).\" (\""
@@ -15419,14 +15412,14 @@ rule SIGNATURE_BASE__Nst_Php_Php_Img_Php_Php_Nstview_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L4990-L5005"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ddaf9f1986d17284de83a17fe5f9fd94"
+		hash = "17a07bb84e137b8aa60f87cd6bfab748"
+		hash = "4745d510fed4378e4b1730f56f25e569"
 		logic_hash = "b1e13f75edbbc8f9263e0e516a54330ce57190ba0b45813dad4bafeaeefa389b"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "ddaf9f1986d17284de83a17fe5f9fd94"
-		hash1 = "17a07bb84e137b8aa60f87cd6bfab748"
-		hash2 = "4745d510fed4378e4b1730f56f25e569"
 
 	strings:
 		$s0 = "<tr><form method=post><td><font color=red><b>Back connect:</b></font></td><td><i"
@@ -15446,14 +15439,14 @@ rule SIGNATURE_BASE__Network_Php_Php_Xinfo_Php_Php_Nfm_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5006-L5020"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "acdbba993a5a4186fd864c5e4ea0ba4f"
+		hash = "2601b6fc1579f263d2f3960ce775df70"
+		hash = "401fbae5f10283051c39e640b77e4c26"
 		logic_hash = "913ff19b6448d3b074440c2a5f85d85813fdf010d33dc57c89ba1e5db6455e11"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "acdbba993a5a4186fd864c5e4ea0ba4f"
-		hash1 = "2601b6fc1579f263d2f3960ce775df70"
-		hash2 = "401fbae5f10283051c39e640b77e4c26"
 
 	strings:
 		$s0 = ".textbox { background: White; border: 1px #000000 solid; color: #000099; font-fa"
@@ -15472,15 +15465,15 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_Specials
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5021-L5036"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "a4bae5456baf0d8d894165c84d66118f2b16cfc040e299c2032eccb6a9eb4822"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s2 = "echo \"<hr size=\\\"1\\\" noshade><b>Done!</b><br>Total time (secs.): \".$ft"
@@ -15499,17 +15492,17 @@ rule SIGNATURE_BASE__R577_Php_Php_Sniper_SA_Shell_Php_R57_Php_Php_R57_Shell_Php_
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5037-L5054"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "eddf7a8fde1e50a7f2a817ef7cece24f"
+		hash = "8023394542cddf8aee5dec6072ed02b5"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
 		logic_hash = "0df3e00f752f85aa1f150c01e3ef41b9a5cd3d3ce2060965992320cb3c4d87ae"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "911195a9b7c010f61b66439d9048f400"
-		hash2 = "eddf7a8fde1e50a7f2a817ef7cece24f"
-		hash3 = "8023394542cddf8aee5dec6072ed02b5"
-		hash4 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash5 = "817671e1bdc85e04cc3440bbd9288800"
 
 	strings:
 		$s2 = "'eng_text71'=>\"Second commands param is:\\r\\n- for CHOWN - name of new owner o"
@@ -15528,15 +15521,15 @@ rule SIGNATURE_BASE__C99Shell_V1_0_Php_Php_C99Php_Sses_Php_Php_Ctt_Sh_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5055-L5071"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "6cd50a14ea0da0df6a246a60c8f6f9c9"
+		hash = "671cad517edd254352fe7e0c7c981c39"
 		logic_hash = "137f98b636ec012d7d5e687f7d24ae88e8d3261360e60a4bbc03da248cce381e"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash1 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash2 = "6cd50a14ea0da0df6a246a60c8f6f9c9"
-		hash3 = "671cad517edd254352fe7e0c7c981c39"
 
 	strings:
 		$s0 = "\"AAAAACH5BAEAAAkALAAAAAAUABQAAAR0MMlJqyzFalqEQJuGEQSCnWg6FogpkHAMF4HAJsWh7/ze\""
@@ -15556,14 +15549,14 @@ rule SIGNATURE_BASE__R577_Php_Php_Spy_Php_Php_S_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5072-L5086"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
 		logic_hash = "09892789e8dad16f9fc7c4e22525e5d0af3af401a4b2655b70f7a6856888875c"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash2 = "817671e1bdc85e04cc3440bbd9288800"
 
 	strings:
 		$s2 = "echo $te.\"<div align=center><textarea cols=35 name=db_query>\".(!empty($_POST['"
@@ -15582,18 +15575,18 @@ rule SIGNATURE_BASE_Webshell_C99_Generic {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5087-L5107"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "09609851caa129e40b0d56e90dfc476c"
+		hash = "671cad517edd254352fe7e0c7c981c39"
 		logic_hash = "422bc3a0d9b04b1e37ad954faacb1ec7841fe529c1eb19634bdbfe83da374c73"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash4 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash5 = "09609851caa129e40b0d56e90dfc476c"
-		hash6 = "671cad517edd254352fe7e0c7c981c39"
 
 	strings:
 		$s0 = "  if ($copy_unset) {foreach($sess_data[\"copy\"] as $k=>$v) {unset($sess_data[\""
@@ -15614,17 +15607,17 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_C99Shell
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5108-L5125"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "b133cf947476a1c94ed90b5cd3757ca8aa429be4284d75664625896d9cfa687f"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash4 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash5 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "$sess_data[\"cut\"] = array(); c99_s"
@@ -15643,14 +15636,14 @@ rule SIGNATURE_BASE__W_Php_Php_Wacking_Php_Php_Specialshell_99_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5126-L5140"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "7bdaebfb093b58a2fd33b4bbeea8465d0f724383b4855eb521a3e339ee153781"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash2 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "\"<td>&nbsp;<a href=\\\"\".$sql_surl.\"sql_act=query&sql_query=\".ur"
@@ -15669,16 +15662,16 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_Sses_Php
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5141-L5157"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "6cd50a14ea0da0df6a246a60c8f6f9c9"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "6dbd40e19d4d5753dbd1f7e627bccc08a60430de8138a923f13e836d19dde65c"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "6cd50a14ea0da0df6a246a60c8f6f9c9"
-		hash4 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "else {$act = \"f\"; $d = dirname($mkfile); if (substr($d,-1) != DIRECTORY_SEPA"
@@ -15697,16 +15690,16 @@ rule SIGNATURE_BASE__R577_Php_Php_Sniper_SA_Shell_Php_R57_Php_Php_Spy_Php_Php_S_
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5158-L5174"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "eddf7a8fde1e50a7f2a817ef7cece24f"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
 		logic_hash = "834c33059e08e8075a8d3f69187b74f3b53afabfc37ae1f13a2f579f0948a363"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "911195a9b7c010f61b66439d9048f400"
-		hash2 = "eddf7a8fde1e50a7f2a817ef7cece24f"
-		hash3 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash4 = "817671e1bdc85e04cc3440bbd9288800"
 
 	strings:
 		$s0 = "echo sr(15,\"<b>\".$lang[$language.'_text"
@@ -15725,14 +15718,14 @@ rule SIGNATURE_BASE__R577_Php_Php_Sniper_SA_Shell_Php_R57_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5175-L5190"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "eddf7a8fde1e50a7f2a817ef7cece24f"
 		logic_hash = "f97846fdaac949185b4ce6a25cc276f4ae4243d891acb18c3a3ce0c18b540976"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "911195a9b7c010f61b66439d9048f400"
-		hash2 = "eddf7a8fde1e50a7f2a817ef7cece24f"
 
 	strings:
 		$s0 = "'ru_text9' =>'???????? ????? ? ???????? ??? ? /bin/bash'," fullword
@@ -15752,15 +15745,15 @@ rule SIGNATURE_BASE__R577_Php_Php_R57_Shell_Php_Php_Spy_Php_Php_S_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5191-L5207"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "8023394542cddf8aee5dec6072ed02b5"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
 		logic_hash = "764a374c1e4acec8978db1e7e7e326c4fa95c6f92e1ca5a6d7f892bb05ecd289"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "8023394542cddf8aee5dec6072ed02b5"
-		hash2 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash3 = "817671e1bdc85e04cc3440bbd9288800"
 
 	strings:
 		$s0 = "echo ws(2).$lb.\" <a"
@@ -15780,15 +15773,15 @@ rule SIGNATURE_BASE__Wacking_Php_Php_1_Specialshell_99_Php_Php_C100_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5208-L5224"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "44542e5c3e9790815c49d5f9beffbbf2"
+		hash = "09609851caa129e40b0d56e90dfc476c"
+		hash = "38fd7e45f9c11a37463c3ded1c76af4c"
 		logic_hash = "0d32fc00ba2602a1140dc9030894bb9524c55b95c445a08f2bf6f8fc60108e64"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash1 = "44542e5c3e9790815c49d5f9beffbbf2"
-		hash2 = "09609851caa129e40b0d56e90dfc476c"
-		hash3 = "38fd7e45f9c11a37463c3ded1c76af4c"
 
 	strings:
 		$s0 = "if(eregi(\"./shbd $por\",$scan))"
@@ -15808,16 +15801,16 @@ rule SIGNATURE_BASE__R577_Php_Php_R57_Php_Php_R57_Shell_Php_Php_Spy_Php_Php_S_Ph
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5225-L5242"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "eddf7a8fde1e50a7f2a817ef7cece24f"
+		hash = "8023394542cddf8aee5dec6072ed02b5"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
 		logic_hash = "afbd2103b0c953d6aec070ba450f43e567560bc9743423a5731cd4d6e5e36bb6"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "eddf7a8fde1e50a7f2a817ef7cece24f"
-		hash2 = "8023394542cddf8aee5dec6072ed02b5"
-		hash3 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash4 = "817671e1bdc85e04cc3440bbd9288800"
 
 	strings:
 		$s1 = "if(rmdir($_POST['mk_name']))"
@@ -15837,15 +15830,15 @@ rule SIGNATURE_BASE__W_Php_Php_Wacking_Php_Php_Sses_Php_Php_Specialshell_99_Php_
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5243-L5259"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "6cd50a14ea0da0df6a246a60c8f6f9c9"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "9bbcb687c83c01ad52e8978a60e604a74f10c33a63af3b91d0286b30dea42890"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash2 = "6cd50a14ea0da0df6a246a60c8f6f9c9"
-		hash3 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "\"ext_avi\"=>array(\"ext_avi\",\"ext_mov\",\"ext_mvi"
@@ -15865,20 +15858,20 @@ rule SIGNATURE_BASE_Multiple_Php_Webshells {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5261-L5282"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "911195a9b7c010f61b66439d9048f400"
+		hash = "be0f67f3e995517d18859ed57b4b4389"
+		hash = "eddf7a8fde1e50a7f2a817ef7cece24f"
+		hash = "8023394542cddf8aee5dec6072ed02b5"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
+		hash = "7101fe72421402029e2629f3aaed6de7"
+		hash = "f618f41f7ebeb5e5076986a66593afd1"
 		logic_hash = "d55c96febd64107273001edadbda6d0a1b4b00e35fb41b46561b49fca6a9bd1b"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "911195a9b7c010f61b66439d9048f400"
-		hash2 = "be0f67f3e995517d18859ed57b4b4389"
-		hash3 = "eddf7a8fde1e50a7f2a817ef7cece24f"
-		hash4 = "8023394542cddf8aee5dec6072ed02b5"
-		hash5 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash6 = "817671e1bdc85e04cc3440bbd9288800"
-		hash7 = "7101fe72421402029e2629f3aaed6de7"
-		hash8 = "f618f41f7ebeb5e5076986a66593afd1"
 
 	strings:
 		$s0 = "kVycm9yOiAkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuI"
@@ -15898,14 +15891,14 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5283-L5298"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
 		logic_hash = "c089f8175532ddc0e2d256b4972f7db32683bd213a456622ed27ab4844d1e435"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
 
 	strings:
 		$s0 = "<b>Dumped! Dump has been writed to "
@@ -15925,16 +15918,16 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_C99Shell
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5299-L5316"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
 		logic_hash = "e82882e89a1aeb256768f2af7a6d3674c89f9abc358710b33b8d3d425defcef1"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash4 = "9e9ae0332ada9c3797d6cee92c2ede62"
 
 	strings:
 		$s0 = "@ini_set(\"highlight" fullword
@@ -15954,14 +15947,14 @@ rule SIGNATURE_BASE__GFS_Web_Shell_Ver_3_1_7___Priv8_Php_Nshell_Php_Php_Gfs_Sh_P
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5317-L5332"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "be0f67f3e995517d18859ed57b4b4389"
+		hash = "4a44d82da21438e32d4f514ab35c26b6"
+		hash = "f618f41f7ebeb5e5076986a66593afd1"
 		logic_hash = "9df5b6df25574b303044a0799c5eb5f38f9ebfbc6f6114275fe1e34adbde1f7c"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "be0f67f3e995517d18859ed57b4b4389"
-		hash1 = "4a44d82da21438e32d4f514ab35c26b6"
-		hash2 = "f618f41f7ebeb5e5076986a66593afd1"
 
 	strings:
 		$s2 = "echo $uname.\"</font><br><b>\";" fullword
@@ -15981,16 +15974,16 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_C99Shell
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5333-L5351"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "0f44dc1ff243b234a718e8dbd5cc8c4dc8eb9d3b63300a5c6ff72b86280607bf"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash4 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "c99ftpbrutecheck"
@@ -16011,16 +16004,16 @@ rule SIGNATURE_BASE__W_Php_Php_Wacking_Php_Php_C99Shell_V1_0_Php_Php_C99Php_Spec
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5352-L5368"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "e9cd7425b806f71d8889f5df7f3fc2f4a692279fc4e495104646cfe28c5b5fe5"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash2 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash3 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash4 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "$sqlquicklaunch[] = array(\""
@@ -16039,14 +16032,14 @@ rule SIGNATURE_BASE__Antichat_Php_Php_Fatalshell_Php_Php_A_Gedit_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5369-L5385"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "128e90b5e2df97e21e96d8e268cde7e3"
+		hash = "b15583f4eaad10a25ef53ab451a4a26d"
+		hash = "ab9c6b24ca15f4a1b7086cad78ff0f78"
 		logic_hash = "789340845aeed4accaef02afa1a1fe420e73b6f5af1b621f4ec2342994045278"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "128e90b5e2df97e21e96d8e268cde7e3"
-		hash1 = "b15583f4eaad10a25ef53ab451a4a26d"
-		hash2 = "ab9c6b24ca15f4a1b7086cad78ff0f78"
 
 	strings:
 		$s0 = "if(@$_POST['save'])writef($file,$_POST['data']);" fullword
@@ -16067,14 +16060,14 @@ rule SIGNATURE_BASE__C99Shell_V1_0_Php_Php_C99Php_Sses_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5386-L5399"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "6cd50a14ea0da0df6a246a60c8f6f9c9"
 		logic_hash = "b2bdf4187ff3d63e4af5c70e8cc93cd8fac3257b33c38764ad2bb2e206066162"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash1 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash2 = "6cd50a14ea0da0df6a246a60c8f6f9c9"
 
 	strings:
 		$s3 = "if (!empty($delerr)) {echo \"<b>Deleting with errors:</b><br>\".$delerr;}" fullword
@@ -16092,14 +16085,14 @@ rule SIGNATURE_BASE__Crystal_Php_Nshell_Php_Php_Load_Shell_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5400-L5415"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "fdbf54d5bf3264eb1c4bff1fac548879"
+		hash = "4a44d82da21438e32d4f514ab35c26b6"
+		hash = "0c5d227f4aa76785e4760cdcff78a661"
 		logic_hash = "71a9310b19b66e3699f75f551cc604f535ea843eb9c50f4a009edcd9c11e01b9"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "fdbf54d5bf3264eb1c4bff1fac548879"
-		hash1 = "4a44d82da21438e32d4f514ab35c26b6"
-		hash2 = "0c5d227f4aa76785e4760cdcff78a661"
 
 	strings:
 		$s0 = "if ($filename != \".\" and $filename != \"..\"){" fullword
@@ -16119,15 +16112,15 @@ rule SIGNATURE_BASE__Nst_Php_Php_Cybershell_Php_Php_Img_Php_Php_Nstview_Php_Php 
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5416-L5432"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ddaf9f1986d17284de83a17fe5f9fd94"
+		hash = "ef8828e0bc0641a655de3932199c0527"
+		hash = "17a07bb84e137b8aa60f87cd6bfab748"
+		hash = "4745d510fed4378e4b1730f56f25e569"
 		logic_hash = "afc0b1c83644aa323d308471e5978b6b03f444f5f46fbaddac28ff42d524df1e"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "ddaf9f1986d17284de83a17fe5f9fd94"
-		hash1 = "ef8828e0bc0641a655de3932199c0527"
-		hash2 = "17a07bb84e137b8aa60f87cd6bfab748"
-		hash3 = "4745d510fed4378e4b1730f56f25e569"
 
 	strings:
 		$s0 = "@$rto=$_POST['rto'];" fullword
@@ -16147,16 +16140,16 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_Dc3_Secu
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5433-L5449"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "433706fdc539238803fd47c4394b5109"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "7a4c74912caa1855efc3a2ea7fa6d0082f62776d77a211e59f12892d4883f240"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "433706fdc539238803fd47c4394b5109"
-		hash4 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = " if ($mode & 0x200) {$world[\"execute\"] = ($world[\"execute\"] == \"x\")?\"t\":"
@@ -16175,16 +16168,16 @@ rule SIGNATURE_BASE__C99Shell_V1_0_Php_Php_C99Php_1_C2007_Php_Php_C100_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5450-L5465"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "44542e5c3e9790815c49d5f9beffbbf2"
+		hash = "d089e7168373a0634e1ac18c0ee00085"
+		hash = "38fd7e45f9c11a37463c3ded1c76af4c"
 		logic_hash = "a5dc73a12d8c8b89bab77b90cb3b561e9daf9db5f5ad550326a2fbce52c1c8da"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash1 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash2 = "44542e5c3e9790815c49d5f9beffbbf2"
-		hash3 = "d089e7168373a0634e1ac18c0ee00085"
-		hash4 = "38fd7e45f9c11a37463c3ded1c76af4c"
 
 	strings:
 		$s0 = "$result = mysql_query(\"SHOW PROCESSLIST\", $sql_sock); " fullword
@@ -16202,19 +16195,19 @@ rule SIGNATURE_BASE_Multiple_Php_Webshells_2 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5466-L5486"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "6cd50a14ea0da0df6a246a60c8f6f9c9"
+		hash = "09609851caa129e40b0d56e90dfc476c"
+		hash = "671cad517edd254352fe7e0c7c981c39"
 		logic_hash = "26fe586ba7f4d1931b2df81aa27543ff422e699fd56b6b1be289a0f8d6954691"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash4 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash5 = "6cd50a14ea0da0df6a246a60c8f6f9c9"
-		hash6 = "09609851caa129e40b0d56e90dfc476c"
-		hash7 = "671cad517edd254352fe7e0c7c981c39"
 
 	strings:
 		$s0 = "elseif (!empty($ft)) {echo \"<center><b>Manually selected type is incorrect. I"
@@ -16234,16 +16227,16 @@ rule SIGNATURE_BASE__W_Php_Php_C99Madshell_V2_1_Php_Php_Wacking_Php_Php_1_Specia
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5487-L5505"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "38a3f9f2aa47c2e940695f3dba6a7bb2"
+		hash = "3ca5886cd54d495dc95793579611f59a"
+		hash = "9c5bb5e3a46ec28039e8986324e42792"
+		hash = "44542e5c3e9790815c49d5f9beffbbf2"
+		hash = "09609851caa129e40b0d56e90dfc476c"
 		logic_hash = "160adf93d4f9e51022c427b2b0601207dd9ca917e98d99e2013fe83e09a85d21"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "38a3f9f2aa47c2e940695f3dba6a7bb2"
-		hash1 = "3ca5886cd54d495dc95793579611f59a"
-		hash2 = "9c5bb5e3a46ec28039e8986324e42792"
-		hash3 = "44542e5c3e9790815c49d5f9beffbbf2"
-		hash4 = "09609851caa129e40b0d56e90dfc476c"
 
 	strings:
 		$s0 = "if ($total === FALSE) {$total = 0;}" fullword
@@ -16264,15 +16257,15 @@ rule SIGNATURE_BASE__R577_Php_Php_R57_Php_Php_Spy_Php_Php_S_Php_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5506-L5522"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0714f80f35c1fddef1f8938b8d42a4c8"
+		hash = "eddf7a8fde1e50a7f2a817ef7cece24f"
+		hash = "eed14de3907c9aa2550d95550d1a2d5f"
+		hash = "817671e1bdc85e04cc3440bbd9288800"
 		logic_hash = "7ba3d6927dc06bfcd98ee9d7146164ca9a9024ef26eac60fabc8ed1375db618d"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "0714f80f35c1fddef1f8938b8d42a4c8"
-		hash1 = "eddf7a8fde1e50a7f2a817ef7cece24f"
-		hash2 = "eed14de3907c9aa2550d95550d1a2d5f"
-		hash3 = "817671e1bdc85e04cc3440bbd9288800"
 
 	strings:
 		$s0 = "$res = mssql_query(\"select * from r57_temp_table\",$db);" fullword
@@ -16292,15 +16285,15 @@ rule SIGNATURE_BASE__Nixrem_Php_Php_C99Shell_V1_0_Php_Php_C99Php_NIX_REMOTE_WEB_
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L5523-L5540"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "40a3e86a63d3d7f063a86aab5b5f92c6"
+		hash = "d8ae5819a0a2349ec552cbcf3a62c975"
+		hash = "9e9ae0332ada9c3797d6cee92c2ede62"
+		hash = "f3ca29b7999643507081caab926e2e74"
 		logic_hash = "f7575db2c8f147d03d5b93b431d1a73c4182b5db6e801e672914778b2042a712"
 		score = 75
 		quality = 85
 		tags = ""
 		super_rule = 1
-		hash0 = "40a3e86a63d3d7f063a86aab5b5f92c6"
-		hash1 = "d8ae5819a0a2349ec552cbcf3a62c975"
-		hash2 = "9e9ae0332ada9c3797d6cee92c2ede62"
-		hash3 = "f3ca29b7999643507081caab926e2e74"
 
 	strings:
 		$s0 = "$num = $nixpasswd + $nixpwdperpage;" fullword
@@ -18359,15 +18352,15 @@ rule SIGNATURE_BASE_Webshell__Cyber_Shell_Cybershell_Cyber_Shell__V_1_0_ {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6758-L6775"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ef7f7c45d26614cea597f2f8e64a85d54630fe38"
+		hash = "cabf47b96e3b2c46248f075bdbc46197db28a25f"
+		hash = "9e165d4ed95e0501cd9a90155ac60546eb5b1076"
 		logic_hash = "fc2cf9a25ccc5aa3d9dc287ef9600b065ba9025cfb0a1ccca1bce9120ea03ff4"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ef7f7c45d26614cea597f2f8e64a85d54630fe38"
-		hash1 = "cabf47b96e3b2c46248f075bdbc46197db28a25f"
-		hash2 = "9e165d4ed95e0501cd9a90155ac60546eb5b1076"
 
 	strings:
 		$s4 = " <a href=\"http://www.cyberlords.net\" target=\"_blank\">Cyber Lords Community</"
@@ -18388,15 +18381,15 @@ rule SIGNATURE_BASE_Webshell__Ajax_PHP_Command_Shell_Ajax_PHP_Command_Shell_Sold
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6776-L6796"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "fa11deaee821ca3de7ad1caafa2a585ee1bc8d82"
+		hash = "c0a4ba3e834fb63e0a220a43caaf55c654f97429"
+		hash = "16fa789b20409c1f2ffec74484a30d0491904064"
 		logic_hash = "0b9e0d96c8a618a4883235e8c5c9a03a1e0b586cb4b30e0273e24c35ee5ee502"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "fa11deaee821ca3de7ad1caafa2a585ee1bc8d82"
-		hash1 = "c0a4ba3e834fb63e0a220a43caaf55c654f97429"
-		hash2 = "16fa789b20409c1f2ffec74484a30d0491904064"
 
 	strings:
 		$s1 = "'Read /etc/passwd' => \"runcommand('etcpasswdfile','GET')\"," fullword
@@ -18420,16 +18413,16 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_7 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6797-L6815"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "de98f890790756f226f597489844eb3e53a867a9"
+		hash = "128988c8ef5294d51c908690d27f69dffad4e42e"
+		hash = "fd64f2bf77df8bcf4d161ec125fa5c3695fe1267"
+		hash = "715f17e286416724e90113feab914c707a26d456"
 		logic_hash = "9d9b6b1333f2061c357fad110b5cc508288c70aea1212aa2fcbf283a2ce4fb2c"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "de98f890790756f226f597489844eb3e53a867a9"
-		hash1 = "128988c8ef5294d51c908690d27f69dffad4e42e"
-		hash2 = "fd64f2bf77df8bcf4d161ec125fa5c3695fe1267"
-		hash3 = "715f17e286416724e90113feab914c707a26d456"
 
 	strings:
 		$s0 = "header(\"Content-disposition: filename=$filename.sql\");" fullword
@@ -18450,16 +18443,16 @@ rule SIGNATURE_BASE_Webshell__Small_Web_Shell_By_Zaco_Small_Zaco_Zacosmall {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6816-L6834"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b148ead15d34a55771894424ace2a92983351dda"
+		hash = "e4ba288f6d46dc77b403adf7d411a280601c635b"
+		hash = "e5713d6d231c844011e9a74175a77e8eb835c856"
+		hash = "1b836517164c18caf2c92ee2a06c645e26936a0c"
 		logic_hash = "840c58043e39014e90e7621c1d2417d5a970c744560738abc4fea3db3cbb8d5a"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "b148ead15d34a55771894424ace2a92983351dda"
-		hash1 = "e4ba288f6d46dc77b403adf7d411a280601c635b"
-		hash2 = "e5713d6d231c844011e9a74175a77e8eb835c856"
-		hash3 = "1b836517164c18caf2c92ee2a06c645e26936a0c"
 
 	strings:
 		$s2 = "if(!$result2)$dump_file.='#error table '.$rows[0];" fullword
@@ -18480,15 +18473,15 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_8 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6835-L6854"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "fc1ae242b926d70e32cdb08bbe92628bc5bd7f99"
+		hash = "9ad55629c4576e5a31dd845012d13a08f1c1f14e"
+		hash = "c4aa2cf665c784553740c3702c3bfcb5d7af65a3"
 		logic_hash = "346df2686c4d43b3210b07a30845477e057602500e67baba69b50c41e8d501fa"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "fc1ae242b926d70e32cdb08bbe92628bc5bd7f99"
-		hash1 = "9ad55629c4576e5a31dd845012d13a08f1c1f14e"
-		hash2 = "c4aa2cf665c784553740c3702c3bfcb5d7af65a3"
 
 	strings:
 		$s1 = "elseif ( $cmd==\"file\" ) { /* <!-- View a file in text --> */" fullword
@@ -18511,16 +18504,16 @@ rule SIGNATURE_BASE_Webshell__PH_Vayv_Phvayv_PH_Vayv_Klasvayv_Asp_Php {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6855-L6873"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b51962a1ffa460ec793317571fc2f46042fd13ee"
+		hash = "408ac9ca3d435c0f78bda370b33e84ba25afc357"
+		hash = "4003ae289e3ae036755976f8d2407c9381ff5653"
+		hash = "4f83bc2836601225a115b5ad54496428a507a361"
 		logic_hash = "42959ba1e3c0f7f198f953e98b9df87059999f5526df4338c109828d0a5a518a"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "b51962a1ffa460ec793317571fc2f46042fd13ee"
-		hash1 = "408ac9ca3d435c0f78bda370b33e84ba25afc357"
-		hash2 = "4003ae289e3ae036755976f8d2407c9381ff5653"
-		hash3 = "4f83bc2836601225a115b5ad54496428a507a361"
 
 	strings:
 		$s1 = "<font color=\"#000000\">Sil</font></a></font></td>" fullword
@@ -18541,14 +18534,14 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_9 {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6875-L6895"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "89f2a7007a2cd411e0a7abd2ff5218d212b84d18"
+		hash = "2266178ad4eb72c2386c0a4d536e5d82bb7ed6a2"
+		hash = "0daed818cac548324ad0c5905476deef9523ad73"
 		logic_hash = "9f8768f609ccd464f7c2b9d10ce8ea423355e11b05b39e629e5e3de0787e212b"
 		score = 70
 		quality = 77
 		tags = ""
 		super_rule = 1
-		hash0 = "89f2a7007a2cd411e0a7abd2ff5218d212b84d18"
-		hash1 = "2266178ad4eb72c2386c0a4d536e5d82bb7ed6a2"
-		hash2 = "0daed818cac548324ad0c5905476deef9523ad73"
 
 	strings:
 		$ = { 3a 3c 62 3e 22 20 2e 62 61 73 65 36 34 5f 64 65 63 6f 64 65 28 24 5f 50 4f 53 54 5b 27 74 6f 74 27 5d 29 2e 20 22 3c 2f 62 3e 22 3b }
@@ -18569,15 +18562,15 @@ rule SIGNATURE_BASE_Webshell__PH_Vayv_Phvayv_PH_Vayv {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6897-L6913"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b51962a1ffa460ec793317571fc2f46042fd13ee"
+		hash = "408ac9ca3d435c0f78bda370b33e84ba25afc357"
+		hash = "4003ae289e3ae036755976f8d2407c9381ff5653"
 		logic_hash = "b2f2b95415bc990adac38eada20cbc793f286d51f2054bc969e9c667f16717f9"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "b51962a1ffa460ec793317571fc2f46042fd13ee"
-		hash1 = "408ac9ca3d435c0f78bda370b33e84ba25afc357"
-		hash2 = "4003ae289e3ae036755976f8d2407c9381ff5653"
 
 	strings:
 		$s4 = "<form method=\"POST\" action=\"<?echo \"PHVayv.php?duzkaydet=$dizin/$duzenle"
@@ -18597,15 +18590,15 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_1 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6915-L6934"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "3b086b9b53cf9d25ff0d30b1d41bb2f45c7cda2b"
+		hash = "2558e728184b8efcdb57cfab918d95b06d45de04"
+		hash = "203a8021192531d454efbc98a3bbb8cabe09c85c"
+		hash = "b79709eb7801a28d02919c41cc75ac695884db27"
 		logic_hash = "9e3759d45d13e33481b962c4b59a019647a3e80bdd3885c4404169af74288b89"
 		score = 70
 		quality = 79
 		tags = ""
 		super_rule = 1
-		hash0 = "3b086b9b53cf9d25ff0d30b1d41bb2f45c7cda2b"
-		hash1 = "2558e728184b8efcdb57cfab918d95b06d45de04"
-		hash2 = "203a8021192531d454efbc98a3bbb8cabe09c85c"
-		hash3 = "b79709eb7801a28d02919c41cc75ac695884db27"
 
 	strings:
 		$ = { 76 61 72 20 63 6f 6d 6d 61 6e 64 5f 68 69 73 74 20 3d 20 6e 65 77 20 41 72 72 61 79 28 3c 3f 70 68 70 20 65 63 68 6f 20 24 6a 73 5f 63 6f 6d 6d 61 6e 64 5f 68 69 73 74 20 3f 3e 29 3b }
@@ -18625,16 +18618,16 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_2 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6936-L6955"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "335a0851304acedc3f117782b61479bbc0fd655a"
+		hash = "ca9fcfb50645dc0712abdf18d613ed2196e66241"
+		hash = "36d8782d749638fdcaeed540d183dd3c8edc6791"
+		hash = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 		logic_hash = "0a63d3b00ad9719140da9bb5dcb49981c4d3758fac13c392d016b47e54f356c8"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
-		hash1 = "ca9fcfb50645dc0712abdf18d613ed2196e66241"
-		hash2 = "36d8782d749638fdcaeed540d183dd3c8edc6791"
-		hash3 = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 
 	strings:
 		$s3 = "if((isset($_POST['fileto']))||(isset($_POST['filefrom'])))" fullword
@@ -18656,15 +18649,15 @@ rule SIGNATURE_BASE_Webshell__Crystalshell_V_1_Erne_Stres {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6956-L6977"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "335a0851304acedc3f117782b61479bbc0fd655a"
+		hash = "6eb4ab630bd25bec577b39fb8a657350bf425687"
+		hash = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 		logic_hash = "a0484a5a71715d6a79c89e20919ab89aaa7e85a18ee502651f1f6b29153847a3"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
-		hash1 = "6eb4ab630bd25bec577b39fb8a657350bf425687"
-		hash2 = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 
 	strings:
 		$s1 = "<input type='submit' value='  open (shill.txt) '>" fullword
@@ -18689,16 +18682,16 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_3 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6978-L6997"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d829e87b3ce34460088c7775a60bded64e530cd4"
+		hash = "d710c95d9f18ec7c76d9349a28dd59c3605c02be"
+		hash = "f044d44e559af22a1a7f9db72de1206f392b8976"
+		hash = "41780a3e8c0dc3cbcaa7b4d3c066ae09fb74a289"
 		logic_hash = "5c264a294fc75cf2cadd3dba61bc64658989ffe5ddecfa18ba18e66492ad3c71"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "d829e87b3ce34460088c7775a60bded64e530cd4"
-		hash1 = "d710c95d9f18ec7c76d9349a28dd59c3605c02be"
-		hash2 = "f044d44e559af22a1a7f9db72de1206f392b8976"
-		hash3 = "41780a3e8c0dc3cbcaa7b4d3c066ae09fb74a289"
 
 	strings:
 		$s0 = "header('Content-Length:'.filesize($file).'');" fullword
@@ -18720,17 +18713,17 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_4 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L6998-L7020"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "335a0851304acedc3f117782b61479bbc0fd655a"
+		hash = "ca9fcfb50645dc0712abdf18d613ed2196e66241"
+		hash = "86bc40772de71b1e7234d23cab355e1ff80c474d"
+		hash = "36d8782d749638fdcaeed540d183dd3c8edc6791"
+		hash = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 		logic_hash = "18db4c6728f0575b4d8388dab9563ee98ca9aa5fdc8534bf76856a87820b4596"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
-		hash1 = "ca9fcfb50645dc0712abdf18d613ed2196e66241"
-		hash2 = "86bc40772de71b1e7234d23cab355e1ff80c474d"
-		hash3 = "36d8782d749638fdcaeed540d183dd3c8edc6791"
-		hash4 = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 
 	strings:
 		$s0 = "if ($filename != \".\" and $filename != \"..\"){" fullword
@@ -18754,15 +18747,15 @@ rule SIGNATURE_BASE_Webshell_GFS {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L7022-L7038"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "c2f1ef6b11aaec255d4dd31efad18a3869a2a42c"
+		hash = "34f6640985b07009dbd06cd70983451aa4fe9822"
+		hash = "d25ef72bdae3b3cb0fc0fdd81cfa58b215812a50"
 		logic_hash = "72a3f117cb11e1461b760c47a3de74283640b6e1daa87b24e45210213bb76609"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "c2f1ef6b11aaec255d4dd31efad18a3869a2a42c"
-		hash1 = "34f6640985b07009dbd06cd70983451aa4fe9822"
-		hash2 = "d25ef72bdae3b3cb0fc0fdd81cfa58b215812a50"
 
 	strings:
 		$s0 = "OKTsNCmNsb3NlKFNURE9VVCk7DQpjbG9zZShTVERFUlIpOw==\";" fullword
@@ -18782,15 +18775,15 @@ rule SIGNATURE_BASE_Webshell__Crystalshell_V_1_Sosyete_Stres {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L7039-L7059"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "335a0851304acedc3f117782b61479bbc0fd655a"
+		hash = "e32405e776e87e45735c187c577d3a4f98a64059"
+		hash = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 		logic_hash = "78aeabe38f7457060d81c3863098b5e424bc38f13e9e86bbb6ea54827f27afcd"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "335a0851304acedc3f117782b61479bbc0fd655a"
-		hash1 = "e32405e776e87e45735c187c577d3a4f98a64059"
-		hash2 = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 
 	strings:
 		$s1 = "A:visited { COLOR:blue; TEXT-DECORATION: none}" fullword
@@ -18814,16 +18807,16 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_10 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L7060-L7080"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ef7f7c45d26614cea597f2f8e64a85d54630fe38"
+		hash = "cabf47b96e3b2c46248f075bdbc46197db28a25f"
+		hash = "9e165d4ed95e0501cd9a90155ac60546eb5b1076"
+		hash = "7d5b54c7cab6b82fb7d131d7bbb989fd53cb1b57"
 		logic_hash = "0bf731edef55cde5d2ad16510fb9f1a240c1a06b535af7e13300fdbea470df74"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "ef7f7c45d26614cea597f2f8e64a85d54630fe38"
-		hash1 = "cabf47b96e3b2c46248f075bdbc46197db28a25f"
-		hash2 = "9e165d4ed95e0501cd9a90155ac60546eb5b1076"
-		hash3 = "7d5b54c7cab6b82fb7d131d7bbb989fd53cb1b57"
 
 	strings:
 		$s2 = "$world[\"execute\"] = ($world['execute']=='x') ? 't' : 'T'; " fullword
@@ -18846,16 +18839,16 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_11 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L7081-L7103"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "31a82cbee8dffaf8eb7b73841f3f3e8e9b3e78cf"
+		hash = "838c7191cb10d5bb0fc7460b4ad0c18c326764c6"
+		hash = "8dfcd919d8ddc89335307a7b2d5d467b1fd67351"
+		hash = "80aba3348434c66ac471daab949871ab16c50042"
 		logic_hash = "5a559a26314ce603d6454efb71f1243bf89daed920ca2a495a51b94a4cca0045"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "31a82cbee8dffaf8eb7b73841f3f3e8e9b3e78cf"
-		hash1 = "838c7191cb10d5bb0fc7460b4ad0c18c326764c6"
-		hash2 = "8dfcd919d8ddc89335307a7b2d5d467b1fd67351"
-		hash3 = "80aba3348434c66ac471daab949871ab16c50042"
 
 	strings:
 		$s5 = "$filename = $backupstring.\"$filename\";" fullword
@@ -18880,15 +18873,15 @@ rule SIGNATURE_BASE_Webshell__Findsock_Php_Findsock_Shell_Php_Reverse_Shell {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L7104-L7118"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "5622c9841d76617bfc3cd4cab1932d8349b7044f"
+		hash = "4a20f36035bbae8e342aab0418134e750b881d05"
+		hash = "40dbdc0bdf5218af50741ba011c5286a723fa9bf"
 		logic_hash = "2459f7114482e17f087bda4b638c29e237f2f3cb5a9e41e326ed65fc1834b6be"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "5622c9841d76617bfc3cd4cab1932d8349b7044f"
-		hash1 = "4a20f36035bbae8e342aab0418134e750b881d05"
-		hash2 = "40dbdc0bdf5218af50741ba011c5286a723fa9bf"
 
 	strings:
 		$s1 = "// me at pentestmonkey@pentestmonkey.net" fullword
@@ -18906,17 +18899,17 @@ rule SIGNATURE_BASE_Webshell_Generic_PHP_6 {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L7119-L7140"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "1a08f5260c4a2614636dfc108091927799776b13"
+		hash = "335a0851304acedc3f117782b61479bbc0fd655a"
+		hash = "ca9fcfb50645dc0712abdf18d613ed2196e66241"
+		hash = "36d8782d749638fdcaeed540d183dd3c8edc6791"
+		hash = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 		logic_hash = "7b3f2ca3cb9516ddda1b9cac2ca5eb5d9e62e1839dad041f69a3dc7a2a186897"
 		score = 75
 		quality = 85
 		tags = ""
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "1a08f5260c4a2614636dfc108091927799776b13"
-		hash1 = "335a0851304acedc3f117782b61479bbc0fd655a"
-		hash2 = "ca9fcfb50645dc0712abdf18d613ed2196e66241"
-		hash3 = "36d8782d749638fdcaeed540d183dd3c8edc6791"
-		hash4 = "03f88f494654f2ad0361fb63e805b6bbfc0c86de"
 
 	strings:
 		$s2 = "@eval(stripslashes($_POST['phpcode']));" fullword
@@ -22578,21 +22571,21 @@ rule SIGNATURE_BASE_Webshell_27_9_C66_C99 : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9231-L9256"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
+		hash = "5d7709a33879d1060a6cff5bae119de7d5a3c17f65415822fd125af56696778c"
+		hash = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
+		hash = "80ec7831ae888d5603ed28d81225ed8b256c831077bb8feb235e0a1a9b68b748"
+		hash = "6ce99e07aa98ba6dc521c34cf16fbd89654d0ba59194878dffca857a4c34e57b"
+		hash = "383d771b55bbe5343bab946fd7650fd42de1933c4c8f32449d9a40c898444ef1"
+		hash = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
+		hash = "615e768522447558970c725909e064558f33d38e6402c63c92a1a8bc62b64966"
+		hash = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
+		hash = "a4db77895228f02ea17ff48976e03100ddfaef7c9f48c1d40462872f103451d5"
 		logic_hash = "71ae0a3843151a2eec913f62167b23cf9e0c759b18ebe0759174d3503fb23717"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
-		hash2 = "5d7709a33879d1060a6cff5bae119de7d5a3c17f65415822fd125af56696778c"
-		hash3 = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
-		hash4 = "80ec7831ae888d5603ed28d81225ed8b256c831077bb8feb235e0a1a9b68b748"
-		hash5 = "6ce99e07aa98ba6dc521c34cf16fbd89654d0ba59194878dffca857a4c34e57b"
-		hash6 = "383d771b55bbe5343bab946fd7650fd42de1933c4c8f32449d9a40c898444ef1"
-		hash7 = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
-		hash8 = "615e768522447558970c725909e064558f33d38e6402c63c92a1a8bc62b64966"
-		hash9 = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
-		hash10 = "a4db77895228f02ea17ff48976e03100ddfaef7c9f48c1d40462872f103451d5"
 
 	strings:
 		$s4 = "if (!empty($unset_surl)) {setcookie(\"c99sh_surl\"); $surl = \"\";}" fullword ascii
@@ -22612,29 +22605,29 @@ rule SIGNATURE_BASE_Webshell_Acid_Antisecshell_3 : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9258-L9290"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
+		hash = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
+		hash = "0202f72b3e8b62e5ebc99164c7d4eb8ec5be6a7527286e9059184aa8321e0092"
+		hash = "d4424c61fe29d2ee3d8503f7d65feb48341ac2fc0049119f83074950e41194d5"
+		hash = "5d7709a33879d1060a6cff5bae119de7d5a3c17f65415822fd125af56696778c"
+		hash = "21dd06ec423f0b49732e4289222864dcc055967922d0fcec901d38a57ed77f06"
+		hash = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
+		hash = "816e699014be9a6d02d5d184eb958c49469d687b7c6fb88e878bca64688a19c9"
+		hash = "383d771b55bbe5343bab946fd7650fd42de1933c4c8f32449d9a40c898444ef1"
+		hash = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
+		hash = "615e768522447558970c725909e064558f33d38e6402c63c92a1a8bc62b64966"
+		hash = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
+		hash = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
+		hash = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
+		hash = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
+		hash = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
+		hash = "a4db77895228f02ea17ff48976e03100ddfaef7c9f48c1d40462872f103451d5"
+		hash = "1fdf6e142135a34ae1caf1d84adf5e273b253ca46c409b2530ca06d65a55ecbd"
 		logic_hash = "c8c3fcde7afdafe8ead59e24e432fdd4ccae99f96f67b4be3e5a9cd74ff9b2e7"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
-		hash2 = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
-		hash3 = "0202f72b3e8b62e5ebc99164c7d4eb8ec5be6a7527286e9059184aa8321e0092"
-		hash4 = "d4424c61fe29d2ee3d8503f7d65feb48341ac2fc0049119f83074950e41194d5"
-		hash5 = "5d7709a33879d1060a6cff5bae119de7d5a3c17f65415822fd125af56696778c"
-		hash6 = "21dd06ec423f0b49732e4289222864dcc055967922d0fcec901d38a57ed77f06"
-		hash7 = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
-		hash8 = "816e699014be9a6d02d5d184eb958c49469d687b7c6fb88e878bca64688a19c9"
-		hash9 = "383d771b55bbe5343bab946fd7650fd42de1933c4c8f32449d9a40c898444ef1"
-		hash10 = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
-		hash11 = "615e768522447558970c725909e064558f33d38e6402c63c92a1a8bc62b64966"
-		hash12 = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
-		hash13 = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
-		hash14 = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
-		hash15 = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
-		hash16 = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
-		hash17 = "a4db77895228f02ea17ff48976e03100ddfaef7c9f48c1d40462872f103451d5"
-		hash18 = "1fdf6e142135a34ae1caf1d84adf5e273b253ca46c409b2530ca06d65a55ecbd"
 
 	strings:
 		$s0 = "echo \"<option value=delete\".($dspact == \"delete\"?\" selected\":\"\").\">Delete</option>\";" fullword ascii
@@ -22653,25 +22646,25 @@ rule SIGNATURE_BASE_Webshell_C99_4 : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9292-L9323"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
+		hash = "0202f72b3e8b62e5ebc99164c7d4eb8ec5be6a7527286e9059184aa8321e0092"
+		hash = "d4424c61fe29d2ee3d8503f7d65feb48341ac2fc0049119f83074950e41194d5"
+		hash = "5d7709a33879d1060a6cff5bae119de7d5a3c17f65415822fd125af56696778c"
+		hash = "21dd06ec423f0b49732e4289222864dcc055967922d0fcec901d38a57ed77f06"
+		hash = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
+		hash = "816e699014be9a6d02d5d184eb958c49469d687b7c6fb88e878bca64688a19c9"
+		hash = "383d771b55bbe5343bab946fd7650fd42de1933c4c8f32449d9a40c898444ef1"
+		hash = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
+		hash = "615e768522447558970c725909e064558f33d38e6402c63c92a1a8bc62b64966"
+		hash = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
+		hash = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
+		hash = "a4db77895228f02ea17ff48976e03100ddfaef7c9f48c1d40462872f103451d5"
+		hash = "1fdf6e142135a34ae1caf1d84adf5e273b253ca46c409b2530ca06d65a55ecbd"
 		logic_hash = "fa095d8da737e24a913eeadaca2882475366bf5cf0911dd9ff44aaa04871cc0f"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
-		hash2 = "0202f72b3e8b62e5ebc99164c7d4eb8ec5be6a7527286e9059184aa8321e0092"
-		hash3 = "d4424c61fe29d2ee3d8503f7d65feb48341ac2fc0049119f83074950e41194d5"
-		hash4 = "5d7709a33879d1060a6cff5bae119de7d5a3c17f65415822fd125af56696778c"
-		hash5 = "21dd06ec423f0b49732e4289222864dcc055967922d0fcec901d38a57ed77f06"
-		hash6 = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
-		hash7 = "816e699014be9a6d02d5d184eb958c49469d687b7c6fb88e878bca64688a19c9"
-		hash8 = "383d771b55bbe5343bab946fd7650fd42de1933c4c8f32449d9a40c898444ef1"
-		hash9 = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
-		hash10 = "615e768522447558970c725909e064558f33d38e6402c63c92a1a8bc62b64966"
-		hash11 = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
-		hash12 = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
-		hash13 = "a4db77895228f02ea17ff48976e03100ddfaef7c9f48c1d40462872f103451d5"
-		hash14 = "1fdf6e142135a34ae1caf1d84adf5e273b253ca46c409b2530ca06d65a55ecbd"
 
 	strings:
 		$s1 = "displaysecinfo(\"List of Attributes\",myshellexec(\"lsattr -a\"));" fullword ascii
@@ -22693,24 +22686,24 @@ rule SIGNATURE_BASE_Webshell_R57Shell_2 : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9325-L9352"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "e46777e5f1ac1652db3ce72dd0a2475ea515b37a737fffd743126772525a47e6"
+		hash = "aa957ca4154b7816093d667873cf6bdaded03f820e84d8f1cd5ad75296dd5d4d"
+		hash = "aa957ca4154b7816093d667873cf6bdaded03f820e84d8f1cd5ad75296dd5d4d"
+		hash = "756b788401aad4bfd4dbafd15c382d98e3ba079390addb5b0cea7ff7f985f881"
+		hash = "756b788401aad4bfd4dbafd15c382d98e3ba079390addb5b0cea7ff7f985f881"
+		hash = "16b6ec4b80f404f4616e44d8c21978dcdad9f52c84d23ba27660ee8e00984ff2"
+		hash = "59105e4623433d5bf93b9e17d72a43a40a4d8ac99e4a703f1d8851ad1276cd88"
+		hash = "1db0549066f294f814ec14ba4e9f63d88c4460d68477e5895236173df437d2b8"
+		hash = "c6a5148c81411ec9200810619fa5eec6616800a4d76c988431c272bc8679254f"
+		hash = "c6a5148c81411ec9200810619fa5eec6616800a4d76c988431c272bc8679254f"
+		hash = "59ea6cf16ea06ff47cf0e6a398df2eaec4d329707b8c3201fc63cbf0b7c85519"
+		hash = "0e0227a0001b38fb59fc07749e80c9d298ff0e6aca126ea8f4ea68ebc9a3661f"
+		hash = "ef74644065925aa8d64913f5f124fe73d8d289d5f019a104bf5f56689f49ba92"
 		logic_hash = "2af51c3d181801b14d5dbb3107cd78cf7ab4a590b7967f231ec707b7ee03fa26"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "e46777e5f1ac1652db3ce72dd0a2475ea515b37a737fffd743126772525a47e6"
-		hash2 = "aa957ca4154b7816093d667873cf6bdaded03f820e84d8f1cd5ad75296dd5d4d"
-		hash3 = "aa957ca4154b7816093d667873cf6bdaded03f820e84d8f1cd5ad75296dd5d4d"
-		hash4 = "756b788401aad4bfd4dbafd15c382d98e3ba079390addb5b0cea7ff7f985f881"
-		hash5 = "756b788401aad4bfd4dbafd15c382d98e3ba079390addb5b0cea7ff7f985f881"
-		hash6 = "16b6ec4b80f404f4616e44d8c21978dcdad9f52c84d23ba27660ee8e00984ff2"
-		hash7 = "59105e4623433d5bf93b9e17d72a43a40a4d8ac99e4a703f1d8851ad1276cd88"
-		hash8 = "1db0549066f294f814ec14ba4e9f63d88c4460d68477e5895236173df437d2b8"
-		hash9 = "c6a5148c81411ec9200810619fa5eec6616800a4d76c988431c272bc8679254f"
-		hash10 = "c6a5148c81411ec9200810619fa5eec6616800a4d76c988431c272bc8679254f"
-		hash11 = "59ea6cf16ea06ff47cf0e6a398df2eaec4d329707b8c3201fc63cbf0b7c85519"
-		hash12 = "0e0227a0001b38fb59fc07749e80c9d298ff0e6aca126ea8f4ea68ebc9a3661f"
-		hash13 = "ef74644065925aa8d64913f5f124fe73d8d289d5f019a104bf5f56689f49ba92"
 
 	strings:
 		$s1 = "$connection = @ftp_connect($ftp_server,$ftp_port,10);" fullword ascii
@@ -22729,19 +22722,19 @@ rule SIGNATURE_BASE_Webshell_27_9_Acid_C99_Locus7S : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9354-L9376"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
+		hash = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
+		hash = "960feb502f913adff6b322bc9815543e5888bbf9058ba0eb46ceb1773ea67668"
+		hash = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
+		hash = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
+		hash = "5ae121f868555fba112ca2b1a9729d4414e795c39d14af9e599ce1f0e4e445d3"
+		hash = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
+		hash = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
 		logic_hash = "3005c09dfcb1f2e33a09ed73e28ef889c74e1f5daf619dd272e0b9b30cdb0f94"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "2b8aed49f50acd0c1b89a399647e1218f2a8545da96631ac0882da28810eecc4"
-		hash2 = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
-		hash3 = "960feb502f913adff6b322bc9815543e5888bbf9058ba0eb46ceb1773ea67668"
-		hash4 = "07f9ec716fb199e00a90091ffba4c2ee1a328a093a64e610e51ab9dd6d33357a"
-		hash5 = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
-		hash6 = "5ae121f868555fba112ca2b1a9729d4414e795c39d14af9e599ce1f0e4e445d3"
-		hash7 = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
-		hash8 = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
 
 	strings:
 		$s0 = "$blah = ex($p2.\" /tmp/back \".$_POST['backconnectip'].\" \".$_POST['backconnectport'].\" &\");" fullword ascii
@@ -22760,22 +22753,22 @@ rule SIGNATURE_BASE_Webshell_Backdoor_PHP_Agent_R57_Mod_Bizzz_Shell_R57 : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9378-L9403"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "e46777e5f1ac1652db3ce72dd0a2475ea515b37a737fffd743126772525a47e6"
+		hash = "f51a5c5775d9cca0b137ddb28ff3831f4f394b7af6f6a868797b0df3dcdb01ba"
+		hash = "16b6ec4b80f404f4616e44d8c21978dcdad9f52c84d23ba27660ee8e00984ff2"
+		hash = "59105e4623433d5bf93b9e17d72a43a40a4d8ac99e4a703f1d8851ad1276cd88"
+		hash = "6dc417db9e07420a618d44217932ca8baf3541c08d5e68281e1be10af4280e4a"
+		hash = "5d07fdfee2dc6d81da26f05028f79badd10dec066909932129d398627b2f4e94"
+		hash = "1db0549066f294f814ec14ba4e9f63d88c4460d68477e5895236173df437d2b8"
+		hash = "c6a5148c81411ec9200810619fa5eec6616800a4d76c988431c272bc8679254f"
+		hash = "59ea6cf16ea06ff47cf0e6a398df2eaec4d329707b8c3201fc63cbf0b7c85519"
+		hash = "0e0227a0001b38fb59fc07749e80c9d298ff0e6aca126ea8f4ea68ebc9a3661f"
+		hash = "ef74644065925aa8d64913f5f124fe73d8d289d5f019a104bf5f56689f49ba92"
 		logic_hash = "51660ea25d1b2290c0ca30377dbf378cac8d7b7650603f1dbe5b7914c530d5cf"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "e46777e5f1ac1652db3ce72dd0a2475ea515b37a737fffd743126772525a47e6"
-		hash2 = "f51a5c5775d9cca0b137ddb28ff3831f4f394b7af6f6a868797b0df3dcdb01ba"
-		hash3 = "16b6ec4b80f404f4616e44d8c21978dcdad9f52c84d23ba27660ee8e00984ff2"
-		hash4 = "59105e4623433d5bf93b9e17d72a43a40a4d8ac99e4a703f1d8851ad1276cd88"
-		hash5 = "6dc417db9e07420a618d44217932ca8baf3541c08d5e68281e1be10af4280e4a"
-		hash6 = "5d07fdfee2dc6d81da26f05028f79badd10dec066909932129d398627b2f4e94"
-		hash7 = "1db0549066f294f814ec14ba4e9f63d88c4460d68477e5895236173df437d2b8"
-		hash8 = "c6a5148c81411ec9200810619fa5eec6616800a4d76c988431c272bc8679254f"
-		hash9 = "59ea6cf16ea06ff47cf0e6a398df2eaec4d329707b8c3201fc63cbf0b7c85519"
-		hash10 = "0e0227a0001b38fb59fc07749e80c9d298ff0e6aca126ea8f4ea68ebc9a3661f"
-		hash11 = "ef74644065925aa8d64913f5f124fe73d8d289d5f019a104bf5f56689f49ba92"
 
 	strings:
 		$s1 = "$_POST['cmd'] = which('" ascii
@@ -22794,18 +22787,18 @@ rule SIGNATURE_BASE_Webshell_C100 : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9405-L9429"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0202f72b3e8b62e5ebc99164c7d4eb8ec5be6a7527286e9059184aa8321e0092"
+		hash = "d4424c61fe29d2ee3d8503f7d65feb48341ac2fc0049119f83074950e41194d5"
+		hash = "21dd06ec423f0b49732e4289222864dcc055967922d0fcec901d38a57ed77f06"
+		hash = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
+		hash = "816e699014be9a6d02d5d184eb958c49469d687b7c6fb88e878bca64688a19c9"
+		hash = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
+		hash = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
 		logic_hash = "cc8c59f70f5ec6c89812b1597e9b864e358593ea5782e359cd483dee1a84b28b"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "0202f72b3e8b62e5ebc99164c7d4eb8ec5be6a7527286e9059184aa8321e0092"
-		hash2 = "d4424c61fe29d2ee3d8503f7d65feb48341ac2fc0049119f83074950e41194d5"
-		hash3 = "21dd06ec423f0b49732e4289222864dcc055967922d0fcec901d38a57ed77f06"
-		hash4 = "c377f9316a4c953602879eb8af1fd7cbb0dd35de6bb4747fa911234082c45596"
-		hash5 = "816e699014be9a6d02d5d184eb958c49469d687b7c6fb88e878bca64688a19c9"
-		hash6 = "bbe0f7278041cb3a6338844aa12c3df6b700a12a78b0a58bce3dce14f1c37b96"
-		hash7 = "ef3a7cd233a880fc61efc3884f127dd8944808babd1203be2400144119b6057f"
 
 	strings:
 		$s0 = "<OPTION VALUE=\"wget http://ftp.powernet.com.tr/supermail/debug/k3\">Kernel attack (Krad.c) PT1 (If wget installed)" fullword ascii
@@ -22827,21 +22820,21 @@ rule SIGNATURE_BASE_Webshell_Acidpoison : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9431-L9454"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
+		hash = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
+		hash = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
+		hash = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
+		hash = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
+		hash = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
+		hash = "be541cf880a8e389a0767b85f1686443f35b508d1975ee25e1ce3f08fa32cfb5"
+		hash = "be541cf880a8e389a0767b85f1686443f35b508d1975ee25e1ce3f08fa32cfb5"
+		hash = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
+		hash = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
 		logic_hash = "31add38bcdc33d5e4b825bfa18ff1a47d5aa5aaeebd8e3adac533c471aa30629"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
-		hash2 = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
-		hash3 = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
-		hash4 = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
-		hash5 = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
-		hash6 = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
-		hash7 = "be541cf880a8e389a0767b85f1686443f35b508d1975ee25e1ce3f08fa32cfb5"
-		hash8 = "be541cf880a8e389a0767b85f1686443f35b508d1975ee25e1ce3f08fa32cfb5"
-		hash9 = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
-		hash10 = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
 
 	strings:
 		$s1 = "elseif ( enabled(\"exec\") ) { exec($cmd,$o); $output = join(\"\\r\\n\",$o); }" fullword ascii
@@ -22859,16 +22852,16 @@ rule SIGNATURE_BASE_Webshell_Acid_Fatalisticz_Fx_Fx_P0Ison_Sh3Ll_X0Rg_Byp4Ss_256
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9456-L9475"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
+		hash = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
+		hash = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
+		hash = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
+		hash = "1fdf6e142135a34ae1caf1d84adf5e273b253ca46c409b2530ca06d65a55ecbd"
 		logic_hash = "07cd255247c9a77b1c9b6049a2b96632252ea9572880b10991c6797c14a05d48"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "7a69466dbd18182ce7da5d9d1a9447228dcebd365e0fe855d0e02024f4117549"
-		hash2 = "d0edca7539ef2d30f0b3189b21a779c95b5815c1637829b5594e2601e77cb4dc"
-		hash3 = "65e7edf10ffb355bed81b7413c77d13d592f63d39e95948cdaea4ea0a376d791"
-		hash4 = "ba87d26340f799e65c771ccb940081838afe318ecb20ee543f32d32db8533e7f"
-		hash5 = "1fdf6e142135a34ae1caf1d84adf5e273b253ca46c409b2530ca06d65a55ecbd"
 
 	strings:
 		$s0 = "<form method=\"POST\"><input type=hidden name=act value=\"ls\">" fullword ascii
@@ -22887,16 +22880,16 @@ rule SIGNATURE_BASE_Webshell_Ayyildiz : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9477-L9496"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0e25aec0a9131e8c7bd7d5004c5c5ffad0e3297f386675bccc07f6ea527dded5"
+		hash = "9c43aada0d5429f8c47595f79a7cdd5d4eb2ba5c559fb5da5a518a6c8c7c330a"
+		hash = "2ebf3e5f5dde4a27bbd60e15c464e08245a35d15cc370b4be6b011aa7a46eaca"
+		hash = "77a63b26f52ba341dd2f5e8bbf5daf05ebbdef6b3f7e81cec44ce97680e820f9"
+		hash = "61c4fcb6e788c0dffcf0b672ae42b1676f8a9beaa6ec7453fc59ad821a4a8127"
 		logic_hash = "8441b7d730e337e002eeb7ae8f489e405409ddbe62f45bbc9a74c935d1d9fe66"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "0e25aec0a9131e8c7bd7d5004c5c5ffad0e3297f386675bccc07f6ea527dded5"
-		hash2 = "9c43aada0d5429f8c47595f79a7cdd5d4eb2ba5c559fb5da5a518a6c8c7c330a"
-		hash3 = "2ebf3e5f5dde4a27bbd60e15c464e08245a35d15cc370b4be6b011aa7a46eaca"
-		hash4 = "77a63b26f52ba341dd2f5e8bbf5daf05ebbdef6b3f7e81cec44ce97680e820f9"
-		hash5 = "61c4fcb6e788c0dffcf0b672ae42b1676f8a9beaa6ec7453fc59ad821a4a8127"
 
 	strings:
 		$s0 = "echo \"<option value=\\\"\". strrev(substr(strstr(strrev($work_dir), \"/\"), 1)) .\"\\\">Parent Directory</option>\\n\";" fullword ascii
@@ -22915,16 +22908,16 @@ rule SIGNATURE_BASE_Webshell_Zehir : FILE {
 		reference = "https://github.com/nikicat/web-malware-collection"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9498-L9517"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "16e1e886576d0c70af0f96e3ccedfd2e72b8b7640f817c08a82b95ff5d4b1218"
+		hash = "0c5f8a2ed62d10986a2dd39f52886c0900a18c03d6d279207b8de8e2ed14adf6"
+		hash = "cb9d5427a83a0fc887e49f07f20849985bd2c3850f272ae1e059a08ac411ff66"
+		hash = "b57bf397984545f419045391b56dcaf7b0bed8b6ee331b5c46cee35c92ffa13d"
+		hash = "febf37a9e8ba8ece863f506ae32ad398115106cc849a9954cbc0277474cdba5c"
 		logic_hash = "c8fda66ada3581d2471b322ae65032b68c69b882c29f7469dd2ed78800c9c5f7"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "16e1e886576d0c70af0f96e3ccedfd2e72b8b7640f817c08a82b95ff5d4b1218"
-		hash2 = "0c5f8a2ed62d10986a2dd39f52886c0900a18c03d6d279207b8de8e2ed14adf6"
-		hash3 = "cb9d5427a83a0fc887e49f07f20849985bd2c3850f272ae1e059a08ac411ff66"
-		hash4 = "b57bf397984545f419045391b56dcaf7b0bed8b6ee331b5c46cee35c92ffa13d"
-		hash5 = "febf37a9e8ba8ece863f506ae32ad398115106cc849a9954cbc0277474cdba5c"
 
 	strings:
 		$s1 = "for (i=1; i<=frmUpload.max.value; i++) str+='File '+i+': <input type=file name=file'+i+'><br>';" fullword ascii
@@ -22943,12 +22936,12 @@ rule SIGNATURE_BASE_Uploadshell_98038F1Efa4203432349Badabad76D44337319A6 : FILE 
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9528-L9543"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "506a6ab6c49e904b4adc1f969c91e4f1a7dde164be549c6440e766de36c93215"
 		logic_hash = "68f0de84a387a9af1a32dd8d38c66b002e16e1c954a51e6bc307580180faedbf"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "506a6ab6c49e904b4adc1f969c91e4f1a7dde164be549c6440e766de36c93215"
 
 	strings:
 		$s2 = "$lol = file_get_contents(\"../../../../../wp-config.php\");" fullword ascii
@@ -22968,12 +22961,12 @@ rule SIGNATURE_BASE_Dkshell_F0772Be3C95802A2D1E7A4A3F5A45Dcdef6997F3 : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9545-L9559"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7ea49d5c29f1242f81f2393b514798ff7caccb50d46c60bdfcf61db00043473b"
 		logic_hash = "81b0a08d1b9d3640e656a5cd08b79c0a2f940a2db5c2d939d19509f993514e86"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "7ea49d5c29f1242f81f2393b514798ff7caccb50d46c60bdfcf61db00043473b"
 
 	strings:
 		$s1 = "<?php Error_Reporting(0); $s_pass = \"" ascii
@@ -22992,12 +22985,12 @@ rule SIGNATURE_BASE_Unknown_8Af033424F9590A15472A23Cc3236E68070B952E : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9561-L9576"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "3382b5eaaa9ad651ab4793e807032650667f9d64356676a16ae3e9b02740ccf3"
 		logic_hash = "d7dc9a2a5e0800b5061cb2101d7cda023a6e637f1e7b14054fdb6a0b2cec6084"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "3382b5eaaa9ad651ab4793e807032650667f9d64356676a16ae3e9b02740ccf3"
 
 	strings:
 		$s1 = "$check = $_SERVER['DOCUMENT_ROOT']" fullword ascii
@@ -23017,12 +23010,12 @@ rule SIGNATURE_BASE_Dkshell_4000Bd83451F0D8501A9Dfad60Dce39E55Ae167D : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9578-L9596"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "51a16b09520a3e063adf10ff5192015729a5de1add8341a43da5326e626315bd"
 		logic_hash = "26d586e32d1b0b7800b4b61f592dadc3dd0583628e4cd3fa4e24e02067077da5"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "51a16b09520a3e063adf10ff5192015729a5de1add8341a43da5326e626315bd"
 
 	strings:
 		$x1 = "DK Shell - Took the Best made it Better..!!" fullword ascii
@@ -23044,12 +23037,12 @@ rule SIGNATURE_BASE_Webshell_5786D7D9F4B0Df731D79Ed927Fb5A124195Fc901 : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9598-L9612"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "b1733cbb0eb3d440c4174cc67ca693ba92308ded5fc1069ed650c3c78b1da4bc"
 		logic_hash = "348ccdf997965fbea791d835f1dd4e2c16d37a17ff4195e585fa4226f18faad6"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "b1733cbb0eb3d440c4174cc67ca693ba92308ded5fc1069ed650c3c78b1da4bc"
 
 	strings:
 		$s1 = "preg_replace(\"\\x2F\\x2E\\x2A\\x2F\\x65\",\"\\x65\\x76\\x61\\x6C\\x28\\x67\\x7A\\x69\\x6E\\x66\\x6C\\x61\\x74\\x65\\x28\\x62\\x" ascii
@@ -23068,12 +23061,12 @@ rule SIGNATURE_BASE_Webshell_E8Eaf8Da94012E866E51547Cd63Bb996379690Bf : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9614-L9629"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "027544baa10259939780e97dc908bd43f0fb940510119fc4cce0883f3dd88275"
 		logic_hash = "044491f0b07ef606aa76e70a07d161565f9cecf73e8f9f8db63cacc1c475b056"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "027544baa10259939780e97dc908bd43f0fb940510119fc4cce0883f3dd88275"
 
 	strings:
 		$x1 = "@exec('./bypass/ln -s /etc/passwd 1.php');" fullword ascii
@@ -23093,12 +23086,12 @@ rule SIGNATURE_BASE_Unknown_0F06C5D1B32F4994C3B3Abf8Bb76D5468F105167 : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9631-L9646"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "6362372850ac7455fa9461ed0483032a1886543f213a431f81a2ac76d383b47e"
 		logic_hash = "6f4bdf8aecd527335c29a8e964c7d8688c3e77419595d3fd10a6cf3704711816"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "6362372850ac7455fa9461ed0483032a1886543f213a431f81a2ac76d383b47e"
 
 	strings:
 		$s1 = "$check = $_SERVER['DOCUMENT_ROOT'] . \"/libraries/lola.php\" ;" fullword ascii
@@ -23118,12 +23111,12 @@ rule SIGNATURE_BASE_Wsoshell_0Bbebaf46F87718Caba581163D4Beed56Ddf73A7 : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9648-L9662"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d053086907aed21fbb6019bf9e644d2bae61c63563c4c3b948d755db3e78f395"
 		logic_hash = "bf5090fb909fea690c8a2af3cca35136eda3b9773976189158c25fb8877cc266"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "d053086907aed21fbb6019bf9e644d2bae61c63563c4c3b948d755db3e78f395"
 
 	strings:
 		$s8 = "$default_charset='Wi'.'ndo.'.'ws-12'.'51';" fullword ascii
@@ -23142,14 +23135,14 @@ rule SIGNATURE_BASE_Webshell_Generic_1609_A : FILE {
 		reference = "https://github.com/bartblaze/PHP-backdoors"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9664-L9679"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "c817a490cfd4d6377c15c9ac9bcfa136f4a45ff5b40c74f15216c030f657d035"
+		hash = "69b9d55ea2eb4a0d9cfe3b21b0c112c31ea197d1cb00493d1dddc78b90c5745e"
 		logic_hash = "e5a4bba3a7b1c712203fcc8b85e4089b0ff18a26e96f5a04529616dbfb9de651"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash1 = "c817a490cfd4d6377c15c9ac9bcfa136f4a45ff5b40c74f15216c030f657d035"
-		hash3 = "69b9d55ea2eb4a0d9cfe3b21b0c112c31ea197d1cb00493d1dddc78b90c5745e"
 
 	strings:
 		$s1 = "return $qwery45234dws($b);" fullword ascii
@@ -23299,12 +23292,12 @@ rule SIGNATURE_BASE_ALFA_SHELL : FILE {
 		reference = "Internal Research - APT33"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9835-L9853"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "a39d8823d54c55e60a7395772e50d116408804c1a5368391a1e5871dbdc83547"
 		logic_hash = "651568b2b95c9e5c2b60fb3245e5afe4290235979e3df15bad96ccd08ae234ef"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "a39d8823d54c55e60a7395772e50d116408804c1a5368391a1e5871dbdc83547"
 
 	strings:
 		$x1 = "$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64')" ascii
@@ -23327,12 +23320,12 @@ rule SIGNATURE_BASE_Webshell_FOPO_Obfuscation_APT_ON_Nov17_1 : FILE {
 		reference = "Internal Research - ON"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9855-L9874"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "ed6e2e0027d3f564f5ce438984dc8a54577df822ce56ce079c60c99a91d5ffb1"
 		logic_hash = "3c5bc3ee0218d4ce6902e49d7f938264ecd158f1f458e2fcef878f06f003ed08"
 		score = 75
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-		hash1 = "ed6e2e0027d3f564f5ce438984dc8a54577df822ce56ce079c60c99a91d5ffb1"
 
 	strings:
 		$x1 = "Obfuscation provided by FOPO" fullword ascii
@@ -23352,11 +23345,11 @@ rule SIGNATURE_BASE_Webshell_Jexboss_JSP_1 : FILE {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9876-L9893"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "41e0fb374e5d30b2e2a362a2718a5bf16e73127e22f0dfc89fdb17acbe89efdf"
 		logic_hash = "f540bbc88bffd0c961837416bd5166fd3cb54b6124ffffbf1cd60e49ab01bd30"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "41e0fb374e5d30b2e2a362a2718a5bf16e73127e22f0dfc89fdb17acbe89efdf"
 
 	strings:
 		$x1 = "equals(\"jexboss\")"
@@ -23378,12 +23371,12 @@ rule SIGNATURE_BASE_Webshell_Jexboss_WAR_1 : FILE {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9895-L9918"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "6271775ab144ce9bb9138bf054b149b5813d3beb96338993c6de35330f566092"
+		hash = "6f14a63c3034d3762da8b3ad4592a8209a0c88beebcb9f9bd11b40e879f74eaf"
 		logic_hash = "ee9cb22496d2e36d215caa9c7e295b41cb8434322a0097bbc3d1a365dce0c156"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "6271775ab144ce9bb9138bf054b149b5813d3beb96338993c6de35330f566092"
-		hash2 = "6f14a63c3034d3762da8b3ad4592a8209a0c88beebcb9f9bd11b40e879f74eaf"
 
 	strings:
 		$ = "jbossass" fullword ascii
@@ -23411,11 +23404,11 @@ rule SIGNATURE_BASE_Webshell_Tinyasp : FILE {
 		reference = "https://github.com/Neo23x0/signature-base"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9920-L9931"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "1f29905348e136b66d4ff6c1494d6008ea13f9551ad5aa9b991893a31b37e452"
 		logic_hash = "d8b7db89ea623d5bcf14476779df727827cfc752d4c6ba4208445fd7305e6943"
 		score = 75
 		quality = 83
 		tags = "FILE"
-		hash1 = "1f29905348e136b66d4ff6c1494d6008ea13f9551ad5aa9b991893a31b37e452"
 
 	strings:
 		$s1 = "Execute Request" ascii wide nocase
@@ -23433,20 +23426,20 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Mar21_1 : FILE {
 		reference = "Internal Research"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/thor-webshells.yar#L9933-L9959"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "10b6e82125a2ddf3cc31a238e0d0c71a64f902e0d77171766713affede03174d"
+		hash = "170bee832df176aac0a3c6c7d5aa3fee413b4572030a24c994a97e70f6648ffc"
+		hash = "31c4d1fc81c052e269866deff324dffb215e7d481a47a2b6357a572a3e685d90"
+		hash = "41b5c26ac194439612b68e9ec6a638eceaf00842c347ffa551eb009ef6c015a3"
+		hash = "4b645bc773acde2b3cc204e77ac27c3f6991046c3b75f42d12bc90ec29cff9e3"
+		hash = "602bb701b78895d4de32f5e78f3c511e5298ba244b29641b11a7c1c483789859"
+		hash = "7ac47a17c511e25c06a53a1c7a5fbbf05f41f047a4a40b71afa81ce7b59f4b03"
+		hash = "9a5097d0e8dc29a2814adac070c80fd4b149b33e56aaaf9235af9e87b0501d91"
+		hash = "9efb5932c0753e45504fc9e8444209b92c2bdf22e63b1c1a44e2d52cb62b4548"
+		hash = "d40b16307d6434c3281374c0e1bbc0f6db388883e7f6266c3c81de0694266882"
 		logic_hash = "0c20163871bf424c0b594c4b75d35e782df03761552f792474761c603ddb8478"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "10b6e82125a2ddf3cc31a238e0d0c71a64f902e0d77171766713affede03174d"
-		hash2 = "170bee832df176aac0a3c6c7d5aa3fee413b4572030a24c994a97e70f6648ffc"
-		hash3 = "31c4d1fc81c052e269866deff324dffb215e7d481a47a2b6357a572a3e685d90"
-		hash4 = "41b5c26ac194439612b68e9ec6a638eceaf00842c347ffa551eb009ef6c015a3"
-		hash5 = "4b645bc773acde2b3cc204e77ac27c3f6991046c3b75f42d12bc90ec29cff9e3"
-		hash6 = "602bb701b78895d4de32f5e78f3c511e5298ba244b29641b11a7c1c483789859"
-		hash7 = "7ac47a17c511e25c06a53a1c7a5fbbf05f41f047a4a40b71afa81ce7b59f4b03"
-		hash8 = "9a5097d0e8dc29a2814adac070c80fd4b149b33e56aaaf9235af9e87b0501d91"
-		hash9 = "9efb5932c0753e45504fc9e8444209b92c2bdf22e63b1c1a44e2d52cb62b4548"
-		hash10 = "d40b16307d6434c3281374c0e1bbc0f6db388883e7f6266c3c81de0694266882"
 
 	strings:
 		$s1 = ".StartInfo.FileName = 'cmd.exe';" ascii
@@ -24738,15 +24731,15 @@ rule SIGNATURE_BASE_CN_Honker_Webshell__Php1_Php7_Php9 : FILE {
 		reference = "Disclosed CN Honker Pentest Toolset"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/cn_pentestset_webshells.yar#L859-L878"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "c2f4b150f53c78777928921b3a985ec678bfae32"
+		hash = "05a3f93dbb6c3705fd5151b6ffb64b53bc555575"
+		hash = "cd3962b1dba9f1b389212e38857568b69ca76725"
 		logic_hash = "6ea5b362f8d8f2e99725d4dd4d2ada5c3939a45a3dde0084571600452ab4673c"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "c2f4b150f53c78777928921b3a985ec678bfae32"
-		hash1 = "05a3f93dbb6c3705fd5151b6ffb64b53bc555575"
-		hash2 = "cd3962b1dba9f1b389212e38857568b69ca76725"
 
 	strings:
 		$s1 = "<a href=\"?s=h&o=wscript\">[WScript.shell]</a> " fullword ascii
@@ -24766,15 +24759,15 @@ rule SIGNATURE_BASE_CN_Honker_Webshell__Serv_U_By_Goldsun_Asp3_Serv_U_Asp : FILE
 		reference = "Disclosed CN Honker Pentest Toolset"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/cn_pentestset_webshells.yar#L880-L899"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "d4d7a632af65a961a1dbd0cff80d5a5c2b397e8c"
+		hash = "87c5a76989bf08da5562e0b75c196dcb3087a27b"
+		hash = "cee91cd462a459d31a95ac08fe80c70d2f9c1611"
 		logic_hash = "b733e80f234a85a4f65eedd94f535860b4da464adb80a91afc547a8d96b5dc7a"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "d4d7a632af65a961a1dbd0cff80d5a5c2b397e8c"
-		hash1 = "87c5a76989bf08da5562e0b75c196dcb3087a27b"
-		hash2 = "cee91cd462a459d31a95ac08fe80c70d2f9c1611"
 
 	strings:
 		$s1 = "c.send loginuser & loginpass & mt & deldomain & quit" fullword ascii
@@ -24794,16 +24787,16 @@ rule SIGNATURE_BASE_CN_Honker_Webshell__Asp4_Asp4_MSSQL__MSSQL_ : FILE {
 		reference = "Disclosed CN Honker Pentest Toolset"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/cn_pentestset_webshells.yar#L901-L921"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "4005b83ced1c032dc657283341617c410bc007b8"
+		hash = "4005b83ced1c032dc657283341617c410bc007b8"
+		hash = "7097c21f92306983add3b5b29a517204cd6cd819"
+		hash = "7097c21f92306983add3b5b29a517204cd6cd819"
 		logic_hash = "a8ec5ad87c83c16f47391c3ce08cee74c6be1e42c288eec6d1559867d28489c6"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "4005b83ced1c032dc657283341617c410bc007b8"
-		hash1 = "4005b83ced1c032dc657283341617c410bc007b8"
-		hash2 = "7097c21f92306983add3b5b29a517204cd6cd819"
-		hash3 = "7097c21f92306983add3b5b29a517204cd6cd819"
 
 	strings:
 		$s0 = "\"<form name=\"\"searchfileform\"\" action=\"\"?action=searchfile\"\" method=\"" ascii
@@ -24823,16 +24816,16 @@ rule SIGNATURE_BASE_CN_Honker_Webshell__Injection_Jmcook_Jmpost_Manualinjection 
 		reference = "Disclosed CN Honker Pentest Toolset"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/cn_pentestset_webshells.yar#L923-L942"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "3484ed16e6f9e0d603cbc5cb44e46b8b7e775d35"
+		hash = "5e1851c77ce922e682333a3cb83b8506e1d7395d"
+		hash = "f80ec26bbdc803786925e8e0450ad7146b2478ff"
+		hash = "e83d427f44783088a84e9c231c6816c214434526"
 		logic_hash = "0f3a4f81326154a6a6ac448d18be29ad534917bc39aba26cc458f06b43001681"
 		score = 70
 		quality = 85
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		super_rule = 1
-		hash0 = "3484ed16e6f9e0d603cbc5cb44e46b8b7e775d35"
-		hash1 = "5e1851c77ce922e682333a3cb83b8506e1d7395d"
-		hash2 = "f80ec26bbdc803786925e8e0450ad7146b2478ff"
-		hash3 = "e83d427f44783088a84e9c231c6816c214434526"
 
 	strings:
 		$s1 = "response.write  PostData(JMUrl,JmStr,JmCok,JmRef)" fullword ascii
@@ -25220,11 +25213,11 @@ rule SIGNATURE_BASE_APT_Webshell_AUS_Tiny_2 : FILE {
 		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_aus_parl_compromise.yar#L25-L38"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "0d6209d86f77a0a69451b0f27b476580c14e0cda15fa6a5003aab57a93e7e5a5"
 		logic_hash = "e26c265d2b1606257d8c843921601f14cae2beaf246f8e37daeeb6c5ff12f289"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "0d6209d86f77a0a69451b0f27b476580c14e0cda15fa6a5003aab57a93e7e5a5"
 
 	strings:
 		$x1 = "Request.Item[System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(\"[password]\"))];" ascii
@@ -25243,11 +25236,11 @@ rule SIGNATURE_BASE_APT_Webshell_AUS_Jscript_3 : FILE {
 		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_aus_parl_compromise.yar#L40-L53"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "7ac6f973f7fccf8c3d58d766dec4ab7eb6867a487aa71bc11d5f05da9322582d"
 		logic_hash = "e144e555dd80e15ac9072a645e629a86ca1a6b52949d236ec3daedbf06bd6718"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "7ac6f973f7fccf8c3d58d766dec4ab7eb6867a487aa71bc11d5f05da9322582d"
 
 	strings:
 		$s1 = "<%@ Page Language=\"Jscript\" validateRequest=\"false\"%><%try{eval(System.Text.Encoding.UTF8.GetString(Convert.FromBase64String" ascii
@@ -25266,11 +25259,11 @@ rule SIGNATURE_BASE_APT_Webshell_AUS_4 : FILE {
 		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_aus_parl_compromise.yar#L56-L71"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "83321c02339bb51735fbcd9a80c056bd3b89655f3dc41e5fef07ca46af09bb71"
 		logic_hash = "4a4f26b50631021979e4a8246a1e1c10150f4fb03eb7d77a1042e41ef57b3961"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "83321c02339bb51735fbcd9a80c056bd3b89655f3dc41e5fef07ca46af09bb71"
 
 	strings:
 		$s1 = "wProxy.Credentials = new System.Net.NetworkCredential(pusr, ppwd);" fullword ascii
@@ -25291,11 +25284,11 @@ rule SIGNATURE_BASE_APT_Webshell_AUS_5 : FILE {
 		reference = "https://twitter.com/cyb3rops/status/1097423665472376832"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_aus_parl_compromise.yar#L92-L111"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "54a17fb257db2d09d61af510753fd5aa00537638a81d0a8762a5645b4ef977e4"
 		logic_hash = "fb0e53e5561f7f14f2ad6afcda2798d353cf4d54d12ae3354b03d62ed0c00bf3"
 		score = 75
 		quality = 85
 		tags = "FILE"
-		hash1 = "54a17fb257db2d09d61af510753fd5aa00537638a81d0a8762a5645b4ef977e4"
 
 	strings:
 		$a1 = "function DEC(d){return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(d));}" fullword ascii
@@ -25350,7 +25343,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Compiled_Sharepoint_Drop_CVE_2025_53770_Jul25_
 		hash = "7e9b77da1f51d03ee2f96bc976f6aeb781f801cf633862a4b8c356cbb555927d"
 		logic_hash = "df11e5bd293cf094f3a147b54ecaafbe0804d7d575fcc22f38e77ab155c7ebdc"
 		score = 75
-		quality = 83
+		quality = 58
 		tags = "CVE-2025-53770, FILE"
 
 	strings:
@@ -25503,11 +25496,11 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_DLL_Moveit_Jun23_1 : FILE {
 		reference = "https://www.trustedsec.com/blog/critical-vulnerability-in-progress-moveit-transfer-technical-analysis-and-recommendations/?utm_content=251159938&utm_medium=social&utm_source=twitter&hss_channel=tw-403811306"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/vuln_moveit_0day_jun23.yar#L2-L22"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "6cbf38f5f27e6a3eaf32e2ac73ed02898cbb5961566bb445e3c511906e2da1fa"
 		logic_hash = "47c2ec1e833852941434586b61d6f435b9acb32b2ff48e0a9e8006e0f9ff8056"
 		score = 85
 		quality = 85
 		tags = "FILE"
-		hash1 = "6cbf38f5f27e6a3eaf32e2ac73ed02898cbb5961566bb445e3c511906e2da1fa"
 
 	strings:
 		$x1 = "human2_aspx" ascii fullword
@@ -25528,13 +25521,13 @@ rule SIGNATURE_BASE_WEBSHELL_ASPX_Moveit_Jun23_1 : FILE {
 		reference = "https://www.rapid7.com/blog/post/2023/06/01/rapid7-observed-exploitation-of-critical-moveit-transfer-vulnerability/"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/vuln_moveit_0day_jun23.yar#L24-L41"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "2413b5d0750c23b07999ec33a5b4930be224b661aaf290a0118db803f31acbc5"
+		hash = "48367d94ccb4411f15d7ef9c455c92125f3ad812f2363c4d2e949ce1b615429a"
+		hash = "e8012a15b6f6b404a33f293205b602ece486d01337b8b3ec331cd99ccadb562e"
 		logic_hash = "436f9a503ad938541faa8f34604310ba6d932e40a41dc189ccd293b7191a7621"
 		score = 85
 		quality = 85
 		tags = "FILE"
-		hash1 = "2413b5d0750c23b07999ec33a5b4930be224b661aaf290a0118db803f31acbc5"
-		hash2 = "48367d94ccb4411f15d7ef9c455c92125f3ad812f2363c4d2e949ce1b615429a"
-		hash3 = "e8012a15b6f6b404a33f293205b602ece486d01337b8b3ec331cd99ccadb562e"
 
 	strings:
 		$s1 = "X-siLock-Comment" ascii fullword
@@ -25583,11 +25576,11 @@ rule SIGNATURE_BASE_WEBSHELL_JAVA_Versamem_JAR_Aug24_2 : FILE {
 		reference = "https://x.com/craiu/status/1828687700884336990"
 		source_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/yara/apt_volttyphoon_versamem.yar#L27-L43"
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
+		hash = "4bcedac20a75e8f8833f4725adfc87577c32990c3783bf6c743f14599a176c37"
 		logic_hash = "0bdf3bf5130c51c1355f179704933ca473a702595c580642035c8d3b9aad5725"
 		score = 75
 		quality = 60
 		tags = "FILE"
-		hash1 = "4bcedac20a75e8f8833f4725adfc87577c32990c3783bf6c743f14599a176c37"
 
 	strings:
 		$x1 = "tomcat_memShell" ascii
@@ -25882,7 +25875,7 @@ rule SIGNATURE_BASE_Chinachopper_Generic : FILE {
 		license_url = "https://github.com/Neo23x0/signature-base/blob/43b2b2faafdaeb7f00102673f62555a2feb04c1b/LICENSE"
 		logic_hash = "34cb81b077d6dae5b4565001b2ab28897c6c554f00aa102601fb9c416c6c0f09"
 		score = 75
-		quality = 85
+		quality = 60
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 
