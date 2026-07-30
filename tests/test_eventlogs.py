@@ -42,6 +42,14 @@ class EventlogsDetectionTests(unittest.TestCase):
             self.rules["win_proxy_hunter"]["name"],
             "T1090-Proxy")
 
+    def test_evtx_notebook_filter_uses_enterprise_proxy_technique(self):
+        template = (
+            REPO_ROOT / "templates" / "Evtx.template"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("T1090-Proxy", template)
+        self.assertNotIn("T0884-Connection Proxy", template)
+
     def test_suspicious_cmdlet_rule_excludes_broad_patterns(self):
         rule = self.rules["win_powershell_suspicious_cmdlet"]["rule"]
         alternatives = rule.split("|")

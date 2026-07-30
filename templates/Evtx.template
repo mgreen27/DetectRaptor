@@ -91,5 +91,5 @@ sources:
                 Message
             FROM source(artifact="DetectRaptor.Windows.Detection.Evtx")
             WHERE NOT Message =~ FilterRegex AND NOT EventData =~ FilterRegex
-                AND `Detection.Name` =~ 'T1059.001-Suspicious Powershell Commandlets|T0884-Connection Proxy'
+                AND `Detection.Name` =~ 'T1059.001-Suspicious Powershell Commandlets|T1090-Proxy'
             ORDER BY EventTime DESC
