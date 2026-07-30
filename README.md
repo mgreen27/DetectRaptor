@@ -53,3 +53,29 @@ Some contributing repositories:
 - https://www.lolrmm.io/
 - https://github.com/SigmaHQ/sigma
 - https://yarahq.github.io/
+
+## Validation
+
+Run the Eventlogs and PSReadLine regression tests from the repository root:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Regenerate the affected artifacts from `scripts/`:
+
+```bash
+cd scripts
+python evtx.py
+python psreadline.py
+python iseautosave.py
+```
+
+Verify the generated artifacts with Velociraptor:
+
+```bash
+./velociraptor artifacts verify \
+  vql/Evtx.yaml \
+  vql/PSReadline.yaml \
+  vql/ISEAutoSave.yaml
+```
