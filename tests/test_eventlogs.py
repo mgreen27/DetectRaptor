@@ -37,12 +37,15 @@ class EventlogsDetectionTests(unittest.TestCase):
         selected = list(csv.DictReader(io.StringIO(lookup)))
         selected_ids = {row["id"] for row in selected}
 
-        self.assertEqual(len(selected), 17)
+        self.assertEqual(len(selected), 16)
         self.assertNotIn("win_sus_service", selected_ids)
+        self.assertNotIn("win_powershell_large_b64", selected_ids)
         self.assertIn("win_powershell_encoded_command", selected_ids)
 
     def test_encoded_command_requires_base64_payload(self):
-        rule = re.compile(self.rules["win_powershell_encoded_command"]["rule"])
+        rule = re.compile(
+            self.rules["win_powershell_encoded_command"]["rule"],
+            re.IGNORECASE)
         payload = "SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAKQA="
 
         for command in (
@@ -60,24 +63,19 @@ class EventlogsDetectionTests(unittest.TestCase):
                 self.assertNotRegex(command, rule)
 
     def test_base64_api_rule_does_not_match_encoding_parameter(self):
-        rule = re.compile(self.rules["win_powershell_base64"]["rule"])
+        rule = re.compile(
+            self.rules["win_powershell_base64"]["rule"],
+            re.IGNORECASE)
         self.assertRegex("[Convert]::FromBase64String($value)", rule)
+        self.assertRegex("[convert]::frombase64string($value)", rule)
         self.assertNotRegex("Set-Content -Encoding UTF8 output.txt", rule)
 
-    def test_large_base64_requires_decode_context(self):
-        rule = re.compile(self.rules["win_powershell_large_b64"]["rule"])
-        payload = (
-            "UABvAHcAZQByAFMAaABlAGwAbAAgAEQAZQB0AGUAYwB0AFIAYQ"
-            "BwAHQAbwByAA==")
-
-        self.assertRegex(
-            f"[Convert]::FromBase64String('{payload}')",
-            rule)
-        self.assertNotRegex(f"# {payload}", rule)
-        self.assertNotRegex(
-            "C:/Python/site-packages/"
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV",
-            rule)
+    def test_csv_has_no_inline_case_insensitive_flags(self):
+        self.assertEqual(len(self.rows), 27)
+        for row in self.rows:
+            for field in ("eventid", "rule", "ignore"):
+                with self.subTest(rule=row["id"], field=field):
+                    self.assertNotIn("(?i)", row[field])
 
 
 if __name__ == "__main__":
