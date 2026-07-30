@@ -31,6 +31,51 @@ class EventlogsDetectionTests(unittest.TestCase):
         self.assertIn("win_powershell_tcpsocket", self.rules)
         self.assertNotIn("win_powershell_tcpsocket^(4103|4104)$", self.rules)
 
+    def test_broad_syswow64_rule_is_retired(self):
+        self.assertNotIn("win_syswow64_binaries", self.rules)
+
+    def test_broad_vhdmp_motw_rule_is_retired(self):
+        self.assertNotIn("virtual_disk_mounted", self.rules)
+
+    def test_proxy_hunter_uses_enterprise_proxy_technique(self):
+        self.assertEqual(
+            self.rules["win_proxy_hunter"]["name"],
+            "T1090-Proxy")
+
+    def test_suspicious_cmdlet_rule_excludes_broad_patterns(self):
+        rule = self.rules["win_powershell_suspicious_cmdlet"]["rule"]
+        alternatives = rule.split("|")
+
+        self.assertNotIn(r"get-net\S+", rule)
+        self.assertNotIn("(Computer|User)Property", rule)
+        self.assertNotIn("Install-Service", alternatives)
+        self.assertNotIn("remoteps", alternatives)
+        self.assertNotIn("NEEEEWWW", alternatives)
+        self.assertIn("Install-ServiceBinary", alternatives)
+
+    def test_memoryloader_requires_primitive_and_execution_sink(self):
+        rule_text = self.rules["win_powershell_memoryloader"]["rule"]
+        rule = re.compile(rule_text, re.IGNORECASE)
+
+        for script in (
+                "New-Object IO.MemoryStream; "
+                "[System.Reflection.Assembly]::Load($bytes)",
+                "VirtualAlloc($ptr, 4096); "
+                "[System.Reflection.Emit.AssemblyBuilderAccess]::Run",
+                "Reflection.Emit.DynamicMethod; CreateType()"):
+            with self.subTest(script=script):
+                self.assertRegex(script, rule)
+
+        for script in (
+                "System.Runtime.InteropServices.MarshalAsAttribute",
+                "New-Object IO.MemoryStream",
+                "[System.Reflection.Assembly]::Load($bytes)",
+                "System.Reflection.Emit.AssemblyBuilderAccess"):
+            with self.subTest(script=script):
+                self.assertNotRegex(script, rule)
+
+        self.assertNotIn("MarshalAsAttribute", rule_text)
+
     def test_psreadline_selection_uses_eventlog_column(self):
         lookup = psreadline.build_powershell_lookup_table(
             REPO_ROOT / "csv" / "Eventlogs.csv")
@@ -71,7 +116,7 @@ class EventlogsDetectionTests(unittest.TestCase):
         self.assertNotRegex("Set-Content -Encoding UTF8 output.txt", rule)
 
     def test_csv_has_no_inline_case_insensitive_flags(self):
-        self.assertEqual(len(self.rows), 27)
+        self.assertEqual(len(self.rows), 25)
         for row in self.rows:
             for field in ("eventid", "rule", "ignore"):
                 with self.subTest(rule=row["id"], field=field):
