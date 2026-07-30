@@ -1,37 +1,50 @@
 #!/usr/bin/python3
 """
-This script converts a PowerShell evtx IOC list to a PSReadline 
+This script converts PowerShell Eventlogs.csv rules to a PSReadLine
 Velociraptor artifact.
-
-Simply set variables and run the script.
-
 """
 
-from base_functions import *
+import csv
+import io
+
+from base_functions import build_vql
 
 # set variables
 template_vql = '../templates/PSReadline.template'
 ioc_csv = '../csv/Eventlogs.csv'
 output_path = '../vql/'
-  
+
+
+def build_powershell_lookup_table(filename):
+    """Return CSV text containing only PowerShell-compatible source rows."""
+    with open(filename, 'r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        if not reader.fieldnames or 'eventlog' not in reader.fieldnames:
+            raise ValueError('Eventlogs CSV must contain an eventlog column')
+
+        output = io.StringIO()
+        writer = csv.DictWriter(
+            output,
+            fieldnames=reader.fieldnames,
+            lineterminator='\n')
+        writer.writeheader()
+
+        for row in reader:
+            if 'powershell' in row['eventlog'].casefold():
+                writer.writerow(row)
+
+    return output.getvalue()
+
+
 if __name__ == "__main__":
     print('Building PSReadline IOC artifact')
 
-    # grab csv contents and split to list of lines
-    lookup_table = []
-    count = 0
-    with open(ioc_csv, 'r') as file:
-      for line in file.readlines():
-        if count == 0 or 'powershell' in line.lower():
-          lookup_table.append(line)
-        count += 1
+    lookup_table = build_powershell_lookup_table(ioc_csv)
+    lookup_table = ''.join(
+        ["        " + line for line in lookup_table.splitlines(keepends=True)])
 
-    # format lookup table txt for VQL insertion
-    lookup_table = ''.join(["        " + x for x in lookup_table])
-
-    #grab VQL template
+    # Grab VQL template.
     with open(template_vql, 'r') as file:
-      template = file.read()
+        template = file.read()
 
-    # build vql artifacts
-    build_vql(lookup_table,template,output_path)
+    build_vql(lookup_table, template, output_path)
