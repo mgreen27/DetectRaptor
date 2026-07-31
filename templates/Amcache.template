@@ -22,6 +22,12 @@ parameters:
    - name: CriticalityLevel
      default: .
      description: "Only use detections matching this regex (values can be Critical,High,Medium,Low)"
+   - name: ApprovedRMMNameRegex
+     default: ^$
+     description: "Optional regex matching approved RMM detection names. Must be combined with ApprovedRMMPathRegex."
+   - name: ApprovedRMMPathRegex
+     default: ^$
+     description: "Optional regex matching approved RMM installation paths. Must be combined with ApprovedRMMNameRegex."
    - name: IOCs
      type: csv
      default: |
@@ -34,7 +40,10 @@ sources:
     query: |
       -- firstly split IOCs by path or filename focus
       LET all_the_things <= SELECT * FROM IOCs
-        WHERE NOT KeywordRegex = '.' AND Criticality =~ CriticalityLevel
+        WHERE NOT KeywordRegex = '.'
+            AND Criticality =~ CriticalityLevel
+            AND Scope =~ '^(Amcache|Both)$'
+            AND NOT EntryType = 'Directory'
         GROUP BY KeywordRegex
       
       -- run KeywordRegex regex
@@ -50,7 +59,26 @@ sources:
                     KeywordRegex=KeywordRegex,
                     PathName=EntryPath,
                     Reference=Reference,
+                    Scope=Scope,
+                    EntryType=EntryType,
                     Criticality=Criticality) as Detection,
+                if(condition=EntryPath =~ '''\\<Err\>|\\<UnknownEntry\>|\\<Parent ''',
+                    then='Unresolved',
+                    else=if(condition=EntryPath =~ '''\\Users\\|\\Windows\\(Temp|SystemTemp)\\|\\\$Recycle\.Bin\\''',
+                        then='User or temporary',
+                        else=if(condition=EntryPath =~ '''\\Program Files( \(x86\))?\\|\\ProgramData\\chocolatey\\''',
+                            then='Installed',
+                            else=if(condition=EntryPath =~ '''\\ProgramData\\''',
+                                then='ProgramData',
+                                else=if(condition=EntryPath =~ '''\\Windows\\''',
+                                    then='System',
+                                    else='Other'))))) as LocationContext,
+                if(condition=Detection =~ '^(RMM|Remote Access)',
+                    then=if(condition=Detection =~ ApprovedRMMNameRegex
+                            AND EntryPath =~ ApprovedRMMPathRegex,
+                        then='Approved',
+                        else='Review'),
+                    else='Not applicable') as RMMDisposition,
                 KeyMTime,EntryName,EntryPath,Publisher,OriginalFileName,SHA1
             FROM all_the_things
             WHERE ( EntryName =~ KeywordRegex OR OriginalFileName =~ KeywordRegex )
@@ -96,3 +124,21 @@ sources:
             FROM source()
             GROUP BY Detection.Name
             ORDER BY Total DESC 
+
+      - type: vql_suggestion
+        name: RMM location summary
+        template: |
+            /*
+            ### RMM location summary
+            Separate installed, portable, unresolved, and other RMM locations.
+            */
+
+            SELECT Detection.Name as Detection,
+                RMMDisposition,
+                LocationContext,
+                count() as Total,
+                EntryPath as ExampleEntryPath
+            FROM source()
+            WHERE Detection.Name =~ '^(RMM|Remote Access)'
+            GROUP BY Detection,RMMDisposition,LocationContext
+            ORDER BY Total DESC

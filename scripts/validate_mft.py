@@ -14,10 +14,21 @@ EXPECTED_FIELDS = (
     "IgnoreRegex",
     "Reference",
     "Criticality",
+    "Scope",
+    "EntryType",
 )
-REQUIRED_FIELDS = ("Detection", "KeywordRegex", "PathRegex", "Criticality")
+REQUIRED_FIELDS = (
+    "Detection",
+    "KeywordRegex",
+    "PathRegex",
+    "Criticality",
+    "Scope",
+    "EntryType",
+)
 REGEX_FIELDS = ("KeywordRegex", "PathRegex", "IgnoreRegex")
 ALLOWED_CRITICALITIES = {"Critical", "High", "Medium", "Low"}
+ALLOWED_SCOPES = {"MFT", "Amcache", "Both"}
+ALLOWED_ENTRY_TYPES = {"File", "Directory", "Any"}
 GLOBAL_IGNORE_PATTERNS = {".", ".*", "^.*$", "(?:.*)"}
 
 
@@ -137,6 +148,21 @@ def validate_mft_csv(csv_path):
                 issues.append(
                     f"line {line_number}: invalid Criticality "
                     f"{row['Criticality']!r}")
+
+            if row["Scope"] not in ALLOWED_SCOPES:
+                issues.append(
+                    f"line {line_number}: invalid Scope {row['Scope']!r}")
+
+            if row["EntryType"] not in ALLOWED_ENTRY_TYPES:
+                issues.append(
+                    f"line {line_number}: invalid EntryType "
+                    f"{row['EntryType']!r}")
+
+            if (row["EntryType"] == "Directory"
+                    and row["Scope"] != "MFT"):
+                issues.append(
+                    f"line {line_number}: Directory rules must use "
+                    "Scope MFT")
 
             if row["IgnoreRegex"].strip() in GLOBAL_IGNORE_PATTERNS:
                 issues.append(

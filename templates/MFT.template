@@ -25,6 +25,12 @@ parameters:
    - name: CriticalityLevel
      default: .
      description: "Only use detections matching this regex (values can be Critical,High,Medium,Low)"
+   - name: ApprovedRMMNameRegex
+     default: ^$
+     description: "Optional regex matching approved RMM detection names. Must be combined with ApprovedRMMPathRegex."
+   - name: ApprovedRMMPathRegex
+     default: ^$
+     description: "Optional regex matching approved RMM installation paths. Must be combined with ApprovedRMMNameRegex."
    - name: IOCs
      type: csv
      default: |
@@ -37,7 +43,9 @@ sources:
     query: |
       -- firstly split IOCs by path or filename focus
       LET all_the_things <= SELECT * FROM IOCs
-        WHERE NOT KeywordRegex = '.' AND Criticality =~ CriticalityLevel
+        WHERE NOT KeywordRegex = '.'
+            AND Criticality =~ CriticalityLevel
+            AND Scope =~ '^(MFT|Both)$'
         GROUP BY KeywordRegex
 
       LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir,
@@ -58,15 +66,37 @@ sources:
                     PathRegex=PathRegex,
                     IgnoreRegex=IgnoreRegex,
                     Reference=Reference,
+                    Scope=Scope,
+                    EntryType=EntryType,
                     StringHit=parse_string_with_regex(string=FileName,regex='(' + KeywordRegex + ')' ).g1,
                     Criticality=Criticality
                         ) as Detection,
+                if(condition=OSPath =~ '''\\<Err\>|\\<UnknownEntry\>|\\<Parent ''',
+                    then='Unresolved',
+                    else=if(condition=OSPath =~ '''\\Users\\|\\Windows\\(Temp|SystemTemp)\\|\\\$Recycle\.Bin\\''',
+                        then='User or temporary',
+                        else=if(condition=OSPath =~ '''\\Program Files( \(x86\))?\\|\\ProgramData\\chocolatey\\''',
+                            then='Installed',
+                            else=if(condition=OSPath =~ '''\\ProgramData\\''',
+                                then='ProgramData',
+                                else=if(condition=OSPath =~ '''\\Windows\\''',
+                                    then='System',
+                                    else='Other'))))) as LocationContext,
+                if(condition=Detection =~ '^(RMM|Remote Access)',
+                    then=if(condition=Detection =~ ApprovedRMMNameRegex
+                            AND OSPath =~ ApprovedRMMPathRegex,
+                        then='Approved',
+                        else='Review'),
+                    else='Not applicable') as RMMDisposition,
                 EntryNumber,InUse,OSPath,FileSize,IsDir,
                 dict(Created0x10=Created0x10,LastModified0x10=LastModified0x10,LastRecordChange0x10=LastRecordChange0x10,LastAccess0x10=LastAccess0x10) as SITimestamps,
                 dict(Created0x30=Created0x30,LastModified0x30=LastModified0x30,LastRecordChange0x30=LastRecordChange0x30,LastAccess0x30=LastAccess0x30) as FNTimestamps
             FROM all_the_things
             WHERE FileName =~ KeywordRegex
                 AND OSPath =~ PathRegex
+                AND (EntryType = 'Any'
+                    OR (EntryType = 'File' AND NOT IsDir)
+                    OR (EntryType = 'Directory' AND IsDir))
                 AND NOT if(condition=IgnoreRegex,
                         then= OSPath =~ IgnoreRegex,
                         else= False )
@@ -166,3 +196,49 @@ sources:
             WHERE Detection.Name =~ 'Defence Evasion|RMM'
                 --AND NOT OSPath =~ '''ADD HERE'''
             GROUP BY Fqdn,Detection,Directory
+
+      - type: vql_suggestion
+        name: RMM location summary
+        template: |
+            /*
+            ### RMM location summary
+            Separate installed, portable, unresolved, and other RMM locations.
+            */
+
+            SELECT Detection.Name as Detection,
+                RMMDisposition,
+                LocationContext,
+                count() as Total,
+                OSPath as ExampleOSPath
+            FROM source()
+            WHERE Detection.Name =~ '^(RMM|Remote Access)'
+            GROUP BY Detection,RMMDisposition,LocationContext
+            ORDER BY Total DESC
+
+      - type: vql_suggestion
+        name: RMM portable or unusual paths
+        template: |
+            /*
+            ### RMM portable or unusual paths
+            Review unapproved RMM in user, temporary, unresolved, or other paths.
+            */
+
+            SELECT *
+            FROM source()
+            WHERE Detection.Name =~ '^(RMM|Remote Access)'
+                AND RMMDisposition = 'Review'
+                AND LocationContext =~ 'User or temporary|Other|Unresolved'
+
+      - type: vql_suggestion
+        name: SI and FN timestamp differences
+        template: |
+            /*
+            ### SI and FN timestamp differences
+            Review suspicious-location files where SI and FN timestamps differ.
+            */
+
+            SELECT *
+            FROM source()
+            WHERE Detection.Name =~ '^Suspicious Location'
+                AND (SITimestamps.Created0x10 != FNTimestamps.Created0x30
+                    OR SITimestamps.LastModified0x10 != FNTimestamps.LastModified0x30)
