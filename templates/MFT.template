@@ -57,6 +57,7 @@ sources:
                     KeywordRegex=KeywordRegex,
                     PathRegex=PathRegex,
                     IgnoreRegex=IgnoreRegex,
+                    Reference=Reference,
                     StringHit=parse_string_with_regex(string=FileName,regex='(' + KeywordRegex + ')' ).g1,
                     Criticality=Criticality
                         ) as Detection,
@@ -143,7 +144,7 @@ sources:
                 FNTimestamps.Created0x30 as Created0x30,
                 FNTimestamps.LastModified0x30 as LastModified0x30
             FROM source()
-            WHERE Detection =~ 'Defense Evasion Binaries|RMM'
+            WHERE Detection.Name =~ 'Defence Evasion|RMM'
 
       - type: vql_suggestion
         name: Detection folder grouping
@@ -159,9 +160,9 @@ sources:
                 Detection.KeywordRegex as KeywordRegex,
                 if(condition= IsDir,
                     then= OSPath, else=dirname(path=OSPath)) as Directory,
-                count() as Total
-                OSPath as ExampleOSPath,
+                count() as Total,
+                OSPath as ExampleOSPath
             FROM source()
-            WHERE Detection =~ 'Defense Evasion Binaries|RMM'
+            WHERE Detection.Name =~ 'Defence Evasion|RMM'
                 --AND NOT OSPath =~ '''ADD HERE'''
             GROUP BY Fqdn,Detection,Directory

@@ -21,7 +21,7 @@ jobs:
           pip install requests -q
           pip install pandas -q
 
-    - name: Validate Eventlogs detections
+    - name: Validate detection CSVs and regressions
       run: python -m unittest discover -s tests -v
 
     - name: Update vql

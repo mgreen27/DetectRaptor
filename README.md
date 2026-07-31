@@ -56,10 +56,17 @@ Some contributing repositories:
 
 ## Validation
 
-Run the Eventlogs and PSReadLine regression tests from the repository root:
+Run the Eventlogs, PSReadLine, and MFT regression tests from the repository
+root:
 
 ```bash
 python -m unittest discover -s tests -v
+```
+
+Validate the MFT detection CSV directly:
+
+```bash
+python scripts/validate_mft.py
 ```
 
 Regenerate the affected artifacts from `scripts/`:
@@ -69,6 +76,7 @@ cd scripts
 python evtx.py
 python psreadline.py
 python iseautosave.py
+python mft.py
 ```
 
 Verify the generated artifacts with Velociraptor:
@@ -77,5 +85,11 @@ Verify the generated artifacts with Velociraptor:
 ./velociraptor artifacts verify \
   vql/Evtx.yaml \
   vql/PSReadline.yaml \
-  vql/ISEAutoSave.yaml
+  vql/ISEAutoSave.yaml \
+  vql/MFT.yaml
 ```
+
+## Detection uplift notes
+
+- `docs/eventlogs-detection-review.md`
+- `docs/mft-detection-uplift.md`

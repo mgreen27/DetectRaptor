@@ -8,6 +8,7 @@ Simply set variables and run the script.
 """
 
 from base_functions import *
+from validate_mft import validate_mft_csv
 
 # set variables
 template_vql = '../templates/Amcache.template'
@@ -16,6 +17,11 @@ output_path = '../vql/'
     
 if __name__ == "__main__":
     print('Building Amcache IOC artifact')
+
+    validation_issues = validate_mft_csv(ioc_csv)
+    if validation_issues:
+      raise SystemExit(
+          "MFT CSV validation failed:\n" + "\n".join(validation_issues))
 
     # grab csv contents and split to list of lines
     with open(ioc_csv, 'r') as file:
