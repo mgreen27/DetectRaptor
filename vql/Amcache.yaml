@@ -67,14 +67,15 @@ parameters:
         Attacker Tool - VulnRecon,vulnrecon\.(exe|dll|py),.,,Internal,Medium
         BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal - mixed cloud services,Low
         Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz,High
-        Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|procdump|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High
+        Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High
+        Credential Access Tool - ProcDump,^(procdump(64)?\.exe|procdumpdll\.dll)$,.,\\Packages\\Plugins\\Microsoft\.Azure\.Monitor\.AzureMonitorWindowsAgent\\[^\\]+\\Monitoring\\Agent\\(procdump\\(x64|x86|arm64)\\procdump(64)?\.exe|procdumpdll\.dll)$,Sysinternals ProcDump; excludes Microsoft Azure Monitor Agent bundled copies,High
         Credential Theft - fgdump,^fgdump\.exe,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,High
         Credential Theft- Potato,Potato\.exe$,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",High
         Credential Theft - PetitPotam,PetitPotam\.(exe|py|sln)$,.,,PoC tool to coerce Windows hosts to authenticate to other machines via MS-EFSRPC EfsRpcOpenFileRaw or other functions.,High
         Credential Theft - gosecretsdump,^gosecretsdump_win_v0.3.1\.exe$,.,,https://github.com/C-Sto/gosecretsdump,High
         Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low
         Data Transfer,FreeFileSync|^mega\.exe|megaclient|megacmd|megasync|megatool|^(ngrok|\.ngrok)|^rclone|Stealbit,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High
-        Data Transfer - FileZilla,FileZilla,.,,Internal,Low
+        Data Transfer - FileZilla,^(filezilla|FileZillaPortable|filezilla-server|filezilla-server-gui|filezilla-server-impersonator|filezilla-server-config-converter|filezilla-server-crypt|fzputtygen|fzsftp)\.exe$,.,,FileZilla client and server executable filenames,Low
         Data Transfer - Restic,restic\.exe,.,,Internal - https://github.com/restic/restic,Low
         Data Transfer,plink\.exe|pscp\.exe|powercat,.,\\Program Files\\,PuTTy / SSH tools outside Program Files is highly suspicious.,High
         Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter,.,,Internal,High
@@ -88,7 +89,7 @@ parameters:
         Enumeration Tool outputs,^ad_ous\.txt|^ad_computers\.txt|^ad_users\.txt|^ad_group\.txt|^trustdmp\.txt|^subnets\.txt|_computers\.json|_domains\.json|_gpos\.json|_groups\.json|_ous\.json|_users\.json|bloodhound\.zip|ADRecon-Report-,.,,Internal,High
         Execution Path,PAEXE|PSEXE|WinExeSvc,\\Windows\\(PAEXE|PSEXE|WinExeSvc),,Internal,Low
         Execution - NirCmd,^nircmd\.exe$,.,,Internal - https://www.nirsoft.net/utils/nircmd.html,Low
-        Execution - Nsudo,^NSudo\.exe$| ^NSudoG\.exe$,.,,Internal - https://github.com/azraelrabbit/NSudo-1,High
+        Execution - Nsudo,^NSudo\.exe$|^NSudoG\.exe$,.,,Internal - https://github.com/azraelrabbit/NSudo-1,High
         Execution - PsExec,psexec\.exe$|psexec64\.exe$|remcom\.exe$,.,,Psexec - some applications use RemCom,Medium
         Execution - LuciRoot,LuciRoot,.,,Rootkit,High
         Hack Tool - Impacket,^execute\.bat$|^[a-zA-Z]{8}\.bat$|^__output$,C:\\WINDOWS\\[a-zA-Z]{8}\.bat|C:\\Windows\\TEMP\\execute\.bat|C:\\__output,,SMBExec - https://github.com/fortra/impacket/blob/master/examples/smbexec.py,High
@@ -103,7 +104,7 @@ parameters:
         RMM - Acronis Cyber Protect (Remotix),^(AcronisCyberProtectConnectQuickAssist.*|AcronisCyberProtectConnectAgent)\.exe$,.,,Acronis Cyber Protect (Remotix) - https://lolrmm.io/tools/acronis_cyber_protect__remotix_,Medium
         RMM - Action1,^(action1_update|action1_connector|action1_remote|action1_agent)\.exe$,.,,Action1 - action1.com - https://lolrmm.io/tools/action1,Medium
         RMM - Adobe Connect,^(ConnectAppSetup.*|ConnectShellSetup.*|Connect|ConnectDetector)\.exe$,.,,Adobe Connect - https://lolrmm.io/tools/adobe_connect,Medium
-        RMM - AeroAdmin,^(aeroadmin|AeroAdmin)\.exe$,.,,AeroAdmin - aeroadmin.com - https://lolrmm.io/tools/aeroadmin,Medium
+        RMM - AeroAdmin,^aeroadmin\.exe$,.,,AeroAdmin - aeroadmin.com - https://lolrmm.io/tools/aeroadmin,Medium
         RMM - AliWangWang-remote-control,^alitask\.exe$,.,,AliWangWang-remote-control - wangwang.taobao.com - https://lolrmm.io/tools/aliwangwang-remote-control,Medium
         RMM - Alpemix,^(AlpemixService|alpemix)\.exe$,.,,Alpemix - alpemix.com - https://lolrmm.io/tools/alpemix,Medium
         RMM - Ammyy Admin,^(AMMYY_Admin|aa_v.*)\.exe$,.,,Ammyy Admin - ammyy.com,Medium
@@ -111,13 +112,13 @@ parameters:
         RMM - AnyDesk,^(anydesk|anydesk.*)\.exe$,.,,AnyDesk - anydesk.com - https://lolrmm.io/tools/anydesk,Medium
         RMM - Anyplace Control,^apc_host\.exe$,.,,Anyplace Control - anyplace-control.com - https://lolrmm.io/tools/anyplace_control,Medium
         RMM - AnyViewer,^(AnyViewerSetup|RCClient|RCService)\.exe$,.,,AnyViewer - https://www.anyviewer.com/ - https://lolrmm.io/tools/anyviewer,Medium
-        RMM - Atera,^(syncrosetup|ateraagent|atera_agent|AteraAgent|AgentPackageTaskScheduler|AgentPackageNetworkDiscovery|atera.*Agent)\.exe$,.,,Atera - atera.com - https://lolrmm.io/tools/atera,Medium
+        RMM - Atera,^(syncrosetup|ateraagent|atera_agent|AgentPackageTaskScheduler|AgentPackageNetworkDiscovery|atera.*Agent)\.exe$,.,,Atera - atera.com - https://lolrmm.io/tools/atera,Medium
         RMM - Auvik,^(auvik.engine|auvik.agent)\.exe$,.,,Auvik - auvik.com - https://lolrmm.io/tools/auvik,Medium
         RMM - AweRay,^(AweSun|aweray_remote.*)\.exe$,.,,AweRay- sun.aweray.com/en/ - https://lolrmm.io/tools/aweray,Medium
         RMM - Barracuda,^BarracudaRMM$|^Barracuda Workplace$|^Barracuda MSP$,.,,Barracuda - barracudamsp.com,Medium
         RMM - Basecamp,^basecamp3setup\.exe$,.,,Basecamp - https://3.basecamp-help.com/article/56-basecamp-3-for-windows,Medium
         RMM - BeamYourScreen,^(beamyourscreen|beamyourscreen-host)\.exe$,.,,BeamYourScreen - beamyourscreen.com - https://lolrmm.io/tools/beamyourscreen,Medium
-        RMM - BeAnywhere,^(basuptshelper|basupsrvcupdate|BASupApp|BASupSysInf|BASupAppSrvc|TakeControl|BASupAppElev|basupsrvc|BASupConHelper|BASupSrvc|BASupSrvcCnfg|BASupSrvcUpdater)\.exe$,.,,BeAnywhere - beanywhere.en.uptodown.com/windows,Medium
+        RMM - BeAnywhere,^(basuptshelper|basupsrvcupdate|BASupApp|BASupSysInf|BASupAppSrvc|TakeControl|BASupAppElev|basupsrvc|BASupConHelper|BASupSrvcCnfg|BASupSrvcUpdater)\.exe$,.,,BeAnywhere - beanywhere.en.uptodown.com/windows,Medium
         RMM - BeInSync,^Beinsync.*\.exe$,.,,BeInSync - beinsync.com  beinsync.net - https://lolrmm.io/tools/beinsync,Medium
         RMM - Beyond Trust (Bomgar),^(bomgar-rdp|bomgar-pac|bomgar-pac-.*|bomgar-scc|bomgar-scc-.*)\.exe$,.,,BeyondTrust - beyondtrust.com/brand/bomgar - https://lolrmm.io/tools/beyondtrust__bomgar_,Medium
         RMM - Bitvise SSH,^(BvSshClient-Inst|BvSshServer-Inst)\.exe$,.,,Bitvise SSH - https://bitvise.com/ssh-client - https://lolrmm.io/tools/bitvise_ssh_client,Medium
@@ -158,23 +159,23 @@ parameters:
         RMM - Fortra,^Fortra$,.,,Fortra - fortra.com,Medium
         RMM - FreeNX,^nxplayer\.exe$,.,,FreeNX - https://lolrmm.io/tools/freenx,Medium
         RMM - GatherPlace-desktop sharing,^(gp3|gp4|gp5)\.exe$,.,,GatherPlace-desktop sharing - gatherplace.com - https://lolrmm.io/tools/gatherplace-desktop_sharing,Medium
-        RMM - GetScreen,^(GetScreen|getscreen)\.exe$,.,,GetScreen - getscreen.me - https://lolrmm.io/tools/getscreen,Medium
+        RMM - GetScreen,^getscreen\.exe$,.,,GetScreen - getscreen.me - https://lolrmm.io/tools/getscreen,Medium
         RMM - GoToAssist,^(gotoassist|g2a.*|GoTo Assist Opener|g2ax_service|gotoassist remote support)\.exe$,.,,GoToAssist - goto.com - https://lolrmm.io/tools/gotoassist,Medium
         RMM - GoToAssist Agent Desktop Console,^G2RDesktopConsole-x64\.msi$,.,,RMM - GoToAssist Agent Desktop Console - https://lolrmm.io/tools/gotoassist_agent_desktop_console,Medium
         RMM - GotoHTTP,^(GotoHTTP_x64|gotohttp|GotoHTTP.*)\.exe$,.,,GotoHTTP - gotohttp.com - https://lolrmm.io/tools/gotohttp,Medium
         RMM - GoToMeeting,^GoToAssist(Service|Unattended)\.exe$,.,,GoToMeeting -goto.com/meeting,Medium
-        RMM - GoToMyPC,^(g2file.*|g2quick|g2svc|g2tray|g2svc|g2printh|g2fileh|g2tray|gopcsrv|g2host|g2comm|g2mainh)\.exe$,.,,GoToMyPC - get.gotomypc.com,Medium
+        RMM - GoToMyPC,^(g2file.*|g2quick|g2svc|g2tray|g2printh|g2fileh|gopcsrv|g2host|g2comm|g2mainh)\.exe$,.,,GoToMyPC - get.gotomypc.com,Medium
         RMM - Goverlan,^(goverrmc|govsrv.*|GovAgentInstallHelper|GovAgentx64|GovReachClient|GovSrv)\.exe$,.,,Goverlan - goverlan.com - https://lolrmm.io/tools/goverlan,Medium
         RMM _ Guacamole,^guacd\.exe$,.,,Guacamole - guacamole.apache.org - https://lolrmm.io/tools/guacamole,Medium
         RMM - HelpBeam,^helpbeam.*\.exe$,.,,HelpBeam - helpbeam.software.informer.com - https://lolrmm.io/tools/helpbeam,Medium
         RMM - HelpU,^(helpu_install|HelpuUpdater|HelpuManager)\.exe$,.,,HelpU - https://lolrmm.io/tools/helpu,Medium
         RMM - I'm InTouch,^(iit|intouch|I'm InTouch Go Installer)\.exe$,.,,I'm InTouch - 01com.com/imintouch-remote-pc-desktop - https://lolrmm.io/tools/i'm_intouch,Medium
         RMM - Impero Connect,^ImperoClientSVC\.exe$,.,,RMM - Impero Connect - https://lolrmm.io/tools/impero_connect,Medium
-        RMM - Instant Housecall,^(hsloader|ihcserver|InstantHousecall|instanthousecall)\.exe$,.,,Instant Housecall - instanthousecall.com - https://lolrmm.io/tools/instant_housecall,Medium
+        RMM - Instant Housecall,^(hsloader|ihcserver|instanthousecall)\.exe$,.,,Instant Housecall - instanthousecall.com - https://lolrmm.io/tools/instant_housecall,Medium
         RMM - Insync,^Insync\.exe$,.,,RMM - Insync - https://lolrmm.io/tools/insync,Medium
         RMM - IntelliAdmin Remote Control,^(iadmin|intelliadmin)\.exe$,.,,IntelliAdmin Remote Control - intelliadmin.com/remote-control - https://lolrmm.io/tools/intelliadmin_remote_control,Medium
         RMM - Iperius Remote,^(iperius|iperiusremote)\.exe$,.,,Iperius Remote - iperiusremote.com - https://lolrmm.io/tools/iperius_remote,Medium
-        RMM - ISL Online,^(ISLLight|isllight|ISLLightClient|isllightservice|islalwaysonmonitor)\.exe$,.,,RMM - ISL Online - https://lolrmm.io/tools/isl_online,Medium
+        RMM - ISL Online,^(isllight|ISLLightClient|isllightservice|islalwaysonmonitor)\.exe$,.,,RMM - ISL Online - https://lolrmm.io/tools/isl_online,Medium
         RMM - Itarian,^(ITSMAgent|RViewer|RAccess|ItsmRsp|ITarianRemoteAccessSetup|RmmService|RDesktop|ComodoRemoteControl|ITSMService|RHost)\.exe$,.,,Itarian - itarian.com - https://lolrmm.io/tools/itarian,Medium
         RMM - ITSupport247 (ConnectWise),^saazapsc\.exe$,.,,RMM - ITSupport247 (ConnectWise) - https://lolrmm.io/tools/itsupport247__connectwise_,Medium
         RMM - Ivanti Remote Control,^(IvantiRemoteControl|ArcUI|AgentlessRC)\.exe$,.,,RMM - Ivanti Remote Control - https://lolrmm.io/tools/ivanti_remote_control,Medium
@@ -189,14 +190,14 @@ parameters:
         RMM - Laplink Everywhere,^(laplink|laplink-everywhere-setup.*|laplinkeverywhere|llrcservice|serverproxyservice|OOSysAgent)\.exe$,.,,Laplink Everywhere - everywhere.laplink.com - https://lolrmm.io/tools/laplink_everywhere,Medium
         RMM - Laplink Gold,^(laplink|tsircusr)\.exe$,.,,Laplink Gold - wen.laplink.com/product/laplink-gold - https://lolrmm.io/tools/laplink_gold,Medium
         RMM - Level,^(level-windows-amd64|level|level-remote-control-ffmpeg)\.exe$,.,,Level - level.io - https://lolrmm.io/tools/level,Medium
-        RMM - LiteManager,^(lmnoipserver|ROMFUSClient|romfusclient|romviewer|romserver|ROMServer)\.exe$,.,,LiteManager - litemanager.com - https://lolrmm.io/tools/litemanager,Medium
+        RMM - LiteManager,^(lmnoipserver|romfusclient|romviewer|romserver)\.exe$,.,,LiteManager - litemanager.com - https://lolrmm.io/tools/litemanager,Medium
         RMM - LogMeIn,^(lmiguardiansvc|lmiignition|logmein|logmeinsystray|logmein.*)\.exe$,.,,LogMeIn - logmein.com/central,Medium
         RMM - LogMeIn rescue,^(support-logmeinrescue.*|support-logmeinrescue|lmi_rescue)\.exe$,.,,LogMeIn rescue - logmeinrescue.com - https://lolrmm.io/tools/logmein_rescue,Medium
         RMM - ManageEngine RMM Central,^(dcagentservice|dcagentregister|ManageEngine_Remote_Access_Plus)\.exe$,.,,ManageEngine RMM Central - manageengine.com/remote-monitoring-management/ - https://lolrmm.io/tools/manage_engine__desktop_central_,Medium
         RMM - Megasync,^(MEGAupdater|MEGAsyncSetup64)\.exe$,.,,Megasync - https://lolrmm.io/tools/megasync,Medium
         RMM - MeshCentral (MeshAgent),^(meshcentral.*|meshagent.*|MeshCmd|MeshCentralInstaller)\.exe$,.,,MeshCentral - meshcentral.com - https://lolrmm.io/tools/meshcentral,Medium
         RMM - Microsoft Quick Assist,^quickassist\.exe$,.,,Microsoft Quick Assist - https://lolrmm.io/tools/microsoft_quick_assist,Medium
-        RMM - Mikogo,^(mikogo|mikogo-starter|mikogo-service|Mikogo-Service|mikogolauncher|Mikogo-Screen-Service)\.exe$,.,,Mikogo - mikogo.com - https://lolrmm.io/tools/mikogo,Medium
+        RMM - Mikogo,^(mikogo|mikogo-starter|mikogo-service|mikogolauncher|Mikogo-Screen-Service)\.exe$,.,,Mikogo - mikogo.com - https://lolrmm.io/tools/mikogo,Medium
         RMM - MioNet (Also known as WD Anywhere Access),^(mionet|mionetmanager)\.exe$,.,,MioNet (Also known as WD Anywhere Access) - https://lolrmm.io/tools/mionet__also_known_as_wd_anywhere_access_,Medium
         RMM - MobaXterm,^(MobaXterm_installer_12.1|MobaXterm_installer_.*)\.msi$,.,,MobaXterm - https://lolrmm.io/tools/mobaxterm,Medium
         RMM - mRemoteNG,^(mRemoteNG)\.exe|(mRemoteNG-Installer-.*)\.msi$,.,,mRemoteNG - mremoteng.org - https://lolrmm.io/tools/mremoteng,Medium
@@ -211,7 +212,7 @@ parameters:
         RMM - Netreo,^(neturo.*|ntrntservice|neturo)\.exe$,.,,Netreo - netreo.com - https://lolrmm.io/tools/neturo,Medium
         RMM - Netviewer,^(nvClient|netviewer.*|netviewer)\.exe$,.,,Netviewer - download.cnet.com/Net-Viewer/3000-2370_4-10034828.html - https://lolrmm.io/tools/netviewer,Medium
         Developer Utility - ngrok,^ngrok\.exe$,.,,ngrok - ngrok.com - https://lolrmm.io/tools/ngrok,Medium
-        RMM - NinjaRMM,^(ninjarmmagent|NinjaRMMAgent|ninjarmm-cli|NinjaRMMAgenPatcher)\.exe$,.,,NinjaRMM - ninjaone.com - https://lolrmm.io/tools/ninjarmm,Medium
+        RMM - NinjaRMM,^(ninjarmmagent|ninjarmm-cli|NinjaRMMAgenPatcher)\.exe$,.,,NinjaRMM - ninjaone.com - https://lolrmm.io/tools/ninjarmm,Medium
         RMM - NoMachine,^(nomachine.*|nxservice.*|nxd|nxserver)\.exe$|^nxservice.*\.ese$,.,,NoMachine - nomachine.com - https://lolrmm.io/tools/nomachine,Medium
         RMM - NTR Remote,^NTRsupportPro_EN\.exe$,.,,ntrsupport.com - https://lolrmm.io/tools/ntr_remote,Medium
         RMM - OCS inventory,^(ocsinventory|ocsservice)\.exe$,.,,OCS inventory - ocsinventory-ng.org - https://lolrmm.io/tools/ocs_inventory,Medium
@@ -234,7 +235,7 @@ parameters:
         RMM - PuTTY Tray,^puttytray\.exe$,.,,PuTTY Tray - https://lolrmm.io/tools/putty_tray,Medium
         RMM - QQ IM-remote assistance,^(qq|QQProtect|qqpcmgr)\.exe$,.,,QQ IM-remote assistance - qq-messenger.en.softonic.com - https://lolrmm.io/tools/qq_im-remote_assistance,Medium
         RMM - Quest KACE Agent (formerly Dell KACE),^konea\.exe$,.,,Quest KACE Agent (formerly Dell KACE) - www.quest.com/kace/ - https://lolrmm.io/tools/quest_kace_agent__formerly_dell_kace_,Medium
-        RMM - RAdmin,^(radmin|famitrfc|radmin3|Radmin|rserver3)\.exe$,.,,Radmin - radmin.com - https://lolrmm.io/tools/radmin,Medium
+        RMM - RAdmin,^(radmin|famitrfc|radmin3|rserver3)\.exe$,.,,Radmin - radmin.com - https://lolrmm.io/tools/radmin,Medium
         RMM - rdp2tcp,^(tdp2tcp)\.exe$|^(rdp2tcp)\.py$,.,,rdp2tcp - github.com/V-E-O/rdp2tcp - https://lolrmm.io/tools/rdp2tcp,Medium
         RMM - RDPView,^dwrcs\.exe$,.,,RDPView - systemmanager.ru/dntu.en/rdp_view.htm - https://lolrmm.io/tools/rdpview,Medium
         RMM - rdpwrap,^(RDPWInst|RDPCheck|RDPConf)\.exe$,.,,rdpwrap - github.com/stascorp/rdpwrap - https://lolrmm.io/tools/rdpwrap,Medium
@@ -248,7 +249,7 @@ parameters:
         RMM - Remote Utilities,^(rutview|rutserv)\.exe$,.,,Remote Utilities - https://lolrmm.io/tools/remote_utilities,Medium
         RMM - RemoteCall,^(rcengmgru|rcmgrsvc|rxstartsupport|rcstartsupport|raautoup|agentu|remotesupportplayeru)\.exe$,.,,RemoteCall - remotecall.com - https://lolrmm.io/tools/remotecall,Medium
         RMM - RemotePass,^(remotepass-access|rpaccess|rpwhostscr)\.exe$,.,,RemotePass - remotepass.com - https://lolrmm.io/tools/remotepass,Medium
-        RMM - RemotePC,^(remotepcservice|rpcsuite|Idrive.File-Transfer|idrive.RemotePCAgent|remotepchost|RemotePCService|RemotePC)\.exe$,.,,RemotePC - remotepc.com - https://lolrmm.io/tools/remotepc,Medium
+        RMM - RemotePC,^(remotepcservice|rpcsuite|Idrive.File-Transfer|idrive.RemotePCAgent|remotepchost|RemotePC)\.exe$,.,,RemotePC - remotepc.com - https://lolrmm.io/tools/remotepc,Medium
         RMM - RemoteView,^(remoteview|rv|rvagent|rvagtray)\.exe$,.,,RemoteView - content.rview.com - https://lolrmm.io/tools/remoteview,Medium
         RMM - RES Automation Manager,^(wisshell.*|wmc|wmcsvc|wmc_deployer)\.exe$,.,,RES Automation Manager - ivanti.com/ - https://lolrmm.io/tools/res_automation_manager,Medium
         RMM - Rocket Remote Desktop,^(RDConsole|RocketRemoteDesktop_Setup)\.exe$,.,,Rocket Remote Desktop - https://lolrmm.io/tools/rocket_remote_desktop,Medium
@@ -261,21 +262,21 @@ parameters:
         RMM - RunSmart,^RunSmart$,.,,RunSmart - runsmart.io,Medium
         RMM - RustDesk,^(rustdesk.*|rustdesk)\.exe$,.,,RustDesk - rustdesk.com - https://lolrmm.io/tools/rustdesk,Medium
         RMM - S3 Browser,^s3browser.*\.exe$,.,,S3 Browser - https://lolrmm.io/tools/s3_browser,Medium
-        RMM - ScreenConnect (aka COnnectWise/Continuum),^(ScreenConnect.ClientService|Remote Workforce Client|ScreenConnect.WindowsClient|screenconnect.*|screenconnect.windowsclient|screenconnect.clientservice|ConnectWiseControl.*|connectwise.*)\.exe$,.,,ScreenConnect - control.connectwise.com - https://lolrmm.io/tools/screenconnect,Medium
+        RMM - ScreenConnect (aka COnnectWise/Continuum),^(ScreenConnect.ClientService|Remote Workforce Client|ScreenConnect.WindowsClient|screenconnect.*|ConnectWiseControl.*|connectwise.*)\.exe$,.,,ScreenConnect - control.connectwise.com - https://lolrmm.io/tools/screenconnect,Medium
         RMM - ScreenMeet,^(ScreenMeetSupport|ScreenMeet.Support)\.exe$,.,,ScreenMeet - screenmeet.com - https://lolrmm.io/tools/screenmeet,Medium
         RMM - SecureCRT,^SecureCRT\.exe$,.,,SecureCRT - https://lolrmm.io/tools/securecrt,Medium
         RMM - Seetrol,^(seetrolcenter|seetrolclient|seetrolmyservice|seetrolremote|seetrolsetting)\.exe$,.,,Seetrol - seetrol.co.kr - https://lolrmm.io/tools/seetrol,Medium
         RMM - Senso.cloud,^(SensoClient|SensoService|aadg)\.exe$,.,,Senso.cloud - senso.cloud - https://lolrmm.io/tools/senso.cloud,Medium
         RMM - ServerEye,^(servereye.*|ServiceProxyLocalSys)\.exe$,.,,ServerEye - servereye.de/download/ - https://lolrmm.io/tools/servereye,Medium
         RMM - SkyFex (aka DeskRoll),^(Deskroll|DeskRollUA|DeskRollSetup)\.exe$,.,,SkyFex (aka DeskRoll) - skyfex.com/ - https://lolrmm.io/tools/skyfex,Medium
-        RMM - ShowMyPC,^(SMPCSetup|showmypc.*|showmypc|smpcsetup)\.exe$,.,,ShowMyPC - showmypc.com - https://lolrmm.io/tools/showmypc,Medium
+        RMM - ShowMyPC,^(smpcsetup|showmypc.*|showmypc)\.exe$,.,,ShowMyPC - showmypc.com - https://lolrmm.io/tools/showmypc,Medium
         RMM - SimpleHelp,^(simplehelpcustomer|simpleservice|simplegatewayservice|remote access|windowslauncher)\.exe$,.,,SimpleHelp - simple-help.com - https://lolrmm.io/tools/simplehelp,Medium
         RMM - Site24x7,^(MEAgentHelper|MonitoringAgent|Site24x7WindowsAgentTrayIcon|Site24x7PluginAgent)\.exe$,.,,Site24x7 - site24x7.com/msp - https://lolrmm.io/tools/site24x7,Medium
         RMM - Sophos-Remote Management System,^(clientmrinit|mgntsvc|routernt)\.exe$,.,,Sophos-Remote Management System - community.sophos.com/on-premise-endpoint/f/sophos-endpoint-software/5725/sophos-remote-management-system,Medium
         RMM - SmarTTY,^SmarTTY\.exe$,.,,SmarTTY - https://lolrmm.io/tools/smartty,Medium
         RMM - Solar-PuTTY,^Solar-PuTTY\.exe$,.,,Solar-PuTTY - https://lolrmm.io/tools/solar-putty,Medium
         RMM - Sorillus,^(Sorillus-Launcher.*|Sorillus Launcher)\.exe$,.,,Sorillus - sorillus.com - https://lolrmm.io/tools/sorillus,Medium
-        RMM - Splashtop Remote,^(strwinclt|SRServer|SplashtopSOS|SRManager|sragent|srmanager|srserver|srservice|Splashtop_Streamer_Windows.*)\.exe$,.,,Splashtop Remote - splashtop.com - https://lolrmm.io/tools/splashtop_remote,Medium
+        RMM - Splashtop Remote,^(strwinclt|srserver|SplashtopSOS|srmanager|sragent|srservice|Splashtop_Streamer_Windows.*)\.exe$,.,,Splashtop Remote - splashtop.com - https://lolrmm.io/tools/splashtop_remote,Medium
         RMM - SpyAnywhere,^sysdiag\.exe$,.,,SpyAnywhere - spyanywhere.com - https://lolrmm.io/tools/spyanywhere,Medium
         RMM - SunLogin ,^(OrayRemoteShell|OrayRemoteService|sunlogin.*)\.exe$,.,,SunLogin - https://lolrmm.io/tools/sunlogin,Medium
         RMM - SuperOps,^(superopsticket|superops)\.exe$,.,,SuperOps - superops.ai - https://lolrmm.io/tools/superops,Medium
@@ -296,9 +297,9 @@ parameters:
         RMM - ToDesk,^(todesk|ToDesk_Service|ToDesk_Setup)\.exe$,.,,ToDesk - todesktop.com - https://lolrmm.io/tools/todesk,Medium
         RMM - Total Software Deployment,^(tniwinagent|Tsdservice)\.exe$,.,,Total Software Deployment - https://lolrmm.io/tools/total_software_deployment,Medium
         RMM - TurboMeeting,^(pcstarter|turbomeeting|turbomeetingstarter)\.exe$,.,,TurboMeeting - acceo.com/turbomeeting/ - https://lolrmm.io/tools/turbomeeting,Medium
-        RMM - Ultraviewer,^(UltraViewer_Service|ultraviewer|UltraViewer_Desktop|ultraviewer_service|ultraviewer_desktop|UltraViewer_setup.*)\.exe$,.,,Ultraviewer - ultraviewer.net - https://lolrmm.io/tools/ultraviewer,Medium
+        RMM - Ultraviewer,^(ultraviewer_service|ultraviewer|ultraviewer_desktop|UltraViewer_setup.*)\.exe$,.,,Ultraviewer - ultraviewer.net - https://lolrmm.io/tools/ultraviewer,Medium
         RMM - UltraVNC,^UltraVNC.*\.exe$,.,,UltraVNC - https://lolrmm.io/tools/ultravnc,Medium
-        Remote Access - VNC,^(vncserver|vncviewer|vncserverui|winwvc|winvncsc|winvncsc|winvnc|winvnc.*)\.exe$,.,,VNC - realvnc.com/en/connect/download/vnc - https://lolrmm.io/tools/vnc,Medium
+        Remote Access - VNC,^(vncserver|vncviewer|vncserverui|winwvc|winvncsc|winvnc|winvnc.*)\.exe$,.,,VNC - realvnc.com/en/connect/download/vnc - https://lolrmm.io/tools/vnc,Medium
         RMM - WebRDP,^webrdp\.exe$,.,,WebRDP - github.com/Mikej81/WebRDP - https://lolrmm.io/tools/webrdp,Medium
         RMM - Weezo,^(weezohttpd|weezo|weezo setup.*)\.exe$,.,,Weezo - weezo.en.softonic.com - https://lolrmm.io/tools/weezo,Medium
         RMM - WinSCP (Data Transfer),^WinSCP\.exe$,.,,WinSCP - https://lolrmm.io/tools/winscp,Medium
@@ -310,14 +311,14 @@ parameters:
         RMM - Zabbix Agent,^zabbix_agent.*\.exe$,.,,Zabbix Agent - zabbix.com - https://lolrmm.io/tools/zabbix_agent,Medium
         RMM - ZeroTier,^(zerotier.*|zero-powershell)\.exe$|^zerotier.*\.msi$,.,,ZeroTier - zerotier.com - https://lolrmm.io/tools/zerotier,Medium
         RMM - Zoc,^zoc\.exe$,.,,Zoc - https://lolrmm.io/tools/zoc,Medium
-        RMM - Zoho Assist,^(za_connect|zaservice|zohotray|ZohoMeeting|Zohours|ZohoURSService|ZMAgent|Zaservice|ZA_Access)\.exe$,.,,Zoho Assist - zoho.com/assist/ - https://lolrmm.io/tools/zoho_assist,Medium
+        RMM - Zoho Assist,^(za_connect|zaservice|zohotray|ZohoMeeting|Zohours|ZohoURSService|ZMAgent|ZA_Access)\.exe$,.,,Zoho Assist - zoho.com/assist/ - https://lolrmm.io/tools/zoho_assist,Medium
         RMM - VNC,TigerVNC|vncviewer\.exe|winvnc\.exe|winvncsc\.exe|winwvc\.exe|JollyFastVNC|realvnc|tightvnc|ultravnc|VNC connect,.,,VNC,Medium
-        RMM - General,^Meraki Systems Manager Agent$|RemoteAgent|TrendMicro BaseCamp|AB Tutor|Datto|SolarWinds RMM|Naverisk,.,\\\<Err\>\\|(x86|amd64|wow64)_microsoft-windows|\.(jpg|gif|png|bmp|pat|pdf|doc|docx|SyncRootIdentity)$,General RMM,Medium
-        VPN,nordvpn|protonvpn|expressvpn|surfshark|cyberghost|Private Internet Access|IPvanish|wireguard|Connectify|OpenVPN|mullvad|tunnelbear,.,\\\<Err\>\\|Nessus|\.(jpg|gif|png|bmp|pat|pdf|doc|docx|SyncRootIdentity|vim)$,Internal,Medium
+        RMM - Product Directory,^(Meraki Systems Manager Agent|TrendMicro BaseCamp|AB Tutor|Datto|SolarWinds RMM|Naverisk)$,.,,General RMM product directory basenames,Medium
+        VPN,^((NordVPN|nordvpn-service|ProtonVPN|ProtonVPNService|ProtonVPN\.WireGuardService|ExpressVPN|expressvpnd|expressvpn-service|Surfshark|Surfshark\.Service|CyberGhost|pia-client|pia-service|pia-wgservice|IPVanish|wireguard|Connectify|ConnectifyService|Connectifyd|OpenVPNConnect|openvpn|openvpn-gui|openvpnserv|openvpnserv2|ovpnconnector|ovpnagent|Mullvad VPN|mullvad-daemon|mullvad-exclude|mullvad-problem-report|TunnelBear|TunnelBear\.Service|TunnelBear\.Maintenance|TunnelBear\.Update)\.exe|(tapexpressvpn|expressvpn-wintun|wireguard)\.sys)$,.,,High-confidence VPN executable service and driver filenames,Medium
         Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,,Medium
         Suspicious Location,\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,\\Perflogs\\|\\ProgramData\\[^\\]+$|\\Users\\Public\\|\\Appdata\\(Roaming|Local)\\.+\\[^\\]$,\\eclipse\\|\\WebSphere\\|com\.ibm\.websphere,Internal,High
         Web Browsing History,BrowsingHistoryView,.,,BrowsingHistoryView,Low
-        RMM - Komari,komari|komari\.exe|komari-agent|komari-agent\.exe|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)(\.exe)?|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)(\.exe)?,.*(\\|/)(Komari|komari)(\\|/).*|.*(\\|/)opt(\\|/)komari(\\|/).*|.*(\\|/)usr(\\|/)local(\\|/)komari(\\|/).*,.*,Medium,Komari server or agent path/filename indicator
+        RMM - Komari,^(komari|komari-agent|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm))(\.exe)?$,.,,Komari server or agent filename indicator,Medium
 
 sources:
   - precondition:
