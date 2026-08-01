@@ -433,7 +433,8 @@ class MFTDetectionTests(unittest.TestCase):
 
         expected_techniques = {
             "Credential Access Tool - ProcDump": "T1003.001",
-            "Credential Access - NTDS Database in User Profile": "T1003.003",
+            "Credential Access - NTDS Database Outside Windows NTDS Directory":
+            "T1003.003",
             "Persistence - User Startup Executable or Script": "T1547.001",
             "Masquerading - Double Extension Payload": "T1036.007",
             "Defence Evasion - Security Control Utilities": "T1562.001",
@@ -1108,11 +1109,12 @@ class MFTDetectionTests(unittest.TestCase):
             r"C:\Users\analyst\AppData\Roaming\Vendor\payload.dll",
             re.compile(guid_rule["PathRegex"], re.IGNORECASE))
 
-    def test_ntds_database_rule_is_exact_and_user_scoped(self):
+    def test_ntds_database_rule_is_exact_and_excludes_windows_ntds(self):
         rule = self.rules[
-            "Credential Access - NTDS Database in User Profile"]
+            "Credential Access - NTDS Database Outside Windows NTDS Directory"]
         keyword = re.compile(rule["KeywordRegex"], re.IGNORECASE)
         path = re.compile(rule["PathRegex"], re.IGNORECASE)
+        ignore = re.compile(rule["IgnoreRegex"], re.IGNORECASE)
 
         self.assertEqual(rule["Criticality"], "High")
         self.assertRegex("ntds.dit", keyword)
@@ -1120,8 +1122,18 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertNotRegex("other.dit", keyword)
         self.assertRegex(
             r"C:\Users\analyst\Desktop\ntds.dit", path)
+        self.assertRegex(
+            r"C:\Windows\Temp\ntds.dit", path)
+        self.assertRegex(
+            r"C:\Windows\System32\ntds.dit", path)
+        self.assertRegex(
+            r"C:\Windows\NTDS\ntds.dit", ignore)
+        self.assertRegex(
+            r"C:\Windows\NTDS\backup\ntds.dit", ignore)
         self.assertNotRegex(
-            r"C:\Windows\NTDS\ntds.dit", path)
+            r"C:\Windows\Temp\ntds.dit", ignore)
+        self.assertNotRegex(
+            r"C:\Windows\System32\ntds.dit", ignore)
 
     def test_generic_location_dump_rules_are_medium(self):
         high_rules = (
@@ -1168,7 +1180,7 @@ class MFTDetectionTests(unittest.TestCase):
             (
                 r"C:\Users\analyst\Desktop\ntds.dit",
                 "ntds.dit",
-                "Credential Access - NTDS Database in User Profile",
+                "Credential Access - NTDS Database Outside Windows NTDS Directory",
             ),
             (
                 r"C:\Users\analyst\AppData\Local"

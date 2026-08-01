@@ -59,7 +59,9 @@ REVIEWED_CONFIDENCE = {
     "VPN": "High",
     "Masquerading - Windows Binary Name in AppData": "High",
     "Masquerading - Double Extension Payload": "High",
-    "Credential Access - NTDS Database in User Profile": "High",
+    "Credential Access - NTDS Database Outside Windows NTDS Directory": (
+        "High"
+    ),
     "Suspicious AppData Hexadecimal Payload": "Medium",
     "Suspicious AppData GUID Directory Payload": "Medium",
     "Suspicious Location - Uncommon AppData Folder": "High",
@@ -123,7 +125,9 @@ def technique_for(detection, category_code):
     """Return only mappings that are unambiguous at filename-rule level."""
     exact_mappings = {
         "Credential Access Tool - ProcDump": "T1003.001",
-        "Credential Access - NTDS Database in User Profile": "T1003.003",
+        "Credential Access - NTDS Database Outside Windows NTDS Directory": (
+            "T1003.003"
+        ),
         "Encryption": "T1486",
         "Masquerading - Windows Binary Name in AppData": "T1036.005",
         "Masquerading - Double Extension Payload": "T1036.007",

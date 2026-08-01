@@ -78,7 +78,7 @@ DR-MFT-DEV-002,COVERAGE-DR-MFT-DEV-002,MFT,File,ngrok.exe,C:\Replay\ngrok.exe,Tr
 DR-MFT-VPN-001,COVERAGE-DR-MFT-VPN-001,MFT,File,NordVPN.exe,C:\Replay\NordVPN.exe,True,
 DR-MFT-MASQ-001,COVERAGE-DR-MFT-MASQ-001,MFT,File,svchost.exe,C:\Users\A\AppData\,True,DR-MFT-SLOC-003
 DR-MFT-MASQ-002,COVERAGE-DR-MFT-MASQ-002,MFT,File,A.doc.exe,C:\Users\,True,
-DR-MFT-CRED-007,COVERAGE-DR-MFT-CRED-007,MFT,File,ntds.dit,C:\Users\,True,
+DR-MFT-CRED-007,COVERAGE-DR-MFT-CRED-007,MFT,File,ntds.dit,C:\Replay\ntds.dit,True,
 DR-MFT-SLOC-001,COVERAGE-DR-MFT-SLOC-001,MFT,File,aaaaaaaaaaaaaaaa.exe,C:\Users\A\AppData\Local\aaaaaaaaaaaaaaaa\,True,
 DR-MFT-SLOC-002,COVERAGE-DR-MFT-SLOC-002,MFT,File,.exe,C:\Users\A\AppData\Local\aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa\,True,
 DR-MFT-SLOC-003,COVERAGE-DR-MFT-SLOC-003,MFT,File,.exe,C:\Users\A\AppData\,True,

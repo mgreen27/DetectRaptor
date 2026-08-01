@@ -26,3 +26,7 @@ MFT-024,MFT,File,$IABC123.exe,C:\$Recycle.Bin\S-1-5-21-1\$IABC123.exe,Canonical 
 MFT-025,MFT,File,$RABC123.exe,C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe,Recycled executable content
 MFT-026,MFT,File,$Important.exe,C:\$Recycle.Bin\S-1-5-21-1\$Important.exe,Noncanonical executable staged beneath Recycle Bin
 MFT-027,MFT,File,payload.ps1,C:\$Recycle.Bin\S-1-5-21-1\$RABC123\Scripts\payload.ps1,Script inside a canonical recycled directory
+MFT-028,MFT,File,ntds.dit,C:\Windows\Temp\ntds.dit,NTDS database staged in Windows Temp
+MFT-029,MFT,File,ntds.dit,C:\Windows\NTDS\ntds.dit,Standard Windows NTDS database
+MFT-030,MFT,File,ntds.dit,C:\Windows\NTDS\backup\ntds.dit,NTDS copy retained beneath the standard NTDS tree
+MFT-031,MFT,File,ntds.dit,C:\Windows\System32\ntds.dit,NTDS database in an unexpected Windows directory

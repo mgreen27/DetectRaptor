@@ -264,8 +264,13 @@ than another recursive catch-all:
   are excluded because they establish deletion rather than suspicious
   staging. Recycle Bin lifecycle analysis should use a dedicated parser that
   correlates `$I` metadata with the corresponding `$R` content.
-- **User-profile NTDS database:** High for the exact `ntds.dit` basename under
-  a user profile. Generic `.dit` files are no longer treated as equivalent.
+- **NTDS database outside the Windows NTDS tree:** High for the exact
+  `ntds.dit` basename anywhere outside the standard `Windows\NTDS` directory.
+  This includes user profiles, temporary paths, ProgramData, alternate drives,
+  and unexpected Windows directories such as `Windows\Temp` or
+  `Windows\System32`. Generic `.dit` files are not treated as equivalent.
+  Custom configured AD database paths require a site-specific whitelist or
+  correlation with the configured `DSA Database file` registry value.
 
 The higher-specificity rules are ordered before the generic one-letter
 filename rule. This is required while the current artifact returns only the
@@ -500,7 +505,7 @@ ATT&CK coverage by category.
 
 Phase 9 adds two complementary regression layers:
 
-- `tests/fixtures/mft_replay.csv` contains 27 sanitized positive and negative
+- `tests/fixtures/mft_replay.csv` contains 31 sanitized positive and negative
   MFT and Amcache cases.
 - `tests/fixtures/mft_expected.csv` defines exact, required, and forbidden
   RuleID expectations.
@@ -573,7 +578,7 @@ Phase 11 adds measurable match expansion and analyst-facing pivots:
 - A normalized cross-artifact pivot stacks MFT, Amcache, BinaryRename, EVTX,
   and PSReadLine evidence by endpoint, path, and event time.
 
-The benchmark covers 396 cases and 369 rules, or 146,124 estimated rule
+The benchmark covers 400 cases and 369 rules, or 147,600 estimated rule
 evaluations per iteration. Exact match and timing metrics are regenerated
 during validation because they vary with rule tuning and development-host
 performance.
