@@ -28,313 +28,388 @@ parameters:
    - name: ApprovedRMMPathRegex
      default: ^$
      description: "Optional regex matching approved RMM installation paths. Must be combined with ApprovedRMMNameRegex."
+   - name: SuppressWhitelisted
+     type: bool
+     default: true
+     description: "Suppress built-in RuleID, filename, and path whitelist matches. Disable to audit suppressed rows."
+   - name: Whitelists
+     type: csv
+     default: |
+        WhitelistID,RuleID,Artifact,FilenameRegex,PathRegex,Disposition,Reason,Source,ReviewDate
+        DR-MFT-WL-001,DR-MFT-RMM-099,MFT,^quickassist\.exe$,\\Program Files\\WindowsApps\\MicrosoftCorporationII\.QuickAssist_[^\\]+\\Microsoft\.RemoteAssistance\.QuickAssist\\QuickAssist\.exe$|\\Windows\\(servicing\\LCU|WinSxS)\\.*\\quickassist\.exe$|\\Windows\\(System32|SysWOW64)\\quickassist\.exe$|\\\$WINDOWS\.~BT\\NewOS\\Windows\\(System32|SysWOW64)\\quickassist\.exe$,Suppress,Microsoft Quick Assist in trusted Windows component paths,DetectRaptor Curated,2027-08-01
+
    - name: IOCs
      type: csv
      default: |
-        Detection,KeywordRegex,PathRegex,IgnoreRegex,Reference,Criticality,Scope,EntryType
-        Archive Utilities - Amcache,^(WinRAR|7zip|7z).*\.exe$,.,\\Program Files\\,Archive utility execution evidence outside Program Files,Low,Amcache,File
-        Archive Utilities - User or Public Staging,^(WinRAR|7zip|7z).*\.exe$,\\Users\\|\\PerfLogs\\|\\\$Recycle\.Bin\\,\\Users\\[^\\]+\\AppData\\Local\\(SourceTree\\app-[^\\]+\\tools|Autodesk\\webdeploy\\production\\[^\\]+)\\,"Archive utility in a user profile, public staging, PerfLogs, or Recycle Bin path",Medium,MFT,File
-        Archive Utilities - Windows Temporary Staging,^(WinRAR|7zip|7z).*\.exe$,\\Windows\\(Temp|SystemTemp)\\,\\Windows\\SystemTemp\\NuGetScratch\\|\\Windows\\Temp\\(AdAccess-installer|odis_download_dest|AdAppMgrRollBackBackup)\\,Archive utility in Windows temporary paths excluding known package extraction paths,Medium,MFT,File
-        Attacker Tool - ADCollector,^ADCollector\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - ADPassHunt,^ADPassHunt\.exe,.,,Internal,High,Both,File
-        Attacker Tool - Antivirus-Disabling Utility,^PowerTool\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - Apollo Agent,^apollo\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - Certipy,^certipy,.,,Internal,High,Both,File
-        Attacker Tool - CrackMapExec,crackmapexec,.,,Internal,High,Both,File
-        Attacker Tool - Dead Potato,^DeadPotato,.,,https://github.com/lypd0/DeadPotato,High,Both,File
-        Attacker Tool - Defender Control,^DefenderControl\.exe|^Disable Defender\.exe|^dControl\.exe|^dfControl\.exe|^disable-defender\.exe|^enable-defender\.exe|^DefenderControl v1.6\.rar,.,,Internal,Medium,Both,File
-        Attacker Tool - Direct HTTP Tunnel,^Direct HTTP Tunnel\.exe,.,,Internal,High,Both,File
-        Attacker Tool - DomainPasswordSpray,^DomainPasswordSpray\.ps1,.,,Internal,High,Both,File
-        Attacker Tool - Dotnetcat,^dncat\.(exe|dll),.,,Internal,High,Both,File
-        Attacker Tool - GadgetToJScript,^GadgetToJScript\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - GetShell,^GetShell\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - Gobuster,^gobuster.exe,.,,Internal,Low,Both,File
-        Attacker Tool - Hashcat,^hashcat\.exe,.,,Internal,Low,Both,File
-        Attacker Tool - Interceptor-NG,^Intercepter-NG\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - Inveigh,^Inveigh\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - John The Ripper,^john\.exe|^john-omp\.exe,.,,Internal,Low,Both,File
-        Attacker Tool - MSF.exe,^msf\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - Nuclei,^nuclei\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - NetExec,^nxc\.exe,.,,https://github.com/Pennyw0rth/NetExec,Medium,Both,File
-        Attacker Tool - Ophcrack,^ophcrack\.exe,.,,Internal,Low,Both,File
-        Attacker Tool - PowerLine,^powerline\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - PSAttack,^PSAttack,.,,Internal,Medium,Both,File
-        Attacker Tool - Pyramid,^cradle\.py|^pyramid\.py,.,,Internal,Medium,Both,File
-        Attacker Tool - Quasar Remote Access Tool (RAT),^Quasar\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - RuralBishop,^RuralBishop\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - SafetyDump,^SafetyDump,.,,Internal,Medium,Both,File
-        Attacker Tool - SafetyKatz,SafetyKatz,.,,Internal,Medium,Both,File
-        Attacker Tool - Seatbelt,^seatbelt,.,,Internal,Medium,Both,File
-        Attacker Tool - SharpDump,^sharpdump,.,,Internal,Medium,Both,File
-        Attacker Tool - SharPersist,^SharPersist,.,,Internal,Medium,Both,File
-        Attacker Tool - SharpStomp,^SharpStomp,.,,Internal,Medium,Both,File
-        Attacker Tool - SharpUp,^SharpUp\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - SharpView,^SharpView,.,,Internal,Medium,Both,File
-        Attacker Tool - SharpWMI,^sharpwmi\.exe,.,,Internal,Medium,Both,File
-        Attacker Tool - SharpZeroLogon,^SharpZeroLogon,.,,Internal,Medium,Both,File
-        Attacker Tool - VulnRecon,vulnrecon\.(exe|dll|py),.,,Internal,Medium,Both,File
-        BAU Cloud Data Transfer,^OneDrive\.exe|iCloud\.exe|googledrivesync\.exe|GoogleDriveSetup\.exe|Dropbox\.exe|DropboxUpdate\.exe|DropboxOEM\.exe|BoxDrive|ShareFile|AmazonCloudDrive\.exe|AmazonDrive\.exe|SpiderOak|pCloud\.exe,.,,Internal - mixed cloud services,Low,Both,File
-        Mimikatz Tools,mimikatz|mimidrv\.sys|mimilib\.dll|mimilove\.exe|mimispool\.dll|Mimikittenz|pypykatz|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz,High,Both,File
-        Credential Theft,AccountRestore|adfsdump|^Arestore|^Certify\.exe|ChromePass|DUBrute|GrabChrome|^Hydra\.exe|kidlogger\.exe|lazagne|mailpv\.exe|MiniDumpWriteDump|NLBrute|pwdump|rdpv\.exe|rubeus\.exe|sekurLSA\.dll$|^veaam\.ps1$|WebBrowserPassView|WirelessKeyView|^lsass.*\.(dmp|zip|rar),.,,Internal - mixed credential tools,High,Both,File
-        Credential Access Tool - ProcDump,^(procdump(64)?\.exe|procdumpdll\.dll)$,.,\\Packages\\Plugins\\Microsoft\.Azure\.Monitor\.AzureMonitorWindowsAgent\\[^\\]+\\Monitoring\\Agent\\(procdump\\(x64|x86|arm64)\\procdump(64)?\.exe|procdumpdll\.dll)$,Sysinternals ProcDump; excludes Microsoft Azure Monitor Agent bundled copies,High,Both,File
-        Credential Theft - fgdump,^fgdump\.exe,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,High,Both,File
-        Credential Theft- Potato,Potato\.exe$,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",High,Both,File
-        Credential Theft - PetitPotam,PetitPotam\.(exe|py|sln)$,.,,PoC tool to coerce Windows hosts to authenticate to other machines via MS-EFSRPC EfsRpcOpenFileRaw or other functions.,High,Both,File
-        Credential Theft - gosecretsdump,^gosecretsdump_win_v0.3.1\.exe$,.,,https://github.com/C-Sto/gosecretsdump,High,Both,File
-        Crytominers,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low,Both,File
-        Data Transfer,FreeFileSync|^mega\.exe|megaclient|megacmd|megasync|megatool|^(ngrok|\.ngrok)|^rclone|Stealbit,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High,Both,File
-        Data Transfer - FileZilla,^(filezilla|FileZillaPortable|filezilla-server|filezilla-server-gui|filezilla-server-impersonator|filezilla-server-config-converter|filezilla-server-crypt|fzputtygen|fzsftp)\.exe$,.,,FileZilla client and server executable filenames,Low,Both,File
-        Data Transfer - Restic,restic\.exe,.,,Internal - https://github.com/restic/restic,Low,Both,File
-        Data Transfer,plink\.exe|pscp\.exe|powercat,.,\\Program Files\\,PuTTy / SSH tools outside Program Files is highly suspicious.,High,Both,File
-        Defence Evasion,^dControl\.exe$|^gmer\.exe$|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter,.,,Internal,High,Both,File
-        Defence Evasion,CleanWipe|nssm\.exe$|processhacker,.,,Internal,Medium,Both,File
-        EDR Evasion,^EDRSilencer\.exe$|^FireBlock\.exe$,.,,https://github.com/netero1010/EDRSilencer,High,Both,File
-        Encryption,^dcrypt|^truecrypt|^VeraCrypt,.,,Internal,Low,Both,File
-        Enumeration Tool - Network Scanner (NS) Tool,^ns\.exe,.,,Internal,High,Both,File
-        Enumeration Tool - Network and AD Scanner,^(ADGet|AdFind|advanced_ip_scanner|advanced_ip_scanner_console|Advanced_port_scanner|fscan|ipscan|kportscan|masscan|massscan|nbtscan|netscan|nsscan|NtdsAudit|Group3r|PingCastle|ADExplorer|SharpShares)\.exe$|^ADRecon\.ps1$,.,,High-confidence network and Active Directory scanner filenames,High,Both,File
-        Enumeration Tool - BloodHound,^(BloodHound\.exe|bloodhound\.py|SharpHound\.ps1|SharpHound\.exe|AzureHound\.ps1)$,.,,BloodHound and SharpHound collection filenames,High,Both,File
-        Enumeration Tool - Nmap and Everything,^(everything|nmap|zenmap)\.exe$,.,,"Exact Nmap, Zenmap, and Everything executable filenames",Medium,Both,File
-        Enumeration Tool outputs,^ad_ous\.txt|^ad_computers\.txt|^ad_users\.txt|^ad_group\.txt|^trustdmp\.txt|^subnets\.txt|_computers\.json|_domains\.json|_gpos\.json|_groups\.json|_ous\.json|_users\.json|bloodhound\.zip|ADRecon-Report-,.,,Internal,High,Both,File
-        Execution Path,PAEXE|PSEXE|WinExeSvc,\\Windows\\(PAEXE|PSEXE|WinExeSvc),,Internal,Low,MFT,File
-        Execution - NirCmd,^nircmd\.exe$,.,,Internal - https://www.nirsoft.net/utils/nircmd.html,Low,Both,File
-        Execution - Nsudo,^NSudo\.exe$|^NSudoG\.exe$,.,,Internal - https://github.com/azraelrabbit/NSudo-1,High,Both,File
-        Execution - PsExec,psexec\.exe$|psexec64\.exe$|remcom\.exe$,.,,Psexec - some applications use RemCom,Medium,Both,File
-        Execution - LuciRoot,LuciRoot,.,,Rootkit,High,Both,File
-        Hack Tool - Impacket,^execute\.bat$|^[a-zA-Z]{8}\.bat$|^__output$,C:\\WINDOWS\\[a-zA-Z]{8}\.bat|C:\\Windows\\TEMP\\execute\.bat|C:\\__output,,SMBExec - https://github.com/fortra/impacket/blob/master/examples/smbexec.py,High,MFT,File
-        Hack Tool - PowerScan,PowerScan\.ps1|Get-CimAppCompatCache\.ps1|Get-CimAsepLogon\.ps1|Get-CimAsepStartup\.ps1|Get-CimAsepWmi\.ps1|Get-CimDNSCache\.ps1|Get-CimDirectory\.ps1|Get-CimDriver\.ps1|Get-CimLocalAdmin\.ps1|Get-CimLocalUser\.ps1|Get-CimLogonHistory\.ps1|Get-CimLogonSession\.ps1|Get-CimNetAdapter\.ps1|Get-CimNetTCPConnection\.ps1|Get-CimProcess\.ps1|Get-CimRegistryKey\.ps1|Get-CimRegistryValue\.ps1|Get-CimScheduledTask\.ps1|Get-CimSecurityHealth\.ps1|Get-CimService\.ps1|Get-CimSmbShare\.ps1|Get-CimUserAssist\.ps1|Get-ComScheduledTask\.ps1|Get-EventLogon\.ps1|Get-EventSuspiciousBITS\.ps1|Get-EventSuspiciousPS\.ps1|Get-EventSvcCreation\.ps1|Get-EventSvcModification\.ps1|Get-EventTaskCreation\.ps1|Get-EventTaskModification\.ps1|Get-PowershellHistory\.ps1|Get-PowershellProfile\.ps1|Get-RegistryKeyTimestamp\.ps1|Get-CimDpapiBrowser\.ps1|Get-CimDpapiCredential\.ps1|Get-CimDpapiVault\.ps1|Get-CimDpapiWifi\.ps1|Get-CimUnprotectedCredential\.ps1|Get-RegistryHiveDump\.ps1|Get-ShadowHiveDump\.ps1|Get-NetBiosInterface\.ps1|Get-NetSession\.ps1|Get-NullSessionStatus\.ps1|Get-OxidBinding\.ps1|Get-SecurityService\.ps1|Get-ServiceNamedPipe\.ps1|Get-SmbOSVersion\.ps1|Get-SmbStatus\.ps1|Get-SpoolerStatus\.ps1,.,,PowerScan - https://github.com/tmenochet/PowerScan,High,Both,File
-        Hack Tool - PsMapExec,PsMapExec\.ps1|DumpSAM\.ps1|Invoke-MSSQLup\.ps1|Invoke-Mongoose\.ps1|Invoke-NETMongoose\.ps1|Invoke-Pandemonium\.ps1|Get-SMBSigning\.ps1|Invoke-SecretsDump\.ps1|Invoke-NTDS\.ps1|Invoke-SharpRDPTest\.ps1|Kirby\.ps1,.,,PsMapExec - https://github.com/The-Viper-One/PsMapExec/blob/main/PsMapExec.ps1,High,Both,File
-        Privilege Escalation Tool,winPEAS|winpwn,.,,Internal,High,Both,File
-        Privilege Escalation Tool - KrbRelayUp,^KrbRelayUp\.exe$,.,,KrbRelayUp - https://github.com/Dec0ne/KrbRelayUp,High,Both,File
-        Pirating Software,KMSPico|cracked,.,WindowsApps\\king\.com|\.(jpg|gif|png|bmp|pat|sbsar|pdf|doc|docx|Metadata)$,Internal,Low,Both,File
-        RMM - 247ithelp.com (ConnectWise),^Remote Workforce Client\.exe$,.,,247ithelp.com (ConnectWise) - https://lolrmm.io/tools/247ithelp.com__connectwise_,Medium,Both,File
-        RMM - Absolute (Computrace),^(rpcnet|ctes|ctespersitence|cteshostsvc|rpcld)\.exe$,.,,Absolute (Computrace) - https://lolrmm.io/tools/absolute__computrace_,Medium,Both,File
-        RMM - Access Remote PC,^(rpcsetup|rpcgrab)\.exe$,.,,Access Remote PC - https://lolrmm.io/tools/access_remote_pc,Medium,Both,File
-        RMM - Acronis Cyber Protect (Remotix),^(AcronisCyberProtectConnectQuickAssist.*|AcronisCyberProtectConnectAgent)\.exe$,.,,Acronis Cyber Protect (Remotix) - https://lolrmm.io/tools/acronis_cyber_protect__remotix_,Medium,Both,File
-        RMM - Action1,^(action1_update|action1_connector|action1_remote|action1_agent)\.exe$,.,,Action1 - action1.com - https://lolrmm.io/tools/action1,Medium,Both,File
-        RMM - Adobe Connect,^(ConnectAppSetup.*|ConnectShellSetup.*|Connect|ConnectDetector)\.exe$,.,,Adobe Connect - https://lolrmm.io/tools/adobe_connect,Medium,Both,File
-        RMM - AeroAdmin,^aeroadmin\.exe$,.,,AeroAdmin - aeroadmin.com - https://lolrmm.io/tools/aeroadmin,Medium,Both,File
-        RMM - AliWangWang-remote-control,^alitask\.exe$,.,,AliWangWang-remote-control - wangwang.taobao.com - https://lolrmm.io/tools/aliwangwang-remote-control,Medium,Both,File
-        RMM - Alpemix,^(AlpemixService|alpemix)\.exe$,.,,Alpemix - alpemix.com - https://lolrmm.io/tools/alpemix,Medium,Both,File
-        RMM - Ammyy Admin,^(AMMYY_Admin|aa_v.*)\.exe$,.,,Ammyy Admin - ammyy.com,Medium,Both,File
-        RMM - Any Support,^ManualLauncher\.exe$,.,,Any Support - anysupport.net -https://lolrmm.io/tools/any_support,Medium,Both,File
-        RMM - AnyDesk,^(anydesk|anydesk.*)\.exe$,.,,AnyDesk - anydesk.com - https://lolrmm.io/tools/anydesk,Medium,Both,File
-        RMM - Anyplace Control,^apc_host\.exe$,.,,Anyplace Control - anyplace-control.com - https://lolrmm.io/tools/anyplace_control,Medium,Both,File
-        RMM - AnyViewer,^(AnyViewerSetup|RCClient|RCService)\.exe$,.,,AnyViewer - https://www.anyviewer.com/ - https://lolrmm.io/tools/anyviewer,Medium,Both,File
-        RMM - Atera,^(syncrosetup|ateraagent|atera_agent|AgentPackageTaskScheduler|AgentPackageNetworkDiscovery|atera.*Agent)\.exe$,.,,Atera - atera.com - https://lolrmm.io/tools/atera,Medium,Both,File
-        RMM - Auvik,^(auvik.engine|auvik.agent)\.exe$,.,,Auvik - auvik.com - https://lolrmm.io/tools/auvik,Medium,Both,File
-        RMM - AweRay,^(AweSun|aweray_remote.*)\.exe$,.,,AweRay- sun.aweray.com/en/ - https://lolrmm.io/tools/aweray,Medium,Both,File
-        RMM - Barracuda,^BarracudaRMM$|^Barracuda Workplace$|^Barracuda MSP$,.,,Barracuda - barracudamsp.com,Medium,MFT,Directory
-        RMM - Basecamp,^basecamp3setup\.exe$,.,,Basecamp - https://3.basecamp-help.com/article/56-basecamp-3-for-windows,Medium,Both,File
-        RMM - BeamYourScreen,^(beamyourscreen|beamyourscreen-host)\.exe$,.,,BeamYourScreen - beamyourscreen.com - https://lolrmm.io/tools/beamyourscreen,Medium,Both,File
-        RMM - BeAnywhere,^(basuptshelper|basupsrvcupdate|BASupApp|BASupSysInf|BASupAppSrvc|TakeControl|BASupAppElev|basupsrvc|BASupConHelper|BASupSrvcCnfg|BASupSrvcUpdater)\.exe$,.,,BeAnywhere - beanywhere.en.uptodown.com/windows,Medium,Both,File
-        RMM - BeInSync,^Beinsync.*\.exe$,.,,BeInSync - beinsync.com  beinsync.net - https://lolrmm.io/tools/beinsync,Medium,Both,File
-        RMM - Beyond Trust (Bomgar),^(bomgar-rdp|bomgar-pac|bomgar-pac-.*|bomgar-scc|bomgar-scc-.*)\.exe$,.,,BeyondTrust - beyondtrust.com/brand/bomgar - https://lolrmm.io/tools/beyondtrust__bomgar_,Medium,Both,File
-        RMM - Bitvise SSH,^(BvSshClient-Inst|BvSshServer-Inst)\.exe$,.,,Bitvise SSH - https://bitvise.com/ssh-client - https://lolrmm.io/tools/bitvise_ssh_client,Medium,Both,File
-        RMM - Bluetrait,^BluetraitInstaller\.msi$,.,,Bluetrait - https://bluetrait.io/,Medium,Both,File
-        RMM - CentraStage (Now Datto),^(CagService|AEMAgent)\.exe$,.,,CentraStage (Now Datto) - datto.com/au/products/rmm/ - https://lolrmm.io/tools/centrastage__now_datto_,Medium,Both,File
-        RMM - Centurion,^ctiserv\.exe$,.,,Centurion - https://lolrmm.io/tools/centurion,Medium,Both,File
-        RMM - ChromeRDP,^(remote_host|remoting_host)\.exe$,.,,ChromeRDP - https://remotedesktop.google.com/ - https://lolrmm.io/tools/chrome_remote_desktop,Medium,Both,File
-        Remote Access - CloudFlare Tunnel,^cloudflared\.exe$,.,,CloudFlare Tunnel - cloudflare.com/products/tunnel/ - https://lolrmm.io/tools/cloudflare_tunnel,Medium,Both,File
-        RMM - Comodo,^(itsmagent|rviewer)\.exe$,.,,Comodo - one.comodo.com,Medium,Both,File
-        RMM - Connectwise Automate (LabTech),^(ltsvc|ltsvcmon|lttray)\.exe$,.,,Connectwise Automate (LabTech) - https://www.connectwise.com/company/announcements/labtech-now-connectwise-automate - https://lolrmm.io/tools/connectwise_automate__labtech_,Medium,Both,File
-        RMM - ConnectWise Control,^(connectwisechat-customer|connectwisecontrol.client|ConnectWise.*)\.exe$,.,,ConnectWise Control - control.connectwise.com - https://lolrmm.io/tools/connectwise_control,Medium,Both,File
-        RMM - CrossLoop,^(crossloopservice|CrossLoopConnect|WinVNCStub)\.exe$,.,,CrossLoop - crossloop.en.softonic.com - https://lolrmm.io/tools/crossloop,Medium,Both,File
-        RMM - CrossTec Remote Control,^(PCIVIDEO|supporttool)\.exe$,.,,CrossTec Remote Control - crosstecsoftware.com/remotecontrol - https://lolrmm.io/tools/crosstec_remote_control,Medium,Both,File
-        RMM - Cruz,^CruzRMM$,.,,Cruz - resources.doradosoftware.com/cruz-rmm,Medium,MFT,Directory
-        RMM - Dameware,^(SolarWinds-Dameware-DRS.*|DameWare Mini Remote Control.*|dntus.*|dwrcs|dwrcst|DameWare Remote Support|SolarWinds-Dameware-MRC.*)\.exe$,.,,Dameware - https://www.solarwinds.com/dameware - https://lolrmm.io/tools/dameware,Medium,Both,File
-        RMM - DeskDay,^ultimate_.*\.exe$,.,,DeskDay - deskday.ai - https://lolrmm.io/tools/deskday,Medium,Both,File
-        RMM - DeskShare,^(TeamTaskManager|DSGuest)\.exe$,.,,DeskShare - https://www.deskshare.com/help/fml/Active-and-Passive-connection-mode.aspx - https://lolrmm.io/tools/deskshare,Medium,Both,File
-        RMM - DesktopNow,^desktopnow\.exe$,.,,DesktopNow - https://www.nchsoftware.com/remotedesktop/index.html - https://lolrmm.io/tools/desktopnow,Medium,Both,File
-        RMM - Distant Desktop,^(ddsystem|dd|distant-desktop)\.exe$,.,,Distant Desktop - https://www.distantdesktop.com/ - https://lolrmm.io/tools/distant_desktop,Medium,Both,File
-        Developer Utility - Dev Tunnels (aka Visual Studio Dev Tunnel),^devtunnel\.exe$,.,,Dev Tunnels - learn.microsoft.com/en-us/azure/developer/dev-tunnels/overview,Medium,Both,File
-        RMM - Domotz,^(domotz.*|Domotz Pro Desktop App|Domotz Pro Desktop App Setup.*|distant-desktop|domotz_bash)\.exe$,.,,Domotz - domotz.com - https://lolrmm.io/tools/domotz,Medium,Both,File
-        RMM - DragonDisk,^DragonDisk\.exe$,.,,DragonDisk - https://lolrmm.io/tools/dragondisk,Medium,Both,File
-        RMM - Duplicati,^Duplicati.Server\.exe$,.,,Duplicati - https://lolrmm.io/tools/duplicati,Medium,Both,File
-        RMM - DW Service,^(dwagsvc|dwagent)\.exe$,.,,DWService - dwservice.net - https://lolrmm.io/tools/dw_service,Medium,Both,File
-        RMM - Echoware,^echoserver.*\.exe$|^echoware\.dll$,.,,Echoware - https://lolrmm.io/tools/echoware,Medium,Both,File
-        RMM - eHorus,^(ehorus standalone|standalone_launcher)\.exe$,.,,eHorus - ehorus.com - https://lolrmm.io/tools/ehorus,Medium,Both,File
-        RMM -  Electric AI (Kaseya),^ElectricAi$,.,,Electric - electric.ai,Medium,MFT,Directory
-        RMM - EMCO Remote Console,^remoteconsole\.exe$,.,,EMCO Remote Console - emcosoftware.com - https://lolrmm.io/tools/emco_remote_console,Medium,Both,File
-        RMM - Encapto,^Encapto$,.,,Encapto - encapto.com,Medium,MFT,Directory
-        RMM - Ericom AccessNow,^(accessserver|accessserver.*)\.exe$,.,,Ericom AccessNow - ericom.com,Medium,Both,File
-        RMM - Ericom Connect,^(ericomconnnectconfigurationtool|EricomConnectRemoteHost.*)\.exe$,.,,Ericom Connect - ericom.com,Medium,Both,File
-        RMM - ESET Remote Administrator,^(era|einstaller|ezhelp.*|eratool|ERAAgent)\.exe$,.,,ESET Remote Administrator - eset.com/me/business/remote-management/remote-administrator/,Medium,Both,File
-        RMM - ExtraPuTTY,^ExtraPuTTY-0.30-2016-01-28-installer\.exe$,.,,ExtraPuTTY - https://lolrmm.io/tools/extraputty,Medium,Both,File
-        RMM - ezHelp,^(ezhelpclientmanager|ezHelpManager|ezhelpclient)\.exe$,.,,ezHelp - ezhelp.co.kr - https://lolrmm.io/tools/ezhelp,Medium,Both,File
-        RMM - FastViewer,^(fastclient|fastmaster|FastViewer)\.exe$,.,,FastViewer - fastviewer.com - https://lolrmm.io/tools/fastviewer,Medium,Both,File
-        RMM - FixMe.it,^(TiClientHelper.*|TiClientCore|fixmeitclient|TiExpertCore|FixMeit Expert Setup|FixMeit Client|FixMeitClient.*|TiExpertStandalone|FixMeit Unattended Access Setup)\.exe$,.,,FixMe.it - fixme.it,Medium,Both,File
-        RMM - FleetDeck,^(fleetdeck_agent_svc|fleetdeck_commander_svc|fleetdeck_installer|fleetdeck_agent|fleetdeck_commander_launcher)\.exe$,.,,FleetDeck - fleetdeck.io,Medium,Both,File
-        RMM - Fortra,^Fortra$,.,,Fortra - fortra.com,Medium,MFT,Directory
-        RMM - FreeNX,^nxplayer\.exe$,.,,FreeNX - https://lolrmm.io/tools/freenx,Medium,Both,File
-        RMM - GatherPlace-desktop sharing,^(gp3|gp4|gp5)\.exe$,.,,GatherPlace-desktop sharing - gatherplace.com - https://lolrmm.io/tools/gatherplace-desktop_sharing,Medium,Both,File
-        RMM - GetScreen,^getscreen\.exe$,.,,GetScreen - getscreen.me - https://lolrmm.io/tools/getscreen,Medium,Both,File
-        RMM - GoToAssist,^(gotoassist|g2a.*|GoTo Assist Opener|g2ax_service|gotoassist remote support)\.exe$,.,,GoToAssist - goto.com - https://lolrmm.io/tools/gotoassist,Medium,Both,File
-        RMM - GoToAssist Agent Desktop Console,^G2RDesktopConsole-x64\.msi$,.,,RMM - GoToAssist Agent Desktop Console - https://lolrmm.io/tools/gotoassist_agent_desktop_console,Medium,Both,File
-        RMM - GotoHTTP,^(GotoHTTP_x64|gotohttp|GotoHTTP.*)\.exe$,.,,GotoHTTP - gotohttp.com - https://lolrmm.io/tools/gotohttp,Medium,Both,File
-        RMM - GoToMeeting,^GoToAssist(Service|Unattended)\.exe$,.,,GoToMeeting -goto.com/meeting,Medium,Both,File
-        RMM - GoToMyPC,^(g2file.*|g2quick|g2svc|g2tray|g2printh|g2fileh|gopcsrv|g2host|g2comm|g2mainh)\.exe$,.,,GoToMyPC - get.gotomypc.com,Medium,Both,File
-        RMM - Goverlan,^(goverrmc|govsrv.*|GovAgentInstallHelper|GovAgentx64|GovReachClient|GovSrv)\.exe$,.,,Goverlan - goverlan.com - https://lolrmm.io/tools/goverlan,Medium,Both,File
-        RMM _ Guacamole,^guacd\.exe$,.,,Guacamole - guacamole.apache.org - https://lolrmm.io/tools/guacamole,Medium,Both,File
-        RMM - HelpBeam,^helpbeam.*\.exe$,.,,HelpBeam - helpbeam.software.informer.com - https://lolrmm.io/tools/helpbeam,Medium,Both,File
-        RMM - HelpU,^(helpu_install|HelpuUpdater|HelpuManager)\.exe$,.,,HelpU - https://lolrmm.io/tools/helpu,Medium,Both,File
-        RMM - I'm InTouch,^(iit|intouch|I'm InTouch Go Installer)\.exe$,.,,I'm InTouch - 01com.com/imintouch-remote-pc-desktop - https://lolrmm.io/tools/i'm_intouch,Medium,Both,File
-        RMM - Impero Connect,^ImperoClientSVC\.exe$,.,,RMM - Impero Connect - https://lolrmm.io/tools/impero_connect,Medium,Both,File
-        RMM - Instant Housecall,^(hsloader|ihcserver|instanthousecall)\.exe$,.,,Instant Housecall - instanthousecall.com - https://lolrmm.io/tools/instant_housecall,Medium,Both,File
-        RMM - Insync,^Insync\.exe$,.,,RMM - Insync - https://lolrmm.io/tools/insync,Medium,Both,File
-        RMM - IntelliAdmin Remote Control,^(iadmin|intelliadmin)\.exe$,.,,IntelliAdmin Remote Control - intelliadmin.com/remote-control - https://lolrmm.io/tools/intelliadmin_remote_control,Medium,Both,File
-        RMM - Iperius Remote,^(iperius|iperiusremote)\.exe$,.,,Iperius Remote - iperiusremote.com - https://lolrmm.io/tools/iperius_remote,Medium,Both,File
-        RMM - ISL Online,^(isllight|ISLLightClient|isllightservice|islalwaysonmonitor)\.exe$,.,,RMM - ISL Online - https://lolrmm.io/tools/isl_online,Medium,Both,File
-        RMM - Itarian,^(ITSMAgent|RViewer|RAccess|ItsmRsp|ITarianRemoteAccessSetup|RmmService|RDesktop|ComodoRemoteControl|ITSMService|RHost)\.exe$,.,,Itarian - itarian.com - https://lolrmm.io/tools/itarian,Medium,Both,File
-        RMM - ITSupport247 (ConnectWise),^saazapsc\.exe$,.,,RMM - ITSupport247 (ConnectWise) - https://lolrmm.io/tools/itsupport247__connectwise_,Medium,Both,File
-        RMM - Ivanti Remote Control,^(IvantiRemoteControl|ArcUI|AgentlessRC)\.exe$,.,,RMM - Ivanti Remote Control - https://lolrmm.io/tools/ivanti_remote_control,Medium,Both,File
-        RMM - JumpCloud,^(JumpCloud.*|JumpCloud Remote Assist)\.exe$,.,,JumpCloud - https://jumpcloud.com/support/understand-remote-assist-agent - https://lolrmm.io/tools/jump_cloud,Medium,Both,File
-        RMM - Jump Desktop,^(jumpclient|jumpdesktop|jumpservice|jumpconnect|jumpupdater)\.exe$,.,,Jump Desktop - jumpdesktop.com - https://lolrmm.io/tools/jump_desktop,Medium,Both,File
-        RMM - JWrapper Remote,"^(https?([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}[0-9]{1,5})|serviceconfig.xml)$",.,,JWrapper Remote - Infield - actor use,Medium,Both,File
-        RMM - Kabuto,^Kabuto.App.Runner\.exe$,.,,Kabuto - repairtechsolutions.com/kabuto/ - https://lolrmm.io/tools/kabuto,Medium,Both,File
-        RMM - Kaseya (aka Unigma),^(agentmon|KaUpdHlp|KaUsrTsk)\.exe$,.,,Kaseya (aka Unigma) - kaseya.com - https://lolrmm.io/tools/kaseya__vsa_,Medium,Both,File
-        RMM - KickIdler,^(grabberEM.*|grabberTT.*)\.msi$|^grabberEM\.*.msi$,.,,KickIdler - kickidler.com - https://lolrmm.io/tools/kickidler,Medium,Both,File
-        RMM - KiTTY,^kitty\.exe$,.,,RMM - KiTTY https://lolrmm.io/tools/kitty ,Medium,Both,File
-        RMM - LANDesk,^(issuser|landeskagentbootstrap|LANDeskPortalManager|ldinv32|ldsensors|softmon|tmcsvc)\.exe$,.,,LANDesk - ivanti.com - https://lolrmm.io/tools/landesk,Medium,Both,File
-        RMM - Laplink Everywhere,^(laplink|laplink-everywhere-setup.*|laplinkeverywhere|llrcservice|serverproxyservice|OOSysAgent)\.exe$,.,,Laplink Everywhere - everywhere.laplink.com - https://lolrmm.io/tools/laplink_everywhere,Medium,Both,File
-        RMM - Laplink Gold,^(laplink|tsircusr)\.exe$,.,,Laplink Gold - wen.laplink.com/product/laplink-gold - https://lolrmm.io/tools/laplink_gold,Medium,Both,File
-        RMM - Level,^(level-windows-amd64|level|level-remote-control-ffmpeg)\.exe$,.,,Level - level.io - https://lolrmm.io/tools/level,Medium,Both,File
-        RMM - LiteManager,^(lmnoipserver|romfusclient|romviewer|romserver)\.exe$,.,,LiteManager - litemanager.com - https://lolrmm.io/tools/litemanager,Medium,Both,File
-        RMM - LogMeIn,^(lmiguardiansvc|lmiignition|logmein|logmeinsystray|logmein.*)\.exe$,.,,LogMeIn - logmein.com/central,Medium,Both,File
-        RMM - LogMeIn rescue,^(support-logmeinrescue.*|support-logmeinrescue|lmi_rescue)\.exe$,.,,LogMeIn rescue - logmeinrescue.com - https://lolrmm.io/tools/logmein_rescue,Medium,Both,File
-        RMM - ManageEngine RMM Central,^(dcagentservice|dcagentregister|ManageEngine_Remote_Access_Plus)\.exe$,.,,ManageEngine RMM Central - manageengine.com/remote-monitoring-management/ - https://lolrmm.io/tools/manage_engine__desktop_central_,Medium,Both,File
-        RMM - Megasync,^(MEGAupdater|MEGAsyncSetup64)\.exe$,.,,Megasync - https://lolrmm.io/tools/megasync,Medium,Both,File
-        RMM - MeshCentral (MeshAgent),^(meshcentral.*|meshagent.*|MeshCmd|MeshCentralInstaller)\.exe$,.,,MeshCentral - meshcentral.com - https://lolrmm.io/tools/meshcentral,Medium,Both,File
-        RMM - Microsoft Quick Assist Execution,^quickassist\.exe$,.,,Microsoft Quick Assist Amcache execution evidence - https://lolrmm.io/tools/microsoft_quick_assist,Medium,Amcache,File
-        RMM - Microsoft Quick Assist Unusual Path,^quickassist\.exe$,.,\\Program Files\\WindowsApps\\MicrosoftCorporationII\.QuickAssist_[^\\]+\\Microsoft\.RemoteAssistance\.QuickAssist\\QuickAssist\.exe$|\\Windows\\(servicing\\LCU|WinSxS)\\.*\\quickassist\.exe$|\\Windows\\(System32|SysWOW64)\\quickassist\.exe$|\\\$WINDOWS\.~BT\\NewOS\\Windows\\(System32|SysWOW64)\\quickassist\.exe$,Microsoft Quick Assist outside trusted Windows component paths,Medium,MFT,File
-        RMM - Mikogo,^(mikogo|mikogo-starter|mikogo-service|mikogolauncher|Mikogo-Screen-Service)\.exe$,.,,Mikogo - mikogo.com - https://lolrmm.io/tools/mikogo,Medium,Both,File
-        RMM - MioNet (Also known as WD Anywhere Access),^(mionet|mionetmanager)\.exe$,.,,MioNet (Also known as WD Anywhere Access) - https://lolrmm.io/tools/mionet__also_known_as_wd_anywhere_access_,Medium,Both,File
-        RMM - MobaXterm,^(MobaXterm_installer_12.1|MobaXterm_installer_.*)\.msi$,.,,MobaXterm - https://lolrmm.io/tools/mobaxterm,Medium,Both,File
-        RMM - mRemoteNG,^(mRemoteNG)\.exe|(mRemoteNG-Installer-.*)\.msi$,.,,mRemoteNG - mremoteng.org - https://lolrmm.io/tools/mremoteng,Medium,Both,File
-        RMM - MSP360,^(Online Backup|CBBackupPlan|Cloud.Backup.Scheduler|Cloud.Backup.RM.Service|cbb|CloudRaService|CloudRaSd|CloudRaCmd|CloudRaUtilities|Remote Desktop|Connect)\.exe$,.,,MSP360 - msp360.com - https://lolrmm.io/tools/msp360,Medium,Both,File
-        RMM - MyGreenPC,^mygreenpc\.exe$,.,,MyGreenPC - mygreenpc.com - https://lolrmm.io/tools/mygreenpc,Medium,Both,File
-        RMM - MyIVO,^(myivomgr|myivomanager)\.exe$,.,,MyIVO - myivo-server.software.informer.com - https://lolrmm.io/tools/myivo,Medium,Both,File
-        RMM - Naverisk,^AgentSetup-.*\.exe$,.,,Naverisk - naverisk.com - https://lolrmm.io/tools/naverisk,Medium,Both,File
-        RMM - N-ABLE Advanced Monitoring Agent,^(Agent_.*_RW|BASEClient|BASupApp|BASupSrvc|BASupSrvcCnfg|BASupTSHelper)\.exe$,.,,N-ABLE Remote Access Software - n-able.com - https://lolrmm.io/tools/n-able_advanced_monitoring_agent,Medium,Both,File
-        RMM - NateOn-desktop sharing,^(nateon.*|nateon|nateonmain)\.exe$,.,,NateOn-desktop sharing - http://rsupport.nate.com/rview/r8/main/index.aspx - https://lolrmm.io/tools/nateon-desktop_sharing,Medium,Both,File
-        RMM - Netop Remote Control (aka Impero Connect),^(nhostsvc|nhstw32|nldrw32|rmserverconsolemediator|ngstw32|Netop Ondemand|ImperoInit|Connect.Backdrop.cloud.*|ImperoClientSVC)\.exe$,.,,Netop Remote Control (aka Impero Connect) - imperosoftware.com/impero-connect/ - https://lolrmm.io/tools/netop_remote_control__aka_impero_connect_,Medium,Both,File
-        RMM - NetSupport Manager,^(pcictlui|pcicfgui|client32)\.exe$,.,,NetSupport Manager - netsupportmanager.com - https://lolrmm.io/tools/netsupport_manager,Medium,Both,File
-        RMM - Netreo,^(neturo.*|ntrntservice|neturo)\.exe$,.,,Netreo - netreo.com - https://lolrmm.io/tools/neturo,Medium,Both,File
-        RMM - Netviewer,^(nvClient|netviewer.*|netviewer)\.exe$,.,,Netviewer - download.cnet.com/Net-Viewer/3000-2370_4-10034828.html - https://lolrmm.io/tools/netviewer,Medium,Both,File
-        Developer Utility - ngrok,^ngrok\.exe$,.,,ngrok - ngrok.com - https://lolrmm.io/tools/ngrok,Medium,Both,File
-        RMM - NinjaRMM,^(ninjarmmagent|ninjarmm-cli|NinjaRMMAgenPatcher)\.exe$,.,,NinjaRMM - ninjaone.com - https://lolrmm.io/tools/ninjarmm,Medium,Both,File
-        RMM - NoMachine,^(nomachine.*|nxservice.*|nxd|nxserver)\.exe$|^nxservice.*\.ese$,.,,NoMachine - nomachine.com - https://lolrmm.io/tools/nomachine,Medium,Both,File
-        RMM - NTR Remote,^NTRsupportPro_EN\.exe$,.,,ntrsupport.com - https://lolrmm.io/tools/ntr_remote,Medium,Both,File
-        RMM - OCS inventory,^(ocsinventory|ocsservice)\.exe$,.,,OCS inventory - ocsinventory-ng.org - https://lolrmm.io/tools/ocs_inventory,Medium,Both,File
-        RMM - Onionshare,^(onionshare.*)\.exe$|^(OnionShare-win.*)\.msi$,.,,RMM - Onionshare - https://lolrmm.io/tools/onionshare,Medium,Both,File
-        RMM - OptiTune,^(OTService|OTPowerShell)\.exe$,.,,OptiTune - bravurasoftware.com/optitune/ - https://lolrmm.io/tools/optitune,Medium,Both,File
-        RMM - Pandora RC (eHorus),^(ehorus standalone|ehorus_agent)\.exe$,.,,Pandora RC (eHorus) - https://pandorafms.com/manual/!current/en/documentation/09_pandora_rc/01_pandora_rc_introduction - https://lolrmm.io/tools/pandora_rc__ehorus_,Medium,Both,File
-        RMM - PDQ,^pdq-connect-agent\.exe$,.,,PDQ - www.pdq.com/,Medium,Both,File
-        RMM - Panorama9,^p9agent.*\.exe$,.,,Panorama9 - panorama9.com/  https://support.panorama9.com/en/articles/1859605-what-ports-and-hosts-does-the-p9-agent-communicate-with - https://lolrmm.io/tools/panorama9,Medium,Both,File
-        RMM - Parallels Access,^(parallelsaccess-.*|TSClient|prl_deskctl_agent|prl_deskctl_wizard|prl_pm_service)\.exe$,.,,Parallels Access - parallels.com/products/ras/try - https://lolrmm.io/tools/parallels_access,Medium,Both,File
-        RMM - Parsec,^(parsec|parsec-windows|parsecd)\.exe$,.,,Parsec - parsec.app,Medium,Both,File
-        RMM - pcAnywhere,^(awhost32|awrem32|pcaquickconnect|winaw32)\.exe$,.,,pcAnywhere - https://lolrmm.io/tools/pcanywhere,Medium,Both,File
-        RMM - Pcnow,^(mwcliun|pcnmgr|webexpcnow)\.exe$,.,,Pcnow - au.pcmag.com/utilities/21470/webex-pcnow - https://lolrmm.io/tools/pcnow,Medium,Both,File
-        RMM - Pcvisit,^(pcvisit|pcvisit_client|pcvisit-easysupport|pcvisit_service_client)\.exe$,.,,Pcvisit - pcvisit.de - https://lolrmm.io/tools/pcvisit,Medium,Both,File
-        RMM - PDQ Connect,^pdq-connect.*\.exe$,.,,PDQ Connect - www.pdq.com/ - https://lolrmm.io/tools/pdq_connect,Medium,Both,File
-        RMM - Pilixo,^Pilixo_Installer.*\.exe$,.,,Pilixo - https://lolrmm.io/tools/pilixo,Medium,Both,File
-        RMM - Pocket Cloud (Wyse),^(pocketcloud.*|pocketcloudservice)\.exe$,.,,Pocket Cloud (Wyse) - https://lolrmm.io/tools/pocket_cloud__wyse_,Medium,Both,File
-        RMM - Pocket Controller,^(pocketcontroller|wysebrowser|XSightService)\.exe$,.,,Pocket Controller - soti.net/products/soti-pocket-controller - https://lolrmm.io/tools/pocket_controller,Medium,Both,File
-        RMM - PSEXEC (Clone),^(psexec|psexecsvc|paexec|PAExec-.*|csexec|remcom|remcomsvc|xcmd|xcmdsvc)\.exe$,.,,PSEXEC (Clone) - https://lolrmm.io/tools/psexec__clone_,Medium,Both,File
-        RMM - PulseWay,^(PCMonitorManager|pcmonitorsrv)\.exe$,.,,PulseWay - pulseway.com - https://lolrmm.io/tools/pulseway,Medium,Both,File
-        RMM - PuTTY Tray,^puttytray\.exe$,.,,PuTTY Tray - https://lolrmm.io/tools/putty_tray,Medium,Both,File
-        RMM - QQ IM-remote assistance,^(qq|QQProtect|qqpcmgr)\.exe$,.,,QQ IM-remote assistance - qq-messenger.en.softonic.com - https://lolrmm.io/tools/qq_im-remote_assistance,Medium,Both,File
-        RMM - Quest KACE Agent (formerly Dell KACE),^konea\.exe$,.,,Quest KACE Agent (formerly Dell KACE) - www.quest.com/kace/ - https://lolrmm.io/tools/quest_kace_agent__formerly_dell_kace_,Medium,Both,File
-        RMM - RAdmin,^(radmin|famitrfc|radmin3|rserver3)\.exe$,.,,Radmin - radmin.com - https://lolrmm.io/tools/radmin,Medium,Both,File
-        RMM - rdp2tcp,^(tdp2tcp)\.exe$|^(rdp2tcp)\.py$,.,,rdp2tcp - github.com/V-E-O/rdp2tcp - https://lolrmm.io/tools/rdp2tcp,Medium,Both,File
-        RMM - RDPView,^dwrcs\.exe$,.,,RDPView - systemmanager.ru/dntu.en/rdp_view.htm - https://lolrmm.io/tools/rdpview,Medium,Both,File
-        RMM - rdpwrap,^(RDPWInst|RDPCheck|RDPConf)\.exe$,.,,rdpwrap - github.com/stascorp/rdpwrap - https://lolrmm.io/tools/rdpwrap,Medium,Both,File
-        RMM - RealONE,^RealONE$,.,,RealONE - https://www.realvnc.com/en/discover/realone/,Medium,MFT,Directory
-        RMM - RealVNC Installer,^VNC-Connect-Installer-.*\.exe$,.,,RealVNC - https://www.realvnc.com/en/,Medium,Both,File
-        RMM - RealVNC Product Directory,^RealVNC$,.,,RealVNC - https://www.realvnc.com/en/,Medium,MFT,Directory
-        RMM - Remcos,^remcos.*\.exe$,.,,Remcos - https://lolrmm.io/tools/remcos,Medium,Both,File
-        RMM - Remobo,^(remobo|remobo_client|remobo_tracker)\.exe$,.,,Remobo - remobo.en.softonic.com - https://lolrmm.io/tools/remobo,Medium,Both,File
-        RMM - Remote Desktop Plus,^rdp\.exe$,.,,Remote Desktop Plus - donkz.nl - https://lolrmm.io/tools/remote_desktop_plus,Medium,Both,File
-        RMM - Remote.it,^(Remote.It-Installer-x64|Remote.It-Installer-ia32|remote-it-installer|remote.it|remoteit)\.exe$,.,,Remote.it - remote.it,Medium,Both,File
-        RMM - Remote Manipulator System,^(rfusclient|rutserv)\.exe$,.,,Remote Manipulator System - rmansys.ru - https://lolrmm.io/tools/remote_manipulator_system,Medium,Both,File
-        RMM - Remote Utilities,^(rutview|rutserv)\.exe$,.,,Remote Utilities - https://lolrmm.io/tools/remote_utilities,Medium,Both,File
-        RMM - RemoteCall,^(rcengmgru|rcmgrsvc|rxstartsupport|rcstartsupport|raautoup|agentu|remotesupportplayeru)\.exe$,.,,RemoteCall - remotecall.com - https://lolrmm.io/tools/remotecall,Medium,Both,File
-        RMM - RemotePass,^(remotepass-access|rpaccess|rpwhostscr)\.exe$,.,,RemotePass - remotepass.com - https://lolrmm.io/tools/remotepass,Medium,Both,File
-        RMM - RemotePC,^(remotepcservice|rpcsuite|Idrive.File-Transfer|idrive.RemotePCAgent|remotepchost|RemotePC)\.exe$,.,,RemotePC - remotepc.com - https://lolrmm.io/tools/remotepc,Medium,Both,File
-        RMM - RemoteView,^(remoteview|rv|rvagent|rvagtray)\.exe$,.,,RemoteView - content.rview.com - https://lolrmm.io/tools/remoteview,Medium,Both,File
-        RMM - RES Automation Manager,^(wisshell.*|wmc|wmcsvc|wmc_deployer)\.exe$,.,,RES Automation Manager - ivanti.com/ - https://lolrmm.io/tools/res_automation_manager,Medium,Both,File
-        RMM - Rocket Remote Desktop,^(RDConsole|RocketRemoteDesktop_Setup)\.exe$,.,,Rocket Remote Desktop - https://lolrmm.io/tools/rocket_remote_desktop,Medium,Both,File
-        RMM - Royal Apps,^(royalserver|royalts)\.exe$,.,,Royal Apps - https://www.royalapps.com/ts/win/download - https://lolrmm.io/tools/royal_apps,Medium,Both,File
-        RMM - Royal Server,^RoyalServerInstaller_.*\.msi$,.,,Royal Server - royalapps.com - https://lolrmm.io/tools/royal_server,Medium,Both,File
-        RMM - Royal TS,^royalts\.exe$,.,,Royal TS - royalapps.com - https://lolrmm.io/tools/royal_ts,Medium,Both,File
-        RMM - RPort,^rport\.exe$,.,,Rport - rport.io - https://lolrmm.io/tools/rport,Medium,Both,File
-        RMM - Rsocx,^rsocx\.exe$,.,,Rsocx - https://github.com/b23r0/rsocx,Medium,Both,File
-        RMM - RuDesktop,^(rd|rudesktop.*)\.exe$,.,,RuDesktop - rudesktop.ru - https://lolrmm.io/tools/rudesktop,Medium,Both,File
-        RMM - RunSmart,^RunSmart$,.,,RunSmart - runsmart.io,Medium,MFT,Directory
-        RMM - RustDesk,^(rustdesk.*|rustdesk)\.exe$,.,,RustDesk - rustdesk.com - https://lolrmm.io/tools/rustdesk,Medium,Both,File
-        RMM - S3 Browser,^s3browser.*\.exe$,.,,S3 Browser - https://lolrmm.io/tools/s3_browser,Medium,Both,File
-        RMM - ScreenConnect (aka COnnectWise/Continuum),^(ScreenConnect.ClientService|Remote Workforce Client|ScreenConnect.WindowsClient|screenconnect.*|ConnectWiseControl.*|connectwise.*)\.exe$,.,,ScreenConnect - control.connectwise.com - https://lolrmm.io/tools/screenconnect,Medium,Both,File
-        RMM - ScreenMeet,^(ScreenMeetSupport|ScreenMeet.Support)\.exe$,.,,ScreenMeet - screenmeet.com - https://lolrmm.io/tools/screenmeet,Medium,Both,File
-        RMM - SecureCRT,^SecureCRT\.exe$,.,,SecureCRT - https://lolrmm.io/tools/securecrt,Medium,Both,File
-        RMM - Seetrol,^(seetrolcenter|seetrolclient|seetrolmyservice|seetrolremote|seetrolsetting)\.exe$,.,,Seetrol - seetrol.co.kr - https://lolrmm.io/tools/seetrol,Medium,Both,File
-        RMM - Senso.cloud,^(SensoClient|SensoService|aadg)\.exe$,.,,Senso.cloud - senso.cloud - https://lolrmm.io/tools/senso.cloud,Medium,Both,File
-        RMM - ServerEye,^(servereye.*|ServiceProxyLocalSys)\.exe$,.,,ServerEye - servereye.de/download/ - https://lolrmm.io/tools/servereye,Medium,Both,File
-        RMM - SkyFex (aka DeskRoll),^(Deskroll|DeskRollUA|DeskRollSetup)\.exe$,.,,SkyFex (aka DeskRoll) - skyfex.com/ - https://lolrmm.io/tools/skyfex,Medium,Both,File
-        RMM - ShowMyPC,^(smpcsetup|showmypc.*|showmypc)\.exe$,.,,ShowMyPC - showmypc.com - https://lolrmm.io/tools/showmypc,Medium,Both,File
-        RMM - SimpleHelp,^(simplehelpcustomer|simpleservice|simplegatewayservice|remote access|windowslauncher)\.exe$,.,,SimpleHelp - simple-help.com - https://lolrmm.io/tools/simplehelp,Medium,Both,File
-        RMM - Site24x7,^(MEAgentHelper|MonitoringAgent|Site24x7WindowsAgentTrayIcon|Site24x7PluginAgent)\.exe$,.,,Site24x7 - site24x7.com/msp - https://lolrmm.io/tools/site24x7,Medium,Both,File
-        RMM - Sophos-Remote Management System,^(clientmrinit|mgntsvc|routernt)\.exe$,.,,Sophos-Remote Management System - community.sophos.com/on-premise-endpoint/f/sophos-endpoint-software/5725/sophos-remote-management-system,Medium,Both,File
-        RMM - SmarTTY,^SmarTTY\.exe$,.,,SmarTTY - https://lolrmm.io/tools/smartty,Medium,Both,File
-        RMM - Solar-PuTTY,^Solar-PuTTY\.exe$,.,,Solar-PuTTY - https://lolrmm.io/tools/solar-putty,Medium,Both,File
-        RMM - Sorillus,^(Sorillus-Launcher.*|Sorillus Launcher)\.exe$,.,,Sorillus - sorillus.com - https://lolrmm.io/tools/sorillus,Medium,Both,File
-        RMM - Splashtop Remote,^(strwinclt|srserver|SplashtopSOS|srmanager|sragent|srservice|Splashtop_Streamer_Windows.*)\.exe$,.,,Splashtop Remote - splashtop.com - https://lolrmm.io/tools/splashtop_remote,Medium,Both,File
-        RMM - SpyAnywhere,^sysdiag\.exe$,.,,SpyAnywhere - spyanywhere.com - https://lolrmm.io/tools/spyanywhere,Medium,Both,File
-        RMM - SunLogin ,^(OrayRemoteShell|OrayRemoteService|sunlogin.*)\.exe$,.,,SunLogin - https://lolrmm.io/tools/sunlogin,Medium,Both,File
-        RMM - SuperOps,^(superopsticket|superops)\.exe$,.,,SuperOps - superops.ai - https://lolrmm.io/tools/superops,Medium,Both,File
-        RMM - SuperPuTTY,^superputty\.exe$,.,,SuperPuTTY - https://lolrmm.io/tools/superputty,Medium,Both,File
-        RMM - Supremo,^(supremo|supremoservice|supremosystem|supremohelper)\.exe$,.,,Supremo - supremocontrol.com - https://lolrmm.io/tools/supremo,Medium,Both,File
-        RMM - Syncro,^(Syncro.Installer|Kabuto.App.Runner|Syncro.Overmind.Service|Kabuto.Installer|KabutoSetup|Syncro.Service|Kabuto.Service.Runner|Syncro.App.Runner|SyncroLive.Service|SyncroLive.Agent)\.exe$,.,,Syncro - syncromsp.com - https://lolrmm.io/tools/syncro,Medium,Both,File
-        RMM - Syncthing,^Syncthing\.exe$,.,,Syncthing - https://lolrmm.io/tools/syncthing,Medium,Both,File
-        RMM - SysAid,^IliAS\.exe$,.,,SysAid - https://lolrmm.io/tools/sysaid,Medium,Both,File
-        RMM - Syspectr,^(oo-syspectr.*|OOSysAgent)\.exe$,.,,Syspectr - syspectr.com/en/,Medium,Both,File
-        RMM - Tactical RMM,^(tacticalrmm|tacticalagent-.*)\.exe$,.,,Tactical RMM - docs.tacticalrmm.com - https://lolrmm.io/tools/tactical_rmm,Medium,Both,File
-        Remote Access - Tailscale,^(tailscale-.*|tailscaled|tailscale-ipn)\.exe$,.,,Tailscale - tailscale.com/ - https://lolrmm.io/tools/tailscale,Medium,Both,File
-        RMM - Tanium,^(TaniumClient|TaniumCX|TaniumExecWrapper|TaniumFileInfo|TPowerShell)\.exe$,.,,Tanium  - tanium.com/products/tanium-deploy - https://lolrmm.io/tools/tanium,Medium,Both,File
-        RMM - TeamViewer,^(teamviewer.*|teamviewerqs|tv_w32|tv_w64|teamviewer_desktop|teamviewer_service)\.exe$,.,,TeamViewer - teamviewer.com - https://lolrmm.io/tools/teamviewer,Medium,Both,File
-        RMM - TechInline,^TechInline$|^fixme.it$,.,,TechInline - techinline.com/,Medium,MFT,Directory
-        RMM - TeleDesktop,^(pstlaunch|ptdskclient|ptdskhost)\.exe$,.,,TeleDesktop - tele-desk.com - https://lolrmm.io/tools/teledesktop,Medium,Both,File
-        RMM - TigerVNC,^(tigervnc.*|winvnc4)\.exe$,.,,TigerVNC - tigervnc.org/ - https://lolrmm.io/tools/tigervnc,Medium,Both,File
-        RMM - TightVNC,^(tvnviewer|TightVNCViewerPortable.*|tvnserver)\.exe$,.,,TightVNC - tightvnc.com/ - https://lolrmm.io/tools/tightvnc,Medium,Both,File
-        RMM - ToDesk,^(todesk|ToDesk_Service|ToDesk_Setup)\.exe$,.,,ToDesk - todesktop.com - https://lolrmm.io/tools/todesk,Medium,Both,File
-        RMM - Total Software Deployment,^(tniwinagent|Tsdservice)\.exe$,.,,Total Software Deployment - https://lolrmm.io/tools/total_software_deployment,Medium,Both,File
-        RMM - TurboMeeting,^(pcstarter|turbomeeting|turbomeetingstarter)\.exe$,.,,TurboMeeting - acceo.com/turbomeeting/ - https://lolrmm.io/tools/turbomeeting,Medium,Both,File
-        RMM - Ultraviewer,^(ultraviewer_service|ultraviewer|ultraviewer_desktop|UltraViewer_setup.*)\.exe$,.,,Ultraviewer - ultraviewer.net - https://lolrmm.io/tools/ultraviewer,Medium,Both,File
-        RMM - UltraVNC,^UltraVNC.*\.exe$,.,,UltraVNC - https://lolrmm.io/tools/ultravnc,Medium,Both,File
-        Remote Access - VNC,^(vncserver|vncviewer|vncserverui|winwvc|winvncsc|winvnc|winvnc.*)\.exe$,.,,VNC - realvnc.com/en/connect/download/vnc - https://lolrmm.io/tools/vnc,Medium,Both,File
-        RMM - WebRDP,^webrdp\.exe$,.,,WebRDP - github.com/Mikej81/WebRDP - https://lolrmm.io/tools/webrdp,Medium,Both,File
-        RMM - Weezo,^(weezohttpd|weezo|weezo setup.*)\.exe$,.,,Weezo - weezo.en.softonic.com - https://lolrmm.io/tools/weezo,Medium,Both,File
-        RMM - WinSCP (Data Transfer),^WinSCP\.exe$,.,,WinSCP - https://lolrmm.io/tools/winscp,Medium,Both,File
-        RMM - XEOX,^(xeox-agent_.*|xeox_service_windows|xeox-agent_x64|xeox-agent_x86)\.exe$,.,,XEOX - xeox.com - https://lolrmm.io/tools/xeox,Medium,Both,File
-        RMM - XMReality,^XMReality$,.,,XMReality - xmreality.com/,Medium,MFT,Directory
-        RMM - Xpra,^(Xpra-Launcher|Xpra-x86_64_Setup)\.exe$,.,,Xpra - https://lolrmm.io/tools/xpra,Medium,Both,File
-        RMM - Xshell,^xShell\.exe$,.,,Xshell - https://lolrmm.io/tools/xshell,Medium,Both,File
-        RMM - Yandex.disk,^YandexDisk2\.exe$,.,,Yandex.Disk - https://lolrmm.io/tools/yandex.disk,Medium,Both,File
-        RMM - Zabbix Agent,^zabbix_agent.*\.exe$,.,,Zabbix Agent - zabbix.com - https://lolrmm.io/tools/zabbix_agent,Medium,Both,File
-        RMM - ZeroTier,^(zerotier.*|zero-powershell)\.exe$|^zerotier.*\.msi$,.,,ZeroTier - zerotier.com - https://lolrmm.io/tools/zerotier,Medium,Both,File
-        RMM - Zoc,^zoc\.exe$,.,,Zoc - https://lolrmm.io/tools/zoc,Medium,Both,File
-        RMM - Zoho Assist,^(za_connect|zaservice|zohotray|ZohoMeeting|Zohours|ZohoURSService|ZMAgent|ZA_Access)\.exe$,.,,Zoho Assist - zoho.com/assist/ - https://lolrmm.io/tools/zoho_assist,Medium,Both,File
-        RMM - VNC Executable,^(vncviewer|winvnc|winvncsc|winwvc)\.exe$,.,,VNC,Medium,Both,File
-        RMM - VNC Product Directory,^(TigerVNC|JollyFastVNC|realvnc|tightvnc|ultravnc|VNC connect)$,.,,VNC,Medium,MFT,Directory
-        RMM - Product Directory,^(Meraki Systems Manager Agent|TrendMicro BaseCamp|AB Tutor|Datto|SolarWinds RMM|Naverisk)$,.,,General RMM product directory basenames,Medium,MFT,Directory
-        VPN,^((NordVPN|nordvpn-service|ProtonVPN|ProtonVPNService|ProtonVPN\.WireGuardService|ExpressVPN|expressvpnd|expressvpn-service|Surfshark|Surfshark\.Service|CyberGhost|pia-client|pia-service|pia-wgservice|IPVanish|wireguard|Connectify|ConnectifyService|Connectifyd|OpenVPNConnect|openvpn|openvpn-gui|openvpnserv|openvpnserv2|ovpnconnector|ovpnagent|Mullvad VPN|mullvad-daemon|mullvad-exclude|mullvad-problem-report|TunnelBear|TunnelBear\.Service|TunnelBear\.Maintenance|TunnelBear\.Update)\.exe|(tapexpressvpn|expressvpn-wintun|wireguard)\.sys)$,.,,High-confidence VPN executable service and driver filenames,Medium,Both,File
-        Suspicious One Letter Filename,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,,Medium,Both,File
-        Suspicious Location - Public Executable or Script,\.(exe|dll|bat|ps1|dmp|dit)$,\\Users\\Public\\,\\Users\\Public\\Documents\\(Autodesk|KUKA Public|Matrox Imaging|Aurora Design Assistant[^\\]*|Aurora Vision[^\\]*|FabImage Studio[^\\]*|MATRIX VISION|PROJECT complete)\\|\\Users\\Public\\EPLAN\\Data\\,"Executable, library, script, or dump in Users Public outside known vendor content",High,MFT,File
-        Suspicious Location - Public Archive or Installer,\.(msi|zip|rar|7z)$,\\Users\\Public\\,\\Users\\Public\\Documents\\(Autodesk|KUKA Public|Matrox Imaging|Aurora Design Assistant[^\\]*|Aurora Vision[^\\]*|FabImage Studio[^\\]*|MATRIX VISION|PROJECT complete)\\|\\Users\\Public\\EPLAN\\Data\\,Archive or installer in Users Public outside known vendor content,Medium,MFT,File
-        Suspicious Location - User Temporary Staging,\.(exe|dll|bat|ps1|dmp|dit|msi|zip|rar|7z)$,\\Users\\[^\\]+\\AppData\\Local\\Temp\\,,"Executable, script, dump, archive, or installer in a user temporary directory",High,MFT,File
-        Suspicious Location - Roaming Script or Archive,\.(bat|ps1|dmp|dit|zip|rar|7z)$,\\Users\\[^\\]+\\AppData\\Roaming\\,,"Script, dump, or archive staged under roaming AppData",High,MFT,File
-        Suspicious Location - ProgramData Root File,\.(exe|dll|bat|ps1|dmp|dit|msi|zip|rar|7z)$,\\ProgramData\\[^\\]+$,,"Executable, script, dump, archive, or installer directly under ProgramData",High,MFT,File
-        Suspicious Location - PerfLogs Staging,\.(exe|dll|bat|ps1|dmp|dit|msi|zip|rar|7z)$,\\PerfLogs\\,,"Executable, script, dump, archive, or installer under PerfLogs",High,MFT,File
-        Web Browsing History,BrowsingHistoryView,.,,BrowsingHistoryView,Low,Both,File
-        RMM - Komari,^(komari|komari-agent|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm))(\.exe)?$,.,,Komari server or agent filename indicator,Medium,Both,File
+        RuleID,Detection,Category,Technique,Confidence,KeywordRegex,PathRegex,IgnoreRegex,Reference,Criticality,Scope,EntryType,Source,SourceID
+        DR-MFT-ARCH-001,Archive Utilities - Amcache,Archive Utility,,High,^(WinRAR|WinRARPortable|7z|7za|7zr|7zG|7zFM|7zip)\.exe$,.,\\Program Files\\,Archive utility execution evidence outside Program Files,Low,Amcache,File,DetectRaptor Curated,
+        DR-MFT-ARCH-002,Archive Utilities - User or Public Staging,Archive Utility,,High,^(WinRAR|WinRARPortable|7z|7za|7zr|7zG|7zFM|7zip)\.exe$,\\Users\\|\\PerfLogs\\|\\\$Recycle\.Bin\\,\\Users\\[^\\]+\\AppData\\Local\\(SourceTree\\app-[^\\]+\\tools|Autodesk\\webdeploy\\production\\[^\\]+)\\,"Archive utility in a user profile, public staging, PerfLogs, or Recycle Bin path",Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-ARCH-003,Archive Utilities - Windows Temporary Staging,Archive Utility,,High,^(WinRAR|WinRARPortable|7z|7za|7zr|7zG|7zFM|7zip)\.exe$,\\Windows\\(Temp|SystemTemp)\\,\\Windows\\SystemTemp\\NuGetScratch\\|\\Windows\\Temp\\(AdAccess-installer|odis_download_dest|AdAppMgrRollBackBackup)\\,Archive utility in Windows temporary paths excluding known package extraction paths,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-TOOL-001,Attacker Tool - ADCollector,Attacker Tool,,High,^ADCollector\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-002,Attacker Tool - ADPassHunt,Attacker Tool,,High,^ADPassHunt\.exe$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-003,Attacker Tool - Antivirus-Disabling Utility,Attacker Tool,T1562.001,High,^PowerTool\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-004,Attacker Tool - Apollo Agent,Attacker Tool,,High,^apollo\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-005,Attacker Tool - Certipy,Attacker Tool,,High,^certipy\.(exe|py)$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-006,Attacker Tool - CrackMapExec,Attacker Tool,T1021,High,^(crackmapexec|cme)\.(exe|py)$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-007,Attacker Tool - Dead Potato,Attacker Tool,,High,^DeadPotato\.exe$,.,,https://github.com/lypd0/DeadPotato,High,Both,File,DetectRaptor Curated,
+        DR-MFT-TOOL-008,Attacker Tool - Defender Control,Attacker Tool,T1562.001,High,^(DefenderControl|Disable Defender|dControl|dfControl|disable-defender|enable-defender)\.exe$|^DefenderControl v1\.6\.rar$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-009,Attacker Tool - Direct HTTP Tunnel,Attacker Tool,T1090,High,^Direct HTTP Tunnel\.exe$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-010,Attacker Tool - DomainPasswordSpray,Attacker Tool,T1110.003,High,^DomainPasswordSpray\.ps1$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-011,Attacker Tool - Dotnetcat,Attacker Tool,,High,^dncat\.(exe|dll)$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-012,Attacker Tool - GadgetToJScript,Attacker Tool,,High,^GadgetToJScript\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-013,Attacker Tool - GetShell,Attacker Tool,,High,^GetShell\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-014,Attacker Tool - Gobuster,Attacker Tool,,High,^gobuster\.exe$,.,,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-015,Attacker Tool - Hashcat,Attacker Tool,T1110.002,High,^hashcat\.exe$,.,,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-016,Attacker Tool - Interceptor-NG,Attacker Tool,,High,^Intercepter-NG\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-017,Attacker Tool - Inveigh,Attacker Tool,,High,^Inveigh\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-018,Attacker Tool - John The Ripper,Attacker Tool,T1110.002,High,^(john|john-omp)\.exe$,.,,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-019,Attacker Tool - MSF.exe,Attacker Tool,,High,^msf\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-020,Attacker Tool - Nuclei,Attacker Tool,,High,^nuclei\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-021,Attacker Tool - NetExec,Attacker Tool,,High,^nxc\.exe$,.,,https://github.com/Pennyw0rth/NetExec,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-TOOL-022,Attacker Tool - Ophcrack,Attacker Tool,T1110.002,High,^ophcrack\.exe$,.,,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-023,Attacker Tool - PowerLine,Attacker Tool,,High,^powerline\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-024,Attacker Tool - PSAttack,Attacker Tool,,High,^PSAttack\.(exe|ps1)$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-025,Attacker Tool - Pyramid,Attacker Tool,,High,^(cradle|pyramid)\.py$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-026,Attacker Tool - Quasar Remote Access Tool (RAT),Attacker Tool,,High,^Quasar\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-027,Attacker Tool - RuralBishop,Attacker Tool,,High,^RuralBishop\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-028,Attacker Tool - SafetyDump,Attacker Tool,,High,^SafetyDump\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-029,Attacker Tool - SafetyKatz,Attacker Tool,,High,^SafetyKatz\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-030,Attacker Tool - Seatbelt,Attacker Tool,,High,^seatbelt\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-031,Attacker Tool - SharpDump,Attacker Tool,,High,^sharpdump\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-032,Attacker Tool - SharPersist,Attacker Tool,,High,^SharPersist\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-033,Attacker Tool - SharpStomp,Attacker Tool,,High,^SharpStomp\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-034,Attacker Tool - SharpUp,Attacker Tool,,High,^SharpUp\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-035,Attacker Tool - SharpView,Attacker Tool,,High,^SharpView\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-036,Attacker Tool - SharpWMI,Attacker Tool,,High,^sharpwmi\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-037,Attacker Tool - SharpZeroLogon,Attacker Tool,,High,^SharpZeroLogon\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-TOOL-038,Attacker Tool - VulnRecon,Attacker Tool,,High,^vulnrecon\.(exe|dll|py)$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-XFER-001,BAU Cloud Data Transfer,Data Transfer,,High,^(OneDrive|iCloud|googledrivesync|GoogleDriveSetup|Dropbox|DropboxUpdate|DropboxOEM|BoxDrive|ShareFile|AmazonCloudDrive|AmazonDrive|SpiderOak|pCloud)\.exe$,.,,Internal - mixed cloud services,Low,Both,File,DetectRaptor Curated,
+        DR-MFT-TOOL-039,Mimikatz Tools,Attacker Tool,T1003,High,^(mimikatz|mimilove|Mimikittenz|pypykatz)\.(exe|py)$|^mimidrv\.sys$|^(mimilib|mimispool)\.dll$|\.kirbi$,.,,https://github.com/gentilkiwi/mimikatz,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-001,Credential Theft,Credential Access,T1003,Medium,^(AccountRestore|adfsdump|Arestore|Certify|ChromePass|DUBrute|GrabChrome|Hydra|kidlogger|lazagne|mailpv|NLBrute|pwdump|rdpv|rubeus|WebBrowserPassView|WirelessKeyView)\.(exe|ps1|py)$|^MiniDumpWriteDump\.(exe|dll)$|^sekurLSA\.dll$|^veaam\.ps1$|^lsass.*\.(dmp|zip|rar)$,.,,Internal - mixed credential tools,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-002,Credential Access Tool - ProcDump,Credential Access,T1003.001,High,^(procdump(64)?\.exe|procdumpdll\.dll)$,.,\\Packages\\Plugins\\Microsoft\.Azure\.Monitor\.AzureMonitorWindowsAgent\\[^\\]+\\Monitoring\\Agent\\(procdump\\(x64|x86|arm64)\\procdump(64)?\.exe|procdumpdll\.dll)$,Sysinternals ProcDump; excludes Microsoft Azure Monitor Agent bundled copies,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-003,Credential Theft - fgdump,Credential Access,T1003,High,^fgdump\.exe$,.,,https://www.cyber.gov.au/sites/default/files/2023-05/csa_living_off_the_land.pdf,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-004,Credential Theft- Potato,Credential Access,,High,^Potato\.exe$,.,,"Covers all potatoes - Petit, Juicy, Lovely, Local, God, Rotten",High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-005,Credential Theft - PetitPotam,Credential Access,T1187,High,^PetitPotam\.(exe|py|sln)$,.,,PoC tool to coerce Windows hosts to authenticate to other machines via MS-EFSRPC EfsRpcOpenFileRaw or other functions.,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-006,Credential Theft - gosecretsdump,Credential Access,T1003,High,^gosecretsdump_win_v0.3.1\.exe$,.,,https://github.com/C-Sto/gosecretsdump,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRYP-001,Crytominers,Cryptomining,,High,^WinRing0\.sys$|^xmrig\.exe$,.,,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-XFER-002,Data Transfer - Command-line and Cloud Tools,Data Transfer,,High,^(FreeFileSync|mega|megaclient|megacmd|megasync|megatool|ngrok|rclone|Stealbit)\.exe$,.,,https://jsac.jpcert.or.jp/archive/2023/pdf/JSAC2023_1_1_yamashige-nakatani-tanaka_en.pdf,High,Both,File,DetectRaptor Curated,
+        DR-MFT-XFER-003,Data Transfer - FileZilla,Data Transfer,,High,^(filezilla|FileZillaPortable|filezilla-server|filezilla-server-gui|filezilla-server-impersonator|filezilla-server-config-converter|filezilla-server-crypt|fzputtygen|fzsftp)\.exe$,.,,FileZilla client and server executable filenames,Low,Both,File,DetectRaptor Curated,
+        DR-MFT-XFER-004,Data Transfer - Restic,Data Transfer,,High,^restic\.exe$,.,,Internal - https://github.com/restic/restic,Low,Both,File,DetectRaptor Curated,
+        DR-MFT-XFER-005,Data Transfer - PuTTY and Powercat,Data Transfer,,High,^(plink|pscp|powercat)\.(exe|ps1)$,.,\\Program Files\\,PuTTy / SSH tools outside Program Files is highly suspicious.,High,Both,File,DetectRaptor Curated,
+        DR-MFT-EVA-001,Defence Evasion - Security Control Utilities,Defence Evasion,T1562.001,High,^(dControl|gmer|IObit Unlocker|DefenderControl|file_shredder|File Shredder|pchunter)\.exe$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-EVA-002,Defence Evasion - Service and Process Utilities,Defence Evasion,T1562.001,High,^(CleanWipe|nssm|processhacker)\.exe$,.,,Internal,Medium,Both,File,InfoGuard Internal,
+        DR-MFT-EVA-003,EDR Evasion,Defence Evasion,T1562.001,High,^EDRSilencer\.exe$|^FireBlock\.exe$,.,,https://github.com/netero1010/EDRSilencer,High,Both,File,DetectRaptor Curated,
+        DR-MFT-IMPA-001,Encryption Tool,Impact,T1486,Medium,^(dcrypt|truecrypt|VeraCrypt).*\.exe$,.,,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-DISC-001,Enumeration Tool - Network Scanner (NS) Tool,Discovery,T1046,High,^ns\.exe$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-DISC-002,Enumeration Tool - Network and AD Scanner,Discovery,T1046,High,^(ADGet|AdFind|advanced_ip_scanner|advanced_ip_scanner_console|Advanced_port_scanner|fscan|ipscan|kportscan|masscan|massscan|nbtscan|netscan|nsscan|NtdsAudit|Group3r|PingCastle|ADExplorer|SharpShares)\.exe$|^ADRecon\.ps1$,.,,High-confidence network and Active Directory scanner filenames,High,Both,File,DetectRaptor Curated,
+        DR-MFT-DISC-003,Enumeration Tool - BloodHound,Discovery,T1482,High,^(BloodHound\.exe|bloodhound\.py|SharpHound\.ps1|SharpHound\.exe|AzureHound\.ps1)$,.,,BloodHound and SharpHound collection filenames,High,Both,File,DetectRaptor Curated,
+        DR-MFT-DISC-004,Enumeration Tool - Nmap and Everything,Discovery,T1046,High,^(everything|nmap|zenmap)\.exe$,.,,"Exact Nmap, Zenmap, and Everything executable filenames",Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-DISC-005,Enumeration Tool outputs,Discovery,,High,^(ad_ous|ad_computers|ad_users|ad_group|trustdmp|subnets)\.txt$|^.+_(computers|domains|gpos|groups|ous|users)\.json$|^bloodhound\.zip$|^ADRecon-Report-.+$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-EXEC-001,Execution Path,Execution,T1569.002,High,^(PAExec|PsExec|WinExeSvc)(\.exe)?$,\\Windows\\(PAEXE|PSEXE|WinExeSvc),,Internal,Low,MFT,File,InfoGuard Internal,
+        DR-MFT-EXEC-002,Execution - NirCmd,Execution,,High,^nircmd\.exe$,.,,Internal - https://www.nirsoft.net/utils/nircmd.html,Low,Both,File,DetectRaptor Curated,
+        DR-MFT-EXEC-003,Execution - Nsudo,Execution,T1548.002,High,^NSudo\.exe$|^NSudoG\.exe$,.,,Internal - https://github.com/azraelrabbit/NSudo-1,High,Both,File,DetectRaptor Curated,
+        DR-MFT-EXEC-004,Execution - PsExec,Execution,T1569.002,High,^(psexec|psexec64|remcom)\.exe$,.,,Psexec - some applications use RemCom,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-EXEC-005,Execution - LuciRoot,Execution,,High,^LuciRoot\.(exe|sys)$,.,,Rootkit,High,Both,File,DetectRaptor Curated,
+        DR-MFT-TOOL-040,Hack Tool - Impacket,Attacker Tool,,High,^execute\.bat$|^[a-zA-Z]{8}\.bat$|^__output$,C:\\WINDOWS\\[a-zA-Z]{8}\.bat|C:\\Windows\\TEMP\\execute\.bat|C:\\__output,,SMBExec - https://github.com/fortra/impacket/blob/master/examples/smbexec.py,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-TOOL-041,Hack Tool - PowerScan,Attacker Tool,,High,^PowerScan\.ps1$|^Get-CimAppCompatCache\.ps1$|^Get-CimAsepLogon\.ps1$|^Get-CimAsepStartup\.ps1$|^Get-CimAsepWmi\.ps1$|^Get-CimDNSCache\.ps1$|^Get-CimDirectory\.ps1$|^Get-CimDriver\.ps1$|^Get-CimLocalAdmin\.ps1$|^Get-CimLocalUser\.ps1$|^Get-CimLogonHistory\.ps1$|^Get-CimLogonSession\.ps1$|^Get-CimNetAdapter\.ps1$|^Get-CimNetTCPConnection\.ps1$|^Get-CimProcess\.ps1$|^Get-CimRegistryKey\.ps1$|^Get-CimRegistryValue\.ps1$|^Get-CimScheduledTask\.ps1$|^Get-CimSecurityHealth\.ps1$|^Get-CimService\.ps1$|^Get-CimSmbShare\.ps1$|^Get-CimUserAssist\.ps1$|^Get-ComScheduledTask\.ps1$|^Get-EventLogon\.ps1$|^Get-EventSuspiciousBITS\.ps1$|^Get-EventSuspiciousPS\.ps1$|^Get-EventSvcCreation\.ps1$|^Get-EventSvcModification\.ps1$|^Get-EventTaskCreation\.ps1$|^Get-EventTaskModification\.ps1$|^Get-PowershellHistory\.ps1$|^Get-PowershellProfile\.ps1$|^Get-RegistryKeyTimestamp\.ps1$|^Get-CimDpapiBrowser\.ps1$|^Get-CimDpapiCredential\.ps1$|^Get-CimDpapiVault\.ps1$|^Get-CimDpapiWifi\.ps1$|^Get-CimUnprotectedCredential\.ps1$|^Get-RegistryHiveDump\.ps1$|^Get-ShadowHiveDump\.ps1$|^Get-NetBiosInterface\.ps1$|^Get-NetSession\.ps1$|^Get-NullSessionStatus\.ps1$|^Get-OxidBinding\.ps1$|^Get-SecurityService\.ps1$|^Get-ServiceNamedPipe\.ps1$|^Get-SmbOSVersion\.ps1$|^Get-SmbStatus\.ps1$|^Get-SpoolerStatus\.ps1$,.,,PowerScan - https://github.com/tmenochet/PowerScan,High,Both,File,DetectRaptor Curated,
+        DR-MFT-TOOL-042,Hack Tool - PsMapExec,Attacker Tool,,High,^PsMapExec\.ps1$|^DumpSAM\.ps1$|^Invoke-MSSQLup\.ps1$|^Invoke-Mongoose\.ps1$|^Invoke-NETMongoose\.ps1$|^Invoke-Pandemonium\.ps1$|^Get-SMBSigning\.ps1$|^Invoke-SecretsDump\.ps1$|^Invoke-NTDS\.ps1$|^Invoke-SharpRDPTest\.ps1$|^Kirby\.ps1$,.,,PsMapExec - https://github.com/The-Viper-One/PsMapExec/blob/main/PsMapExec.ps1,High,Both,File,DetectRaptor Curated,
+        DR-MFT-PRIV-001,Privilege Escalation Tool,Privilege Escalation,,Medium,^(winPEAS|winpwn).*\.exe$,.,,Internal,High,Both,File,InfoGuard Internal,
+        DR-MFT-PRIV-002,Privilege Escalation Tool - KrbRelayUp,Privilege Escalation,,High,^KrbRelayUp\.exe$,.,,KrbRelayUp - https://github.com/Dec0ne/KrbRelayUp,High,Both,File,DetectRaptor Curated,
+        DR-MFT-POL-001,Pirating Software,Policy Violation,,Medium,^(KMSPico|AutoKMS).*(\.exe|\.zip|\.rar)$,.,WindowsApps\\king\.com|\.(jpg|gif|png|bmp|pat|sbsar|pdf|doc|docx|Metadata)$,Internal,Low,Both,File,InfoGuard Internal,
+        DR-MFT-DEV-001,Developer Utility - Dev Tunnels (aka Visual Studio Dev Tunnel),Developer Utility,,High,^devtunnel\.exe$,.,,Dev Tunnels - learn.microsoft.com/en-us/azure/developer/dev-tunnels/overview,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-DEV-002,Developer Utility - ngrok,Developer Utility,,High,^ngrok\.exe$,.,,ngrok - ngrok.com - https://lolrmm.io/tools/ngrok,Medium,Both,File,LOLRMM,ngrok
+        DR-MFT-VPN-001,VPN,Network Tunnelling,T1090,High,^((NordVPN|nordvpn-service|ProtonVPN|ProtonVPNService|ProtonVPN\.WireGuardService|ExpressVPN|expressvpnd|expressvpn-service|Surfshark|Surfshark\.Service|CyberGhost|pia-client|pia-service|pia-wgservice|IPVanish|wireguard|Connectify|ConnectifyService|Connectifyd|OpenVPNConnect|openvpn|openvpn-gui|openvpnserv|openvpnserv2|ovpnconnector|ovpnagent|Mullvad VPN|mullvad-daemon|mullvad-exclude|mullvad-problem-report|TunnelBear|TunnelBear\.Service|TunnelBear\.Maintenance|TunnelBear\.Update)\.exe|(tapexpressvpn|expressvpn-wintun|wireguard)\.sys)$,.,,High-confidence VPN executable service and driver filenames,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-MASQ-001,Masquerading - Windows Binary Name in AppData,Masquerading,T1036.005,High,^((svchost|conhost|dllhost|sechost|wscript|cscript|rundll32|services|lsass|csrss|winlogon|smss|taskhostw)\.exe|(conhost|sechost)\.dll)$,\\Users\\[^\\]+\\AppData\\,,Windows system binary basename located under user AppData,High,Both,File,DetectRaptor Curated,
+        DR-MFT-MASQ-002,Masquerading - Double Extension Payload,Masquerading,T1036.007,High,^.+\.(doc|docx|pdf|txt|jpg|jpeg|png|gif|zip|rar)\.(exe|scr|com|bat|cmd|vbs|vbe|js|jse|hta)$,\\Users\\,,Executable or script masquerading with a document media or archive extension,High,Both,File,DetectRaptor Curated,
+        DR-MFT-CRED-007,Credential Access - NTDS Database in User Profile,Credential Access,T1003.003,High,^ntds\.dit$,\\Users\\,,NTDS Active Directory database under a user profile,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-001,Suspicious AppData Hexadecimal Payload,Suspicious Location,,Medium,"^[a-f0-9]{16,64}\.(exe|dll)$","\\Users\\[^\\]+\\AppData\\(Local|Roaming)\\[a-f0-9]{16,64}\\",,Executable or library using hexadecimal AppData directory and filename components,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-SLOC-002,Suspicious AppData GUID Directory Payload,Suspicious Location,,Medium,\.(exe|dll|bat|cmd|ps1|vbs|js|hta)$,\\Users\\[^\\]+\\AppData\\(Local|Roaming)\\\{?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\}?\\,,Executable or script under a GUID-like AppData directory,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-SLOC-003,Suspicious Location - Uncommon AppData Folder,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl|msi|iso|lnk)$,\\Users\\[^\\]+\\AppData\\,\\Users\\[^\\]+\\AppData\\(Local|LocalLow|Roaming)\\,Executable script shortcut or installer under an uncommon AppData sibling directory,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-PERS-001,Persistence - User Startup Executable or Script,Persistence,T1547.001,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\,,Executable or script in the per-user Startup folder,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-PERS-002,Persistence - User Startup Shortcut,Persistence,T1547.001,Medium,\.lnk$,\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\,,Shortcut in the per-user Startup folder requiring target resolution,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-004,Suspicious Location - Recycle Bin Executable or Script,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\\$Recycle\.Bin\\,,Executable or script staged beneath the Recycle Bin,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SFILE-001,Suspicious One Letter Filename,Suspicious Filename,T1036,Medium,^\w\.(exe|dll|dit|msi|bat|rar|zip|dmp|ps1|7z)$,.,\<Err\>|perl|\\R\\R|Vagrant|Anaconda3|Xactware|eclipse|MSWin32-x86-multi-thread,,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-SLOC-005,Suspicious Location - Public Executable or Script,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\Users\\Public\\,\\Users\\Public\\Documents\\(Autodesk|KUKA Public|Matrox Imaging|Aurora Design Assistant[^\\]*|Aurora Vision[^\\]*|FabImage Studio[^\\]*|MATRIX VISION|PROJECT complete)\\|\\Users\\Public\\EPLAN\\Data\\,Executable or script in Users Public outside known vendor content,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-006,Suspicious Location - Public Archive Installer or Dump,Suspicious Location,,Medium,\.(msi|zip|rar|7z|iso|dmp|hdmp)$,\\Users\\Public\\,\\Users\\Public\\Documents\\(Autodesk|KUKA Public|Matrox Imaging|Aurora Design Assistant[^\\]*|Aurora Vision[^\\]*|FabImage Studio[^\\]*|MATRIX VISION|PROJECT complete)\\|\\Users\\Public\\EPLAN\\Data\\,Archive installer or dump in Users Public outside known vendor content,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-007,Suspicious Location - Local Temp Executable or Script,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\Users\\[^\\]+\\AppData\\Local\\Temp\\,,Executable or script in a user temporary directory,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-008,Suspicious Location - Local Temp Archive Installer or Dump,Suspicious Location,,Medium,\.(msi|zip|rar|7z|iso|dmp|hdmp)$,\\Users\\[^\\]+\\AppData\\Local\\Temp\\,,Archive installer or dump in a user temporary directory,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-009,Suspicious Location - AppData Root Executable or Script,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\Users\\[^\\]+\\AppData\\(Local|Roaming)\\[^\\]+$,,Executable or script directly under Local or Roaming AppData,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-010,Suspicious Location - AppData Root Archive or Installer,Suspicious Location,,Medium,\.(msi|zip|rar|7z|iso)$,\\Users\\[^\\]+\\AppData\\(Local|Roaming)\\[^\\]+$,,Archive or installer directly under Local or Roaming AppData,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-011,Suspicious Location - ProgramData Root Executable or Script,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\ProgramData\\[^\\]+$,,Executable or script directly under ProgramData,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-012,Suspicious Location - ProgramData Root Archive Installer or Dump,Suspicious Location,,Medium,\.(msi|zip|rar|7z|iso|dmp|hdmp)$,\\ProgramData\\[^\\]+$,,Archive installer or dump directly under ProgramData,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-013,Suspicious Location - PerfLogs Executable or Script,Suspicious Location,,High,\.(exe|dll|bat|cmd|ps1|psm1|vbs|vbe|js|jse|wsf|hta|scr|cpl)$,\\PerfLogs\\,,Executable or script under PerfLogs,High,MFT,File,DetectRaptor Curated,
+        DR-MFT-SLOC-014,Suspicious Location - PerfLogs Archive Installer or Dump,Suspicious Location,,Medium,\.(msi|zip|rar|7z|iso|dmp|hdmp)$,\\PerfLogs\\,,Archive installer or dump under PerfLogs,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-WEB-001,Web Browsing History Tool,Web History,,High,^BrowsingHistoryView\.exe$,.,,BrowsingHistoryView,Low,Both,File,DetectRaptor Curated,
+        DR-MFT-RMM-001,RMM - 247ithelp.com (ConnectWise),Remote Access Software,T1219,High,^Remote Workforce Client\.exe$,.,,https://lolrmm.io/tools/247ithelp.com__connectwise_,Medium,Both,File,LOLRMM,247ithelp.com__connectwise_
+        DR-MFT-RMM-002,RMM - Absolute (Computrace),Remote Access Software,T1219,High,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersitence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,.,,https://lolrmm.io/tools/absolute__computrace_,Medium,Both,File,LOLRMM,absolute__computrace_
+        DR-MFT-RMM-004,RMM - Acronis Cyber Protect (Remotix),Remote Access Software,T1219,Medium,^AcronisCyberProtectConnectAgent\.exe$|^AcronisCyberProtectConnectQuickAssist.*\.exe$,.,,https://lolrmm.io/tools/acronis_cyber_protect__remotix_,Medium,Both,File,LOLRMM,acronis_cyber_protect__remotix_
+        DR-MFT-RMM-006,RMM - Adobe Connect,Remote Access Software,T1219,Medium,^ConnectAppSetup.*\.exe$|^ConnectDetector\.exe$|^ConnectShellSetup.*\.exe$|^Connect\.exe$,.,,https://lolrmm.io/tools/adobe_connect,Medium,Both,File,LOLRMM,adobe_connect
+        DR-MFT-RMM-007,RMM - AeroAdmin,Remote Access Software,T1219,High,^AeroAdmin\.exe$,.,,https://lolrmm.io/tools/aeroadmin,Medium,Both,File,LOLRMM,aeroadmin
+        DR-MFT-RMM-008,RMM - AliWangWang-remote-control,Remote Access Software,T1219,High,^alitask\.exe$,.,,https://lolrmm.io/tools/aliwangwang-remote-control,Medium,Both,File,LOLRMM,aliwangwang-remote-control
+        DR-MFT-RMM-009,RMM - Alpemix,Remote Access Software,T1219,High,^AlpemixService\.exe$,.,,https://lolrmm.io/tools/alpemix,Medium,Both,File,LOLRMM,alpemix
+        DR-MFT-RMM-220,RMM - Ammyy Admin,Remote Access Software,T1219,Medium,^AMMYY_Admin\.exe$|^aa_v.*\.exe$,.,,https://lolrmm.io/tools/ammyy_admin,Medium,Both,File,LOLRMM,ammyy_admin
+        DR-MFT-RMM-011,RMM - Any Support,Remote Access Software,T1219,High,^ManualLauncher\.exe$,.,,https://lolrmm.io/tools/any_support,Medium,Both,File,LOLRMM,any_support
+        DR-MFT-RMM-013,RMM - Anyplace Control,Remote Access Software,T1219,High,^apc_host\.exe$,.,,https://lolrmm.io/tools/anyplace_control,Medium,Both,File,LOLRMM,anyplace_control
+        DR-MFT-RMM-222,RMM - Aspia,Remote Access Software,T1219,High,^aspia_client\.exe$,.,,https://lolrmm.io/tools/aspia,Medium,Both,File,LOLRMM,aspia
+        DR-MFT-RMM-015,RMM - Atera,Remote Access Software,T1219,High,^AgentPackageNetworkDiscovery\.exe$|^AgentPackageTaskScheduler\.exe$|^AteraAgent\.exe$|^atera_agent\.exe$|^syncrosetup\.exe$,.,,https://lolrmm.io/tools/atera,Medium,Both,File,LOLRMM,atera
+        DR-MFT-RMM-016,RMM - Auvik,Remote Access Software,T1219,High,^auvik\.agent\.exe$|^auvik\.engine\.exe$,.,,https://lolrmm.io/tools/auvik,Medium,Both,File,LOLRMM,auvik
+        DR-MFT-RMM-017,RMM - AweRay,Remote Access Software,T1219,Medium,^AweSun\.exe$|^aweray_remote.*\.exe$,.,,https://lolrmm.io/tools/aweray,Medium,Both,File,LOLRMM,aweray
+        DR-MFT-RMM-020,RMM - BeamYourScreen,Remote Access Software,T1219,High,^beamyourscreen-host\.exe$|^beamyourscreen\.exe$,.,,https://lolrmm.io/tools/beamyourscreen,Medium,Both,File,LOLRMM,beamyourscreen
+        DR-MFT-RMM-226,RMM - BeAnyWhere,Remote Access Software,T1219,High,^BASupAppElev\.exe$|^BASupAppSrvc\.exe$|^BASupApp\.exe$|^BASupSysInf\.exe$|^TakeControl\.exe$|^basupsrvc\.exe$|^basupsrvcupdate\.exe$|^basuptshelper\.exe$,.,,https://lolrmm.io/tools/beanywhere,Medium,Both,File,LOLRMM,beanywhere
+        DR-MFT-RMM-022,RMM - BeInSync,Remote Access Software,T1219,Medium,^Beinsync.*\.exe$,.,,https://lolrmm.io/tools/beinsync,Medium,Both,File,LOLRMM,beinsync
+        DR-MFT-RMM-023,RMM - BeyondTrust (Bomgar),Remote Access Software,T1219,Medium,^bomgar-pac-.*\.exe$|^bomgar-pac\.exe$|^bomgar-rdp\.exe$|^bomgar-scc-.*\.exe$|^bomgar-scc\.exe$,.,,https://lolrmm.io/tools/beyondtrust__bomgar_,Medium,Both,File,LOLRMM,beyondtrust__bomgar_
+        DR-MFT-RMM-024,RMM - Bitvise SSH Client,Remote Access Software,T1219,High,^BvSshClient-Inst\.exe$,.,,https://lolrmm.io/tools/bitvise_ssh_client,Medium,Both,File,LOLRMM,bitvise_ssh_client
+        DR-MFT-RMM-228,RMM - Bitvise SSH Server,Remote Access Software,T1219,High,^BvSshServer-Inst\.exe$,.,,https://lolrmm.io/tools/bitvise_ssh_server,Medium,Both,File,LOLRMM,bitvise_ssh_server
+        DR-MFT-RMM-026,RMM - CentraStage (Now Datto),Remote Access Software,T1219,High,^AEMAgent\.exe$|^CagService\.exe$,.,,https://lolrmm.io/tools/centrastage__now_datto_,Medium,Both,File,LOLRMM,centrastage__now_datto_
+        DR-MFT-RMM-027,RMM - Centurion,Remote Access Software,T1219,High,^ctiserv\.exe$,.,,https://lolrmm.io/tools/centurion,Medium,Both,File,LOLRMM,centurion
+        DR-MFT-RMM-028,RMM - Chrome Remote Desktop,Remote Access Software,T1219,High,^remoting_host\.exe$|^remote_host\.exe$,.,,https://lolrmm.io/tools/chrome_remote_desktop,Medium,Both,File,LOLRMM,chrome_remote_desktop
+        DR-MFT-RMM-029,RMM - CloudFlare Tunnel,Remote Access Software,T1219,High,^cloudflared\.exe$,.,,https://lolrmm.io/tools/cloudflare_tunnel,Medium,Both,File,LOLRMM,cloudflare_tunnel
+        DR-MFT-RMM-232,RMM - Comodo RMM,Remote Access Software,T1219,High,^itsmagent\.exe$|^rviewer\.exe$,.,,https://lolrmm.io/tools/comodo_rmm,Medium,Both,File,LOLRMM,comodo_rmm
+        DR-MFT-RMM-031,RMM - Connectwise Automate (LabTech),Remote Access Software,T1219,High,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,.,,https://lolrmm.io/tools/connectwise_automate__labtech_,Medium,Both,File,LOLRMM,connectwise_automate__labtech_
+        DR-MFT-RMM-032,RMM - ConnectWise Control,Remote Access Software,T1219,High,^connectwisechat-customer\.exe$|^connectwisecontrol\.client\.exe$|^screenconnect\.windowsclient\.exe$,.,,https://lolrmm.io/tools/connectwise_control,Medium,Both,File,LOLRMM,connectwise_control
+        DR-MFT-RMM-234,RMM - Controlio,Remote Access Software,T1219,High,^bbl\.exe$|^weCliboardListener\.exe$|^weInstSvc\.exe$|^wemonc\.exe$|^weprtct\.exe$|^wesvc\.exe$|^libeay32\.dll$|^ssleay32\.dll$,.,,https://lolrmm.io/tools/controlio,Medium,Both,File,LOLRMM,controlio
+        DR-MFT-RMM-033,RMM - CrossLoop,Remote Access Software,T1219,High,^CrossLoopConnect\.exe$|^WinVNCStub\.exe$|^crossloopservice\.exe$,.,,https://lolrmm.io/tools/crossloop,Medium,Both,File,LOLRMM,crossloop
+        DR-MFT-RMM-034,RMM - CrossTec Remote Control,Remote Access Software,T1219,High,^PCIVIDEO\.EXE$|^supporttool\.exe$,.,,https://lolrmm.io/tools/crosstec_remote_control,Medium,Both,File,LOLRMM,crosstec_remote_control
+        DR-MFT-RMM-036,RMM - DameWare,Remote Access Software,T1219,Medium,^dwrcst\.exe$|^DameWare Mini Remote Control.*\.exe$|^DameWare Remote Support\.exe$|^SolarWinds-Dameware-DRS.*\.exe$|^SolarWinds-Dameware-MRC.*\.exe$|^dntus.*\.exe$|^dwrcs\.exe$,.,,https://lolrmm.io/tools/dameware,Medium,Both,File,LOLRMM,dameware
+        DR-MFT-RMM-037,RMM - DeskDay,Remote Access Software,T1219,Medium,^ultimate_.*\.exe$,.,,https://lolrmm.io/tools/deskday,Medium,Both,File,LOLRMM,deskday
+        DR-MFT-RMM-038,RMM - DeskShare,Remote Access Software,T1219,High,^DSGuest\.exe$|^TeamTaskManager\.exe$,.,,https://lolrmm.io/tools/deskshare,Medium,Both,File,LOLRMM,deskshare
+        DR-MFT-RMM-039,RMM - DesktopNow,Remote Access Software,T1219,High,^desktopnow\.exe$,.,,https://lolrmm.io/tools/desktopnow,Medium,Both,File,LOLRMM,desktopnow
+        DR-MFT-RMM-239,RMM - Devolutions Remote Desktop Manager,Remote Access Software,T1219,High,^RemoteDesktopManager\.exe$,.,,https://lolrmm.io/tools/devolutions_remote_desktop_manager,Medium,Both,File,LOLRMM,devolutions_remote_desktop_manager
+        DR-MFT-RMM-040,RMM - Distant Desktop,Remote Access Software,T1219,High,^ddsystem\.exe$|^distant-desktop\.exe$,.,,https://lolrmm.io/tools/distant_desktop,Medium,Both,File,LOLRMM,distant_desktop
+        DR-MFT-RMM-041,RMM - Domotz,Remote Access Software,T1219,Medium,^Domotz Pro Desktop App Setup.*\.exe$|^Domotz Pro Desktop App\.exe$|^domotz-windows.*\.exe$|^domotz.*\.exe$|^domotz\.exe$|^domotz_bash\.exe$,.,,https://lolrmm.io/tools/domotz,Medium,Both,File,LOLRMM,domotz
+        DR-MFT-RMM-042,RMM - DragonDisk,Remote Access Software,T1219,High,^DragonDisk\.exe$,.,,https://lolrmm.io/tools/dragondisk,Medium,Both,File,LOLRMM,dragondisk
+        DR-MFT-RMM-240,RMM - Duet Display,Remote Access Software,T1219,High,^DuetDisp\.exe$|^DuetSetup\.exe$|^duet\.exe$,.,,https://lolrmm.io/tools/duet_display,Medium,Both,File,LOLRMM,duet_display
+        DR-MFT-RMM-043,RMM - Duplicati,Remote Access Software,T1219,High,^Duplicati\.Server\.exe$,.,,https://lolrmm.io/tools/duplicati,Medium,Both,File,LOLRMM,duplicati
+        DR-MFT-RMM-044,RMM - DW Service,Remote Access Software,T1219,High,^dwagent\.exe$|^dwaglnc\.exe$|^dwagsvc\.exe$,.,,https://lolrmm.io/tools/dw_service,Medium,Both,File,LOLRMM,dw_service
+        DR-MFT-RMM-045,RMM - Echoware,Remote Access Software,T1219,Medium,^echoserver.*\.exe$|^echoware\.dll$,.,,https://lolrmm.io/tools/echoware,Medium,Both,File,LOLRMM,echoware
+        DR-MFT-RMM-046,RMM - eHorus,Remote Access Software,T1219,High,^ehorus standalone\.exe$|^ehorus_agent\.exe$|^ehorus_cmd\.exe$|^ehorus_launcher\.exe$|^ehorus_uit\.exe$,.,,https://lolrmm.io/tools/ehorus,Medium,Both,File,LOLRMM,ehorus
+        DR-MFT-RMM-048,RMM - EMCO Remote Console,Remote Access Software,T1219,High,^remoteconsole\.exe$,.,,https://lolrmm.io/tools/emco_remote_console,Medium,Both,File,LOLRMM,emco_remote_console
+        DR-MFT-RMM-243,RMM - Ericom AccessNow,Remote Access Software,T1219,Medium,^accessserver.*\.exe$|^accessserver\.exe$,.,,https://lolrmm.io/tools/ericom_accessnow,Medium,Both,File,LOLRMM,ericom_accessnow
+        DR-MFT-RMM-244,RMM - Ericom Connect,Remote Access Software,T1219,Medium,^EricomConnectRemoteHost.*\.exe$|^ericomconnnectconfigurationtool\.exe$,.,,https://lolrmm.io/tools/ericom_connect,Medium,Both,File,LOLRMM,ericom_connect
+        DR-MFT-RMM-245,RMM - ESET Remote Administrator,Remote Access Software,T1219,Medium,^ERAAgent\.exe$|^einstaller\.exe$|^era\.exe$|^eratool\.exe$|^ezhelp.*\.exe$,.,,https://lolrmm.io/tools/eset_remote_administrator,Medium,Both,File,LOLRMM,eset_remote_administrator
+        DR-MFT-RMM-053,RMM - ExtraPuTTY,Remote Access Software,T1219,High,^ExtraPuTTY-0\.30-2016-01-28-installer\.exe$,.,,https://lolrmm.io/tools/extraputty,Medium,Both,File,LOLRMM,extraputty
+        DR-MFT-RMM-054,RMM - ezHelp,Remote Access Software,T1219,High,^ezHelpManager\.exe$|^ezhelpclient\.exe$|^ezhelpclientmanager\.exe$,.,,https://lolrmm.io/tools/ezhelp,Medium,Both,File,LOLRMM,ezhelp
+        DR-MFT-RMM-246,RMM - Faronics Core,Remote Access Software,T1219,High,^CoreAgentService\.exe$|^FaronicsCoreAgent\.exe$|^FCAForStartupMonitor\.msi$,.,,https://lolrmm.io/tools/faronics_core,Medium,Both,File,LOLRMM,faronics_core
+        DR-MFT-RMM-247,RMM - Faronics Deep Freeze,Remote Access Software,T1219,High,^DFC\.exe$|^DFServEx\.exe$|^DFServ\.exe$|^DFWks\.exe$|^CloudWksInstall\.exe$|^DFInst\.exe$|^DFStdInstall\.exe$|^DFStd\.exe$,.,,https://lolrmm.io/tools/faronics_deep_freeze,Medium,Both,File,LOLRMM,faronics_deep_freeze
+        DR-MFT-RMM-248,RMM - Faronics Deploy,Remote Access Software,T1219,Medium,^FRCServer\.exe$|^FSSInstaller\.exe$|^FWAService\.exe$|^FWA_UI_Agent\.exe$|^FaronicsDeployAgent\.exe$|^FaronicsSA\.exe$|^MigrationHelper_32\.exe$|^MigrationHelper_64\.exe$|^ModulesUpgradeMgr\.exe$|^NotificationHelper\.exe$|^UserNotificationHelper\.exe$|^CloudWksInstall\.exe$|^FWAWebInstaller_.*\.exe$,.,,https://lolrmm.io/tools/faronics_deploy,Medium,Both,File,LOLRMM,faronics_deploy
+        DR-MFT-RMM-249,RMM - Faronics Insight,Remote Access Software,T1219,High,^FIStudentAgent\.exe$|^FIStudentSvc\.exe$|^FIStudentUI\.exe$|^STAHelper\.exe$|^InsightSetup\.msi$|^InsightInstallerStudent\.exe$|^InsightInstallerTeacher\.exe$|^InsightInstaller\.exe$|^StudentSvc\.exe$,.,,https://lolrmm.io/tools/faronics_insight,Medium,Both,File,LOLRMM,faronics_insight
+        DR-MFT-RMM-055,RMM - FastViewer,Remote Access Software,T1219,High,^FastViewer\.exe$|^fastclient\.exe$|^fastmaster\.exe$,.,,https://lolrmm.io/tools/fastviewer,Medium,Both,File,LOLRMM,fastviewer
+        DR-MFT-RMM-250,RMM - FixMe.it,Remote Access Software,T1219,Medium,^FixMeit Client\.exe$|^FixMeit Expert Setup\.exe$|^FixMeit Unattended Access Setup\.exe$|^FixMeitClient.*\.exe$|^TiClientCore\.exe$|^TiClientHelper.*\.exe$|^TiExpertCore\.exe$|^TiExpertStandalone\.exe$|^fixmeitclient\.exe$,.,,https://lolrmm.io/tools/fixme.it,Medium,Both,File,LOLRMM,fixme.it
+        DR-MFT-RMM-251,RMM - FleetDeck.io,Remote Access Software,T1219,High,^fd_agent\.dll$|^fleetdeck_agent\.exe$|^fleetdeck_agent_svc\.exe$|^fleetdeck-agent\.exe$|^fleetdeck_commander_launcher\.exe$|^fleetdeck_commander_svc\.exe$|^fleetdeck_installer\.exe$|^fleetdeck-agent\.msi$,.,,https://lolrmm.io/tools/fleetdeck.io,Medium,Both,File,LOLRMM,fleetdeck.io
+        DR-MFT-RMM-059,RMM - FreeNX,Remote Access Software,T1219,High,^nxplayer\.exe$,.,,https://lolrmm.io/tools/freenx,Medium,Both,File,LOLRMM,freenx
+        DR-MFT-RMM-256,RMM - Freshservice,Remote Access Software,T1219,Medium,^FSAgentAutoUpdate\.exe$|^FSAgentService\.exe$|^FSWmiScanner\.exe$|^Freshservice\.DiscoveryProbe\.ScanService\.exe$|^Freshservice\.DiscoveryProbe\.Window\.exe$|^plink\.exe$|^FSAgent\.msi$|^fs-probe-.*\.msi$|^fs-windows-agent-.*\.msi$|^win-installer-.*\.msi$,.,,https://lolrmm.io/tools/freshservice,Medium,Both,File,LOLRMM,freshservice
+        DR-MFT-RMM-061,RMM - GetScreen,Remote Access Software,T1219,High,^getscreen-x86\.exe$|^getscreen\.upd\.exe$,.,,https://lolrmm.io/tools/getscreen,Medium,Both,File,LOLRMM,getscreen
+        DR-MFT-RMM-062,RMM - GoToAssist,Remote Access Software,T1219,Medium,^GoTo Assist Opener\.exe$|^g2a.*\.exe$|^g2ax_comm_customer\.exe$|^g2mcomm\.exe$|^goto opener\.exe$|^gotoassist\.exe$|^g2mupdate\.com$,.,,https://lolrmm.io/tools/gotoassist,Medium,Both,File,LOLRMM,gotoassist
+        DR-MFT-RMM-260,RMM - GoToAssist (GoTo Resolve),Remote Access Software,T1219,High,^GoToResolveExternalModuleHandler\.exe$|^GoToResolveFileManager\.exe$|^GoToResolveLoggerProcess\.exe$|^GoToResolveNetworkChecker\.exe$|^GoToResolveProcessChecker\.exe$|^GoToResolveQuickView\.exe$|^GoToResolveRegistryEditor\.exe$|^GoToResolveRemoteControl\.exe$|^GoToResolveServiceManager\.exe$|^GoToResolveService\.exe$|^GoToResolveTerminal\.exe$|^GoToResolveTools32\.exe$|^GoToResolveTools64\.exe$|^GoToResolveUi\.exe$|^GoToResolveUnattendedRemover\.exe$|^GoToResolveUnattendedUi\.exe$|^GoToResolveUnattended\.exe$,.,,https://lolrmm.io/tools/gotoassist__goto_resolve_,Medium,Both,File,LOLRMM,gotoassist__goto_resolve_
+        DR-MFT-RMM-063,RMM - GoToAssist Agent Desktop Console,Remote Access Software,T1219,High,^G2RDesktopConsole-x64\.msi$,.,,https://lolrmm.io/tools/gotoassist_agent_desktop_console,Medium,Both,File,LOLRMM,gotoassist_agent_desktop_console
+        DR-MFT-RMM-064,RMM - GotoHTTP,Remote Access Software,T1219,Medium,^GotoHTTP.*\.exe$|^GotoHTTP_x64\.exe$|^gotohttp\.exe$,.,,https://lolrmm.io/tools/gotohttp,Medium,Both,File,LOLRMM,gotohttp
+        DR-MFT-RMM-261,RMM - GoToMyPC,Remote Access Software,T1219,High,^G2M\.exe$,.,,https://lolrmm.io/tools/gotomypc,Medium,Both,File,LOLRMM,gotomypc
+        DR-MFT-RMM-067,RMM - Goverlan,Remote Access Software,T1219,Medium,^GovSrv\.exe$|^GovAgentInstallHelper\.exe$|^GovAgentx64\.exe$|^GovReachClient\.exe$|^goverrmc\.exe$|^govsrv.*\.exe$,.,,https://lolrmm.io/tools/goverlan,Medium,Both,File,LOLRMM,goverlan
+        DR-MFT-RMM-068,RMM - Guacamole,Remote Access Software,T1219,High,^guacd\.exe$,.,,https://lolrmm.io/tools/guacamole,Medium,Both,File,LOLRMM,guacamole
+        DR-MFT-RMM-262,RMM - HeartbeatRM,Remote Access Software,T1219,High,^agent-installer-any\.exe$|^hbrm-updater-x64\.exe$|^hbrm-x64\.exe$,.,,https://lolrmm.io/tools/heartbeatrm,Medium,Both,File,LOLRMM,heartbeatrm
+        DR-MFT-RMM-069,RMM - HelpBeam,Remote Access Software,T1219,Medium,^helpbeam.*\.exe$,.,,https://lolrmm.io/tools/helpbeam,Medium,Both,File,LOLRMM,helpbeam
+        DR-MFT-RMM-070,RMM - HelpU,Remote Access Software,T1219,High,^HelpuManager\.exe$|^HelpuUpdater\.exe$|^helpu_install\.exe$,.,,https://lolrmm.io/tools/helpu,Medium,Both,File,LOLRMM,helpu
+        DR-MFT-RMM-263,RMM - HelpWire,Remote Access Software,T1219,High,^HelpWire Quick\.exe$|^helpwire\.exe$,.,,https://lolrmm.io/tools/helpwire,Medium,Both,File,LOLRMM,helpwire
+        DR-MFT-RMM-264,RMM - HopToDesk,Remote Access Software,T1219,High,^HopToDesk\.exe$|^HopToDesk-Standalone\.exe$,.,,https://lolrmm.io/tools/hoptodesk,Medium,Both,File,LOLRMM,hoptodesk
+        DR-MFT-RMM-265,RMM - I'm InTouch,Remote Access Software,T1219,High,^I'm InTouch Go Installer\.exe$|^iit\.exe$|^intouch\.exe$,.,,https://lolrmm.io/tools/i'm_intouch,Medium,Both,File,LOLRMM,i'm_intouch
+        DR-MFT-RMM-266,RMM - iDrive,Remote Access Software,T1219,High,^IDriveWinSetup\.exe$|^IDComponent\.dll$|^IDriveEClassic\.exe$|^id_tray\.exe$,.,,https://lolrmm.io/tools/idrive,Medium,Both,File,LOLRMM,idrive
+        DR-MFT-RMM-267,RMM - ImmyBot,Remote Access Software,T1219,High,^ImmyAgent\.exe$|^ImmyUpdater\.exe$|^ImmyBot\.msi$|^ImmyBot\.Agent\.Ephemeral\.exe$,.,,https://lolrmm.io/tools/immybot,Medium,Both,File,LOLRMM,immybot
+        DR-MFT-RMM-072,RMM - Impero Connect,Remote Access Software,T1219,High,^ImperoClientSVC\.exe$,.,,https://lolrmm.io/tools/impero_connect,Medium,Both,File,LOLRMM,impero_connect
+        DR-MFT-RMM-073,RMM - Instant Housecall,Remote Access Software,T1219,High,^InstantHousecall\.exe$|^hsloader\.exe$|^ihcserver\.exe$,.,,https://lolrmm.io/tools/instant_housecall,Medium,Both,File,LOLRMM,instant_housecall
+        DR-MFT-RMM-074,RMM - Insync,Remote Access Software,T1219,High,^Insync\.exe$,.,,https://lolrmm.io/tools/insync,Medium,Both,File,LOLRMM,insync
+        DR-MFT-RMM-075,RMM - IntelliAdmin Remote Control,Remote Access Software,T1219,High,^agent32\.exe$|^agent64\.exe$|^agent_setup_5\.exe$|^iadmin\.exe$|^intelliadmin\.exe$,.,,https://lolrmm.io/tools/intelliadmin_remote_control,Medium,Both,File,LOLRMM,intelliadmin_remote_control
+        DR-MFT-RMM-268,RMM - InvGate,Remote Access Software,T1219,High,^DepHlp\.exe$|^InvGate-ED\.exe$|^Software Matt\.dll$|^InvGateAssetsRD\.exe$|^InvGateRD\.exe$|^sas\.dll$,.,,https://lolrmm.io/tools/invgate,Medium,Both,File,LOLRMM,invgate
+        DR-MFT-RMM-076,RMM - Iperius Remote,Remote Access Software,T1219,High,^iperius\.exe$|^iperiusremote\.exe$,.,,https://lolrmm.io/tools/iperius_remote,Medium,Both,File,LOLRMM,iperius_remote
+        DR-MFT-RMM-269,RMM - ISL Light,Remote Access Software,T1219,High,^islalwaysonmonitor\.exe$|^isllight\.exe$|^isllightservice\.exe$,.,,https://lolrmm.io/tools/isl_light,Medium,Both,File,LOLRMM,isl_light
+        DR-MFT-RMM-077,RMM - ISL Online,Remote Access Software,T1219,High,^ISLLight\.exe$|^ISLLightClient\.exe$|^islalwaysonmonitor\.exe$|^isllightservice\.exe$,.,,https://lolrmm.io/tools/isl_online,Medium,Both,File,LOLRMM,isl_online
+        DR-MFT-RMM-078,RMM - Itarian,Remote Access Software,T1219,High,^ComodoRemoteControl\.exe$|^ITSMAgent\.exe$|^ITSMService\.exe$|^ITarianRemoteAccessSetup\.exe$|^ItsmRsp\.exe$|^RAccess\.exe$|^RDesktop\.exe$|^RHost\.exe$|^RViewer\.exe$|^RmmService\.exe$,.,,https://lolrmm.io/tools/itarian,Medium,Both,File,LOLRMM,itarian
+        DR-MFT-RMM-079,RMM - ITSupport247 (ConnectWise),Remote Access Software,T1219,High,^saazapsc\.exe$,.,,https://lolrmm.io/tools/itsupport247__connectwise_,Medium,Both,File,LOLRMM,itsupport247__connectwise_
+        DR-MFT-RMM-080,RMM - Ivanti Remote Control,Remote Access Software,T1219,High,^AgentlessRC\.exe$|^ArcUI\.exe$|^IvantiRemoteControl\.exe$,.,,https://lolrmm.io/tools/ivanti_remote_control,Medium,Both,File,LOLRMM,ivanti_remote_control
+        DR-MFT-RMM-081,RMM - Jump Cloud,Remote Access Software,T1219,Medium,^JumpCloud.*\.exe$,.,,https://lolrmm.io/tools/jump_cloud,Medium,Both,File,LOLRMM,jump_cloud
+        DR-MFT-RMM-082,RMM - Jump Desktop,Remote Access Software,T1219,High,^jumpclient\.exe$|^jumpconnect\.exe$|^jumpdesktop\.exe$|^jumpservice\.exe$|^jumpupdater\.exe$,.,,https://lolrmm.io/tools/jump_desktop,Medium,Both,File,LOLRMM,jump_desktop
+        DR-MFT-RMM-084,RMM - Kabuto,Remote Access Software,T1219,High,^Kabuto\.App\.Runner\.exe$,.,,https://lolrmm.io/tools/kabuto,Medium,Both,File,LOLRMM,kabuto
+        DR-MFT-RMM-271,RMM - KHelpDesk,Remote Access Software,T1219,High,^KHelpDesk\.exe$,.,,https://lolrmm.io/tools/khelpdesk,Medium,Both,File,LOLRMM,khelpdesk
+        DR-MFT-RMM-086,RMM - KickIdler,Remote Access Software,T1219,Medium,^grabberTT.*\.msi$,.,,https://lolrmm.io/tools/kickidler,Medium,Both,File,LOLRMM,kickidler
+        DR-MFT-RMM-087,RMM - KiTTY,Remote Access Software,T1219,High,^kitty\.exe$,.,,https://lolrmm.io/tools/kitty,Medium,Both,File,LOLRMM,kitty
+        DR-MFT-RMM-274,RMM - LabTeach (Connectwise Automate),Remote Access Software,T1219,High,^ltsvc\.exe$,.,,https://lolrmm.io/tools/labteach__connectwise_automate_,Medium,Both,File,LOLRMM,labteach__connectwise_automate_
+        DR-MFT-RMM-275,RMM - LabTech RMM (Now ConnectWise Automate),Remote Access Software,T1219,High,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,.,,https://lolrmm.io/tools/labtech_rmm__now_connectwise_automate_,Medium,Both,File,LOLRMM,labtech_rmm__now_connectwise_automate_
+        DR-MFT-RMM-088,RMM - LANDesk,Remote Access Software,T1219,High,^issuser\.exe$|^softmon\.exe$|^tmcsvc\.exe$|^LANDeskPortalManager\.exe$|^landeskagentbootstrap\.exe$|^ldinv32\.exe$|^ldsensors\.exe$,.,,https://lolrmm.io/tools/landesk,Medium,Both,File,LOLRMM,landesk
+        DR-MFT-RMM-089,RMM - Laplink Everywhere,Remote Access Software,T1219,Medium,^OOSysAgent\.exe$|^laplink-everywhere-setup.*\.exe$|^laplink\.exe$|^laplinkeverywhere\.exe$|^llrcservice\.exe$|^serverproxyservice\.exe$,.,,https://lolrmm.io/tools/laplink_everywhere,Medium,Both,File,LOLRMM,laplink_everywhere
+        DR-MFT-RMM-090,RMM - Laplink Gold,Remote Access Software,T1219,High,^laplink\.exe$|^tsircusr\.exe$,.,,https://lolrmm.io/tools/laplink_gold,Medium,Both,File,LOLRMM,laplink_gold
+        DR-MFT-RMM-276,RMM - Level.io,Remote Access Software,T1219,High,^level-remote-control-ffmpeg\.exe$|^level-windows-amd64\.exe$|^level\.exe$,.,,https://lolrmm.io/tools/level.io,Medium,Both,File,LOLRMM,level.io
+        DR-MFT-RMM-092,RMM - Lite Manager,Remote Access Software,T1219,High,^LMNoIpServer\.exe$|^ROMFUSClient\.exe$|^ROMServer\.exe$|^romviewer\.exe$,.,,https://lolrmm.io/tools/lite_manager,Medium,Both,File,LOLRMM,litemanager
+        DR-MFT-RMM-278,RMM - LocalXpose,Remote Access Software,T1219,High,^loclx\.exe$,.,,https://lolrmm.io/tools/localxpose,Medium,Both,File,LOLRMM,localxpose
+        DR-MFT-RMM-094,RMM - LogMeIn rescue,Remote Access Software,T1219,Medium,^lmi_rescue\.exe$|^lmi_rescue_srv\.exe$|^support-logmeinrescue.*\.exe$|^support-logmeinrescue\.exe$,.,,https://lolrmm.io/tools/logmein_rescue,Medium,Both,File,LOLRMM,logmein_rescue
+        DR-MFT-RMM-280,RMM - Lunixar,Remote Access Software,T1219,Medium,^LunixarRemote\.dll$|^LunixarRemote\.exe$|^LunixarUpdater\.dll$|^LunixarUpdater\.exe$|^Lunixar\.Agent\.Core\.dll$|^Lunixar\.dll$|^Lunixar\.exe$|^Googlemeet\.msi$|^LunixarRMM.*\.msi$|^eDocument-.*\.msi$,.,,https://lolrmm.io/tools/lunixar,Medium,Both,File,LOLRMM,lunixar
+        DR-MFT-RMM-095,RMM - Manage Engine (Desktop Central),Remote Access Software,T1219,High,^dcagentregister\.exe$|^dcagentservice\.exe$,.,,https://lolrmm.io/tools/manage_engine__desktop_central_,Medium,Both,File,LOLRMM,manage_engine__desktop_central_
+        DR-MFT-RMM-281,RMM - ManageEngine,Remote Access Software,T1219,High,^dcagentservice\.exe$|^InstallShield Setup\.exe$|^ManageEngine_Remote_Access_Plus\.exe$,.,,https://lolrmm.io/tools/manageengine,Medium,Both,File,LOLRMM,manageengine
+        DR-MFT-RMM-283,RMM - ManageEngine ServiceDesk Plus,Remote Access Software,T1219,High,^ManageEngine_ServiceDesk_Plus\.exe$,.,,https://lolrmm.io/tools/manageengine_servicedesk_plus,Medium,Both,File,LOLRMM,manageengine_servicedesk_plus
+        DR-MFT-RMM-096,RMM - MEGAsync,Remote Access Software,T1219,High,^MEGAsyncSetup64\.exe$|^MEGAupdater\.exe$,.,,https://lolrmm.io/tools/megasync,Medium,Both,File,LOLRMM,megasync
+        DR-MFT-RMM-097,RMM - MeshCentral,Remote Access Software,T1219,Medium,^meshagent.*\.exe$|^meshcentral.*\.exe$,.,,https://lolrmm.io/tools/meshcentral,Medium,Both,File,LOLRMM,meshcentral
+        DR-MFT-RMM-100,RMM - Mikogo,Remote Access Software,T1219,High,^Mikogo-Screen-Service\.exe$|^Mikogo-Service\.exe$|^mikogo-starter\.exe$|^mikogo\.exe$|^mikogolauncher\.exe$,.,,https://lolrmm.io/tools/mikogo,Medium,Both,File,LOLRMM,mikogo
+        DR-MFT-RMM-101,RMM - MioNet (Also known as WD Anywhere Access),Remote Access Software,T1219,High,^mionet\.exe$|^mionetmanager\.exe$,.,,https://lolrmm.io/tools/mionet__also_known_as_wd_anywhere_access_,Medium,Both,File,LOLRMM,mionet__also_known_as_wd_anywhere_access_
+        DR-MFT-RMM-284,RMM - MioNet (WD Anywhere Access),Remote Access Software,T1219,High,^mionet\.exe$|^mionetmanager\.exe$,.,,https://lolrmm.io/tools/mionet__wd_anywhere_access_,Medium,Both,File,LOLRMM,mionet__wd_anywhere_access_
+        DR-MFT-RMM-102,RMM - MobaXterm,Remote Access Software,T1219,Medium,^MobaXterm_installer_.*\.msi$|^MobaXterm_installer_12\.1\.msi$,.,,https://lolrmm.io/tools/mobaxterm,Medium,Both,File,LOLRMM,mobaxterm
+        DR-MFT-RMM-287,RMM - Monitic,Remote Access Software,T1219,High,^agent\.exe$|^amon\.exe$,.,,https://lolrmm.io/tools/monitic,Medium,Both,File,LOLRMM,monitic
+        DR-MFT-RMM-103,RMM - mRemoteNG,Remote Access Software,T1219,Medium,^mRemoteNG\.exe$|^mRemoteNG-Installer-.*\.msi$,.,,https://lolrmm.io/tools/mremoteng,Medium,Both,File,LOLRMM,mremoteng
+        DR-MFT-RMM-104,RMM - MSP360,Remote Access Software,T1219,High,^CBBackupPlan\.exe$|^CloudRaCmd\.exe$|^CloudRaSd\.exe$|^CloudRaService\.exe$|^CloudRaUtilities\.exe$|^Cloud\.Backup\.RM\.Service\.exe$|^Cloud\.Backup\.Scheduler\.exe$|^Connect\.exe$|^Online Backup\.exe$|^RMM\.Agent\.exe$|^Remote Desktop\.exe$|^cbb\.exe$,.,,https://lolrmm.io/tools/msp360,Medium,Both,File,LOLRMM,msp360
+        DR-MFT-RMM-289,RMM - mstsc.exe (Microsoft Remote Desktop Connection),Remote Access Software,T1219,High,^mstsc\.exe$,.,,https://lolrmm.io/tools/mstsc.exe__microsoft_remote_desktop_connection_,Medium,Both,File,LOLRMM,mstsc.exe__microsoft_remote_desktop_connection_
+        DR-MFT-RMM-105,RMM - MyGreenPC,Remote Access Software,T1219,High,^mygreenpc\.exe$,.,,https://lolrmm.io/tools/mygreenpc,Medium,Both,File,LOLRMM,mygreenpc
+        DR-MFT-RMM-106,RMM - MyIVO,Remote Access Software,T1219,High,^myivomanager\.exe$|^myivomgr\.exe$,.,,https://lolrmm.io/tools/myivo,Medium,Both,File,LOLRMM,myivo
+        DR-MFT-RMM-108,RMM - N-Able Advanced Monitoring Agent,Remote Access Software,T1219,Medium,^Agent_.*_RW\.exe$|^BASEClient\.exe$|^BASupApp\.exe$|^BASupSrvcCnfg\.exe$|^BASupSrvc\.exe$|^BASupTSHelper\.exe$|^winagent\.exe$,.,,https://lolrmm.io/tools/n-able_advanced_monitoring_agent,Medium,Both,File,LOLRMM,n-able_advanced_monitoring_agent
+        DR-MFT-RMM-107,RMM - Naverisk,Remote Access Software,T1219,Medium,^AgentSetup-.*\.exe$,.,,https://lolrmm.io/tools/naverisk,Medium,Both,File,LOLRMM,naverisk
+        DR-MFT-RMM-292,RMM - Net Monitor for Employees,Remote Access Software,T1219,High,^nmep_agtconfig\.exe$|^nmep_ctrlagent\.exe$|^nmep_ctrlagentsvc\.exe$|^winpty-agent64\.exe$|^winpty-agent\.exe$,.,,https://lolrmm.io/tools/net_monitor_for_employees,Medium,Both,File,LOLRMM,net_monitor_for_employees
+        DR-MFT-RMM-293,RMM - NetBird,Remote Access Software,T1219,High,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,.,,https://lolrmm.io/tools/netbird,Medium,Both,File,LOLRMM,netbird
+        DR-MFT-RMM-294,RMM - NetLock RMM,Remote Access Software,T1219,High,^NetLock_RMM_User_Process\.exe$|^NetLock_RMM_User_UAC\.exe$|^NetLock_RMM_Agent_Installer\.exe$,.,,https://lolrmm.io/tools/netlock_rmm,Medium,Both,File,LOLRMM,netlock_rmm
+        DR-MFT-RMM-110,RMM - Netop Remote Control (aka Impero Connect),Remote Access Software,T1219,High,^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,.,,https://lolrmm.io/tools/netop_remote_control__aka_impero_connect_,Medium,Both,File,LOLRMM,netop_remote_control__aka_impero_connect_
+        DR-MFT-RMM-296,RMM - Netop Remote Control (Impero Connect),Remote Access Software,T1219,Medium,^Connect\.Backdrop\.cloud.*\.exe$|^ImperoClientSVC\.exe$|^ImperoInit\.exe$|^Netop Ondemand\.exe$|^ngstw32\.exe$|^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,.,,https://lolrmm.io/tools/netop_remote_control__impero_connect_,Medium,Both,File,LOLRMM,netop_remote_control__impero_connect_
+        DR-MFT-RMM-111,RMM - NetSupport Manager,Remote Access Software,T1219,High,^client32\.exe$|^pcicfgui\.exe$|^pcictlui\.exe$|^remcmdstub\.exe$,.,,https://lolrmm.io/tools/netsupport_manager,Medium,Both,File,LOLRMM,netsupport_manager
+        DR-MFT-RMM-112,RMM - Neturo,Remote Access Software,T1219,Medium,^neturo.*\.exe$|^neturo\.exe$|^ntrntservice\.exe$,.,,https://lolrmm.io/tools/neturo,Medium,Both,File,LOLRMM,neturo
+        DR-MFT-RMM-113,RMM - Netviewer,Remote Access Software,T1219,Medium,^netviewer.*\.exe$|^netviewer\.exe$,.,,https://lolrmm.io/tools/netviewer,Medium,Both,File,LOLRMM,netviewer
+        DR-MFT-RMM-298,RMM - Netviewer (GoToMeet),Remote Access Software,T1219,High,^NetViewer\.exe$|^nvClient\.exe$|^nvConsole\.exe$,.,,https://lolrmm.io/tools/netviewer__gotomeet_,Medium,Both,File,LOLRMM,netviewer__gotomeet_
+        DR-MFT-RMM-299,RMM - Nezha,Remote Access Software,T1219,High,^nezha-agent\.exe$|^dashboard-windows-amd64\.exe$,.,,https://lolrmm.io/tools/nezha,Medium,Both,File,LOLRMM,nezha
+        DR-MFT-RMM-349,RMM - ngrok,Remote Access Software,T1219,High,^ngrok\.exe$,.,,https://lolrmm.io/tools/ngrok,Medium,Both,File,LOLRMM,ngrok
+        DR-MFT-RMM-300,RMM - Ninite Pro (Ninite Agent),Remote Access Software,T1219,High,^NiniteAgent\.exe$|^NiniteOne\.exe$|^NinitePro\.exe$|^Ninite\.exe$,.,,https://lolrmm.io/tools/ninite_pro__ninite_agent_,Medium,Both,File,LOLRMM,ninite_pro__ninite_agent_
+        DR-MFT-RMM-114,RMM - NinjaRMM,Remote Access Software,T1219,High,^NinjaRMMAgentPatcher\.exe$|^NinjaRMMAgent\.exe$|^ninjarmm-cli\.exe$,.,,https://lolrmm.io/tools/ninjarmm,Medium,Both,File,LOLRMM,ninjarmm
+        DR-MFT-RMM-115,RMM - NoMachine,Remote Access Software,T1219,Medium,^nomachine.*\.exe$|^nxd\.exe$,.,,https://lolrmm.io/tools/nomachine,Medium,Both,File,LOLRMM,nomachine
+        DR-MFT-RMM-303,RMM - NoteOn-desktop sharing,Remote Access Software,T1219,Medium,^nateon.*\.exe$|^nateon\.exe$|^nateonmain\.exe$,.,,https://lolrmm.io/tools/noteon-desktop_sharing,Medium,Both,File,LOLRMM,noteon-desktop_sharing
+        DR-MFT-RMM-116,RMM - NTR Remote,Remote Access Software,T1219,High,^NTRsupportPro_EN\.exe$,.,,https://lolrmm.io/tools/ntr_remote,Medium,Both,File,LOLRMM,ntr_remote
+        DR-MFT-RMM-304,RMM - NVDA (Non-Visual Desktop Access),Remote Access Software,T1219,Medium,^nvda\.exe$|^nvda_.*\.exe$|^nvda_service\.exe$,.,,https://lolrmm.io/tools/nvda__non-visual_desktop_access_,Medium,Both,File,LOLRMM,nvda__non-visual_desktop_access_
+        DR-MFT-RMM-117,RMM - OCS inventory,Remote Access Software,T1219,High,^ocsinventory\.exe$|^ocsservice\.exe$,.,,https://lolrmm.io/tools/ocs_inventory,Medium,Both,File,LOLRMM,ocs_inventory
+        DR-MFT-RMM-118,RMM - Onionshare,Remote Access Software,T1219,Medium,^onionshare.*\.exe$|^OnionShare-win.*\.msi$,.,,https://lolrmm.io/tools/onionshare,Medium,Both,File,LOLRMM,onionshare
+        DR-MFT-RMM-119,RMM - OptiTune,Remote Access Software,T1219,High,^OTPowerShell\.exe$|^OTService\.exe$,.,,https://lolrmm.io/tools/optitune,Medium,Both,File,LOLRMM,optitune
+        DR-MFT-RMM-120,RMM - Pandora RC (eHorus),Remote Access Software,T1219,High,^ehorus standalone\.exe$|^ehorus_agent\.exe$,.,,https://lolrmm.io/tools/pandora_rc__ehorus_,Medium,Both,File,LOLRMM,pandora_rc__ehorus_
+        DR-MFT-RMM-122,RMM - Panorama9,Remote Access Software,T1219,Medium,^p9agent.*\.exe$,.,,https://lolrmm.io/tools/panorama9,Medium,Both,File,LOLRMM,panorama9
+        DR-MFT-RMM-123,RMM - Parallels Access,Remote Access Software,T1219,Medium,^TSClient\.exe$|^parallelsaccess-.*\.exe$|^prl_deskctl_agent\.exe$|^prl_deskctl_wizard\.exe$|^prl_pm_service\.exe$,.,,https://lolrmm.io/tools/parallels_access,Medium,Both,File,LOLRMM,parallels_access
+        DR-MFT-RMM-305,RMM - Parsec,Remote Access Software,T1219,High,^parsecd\.exe$|^pservice\.exe$,.,,https://lolrmm.io/tools/parsec,Medium,Both,File,LOLRMM,parsec
+        DR-MFT-RMM-125,RMM - pcAnywhere,Remote Access Software,T1219,High,^awhost32\.exe$|^awrem32\.exe$|^pcaquickconnect\.exe$|^winaw32\.exe$,.,,https://lolrmm.io/tools/pcanywhere,Medium,Both,File,LOLRMM,pcanywhere
+        DR-MFT-RMM-306,RMM - PChelpware,Remote Access Software,T1219,High,^PcHelpWare_viewer\.exe$,.,,https://lolrmm.io/tools/pchelpware,Medium,Both,File,LOLRMM,pchelpware
+        DR-MFT-RMM-126,RMM - Pcnow,Remote Access Software,T1219,High,^mwcliun\.exe$|^pcnmgr\.exe$|^webexpcnow\.exe$,.,,https://lolrmm.io/tools/pcnow,Medium,Both,File,LOLRMM,pcnow
+        DR-MFT-RMM-127,RMM - Pcvisit,Remote Access Software,T1219,High,^pcvisit-easysupport\.exe$|^pcvisit\.exe$|^pcvisit_client\.exe$|^pcvisit_service_client\.exe$,.,,https://lolrmm.io/tools/pcvisit,Medium,Both,File,LOLRMM,pcvisit
+        DR-MFT-RMM-128,RMM - PDQ Connect,Remote Access Software,T1219,Medium,^PDQConnectUpdater-.*\.msi$|^pdq-connect.*\.exe$,.,,https://lolrmm.io/tools/pdq_connect,Medium,Both,File,LOLRMM,pdq_connect
+        DR-MFT-RMM-129,RMM - Pilixo,Remote Access Software,T1219,Medium,^Pilixo_Installer.*\.exe$|^rdp\.exe$,.,,https://lolrmm.io/tools/pilixo,Medium,Both,File,LOLRMM,pilixo
+        DR-MFT-RMM-130,RMM - Pocket Cloud (Wyse),Remote Access Software,T1219,Medium,^pocketcloud.*\.exe$|^pocketcloudservice\.exe$,.,,https://lolrmm.io/tools/pocket_cloud__wyse_,Medium,Both,File,LOLRMM,pocket_cloud__wyse_
+        DR-MFT-RMM-131,RMM - Pocket Controller,Remote Access Software,T1219,High,^pocketcloudservice\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,.,,https://lolrmm.io/tools/pocket_controller,Medium,Both,File,LOLRMM,pocket_controller
+        DR-MFT-RMM-308,RMM - Pocket Controller (Soti Xsight),Remote Access Software,T1219,High,^XSightService\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,.,,https://lolrmm.io/tools/pocket_controller__soti_xsight_,Medium,Both,File,LOLRMM,pocket_controller__soti_xsight_
+        DR-MFT-RMM-309,RMM - PSEXEC,Remote Access Software,T1219,High,^psexec64\.exe$|^psexec\.exe$|^psexecsvc\.exe$,.,,https://lolrmm.io/tools/psexec,Medium,Both,File,LOLRMM,psexec
+        DR-MFT-RMM-132,RMM - PSEXEC (Clone),Remote Access Software,T1219,Medium,^PAExec-.*\.exe$|^csexec\.exe$|^paexec\.exe$|^remcom\.exe$|^remcomsvc\.exe$|^xcmd\.exe$|^xcmdsvc\.exe$,.,,https://lolrmm.io/tools/psexec__clone_,Medium,Both,File,LOLRMM,psexec__clone_
+        DR-MFT-RMM-133,RMM - Pulseway,Remote Access Software,T1219,High,^PCMonitorManager\.exe$|^pcmonitorsrv\.exe$,.,,https://lolrmm.io/tools/pulseway,Medium,Both,File,LOLRMM,pulseway
+        DR-MFT-RMM-310,RMM - PuTTY,Remote Access Software,T1219,High,^putty\.exe$,.,,https://lolrmm.io/tools/putty,Medium,Both,File,LOLRMM,putty
+        DR-MFT-RMM-134,RMM - PuTTY Tray,Remote Access Software,T1219,High,^puttytray\.exe$,.,,https://lolrmm.io/tools/putty_tray,Medium,Both,File,LOLRMM,putty_tray
+        DR-MFT-RMM-135,RMM - QQ IM-remote assistance,Remote Access Software,T1219,High,^QQProtect\.exe$|^qqpcmgr\.exe$,.,,https://lolrmm.io/tools/qq_im-remote_assistance,Medium,Both,File,LOLRMM,qq_im-remote_assistance
+        DR-MFT-RMM-136,RMM - Quest KACE Agent (formerly Dell KACE),Remote Access Software,T1219,High,^konea\.exe$,.,,https://lolrmm.io/tools/quest_kace_agent__formerly_dell_kace_,Medium,Both,File,LOLRMM,quest_kace_agent__formerly_dell_kace_
+        DR-MFT-RMM-137,RMM - RAdmin,Remote Access Software,T1219,High,^Radmin\.exe$|^rserver3\.exe$,.,,https://lolrmm.io/tools/radmin,Medium,Both,File,LOLRMM,radmin
+        DR-MFT-RMM-312,RMM - Rapid7,Remote Access Software,T1219,High,^ir_agent\.exe$|^rapid7_agent_core\.exe$|^rapid7_endpoint_broker\.exe$,.,,https://lolrmm.io/tools/rapid7,Medium,Both,File,LOLRMM,rapid7
+        DR-MFT-RMM-313,RMM - RdClient,Remote Access Software,T1219,High,^RdClientInstaller\.exe$|^SupportTool\.exe$|^rdclient\.exe$,.,,https://lolrmm.io/tools/rdclient,Medium,Both,File,LOLRMM,rdclient
+        DR-MFT-RMM-314,RMM - RDCMan,Remote Access Software,T1219,High,^RDCMan-x86\.exe$|^RDCMan\.exe$,.,,https://lolrmm.io/tools/rdcman,Medium,Both,File,LOLRMM,rdcman
+        DR-MFT-RMM-138,RMM - rdp2tcp,Remote Access Software,T1219,High,^tdp2tcp\.exe$,.,,https://lolrmm.io/tools/rdp2tcp,Medium,Both,File,LOLRMM,rdp2tcp
+        DR-MFT-RMM-139,RMM - RDPView,Remote Access Software,T1219,High,^dwrcs\.exe$,.,,https://lolrmm.io/tools/rdpview,Medium,Both,File,LOLRMM,rdpview
+        DR-MFT-RMM-140,RMM - rdpwrap,Remote Access Software,T1219,High,^RDPCheck\.exe$|^RDPConf\.exe$|^RDPWInst\.exe$,.,,https://lolrmm.io/tools/rdpwrap,Medium,Both,File,LOLRMM,rdpwrap
+        DR-MFT-RMM-144,RMM - Remcos,Remote Access Software,T1219,Medium,^remcos.*\.exe$,.,,https://lolrmm.io/tools/remcos,Medium,Both,File,LOLRMM,remcos
+        DR-MFT-RMM-317,RMM - Remmon,Remote Access Software,T1219,High,^remmon\.exe$,.,,https://lolrmm.io/tools/remmon,Medium,Both,File,LOLRMM,remmon
+        DR-MFT-RMM-145,RMM - Remobo,Remote Access Software,T1219,High,^remobo\.exe$|^remobo_client\.exe$|^remobo_tracker\.exe$,.,,https://lolrmm.io/tools/remobo,Medium,Both,File,LOLRMM,remobo
+        DR-MFT-RMM-146,RMM - Remote Desktop Plus,Remote Access Software,T1219,High,^rdp\.exe$,.,,https://lolrmm.io/tools/remote_desktop_plus,Medium,Both,File,LOLRMM,remote_desktop_plus
+        DR-MFT-RMM-148,RMM - Remote Manipulator System,Remote Access Software,T1219,High,^rfusclient\.exe$|^rutserv\.exe$,.,,https://lolrmm.io/tools/remote_manipulator_system,Medium,Both,File,LOLRMM,remote_manipulator_system
+        DR-MFT-RMM-320,RMM - Remote Ripple,Remote Access Software,T1219,High,^RemoteRipple\.exe$,.,,https://lolrmm.io/tools/remote_ripple,Medium,Both,File,LOLRMM,remote_ripple
+        DR-MFT-RMM-149,RMM - Remote Utilities,Remote Access Software,T1219,High,^rutserv\.exe$|^rutview\.exe$,.,,https://lolrmm.io/tools/remote_utilities,Medium,Both,File,LOLRMM,remote_utilities
+        DR-MFT-RMM-318,RMM - Remote.it,Remote Access Software,T1219,High,^remote-it-installer\.exe$|^remote\.it\.exe$|^remoteit\.exe$,.,,https://lolrmm.io/tools/remote.it,Medium,Both,File,LOLRMM,remote.it
+        DR-MFT-RMM-150,RMM - RemoteCall,Remote Access Software,T1219,High,^agentu\.exe$|^raautoup\.exe$|^rcengmgru\.exe$|^rcmgrsvc\.exe$|^rcstartsupport\.exe$|^remotesupportplayeru\.exe$|^rxstartsupport\.exe$,.,,https://lolrmm.io/tools/remotecall,Medium,Both,File,LOLRMM,remotecall
+        DR-MFT-RMM-321,RMM - Remotely,Remote Access Software,T1219,High,^Remotely_Desktop\.exe$|^Remotely_Agent\.exe$,.,,https://lolrmm.io/tools/remotely,Medium,Both,File,LOLRMM,remotely
+        DR-MFT-RMM-151,RMM - RemotePass,Remote Access Software,T1219,High,^remotepass-access\.exe$|^rpaccess\.exe$|^rpwhostscr\.exe$,.,,https://lolrmm.io/tools/remotepass,Medium,Both,File,LOLRMM,remotepass
+        DR-MFT-RMM-152,RMM - RemotePC,Remote Access Software,T1219,High,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,.,,https://lolrmm.io/tools/remotepc,Medium,Both,File,LOLRMM,remotepc
+        DR-MFT-RMM-322,RMM - RemotePulse,Remote Access Software,T1219,High,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,.,,https://lolrmm.io/tools/remotepulse,Medium,Both,File,LOLRMM,remotepulse
+        DR-MFT-RMM-153,RMM - RemoteView,Remote Access Software,T1219,High,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,.,,https://lolrmm.io/tools/remoteview,Medium,Both,File,LOLRMM,remoteview
+        DR-MFT-RMM-324,RMM - RemSupp,Remote Access Software,T1219,High,^RemSupp\.exe$|^Uninstall RemSupp\.exe$|^installer\.exe$,.,,https://lolrmm.io/tools/remsupp,Medium,Both,File,LOLRMM,remsupp
+        DR-MFT-RMM-154,RMM - RES Automation Manager,Remote Access Software,T1219,Medium,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,.,,https://lolrmm.io/tools/res_automation_manager,Medium,Both,File,LOLRMM,res_automation_manager
+        DR-MFT-RMM-155,RMM - Rocket Remote Desktop,Remote Access Software,T1219,High,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,.,,https://lolrmm.io/tools/rocket_remote_desktop,Medium,Both,File,LOLRMM,rocket_remote_desktop
+        DR-MFT-RMM-325,RMM - Rodex RMM,Remote Access Software,T1219,High,^RodexAgent\.exe$|^<random>\.exe$,.,,https://lolrmm.io/tools/rodex_rmm,Medium,Both,File,LOLRMM,rodex_rmm
+        DR-MFT-RMM-156,RMM - Royal Apps,Remote Access Software,T1219,High,^royalserver\.exe$|^royalts\.exe$,.,,https://lolrmm.io/tools/royal_apps,Medium,Both,File,LOLRMM,royal_apps
+        DR-MFT-RMM-158,RMM - Royal TS,Remote Access Software,T1219,High,^royalts\.exe$,.,,https://lolrmm.io/tools/royal_ts,Medium,Both,File,LOLRMM,royal_ts
+        DR-MFT-RMM-159,RMM - RPort,Remote Access Software,T1219,High,^rport\.exe$,.,,https://lolrmm.io/tools/rport,Medium,Both,File,LOLRMM,rport
+        DR-MFT-RMM-161,RMM - RuDesktop,Remote Access Software,T1219,Medium,^rudesktop.*\.exe$,.,,https://lolrmm.io/tools/rudesktop,Medium,Both,File,LOLRMM,rudesktop
+        DR-MFT-RMM-163,RMM - RustDesk,Remote Access Software,T1219,Medium,^rustdesk\.exe$|^rustdesk.*\.exe$,.,,https://lolrmm.io/tools/rustdesk,Medium,Both,File,LOLRMM,rustdesk
+        DR-MFT-RMM-164,RMM - S3 Browser,Remote Access Software,T1219,Medium,^s3browser.*\.exe$,.,,https://lolrmm.io/tools/s3_browser,Medium,Both,File,LOLRMM,s3_browser
+        DR-MFT-RMM-165,RMM - ScreenConnect,Remote Access Software,T1219,Medium,^ScreenConnect\.ClientService\.exe$|^ScreenConnect\.WindowsClient\.exe$|^ConnectWiseControl.*\.exe$|^Remote Workforce Client\.exe$|^connectwise.*\.exe$|^screenconnect.*\.exe$,.,,https://lolrmm.io/tools/screenconnect,Medium,Both,File,LOLRMM,screenconnect
+        DR-MFT-RMM-166,RMM - ScreenMeet,Remote Access Software,T1219,High,^ScreenMeetSupport\.exe$|^ScreenMeet\.Support\.exe$,.,,https://lolrmm.io/tools/screenmeet,Medium,Both,File,LOLRMM,screenmeet
+        DR-MFT-RMM-167,RMM - SecureCRT,Remote Access Software,T1219,High,^SecureCRT\.EXE$,.,,https://lolrmm.io/tools/securecrt,Medium,Both,File,LOLRMM,securecrt
+        DR-MFT-RMM-168,RMM - Seetrol,Remote Access Software,T1219,High,^seetrolcenter\.exe$|^seetrolclient\.exe$|^seetrolmyservice\.exe$|^seetrolremote\.exe$|^seetrolsetting\.exe$,.,,https://lolrmm.io/tools/seetrol,Medium,Both,File,LOLRMM,seetrol
+        DR-MFT-RMM-169,RMM - Senso.cloud,Remote Access Software,T1219,High,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,.,,https://lolrmm.io/tools/senso.cloud,Medium,Both,File,LOLRMM,senso.cloud
+        DR-MFT-RMM-170,RMM - ServerEye,Remote Access Software,T1219,Medium,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,.,,https://lolrmm.io/tools/servereye,Medium,Both,File,LOLRMM,servereye
+        DR-MFT-RMM-172,RMM - ShowMyPC,Remote Access Software,T1219,Medium,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,.,,https://lolrmm.io/tools/showmypc,Medium,Both,File,LOLRMM,showmypc
+        DR-MFT-RMM-173,RMM - SimpleHelp,Remote Access Software,T1219,High,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^windowslauncher\.exe$|^vhost\.exe$,.,,https://lolrmm.io/tools/simplehelp,Medium,Both,File,LOLRMM,simplehelp
+        DR-MFT-RMM-174,RMM - Site24x7,Remote Access Software,T1219,High,^MEAgentHelper\.exe$|^MonitoringAgent\.exe$|^Site24x7PluginAgent\.exe$|^Site24x7WindowsAgentTrayIcon\.exe$,.,,https://lolrmm.io/tools/site24x7,Medium,Both,File,LOLRMM,site24x7
+        DR-MFT-RMM-171,RMM - SkyFex,Remote Access Software,T1219,High,^DeskRollUA\.exe$|^Deskroll\.exe$,.,,https://lolrmm.io/tools/skyfex,Medium,Both,File,LOLRMM,skyfex
+        DR-MFT-RMM-176,RMM - SmarTTY,Remote Access Software,T1219,High,^SmarTTY\.exe$,.,,https://lolrmm.io/tools/smartty,Medium,Both,File,LOLRMM,smartty
+        DR-MFT-RMM-177,RMM - Solar-PuTTY,Remote Access Software,T1219,High,^Solar-PuTTY\.exe$,.,,https://lolrmm.io/tools/solar-putty,Medium,Both,File,LOLRMM,solar-putty
+        DR-MFT-RMM-330,RMM - Sophos-Remote Management System,Remote Access Software,T1219,High,^clientmrinit\.exe$|^mgntsvc\.exe$|^routernt\.exe$,.,,https://lolrmm.io/tools/sophos-remote_management_system,Medium,Both,File,LOLRMM,sophos-remote_management_system
+        DR-MFT-RMM-178,RMM - Sorillus,Remote Access Software,T1219,Medium,^Sorillus Launcher\.exe$|^Sorillus-Launcher.*\.exe$,.,,https://lolrmm.io/tools/sorillus,Medium,Both,File,LOLRMM,sorillus
+        DR-MFT-RMM-331,RMM - Splashtop,Remote Access Software,T1219,High,^strwinclt\.exe$,.,,https://lolrmm.io/tools/splashtop,Medium,Both,File,LOLRMM,splashtop
+        DR-MFT-RMM-332,RMM - Splashtop (Beta),Remote Access Software,T1219,Medium,^SRManager\.exe$|^SRServer\.exe$|^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$,.,,https://lolrmm.io/tools/splashtop__beta_,Medium,Both,File,LOLRMM,splashtop__beta_
+        DR-MFT-RMM-179,RMM - Splashtop Remote,Remote Access Software,T1219,Medium,^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$|^sragent\.exe$|^srmanager\.exe$|^srserver\.exe$|^srservice\.exe$|^strwinclt\.exe$,.,,https://lolrmm.io/tools/splashtop_remote,Medium,Both,File,LOLRMM,splashtop_remote
+        DR-MFT-RMM-180,RMM - SpyAnywhere,Remote Access Software,T1219,High,^sysdiag\.exe$,.,,https://lolrmm.io/tools/spyanywhere,Medium,Both,File,LOLRMM,spyanywhere
+        DR-MFT-RMM-181,RMM - SunLogin,Remote Access Software,T1219,Medium,^OrayRemoteService\.exe$|^OrayRemoteShell\.exe$|^sunlogin.*\.exe$,.,,https://lolrmm.io/tools/sunlogin,Medium,Both,File,LOLRMM,sunlogin
+        DR-MFT-RMM-182,RMM - SuperOps,Remote Access Software,T1219,High,^superops\.exe$|^superopsticket\.exe$,.,,https://lolrmm.io/tools/superops,Medium,Both,File,LOLRMM,superops
+        DR-MFT-RMM-183,RMM - SuperPuTTY,Remote Access Software,T1219,High,^superputty\.exe$,.,,https://lolrmm.io/tools/superputty,Medium,Both,File,LOLRMM,superputty
+        DR-MFT-RMM-184,RMM - Supremo,Remote Access Software,T1219,High,^supremosystem\.exe$|^supremo\.exe$|^supremohelper\.exe$|^supremoservice\.exe$,.,,https://lolrmm.io/tools/supremo,Medium,Both,File,LOLRMM,supremo
+        DR-MFT-RMM-185,RMM - Syncro,Remote Access Software,T1219,High,^KabutoSetup\.exe$|^Kabuto\.App\.Runner\.exe$|^Kabuto\.Installer\.exe$|^Kabuto\.Service\.Runner\.exe$|^SyncroLive\.Agent\.exe$|^SyncroLive\.Service\.exe$|^Syncro\.App\.Runner\.exe$|^Syncro\.Installer\.exe$|^Syncro\.Overmind\.Service\.exe$|^Syncro\.Service\.exe$,.,,https://lolrmm.io/tools/syncro,Medium,Both,File,LOLRMM,syncro
+        DR-MFT-RMM-186,RMM - Syncthing,Remote Access Software,T1219,High,^Syncthing\.exe$,.,,https://lolrmm.io/tools/syncthing,Medium,Both,File,LOLRMM,syncthing
+        DR-MFT-RMM-187,RMM - SysAid,Remote Access Software,T1219,High,^IliAS\.exe$,.,,https://lolrmm.io/tools/sysaid,Medium,Both,File,LOLRMM,sysaid
+        DR-MFT-RMM-334,RMM - Syspectr,Remote Access Software,T1219,High,^oolocker\.exe$|^oosyspectr\.exe$|^syspectr\.exe$,.,,https://lolrmm.io/tools/syspectr,Medium,Both,File,LOLRMM,syspectr
+        DR-MFT-RMM-189,RMM - Tactical RMM,Remote Access Software,T1219,High,^tacticalrmm\.exe$,.,,https://lolrmm.io/tools/tactical_rmm,Medium,Both,File,LOLRMM,tactical_rmm
+        DR-MFT-RMM-190,RMM - Tailscale,Remote Access Software,T1219,Medium,^tailscale-.*\.exe$|^tailscale-ipn\.exe$|^tailscaled\.exe$,.,,https://lolrmm.io/tools/tailscale,Medium,Both,File,LOLRMM,tailscale
+        DR-MFT-RMM-191,RMM - Tanium,Remote Access Software,T1219,High,^TPowerShell\.exe$|^TaniumCX\.exe$|^TaniumClient\.exe$|^TaniumExecWrapper\.exe$|^TaniumFileInfo\.exe$,.,,https://lolrmm.io/tools/tanium,Medium,Both,File,LOLRMM,tanium
+        DR-MFT-RMM-192,RMM - TeamViewer,Remote Access Software,T1219,High,^teamviewer_desktop\.exe$|^teamviewer_service\.exe$,.,,https://lolrmm.io/tools/teamviewer,Medium,Both,File,LOLRMM,teamviewer
+        DR-MFT-RMM-194,RMM - TeleDesktop,Remote Access Software,T1219,High,^pstlaunch\.exe$|^ptdskclient\.exe$|^ptdskhost\.exe$,.,,https://lolrmm.io/tools/teledesktop,Medium,Both,File,LOLRMM,teledesktop
+        DR-MFT-RMM-336,RMM - Teramind,Remote Access Software,T1219,High,^tmagentsvc\.exe$,.,,https://lolrmm.io/tools/teramind,Medium,Both,File,LOLRMM,teramind
+        DR-MFT-RMM-338,RMM - TiFLUX,Remote Access Software,T1219,High,^TiService\.exe$|^TiUpdateService\.exe$|^TiAgent\.exe$,.,,https://lolrmm.io/tools/tiflux,Medium,Both,File,LOLRMM,tiflux
+        DR-MFT-RMM-195,RMM - TigerVNC,Remote Access Software,T1219,Medium,^tvnserver\.exe$|^tigervnc.*\.exe$|^winvnc4\.exe$,.,,https://lolrmm.io/tools/tigervnc,Medium,Both,File,LOLRMM,tigervnc
+        DR-MFT-RMM-196,RMM - TightVNC,Remote Access Software,T1219,Medium,^TightVNCViewerPortable.*\.exe$|^tvnserver\.exe$|^tvnviewer\.exe$,.,,https://lolrmm.io/tools/tightvnc,Medium,Both,File,LOLRMM,tightvnc
+        DR-MFT-RMM-197,RMM - ToDesk,Remote Access Software,T1219,High,^ToDesk_Service\.exe$|^ToDesk_Setup\.exe$|^todesk\.exe$,.,,https://lolrmm.io/tools/todesk,Medium,Both,File,LOLRMM,todesk
+        DR-MFT-RMM-198,RMM - Total Software Deployment,Remote Access Software,T1219,High,^Tsdservice\.exe$|^tniwinagent\.exe$,.,,https://lolrmm.io/tools/total_software_deployment,Medium,Both,File,LOLRMM,total_software_deployment
+        DR-MFT-RMM-340,RMM - TrustConnect,Remote Access Software,T1219,High,^TrustConnectAgent\.exe$|^DocConnect\.Agent\.exe$,.,,https://lolrmm.io/tools/trustconnect,Medium,Both,File,LOLRMM,trustconnect
+        DR-MFT-RMM-199,RMM - TurboMeeting,Remote Access Software,T1219,High,^pcstarter\.exe$|^turbomeeting\.exe$|^turbomeetingstarter\.exe$,.,,https://lolrmm.io/tools/turbomeeting,Medium,Both,File,LOLRMM,turbomeeting
+        DR-MFT-RMM-201,RMM - Ultra VNC,Remote Access Software,T1219,Medium,^UVNC_Launch\.exe$|^vncviewer\.exe$|^winvnc\.exe$|^UltraVNC.*\.exe$,.,,https://lolrmm.io/tools/ultra_vnc,Medium,Both,File,LOLRMM,ultravnc
+        DR-MFT-RMM-200,RMM - UltraViewer,Remote Access Software,T1219,High,^UltraViewer_Desktop\.exe$|^UltraViewer_Service\.exe$|^ultraviewer\.exe$,.,,https://lolrmm.io/tools/ultraviewer,Medium,Both,File,LOLRMM,ultraviewer
+        DR-MFT-RMM-342,RMM - Veyon,Remote Access Software,T1219,High,^veyon-master\.exe$|^veyon-server\.exe$|^veyon-service\.exe$|^veyon-wcli\.exe$|^veyon-worker\.exe$,.,,https://lolrmm.io/tools/veyon,Medium,Both,File,LOLRMM,veyon
+        DR-MFT-RMM-202,RMM - VNC,Remote Access Software,T1219,Medium,^vncserver\.exe$|^vncserverui\.exe$|^vncviewer\.exe$|^winvnc.*\.exe$|^winvnc\.exe$|^winvncsc\.exe$|^winwvc\.exe$,.,,https://lolrmm.io/tools/vnc,Medium,Both,File,LOLRMM,vnc
+        DR-MFT-RMM-203,RMM - WebRDP,Remote Access Software,T1219,High,^webrdp\.exe$,.,,https://lolrmm.io/tools/webrdp,Medium,Both,File,LOLRMM,webrdp
+        DR-MFT-RMM-204,RMM - Weezo,Remote Access Software,T1219,Medium,^weezo setup.*\.exe$|^weezo\.exe$|^weezohttpd\.exe$,.,,https://lolrmm.io/tools/weezo,Medium,Both,File,LOLRMM,weezo
+        DR-MFT-RMM-205,RMM - WinSCP,Remote Access Software,T1219,High,^WinSCP\.exe$,.,,https://lolrmm.io/tools/winscp,Medium,Both,File,LOLRMM,winscp
+        DR-MFT-RMM-206,RMM - Xeox,Remote Access Software,T1219,Medium,^xeox-agent_.*\.exe$|^xeox-agent_x64\.exe$|^xeox-agent_x86\.exe$|^xeox_service_windows\.exe$,.,,https://lolrmm.io/tools/xeox,Medium,Both,File,LOLRMM,xeox
+        DR-MFT-RMM-208,RMM - Xpra,Remote Access Software,T1219,High,^Xpra-Launcher\.exe$|^Xpra-x86_64_Setup\.exe$,.,,https://lolrmm.io/tools/xpra,Medium,Both,File,LOLRMM,xpra
+        DR-MFT-RMM-209,RMM - Xshell,Remote Access Software,T1219,High,^xShell\.exe$,.,,https://lolrmm.io/tools/xshell,Medium,Both,File,LOLRMM,xshell
+        DR-MFT-RMM-210,RMM - Yandex.Disk,Remote Access Software,T1219,High,^YandexDisk2\.exe$,.,,https://lolrmm.io/tools/yandex.disk,Medium,Both,File,LOLRMM,yandex.disk
+        DR-MFT-RMM-211,RMM - Zabbix Agent,Remote Access Software,T1219,Medium,^zabbix_agent.*\.exe$,.,,https://lolrmm.io/tools/zabbix_agent,Medium,Both,File,LOLRMM,zabbix_agent
+        DR-MFT-RMM-212,RMM - ZeroTier,Remote Access Software,T1219,Medium,^zero-powershell\.exe$|^zerotier.*\.exe$|^zerotier.*\.msi$,.,,https://lolrmm.io/tools/zerotier,Medium,Both,File,LOLRMM,zerotier
+        DR-MFT-RMM-213,RMM - ZOC,Remote Access Software,T1219,High,^zoc\.exe$,.,,https://lolrmm.io/tools/zoc,Medium,Both,File,LOLRMM,zoc
+        DR-MFT-RMM-214,RMM - Zoho Assist,Remote Access Software,T1219,High,^ZA_Access\.exe$|^ZMAgent\.exe$|^ZohoMeeting\.exe$|^ZohoURSService\.exe$|^Zohours\.exe$|^connect\.exe$|^toolsiq\.exe$|^za_connect\.exe$|^zaservice\.exe$|^zohotray\.exe$,.,,https://lolrmm.io/tools/zoho_assist,Medium,Both,File,LOLRMM,zoho_assist
+        DR-MFT-RMM-018,RMM - Barracuda,Remote Access Software,T1219,High,^BarracudaRMM$|^Barracuda Workplace$|^Barracuda MSP$,.,,Barracuda - barracudamsp.com,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-035,RMM - Cruz,Remote Access Software,T1219,High,^CruzRMM$,.,,Cruz - resources.doradosoftware.com/cruz-rmm,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-047,RMM -  Electric AI (Kaseya),Remote Access Software,T1219,High,^ElectricAi$,.,,Electric - electric.ai,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-049,RMM - Encapto,Remote Access Software,T1219,High,^Encapto$,.,,Encapto - encapto.com,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-058,RMM - Fortra,Remote Access Software,T1219,High,^Fortra$,.,,Fortra - fortra.com,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-065,RMM - GoToMeeting,Remote Access Software,T1219,High,^GoToAssist(Service|Unattended)\.exe$,.,,GoToMeeting -goto.com/meeting,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-RMM-083,RMM - JWrapper Remote,Remote Access Software,T1219,High,"^(https?([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}[0-9]{1,5})|serviceconfig.xml)$",.,,JWrapper Remote - Infield - actor use,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-RMM-099,RMM - Microsoft Quick Assist Unusual Path,Remote Access Software,T1219.002,High,^quickassist\.exe$,.,,Microsoft Quick Assist outside trusted Windows component paths,Medium,MFT,File,DetectRaptor Curated,
+        DR-MFT-RMM-141,RMM - RealONE,Remote Access Software,T1219,High,^RealONE$,.,,RealONE - https://www.realvnc.com/en/discover/realone/,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-143,RMM - RealVNC Product Directory,Remote Access Software,T1219,High,^RealVNC$,.,,RealVNC - https://www.realvnc.com/en/,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-160,RMM - Rsocx,Remote Access Software,T1219,High,^rsocx\.exe$,.,,Rsocx - https://github.com/b23r0/rsocx,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-RMM-162,RMM - RunSmart,Remote Access Software,T1219,High,^RunSmart$,.,,RunSmart - runsmart.io,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-193,RMM - TechInline,Remote Access Software,T1219,High,^TechInline$|^fixme.it$,.,,TechInline - techinline.com/,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-207,RMM - XMReality,Remote Access Software,T1219,High,^XMReality$,.,,XMReality - xmreality.com/,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-216,RMM - VNC Product Directory,Remote Access Software,T1219,High,^(TigerVNC|JollyFastVNC|realvnc|tightvnc|ultravnc|VNC connect)$,.,,VNC,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-217,RMM - Product Directory,Remote Access Software,T1219,High,^(Meraki Systems Manager Agent|TrendMicro BaseCamp|AB Tutor|Datto|SolarWinds RMM|Naverisk)$,.,,General RMM product directory basenames,Medium,MFT,Directory,DetectRaptor Curated,
+        DR-MFT-RMM-003,RMM - Access Remote PC,Remote Access Software,T1219,High,^(rpcsetup|rpcgrab)\.exe$,.,,Retained curated filename coverage; Access Remote PC - https://lolrmm.io/tools/access_remote_pc,Medium,Both,File,DetectRaptor Curated,access_remote_pc
+        DR-MFT-RMM-005,RMM - Action1,Remote Access Software,T1219,High,^(action1_update|action1_connector|action1_remote|action1_agent)\.exe$,.,,Retained curated filename coverage; Action1 - action1.com - https://lolrmm.io/tools/action1,Medium,Both,File,DetectRaptor Curated,action1
+        DR-MFT-RMM-012,RMM - AnyDesk,Remote Access Software,T1219,Medium,^(anydesk|anydesk.*)\.exe$,.,,Retained curated filename coverage; AnyDesk - anydesk.com - https://lolrmm.io/tools/anydesk,Medium,Both,File,DetectRaptor Curated,anydesk
+        DR-MFT-RMM-014,RMM - AnyViewer,Remote Access Software,T1219,High,^(AnyViewerSetup|RCClient|RCService)\.exe$,.,,Retained curated filename coverage; AnyViewer - https://www.anyviewer.com/ - https://lolrmm.io/tools/anyviewer,Medium,Both,File,DetectRaptor Curated,anyviewer
+        DR-MFT-RMM-060,RMM - GatherPlace-desktop sharing,Remote Access Software,T1219,High,^(gp3|gp4|gp5)\.exe$,.,,Retained curated filename coverage; GatherPlace-desktop sharing - gatherplace.com - https://lolrmm.io/tools/gatherplace-desktop_sharing,Medium,Both,File,DetectRaptor Curated,gatherplace-desktop_sharing
+        DR-MFT-RMM-085,RMM - Kaseya (aka Unigma),Remote Access Software,T1219,High,^(agentmon|KaUpdHlp|KaUsrTsk)\.exe$,.,,Retained curated filename coverage; Kaseya (aka Unigma) - kaseya.com - https://lolrmm.io/tools/kaseya__vsa_,Medium,Both,File,DetectRaptor Curated,kaseya__vsa_
+        DR-MFT-RMM-091,RMM - Level,Remote Access Software,T1219,High,^(level-windows-amd64|level|level-remote-control-ffmpeg)\.exe$,.,,Retained curated filename coverage; Level - level.io - https://lolrmm.io/tools/level,Medium,Both,File,DetectRaptor Curated,level
+        DR-MFT-RMM-157,RMM - Royal Server,Remote Access Software,T1219,Medium,^RoyalServerInstaller_.*\.msi$,.,,Retained curated filename coverage; Royal Server - royalapps.com - https://lolrmm.io/tools/royal_server,Medium,Both,File,DetectRaptor Curated,royal_server
+        DR-MFT-RMM-098,RMM - Microsoft Quick Assist Execution,Remote Access Software,T1219.002,High,^quickassist\.exe$,.,,Microsoft Quick Assist execution evidence,Medium,Amcache,File,DetectRaptor Curated,microsoft_quick_assist
+        DR-MFT-RMM-142,RMM - RealVNC Installer,Remote Access Software,T1219,High,^VNC-Connect-Installer-.*\.exe$,.,,RealVNC installer filename,Medium,Both,File,DetectRaptor Curated,
+        DR-MFT-RMM-218,RMM - Komari,Remote Access Software,T1219,Medium,^(komari|komari-agent|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm))(\.exe)?$,.,,Komari server or agent filename indicator,Medium,Both,File,DetectRaptor Curated,komari
 
 
 sources:
@@ -348,23 +423,51 @@ sources:
             AND Criticality =~ CriticalityLevel
             AND Scope =~ '^(Amcache|Both)$'
             AND NOT EntryType = 'Directory'
+
+      LET whitelist_lookup <= memoize(
+        key='LookupKey',
+        query={
+          SELECT *, RuleID + '|Amcache' AS LookupKey
+          FROM Whitelists
+          WHERE Artifact = 'Amcache'
+              AND Disposition = 'Suppress'
+        }, period=100000)
+
+      LET keyword_patterns <= SELECT KeywordRegex
+        FROM all_the_things
         GROUP BY KeywordRegex
       
       -- run KeywordRegex regex
       LET hits = SELECT * FROM Artifact.Windows.Detection.Amcache(
                                 KeyPathGlob='/Root/{Inventory, File}*/**',
-                                NameRegex=join(array=all_the_things.KeywordRegex,sep='|'))
+                                NameRegex=join(array=keyword_patterns.KeywordRegex,sep='|'))
       
       -- output results and enrich with IOC data
-      SELECT * FROM foreach(row=hits,query={
+      LET rule_hits = SELECT * FROM foreach(row=hits,query={
             SELECT 
+                RuleID,
+                Detection as DetectionName,
+                Category,
+                Technique,
+                Confidence,
+                Criticality,
+                Source,
+                SourceID,
+                EntryName as FileName,
+                EntryPath as OSPath,
                 dict(
+                    RuleID=RuleID,
                     Name=Detection,
+                    Category=Category,
+                    Technique=Technique,
+                    Confidence=Confidence,
                     KeywordRegex=KeywordRegex,
                     PathName=EntryPath,
                     Reference=Reference,
                     Scope=Scope,
                     EntryType=EntryType,
+                    Source=Source,
+                    SourceID=SourceID,
                     Criticality=Criticality) as Detection,
                 if(condition=EntryPath =~ '''\\<Err\>|\\<UnknownEntry\>|\\<Parent ''',
                     then='Unresolved',
@@ -377,7 +480,7 @@ sources:
                                 else=if(condition=EntryPath =~ '''\\Windows\\''',
                                     then='System',
                                     else='Other'))))) as LocationContext,
-                if(condition=Detection =~ '^(RMM|Remote Access)',
+                if(condition=Category = 'Remote Access Software',
                     then=if(condition=Detection =~ ApprovedRMMNameRegex
                             AND EntryPath =~ ApprovedRMMPathRegex,
                         then='Approved',
@@ -390,8 +493,27 @@ sources:
                 AND NOT if(condition=IgnoreRegex,
                     then= EntryPath =~ IgnoreRegex,
                     else= False )
-            LIMIT 1
         },workers=20)
+
+      LET candidate_hits = SELECT *,
+          get(
+            item=whitelist_lookup,
+            field=RuleID + '|Amcache') AS WhitelistCandidate
+        FROM rule_hits
+
+      LET classified_hits = SELECT *,
+          if(
+            condition=WhitelistCandidate
+              AND (EntryName =~ WhitelistCandidate.FilenameRegex
+                OR OriginalFileName =~ WhitelistCandidate.FilenameRegex)
+              AND EntryPath =~ WhitelistCandidate.PathRegex,
+            then='Suppressed',
+            else='Retained') AS Disposition
+        FROM candidate_hits
+
+      SELECT * FROM classified_hits
+      WHERE NOT SuppressWhitelisted
+          OR Disposition != 'Suppressed'
 
     notebook:
       - type: vql_suggestion
@@ -424,10 +546,68 @@ sources:
             ### Detection Summary
             */
             
-            SELECT Detection.Name, count() AS Total
+            SELECT RuleID,DetectionName,Category,Confidence,Criticality,
+                count() AS Total
             FROM source()
-            GROUP BY Detection.Name
+            GROUP BY RuleID
             ORDER BY Total DESC 
+
+      - type: vql_suggestion
+        name: Operational metrics
+        template: |
+            /*
+            ### Operational metrics
+            Separate total rule matches from unique endpoint paths and
+            multi-match expansion.
+            */
+
+            LET DRRows = SELECT * FROM source()
+            LET DRPaths = SELECT Fqdn,EntryPath,count() AS MatchCount
+                FROM DRRows
+                GROUP BY Fqdn,EntryPath
+            LET DRMultiPaths = SELECT * FROM DRPaths
+                WHERE MatchCount > 1
+            LET DREndpoints = SELECT Fqdn FROM DRRows
+                GROUP BY Fqdn
+
+            SELECT * FROM chain(
+                rule_matches={
+                    SELECT 'Rule matches' AS Metric,count() AS Value
+                    FROM DRRows
+                },
+                unique_paths={
+                    SELECT 'Unique endpoint paths' AS Metric,count() AS Value
+                    FROM DRPaths
+                },
+                multi_match_paths={
+                    SELECT 'Multi-match endpoint paths' AS Metric,
+                        count() AS Value
+                    FROM DRMultiPaths
+                },
+                endpoints={
+                    SELECT 'Endpoints' AS Metric,count() AS Value
+                    FROM DREndpoints
+                })
+
+      - type: vql_suggestion
+        name: File match summary
+        template: |
+            /*
+            ### File match summary
+            Group every Amcache rule matching the same path.
+            */
+
+            SELECT Fqdn,EntryPath,
+                count() as MatchCount,
+                enumerate(items=RuleID) as RuleIDs,
+                enumerate(items=DetectionName) as Detections,
+                enumerate(items=Category) as Categories,
+                enumerate(items=Technique) as Techniques,
+                enumerate(items=Confidence) as Confidences,
+                KeyMTime,Publisher,OriginalFileName,SHA1
+            FROM source()
+            GROUP BY Fqdn,EntryPath
+            ORDER BY MatchCount DESC
 
       - type: vql_suggestion
         name: RMM location summary
@@ -437,12 +617,37 @@ sources:
             Separate installed, portable, unresolved, and other RMM locations.
             */
 
-            SELECT Detection.Name as Detection,
+            SELECT RuleID,
+                DetectionName as Detection,
+                SourceID,
                 RMMDisposition,
                 LocationContext,
                 count() as Total,
+                enumerate(items=Fqdn) as Endpoints,
                 EntryPath as ExampleEntryPath
             FROM source()
-            WHERE Detection.Name =~ '^(RMM|Remote Access)'
-            GROUP BY Detection,RMMDisposition,LocationContext
+            WHERE DetectionName =~ '^(RMM|Remote Access)'
+            GROUP BY RuleID,RMMDisposition,LocationContext
+            ORDER BY Total DESC
+
+      - type: vql_suggestion
+        name: Whitelist suppression audit
+        template: |
+            /*
+            ### Whitelist suppression audit
+            Collect with SuppressWhitelisted disabled to populate this view.
+            */
+
+            SELECT WhitelistCandidate.WhitelistID as WhitelistID,
+                RuleID,
+                DetectionName,
+                WhitelistCandidate.Reason as Reason,
+                WhitelistCandidate.Source as Source,
+                WhitelistCandidate.ReviewDate as ReviewDate,
+                count() as Total,
+                enumerate(items=Fqdn) as Endpoints,
+                EntryPath as ExampleEntryPath
+            FROM source()
+            WHERE Disposition = 'Suppressed'
+            GROUP BY WhitelistID,RuleID
             ORDER BY Total DESC
