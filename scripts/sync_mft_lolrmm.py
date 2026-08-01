@@ -23,6 +23,8 @@ WINDOWS_EXTENSION_RE = re.compile(
     r"wsf|hta|scr|cpl|com)(?:\\?\$|\$|\)|$)",
     re.IGNORECASE,
 )
+DLL_EXTENSION_RE = re.compile(
+    r"\\?\.dll(?:\\?\$|\$)$", re.IGNORECASE)
 RULE_ID_RE = re.compile(r"^DR-MFT-RMM-(\d{3})$")
 SOURCE_ID_ALIASES = {
     "lite_manager": "litemanager",
@@ -86,13 +88,47 @@ def _filename_pattern(alternative):
     return pattern
 
 
-def filename_patterns(path_regex):
+def _product_tokens(name, item):
+    ignored = {
+        "agent", "client", "control", "desktop", "management",
+        "monitor", "remote", "rmm", "server", "service", "software",
+        "tool",
+    }
+    tokens = set()
+    for value in (name, item):
+        value = re.sub(r"\.io$", "", value.casefold())
+        normalized = re.sub(r"[^a-z0-9]+", "", value)
+        if len(normalized) >= 4:
+            tokens.add(normalized)
+        for token in re.split(r"[^a-z0-9]+", value):
+            if len(token) >= 4 and token not in ignored:
+                tokens.add(token)
+    return {token for token in tokens if len(token) >= 4}
+
+
+def _specific_product_dll(pattern, name, item):
+    if not DLL_EXTENSION_RE.search(pattern):
+        return True
+    stem = DLL_EXTENSION_RE.sub("", pattern)
+    normalized_stem = re.sub(r"[^a-z0-9]+", "", stem.casefold())
+    return any(
+        token in normalized_stem
+        for token in _product_tokens(name, item)
+    )
+
+
+def filename_patterns(path_regex, name="", item=""):
     patterns = OrderedDict()
+    filtered = OrderedDict()
     for alternative in _split_top_level_alternatives(path_regex):
         pattern = _filename_pattern(alternative)
         if pattern:
-            patterns.setdefault(pattern.casefold(), pattern)
-    return list(patterns.values())
+            target = (
+                patterns if _specific_product_dll(pattern, name, item)
+                else filtered
+            )
+            target.setdefault(pattern.casefold(), pattern)
+    return list(patterns.values()), list(filtered.values())
 
 
 def load_registry(path, existing_rows):
@@ -136,16 +172,23 @@ def build_generated_rules(lolrmm_rows, registry):
             "LolRMMLink": row["LolRMMLink"],
             "SourceRows": 0,
             "Patterns": OrderedDict(),
+            "FilteredPatterns": OrderedDict(),
         })
         group["SourceRows"] += 1
-        for pattern in filename_patterns(row["PathRegex"]):
+        accepted, filtered = filename_patterns(
+            row["PathRegex"], row["Name"], item)
+        for pattern in accepted:
             group["Patterns"].setdefault(pattern.casefold(), pattern)
+        for pattern in filtered:
+            group["FilteredPatterns"].setdefault(
+                pattern.casefold(), pattern)
 
     generated = []
     report = []
     for item, group in sorted(
             grouped.items(), key=lambda value: value[1]["Name"].casefold()):
         patterns = list(group["Patterns"].values())
+        filtered_patterns = list(group["FilteredPatterns"].values())
         if not patterns:
             report.append({
                 "SourceID": item,
@@ -154,7 +197,11 @@ def build_generated_rules(lolrmm_rows, registry):
                 "RuleID": registry.get(item, ""),
                 "FilenamePatternCount": "0",
                 "FilenameRegex": "",
-                "Reason": "No safe Windows filename indicator",
+                "FilteredFilenameRegex": "|".join(filtered_patterns),
+                "Reason": (
+                    "No safe Windows filename indicator"
+                    if not filtered_patterns
+                    else "Only non-specific DLL filename indicators"),
                 "SourceRows": str(group["SourceRows"]),
             })
             continue
@@ -186,7 +233,10 @@ def build_generated_rules(lolrmm_rows, registry):
             "RuleID": rule_id,
             "FilenamePatternCount": str(len(patterns)),
             "FilenameRegex": keyword_regex,
-            "Reason": "",
+            "FilteredFilenameRegex": "|".join(filtered_patterns),
+            "Reason": (
+                "Filtered non-specific DLL filename indicators"
+                if filtered_patterns else ""),
             "SourceRows": str(group["SourceRows"]),
         })
     return generated, report
@@ -232,12 +282,13 @@ def sync(mft_path, lolrmm_path, overrides_path, ids_path, report_path):
             "RuleID": row["RuleID"],
             "FilenamePatternCount": "",
             "FilenameRegex": row["KeywordRegex"],
+            "FilteredFilenameRegex": "",
             "Reason": row["Reference"],
             "SourceRows": "",
         })
     write_csv(report_path, (
         "SourceID", "Name", "Status", "RuleID", "FilenamePatternCount",
-        "FilenameRegex", "Reason", "SourceRows",
+        "FilenameRegex", "FilteredFilenameRegex", "Reason", "SourceRows",
     ), report)
 
     issues = validate_mft_csv(mft_path)

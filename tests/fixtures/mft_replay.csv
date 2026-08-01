@@ -21,3 +21,4 @@ MFT-019,MFT,File,payload.exe,C:\Users\analyst\AppData\Update\payload.exe,Uncommo
 MFT-020,MFT,File,payload.exe,C:\Users\analyst\AppData\Local\payload.exe,Local AppData root executable
 MFT-021,MFT,Directory,Datto,C:\ProgramData\Datto,RMM product directory
 MFT-022,MFT,File,Datto,C:\ProgramData\Datto,Directory indicator presented as file
+MFT-023,MFT,File,vendor.dll,C:\Users\analyst\AppData\Local\Temp\Vendor\vendor.dll,Nested Local Temp supporting library

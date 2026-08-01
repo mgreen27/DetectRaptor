@@ -203,9 +203,71 @@ class MFTDetectionTests(unittest.TestCase):
         for row in coverage:
             with self.subTest(source_id=row["SourceID"]):
                 if row["Status"] == "Excluded":
-                    self.assertEqual(
+                    self.assertIn(
                         row["Reason"],
-                        "No safe Windows filename indicator")
+                        {
+                            "No safe Windows filename indicator",
+                            "Only non-specific DLL filename indicators",
+                        })
+
+    def test_lolrmm_dlls_require_product_specific_names(self):
+        accepted, filtered = sync_mft_lolrmm.filename_patterns(
+            r"^control\.dll$|^controlio\.dll$",
+            "Controlio",
+            "controlio",
+        )
+        self.assertEqual([r"^controlio\.dll$"], accepted)
+        self.assertEqual([r"^control\.dll$"], filtered)
+
+        generated = {
+            row["SourceID"]: row
+            for row in self.rows
+            if row["Source"] == "LOLRMM"
+        }
+
+        removed = {
+            "controlio": ("libeay32.dll", "ssleay32.dll"),
+            "fleetdeck.io": ("fd_agent.dll",),
+            "idrive": ("IDComponent.dll",),
+            "invgate": ("Software Matt.dll", "sas.dll"),
+        }
+        for source_id, filenames in removed.items():
+            regex = re.compile(
+                generated[source_id]["KeywordRegex"], re.IGNORECASE)
+            for filename in filenames:
+                with self.subTest(
+                        source_id=source_id, filename=filename):
+                    self.assertNotRegex(filename, regex)
+
+        retained = {
+            "echoware": ("echoware.dll",),
+            "lunixar": (
+                "LunixarRemote.dll",
+                "LunixarUpdater.dll",
+                "Lunixar.Agent.Core.dll",
+                "Lunixar.dll",
+            ),
+        }
+        for source_id, filenames in retained.items():
+            regex = re.compile(
+                generated[source_id]["KeywordRegex"], re.IGNORECASE)
+            for filename in filenames:
+                with self.subTest(
+                        source_id=source_id, filename=filename):
+                    self.assertRegex(filename, regex)
+
+        with (
+                REPO_ROOT / "csv" / "MFT_RMM_Coverage.csv"
+        ).open(newline="", encoding="utf-8") as handle:
+            coverage = {
+                row["SourceID"]: row for row in csv.DictReader(handle)
+            }
+        self.assertIn(
+            r"^libeay32\.dll$",
+            coverage["controlio"]["FilteredFilenameRegex"])
+        self.assertIn(
+            r"^sas\.dll$",
+            coverage["invgate"]["FilteredFilenameRegex"])
 
     def test_lolrmm_generated_rules_are_safe_and_attributable(self):
         generated = [
@@ -734,6 +796,15 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertNotRegex("crash.dmp", executable_keyword)
         self.assertRegex("crash.dmp", dump_keyword)
         self.assertRegex("archive.iso", dump_keyword)
+
+        executable_path = re.compile(
+            executable_rule["PathRegex"], re.IGNORECASE)
+        self.assertRegex(
+            r"C:\Users\analyst\AppData\Local\Temp\payload.exe",
+            executable_path)
+        self.assertNotRegex(
+            r"C:\Users\analyst\AppData\Local\Temp\Vendor\payload.exe",
+            executable_path)
 
     def test_appdata_root_rules_are_shallow_and_cover_local_and_roaming(self):
         executable_rule = self.rules[

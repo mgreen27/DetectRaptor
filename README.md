@@ -89,7 +89,10 @@ preserved.
 `sync_mft_lolrmm.py` regenerates LOLRMM-backed MFT rules from
 `csv/lolrmm.csv`, preserving IDs through `csv/MFT_RMM_IDs.csv` and applying
 `csv/MFT_RMM_Overrides.csv`. `normalize_mft_metadata.py` then applies the
-reviewed confidence, severity, scope, and ATT&CK policy.
+reviewed confidence, severity, scope, and ATT&CK policy. Generated DLL
+indicators are retained only when their basename contains a product-specific
+LOLRMM name token; filtered DLLs are recorded in
+`csv/MFT_RMM_Coverage.csv`.
 
 `build_mft_replay_coverage.py` creates a deterministic synthetic positive for
 every MFT rule and records overlapping rule matches in

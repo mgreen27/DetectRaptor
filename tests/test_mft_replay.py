@@ -38,7 +38,7 @@ class MFTReplayTests(unittest.TestCase):
                 self.matches, self.expected))
 
         summary = replay_mft.summarize(self.cases, self.matches)
-        self.assertEqual(summary["Cases"], 22)
+        self.assertEqual(summary["Cases"], 23)
         self.assertEqual(summary["RuleMatches"], 20)
         self.assertEqual(summary["MultiMatchCases"], 2)
         self.assertEqual(summary["UniqueFiles"], 18)
@@ -124,10 +124,10 @@ class MFTReplayTests(unittest.TestCase):
         result = benchmark_mft_replay.benchmark(
             self.rules, self.whitelists, cases, iterations=1)
 
-        self.assertEqual(390, result["Cases"])
+        self.assertEqual(391, result["Cases"])
         self.assertEqual(368, result["Rules"])
         self.assertEqual(
-            390 * 368,
+            391 * 368,
             result["EstimatedRuleEvaluationsPerIteration"])
         self.assertEqual(1, result["SuppressedMatches"])
         self.assertEqual(

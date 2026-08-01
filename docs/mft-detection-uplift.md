@@ -343,6 +343,9 @@ coverage.
 - `scripts/sync_mft_lolrmm.py` extracts safe Windows filename indicators.
 - Full paths contribute their basename when the basename is sufficiently
   specific.
+- DLL indicators require a product-specific basename token. Generic library
+  names remain visible in `FilteredFilenameRegex` for review but do not
+  generate detections.
 - Linux/macOS-only, directory-only, empty, invalid, or generic wildcard
   indicators are excluded.
 - Duplicate upstream records are merged by SourceID.
@@ -358,6 +361,21 @@ coverage.
 Current output contains 243 generated LOLRMM rules, 27 curated overrides, and
 54 explicitly excluded upstream records without a safe Windows filename
 indicator.
+
+### Post-hunt DLL and Local Temp tuning
+
+A sanitized running-hunt review found that generic LOLRMM DLL basenames were
+dominated by operating-system and unrelated vendor packages. The generator now
+filters `libeay32.dll`, `ssleay32.dll`, `fd_agent.dll`, `IDComponent.dll`,
+`Software Matt.dll`, and `sas.dll`. Product-specific DLL names such as
+`echoware.dll` and the Lunixar DLL family remain covered. Existing executable,
+installer, script, service, and driver indicators are unaffected.
+
+The generic Local Temp executable/script rule now matches only files directly
+under `AppData\Local\Temp`. Nested package extraction trees are excluded from
+that generic rule. Nested malware must be detected by a specific filename,
+masquerading, RMM, persistence, or other behavior rule. This is an intentional
+noise-versus-coverage tradeoff and is enforced with a negative replay fixture.
 
 ## Phase 7: generic filename-rule review
 
@@ -397,7 +415,7 @@ ATT&CK coverage by category.
 
 Phase 9 adds two complementary regression layers:
 
-- `tests/fixtures/mft_replay.csv` contains 22 sanitized positive and negative
+- `tests/fixtures/mft_replay.csv` contains 23 sanitized positive and negative
   MFT and Amcache cases.
 - `tests/fixtures/mft_expected.csv` defines exact, required, and forbidden
   RuleID expectations.
@@ -470,13 +488,10 @@ Phase 11 adds measurable match expansion and analyst-facing pivots:
 - A normalized cross-artifact pivot stacks MFT, Amcache, BinaryRename, EVTX,
   and PSReadLine evidence by endpoint, path, and event time.
 
-The local three-iteration synthetic benchmark covered 390 cases and 368 rules,
-or 143,520 estimated rule evaluations per iteration. It produced 434 raw rule
-matches, 433 retained matches, one suppression, 386 unique file records, and
-42 multi-match files. Mean replay time was approximately 0.09 seconds on the
-development host. Timing is environment-specific and is a regression
-baseline, not a substitute for collection benchmarking across production
-endpoints.
+The benchmark covers 391 cases and 368 rules, or 143,888 estimated rule
+evaluations per iteration. Exact match and timing metrics are regenerated
+during validation because they vary with rule tuning and development-host
+performance.
 
 ## Current acceptance state
 
