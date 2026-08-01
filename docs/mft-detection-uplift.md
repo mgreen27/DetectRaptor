@@ -260,9 +260,10 @@ than another recursive catch-all:
   user profile that masquerade behind a document, image, or archive extension.
 - **Recycle Bin payload:** High only for executable or script content using a
   noncanonical filename beneath `$Recycle.Bin`. Canonical `$I` metadata
-  sidecars are excluded. Canonical `$R` files and children of canonical `$R`
-  directories are classified separately at Low because they establish
-  deletion, not suspicious staging.
+  sidecars, canonical `$R` files, and children of canonical `$R` directories
+  are excluded because they establish deletion rather than suspicious
+  staging. Recycle Bin lifecycle analysis should use a dedicated parser that
+  correlates `$I` metadata with the corresponding `$R` content.
 - **User-profile NTDS database:** High for the exact `ntds.dit` basename under
   a user profile. Generic `.dit` files are no longer treated as equivalent.
 
@@ -363,8 +364,8 @@ coverage.
 - `csv/MFT_RMM_Coverage.csv` records every generated, excluded, or overridden
   source.
 
-Current output contains 239 generated LOLRMM rules, 33 curated overrides, and
-55 explicitly excluded upstream records.
+Current output contains 238 generated LOLRMM rules, 33 curated overrides, and
+56 explicitly excluded upstream records.
 
 ### Post-hunt DLL and Local Temp tuning
 
@@ -431,6 +432,36 @@ location, process, and execution telemetry where applicable. Detection of
 actual RDP client use should rely on execution and connection evidence rather
 than passive disk presence.
 
+### Post-hunt Dameware attribution tuning
+
+A sanitized running-hunt review found `DWRCS.EXE` reported as both Dameware
+and RDPView. The RDPView upstream record contains only `dwrcs.exe`, while the
+canonical Dameware record covers `dwrcs.exe`, `dwrcst.exe`, `dntus*.exe`, the
+standard Dameware deployment directory, and product-specific installer names.
+
+The `rdpview` source is now explicitly excluded from generated MFT and Amcache
+filename rules as duplicate and misattributed coverage. Its stable
+`DR-MFT-RMM-139` allocation remains in the ID registry and the exclusion
+reason is retained in coverage output. `DWRCS.EXE`, `DWRCST.EXE`, and
+`DNTUSrv.exe` remain covered by `DR-MFT-RMM-036` as Dameware. Installed
+software named RDPView remains independently detectable through the
+Applications logic.
+
+### Post-hunt Recycle Bin tuning
+
+A sanitized running-hunt review found a canonical `$Rxxxxxx.exe` item reported
+as suspicious staging by an older artifact build whose Recycle Bin rule had no
+ignore expression. Current logic excludes canonical `$Ixxxxxx` metadata,
+`$Rxxxxxx` content, and descendants of canonical `$Rxxxxxx` directories from
+the high-severity staging rule.
+
+The separate low-severity rule that emitted canonical recycled executable and
+script content was removed. Deleted-file inventory is not a DetectRaptor
+detection by itself and creates routine noise. Investigations that require
+deletion context should run a dedicated Recycle Bin parser and correlate each
+`$I` record's original path, deletion time, and size with its corresponding
+`$R` content.
+
 ## Phase 7: generic filename-rule review
 
 The path-independent tool families were reviewed and tightened:
@@ -479,7 +510,7 @@ Phase 9 adds two complementary regression layers:
   reports Added, Removed, and Unchanged matches by CaseID and RuleID.
 - `scripts/build_mft_replay_coverage.py` generates one deterministic synthetic
   positive per rule in `csv/MFT_Replay_Coverage.csv`.
-- All 371 current rules have a verified synthetic positive. Forty generated
+- All 369 current rules have a verified synthetic positive. Thirty-nine generated
   cases also match another rule; `AdditionalRuleIDs` preserves those overlaps
   for collision review.
 
@@ -542,7 +573,7 @@ Phase 11 adds measurable match expansion and analyst-facing pivots:
 - A normalized cross-artifact pivot stacks MFT, Amcache, BinaryRename, EVTX,
   and PSReadLine evidence by endpoint, path, and event time.
 
-The benchmark covers 398 cases and 371 rules, or 147,658 estimated rule
+The benchmark covers 396 cases and 369 rules, or 146,124 estimated rule
 evaluations per iteration. Exact match and timing metrics are regenerated
 during validation because they vary with rule tuning and development-host
 performance.

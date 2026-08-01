@@ -221,6 +221,29 @@ class MFTDetectionTests(unittest.TestCase):
             },
         )
 
+        rdpview = next(
+            row for row in coverage if row["SourceID"] == "rdpview"
+        )
+        self.assertEqual("Excluded", rdpview["Status"])
+        self.assertIn("Dameware", rdpview["Reason"])
+        self.assertNotIn(
+            "rdpview",
+            {
+                row["SourceID"] for row in self.rows
+                if row["Category"] == "Remote Access Software"
+            },
+        )
+
+        dameware = next(
+            row for row in self.rows if row["SourceID"] == "dameware"
+        )
+        dameware_regex = re.compile(
+            dameware["KeywordRegex"], re.IGNORECASE
+        )
+        for filename in ("DWRCS.EXE", "DWRCST.EXE", "DNTUSrv.exe"):
+            with self.subTest(filename=filename):
+                self.assertRegex(filename, dameware_regex)
+
     def test_lolrmm_exclusions_require_unique_source_and_reason(self):
         with tempfile.TemporaryDirectory() as directory:
             exclusions = Path(directory) / "exclusions.csv"
@@ -1010,18 +1033,17 @@ class MFTDetectionTests(unittest.TestCase):
     def test_recycle_bin_payload_rule(self):
         staging_rule = self.rules[
             "Suspicious Location - Recycle Bin Executable or Script"]
-        deleted_rule = self.rules[
-            "Deleted Executable or Script - Recycle Bin Content"]
         keyword = re.compile(
             staging_rule["KeywordRegex"], re.IGNORECASE)
         path = re.compile(staging_rule["PathRegex"], re.IGNORECASE)
         ignore = re.compile(
             staging_rule["IgnoreRegex"], re.IGNORECASE)
-        deleted_path = re.compile(
-            deleted_rule["PathRegex"], re.IGNORECASE)
 
         self.assertEqual(staging_rule["Criticality"], "High")
-        self.assertEqual(deleted_rule["Criticality"], "Low")
+        self.assertNotIn(
+            "Deleted Executable or Script - Recycle Bin Content",
+            self.rules,
+        )
         self.assertRegex("payload.ps1", keyword)
         self.assertRegex(
             r"C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe", path)
@@ -1030,23 +1052,13 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertRegex(
             r"C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe", ignore)
         self.assertRegex(
-            r"C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe", deleted_path)
-        self.assertRegex(
             r"C:\$Recycle.Bin\S-1-5-21-1"
             r"\$RABC123\Scripts\payload.ps1",
             ignore)
-        self.assertRegex(
-            r"C:\$Recycle.Bin\S-1-5-21-1"
-            r"\$RABC123\Scripts\payload.ps1",
-            deleted_path)
-        self.assertNotRegex(
-            r"C:\$Recycle.Bin\S-1-5-21-1\$IABC123.exe", deleted_path)
         self.assertNotRegex(
             r"C:\$Recycle.Bin\S-1-5-21-1\$IABC12.exe", ignore)
         self.assertNotRegex(
             r"C:\$Recycle.Bin\S-1-5-21-1\$Important.exe", ignore)
-        self.assertNotRegex(
-            r"C:\$Recycle.Bin\S-1-5-21-1\$Important.exe", deleted_path)
 
     def test_double_extension_payload_rule(self):
         rule = self.rules["Masquerading - Double Extension Payload"]

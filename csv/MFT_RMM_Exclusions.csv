@@ -1,2 +1,3 @@
 SourceID,Reason
 mstsc.exe__microsoft_remote_desktop_connection_,Built-in Windows Remote Desktop client; filename-only MFT presence is expected on Windows deployments
+rdpview,Duplicate and misattributed dwrcs.exe indicator; the binary is a SolarWinds Dameware component already covered by the canonical Dameware rule

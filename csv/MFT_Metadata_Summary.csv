@@ -5,7 +5,6 @@ Credential Access,7,6,1,0,7,0,0,1,0,6,6
 Cryptomining,1,1,0,0,0,0,1,0,0,1,0
 Data Transfer,5,5,0,0,2,0,3,0,0,5,0
 Defence Evasion,3,3,0,0,2,1,0,0,0,3,3
-Deleted File,1,1,0,0,0,0,1,1,0,0,0
 Developer Utility,2,2,0,0,0,2,0,0,0,2,0
 Discovery,5,5,0,0,4,1,0,0,0,5,4
 Execution,5,5,0,0,2,1,2,1,0,4,3
@@ -15,7 +14,7 @@ Network Tunnelling,1,1,0,0,0,1,0,0,0,1,1
 Persistence,2,1,1,0,1,1,0,2,0,0,2
 Policy Violation,1,0,1,0,0,0,1,0,0,1,0
 Privilege Escalation,2,1,1,0,2,0,0,0,0,2,0
-Remote Access Software,272,205,67,0,0,272,0,13,1,258,272
+Remote Access Software,271,204,67,0,0,271,0,13,1,257,271
 Suspicious Filename,1,0,1,0,0,1,0,0,0,1,1
 Suspicious Location,14,7,7,0,7,7,0,12,0,2,0
 Web History,1,1,0,0,0,0,1,0,0,1,0

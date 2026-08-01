@@ -197,7 +197,7 @@ rapid7,Rapid7,Generated,DR-MFT-RMM-312,3,^ir_agent\.exe$|^rapid7_agent_core\.exe
 rdclient,RdClient,Generated,DR-MFT-RMM-313,3,^RdClientInstaller\.exe$|^SupportTool\.exe$|^rdclient\.exe$,,,1
 rdcman,RDCMan,Generated,DR-MFT-RMM-314,2,^RDCMan-x86\.exe$|^RDCMan\.exe$,,,1
 rdp2tcp,rdp2tcp,Generated,DR-MFT-RMM-138,1,^tdp2tcp\.exe$,,,1
-rdpview,RDPView,Generated,DR-MFT-RMM-139,1,^dwrcs\.exe$,,,1
+rdpview,RDPView,Excluded,DR-MFT-RMM-139,0,,,Duplicate and misattributed dwrcs.exe indicator; the binary is a SolarWinds Dameware component already covered by the canonical Dameware rule,1
 rdpwrap,rdpwrap,Generated,DR-MFT-RMM-140,3,^RDPCheck\.exe$|^RDPConf\.exe$|^RDPWInst\.exe$,,,1
 realvnc,RealVNC,Excluded,DR-MFT-RMM-315,0,,,No safe Windows filename indicator,1
 remcos,Remcos,Generated,DR-MFT-RMM-144,1,^remcos.*\.exe$,,,1
