@@ -419,30 +419,75 @@ still required for those decisions.
 Replay output is written only when an explicit output path is supplied. This
 avoids implicit use of `/tmp` and supports CSV-based offline analysis.
 
-## Remaining planned work
+## Phase 10: path-aware whitelisting
 
-### Phase 10: path-aware whitelisting
+Phase 10 adds auditable suppression after rule matching:
 
-Add only narrow filename-and-path exclusions supported by repeated hunt
-evidence. Keep environment approval overlays separate from built-in
-suppression.
+- `csv/MFT_Whitelist.csv` stores WhitelistID, RuleID, artifact, filename,
+  path, reason, source, and review date.
+- `scripts/validate_mft_whitelist.py` rejects unknown rules, duplicate
+  RuleID/artifact policies, broad regexes, invalid scope combinations, and
+  unanchored or insufficiently specific paths. Expired review dates fail
+  validation.
+- MFT and Amcache build an in-memory whitelist index using RuleID and artifact.
+- Filename and path must both match before a result is suppressed.
+- Suppression is applied to each RuleID match independently. Another rule
+  matching the same OSPath remains visible.
+- `SuppressWhitelisted` defaults to true. Disabling it emits retained and
+  suppressed rows with the matching policy metadata for audit.
+- Replay reports raw, retained, and suppressed match counts and can write
+  suppressed rows to a separate CSV.
 
-### Phase 11: performance and analyst workflow
+The existing Quick Assist trusted-component exclusion was migrated from the
+rule's opaque `IgnoreRegex` into `DR-MFT-WL-001`. Quick Assist outside those
+paths remains visible, and Amcache execution evidence is not suppressed.
+Customer-specific RMM approvals remain runtime overlays.
 
-Benchmark collection cost, monitor result expansion from multi-match output,
-and improve notebook correlation with Amcache, BinaryRename, EVTX, and
-PSReadLine.
+Phase 10 validation covers one trusted-path suppression, unusual-path
+retention, Amcache retention, and preservation of unrelated RuleID matches on
+the same file.
 
-Acceptance criteria for remaining phases:
+## Phase 11: performance and analyst workflow
+
+Phase 11 adds measurable match expansion and analyst-facing pivots:
+
+- `scripts/benchmark_mft_replay.py` benchmarks the sanitized fixtures plus one
+  generated positive per rule.
+- Replay now reports unique file records separately from unique path strings
+  and total rule matches.
+- The whitelist table is indexed once and retrieved once per rule match.
+- Amcache no longer stops at the first matching rule. It now preserves the
+  same multi-match behavior as MFT.
+- MFT and Amcache emit flattened RuleID, detection, category, technique,
+  confidence, criticality, source, filename, and path fields while retaining
+  the nested Detection dictionary.
+- Operational metric notebooks separate rule matches, unique endpoint paths,
+  multi-match endpoint paths, and endpoints.
+- Rule/path prevalence and whitelist suppression audit views were added.
+- RMM summaries now include RuleID, SourceID, endpoint context, disposition,
+  location context, and an example path.
+- An exact-path MFT/Amcache correlation view was added.
+- A normalized cross-artifact pivot stacks MFT, Amcache, BinaryRename, EVTX,
+  and PSReadLine evidence by endpoint, path, and event time.
+
+The local three-iteration synthetic benchmark covered 390 cases and 368 rules,
+or 143,520 estimated rule evaluations per iteration. It produced 434 raw rule
+matches, 433 retained matches, one suppression, 386 unique file records, and
+42 multi-match files. Mean replay time was approximately 0.09 seconds on the
+development host. Timing is environment-specific and is a regression
+baseline, not a substitute for collection benchmarking across production
+endpoints.
+
+## Current acceptance state
 
 - Every supported LOLRMM Windows indicator is represented or explicitly
   excluded with a documented reason.
 - Curated overrides survive upstream refreshes.
-- Replay output reports unique files separately from total rule matches.
-- Broad rule or whitelist changes include positive and negative regression
-  evidence.
-- Collection and result expansion remain operationally acceptable at hunt
-  scale.
+- Replay reports unique files separately from total rule matches.
+- Whitelist changes have positive and negative regression evidence.
+- MFT and Amcache rendered artifacts pass local Velociraptor verification.
+- Production hunt runtime and result-size comparison remains an operational
+  deployment check after GitHub Actions rebuilds the generated artifacts.
 
 ## Validation
 
@@ -453,8 +498,10 @@ python scripts/sync_mft_lolrmm.py
 python scripts/normalize_mft_metadata.py
 python scripts/assign_mft_metadata.py --check
 python scripts/validate_mft.py
+python scripts/validate_mft_whitelist.py
 python scripts/build_mft_replay_coverage.py
 python scripts/replay_mft.py --check
+python scripts/benchmark_mft_replay.py --iterations 3
 python -m unittest discover -s tests -v
 ```
 

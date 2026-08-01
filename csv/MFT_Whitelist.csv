@@ -1,0 +1,2 @@
+WhitelistID,RuleID,Artifact,FilenameRegex,PathRegex,Disposition,Reason,Source,ReviewDate
+DR-MFT-WL-001,DR-MFT-RMM-099,MFT,^quickassist\.exe$,\\Program Files\\WindowsApps\\MicrosoftCorporationII\.QuickAssist_[^\\]+\\Microsoft\.RemoteAssistance\.QuickAssist\\QuickAssist\.exe$|\\Windows\\(servicing\\LCU|WinSxS)\\.*\\quickassist\.exe$|\\Windows\\(System32|SysWOW64)\\quickassist\.exe$|\\\$WINDOWS\.~BT\\NewOS\\Windows\\(System32|SysWOW64)\\quickassist\.exe$,Suppress,Microsoft Quick Assist in trusted Windows component paths,DetectRaptor Curated,2027-08-01

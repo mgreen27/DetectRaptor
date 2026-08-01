@@ -11,13 +11,15 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RULES = REPO_ROOT / "csv" / "MFT.csv"
+DEFAULT_WHITELISTS = REPO_ROOT / "csv" / "MFT_Whitelist.csv"
 DEFAULT_INPUT = REPO_ROOT / "tests" / "fixtures" / "mft_replay.csv"
 DEFAULT_EXPECTED = REPO_ROOT / "tests" / "fixtures" / "mft_expected.csv"
 
 MATCH_FIELDS = (
     "CaseID", "Artifact", "EntryType", "FileName", "OSPath",
     "RuleID", "Detection", "Category", "Technique", "Confidence",
-    "Criticality", "Source", "SourceID",
+    "Criticality", "Source", "SourceID", "Disposition", "WhitelistID",
+    "WhitelistReason", "WhitelistSource", "WhitelistReviewDate",
 )
 COMPARISON_FIELDS = (
     "CaseID", "RuleID", "Change", "CurrentDetection", "BaselineDetection",
@@ -122,6 +124,56 @@ def replay(rules, cases):
     return matches
 
 
+def whitelist_matches(match, whitelist):
+    return (
+        whitelist["Disposition"] == "Suppress"
+        and whitelist["RuleID"] == match["RuleID"]
+        and whitelist["Artifact"] == match["Artifact"]
+        and re.search(
+            whitelist["FilenameRegex"],
+            match["FileName"],
+            re.IGNORECASE)
+        and re.search(
+            whitelist["PathRegex"],
+            match["OSPath"],
+            re.IGNORECASE)
+    )
+
+
+def apply_whitelists(matches, whitelists):
+    """Return retained and suppressed matches with whitelist metadata."""
+    policies = {
+        (row["RuleID"], row["Artifact"]): row
+        for row in whitelists
+    }
+    retained = []
+    suppressed = []
+
+    for match in matches:
+        output = dict(match)
+        whitelist = policies.get(
+            (match["RuleID"], match["Artifact"]))
+        if whitelist and whitelist_matches(match, whitelist):
+            output.update({
+                "Disposition": "Suppressed",
+                "WhitelistID": whitelist["WhitelistID"],
+                "WhitelistReason": whitelist["Reason"],
+                "WhitelistSource": whitelist["Source"],
+                "WhitelistReviewDate": whitelist["ReviewDate"],
+            })
+            suppressed.append(output)
+        else:
+            output.update({
+                "Disposition": "Retained",
+                "WhitelistID": "",
+                "WhitelistReason": "",
+                "WhitelistSource": "",
+                "WhitelistReviewDate": "",
+            })
+            retained.append(output)
+    return retained, suppressed
+
+
 def validate_expected(matches, expected_rows):
     actual = {}
     for match in matches:
@@ -151,12 +203,23 @@ def validate_expected(matches, expected_rows):
 
 def summarize(cases, matches):
     counts = Counter(match["CaseID"] for match in matches)
+    file_counts = Counter(
+        (match["CaseID"], match["Artifact"], match["OSPath"])
+        for match in matches)
+    path_counts = Counter(
+        (match["Artifact"], match["OSPath"]) for match in matches)
     return {
         "Cases": len(cases),
         "MatchedCases": len(counts),
         "UnmatchedCases": len(cases) - len(counts),
         "RuleMatches": len(matches),
         "MultiMatchCases": sum(total > 1 for total in counts.values()),
+        "UniqueFiles": len(file_counts),
+        "MultiMatchFiles": sum(
+            total > 1 for total in file_counts.values()),
+        "UniquePaths": len(path_counts),
+        "MultiMatchPaths": sum(
+            total > 1 for total in path_counts.values()),
         "UniqueRuleIDs": len({match["RuleID"] for match in matches}),
     }
 
@@ -202,8 +265,14 @@ def main():
     parser.add_argument("--rules", type=Path, default=DEFAULT_RULES)
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--expected", type=Path, default=DEFAULT_EXPECTED)
+    parser.add_argument(
+        "--whitelists", type=Path, default=DEFAULT_WHITELISTS)
+    parser.add_argument(
+        "--disable-whitelist", action="store_true",
+        help="Report raw rule matches without whitelist suppression.")
     parser.add_argument("--baseline-rules", type=Path)
     parser.add_argument("--matches-out", type=Path)
+    parser.add_argument("--suppressed-out", type=Path)
     parser.add_argument("--comparison-out", type=Path)
     parser.add_argument("--summary-out", type=Path)
     parser.add_argument(
@@ -213,19 +282,40 @@ def main():
 
     rules = read_csv(args.rules)
     cases = read_csv(args.input)
-    matches = replay(rules, cases)
+    raw_matches = replay(rules, cases)
+    if args.disable_whitelist:
+        matches, suppressed = apply_whitelists(raw_matches, [])
+    else:
+        matches, suppressed = apply_whitelists(
+            raw_matches, read_csv(args.whitelists))
     expected_rows = read_csv(args.expected)
     issues = validate_case_inventory(cases, expected_rows)
     issues.extend(validate_expected(matches, expected_rows))
     summary = summarize(cases, matches)
+    summary.update({
+        "RawRuleMatches": len(raw_matches),
+        "RetainedRuleMatches": len(matches),
+        "SuppressedMatches": len(suppressed),
+        "SuppressedCases": len({
+            row["CaseID"] for row in suppressed}),
+        "WhitelistIDs": len({
+            row["WhitelistID"] for row in suppressed}),
+    })
 
     if args.matches_out:
         write_csv(args.matches_out, MATCH_FIELDS, matches)
+    if args.suppressed_out:
+        write_csv(args.suppressed_out, MATCH_FIELDS, suppressed)
     if args.summary_out:
         args.summary_out.write_text(
             json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     if args.baseline_rules:
-        baseline = replay(read_csv(args.baseline_rules), cases)
+        baseline_raw = replay(read_csv(args.baseline_rules), cases)
+        if args.disable_whitelist:
+            baseline, _ = apply_whitelists(baseline_raw, [])
+        else:
+            baseline, _ = apply_whitelists(
+                baseline_raw, read_csv(args.whitelists))
         comparison = compare_matches(matches, baseline)
         if args.comparison_out:
             write_csv(

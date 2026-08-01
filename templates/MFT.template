@@ -31,6 +31,14 @@ parameters:
    - name: ApprovedRMMPathRegex
      default: ^$
      description: "Optional regex matching approved RMM installation paths. Must be combined with ApprovedRMMNameRegex."
+   - name: SuppressWhitelisted
+     type: bool
+     default: true
+     description: "Suppress built-in RuleID, filename, and path whitelist matches. Disable to audit suppressed rows."
+   - name: Whitelists
+     type: csv
+     default: |
+%whitelist%
    - name: IOCs
      type: csv
      default: |
@@ -47,6 +55,15 @@ sources:
             AND Criticality =~ CriticalityLevel
             AND Scope =~ '^(MFT|Both)$'
 
+      LET whitelist_lookup <= memoize(
+        key='LookupKey',
+        query={
+          SELECT *, RuleID + '|MFT' AS LookupKey
+          FROM Whitelists
+          WHERE Artifact = 'MFT'
+              AND Disposition = 'Suppress'
+        }, period=100000)
+
       LET keyword_patterns <= SELECT KeywordRegex
         FROM all_the_things
         GROUP BY KeywordRegex
@@ -61,8 +78,17 @@ sources:
                                 AllDrives=AllDrives )
 
       -- output results and enrich with IOC data
-      SELECT * FROM foreach(row=hits,query={
+      LET rule_hits = SELECT * FROM foreach(row=hits,query={
             SELECT
+                RuleID,
+                Detection as DetectionName,
+                Category,
+                Technique,
+                Confidence,
+                Criticality,
+                Source,
+                SourceID,
+                FileName,
                 dict(
                     RuleID=RuleID,
                     Name=Detection,
@@ -111,6 +137,25 @@ sources:
                         else= False )
         },workers=20)
 
+      LET candidate_hits = SELECT *,
+          get(
+            item=whitelist_lookup,
+            field=RuleID + '|MFT') AS WhitelistCandidate
+        FROM rule_hits
+
+      LET classified_hits = SELECT *,
+          if(
+            condition=WhitelistCandidate
+              AND FileName =~ WhitelistCandidate.FilenameRegex
+              AND OSPath =~ WhitelistCandidate.PathRegex,
+            then='Suppressed',
+            else='Retained') AS Disposition
+        FROM candidate_hits
+
+      SELECT * FROM classified_hits
+      WHERE NOT SuppressWhitelisted
+          OR Disposition != 'Suppressed'
+
     notebook:
       - type: vql_suggestion
         name: Detection summary
@@ -127,6 +172,62 @@ sources:
             FROM source()
             GROUP BY Detection.RuleID
             ORDER BY Total DESC
+      - type: vql_suggestion
+        name: Operational metrics
+        template: |
+            /*
+            ### Operational metrics
+            Separate total rule matches from unique endpoint paths and
+            multi-match expansion.
+            */
+
+            LET DRRows = SELECT * FROM source()
+            LET DRPaths = SELECT Fqdn,OSPath,count() AS MatchCount
+                FROM DRRows
+                GROUP BY Fqdn,OSPath
+            LET DRMultiPaths = SELECT * FROM DRPaths
+                WHERE MatchCount > 1
+            LET DREndpoints = SELECT Fqdn FROM DRRows
+                GROUP BY Fqdn
+
+            SELECT * FROM chain(
+                rule_matches={
+                    SELECT 'Rule matches' AS Metric,count() AS Value
+                    FROM DRRows
+                },
+                unique_paths={
+                    SELECT 'Unique endpoint paths' AS Metric,count() AS Value
+                    FROM DRPaths
+                },
+                multi_match_paths={
+                    SELECT 'Multi-match endpoint paths' AS Metric,
+                        count() AS Value
+                    FROM DRMultiPaths
+                },
+                endpoints={
+                    SELECT 'Endpoints' AS Metric,count() AS Value
+                    FROM DREndpoints
+                })
+      - type: vql_suggestion
+        name: Rule path prevalence
+        template: |
+            /*
+            ### Rule path prevalence
+            Count each RuleID and endpoint path once.
+            */
+
+            LET DRRulePaths = SELECT RuleID,DetectionName,Category,
+                    Confidence,Criticality,Fqdn,OSPath
+                FROM source()
+                GROUP BY RuleID,Fqdn,OSPath
+
+            SELECT RuleID,DetectionName,Category,Confidence,Criticality,
+                count() AS UniqueEndpointPaths,
+                enumerate(items=Fqdn) AS Endpoints,
+                OSPath AS ExampleOSPath
+            FROM DRRulePaths
+            GROUP BY RuleID
+            ORDER BY UniqueEndpointPaths DESC
       - type: vql_suggestion
         name: File match summary
         template: |
@@ -241,14 +342,17 @@ sources:
             Separate installed, portable, unresolved, and other RMM locations.
             */
 
-            SELECT Detection.Name as Detection,
+            SELECT RuleID,
+                DetectionName as Detection,
+                SourceID,
                 RMMDisposition,
                 LocationContext,
                 count() as Total,
+                enumerate(items=Fqdn) as Endpoints,
                 OSPath as ExampleOSPath
             FROM source()
-            WHERE Detection.Name =~ '^(RMM|Remote Access)'
-            GROUP BY Detection,RMMDisposition,LocationContext
+            WHERE DetectionName =~ '^(RMM|Remote Access)'
+            GROUP BY RuleID,RMMDisposition,LocationContext
             ORDER BY Total DESC
 
       - type: vql_suggestion
@@ -261,9 +365,116 @@ sources:
 
             SELECT *
             FROM source()
-            WHERE Detection.Name =~ '^(RMM|Remote Access)'
+            WHERE DetectionName =~ '^(RMM|Remote Access)'
                 AND RMMDisposition = 'Review'
                 AND LocationContext =~ 'User or temporary|Other|Unresolved'
+
+      - type: vql_suggestion
+        name: Whitelist suppression audit
+        template: |
+            /*
+            ### Whitelist suppression audit
+            Collect with SuppressWhitelisted disabled to populate this view.
+            */
+
+            SELECT WhitelistCandidate.WhitelistID as WhitelistID,
+                RuleID,
+                DetectionName,
+                WhitelistCandidate.Reason as Reason,
+                WhitelistCandidate.Source as Source,
+                WhitelistCandidate.ReviewDate as ReviewDate,
+                count() as Total,
+                enumerate(items=Fqdn) as Endpoints,
+                OSPath as ExampleOSPath
+            FROM source()
+            WHERE Disposition = 'Suppressed'
+            GROUP BY WhitelistID,RuleID
+            ORDER BY Total DESC
+
+      - type: vql_suggestion
+        name: MFT and Amcache exact path correlation
+        template: |
+            /*
+            ### MFT and Amcache exact path correlation
+            Requires MFT and Amcache results in the same hunt or collection.
+            */
+
+            LET DRMFT = SELECT *,
+                    Fqdn as MFTFqdn,
+                    OSPath as MFTPath,
+                    RuleID as MFTRuleID,
+                    DetectionName as MFTDetection
+                FROM source(
+                    artifact='DetectRaptor.Windows.Detection.MFT')
+
+            SELECT MFTFqdn as Fqdn,
+                MFTPath as OSPath,
+                MFTRuleID,
+                MFTDetection,
+                RuleID as AmcacheRuleID,
+                DetectionName as AmcacheDetection,
+                KeyMTime,
+                SHA1
+            FROM foreach(row=DRMFT,query={
+                SELECT *
+                FROM source(
+                    artifact='DetectRaptor.Windows.Detection.Amcache')
+                WHERE Fqdn = MFTFqdn
+                    AND EntryPath = MFTPath
+            })
+
+      - type: vql_suggestion
+        name: Cross-artifact correlation pivots
+        template: |
+            /*
+            ### Cross-artifact correlation pivots
+            Normalize available MFT, Amcache, BinaryRename, EVTX, and
+            PSReadLine results into a common endpoint, path, and time view.
+            */
+
+            SELECT * FROM chain(
+                mft={
+                    SELECT Fqdn,'MFT' as Artifact,OSPath,FileName,
+                        RuleID,DetectionName,
+                        SITimestamps.LastModified0x10 as EventTime,
+                        '' as Context
+                    FROM source(
+                        artifact='DetectRaptor.Windows.Detection.MFT')
+                },
+                amcache={
+                    SELECT Fqdn,'Amcache' as Artifact,
+                        EntryPath as OSPath,EntryName as FileName,
+                        RuleID,DetectionName,KeyMTime as EventTime,
+                        OriginalFileName as Context
+                    FROM source(
+                        artifact='DetectRaptor.Windows.Detection.Amcache')
+                },
+                binary_rename={
+                    SELECT Fqdn,'BinaryRename' as Artifact,OSPath,
+                        Name as FileName,'' as RuleID,
+                        'Binary rename' as DetectionName,
+                        Ctime as EventTime,
+                        VersionInformation as Context
+                    FROM source(
+                        artifact='DetectRaptor.Windows.Detection.BinaryRename')
+                },
+                evtx={
+                    SELECT Computer as Fqdn,'EVTX' as Artifact,OSPath,
+                        '' as FileName,'' as RuleID,
+                        Detection.Name as DetectionName,
+                        EventTime,Message as Context
+                    FROM source(
+                        artifact='DetectRaptor.Windows.Detection.Evtx')
+                },
+                psreadline={
+                    SELECT Fqdn,'PSReadLine' as Artifact,
+                        FileInfo.OSPath as OSPath,'' as FileName,
+                        RuleID,RuleName as DetectionName,
+                        FileInfo.Mtime as EventTime,Line as Context
+                    FROM source(
+                        artifact='DetectRaptor.Windows.Detection.Powershell.PSReadline')
+                })
+            ORDER BY Fqdn,EventTime
 
       - type: vql_suggestion
         name: SI and FN timestamp differences

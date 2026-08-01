@@ -70,8 +70,10 @@ python scripts/sync_mft_lolrmm.py
 python scripts/normalize_mft_metadata.py
 python scripts/assign_mft_metadata.py --check
 python scripts/validate_mft.py
+python scripts/validate_mft_whitelist.py
 python scripts/build_mft_replay_coverage.py
 python scripts/replay_mft.py --check
+python scripts/benchmark_mft_replay.py --iterations 3
 ```
 
 When adding an MFT rule, leave the generated metadata fields empty and run:
@@ -96,6 +98,19 @@ positive and negative fixtures under `tests/fixtures/`. It can also compare a
 candidate rules file with a baseline using `--baseline-rules`, and write
 detailed match, comparison, and summary output to explicitly selected paths.
 
+`csv/MFT_Whitelist.csv` contains built-in path-aware suppression policies.
+Policies require an exact RuleID and artifact plus matching filename and path
+regexes. `SuppressWhitelisted` is enabled by default in MFT and Amcache;
+disable it to audit suppressed rows and their WhitelistID metadata. Local or
+customer-specific RMM approvals remain runtime parameters and are not
+committed to the repository.
+
+`benchmark_mft_replay.py` combines the sanitized fixtures with one generated
+positive per rule. It reports raw, retained, and suppressed matches; unique
+files and path strings; multi-match expansion; estimated rule evaluations; and
+runtime. Additional replay-format CSV inputs may be supplied with `--input`.
+Benchmark JSON is written only when `--output` is explicitly provided.
+
 Regenerate the affected artifacts from `scripts/`:
 
 ```bash
@@ -104,6 +119,7 @@ python evtx.py
 python psreadline.py
 python iseautosave.py
 python mft.py
+python amcache.py
 ```
 
 Verify the generated artifacts with Velociraptor:

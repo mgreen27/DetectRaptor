@@ -11,6 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import validate_mft
+import validate_mft_whitelist
 import assign_mft_metadata
 import sync_mft_lolrmm
 import normalize_mft_metadata
@@ -27,6 +28,22 @@ class MFTDetectionTests(unittest.TestCase):
 
     def test_mft_csv_is_valid(self):
         self.assertEqual([], validate_mft.validate_mft_csv(self.csv_path))
+
+    def test_mft_whitelist_is_valid(self):
+        self.assertEqual(
+            [],
+            validate_mft_whitelist.validate_whitelist(
+                REPO_ROOT / "csv" / "MFT_Whitelist.csv",
+                self.csv_path,
+            ),
+        )
+
+    def test_whitelist_validator_rejects_broad_paths(self):
+        issues = validate_mft_whitelist.validate_path_pattern(
+            r"\\.*$")
+        self.assertTrue(
+            any("specific directory and basename" in issue
+                for issue in issues))
 
     def test_komari_rule_has_valid_columns_and_does_not_self_suppress(self):
         rule = self.rules["RMM - Komari"]
@@ -433,6 +450,14 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertIn(
             "enumerate(items=Detection.Name) as Detections", template)
         self.assertIn("GROUP BY Fqdn,OSPath", template)
+        self.assertIn("name: Operational metrics", template)
+        self.assertIn("name: Rule path prevalence", template)
+        self.assertIn(
+            "name: MFT and Amcache exact path correlation", template)
+        self.assertIn(
+            "name: Cross-artifact correlation pivots", template)
+        self.assertEqual(
+            1, template.count("field=RuleID + '|MFT'"))
 
     def test_amcache_template_excludes_directory_rules(self):
         template = (
@@ -449,6 +474,28 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertIn("Confidence=Confidence,", template)
         self.assertIn("Source=Source,", template)
         self.assertIn("SourceID=SourceID,", template)
+        self.assertNotIn("LIMIT 1", template)
+        self.assertIn("name: Operational metrics", template)
+        self.assertIn("name: File match summary", template)
+        self.assertEqual(
+            1, template.count("field=RuleID + '|Amcache'"))
+
+    def test_templates_emit_flattened_analyst_fields(self):
+        for template_name in ("MFT.template", "Amcache.template"):
+            with self.subTest(template=template_name):
+                template = (
+                    REPO_ROOT / "templates" / template_name
+                ).read_text(encoding="utf-8")
+                for field in (
+                        "RuleID,",
+                        "Detection as DetectionName,",
+                        "Category,",
+                        "Technique,",
+                        "Confidence,",
+                        "Criticality,",
+                        "Source,",
+                        "SourceID,"):
+                    self.assertIn(field, template)
 
     def test_quick_assist_is_split_by_artifact_context(self):
         self.assertNotIn("RMM - Microsoft Quick Assist", self.rules)
@@ -461,18 +508,25 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertEqual(amcache["Scope"], "Amcache")
         self.assertEqual(amcache["IgnoreRegex"], "")
         self.assertEqual(unusual["Scope"], "MFT")
+        self.assertEqual(unusual["IgnoreRegex"], "")
 
-        ignore = re.compile(unusual["IgnoreRegex"], re.IGNORECASE)
+        whitelists = validate_mft_whitelist.read_csv(
+            REPO_ROOT / "csv" / "MFT_Whitelist.csv")
+        policy = next(
+            row for row in whitelists
+            if row["RuleID"] == unusual["RuleID"]
+            and row["Artifact"] == "MFT")
+        path = re.compile(policy["PathRegex"], re.IGNORECASE)
         self.assertRegex(
             r"C:\Program Files\WindowsApps"
             r"\MicrosoftCorporationII.QuickAssist_2.0.35.0_x64__8wekyb3d8bbwe"
             r"\Microsoft.RemoteAssistance.QuickAssist\QuickAssist.exe",
-            ignore)
+            path)
         self.assertRegex(
             r"C:\Windows\WinSxS"
             r"\amd64_microsoft-windows-quickassist\quickassist.exe",
-            ignore)
-        self.assertNotRegex(r"C:\Tools\QuickAssist.exe", ignore)
+            path)
+        self.assertNotRegex(r"C:\Tools\QuickAssist.exe", path)
 
     def test_archive_utilities_are_split_by_path_context(self):
         self.assertNotIn("Archive Utilities", self.rules)
@@ -589,6 +643,11 @@ class MFTDetectionTests(unittest.TestCase):
                 ).read_text(encoding="utf-8")
                 self.assertIn("ApprovedRMMNameRegex", template)
                 self.assertIn("ApprovedRMMPathRegex", template)
+                self.assertIn("SuppressWhitelisted", template)
+                self.assertIn("Whitelists", template)
+                self.assertIn("memoize(", template)
+                self.assertIn("AS WhitelistCandidate", template)
+                self.assertIn("AS Disposition", template)
                 self.assertIn("as LocationContext", template)
                 self.assertIn("as RMMDisposition", template)
                 self.assertIn("RMM location summary", template)

@@ -28,6 +28,14 @@ parameters:
    - name: ApprovedRMMPathRegex
      default: ^$
      description: "Optional regex matching approved RMM installation paths. Must be combined with ApprovedRMMNameRegex."
+   - name: SuppressWhitelisted
+     type: bool
+     default: true
+     description: "Suppress built-in RuleID, filename, and path whitelist matches. Disable to audit suppressed rows."
+   - name: Whitelists
+     type: csv
+     default: |
+%whitelist%
    - name: IOCs
      type: csv
      default: |
@@ -45,6 +53,15 @@ sources:
             AND Scope =~ '^(Amcache|Both)$'
             AND NOT EntryType = 'Directory'
 
+      LET whitelist_lookup <= memoize(
+        key='LookupKey',
+        query={
+          SELECT *, RuleID + '|Amcache' AS LookupKey
+          FROM Whitelists
+          WHERE Artifact = 'Amcache'
+              AND Disposition = 'Suppress'
+        }, period=100000)
+
       LET keyword_patterns <= SELECT KeywordRegex
         FROM all_the_things
         GROUP BY KeywordRegex
@@ -55,8 +72,18 @@ sources:
                                 NameRegex=join(array=keyword_patterns.KeywordRegex,sep='|'))
       
       -- output results and enrich with IOC data
-      SELECT * FROM foreach(row=hits,query={
+      LET rule_hits = SELECT * FROM foreach(row=hits,query={
             SELECT 
+                RuleID,
+                Detection as DetectionName,
+                Category,
+                Technique,
+                Confidence,
+                Criticality,
+                Source,
+                SourceID,
+                EntryName as FileName,
+                EntryPath as OSPath,
                 dict(
                     RuleID=RuleID,
                     Name=Detection,
@@ -95,8 +122,27 @@ sources:
                 AND NOT if(condition=IgnoreRegex,
                     then= EntryPath =~ IgnoreRegex,
                     else= False )
-            LIMIT 1
         },workers=20)
+
+      LET candidate_hits = SELECT *,
+          get(
+            item=whitelist_lookup,
+            field=RuleID + '|Amcache') AS WhitelistCandidate
+        FROM rule_hits
+
+      LET classified_hits = SELECT *,
+          if(
+            condition=WhitelistCandidate
+              AND (EntryName =~ WhitelistCandidate.FilenameRegex
+                OR OriginalFileName =~ WhitelistCandidate.FilenameRegex)
+              AND EntryPath =~ WhitelistCandidate.PathRegex,
+            then='Suppressed',
+            else='Retained') AS Disposition
+        FROM candidate_hits
+
+      SELECT * FROM classified_hits
+      WHERE NOT SuppressWhitelisted
+          OR Disposition != 'Suppressed'
 
     notebook:
       - type: vql_suggestion
@@ -129,10 +175,68 @@ sources:
             ### Detection Summary
             */
             
-            SELECT Detection.Name, count() AS Total
+            SELECT RuleID,DetectionName,Category,Confidence,Criticality,
+                count() AS Total
             FROM source()
-            GROUP BY Detection.Name
+            GROUP BY RuleID
             ORDER BY Total DESC 
+
+      - type: vql_suggestion
+        name: Operational metrics
+        template: |
+            /*
+            ### Operational metrics
+            Separate total rule matches from unique endpoint paths and
+            multi-match expansion.
+            */
+
+            LET DRRows = SELECT * FROM source()
+            LET DRPaths = SELECT Fqdn,EntryPath,count() AS MatchCount
+                FROM DRRows
+                GROUP BY Fqdn,EntryPath
+            LET DRMultiPaths = SELECT * FROM DRPaths
+                WHERE MatchCount > 1
+            LET DREndpoints = SELECT Fqdn FROM DRRows
+                GROUP BY Fqdn
+
+            SELECT * FROM chain(
+                rule_matches={
+                    SELECT 'Rule matches' AS Metric,count() AS Value
+                    FROM DRRows
+                },
+                unique_paths={
+                    SELECT 'Unique endpoint paths' AS Metric,count() AS Value
+                    FROM DRPaths
+                },
+                multi_match_paths={
+                    SELECT 'Multi-match endpoint paths' AS Metric,
+                        count() AS Value
+                    FROM DRMultiPaths
+                },
+                endpoints={
+                    SELECT 'Endpoints' AS Metric,count() AS Value
+                    FROM DREndpoints
+                })
+
+      - type: vql_suggestion
+        name: File match summary
+        template: |
+            /*
+            ### File match summary
+            Group every Amcache rule matching the same path.
+            */
+
+            SELECT Fqdn,EntryPath,
+                count() as MatchCount,
+                enumerate(items=RuleID) as RuleIDs,
+                enumerate(items=DetectionName) as Detections,
+                enumerate(items=Category) as Categories,
+                enumerate(items=Technique) as Techniques,
+                enumerate(items=Confidence) as Confidences,
+                KeyMTime,Publisher,OriginalFileName,SHA1
+            FROM source()
+            GROUP BY Fqdn,EntryPath
+            ORDER BY MatchCount DESC
 
       - type: vql_suggestion
         name: RMM location summary
@@ -142,12 +246,37 @@ sources:
             Separate installed, portable, unresolved, and other RMM locations.
             */
 
-            SELECT Detection.Name as Detection,
+            SELECT RuleID,
+                DetectionName as Detection,
+                SourceID,
                 RMMDisposition,
                 LocationContext,
                 count() as Total,
+                enumerate(items=Fqdn) as Endpoints,
                 EntryPath as ExampleEntryPath
             FROM source()
-            WHERE Detection.Name =~ '^(RMM|Remote Access)'
-            GROUP BY Detection,RMMDisposition,LocationContext
+            WHERE DetectionName =~ '^(RMM|Remote Access)'
+            GROUP BY RuleID,RMMDisposition,LocationContext
+            ORDER BY Total DESC
+
+      - type: vql_suggestion
+        name: Whitelist suppression audit
+        template: |
+            /*
+            ### Whitelist suppression audit
+            Collect with SuppressWhitelisted disabled to populate this view.
+            */
+
+            SELECT WhitelistCandidate.WhitelistID as WhitelistID,
+                RuleID,
+                DetectionName,
+                WhitelistCandidate.Reason as Reason,
+                WhitelistCandidate.Source as Source,
+                WhitelistCandidate.ReviewDate as ReviewDate,
+                count() as Total,
+                enumerate(items=Fqdn) as Endpoints,
+                EntryPath as ExampleEntryPath
+            FROM source()
+            WHERE Disposition = 'Suppressed'
+            GROUP BY WhitelistID,RuleID
             ORDER BY Total DESC
