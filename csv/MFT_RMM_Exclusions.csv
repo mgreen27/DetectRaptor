@@ -1,0 +1,2 @@
+SourceID,Reason
+mstsc.exe__microsoft_remote_desktop_connection_,Built-in Windows Remote Desktop client; filename-only MFT presence is expected on Windows deployments

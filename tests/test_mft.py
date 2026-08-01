@@ -172,6 +172,7 @@ class MFTDetectionTests(unittest.TestCase):
             REPO_ROOT / "csv" / "MFT_RMM_Overrides.csv",
             REPO_ROOT / "csv" / "MFT_RMM_IDs.csv",
             REPO_ROOT / "csv" / "MFT_RMM_Coverage.csv",
+            REPO_ROOT / "csv" / "MFT_RMM_Exclusions.csv",
         )
         normalize_mft_metadata.normalize_files(
             REPO_ROOT / "csv" / "MFT.csv",
@@ -203,12 +204,48 @@ class MFTDetectionTests(unittest.TestCase):
         for row in coverage:
             with self.subTest(source_id=row["SourceID"]):
                 if row["Status"] == "Excluded":
-                    self.assertIn(
-                        row["Reason"],
-                        {
-                            "No safe Windows filename indicator",
-                            "Only non-specific DLL filename indicators",
-                        })
+                    self.assertTrue(row["Reason"])
+
+        mstsc = next(
+            row for row in coverage
+            if row["SourceID"]
+            == "mstsc.exe__microsoft_remote_desktop_connection_"
+        )
+        self.assertEqual("Excluded", mstsc["Status"])
+        self.assertIn("Built-in Windows", mstsc["Reason"])
+        self.assertNotIn(
+            "mstsc.exe__microsoft_remote_desktop_connection_",
+            {
+                row["SourceID"] for row in self.rows
+                if row["Category"] == "Remote Access Software"
+            },
+        )
+
+    def test_lolrmm_exclusions_require_unique_source_and_reason(self):
+        with tempfile.TemporaryDirectory() as directory:
+            exclusions = Path(directory) / "exclusions.csv"
+            exclusions.write_text(
+                "SourceID,Reason\n"
+                "mstsc.exe__microsoft_remote_desktop_connection_,"
+                "Built-in Windows component\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                {
+                    "mstsc.exe__microsoft_remote_desktop_connection_":
+                    "Built-in Windows component",
+                },
+                sync_mft_lolrmm.load_exclusions(exclusions),
+            )
+
+            exclusions.write_text(
+                "SourceID,Reason\n"
+                "duplicate,First\n"
+                "duplicate,Second\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "duplicate SourceID"):
+                sync_mft_lolrmm.load_exclusions(exclusions)
 
     def test_lolrmm_dlls_require_product_specific_names(self):
         accepted, filtered = sync_mft_lolrmm.filename_patterns(
@@ -268,6 +305,74 @@ class MFTDetectionTests(unittest.TestCase):
         self.assertIn(
             r"^sas\.dll$",
             coverage["invgate"]["FilteredFilenameRegex"])
+
+    def test_lolrmm_ambiguous_filenames_are_removed_or_path_bound(self):
+        by_source = {
+            row["SourceID"]: row
+            for row in self.rows
+            if row["SourceID"]
+        }
+        for source_id in ("adobe_connect", "msp360", "zoho_assist"):
+            with self.subTest(source_id=source_id):
+                regex = re.compile(
+                    by_source[source_id]["KeywordRegex"], re.IGNORECASE)
+                self.assertNotRegex("connect.exe", regex)
+
+        path_rules = {
+            "DR-MFT-RMM-350": (
+                "agent.exe",
+                r"C:\Program Files\Monitic\agent.exe",
+                r"C:\Program Files (x86)\N-able Technologies"
+                r"\Windows Agent\bin\agent.exe",
+            ),
+            "DR-MFT-RMM-351": (
+                "winpty-agent.exe",
+                r"C:\Program Files\Net Monitor for Employees Pro"
+                r"\winpty-agent.exe",
+                r"C:\Program Files\Git\usr\bin\winpty-agent.exe",
+            ),
+            "DR-MFT-RMM-352": (
+                "installer.exe",
+                r"C:\Users\analyst\AppData\Local"
+                r"\remsupp-updater\installer.exe",
+                r"C:\Users\analyst\AppData\Local"
+                r"\mqtt-explorer-updater\installer.exe",
+            ),
+        }
+        by_rule_id = {row["RuleID"]: row for row in self.rows}
+        for rule_id, (filename, expected_path, rejected_path) in (
+                path_rules.items()):
+            with self.subTest(rule_id=rule_id):
+                rule = by_rule_id[rule_id]
+                self.assertRegex(
+                    filename,
+                    re.compile(rule["KeywordRegex"], re.IGNORECASE),
+                )
+                path = re.compile(rule["PathRegex"], re.IGNORECASE)
+                self.assertRegex(expected_path, path)
+                self.assertNotRegex(rejected_path, path)
+
+        self.assertRegex(
+            "winpty-agent64.exe",
+            re.compile(
+                by_rule_id["DR-MFT-RMM-351"]["KeywordRegex"],
+                re.IGNORECASE,
+            ),
+        )
+
+        with (
+                REPO_ROOT / "csv" / "MFT_RMM_Coverage.csv"
+        ).open(newline="", encoding="utf-8") as handle:
+            coverage = {
+                row["SourceID"]: row
+                for row in csv.DictReader(handle)
+                if row["SourceID"]
+            }
+        for source_id in ("adobe_connect", "msp360", "zoho_assist"):
+            self.assertIn(
+                r"connect\.exe$",
+                coverage[source_id]["FilteredFilenameRegex"].casefold(),
+            )
 
     def test_lolrmm_generated_rules_are_safe_and_attributable(self):
         generated = [
@@ -785,13 +890,20 @@ class MFTDetectionTests(unittest.TestCase):
             executable_rule["KeywordRegex"], re.IGNORECASE)
         dump_keyword = re.compile(
             dump_rule["KeywordRegex"], re.IGNORECASE)
+        dump_path = re.compile(
+            dump_rule["PathRegex"], re.IGNORECASE)
         temp_path = r"C:\Users\analyst\AppData\Local\Temp\crash.dmp"
 
         self.assertEqual(executable_rule["Criticality"], "High")
         self.assertEqual(dump_rule["Criticality"], "Medium")
+        self.assertRegex(temp_path, dump_path)
         self.assertRegex(
-            temp_path,
-            re.compile(dump_rule["PathRegex"], re.IGNORECASE))
+            r"C:\Users\analyst\AppData\Local\Temp\Vendor\archive.zip",
+            dump_path)
+        self.assertNotRegex(
+            r"C:\Users\analyst\AppData\Local\Temp"
+            r"\Vendor\Package\archive.zip",
+            dump_path)
         self.assertRegex("payload.exe", executable_keyword)
         self.assertNotRegex("crash.dmp", executable_keyword)
         self.assertRegex("crash.dmp", dump_keyword)
@@ -896,15 +1008,45 @@ class MFTDetectionTests(unittest.TestCase):
             re.compile(shortcut_rule["KeywordRegex"], re.IGNORECASE))
 
     def test_recycle_bin_payload_rule(self):
-        rule = self.rules[
+        staging_rule = self.rules[
             "Suspicious Location - Recycle Bin Executable or Script"]
-        self.assertEqual(rule["Criticality"], "High")
+        deleted_rule = self.rules[
+            "Deleted Executable or Script - Recycle Bin Content"]
+        keyword = re.compile(
+            staging_rule["KeywordRegex"], re.IGNORECASE)
+        path = re.compile(staging_rule["PathRegex"], re.IGNORECASE)
+        ignore = re.compile(
+            staging_rule["IgnoreRegex"], re.IGNORECASE)
+        deleted_path = re.compile(
+            deleted_rule["PathRegex"], re.IGNORECASE)
+
+        self.assertEqual(staging_rule["Criticality"], "High")
+        self.assertEqual(deleted_rule["Criticality"], "Low")
+        self.assertRegex("payload.ps1", keyword)
         self.assertRegex(
-            "payload.ps1",
-            re.compile(rule["KeywordRegex"], re.IGNORECASE))
+            r"C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe", path)
         self.assertRegex(
-            r"C:\$Recycle.Bin\S-1-5-21-1\$R123\payload.ps1",
-            re.compile(rule["PathRegex"], re.IGNORECASE))
+            r"C:\$Recycle.Bin\S-1-5-21-1\$IABC123.exe", ignore)
+        self.assertRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe", ignore)
+        self.assertRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe", deleted_path)
+        self.assertRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1"
+            r"\$RABC123\Scripts\payload.ps1",
+            ignore)
+        self.assertRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1"
+            r"\$RABC123\Scripts\payload.ps1",
+            deleted_path)
+        self.assertNotRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1\$IABC123.exe", deleted_path)
+        self.assertNotRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1\$IABC12.exe", ignore)
+        self.assertNotRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1\$Important.exe", ignore)
+        self.assertNotRegex(
+            r"C:\$Recycle.Bin\S-1-5-21-1\$Important.exe", deleted_path)
 
     def test_double_extension_payload_rule(self):
         rule = self.rules["Masquerading - Double Extension Payload"]

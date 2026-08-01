@@ -38,12 +38,12 @@ class MFTReplayTests(unittest.TestCase):
                 self.matches, self.expected))
 
         summary = replay_mft.summarize(self.cases, self.matches)
-        self.assertEqual(summary["Cases"], 23)
-        self.assertEqual(summary["RuleMatches"], 20)
+        self.assertEqual(summary["Cases"], 27)
+        self.assertEqual(summary["RuleMatches"], 23)
         self.assertEqual(summary["MultiMatchCases"], 2)
-        self.assertEqual(summary["UniqueFiles"], 18)
+        self.assertEqual(summary["UniqueFiles"], 21)
         self.assertEqual(summary["MultiMatchFiles"], 2)
-        self.assertEqual(summary["UniquePaths"], 18)
+        self.assertEqual(summary["UniquePaths"], 21)
         self.assertEqual(summary["MultiMatchPaths"], 2)
 
     def test_path_aware_whitelist_suppresses_only_targeted_match(self):
@@ -124,10 +124,10 @@ class MFTReplayTests(unittest.TestCase):
         result = benchmark_mft_replay.benchmark(
             self.rules, self.whitelists, cases, iterations=1)
 
-        self.assertEqual(391, result["Cases"])
-        self.assertEqual(368, result["Rules"])
+        self.assertEqual(398, result["Cases"])
+        self.assertEqual(371, result["Rules"])
         self.assertEqual(
-            391 * 368,
+            398 * 371,
             result["EstimatedRuleEvaluationsPerIteration"])
         self.assertEqual(1, result["SuppressedMatches"])
         self.assertEqual(

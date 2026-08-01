@@ -88,11 +88,15 @@ preserved.
 
 `sync_mft_lolrmm.py` regenerates LOLRMM-backed MFT rules from
 `csv/lolrmm.csv`, preserving IDs through `csv/MFT_RMM_IDs.csv` and applying
-`csv/MFT_RMM_Overrides.csv`. `normalize_mft_metadata.py` then applies the
-reviewed confidence, severity, scope, and ATT&CK policy. Generated DLL
-indicators are retained only when their basename contains a product-specific
-LOLRMM name token; filtered DLLs are recorded in
-`csv/MFT_RMM_Coverage.csv`.
+`csv/MFT_RMM_Overrides.csv`. Sources that are inherently unsuitable for
+filename-only MFT detection are documented in `csv/MFT_RMM_Exclusions.csv`.
+`normalize_mft_metadata.py` then applies the reviewed confidence, severity,
+scope, and ATT&CK policy. Generated DLL indicators are retained only when
+their basename contains a product-specific LOLRMM name token; filtered DLLs
+and explicit exclusions are recorded in `csv/MFT_RMM_Coverage.csv`. Known
+ambiguous executable basenames are also filtered from filename-only
+generation. Curated split overrides retain generic filenames only beneath
+stable upstream product paths.
 
 `build_mft_replay_coverage.py` creates a deterministic synthetic positive for
 every MFT rule and records overlapping rule matches in

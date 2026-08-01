@@ -258,8 +258,11 @@ than another recursive catch-all:
   content beneath a GUID-shaped Local or Roaming directory.
 - **Double-extension payload:** High for executable or script files under a
   user profile that masquerade behind a document, image, or archive extension.
-- **Recycle Bin payload:** High for executable or script files staged beneath
-  `$Recycle.Bin`.
+- **Recycle Bin payload:** High only for executable or script content using a
+  noncanonical filename beneath `$Recycle.Bin`. Canonical `$I` metadata
+  sidecars are excluded. Canonical `$R` files and children of canonical `$R`
+  directories are classified separately at Low because they establish
+  deletion, not suspicious staging.
 - **User-profile NTDS database:** High for the exact `ntds.dit` basename under
   a user profile. Generic `.dit` files are no longer treated as equivalent.
 
@@ -355,12 +358,13 @@ coverage.
 - `csv/MFT_RMM_Overrides.csv` retains directory rules, artifact-specific
   Quick Assist behavior, local additions, and filename coverage absent from
   current upstream data.
+- `csv/MFT_RMM_Exclusions.csv` documents upstream sources that are unsuitable
+  for filename-only MFT detection.
 - `csv/MFT_RMM_Coverage.csv` records every generated, excluded, or overridden
   source.
 
-Current output contains 243 generated LOLRMM rules, 27 curated overrides, and
-54 explicitly excluded upstream records without a safe Windows filename
-indicator.
+Current output contains 239 generated LOLRMM rules, 33 curated overrides, and
+55 explicitly excluded upstream records.
 
 ### Post-hunt DLL and Local Temp tuning
 
@@ -376,6 +380,56 @@ under `AppData\Local\Temp`. Nested package extraction trees are excluded from
 that generic rule. Nested malware must be detected by a specific filename,
 masquerading, RMM, persistence, or other behavior rule. This is an intentional
 noise-versus-coverage tradeoff and is enforced with a negative replay fixture.
+
+The Local Temp archive/installer/dump rule is bounded separately: it matches
+files directly under `Temp` or one directory below it. Deeper package,
+application, and extraction trees are excluded from this generic rule.
+
+### Post-hunt ambiguous RMM filename tuning
+
+A sanitized running-hunt review identified four filename-only collision
+families:
+
+- `connect.exe` matched one Git for Windows binary as Adobe Connect, MSP360,
+  and Zoho Assist.
+- `winpty-agent.exe` matched Git, developer tools, and SQL management tooling
+  as Net Monitor for Employees.
+- `installer.exe` matched an unrelated application updater as RemSupp.
+- `agent.exe` matched an unrelated management agent as Monitic.
+
+Completed:
+
+- Filter case-insensitive `connect.exe` from generated LOLRMM filename-only
+  rules while recording the removed alternative in coverage metadata.
+- Split Monitic so `amon.exe` remains filename-based and `agent.exe` requires
+  the upstream `Program Files\Monitic` path.
+- Split Net Monitor for Employees so `nmep_*` binaries remain filename-based
+  and `winpty-agent.exe` or `winpty-agent64.exe` requires the upstream product
+  directory.
+- Split RemSupp so its product-specific binaries remain filename-based and
+  `installer.exe` requires the upstream `remsupp-updater` path.
+
+These are global rule corrections rather than site allowlists: the generic
+filenames collided with unrelated products, while the retained paths originate
+from the corresponding upstream LOLRMM records.
+
+### Post-hunt built-in Remote Desktop client tuning
+
+A sanitized running-hunt review found 192
+`RMM - mstsc.exe (Microsoft Remote Desktop Connection)` matches. The filename
+is present by default as a Windows component, including servicing and
+component-store copies, so its existence in MFT is not useful evidence of
+remote-access activity.
+
+The LOLRMM source
+`mstsc.exe__microsoft_remote_desktop_connection_` is now explicitly excluded
+from generated MFT and Amcache filename rules. The stable
+`DR-MFT-RMM-289` allocation remains in the ID registry and the exclusion
+reason is retained in coverage output. Suspicious renamed or relocated
+binaries remain addressable through masquerading, binary-rename, suspicious
+location, process, and execution telemetry where applicable. Detection of
+actual RDP client use should rely on execution and connection evidence rather
+than passive disk presence.
 
 ## Phase 7: generic filename-rule review
 
@@ -415,7 +469,7 @@ ATT&CK coverage by category.
 
 Phase 9 adds two complementary regression layers:
 
-- `tests/fixtures/mft_replay.csv` contains 23 sanitized positive and negative
+- `tests/fixtures/mft_replay.csv` contains 27 sanitized positive and negative
   MFT and Amcache cases.
 - `tests/fixtures/mft_expected.csv` defines exact, required, and forbidden
   RuleID expectations.
@@ -425,7 +479,7 @@ Phase 9 adds two complementary regression layers:
   reports Added, Removed, and Unchanged matches by CaseID and RuleID.
 - `scripts/build_mft_replay_coverage.py` generates one deterministic synthetic
   positive per rule in `csv/MFT_Replay_Coverage.csv`.
-- All 368 current rules have a verified synthetic positive. Forty generated
+- All 371 current rules have a verified synthetic positive. Forty generated
   cases also match another rule; `AdditionalRuleIDs` preserves those overlaps
   for collision review.
 
@@ -488,7 +542,7 @@ Phase 11 adds measurable match expansion and analyst-facing pivots:
 - A normalized cross-artifact pivot stacks MFT, Amcache, BinaryRename, EVTX,
   and PSReadLine evidence by endpoint, path, and event time.
 
-The benchmark covers 391 cases and 368 rules, or 143,888 estimated rule
+The benchmark covers 398 cases and 371 rules, or 147,658 estimated rule
 evaluations per iteration. Exact match and timing metrics are regenerated
 during validation because they vary with rule tuning and development-host
 performance.

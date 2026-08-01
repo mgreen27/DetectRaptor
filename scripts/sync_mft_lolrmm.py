@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MFT = REPO_ROOT / "csv" / "MFT.csv"
 DEFAULT_LOLRMM = REPO_ROOT / "csv" / "lolrmm.csv"
 DEFAULT_OVERRIDES = REPO_ROOT / "csv" / "MFT_RMM_Overrides.csv"
+DEFAULT_EXCLUSIONS = REPO_ROOT / "csv" / "MFT_RMM_Exclusions.csv"
 DEFAULT_IDS = REPO_ROOT / "csv" / "MFT_RMM_IDs.csv"
 DEFAULT_REPORT = REPO_ROOT / "csv" / "MFT_RMM_Coverage.csv"
 
@@ -32,6 +33,9 @@ SOURCE_ID_ALIASES = {
     "remoteutilities": "remote_utilities",
     "ultra_vnc": "ultravnc",
 }
+AMBIGUOUS_FILENAME_PATTERNS = {
+    r"^connect\.exe$",
+}
 
 
 def read_csv(path):
@@ -45,6 +49,21 @@ def write_csv(path, fieldnames, rows):
             handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def load_exclusions(path):
+    exclusions = {}
+    for line_number, row in enumerate(read_csv(path), start=2):
+        item = row.get("SourceID", "").strip()
+        reason = row.get("Reason", "").strip()
+        if not item or not reason:
+            raise ValueError(
+                f"{path}:{line_number}: SourceID and Reason are required")
+        if item in exclusions:
+            raise ValueError(
+                f"{path}:{line_number}: duplicate SourceID {item}")
+        exclusions[item] = reason
+    return exclusions
 
 
 def source_id(row):
@@ -124,7 +143,12 @@ def filename_patterns(path_regex, name="", item=""):
         pattern = _filename_pattern(alternative)
         if pattern:
             target = (
-                patterns if _specific_product_dll(pattern, name, item)
+                patterns
+                if (
+                    pattern.casefold()
+                    not in AMBIGUOUS_FILENAME_PATTERNS
+                    and _specific_product_dll(pattern, name, item)
+                )
                 else filtered
             )
             target.setdefault(pattern.casefold(), pattern)
@@ -163,7 +187,8 @@ def allocate_rule_ids(registry, source_ids, existing_rows):
     return registry
 
 
-def build_generated_rules(lolrmm_rows, registry):
+def build_generated_rules(lolrmm_rows, registry, exclusions=None):
+    exclusions = exclusions or {}
     grouped = OrderedDict()
     for row in lolrmm_rows:
         item = source_id(row)
@@ -187,6 +212,20 @@ def build_generated_rules(lolrmm_rows, registry):
     report = []
     for item, group in sorted(
             grouped.items(), key=lambda value: value[1]["Name"].casefold()):
+        if item in exclusions:
+            report.append({
+                "SourceID": item,
+                "Name": group["Name"],
+                "Status": "Excluded",
+                "RuleID": registry.get(item, ""),
+                "FilenamePatternCount": "0",
+                "FilenameRegex": "",
+                "FilteredFilenameRegex": "",
+                "Reason": exclusions[item],
+                "SourceRows": str(group["SourceRows"]),
+            })
+            continue
+
         patterns = list(group["Patterns"].values())
         filtered_patterns = list(group["FilteredPatterns"].values())
         if not patterns:
@@ -235,25 +274,40 @@ def build_generated_rules(lolrmm_rows, registry):
             "FilenameRegex": keyword_regex,
             "FilteredFilenameRegex": "|".join(filtered_patterns),
             "Reason": (
-                "Filtered non-specific DLL filename indicators"
+                "Filtered ambiguous or non-specific filename indicators"
                 if filtered_patterns else ""),
             "SourceRows": str(group["SourceRows"]),
         })
     return generated, report
 
 
-def sync(mft_path, lolrmm_path, overrides_path, ids_path, report_path):
+def sync(
+        mft_path, lolrmm_path, overrides_path, ids_path, report_path,
+        exclusions_path=DEFAULT_EXCLUSIONS):
     current_rows = read_csv(mft_path)
     lolrmm_rows = read_csv(lolrmm_path)
     overrides = read_csv(overrides_path)
+    exclusions = load_exclusions(exclusions_path)
     registry = load_registry(ids_path, current_rows)
 
     grouped_source_ids = {source_id(row) for row in lolrmm_rows}
-    registry = allocate_rule_ids(
-        registry, grouped_source_ids, current_rows)
-    generated, report = build_generated_rules(lolrmm_rows, registry)
+    unknown_exclusions = set(exclusions) - grouped_source_ids
+    if unknown_exclusions:
+        raise ValueError(
+            "Unknown LOLRMM exclusion SourceID(s): "
+            + ", ".join(sorted(unknown_exclusions)))
     override_source_ids = {
         row["SourceID"] for row in overrides if row["SourceID"]}
+    conflicting_sources = set(exclusions) & override_source_ids
+    if conflicting_sources:
+        raise ValueError(
+            "LOLRMM SourceID(s) cannot be both excluded and overridden: "
+            + ", ".join(sorted(conflicting_sources)))
+
+    registry = allocate_rule_ids(
+        registry, grouped_source_ids, current_rows)
+    generated, report = build_generated_rules(
+        lolrmm_rows, registry, exclusions)
     generated = [
         row for row in generated
         if row["SourceID"] not in override_source_ids
@@ -302,12 +356,15 @@ def main():
     parser.add_argument("--mft", type=Path, default=DEFAULT_MFT)
     parser.add_argument("--lolrmm", type=Path, default=DEFAULT_LOLRMM)
     parser.add_argument("--overrides", type=Path, default=DEFAULT_OVERRIDES)
+    parser.add_argument(
+        "--exclusions", type=Path, default=DEFAULT_EXCLUSIONS)
     parser.add_argument("--ids", type=Path, default=DEFAULT_IDS)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
 
     generated, report = sync(
-        args.mft, args.lolrmm, args.overrides, args.ids, args.report)
+        args.mft, args.lolrmm, args.overrides, args.ids, args.report,
+        args.exclusions)
     statuses = {}
     for row in report:
         statuses[row["Status"]] = statuses.get(row["Status"], 0) + 1

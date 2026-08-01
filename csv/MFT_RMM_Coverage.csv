@@ -3,7 +3,7 @@ SourceID,Name,Status,RuleID,FilenamePatternCount,FilenameRegex,FilteredFilenameR
 absolute__computrace_,Absolute (Computrace),Generated,DR-MFT-RMM-002,5,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersitence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,,,1
 acronis_cyber_protect__remotix_,Acronis Cyber Protect (Remotix),Generated,DR-MFT-RMM-004,2,^AcronisCyberProtectConnectAgent\.exe$|^AcronisCyberProtectConnectQuickAssist.*\.exe$,,,1
 addigy,Addigy,Excluded,DR-MFT-RMM-219,0,,,No safe Windows filename indicator,1
-adobe_connect,Adobe Connect,Generated,DR-MFT-RMM-006,4,^ConnectAppSetup.*\.exe$|^ConnectDetector\.exe$|^ConnectShellSetup.*\.exe$|^Connect\.exe$,,,1
+adobe_connect,Adobe Connect,Generated,DR-MFT-RMM-006,3,^ConnectAppSetup.*\.exe$|^ConnectDetector\.exe$|^ConnectShellSetup.*\.exe$,^Connect\.exe$,Filtered ambiguous or non-specific filename indicators,1
 aeroadmin,AeroAdmin,Generated,DR-MFT-RMM-007,1,^AeroAdmin\.exe$,,,1
 aliwangwang-remote-control,AliWangWang-remote-control,Generated,DR-MFT-RMM-008,1,^alitask\.exe$,,,1
 alpemix,Alpemix,Generated,DR-MFT-RMM-009,1,^AlpemixService\.exe$,,,1
@@ -36,7 +36,7 @@ comodo_rmm,Comodo RMM,Generated,DR-MFT-RMM-232,2,^itsmagent\.exe$|^rviewer\.exe$
 connectwise,ConnectWise,Excluded,DR-MFT-RMM-233,0,,,No safe Windows filename indicator,1
 connectwise_automate__labtech_,Connectwise Automate (LabTech),Generated,DR-MFT-RMM-031,3,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,,,1
 connectwise_control,ConnectWise Control,Generated,DR-MFT-RMM-032,3,^connectwisechat-customer\.exe$|^connectwisecontrol\.client\.exe$|^screenconnect\.windowsclient\.exe$,,,1
-controlio,Controlio,Generated,DR-MFT-RMM-234,6,^bbl\.exe$|^weCliboardListener\.exe$|^weInstSvc\.exe$|^wemonc\.exe$|^weprtct\.exe$|^wesvc\.exe$,^libeay32\.dll$|^ssleay32\.dll$,Filtered non-specific DLL filename indicators,1
+controlio,Controlio,Generated,DR-MFT-RMM-234,6,^bbl\.exe$|^weCliboardListener\.exe$|^weInstSvc\.exe$|^wemonc\.exe$|^weprtct\.exe$|^wesvc\.exe$,^libeay32\.dll$|^ssleay32\.dll$,Filtered ambiguous or non-specific filename indicators,1
 crossloop,CrossLoop,Generated,DR-MFT-RMM-033,3,^CrossLoopConnect\.exe$|^WinVNCStub\.exe$|^crossloopservice\.exe$,,,1
 crosstec_remote_control,CrossTec Remote Control,Generated,DR-MFT-RMM-034,2,^PCIVIDEO\.EXE$|^supporttool\.exe$,,,1
 cruzcontrol,CruzControl,Excluded,DR-MFT-RMM-235,0,,,No safe Windows filename indicator,1
@@ -70,7 +70,7 @@ faronics_deploy,Faronics Deploy,Generated,DR-MFT-RMM-248,13,^FRCServer\.exe$|^FS
 faronics_insight,Faronics Insight,Generated,DR-MFT-RMM-249,9,^FIStudentAgent\.exe$|^FIStudentSvc\.exe$|^FIStudentUI\.exe$|^STAHelper\.exe$|^InsightSetup\.msi$|^InsightInstallerStudent\.exe$|^InsightInstallerTeacher\.exe$|^InsightInstaller\.exe$|^StudentSvc\.exe$,,,1
 fastviewer,FastViewer,Generated,DR-MFT-RMM-055,3,^FastViewer\.exe$|^fastclient\.exe$|^fastmaster\.exe$,,,1
 fixme.it,FixMe.it,Generated,DR-MFT-RMM-250,9,^FixMeit Client\.exe$|^FixMeit Expert Setup\.exe$|^FixMeit Unattended Access Setup\.exe$|^FixMeitClient.*\.exe$|^TiClientCore\.exe$|^TiClientHelper.*\.exe$|^TiExpertCore\.exe$|^TiExpertStandalone\.exe$|^fixmeitclient\.exe$,,,1
-fleetdeck.io,FleetDeck.io,Generated,DR-MFT-RMM-251,7,^fleetdeck_agent\.exe$|^fleetdeck_agent_svc\.exe$|^fleetdeck-agent\.exe$|^fleetdeck_commander_launcher\.exe$|^fleetdeck_commander_svc\.exe$|^fleetdeck_installer\.exe$|^fleetdeck-agent\.msi$,^fd_agent\.dll$,Filtered non-specific DLL filename indicators,1
+fleetdeck.io,FleetDeck.io,Generated,DR-MFT-RMM-251,7,^fleetdeck_agent\.exe$|^fleetdeck_agent_svc\.exe$|^fleetdeck-agent\.exe$|^fleetdeck_commander_launcher\.exe$|^fleetdeck_commander_svc\.exe$|^fleetdeck_installer\.exe$|^fleetdeck-agent\.msi$,^fd_agent\.dll$,Filtered ambiguous or non-specific filename indicators,1
 fortra,Fortra,Excluded,DR-MFT-RMM-252,0,,,No safe Windows filename indicator,1
 free_ping_tool,Free Ping Tool,Excluded,DR-MFT-RMM-253,0,,,No safe Windows filename indicator,1
 free_tools_launcher,Free Tools Launcher,Excluded,DR-MFT-RMM-254,0,,,No safe Windows filename indicator,1
@@ -94,13 +94,13 @@ helpu,HelpU,Generated,DR-MFT-RMM-070,3,^HelpuManager\.exe$|^HelpuUpdater\.exe$|^
 helpwire,HelpWire,Generated,DR-MFT-RMM-263,2,^HelpWire Quick\.exe$|^helpwire\.exe$,,,1
 hoptodesk,HopToDesk,Generated,DR-MFT-RMM-264,2,^HopToDesk\.exe$|^HopToDesk-Standalone\.exe$,,,1
 i'm_intouch,I'm InTouch,Generated,DR-MFT-RMM-265,3,^I'm InTouch Go Installer\.exe$|^iit\.exe$|^intouch\.exe$,,,1
-idrive,iDrive,Generated,DR-MFT-RMM-266,3,^IDriveWinSetup\.exe$|^IDriveEClassic\.exe$|^id_tray\.exe$,^IDComponent\.dll$,Filtered non-specific DLL filename indicators,1
+idrive,iDrive,Generated,DR-MFT-RMM-266,3,^IDriveWinSetup\.exe$|^IDriveEClassic\.exe$|^id_tray\.exe$,^IDComponent\.dll$,Filtered ambiguous or non-specific filename indicators,1
 immybot,ImmyBot,Generated,DR-MFT-RMM-267,4,^ImmyAgent\.exe$|^ImmyUpdater\.exe$|^ImmyBot\.msi$|^ImmyBot\.Agent\.Ephemeral\.exe$,,,1
 impero_connect,Impero Connect,Generated,DR-MFT-RMM-072,1,^ImperoClientSVC\.exe$,,,1
 instant_housecall,Instant Housecall,Generated,DR-MFT-RMM-073,3,^InstantHousecall\.exe$|^hsloader\.exe$|^ihcserver\.exe$,,,2
 insync,Insync,Generated,DR-MFT-RMM-074,1,^Insync\.exe$,,,1
 intelliadmin_remote_control,IntelliAdmin Remote Control,Generated,DR-MFT-RMM-075,5,^agent32\.exe$|^agent64\.exe$|^agent_setup_5\.exe$|^iadmin\.exe$|^intelliadmin\.exe$,,,1
-invgate,InvGate,Generated,DR-MFT-RMM-268,4,^DepHlp\.exe$|^InvGate-ED\.exe$|^InvGateAssetsRD\.exe$|^InvGateRD\.exe$,^Software Matt\.dll$|^sas\.dll$,Filtered non-specific DLL filename indicators,1
+invgate,InvGate,Generated,DR-MFT-RMM-268,4,^DepHlp\.exe$|^InvGate-ED\.exe$|^InvGateAssetsRD\.exe$|^InvGateRD\.exe$,^Software Matt\.dll$|^sas\.dll$,Filtered ambiguous or non-specific filename indicators,1
 iperius_remote,Iperius Remote,Generated,DR-MFT-RMM-076,2,^iperius\.exe$|^iperiusremote\.exe$,,,1
 isl_light,ISL Light,Generated,DR-MFT-RMM-269,3,^islalwaysonmonitor\.exe$|^isllight\.exe$|^isllightservice\.exe$,,,1
 isl_online,ISL Online,Generated,DR-MFT-RMM-077,4,^ISLLight\.exe$|^ISLLightClient\.exe$|^islalwaysonmonitor\.exe$|^isllightservice\.exe$,,,2
@@ -138,18 +138,16 @@ mionet__wd_anywhere_access_,MioNet (WD Anywhere Access),Generated,DR-MFT-RMM-284
 miradore,Miradore,Excluded,DR-MFT-RMM-285,0,,,No safe Windows filename indicator,1
 mobaxterm,MobaXterm,Generated,DR-MFT-RMM-102,2,^MobaXterm_installer_.*\.msi$|^MobaXterm_installer_12\.1\.msi$,,,1
 mocha_vnc_lite,Mocha VNC Lite,Excluded,DR-MFT-RMM-286,0,,,No safe Windows filename indicator,1
-monitic,Monitic,Generated,DR-MFT-RMM-287,2,^agent\.exe$|^amon\.exe$,,,1
 mouse_without_borders,Mouse Without Borders,Excluded,DR-MFT-RMM-288,0,,,No safe Windows filename indicator,1
 mremoteng,mRemoteNG,Generated,DR-MFT-RMM-103,2,^mRemoteNG\.exe$|^mRemoteNG-Installer-.*\.msi$,,,1
-msp360,MSP360,Generated,DR-MFT-RMM-104,12,^CBBackupPlan\.exe$|^CloudRaCmd\.exe$|^CloudRaSd\.exe$|^CloudRaService\.exe$|^CloudRaUtilities\.exe$|^Cloud\.Backup\.RM\.Service\.exe$|^Cloud\.Backup\.Scheduler\.exe$|^Connect\.exe$|^Online Backup\.exe$|^RMM\.Agent\.exe$|^Remote Desktop\.exe$|^cbb\.exe$,,,1
-mstsc.exe__microsoft_remote_desktop_connection_,mstsc.exe (Microsoft Remote Desktop Connection),Generated,DR-MFT-RMM-289,1,^mstsc\.exe$,,,1
+msp360,MSP360,Generated,DR-MFT-RMM-104,11,^CBBackupPlan\.exe$|^CloudRaCmd\.exe$|^CloudRaSd\.exe$|^CloudRaService\.exe$|^CloudRaUtilities\.exe$|^Cloud\.Backup\.RM\.Service\.exe$|^Cloud\.Backup\.Scheduler\.exe$|^Online Backup\.exe$|^RMM\.Agent\.exe$|^Remote Desktop\.exe$|^cbb\.exe$,^Connect\.exe$,Filtered ambiguous or non-specific filename indicators,1
+mstsc.exe__microsoft_remote_desktop_connection_,mstsc.exe (Microsoft Remote Desktop Connection),Excluded,DR-MFT-RMM-289,0,,,Built-in Windows Remote Desktop client; filename-only MFT presence is expected on Windows deployments,1
 multcloud,MultCloud,Excluded,DR-MFT-RMM-290,0,,,No safe Windows filename indicator,1
 mygreenpc,MyGreenPC,Generated,DR-MFT-RMM-105,1,^mygreenpc\.exe$,,,1
 myivo,MyIVO,Generated,DR-MFT-RMM-106,2,^myivomanager\.exe$|^myivomgr\.exe$,,,1
 n-able_advanced_monitoring_agent,N-Able Advanced Monitoring Agent,Generated,DR-MFT-RMM-108,7,^Agent_.*_RW\.exe$|^BASEClient\.exe$|^BASupApp\.exe$|^BASupSrvcCnfg\.exe$|^BASupSrvc\.exe$|^BASupTSHelper\.exe$|^winagent\.exe$,,,2
 n-able_remote_access_software,N-ABLE Remote Access Software,Excluded,DR-MFT-RMM-291,0,,,No safe Windows filename indicator,1
 naverisk,Naverisk,Generated,DR-MFT-RMM-107,1,^AgentSetup-.*\.exe$,,,1
-net_monitor_for_employees,Net Monitor for Employees,Generated,DR-MFT-RMM-292,5,^nmep_agtconfig\.exe$|^nmep_ctrlagent\.exe$|^nmep_ctrlagentsvc\.exe$|^winpty-agent64\.exe$|^winpty-agent\.exe$,,,1
 netbird,NetBird,Generated,DR-MFT-RMM-293,5,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,,,1
 netlock_rmm,NetLock RMM,Generated,DR-MFT-RMM-294,3,^NetLock_RMM_User_Process\.exe$|^NetLock_RMM_User_UAC\.exe$|^NetLock_RMM_Agent_Installer\.exe$,,,1
 netop,Netop,Excluded,DR-MFT-RMM-295,0,,,No safe Windows filename indicator,1
@@ -218,7 +216,6 @@ remotepass,RemotePass,Generated,DR-MFT-RMM-151,3,^remotepass-access\.exe$|^rpacc
 remotepc,RemotePC,Generated,DR-MFT-RMM-152,4,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,,,1
 remotepulse,RemotePulse,Generated,DR-MFT-RMM-322,5,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,,,1
 remoteview,RemoteView,Generated,DR-MFT-RMM-153,3,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,,,1
-remsupp,RemSupp,Generated,DR-MFT-RMM-324,3,^RemSupp\.exe$|^Uninstall RemSupp\.exe$|^installer\.exe$,,,1
 res_automation_manager,RES Automation Manager,Generated,DR-MFT-RMM-154,4,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,,,1
 rocket_remote_desktop,Rocket Remote Desktop,Generated,DR-MFT-RMM-155,2,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,,,1
 rodex_rmm,Rodex RMM,Generated,DR-MFT-RMM-325,2,^RodexAgent\.exe$|^<random>\.exe$,,,1
@@ -295,7 +292,7 @@ yandex.disk,Yandex.Disk,Generated,DR-MFT-RMM-210,1,^YandexDisk2\.exe$,,,1
 zabbix_agent,Zabbix Agent,Generated,DR-MFT-RMM-211,1,^zabbix_agent.*\.exe$,,,1
 zerotier,ZeroTier,Generated,DR-MFT-RMM-212,3,^zero-powershell\.exe$|^zerotier.*\.exe$|^zerotier.*\.msi$,,,1
 zoc,ZOC,Generated,DR-MFT-RMM-213,1,^zoc\.exe$,,,1
-zoho_assist,Zoho Assist,Generated,DR-MFT-RMM-214,10,^ZA_Access\.exe$|^ZMAgent\.exe$|^ZohoMeeting\.exe$|^ZohoURSService\.exe$|^Zohours\.exe$|^connect\.exe$|^toolsiq\.exe$|^za_connect\.exe$|^zaservice\.exe$|^zohotray\.exe$,,,1
+zoho_assist,Zoho Assist,Generated,DR-MFT-RMM-214,9,^ZA_Access\.exe$|^ZMAgent\.exe$|^ZohoMeeting\.exe$|^ZohoURSService\.exe$|^Zohours\.exe$|^toolsiq\.exe$|^za_connect\.exe$|^zaservice\.exe$|^zohotray\.exe$,^connect\.exe$,Filtered ambiguous or non-specific filename indicators,1
 ,RMM - Barracuda,Override,DR-MFT-RMM-018,,^BarracudaRMM$|^Barracuda Workplace$|^Barracuda MSP$,,Barracuda - barracudamsp.com,
 ,RMM - Cruz,Override,DR-MFT-RMM-035,,^CruzRMM$,,Cruz - resources.doradosoftware.com/cruz-rmm,
 ,RMM -  Electric AI (Kaseya),Override,DR-MFT-RMM-047,,^ElectricAi$,,Electric - electric.ai,
@@ -323,3 +320,9 @@ royal_server,RMM - Royal Server,Override,DR-MFT-RMM-157,,^RoyalServerInstaller_.
 microsoft_quick_assist,RMM - Microsoft Quick Assist Execution,Override,DR-MFT-RMM-098,,^quickassist\.exe$,,Microsoft Quick Assist execution evidence,
 ,RMM - RealVNC Installer,Override,DR-MFT-RMM-142,,^VNC-Connect-Installer-.*\.exe$,,RealVNC installer filename,
 komari,RMM - Komari,Override,DR-MFT-RMM-218,,^(komari|komari-agent|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm))(\.exe)?$,,Komari server or agent filename indicator,
+monitic,RMM - Monitic,Override,DR-MFT-RMM-287,,^amon\.exe$,,Monitic product-specific binary; https://lolrmm.io/tools/monitic,
+,RMM - Monitic Agent in Product Path,Override,DR-MFT-RMM-350,,^agent\.exe$,,Generic Monitic agent basename restricted to the upstream product path,
+net_monitor_for_employees,RMM - Net Monitor for Employees,Override,DR-MFT-RMM-292,,^nmep_(agtconfig|ctrlagent|ctrlagentsvc)\.exe$,,Net Monitor for Employees product-specific binaries; https://lolrmm.io/tools/net_monitor_for_employees,
+,RMM - Net Monitor for Employees WinPTY in Product Path,Override,DR-MFT-RMM-351,,^winpty-agent(64)?\.exe$,,Generic WinPTY helper restricted to the upstream Net Monitor for Employees product path,
+remsupp,RMM - RemSupp,Override,DR-MFT-RMM-324,,^(RemSupp|Uninstall RemSupp)\.exe$,,RemSupp product-specific binaries; https://lolrmm.io/tools/remsupp,
+,RMM - RemSupp Updater Installer in Product Path,Override,DR-MFT-RMM-352,,^installer\.exe$,,Generic updater installer basename restricted to the upstream RemSupp product path,

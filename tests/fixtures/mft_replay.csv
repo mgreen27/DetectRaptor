@@ -22,3 +22,7 @@ MFT-020,MFT,File,payload.exe,C:\Users\analyst\AppData\Local\payload.exe,Local Ap
 MFT-021,MFT,Directory,Datto,C:\ProgramData\Datto,RMM product directory
 MFT-022,MFT,File,Datto,C:\ProgramData\Datto,Directory indicator presented as file
 MFT-023,MFT,File,vendor.dll,C:\Users\analyst\AppData\Local\Temp\Vendor\vendor.dll,Nested Local Temp supporting library
+MFT-024,MFT,File,$IABC123.exe,C:\$Recycle.Bin\S-1-5-21-1\$IABC123.exe,Canonical Recycle Bin metadata sidecar
+MFT-025,MFT,File,$RABC123.exe,C:\$Recycle.Bin\S-1-5-21-1\$RABC123.exe,Recycled executable content
+MFT-026,MFT,File,$Important.exe,C:\$Recycle.Bin\S-1-5-21-1\$Important.exe,Noncanonical executable staged beneath Recycle Bin
+MFT-027,MFT,File,payload.ps1,C:\$Recycle.Bin\S-1-5-21-1\$RABC123\Scripts\payload.ps1,Script inside a canonical recycled directory
