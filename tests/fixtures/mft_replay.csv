@@ -1,0 +1,23 @@
+CaseID,Artifact,EntryType,FileName,OSPath,Description
+MFT-001,MFT,File,svchost.exe,C:\Users\analyst\AppData\Local\Temp\svchost.exe,System binary masquerading in Local Temp
+MFT-002,MFT,File,payload.exe,C:\Users\analyst\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\payload.exe,Startup executable
+MFT-003,MFT,File,launch.lnk,C:\Users\analyst\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\launch.lnk,Startup shortcut
+MFT-004,MFT,File,invoice.pdf.exe,C:\Users\analyst\Downloads\invoice.pdf.exe,Double extension payload
+MFT-005,MFT,File,ntds.dit,C:\Users\analyst\Desktop\ntds.dit,NTDS database under user profile
+MFT-006,MFT,File,payload.ps1,C:\$Recycle.Bin\S-1-5-21-1\$R123\payload.ps1,Recycle Bin script
+MFT-007,MFT,File,crash.dmp,C:\Users\analyst\AppData\Local\Temp\crash.dmp,Local Temp crash dump
+MFT-008,MFT,File,QuickAssist.exe,C:\Windows\System32\QuickAssist.exe,Trusted Quick Assist path
+MFT-009,MFT,File,QuickAssist.exe,C:\Tools\QuickAssist.exe,Unusual Quick Assist path
+MFT-010,Amcache,File,QuickAssist.exe,C:\Windows\System32\QuickAssist.exe,Quick Assist execution evidence
+MFT-011,MFT,File,AnyDesk.exe,C:\Program Files\AnyDesk\AnyDesk.exe,Installed AnyDesk
+MFT-012,MFT,File,processhacker.exe.config,C:\Tools\processhacker.exe.config,Supporting configuration file
+MFT-013,MFT,File,processhacker.exe,C:\Tools\processhacker.exe,Process Hacker executable
+MFT-014,MFT,File,restic.exe.log,C:\Temp\restic.exe.log,Restic log file
+MFT-015,MFT,File,restic.exe,C:\Temp\restic.exe,Restic executable
+MFT-016,MFT,File,7z.exe,C:\Users\analyst\Downloads\7z.exe,Archive utility in user staging
+MFT-017,MFT,File,AnyDesk.exe,C:\Users\analyst\AppData\Local\Temp\AnyDesk.exe,Portable AnyDesk in Local Temp
+MFT-018,MFT,File,crash.dmp,C:\Users\Public\crash.dmp,Public crash dump
+MFT-019,MFT,File,payload.exe,C:\Users\analyst\AppData\Update\payload.exe,Uncommon AppData sibling
+MFT-020,MFT,File,payload.exe,C:\Users\analyst\AppData\Local\payload.exe,Local AppData root executable
+MFT-021,MFT,Directory,Datto,C:\ProgramData\Datto,RMM product directory
+MFT-022,MFT,File,Datto,C:\ProgramData\Datto,Directory indicator presented as file

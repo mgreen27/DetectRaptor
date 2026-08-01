@@ -37,6 +37,11 @@ jobs:
           python loldrivers.py
           python loldrivers_yara.py
           python lolrmm.py
+          python sync_mft_lolrmm.py
+          python normalize_mft_metadata.py
+          python build_mft_replay_coverage.py
+          python mft.py
+          python amcache.py
           
     - name: Git Auto Commit
       uses: stefanzweifel/git-auto-commit-action@v4.15.4

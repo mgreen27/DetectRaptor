@@ -1,0 +1,20 @@
+Category,Rules,ConfidenceHigh,ConfidenceMedium,ConfidenceLow,CriticalityHigh,CriticalityMedium,CriticalityLow,ScopeMFT,ScopeAmcache,ScopeBoth,TechniqueMapped
+Archive Utility,3,3,0,0,0,2,1,2,1,0,0
+Attacker Tool,42,42,0,0,11,27,4,1,0,41,9
+Credential Access,7,6,1,0,7,0,0,1,0,6,6
+Cryptomining,1,1,0,0,0,0,1,0,0,1,0
+Data Transfer,5,5,0,0,2,0,3,0,0,5,0
+Defence Evasion,3,3,0,0,2,1,0,0,0,3,3
+Developer Utility,2,2,0,0,0,2,0,0,0,2,0
+Discovery,5,5,0,0,4,1,0,0,0,5,4
+Execution,5,5,0,0,2,1,2,1,0,4,3
+Impact,1,0,1,0,0,0,1,0,0,1,1
+Masquerading,2,2,0,0,2,0,0,0,0,2,2
+Network Tunnelling,1,1,0,0,0,1,0,0,0,1,1
+Persistence,2,1,1,0,1,1,0,2,0,0,2
+Policy Violation,1,0,1,0,0,0,1,0,0,1,0
+Privilege Escalation,2,1,1,0,2,0,0,0,0,2,0
+Remote Access Software,270,203,67,0,0,270,0,13,1,256,270
+Suspicious Filename,1,0,1,0,0,1,0,0,0,1,1
+Suspicious Location,14,7,7,0,7,7,0,12,0,2,0
+Web History,1,1,0,0,0,0,1,0,0,1,0

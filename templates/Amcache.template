@@ -44,23 +44,32 @@ sources:
             AND Criticality =~ CriticalityLevel
             AND Scope =~ '^(Amcache|Both)$'
             AND NOT EntryType = 'Directory'
+
+      LET keyword_patterns <= SELECT KeywordRegex
+        FROM all_the_things
         GROUP BY KeywordRegex
       
       -- run KeywordRegex regex
       LET hits = SELECT * FROM Artifact.Windows.Detection.Amcache(
                                 KeyPathGlob='/Root/{Inventory, File}*/**',
-                                NameRegex=join(array=all_the_things.KeywordRegex,sep='|'))
+                                NameRegex=join(array=keyword_patterns.KeywordRegex,sep='|'))
       
       -- output results and enrich with IOC data
       SELECT * FROM foreach(row=hits,query={
             SELECT 
                 dict(
+                    RuleID=RuleID,
                     Name=Detection,
+                    Category=Category,
+                    Technique=Technique,
+                    Confidence=Confidence,
                     KeywordRegex=KeywordRegex,
                     PathName=EntryPath,
                     Reference=Reference,
                     Scope=Scope,
                     EntryType=EntryType,
+                    Source=Source,
+                    SourceID=SourceID,
                     Criticality=Criticality) as Detection,
                 if(condition=EntryPath =~ '''\\<Err\>|\\<UnknownEntry\>|\\<Parent ''',
                     then='Unresolved',
@@ -73,7 +82,7 @@ sources:
                                 else=if(condition=EntryPath =~ '''\\Windows\\''',
                                     then='System',
                                     else='Other'))))) as LocationContext,
-                if(condition=Detection =~ '^(RMM|Remote Access)',
+                if(condition=Category = 'Remote Access Software',
                     then=if(condition=Detection =~ ApprovedRMMNameRegex
                             AND EntryPath =~ ApprovedRMMPathRegex,
                         then='Approved',

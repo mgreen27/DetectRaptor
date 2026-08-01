@@ -66,8 +66,35 @@ python -m unittest discover -s tests -v
 Validate the MFT detection CSV directly:
 
 ```bash
+python scripts/sync_mft_lolrmm.py
+python scripts/normalize_mft_metadata.py
+python scripts/assign_mft_metadata.py --check
 python scripts/validate_mft.py
+python scripts/build_mft_replay_coverage.py
+python scripts/replay_mft.py --check
 ```
+
+When adding an MFT rule, leave the generated metadata fields empty and run:
+
+```bash
+python scripts/assign_mft_metadata.py
+```
+
+This assigns an immutable `DR-MFT-<CATEGORY>-NNN` RuleID and baseline
+category, confidence, source, and ATT&CK metadata. Existing RuleIDs are
+preserved.
+
+`sync_mft_lolrmm.py` regenerates LOLRMM-backed MFT rules from
+`csv/lolrmm.csv`, preserving IDs through `csv/MFT_RMM_IDs.csv` and applying
+`csv/MFT_RMM_Overrides.csv`. `normalize_mft_metadata.py` then applies the
+reviewed confidence, severity, scope, and ATT&CK policy.
+
+`build_mft_replay_coverage.py` creates a deterministic synthetic positive for
+every MFT rule and records overlapping rule matches in
+`csv/MFT_Replay_Coverage.csv`. `replay_mft.py --check` evaluates the sanitized
+positive and negative fixtures under `tests/fixtures/`. It can also compare a
+candidate rules file with a baseline using `--baseline-rules`, and write
+detailed match, comparison, and summary output to explicitly selected paths.
 
 Regenerate the affected artifacts from `scripts/`:
 

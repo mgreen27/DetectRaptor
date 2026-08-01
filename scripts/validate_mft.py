@@ -8,7 +8,11 @@ from pathlib import Path
 
 
 EXPECTED_FIELDS = (
+    "RuleID",
     "Detection",
+    "Category",
+    "Technique",
+    "Confidence",
     "KeywordRegex",
     "PathRegex",
     "IgnoreRegex",
@@ -16,20 +20,31 @@ EXPECTED_FIELDS = (
     "Criticality",
     "Scope",
     "EntryType",
+    "Source",
+    "SourceID",
 )
 REQUIRED_FIELDS = (
+    "RuleID",
     "Detection",
+    "Category",
+    "Confidence",
     "KeywordRegex",
     "PathRegex",
     "Criticality",
     "Scope",
     "EntryType",
+    "Source",
 )
 REGEX_FIELDS = ("KeywordRegex", "PathRegex", "IgnoreRegex")
 ALLOWED_CRITICALITIES = {"Critical", "High", "Medium", "Low"}
+ALLOWED_CONFIDENCE = {"High", "Medium", "Low", "Unreviewed"}
 ALLOWED_SCOPES = {"MFT", "Amcache", "Both"}
 ALLOWED_ENTRY_TYPES = {"File", "Directory", "Any"}
 GLOBAL_IGNORE_PATTERNS = {".", ".*", "^.*$", "(?:.*)"}
+RULE_ID_PATTERN = re.compile(
+    r"^DR-MFT-[A-Z][A-Z0-9]{2,5}-\d{3}$")
+TECHNIQUE_PATTERN = re.compile(
+    r"^T\d{4}(?:\.\d{3})?(?:\|T\d{4}(?:\.\d{3})?)*$")
 
 
 def _parenthesized_contents(pattern):
@@ -132,6 +147,7 @@ def validate_mft_csv(csv_path):
                 + ",".join(EXPECTED_FIELDS)
             ]
 
+        seen_rule_ids = {}
         for line_number, row in enumerate(reader, start=2):
             if None in row or any(value is None for value in row.values()):
                 issues.append(
@@ -143,6 +159,28 @@ def validate_mft_csv(csv_path):
                 if not row[field].strip():
                     issues.append(
                         f"line {line_number}: required field {field} is empty")
+
+            rule_id = row["RuleID"].strip()
+            if rule_id and not RULE_ID_PATTERN.fullmatch(rule_id):
+                issues.append(
+                    f"line {line_number}: invalid RuleID {rule_id!r}")
+            elif rule_id in seen_rule_ids:
+                issues.append(
+                    f"line {line_number}: duplicate RuleID {rule_id!r}; "
+                    f"first used on line {seen_rule_ids[rule_id]}")
+            elif rule_id:
+                seen_rule_ids[rule_id] = line_number
+
+            if row["Confidence"] not in ALLOWED_CONFIDENCE:
+                issues.append(
+                    f"line {line_number}: invalid Confidence "
+                    f"{row['Confidence']!r}")
+
+            technique = row["Technique"].strip()
+            if technique and not TECHNIQUE_PATTERN.fullmatch(technique):
+                issues.append(
+                    f"line {line_number}: invalid Technique "
+                    f"{technique!r}")
 
             if row["Criticality"] not in ALLOWED_CRITICALITIES:
                 issues.append(

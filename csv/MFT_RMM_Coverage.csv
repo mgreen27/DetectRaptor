@@ -1,0 +1,325 @@
+SourceID,Name,Status,RuleID,FilenamePatternCount,FilenameRegex,Reason,SourceRows
+247ithelp.com__connectwise_,247ithelp.com (ConnectWise),Generated,DR-MFT-RMM-001,1,^Remote Workforce Client\.exe$,,1
+absolute__computrace_,Absolute (Computrace),Generated,DR-MFT-RMM-002,5,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersitence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,,1
+acronis_cyber_protect__remotix_,Acronis Cyber Protect (Remotix),Generated,DR-MFT-RMM-004,2,^AcronisCyberProtectConnectAgent\.exe$|^AcronisCyberProtectConnectQuickAssist.*\.exe$,,1
+addigy,Addigy,Excluded,DR-MFT-RMM-219,0,,No safe Windows filename indicator,1
+adobe_connect,Adobe Connect,Generated,DR-MFT-RMM-006,4,^ConnectAppSetup.*\.exe$|^ConnectDetector\.exe$|^ConnectShellSetup.*\.exe$|^Connect\.exe$,,1
+aeroadmin,AeroAdmin,Generated,DR-MFT-RMM-007,1,^AeroAdmin\.exe$,,1
+aliwangwang-remote-control,AliWangWang-remote-control,Generated,DR-MFT-RMM-008,1,^alitask\.exe$,,1
+alpemix,Alpemix,Generated,DR-MFT-RMM-009,1,^AlpemixService\.exe$,,1
+ammyy_admin,Ammyy Admin,Generated,DR-MFT-RMM-220,2,^AMMYY_Admin\.exe$|^aa_v.*\.exe$,,1
+any_support,Any Support,Generated,DR-MFT-RMM-011,1,^ManualLauncher\.exe$,,1
+anyplace_control,Anyplace Control,Generated,DR-MFT-RMM-013,1,^apc_host\.exe$,,1
+apple_remote_desktop,Apple Remote Desktop,Excluded,DR-MFT-RMM-221,0,,No safe Windows filename indicator,1
+aspia,Aspia,Generated,DR-MFT-RMM-222,1,^aspia_client\.exe$,,1
+atera,Atera,Generated,DR-MFT-RMM-015,5,^AgentPackageNetworkDiscovery\.exe$|^AgentPackageTaskScheduler\.exe$|^AteraAgent\.exe$|^atera_agent\.exe$|^syncrosetup\.exe$,,1
+auvik,Auvik,Generated,DR-MFT-RMM-016,2,^auvik\.agent\.exe$|^auvik\.engine\.exe$,,1
+aweray,AweRay,Generated,DR-MFT-RMM-017,2,^AweSun\.exe$|^aweray_remote.*\.exe$,,1
+baramundi_management_suite,baramundi Management Suite,Excluded,DR-MFT-RMM-223,0,,No safe Windows filename indicator,1
+barracuda,Barracuda,Excluded,DR-MFT-RMM-224,0,,No safe Windows filename indicator,1
+basecamp,Basecamp,Excluded,DR-MFT-RMM-225,0,,No safe Windows filename indicator,1
+beamyourscreen,BeamYourScreen,Generated,DR-MFT-RMM-020,2,^beamyourscreen-host\.exe$|^beamyourscreen\.exe$,,1
+beanywhere,BeAnyWhere,Generated,DR-MFT-RMM-226,8,^BASupAppElev\.exe$|^BASupAppSrvc\.exe$|^BASupApp\.exe$|^BASupSysInf\.exe$|^TakeControl\.exe$|^basupsrvc\.exe$|^basupsrvcupdate\.exe$|^basuptshelper\.exe$,,1
+beinsync,BeInSync,Generated,DR-MFT-RMM-022,1,^Beinsync.*\.exe$,,1
+beyondtrust,BeyondTrust,Excluded,DR-MFT-RMM-227,0,,No safe Windows filename indicator,1
+beyondtrust__bomgar_,BeyondTrust (Bomgar),Generated,DR-MFT-RMM-023,5,^bomgar-pac-.*\.exe$|^bomgar-pac\.exe$|^bomgar-rdp\.exe$|^bomgar-scc-.*\.exe$|^bomgar-scc\.exe$,,1
+bitvise_ssh_client,Bitvise SSH Client,Generated,DR-MFT-RMM-024,1,^BvSshClient-Inst\.exe$,,1
+bitvise_ssh_server,Bitvise SSH Server,Generated,DR-MFT-RMM-228,1,^BvSshServer-Inst\.exe$,,1
+bluetrait,Bluetrait,Excluded,DR-MFT-RMM-229,0,,No safe Windows filename indicator,1
+centrastage__now_datto_,CentraStage (Now Datto),Generated,DR-MFT-RMM-026,2,^AEMAgent\.exe$|^CagService\.exe$,,1
+centurion,Centurion,Generated,DR-MFT-RMM-027,1,^ctiserv\.exe$,,1
+chicken__of_the_vnc_,Chicken (of the VNC),Excluded,DR-MFT-RMM-230,0,,No safe Windows filename indicator,1
+chrome_remote_desktop,Chrome Remote Desktop,Generated,DR-MFT-RMM-028,2,^remoting_host\.exe$|^remote_host\.exe$,,1
+chrome_ssh_extension,Chrome SSH Extension,Excluded,DR-MFT-RMM-231,0,,No safe Windows filename indicator,1
+cloudflare_tunnel,CloudFlare Tunnel,Generated,DR-MFT-RMM-029,1,^cloudflared\.exe$,,1
+comodo_rmm,Comodo RMM,Generated,DR-MFT-RMM-232,2,^itsmagent\.exe$|^rviewer\.exe$,,1
+connectwise,ConnectWise,Excluded,DR-MFT-RMM-233,0,,No safe Windows filename indicator,1
+connectwise_automate__labtech_,Connectwise Automate (LabTech),Generated,DR-MFT-RMM-031,3,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,,1
+connectwise_control,ConnectWise Control,Generated,DR-MFT-RMM-032,3,^connectwisechat-customer\.exe$|^connectwisecontrol\.client\.exe$|^screenconnect\.windowsclient\.exe$,,1
+controlio,Controlio,Generated,DR-MFT-RMM-234,8,^bbl\.exe$|^weCliboardListener\.exe$|^weInstSvc\.exe$|^wemonc\.exe$|^weprtct\.exe$|^wesvc\.exe$|^libeay32\.dll$|^ssleay32\.dll$,,1
+crossloop,CrossLoop,Generated,DR-MFT-RMM-033,3,^CrossLoopConnect\.exe$|^WinVNCStub\.exe$|^crossloopservice\.exe$,,1
+crosstec_remote_control,CrossTec Remote Control,Generated,DR-MFT-RMM-034,2,^PCIVIDEO\.EXE$|^supporttool\.exe$,,1
+cruzcontrol,CruzControl,Excluded,DR-MFT-RMM-235,0,,No safe Windows filename indicator,1
+dameware,DameWare,Generated,DR-MFT-RMM-036,7,^dwrcst\.exe$|^DameWare Mini Remote Control.*\.exe$|^DameWare Remote Support\.exe$|^SolarWinds-Dameware-DRS.*\.exe$|^SolarWinds-Dameware-MRC.*\.exe$|^dntus.*\.exe$|^dwrcs\.exe$,,1
+dataplicity,Dataplicity,Excluded,DR-MFT-RMM-236,0,,No safe Windows filename indicator,1
+deskday,DeskDay,Generated,DR-MFT-RMM-037,1,^ultimate_.*\.exe$,,1
+desknets,DeskNets,Excluded,DR-MFT-RMM-237,0,,No safe Windows filename indicator,1
+deskshare,DeskShare,Generated,DR-MFT-RMM-038,2,^DSGuest\.exe$|^TeamTaskManager\.exe$,,1
+desktopnow,DesktopNow,Generated,DR-MFT-RMM-039,1,^desktopnow\.exe$,,1
+dev_tunnels__aka_visual_studio_dev_tunnel_,Dev Tunnels (aka Visual Studio Dev Tunnel),Excluded,DR-MFT-RMM-238,0,,No safe Windows filename indicator,1
+devolutions_remote_desktop_manager,Devolutions Remote Desktop Manager,Generated,DR-MFT-RMM-239,1,^RemoteDesktopManager\.exe$,,1
+distant_desktop,Distant Desktop,Generated,DR-MFT-RMM-040,2,^ddsystem\.exe$|^distant-desktop\.exe$,,1
+domotz,Domotz,Generated,DR-MFT-RMM-041,6,^Domotz Pro Desktop App Setup.*\.exe$|^Domotz Pro Desktop App\.exe$|^domotz-windows.*\.exe$|^domotz.*\.exe$|^domotz\.exe$|^domotz_bash\.exe$,,1
+dragondisk,DragonDisk,Generated,DR-MFT-RMM-042,1,^DragonDisk\.exe$,,1
+duet_display,Duet Display,Generated,DR-MFT-RMM-240,3,^DuetDisp\.exe$|^DuetSetup\.exe$|^duet\.exe$,,1
+duplicati,Duplicati,Generated,DR-MFT-RMM-043,1,^Duplicati\.Server\.exe$,,1
+dw_service,DW Service,Generated,DR-MFT-RMM-044,3,^dwagent\.exe$|^dwaglnc\.exe$|^dwagsvc\.exe$,,1
+echoware,Echoware,Generated,DR-MFT-RMM-045,2,^echoserver.*\.exe$|^echoware\.dll$,,1
+ehorus,eHorus,Generated,DR-MFT-RMM-046,5,^ehorus standalone\.exe$|^ehorus_agent\.exe$|^ehorus_cmd\.exe$|^ehorus_launcher\.exe$|^ehorus_uit\.exe$,,1
+electric_ai__kaseya_,Electric AI (Kaseya),Excluded,DR-MFT-RMM-241,0,,No safe Windows filename indicator,1
+emco_remote_console,EMCO Remote Console,Generated,DR-MFT-RMM-048,1,^remoteconsole\.exe$,,1
+encapto,Encapto,Excluded,DR-MFT-RMM-242,0,,No safe Windows filename indicator,1
+ericom_accessnow,Ericom AccessNow,Generated,DR-MFT-RMM-243,2,^accessserver.*\.exe$|^accessserver\.exe$,,1
+ericom_connect,Ericom Connect,Generated,DR-MFT-RMM-244,2,^EricomConnectRemoteHost.*\.exe$|^ericomconnnectconfigurationtool\.exe$,,1
+eset_remote_administrator,ESET Remote Administrator,Generated,DR-MFT-RMM-245,5,^ERAAgent\.exe$|^einstaller\.exe$|^era\.exe$|^eratool\.exe$|^ezhelp.*\.exe$,,1
+extraputty,ExtraPuTTY,Generated,DR-MFT-RMM-053,1,^ExtraPuTTY-0\.30-2016-01-28-installer\.exe$,,1
+ezhelp,ezHelp,Generated,DR-MFT-RMM-054,3,^ezHelpManager\.exe$|^ezhelpclient\.exe$|^ezhelpclientmanager\.exe$,,1
+faronics_core,Faronics Core,Generated,DR-MFT-RMM-246,3,^CoreAgentService\.exe$|^FaronicsCoreAgent\.exe$|^FCAForStartupMonitor\.msi$,,1
+faronics_deep_freeze,Faronics Deep Freeze,Generated,DR-MFT-RMM-247,8,^DFC\.exe$|^DFServEx\.exe$|^DFServ\.exe$|^DFWks\.exe$|^CloudWksInstall\.exe$|^DFInst\.exe$|^DFStdInstall\.exe$|^DFStd\.exe$,,1
+faronics_deploy,Faronics Deploy,Generated,DR-MFT-RMM-248,13,^FRCServer\.exe$|^FSSInstaller\.exe$|^FWAService\.exe$|^FWA_UI_Agent\.exe$|^FaronicsDeployAgent\.exe$|^FaronicsSA\.exe$|^MigrationHelper_32\.exe$|^MigrationHelper_64\.exe$|^ModulesUpgradeMgr\.exe$|^NotificationHelper\.exe$|^UserNotificationHelper\.exe$|^CloudWksInstall\.exe$|^FWAWebInstaller_.*\.exe$,,1
+faronics_insight,Faronics Insight,Generated,DR-MFT-RMM-249,9,^FIStudentAgent\.exe$|^FIStudentSvc\.exe$|^FIStudentUI\.exe$|^STAHelper\.exe$|^InsightSetup\.msi$|^InsightInstallerStudent\.exe$|^InsightInstallerTeacher\.exe$|^InsightInstaller\.exe$|^StudentSvc\.exe$,,1
+fastviewer,FastViewer,Generated,DR-MFT-RMM-055,3,^FastViewer\.exe$|^fastclient\.exe$|^fastmaster\.exe$,,1
+fixme.it,FixMe.it,Generated,DR-MFT-RMM-250,9,^FixMeit Client\.exe$|^FixMeit Expert Setup\.exe$|^FixMeit Unattended Access Setup\.exe$|^FixMeitClient.*\.exe$|^TiClientCore\.exe$|^TiClientHelper.*\.exe$|^TiExpertCore\.exe$|^TiExpertStandalone\.exe$|^fixmeitclient\.exe$,,1
+fleetdeck.io,FleetDeck.io,Generated,DR-MFT-RMM-251,8,^fd_agent\.dll$|^fleetdeck_agent\.exe$|^fleetdeck_agent_svc\.exe$|^fleetdeck-agent\.exe$|^fleetdeck_commander_launcher\.exe$|^fleetdeck_commander_svc\.exe$|^fleetdeck_installer\.exe$|^fleetdeck-agent\.msi$,,1
+fortra,Fortra,Excluded,DR-MFT-RMM-252,0,,No safe Windows filename indicator,1
+free_ping_tool,Free Ping Tool,Excluded,DR-MFT-RMM-253,0,,No safe Windows filename indicator,1
+free_tools_launcher,Free Tools Launcher,Excluded,DR-MFT-RMM-254,0,,No safe Windows filename indicator,1
+freenx,FreeNX,Generated,DR-MFT-RMM-059,1,^nxplayer\.exe$,,1
+freerdp,FreeRDP,Excluded,DR-MFT-RMM-255,0,,No safe Windows filename indicator,1
+freshservice,Freshservice,Generated,DR-MFT-RMM-256,10,^FSAgentAutoUpdate\.exe$|^FSAgentService\.exe$|^FSWmiScanner\.exe$|^Freshservice\.DiscoveryProbe\.ScanService\.exe$|^Freshservice\.DiscoveryProbe\.Window\.exe$|^plink\.exe$|^FSAgent\.msi$|^fs-probe-.*\.msi$|^fs-windows-agent-.*\.msi$|^win-installer-.*\.msi$,,1
+getscreen,GetScreen,Generated,DR-MFT-RMM-061,2,^getscreen-x86\.exe$|^getscreen\.upd\.exe$,,1
+glpi_agent,GLPI Agent,Excluded,DR-MFT-RMM-257,0,,No safe Windows filename indicator,1
+gorelo_rmm,Gorelo RMM,Excluded,DR-MFT-RMM-258,0,,No safe Windows filename indicator,1
+goto_opener,GoTo Opener,Excluded,DR-MFT-RMM-259,0,,No safe Windows filename indicator,1
+gotoassist,GoToAssist,Generated,DR-MFT-RMM-062,7,^GoTo Assist Opener\.exe$|^g2a.*\.exe$|^g2ax_comm_customer\.exe$|^g2mcomm\.exe$|^goto opener\.exe$|^gotoassist\.exe$|^g2mupdate\.com$,,1
+gotoassist__goto_resolve_,GoToAssist (GoTo Resolve),Generated,DR-MFT-RMM-260,17,^GoToResolveExternalModuleHandler\.exe$|^GoToResolveFileManager\.exe$|^GoToResolveLoggerProcess\.exe$|^GoToResolveNetworkChecker\.exe$|^GoToResolveProcessChecker\.exe$|^GoToResolveQuickView\.exe$|^GoToResolveRegistryEditor\.exe$|^GoToResolveRemoteControl\.exe$|^GoToResolveServiceManager\.exe$|^GoToResolveService\.exe$|^GoToResolveTerminal\.exe$|^GoToResolveTools32\.exe$|^GoToResolveTools64\.exe$|^GoToResolveUi\.exe$|^GoToResolveUnattendedRemover\.exe$|^GoToResolveUnattendedUi\.exe$|^GoToResolveUnattended\.exe$,,1
+gotoassist_agent_desktop_console,GoToAssist Agent Desktop Console,Generated,DR-MFT-RMM-063,1,^G2RDesktopConsole-x64\.msi$,,1
+gotohttp,GotoHTTP,Generated,DR-MFT-RMM-064,3,^GotoHTTP.*\.exe$|^GotoHTTP_x64\.exe$|^gotohttp\.exe$,,1
+gotomypc,GoToMyPC,Generated,DR-MFT-RMM-261,1,^G2M\.exe$,,1
+goverlan,Goverlan,Generated,DR-MFT-RMM-067,6,^GovSrv\.exe$|^GovAgentInstallHelper\.exe$|^GovAgentx64\.exe$|^GovReachClient\.exe$|^goverrmc\.exe$|^govsrv.*\.exe$,,1
+guacamole,Guacamole,Generated,DR-MFT-RMM-068,1,^guacd\.exe$,,1
+heartbeatrm,HeartbeatRM,Generated,DR-MFT-RMM-262,3,^agent-installer-any\.exe$|^hbrm-updater-x64\.exe$|^hbrm-x64\.exe$,,1
+helpbeam,HelpBeam,Generated,DR-MFT-RMM-069,1,^helpbeam.*\.exe$,,1
+helpu,HelpU,Generated,DR-MFT-RMM-070,3,^HelpuManager\.exe$|^HelpuUpdater\.exe$|^helpu_install\.exe$,,1
+helpwire,HelpWire,Generated,DR-MFT-RMM-263,2,^HelpWire Quick\.exe$|^helpwire\.exe$,,1
+hoptodesk,HopToDesk,Generated,DR-MFT-RMM-264,2,^HopToDesk\.exe$|^HopToDesk-Standalone\.exe$,,1
+i'm_intouch,I'm InTouch,Generated,DR-MFT-RMM-265,3,^I'm InTouch Go Installer\.exe$|^iit\.exe$|^intouch\.exe$,,1
+idrive,iDrive,Generated,DR-MFT-RMM-266,4,^IDriveWinSetup\.exe$|^IDComponent\.dll$|^IDriveEClassic\.exe$|^id_tray\.exe$,,1
+immybot,ImmyBot,Generated,DR-MFT-RMM-267,4,^ImmyAgent\.exe$|^ImmyUpdater\.exe$|^ImmyBot\.msi$|^ImmyBot\.Agent\.Ephemeral\.exe$,,1
+impero_connect,Impero Connect,Generated,DR-MFT-RMM-072,1,^ImperoClientSVC\.exe$,,1
+instant_housecall,Instant Housecall,Generated,DR-MFT-RMM-073,3,^InstantHousecall\.exe$|^hsloader\.exe$|^ihcserver\.exe$,,2
+insync,Insync,Generated,DR-MFT-RMM-074,1,^Insync\.exe$,,1
+intelliadmin_remote_control,IntelliAdmin Remote Control,Generated,DR-MFT-RMM-075,5,^agent32\.exe$|^agent64\.exe$|^agent_setup_5\.exe$|^iadmin\.exe$|^intelliadmin\.exe$,,1
+invgate,InvGate,Generated,DR-MFT-RMM-268,6,^DepHlp\.exe$|^InvGate-ED\.exe$|^Software Matt\.dll$|^InvGateAssetsRD\.exe$|^InvGateRD\.exe$|^sas\.dll$,,1
+iperius_remote,Iperius Remote,Generated,DR-MFT-RMM-076,2,^iperius\.exe$|^iperiusremote\.exe$,,1
+isl_light,ISL Light,Generated,DR-MFT-RMM-269,3,^islalwaysonmonitor\.exe$|^isllight\.exe$|^isllightservice\.exe$,,1
+isl_online,ISL Online,Generated,DR-MFT-RMM-077,4,^ISLLight\.exe$|^ISLLightClient\.exe$|^islalwaysonmonitor\.exe$|^isllightservice\.exe$,,2
+itarian,Itarian,Generated,DR-MFT-RMM-078,10,^ComodoRemoteControl\.exe$|^ITSMAgent\.exe$|^ITSMService\.exe$|^ITarianRemoteAccessSetup\.exe$|^ItsmRsp\.exe$|^RAccess\.exe$|^RDesktop\.exe$|^RHost\.exe$|^RViewer\.exe$|^RmmService\.exe$,,1
+itsupport247__connectwise_,ITSupport247 (ConnectWise),Generated,DR-MFT-RMM-079,1,^saazapsc\.exe$,,2
+ivanti_remote_control,Ivanti Remote Control,Generated,DR-MFT-RMM-080,3,^AgentlessRC\.exe$|^ArcUI\.exe$|^IvantiRemoteControl\.exe$,,1
+jollysfastvnc,JollysFastVNC,Excluded,DR-MFT-RMM-270,0,,No safe Windows filename indicator,1
+jump_cloud,Jump Cloud,Generated,DR-MFT-RMM-081,1,^JumpCloud.*\.exe$,,1
+jump_desktop,Jump Desktop,Generated,DR-MFT-RMM-082,5,^jumpclient\.exe$|^jumpconnect\.exe$|^jumpdesktop\.exe$|^jumpservice\.exe$|^jumpupdater\.exe$,,1
+kabuto,Kabuto,Generated,DR-MFT-RMM-084,1,^Kabuto\.App\.Runner\.exe$,,1
+khelpdesk,KHelpDesk,Generated,DR-MFT-RMM-271,1,^KHelpDesk\.exe$,,1
+kickidler,KickIdler,Generated,DR-MFT-RMM-086,1,^grabberTT.*\.msi$,,1
+kitty,KiTTY,Generated,DR-MFT-RMM-087,1,^kitty\.exe$,,1
+koofr,Koofr,Excluded,DR-MFT-RMM-273,0,,No safe Windows filename indicator,1
+labteach__connectwise_automate_,LabTeach (Connectwise Automate),Generated,DR-MFT-RMM-274,1,^ltsvc\.exe$,,1
+labtech_rmm__now_connectwise_automate_,LabTech RMM (Now ConnectWise Automate),Generated,DR-MFT-RMM-275,3,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,,1
+landesk,LANDesk,Generated,DR-MFT-RMM-088,7,^issuser\.exe$|^softmon\.exe$|^tmcsvc\.exe$|^LANDeskPortalManager\.exe$|^landeskagentbootstrap\.exe$|^ldinv32\.exe$|^ldsensors\.exe$,,1
+laplink_everywhere,Laplink Everywhere,Generated,DR-MFT-RMM-089,6,^OOSysAgent\.exe$|^laplink-everywhere-setup.*\.exe$|^laplink\.exe$|^laplinkeverywhere\.exe$|^llrcservice\.exe$|^serverproxyservice\.exe$,,1
+laplink_gold,Laplink Gold,Generated,DR-MFT-RMM-090,2,^laplink\.exe$|^tsircusr\.exe$,,1
+level.io,Level.io,Generated,DR-MFT-RMM-276,3,^level-remote-control-ffmpeg\.exe$|^level-windows-amd64\.exe$|^level\.exe$,,2
+litemanager,Lite Manager,Generated,DR-MFT-RMM-092,4,^LMNoIpServer\.exe$|^ROMFUSClient\.exe$|^ROMServer\.exe$|^romviewer\.exe$,,2
+localxpose,LocalXpose,Generated,DR-MFT-RMM-278,1,^loclx\.exe$,,1
+logmein,LogMeIn,Excluded,DR-MFT-RMM-279,0,,No safe Windows filename indicator,1
+logmein_rescue,LogMeIn rescue,Generated,DR-MFT-RMM-094,4,^lmi_rescue\.exe$|^lmi_rescue_srv\.exe$|^support-logmeinrescue.*\.exe$|^support-logmeinrescue\.exe$,,1
+lunixar,Lunixar,Generated,DR-MFT-RMM-280,10,^LunixarRemote\.dll$|^LunixarRemote\.exe$|^LunixarUpdater\.dll$|^LunixarUpdater\.exe$|^Lunixar\.Agent\.Core\.dll$|^Lunixar\.dll$|^Lunixar\.exe$|^Googlemeet\.msi$|^LunixarRMM.*\.msi$|^eDocument-.*\.msi$,,1
+manage_engine__desktop_central_,Manage Engine (Desktop Central),Generated,DR-MFT-RMM-095,2,^dcagentregister\.exe$|^dcagentservice\.exe$,,1
+manageengine,ManageEngine,Generated,DR-MFT-RMM-281,3,^dcagentservice\.exe$|^InstallShield Setup\.exe$|^ManageEngine_Remote_Access_Plus\.exe$,,1
+manageengine_rmm_central,ManageEngine RMM Central,Excluded,DR-MFT-RMM-282,0,,No safe Windows filename indicator,1
+manageengine_servicedesk_plus,ManageEngine ServiceDesk Plus,Generated,DR-MFT-RMM-283,1,^ManageEngine_ServiceDesk_Plus\.exe$,,1
+megasync,MEGAsync,Generated,DR-MFT-RMM-096,2,^MEGAsyncSetup64\.exe$|^MEGAupdater\.exe$,,1
+meshcentral,MeshCentral,Generated,DR-MFT-RMM-097,2,^meshagent.*\.exe$|^meshcentral.*\.exe$,,1
+mikogo,Mikogo,Generated,DR-MFT-RMM-100,5,^Mikogo-Screen-Service\.exe$|^Mikogo-Service\.exe$|^mikogo-starter\.exe$|^mikogo\.exe$|^mikogolauncher\.exe$,,1
+mionet__also_known_as_wd_anywhere_access_,MioNet (Also known as WD Anywhere Access),Generated,DR-MFT-RMM-101,2,^mionet\.exe$|^mionetmanager\.exe$,,1
+mionet__wd_anywhere_access_,MioNet (WD Anywhere Access),Generated,DR-MFT-RMM-284,2,^mionet\.exe$|^mionetmanager\.exe$,,1
+miradore,Miradore,Excluded,DR-MFT-RMM-285,0,,No safe Windows filename indicator,1
+mobaxterm,MobaXterm,Generated,DR-MFT-RMM-102,2,^MobaXterm_installer_.*\.msi$|^MobaXterm_installer_12\.1\.msi$,,1
+mocha_vnc_lite,Mocha VNC Lite,Excluded,DR-MFT-RMM-286,0,,No safe Windows filename indicator,1
+monitic,Monitic,Generated,DR-MFT-RMM-287,2,^agent\.exe$|^amon\.exe$,,1
+mouse_without_borders,Mouse Without Borders,Excluded,DR-MFT-RMM-288,0,,No safe Windows filename indicator,1
+mremoteng,mRemoteNG,Generated,DR-MFT-RMM-103,2,^mRemoteNG\.exe$|^mRemoteNG-Installer-.*\.msi$,,1
+msp360,MSP360,Generated,DR-MFT-RMM-104,12,^CBBackupPlan\.exe$|^CloudRaCmd\.exe$|^CloudRaSd\.exe$|^CloudRaService\.exe$|^CloudRaUtilities\.exe$|^Cloud\.Backup\.RM\.Service\.exe$|^Cloud\.Backup\.Scheduler\.exe$|^Connect\.exe$|^Online Backup\.exe$|^RMM\.Agent\.exe$|^Remote Desktop\.exe$|^cbb\.exe$,,1
+mstsc.exe__microsoft_remote_desktop_connection_,mstsc.exe (Microsoft Remote Desktop Connection),Generated,DR-MFT-RMM-289,1,^mstsc\.exe$,,1
+multcloud,MultCloud,Excluded,DR-MFT-RMM-290,0,,No safe Windows filename indicator,1
+mygreenpc,MyGreenPC,Generated,DR-MFT-RMM-105,1,^mygreenpc\.exe$,,1
+myivo,MyIVO,Generated,DR-MFT-RMM-106,2,^myivomanager\.exe$|^myivomgr\.exe$,,1
+n-able_advanced_monitoring_agent,N-Able Advanced Monitoring Agent,Generated,DR-MFT-RMM-108,7,^Agent_.*_RW\.exe$|^BASEClient\.exe$|^BASupApp\.exe$|^BASupSrvcCnfg\.exe$|^BASupSrvc\.exe$|^BASupTSHelper\.exe$|^winagent\.exe$,,2
+n-able_remote_access_software,N-ABLE Remote Access Software,Excluded,DR-MFT-RMM-291,0,,No safe Windows filename indicator,1
+naverisk,Naverisk,Generated,DR-MFT-RMM-107,1,^AgentSetup-.*\.exe$,,1
+net_monitor_for_employees,Net Monitor for Employees,Generated,DR-MFT-RMM-292,5,^nmep_agtconfig\.exe$|^nmep_ctrlagent\.exe$|^nmep_ctrlagentsvc\.exe$|^winpty-agent64\.exe$|^winpty-agent\.exe$,,1
+netbird,NetBird,Generated,DR-MFT-RMM-293,5,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,,1
+netlock_rmm,NetLock RMM,Generated,DR-MFT-RMM-294,3,^NetLock_RMM_User_Process\.exe$|^NetLock_RMM_User_UAC\.exe$|^NetLock_RMM_Agent_Installer\.exe$,,1
+netop,Netop,Excluded,DR-MFT-RMM-295,0,,No safe Windows filename indicator,1
+netop_remote_control__aka_impero_connect_,Netop Remote Control (aka Impero Connect),Generated,DR-MFT-RMM-110,4,^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,,1
+netop_remote_control__impero_connect_,Netop Remote Control (Impero Connect),Generated,DR-MFT-RMM-296,9,^Connect\.Backdrop\.cloud.*\.exe$|^ImperoClientSVC\.exe$|^ImperoInit\.exe$|^Netop Ondemand\.exe$|^ngstw32\.exe$|^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,,1
+netreo,Netreo,Excluded,DR-MFT-RMM-297,0,,No safe Windows filename indicator,1
+netsupport_manager,NetSupport Manager,Generated,DR-MFT-RMM-111,4,^client32\.exe$|^pcicfgui\.exe$|^pcictlui\.exe$|^remcmdstub\.exe$,,1
+neturo,Neturo,Generated,DR-MFT-RMM-112,3,^neturo.*\.exe$|^neturo\.exe$|^ntrntservice\.exe$,,1
+netviewer,Netviewer,Generated,DR-MFT-RMM-113,2,^netviewer.*\.exe$|^netviewer\.exe$,,1
+netviewer__gotomeet_,Netviewer (GoToMeet),Generated,DR-MFT-RMM-298,3,^NetViewer\.exe$|^nvClient\.exe$|^nvConsole\.exe$,,1
+nezha,Nezha,Generated,DR-MFT-RMM-299,2,^nezha-agent\.exe$|^dashboard-windows-amd64\.exe$,,1
+ngrok,ngrok,Generated,DR-MFT-RMM-349,1,^ngrok\.exe$,,1
+ninite_pro__ninite_agent_,Ninite Pro (Ninite Agent),Generated,DR-MFT-RMM-300,4,^NiniteAgent\.exe$|^NiniteOne\.exe$|^NinitePro\.exe$|^Ninite\.exe$,,1
+ninjaone__formerly_ninjarmm_,NinjaOne (formerly NinjaRMM),Excluded,DR-MFT-RMM-301,0,,No safe Windows filename indicator,1
+ninjarmm,NinjaRMM,Generated,DR-MFT-RMM-114,3,^NinjaRMMAgentPatcher\.exe$|^NinjaRMMAgent\.exe$|^ninjarmm-cli\.exe$,,1
+nomachine,NoMachine,Generated,DR-MFT-RMM-115,2,^nomachine.*\.exe$|^nxd\.exe$,,1
+nordlocker,NordLocker,Excluded,DR-MFT-RMM-302,0,,No safe Windows filename indicator,1
+noteon-desktop_sharing,NoteOn-desktop sharing,Generated,DR-MFT-RMM-303,3,^nateon.*\.exe$|^nateon\.exe$|^nateonmain\.exe$,,1
+ntr_remote,NTR Remote,Generated,DR-MFT-RMM-116,1,^NTRsupportPro_EN\.exe$,,1
+nvda__non-visual_desktop_access_,NVDA (Non-Visual Desktop Access),Generated,DR-MFT-RMM-304,3,^nvda\.exe$|^nvda_.*\.exe$|^nvda_service\.exe$,,1
+ocs_inventory,OCS inventory,Generated,DR-MFT-RMM-117,2,^ocsinventory\.exe$|^ocsservice\.exe$,,1
+onionshare,Onionshare,Generated,DR-MFT-RMM-118,2,^onionshare.*\.exe$|^OnionShare-win.*\.msi$,,1
+optitune,OptiTune,Generated,DR-MFT-RMM-119,2,^OTPowerShell\.exe$|^OTService\.exe$,,1
+pandora_rc__ehorus_,Pandora RC (eHorus),Generated,DR-MFT-RMM-120,2,^ehorus standalone\.exe$|^ehorus_agent\.exe$,,1
+panorama9,Panorama9,Generated,DR-MFT-RMM-122,1,^p9agent.*\.exe$,,1
+parallels_access,Parallels Access,Generated,DR-MFT-RMM-123,5,^TSClient\.exe$|^parallelsaccess-.*\.exe$|^prl_deskctl_agent\.exe$|^prl_deskctl_wizard\.exe$|^prl_pm_service\.exe$,,1
+parsec,Parsec,Generated,DR-MFT-RMM-305,2,^parsecd\.exe$|^pservice\.exe$,,1
+pcanywhere,pcAnywhere,Generated,DR-MFT-RMM-125,4,^awhost32\.exe$|^awrem32\.exe$|^pcaquickconnect\.exe$|^winaw32\.exe$,,1
+pchelpware,PChelpware,Generated,DR-MFT-RMM-306,1,^PcHelpWare_viewer\.exe$,,1
+pcnow,Pcnow,Generated,DR-MFT-RMM-126,3,^mwcliun\.exe$|^pcnmgr\.exe$|^webexpcnow\.exe$,,1
+pcvisit,Pcvisit,Generated,DR-MFT-RMM-127,4,^pcvisit-easysupport\.exe$|^pcvisit\.exe$|^pcvisit_client\.exe$|^pcvisit_service_client\.exe$,,1
+pdq_connect,PDQ Connect,Generated,DR-MFT-RMM-128,2,^PDQConnectUpdater-.*\.msi$|^pdq-connect.*\.exe$,,1
+pilixo,Pilixo,Generated,DR-MFT-RMM-129,2,^Pilixo_Installer.*\.exe$|^rdp\.exe$,,1
+pitunnel,PiTunnel,Excluded,DR-MFT-RMM-307,0,,No safe Windows filename indicator,1
+pocket_cloud__wyse_,Pocket Cloud (Wyse),Generated,DR-MFT-RMM-130,2,^pocketcloud.*\.exe$|^pocketcloudservice\.exe$,,1
+pocket_controller,Pocket Controller,Generated,DR-MFT-RMM-131,3,^pocketcloudservice\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,,1
+pocket_controller__soti_xsight_,Pocket Controller (Soti Xsight),Generated,DR-MFT-RMM-308,3,^XSightService\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,,1
+psexec,PSEXEC,Generated,DR-MFT-RMM-309,3,^psexec64\.exe$|^psexec\.exe$|^psexecsvc\.exe$,,1
+psexec__clone_,PSEXEC (Clone),Generated,DR-MFT-RMM-132,7,^PAExec-.*\.exe$|^csexec\.exe$|^paexec\.exe$|^remcom\.exe$|^remcomsvc\.exe$|^xcmd\.exe$|^xcmdsvc\.exe$,,1
+pulseway,Pulseway,Generated,DR-MFT-RMM-133,2,^PCMonitorManager\.exe$|^pcmonitorsrv\.exe$,,1
+putty,PuTTY,Generated,DR-MFT-RMM-310,1,^putty\.exe$,,1
+putty_tray,PuTTY Tray,Generated,DR-MFT-RMM-134,1,^puttytray\.exe$,,1
+qq_im-remote_assistance,QQ IM-remote assistance,Generated,DR-MFT-RMM-135,2,^QQProtect\.exe$|^qqpcmgr\.exe$,,1
+quest_kace_agent__formerly_dell_kace_,Quest KACE Agent (formerly Dell KACE),Generated,DR-MFT-RMM-136,1,^konea\.exe$,,1
+radmin,RAdmin,Generated,DR-MFT-RMM-137,2,^Radmin\.exe$|^rserver3\.exe$,,1
+rapid7,Rapid7,Generated,DR-MFT-RMM-312,3,^ir_agent\.exe$|^rapid7_agent_core\.exe$|^rapid7_endpoint_broker\.exe$,,1
+rdclient,RdClient,Generated,DR-MFT-RMM-313,3,^RdClientInstaller\.exe$|^SupportTool\.exe$|^rdclient\.exe$,,1
+rdcman,RDCMan,Generated,DR-MFT-RMM-314,2,^RDCMan-x86\.exe$|^RDCMan\.exe$,,1
+rdp2tcp,rdp2tcp,Generated,DR-MFT-RMM-138,1,^tdp2tcp\.exe$,,1
+rdpview,RDPView,Generated,DR-MFT-RMM-139,1,^dwrcs\.exe$,,1
+rdpwrap,rdpwrap,Generated,DR-MFT-RMM-140,3,^RDPCheck\.exe$|^RDPConf\.exe$|^RDPWInst\.exe$,,1
+realvnc,RealVNC,Excluded,DR-MFT-RMM-315,0,,No safe Windows filename indicator,1
+remcos,Remcos,Generated,DR-MFT-RMM-144,1,^remcos.*\.exe$,,1
+remmina,Remmina,Excluded,DR-MFT-RMM-316,0,,No safe Windows filename indicator,1
+remmon,Remmon,Generated,DR-MFT-RMM-317,1,^remmon\.exe$,,1
+remobo,Remobo,Generated,DR-MFT-RMM-145,3,^remobo\.exe$|^remobo_client\.exe$|^remobo_tracker\.exe$,,1
+remote_desktop_manager__devolutions_,Remote Desktop Manager (Devolutions),Excluded,DR-MFT-RMM-319,0,,No safe Windows filename indicator,1
+remote_desktop_plus,Remote Desktop Plus,Generated,DR-MFT-RMM-146,1,^rdp\.exe$,,1
+remote_manipulator_system,Remote Manipulator System,Generated,DR-MFT-RMM-148,2,^rfusclient\.exe$|^rutserv\.exe$,,1
+remote_ripple,Remote Ripple,Generated,DR-MFT-RMM-320,1,^RemoteRipple\.exe$,,1
+remote_utilities,Remote Utilities,Generated,DR-MFT-RMM-149,2,^rutserv\.exe$|^rutview\.exe$,,2
+remote.it,Remote.it,Generated,DR-MFT-RMM-318,3,^remote-it-installer\.exe$|^remote\.it\.exe$|^remoteit\.exe$,,1
+remotecall,RemoteCall,Generated,DR-MFT-RMM-150,7,^agentu\.exe$|^raautoup\.exe$|^rcengmgru\.exe$|^rcmgrsvc\.exe$|^rcstartsupport\.exe$|^remotesupportplayeru\.exe$|^rxstartsupport\.exe$,,1
+remotely,Remotely,Generated,DR-MFT-RMM-321,2,^Remotely_Desktop\.exe$|^Remotely_Agent\.exe$,,1
+remotepass,RemotePass,Generated,DR-MFT-RMM-151,3,^remotepass-access\.exe$|^rpaccess\.exe$|^rpwhostscr\.exe$,,1
+remotepc,RemotePC,Generated,DR-MFT-RMM-152,4,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,,1
+remotepulse,RemotePulse,Generated,DR-MFT-RMM-322,5,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,,1
+remoteview,RemoteView,Generated,DR-MFT-RMM-153,3,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,,1
+remsupp,RemSupp,Generated,DR-MFT-RMM-324,3,^RemSupp\.exe$|^Uninstall RemSupp\.exe$|^installer\.exe$,,1
+res_automation_manager,RES Automation Manager,Generated,DR-MFT-RMM-154,4,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,,1
+rocket_remote_desktop,Rocket Remote Desktop,Generated,DR-MFT-RMM-155,2,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,,1
+rodex_rmm,Rodex RMM,Generated,DR-MFT-RMM-325,2,^RodexAgent\.exe$|^<random>\.exe$,,1
+royal_apps,Royal Apps,Generated,DR-MFT-RMM-156,2,^royalserver\.exe$|^royalts\.exe$,,1
+royal_ts,Royal TS,Generated,DR-MFT-RMM-158,1,^royalts\.exe$,,1
+rport,RPort,Generated,DR-MFT-RMM-159,1,^rport\.exe$,,1
+rudesktop,RuDesktop,Generated,DR-MFT-RMM-161,1,^rudesktop.*\.exe$,,1
+runsmart,RunSmart,Excluded,DR-MFT-RMM-326,0,,No safe Windows filename indicator,1
+rustdesk,RustDesk,Generated,DR-MFT-RMM-163,2,^rustdesk\.exe$|^rustdesk.*\.exe$,,1
+s3_browser,S3 Browser,Generated,DR-MFT-RMM-164,1,^s3browser.*\.exe$,,1
+screenconnect,ScreenConnect,Generated,DR-MFT-RMM-165,6,^ScreenConnect\.ClientService\.exe$|^ScreenConnect\.WindowsClient\.exe$|^ConnectWiseControl.*\.exe$|^Remote Workforce Client\.exe$|^connectwise.*\.exe$|^screenconnect.*\.exe$,,1
+screenmeet,ScreenMeet,Generated,DR-MFT-RMM-166,2,^ScreenMeetSupport\.exe$|^ScreenMeet\.Support\.exe$,,1
+securecrt,SecureCRT,Generated,DR-MFT-RMM-167,1,^SecureCRT\.EXE$,,1
+seetrol,Seetrol,Generated,DR-MFT-RMM-168,5,^seetrolcenter\.exe$|^seetrolclient\.exe$|^seetrolmyservice\.exe$|^seetrolremote\.exe$|^seetrolsetting\.exe$,,1
+senso.cloud,Senso.cloud,Generated,DR-MFT-RMM-169,3,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,,1
+servereye,ServerEye,Generated,DR-MFT-RMM-170,2,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,,1
+shellhub,ShellHub,Excluded,DR-MFT-RMM-327,0,,No safe Windows filename indicator,1
+showmypc,ShowMyPC,Generated,DR-MFT-RMM-172,3,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,,1
+simplehelp,SimpleHelp,Generated,DR-MFT-RMM-173,7,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^windowslauncher\.exe$|^vhost\.exe$,,2
+site24x7,Site24x7,Generated,DR-MFT-RMM-174,4,^MEAgentHelper\.exe$|^MonitoringAgent\.exe$|^Site24x7PluginAgent\.exe$|^Site24x7WindowsAgentTrayIcon\.exe$,,1
+skyfex,SkyFex,Generated,DR-MFT-RMM-171,2,^DeskRollUA\.exe$|^Deskroll\.exe$,,1
+smartcode_web_vnc,SmartCode Web VNC,Excluded,DR-MFT-RMM-328,0,,No safe Windows filename indicator,1
+smartftp,SmartFTP,Excluded,DR-MFT-RMM-329,0,,No safe Windows filename indicator,1
+smartty,SmarTTY,Generated,DR-MFT-RMM-176,1,^SmarTTY\.exe$,,1
+solar-putty,Solar-PuTTY,Generated,DR-MFT-RMM-177,1,^Solar-PuTTY\.exe$,,1
+sophos-remote_management_system,Sophos-Remote Management System,Generated,DR-MFT-RMM-330,3,^clientmrinit\.exe$|^mgntsvc\.exe$|^routernt\.exe$,,1
+sorillus,Sorillus,Generated,DR-MFT-RMM-178,2,^Sorillus Launcher\.exe$|^Sorillus-Launcher.*\.exe$,,1
+splashtop,Splashtop,Generated,DR-MFT-RMM-331,1,^strwinclt\.exe$,,1
+splashtop__beta_,Splashtop (Beta),Generated,DR-MFT-RMM-332,4,^SRManager\.exe$|^SRServer\.exe$|^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$,,1
+splashtop_remote,Splashtop Remote,Generated,DR-MFT-RMM-179,7,^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$|^sragent\.exe$|^srmanager\.exe$|^srserver\.exe$|^srservice\.exe$|^strwinclt\.exe$,,1
+spyanywhere,SpyAnywhere,Generated,DR-MFT-RMM-180,1,^sysdiag\.exe$,,1
+sunlogin,SunLogin,Generated,DR-MFT-RMM-181,3,^OrayRemoteService\.exe$|^OrayRemoteShell\.exe$|^sunlogin.*\.exe$,,1
+superops,SuperOps,Generated,DR-MFT-RMM-182,2,^superops\.exe$|^superopsticket\.exe$,,1
+superputty,SuperPuTTY,Generated,DR-MFT-RMM-183,1,^superputty\.exe$,,1
+supremo,Supremo,Generated,DR-MFT-RMM-184,4,^supremosystem\.exe$|^supremo\.exe$|^supremohelper\.exe$|^supremoservice\.exe$,,1
+syncro,Syncro,Generated,DR-MFT-RMM-185,10,^KabutoSetup\.exe$|^Kabuto\.App\.Runner\.exe$|^Kabuto\.Installer\.exe$|^Kabuto\.Service\.Runner\.exe$|^SyncroLive\.Agent\.exe$|^SyncroLive\.Service\.exe$|^Syncro\.App\.Runner\.exe$|^Syncro\.Installer\.exe$|^Syncro\.Overmind\.Service\.exe$|^Syncro\.Service\.exe$,,1
+syncthing,Syncthing,Generated,DR-MFT-RMM-186,1,^Syncthing\.exe$,,1
+synergy,Synergy,Excluded,DR-MFT-RMM-333,0,,No safe Windows filename indicator,1
+sysaid,SysAid,Generated,DR-MFT-RMM-187,1,^IliAS\.exe$,,1
+syspectr,Syspectr,Generated,DR-MFT-RMM-334,3,^oolocker\.exe$|^oosyspectr\.exe$|^syspectr\.exe$,,1
+tactical_rmm,Tactical RMM,Generated,DR-MFT-RMM-189,1,^tacticalrmm\.exe$,,1
+tailscale,Tailscale,Generated,DR-MFT-RMM-190,3,^tailscale-.*\.exe$|^tailscale-ipn\.exe$|^tailscaled\.exe$,,1
+tanium,Tanium,Generated,DR-MFT-RMM-191,5,^TPowerShell\.exe$|^TaniumCX\.exe$|^TaniumClient\.exe$|^TaniumExecWrapper\.exe$|^TaniumFileInfo\.exe$,,1
+tanium_deploy,Tanium Deploy,Excluded,DR-MFT-RMM-335,0,,No safe Windows filename indicator,1
+teamviewer,TeamViewer,Generated,DR-MFT-RMM-192,2,^teamviewer_desktop\.exe$|^teamviewer_service\.exe$,,1
+teledesktop,TeleDesktop,Generated,DR-MFT-RMM-194,3,^pstlaunch\.exe$|^ptdskclient\.exe$|^ptdskhost\.exe$,,1
+teramind,Teramind,Generated,DR-MFT-RMM-336,1,^tmagentsvc\.exe$,,1
+terminals,Terminals,Excluded,DR-MFT-RMM-337,0,,No safe Windows filename indicator,1
+tiflux,TiFLUX,Generated,DR-MFT-RMM-338,3,^TiService\.exe$|^TiUpdateService\.exe$|^TiAgent\.exe$,,1
+tigervnc,TigerVNC,Generated,DR-MFT-RMM-195,3,^tvnserver\.exe$|^tigervnc.*\.exe$|^winvnc4\.exe$,,1
+tightvnc,TightVNC,Generated,DR-MFT-RMM-196,3,^TightVNCViewerPortable.*\.exe$|^tvnserver\.exe$|^tvnviewer\.exe$,,1
+tmate,tmate,Excluded,DR-MFT-RMM-339,0,,No safe Windows filename indicator,1
+todesk,ToDesk,Generated,DR-MFT-RMM-197,3,^ToDesk_Service\.exe$|^ToDesk_Setup\.exe$|^todesk\.exe$,,1
+total_software_deployment,Total Software Deployment,Generated,DR-MFT-RMM-198,2,^Tsdservice\.exe$|^tniwinagent\.exe$,,1
+trustconnect,TrustConnect,Generated,DR-MFT-RMM-340,2,^TrustConnectAgent\.exe$|^DocConnect\.Agent\.exe$,,1
+turbomeeting,TurboMeeting,Generated,DR-MFT-RMM-199,3,^pcstarter\.exe$|^turbomeeting\.exe$|^turbomeetingstarter\.exe$,,1
+ultravnc,Ultra VNC,Generated,DR-MFT-RMM-201,4,^UVNC_Launch\.exe$|^vncviewer\.exe$|^winvnc\.exe$|^UltraVNC.*\.exe$,,2
+ultraviewer,UltraViewer,Generated,DR-MFT-RMM-200,3,^UltraViewer_Desktop\.exe$|^UltraViewer_Service\.exe$|^ultraviewer\.exe$,,1
+veyon,Veyon,Generated,DR-MFT-RMM-342,5,^veyon-master\.exe$|^veyon-server\.exe$|^veyon-service\.exe$|^veyon-wcli\.exe$|^veyon-worker\.exe$,,1
+visual_studio_dev_tunnel,Visual Studio Dev Tunnel,Excluded,DR-MFT-RMM-343,0,,No safe Windows filename indicator,1
+vizor,VIZOR,Excluded,DR-MFT-RMM-344,0,,No safe Windows filename indicator,1
+vnc,VNC,Generated,DR-MFT-RMM-202,7,^vncserver\.exe$|^vncserverui\.exe$|^vncviewer\.exe$|^winvnc.*\.exe$|^winvnc\.exe$|^winvncsc\.exe$|^winwvc\.exe$,,1
+vnc_connect,VNC Connect,Excluded,DR-MFT-RMM-345,0,,No safe Windows filename indicator,1
+webex__remote_access_,WebEx (Remote Access),Excluded,DR-MFT-RMM-346,0,,No safe Windows filename indicator,1
+webrdp,WebRDP,Generated,DR-MFT-RMM-203,1,^webrdp\.exe$,,1
+weezo,Weezo,Generated,DR-MFT-RMM-204,3,^weezo setup.*\.exe$|^weezo\.exe$|^weezohttpd\.exe$,,1
+winscp,WinSCP,Generated,DR-MFT-RMM-205,1,^WinSCP\.exe$,,1
+x2go,X2Go,Excluded,DR-MFT-RMM-347,0,,No safe Windows filename indicator,1
+xeox,Xeox,Generated,DR-MFT-RMM-206,4,^xeox-agent_.*\.exe$|^xeox-agent_x64\.exe$|^xeox-agent_x86\.exe$|^xeox_service_windows\.exe$,,1
+xpra,Xpra,Generated,DR-MFT-RMM-208,2,^Xpra-Launcher\.exe$|^Xpra-x86_64_Setup\.exe$,,1
+xrdp,XRDP,Excluded,DR-MFT-RMM-348,0,,No safe Windows filename indicator,1
+xshell,Xshell,Generated,DR-MFT-RMM-209,1,^xShell\.exe$,,1
+yandex.disk,Yandex.Disk,Generated,DR-MFT-RMM-210,1,^YandexDisk2\.exe$,,1
+zabbix_agent,Zabbix Agent,Generated,DR-MFT-RMM-211,1,^zabbix_agent.*\.exe$,,1
+zerotier,ZeroTier,Generated,DR-MFT-RMM-212,3,^zero-powershell\.exe$|^zerotier.*\.exe$|^zerotier.*\.msi$,,1
+zoc,ZOC,Generated,DR-MFT-RMM-213,1,^zoc\.exe$,,1
+zoho_assist,Zoho Assist,Generated,DR-MFT-RMM-214,10,^ZA_Access\.exe$|^ZMAgent\.exe$|^ZohoMeeting\.exe$|^ZohoURSService\.exe$|^Zohours\.exe$|^connect\.exe$|^toolsiq\.exe$|^za_connect\.exe$|^zaservice\.exe$|^zohotray\.exe$,,1
+,RMM - Barracuda,Override,DR-MFT-RMM-018,,^BarracudaRMM$|^Barracuda Workplace$|^Barracuda MSP$,Barracuda - barracudamsp.com,
+,RMM - Cruz,Override,DR-MFT-RMM-035,,^CruzRMM$,Cruz - resources.doradosoftware.com/cruz-rmm,
+,RMM -  Electric AI (Kaseya),Override,DR-MFT-RMM-047,,^ElectricAi$,Electric - electric.ai,
+,RMM - Encapto,Override,DR-MFT-RMM-049,,^Encapto$,Encapto - encapto.com,
+,RMM - Fortra,Override,DR-MFT-RMM-058,,^Fortra$,Fortra - fortra.com,
+,RMM - GoToMeeting,Override,DR-MFT-RMM-065,,^GoToAssist(Service|Unattended)\.exe$,GoToMeeting -goto.com/meeting,
+,RMM - JWrapper Remote,Override,DR-MFT-RMM-083,,"^(https?([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}[0-9]{1,5})|serviceconfig.xml)$",JWrapper Remote - Infield - actor use,
+,RMM - Microsoft Quick Assist Unusual Path,Override,DR-MFT-RMM-099,,^quickassist\.exe$,Microsoft Quick Assist outside trusted Windows component paths,
+,RMM - RealONE,Override,DR-MFT-RMM-141,,^RealONE$,RealONE - https://www.realvnc.com/en/discover/realone/,
+,RMM - RealVNC Product Directory,Override,DR-MFT-RMM-143,,^RealVNC$,RealVNC - https://www.realvnc.com/en/,
+,RMM - Rsocx,Override,DR-MFT-RMM-160,,^rsocx\.exe$,Rsocx - https://github.com/b23r0/rsocx,
+,RMM - RunSmart,Override,DR-MFT-RMM-162,,^RunSmart$,RunSmart - runsmart.io,
+,RMM - TechInline,Override,DR-MFT-RMM-193,,^TechInline$|^fixme.it$,TechInline - techinline.com/,
+,RMM - XMReality,Override,DR-MFT-RMM-207,,^XMReality$,XMReality - xmreality.com/,
+,RMM - VNC Product Directory,Override,DR-MFT-RMM-216,,^(TigerVNC|JollyFastVNC|realvnc|tightvnc|ultravnc|VNC connect)$,VNC,
+,RMM - Product Directory,Override,DR-MFT-RMM-217,,^(Meraki Systems Manager Agent|TrendMicro BaseCamp|AB Tutor|Datto|SolarWinds RMM|Naverisk)$,General RMM product directory basenames,
+access_remote_pc,RMM - Access Remote PC,Override,DR-MFT-RMM-003,,^(rpcsetup|rpcgrab)\.exe$,Retained curated filename coverage; Access Remote PC - https://lolrmm.io/tools/access_remote_pc,
+action1,RMM - Action1,Override,DR-MFT-RMM-005,,^(action1_update|action1_connector|action1_remote|action1_agent)\.exe$,Retained curated filename coverage; Action1 - action1.com - https://lolrmm.io/tools/action1,
+anydesk,RMM - AnyDesk,Override,DR-MFT-RMM-012,,^(anydesk|anydesk.*)\.exe$,Retained curated filename coverage; AnyDesk - anydesk.com - https://lolrmm.io/tools/anydesk,
+anyviewer,RMM - AnyViewer,Override,DR-MFT-RMM-014,,^(AnyViewerSetup|RCClient|RCService)\.exe$,Retained curated filename coverage; AnyViewer - https://www.anyviewer.com/ - https://lolrmm.io/tools/anyviewer,
+gatherplace-desktop_sharing,RMM - GatherPlace-desktop sharing,Override,DR-MFT-RMM-060,,^(gp3|gp4|gp5)\.exe$,Retained curated filename coverage; GatherPlace-desktop sharing - gatherplace.com - https://lolrmm.io/tools/gatherplace-desktop_sharing,
+kaseya__vsa_,RMM - Kaseya (aka Unigma),Override,DR-MFT-RMM-085,,^(agentmon|KaUpdHlp|KaUsrTsk)\.exe$,Retained curated filename coverage; Kaseya (aka Unigma) - kaseya.com - https://lolrmm.io/tools/kaseya__vsa_,
+level,RMM - Level,Override,DR-MFT-RMM-091,,^(level-windows-amd64|level|level-remote-control-ffmpeg)\.exe$,Retained curated filename coverage; Level - level.io - https://lolrmm.io/tools/level,
+royal_server,RMM - Royal Server,Override,DR-MFT-RMM-157,,^RoyalServerInstaller_.*\.msi$,Retained curated filename coverage; Royal Server - royalapps.com - https://lolrmm.io/tools/royal_server,
+microsoft_quick_assist,RMM - Microsoft Quick Assist Execution,Override,DR-MFT-RMM-098,,^quickassist\.exe$,Microsoft Quick Assist execution evidence,
+,RMM - RealVNC Installer,Override,DR-MFT-RMM-142,,^VNC-Connect-Installer-.*\.exe$,RealVNC installer filename,
+komari,RMM - Komari,Override,DR-MFT-RMM-218,,^(komari|komari-agent|komari-agent-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm)|komari-(windows|linux|darwin|freebsd)-(amd64|arm64|386|arm))(\.exe)?$,Komari server or agent filename indicator,

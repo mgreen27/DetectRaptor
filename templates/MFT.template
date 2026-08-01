@@ -46,13 +46,16 @@ sources:
         WHERE NOT KeywordRegex = '.'
             AND Criticality =~ CriticalityLevel
             AND Scope =~ '^(MFT|Both)$'
+
+      LET keyword_patterns <= SELECT KeywordRegex
+        FROM all_the_things
         GROUP BY KeywordRegex
 
       LET hits = SELECT EntryNumber,InUse,OSPath,FileName,FileSize,IsDir,
             Created0x10,LastModified0x10,LastRecordChange0x10,LastAccess0x10,
             Created0x30,LastModified0x30,LastRecordChange0x30,LastAccess0x30
         FROM Artifact.Windows.NTFS.MFT(
-                                FileRegex=join(array=all_the_things.KeywordRegex,sep='|'),
+                                FileRegex=join(array=keyword_patterns.KeywordRegex,sep='|'),
                                 DateBefore=DateBefore,
                                 DateAfter=DateAfter,
                                 AllDrives=AllDrives )
@@ -61,13 +64,19 @@ sources:
       SELECT * FROM foreach(row=hits,query={
             SELECT
                 dict(
+                    RuleID=RuleID,
                     Name=Detection,
+                    Category=Category,
+                    Technique=Technique,
+                    Confidence=Confidence,
                     KeywordRegex=KeywordRegex,
                     PathRegex=PathRegex,
                     IgnoreRegex=IgnoreRegex,
                     Reference=Reference,
                     Scope=Scope,
                     EntryType=EntryType,
+                    Source=Source,
+                    SourceID=SourceID,
                     StringHit=parse_string_with_regex(string=FileName,regex='(' + KeywordRegex + ')' ).g1,
                     Criticality=Criticality
                         ) as Detection,
@@ -82,7 +91,7 @@ sources:
                                 else=if(condition=OSPath =~ '''\\Windows\\''',
                                     then='System',
                                     else='Other'))))) as LocationContext,
-                if(condition=Detection =~ '^(RMM|Remote Access)',
+                if(condition=Category = 'Remote Access Software',
                     then=if(condition=Detection =~ ApprovedRMMNameRegex
                             AND OSPath =~ ApprovedRMMPathRegex,
                         then='Approved',
@@ -100,7 +109,6 @@ sources:
                 AND NOT if(condition=IgnoreRegex,
                         then= OSPath =~ IgnoreRegex,
                         else= False )
-            LIMIT 1
         },workers=20)
 
     notebook:
@@ -111,12 +119,40 @@ sources:
             ### Detection summary
             */
 
-            SELECT Detection.Name, 
+            SELECT Detection.RuleID,
+               Detection.Name,
+               Detection.Category as Category,
                Detection.Criticality as Criticality,
                count() AS Total
             FROM source()
-            GROUP BY Detection.Name
+            GROUP BY Detection.RuleID
             ORDER BY Total DESC
+      - type: vql_suggestion
+        name: File match summary
+        template: |
+            /*
+            ### File match summary
+            Group every matching rule for the same OSPath on each endpoint.
+            */
+
+            SELECT Fqdn,
+                OSPath,
+                count() as MatchCount,
+                enumerate(items=Detection.RuleID) as RuleIDs,
+                enumerate(items=Detection.Name) as Detections,
+                enumerate(items=Detection.Category) as Categories,
+                enumerate(items=Detection.Technique) as Techniques,
+                enumerate(items=Detection.Confidence) as Confidences,
+                enumerate(items=Detection.Criticality) as Criticalities,
+                EntryNumber,
+                InUse,
+                IsDir,
+                FileSize,
+                SITimestamps,
+                FNTimestamps
+            FROM source()
+            GROUP BY Fqdn,OSPath
+            ORDER BY MatchCount DESC
       - type: vql_suggestion
         name: Timeline preparation
         template: |
@@ -151,7 +187,7 @@ sources:
                 FNTimestamps.Created0x30 as Created0x30,
                 FNTimestamps.LastModified0x30 as LastModified0x30
             FROM source()
-            WHERE Criticality =~ 'Critical|High'
+            WHERE Detection.Criticality =~ 'Critical|High'
 
 
       - type: vql_suggestion
