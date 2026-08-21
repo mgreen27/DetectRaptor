@@ -1,0 +1,508 @@
+name: DetectRaptor.Windows.Detection.ChromiumExtensionPersistence
+author: Matt Green - @mgreen27
+description: |
+  Hunts Chromium profiles for enabled unpacked extensions and Native Messaging
+  Host registrations associated with Chromium extension persistence.
+
+  This is intended to identify extension persistence techniques such as the
+  SilentChrome-BOF technique described by SpecterOps. SilentChrome writes an
+  unpacked extension entry under extensions.settings.<extension_id>, enables
+  developer mode, and repairs Chromium preference integrity metadata so the
+  extension is accepted at next browser start.
+
+  Native Messaging Hosts are collected independently from each user's NTUSER.DAT
+  using Windows.Registry.NTUser. This allows registry-only/orphaned native host
+  registrations to remain visible even when no matching unpacked extension exists.
+
+  Static profile and registry state alone cannot prove which tool created an
+  extension or Native Messaging Host. Results should therefore be treated as
+  hunt leads and correlated with file-write/process telemetry where available.
+
+  High-value signals include:
+  
+    * location == 4 (UNPACKED)
+    * enabled unpacked extensions
+    * extension paths outside the browser-managed Extensions directory
+    * extensions staged from Public, Temp, Downloads, ProgramData or other
+      unusual locations
+    * powerful API or broad host permissions
+    * developer mode enabled
+    * Native Messaging Host manifests/executables from suspicious paths
+    * Native Messaging Host allowed_origins referencing the same unpacked
+      ExtensionId
+
+reference:
+  - https://specterops.io/blog/2026/08/13/chromium-extension-c2-persistence/
+  - https://github.com/kingofthenops/silentchrome-bof
+  
+type: CLIENT
+
+parameters:
+  - name: PreferenceTargets
+    type: csv
+    description: Chromium preference files to inspect.
+    default: |
+      Browser,Glob
+      Chrome,C:/Users/*/AppData/Local/Google/Chrome/User Data/*/Secure Preferences
+      Chrome,C:/Users/*/AppData/Local/Google/Chrome/User Data/*/Preferences
+      Edge,C:/Users/*/AppData/Local/Microsoft/Edge/User Data/*/Secure Preferences
+      Edge,C:/Users/*/AppData/Local/Microsoft/Edge/User Data/*/Preferences
+
+  - name: Accessor
+    default: auto
+
+  - name: MinScore
+    type: int
+    description: Minimum extension score to return when ShowAll is false.
+    default: 40
+
+  - name: ShowAll
+    type: bool
+    description: Return all registered extensions, including normal managed extensions.
+    default: false
+
+  - name: NativeHostMinScore
+    type: int
+    description: Minimum Native Messaging Host score to return.
+    default: 20
+
+  - name: ShowAllNativeHosts
+    type: bool
+    description: Return all Native Messaging Hosts, including low-risk registrations.
+    default: false
+
+  - name: SuspiciousPathRegex
+    type: regex
+    description: Paths unusual for persistent unpacked extensions/native hosts.
+    default: '(?i)[\\/](Users[\\/]Public|Temp|TMP|Downloads|Desktop|ProgramData|Windows[\\/]Temp)([\\/]|$)'
+
+  - name: PowerfulPermissionRegex
+    type: regex
+    description: Extension APIs worth prioritising during triage.
+    default: '(?i)(cookies|history|tabs|debugger|nativeMessaging|webRequest|webRequestBlocking|scripting|management|downloads|clipboardRead|clipboardWrite|geolocation|proxy)'
+
+  - name: BroadHostRegex
+    type: regex
+    description: Broad host access worth prioritising during triage.
+    default: '(?i)(<all_urls>|\\*://\\*/\\*|https?://\\*/\\*)'
+
+  - name: ExpectedStoreExtensionIdRegex
+    type: regex
+    description: |
+      Optional regex containing extension IDs expected to be Web Store/managed
+      installs. A match combined with location=4 is high-value because a manifest
+      key can make an unpacked extension reuse a legitimate extension ID.
+    default: '^$'
+
+  - name: NativeHostKeyGlob
+    description: |
+      Registry glob passed directly to Windows.Registry.NTUser. User hive
+      discovery is delegated entirely to that artifact.
+    default: 'Software\{Google\Chrome,Microsoft\Edge}\NativeMessagingHosts\*\@'
+
+  - name: MaxPreferenceReadSize
+    type: int
+    description: Maximum bytes read from each Preferences file.
+    default: 20971520
+
+  - name: MaxNativeHostManifestReadSize
+    type: int
+    description: Maximum bytes read from each Native Messaging Host JSON manifest.
+    default: 1048576
+
+sources:
+  - name: Extensions
+    precondition:
+      SELECT OS FROM info() WHERE OS = 'windows'
+
+    query: |
+      LET PreferenceFiles = SELECT
+          Browser,
+          OSPath,
+          Mtime AS PreferenceMtime,
+          basename(path=OSPath) AS PreferenceFile,
+          basename(path=dirname(path=OSPath)) AS Profile,
+          dirname(path=OSPath) AS ProfilePath
+      FROM foreach(
+          row=PreferenceTargets,
+          query={
+              SELECT Browser, OSPath, Mtime
+              FROM glob(globs=Glob, accessor=Accessor)
+              WHERE NOT IsDir
+          })
+
+      LET ParsedProfiles = SELECT
+          *,
+          parse_json(
+              data=read_file(
+                  filename=OSPath,
+                  accessor=Accessor,
+                  length=MaxPreferenceReadSize)) AS Prefs
+      FROM PreferenceFiles
+
+      LET Registered = SELECT *
+      FROM foreach(
+          row=ParsedProfiles,
+          query={
+              SELECT
+                  Browser,
+                  Profile,
+                  ProfilePath,
+                  OSPath AS PreferencePath,
+                  PreferenceFile,
+                  PreferenceMtime,
+                  parse_string_with_regex(
+                      string=format(format='%v', args=[OSPath]),
+                      regex=['''(?i)^[A-Z]:\\Users\\(?P<Username>[^\\]+)\\''']).Username AS Username,
+                  get(item=Prefs,
+                      member='extensions.ui.developer_mode') AS DeveloperMode,
+                  get(item=Prefs,
+                      member='protection.macs.extensions.settings_encrypted_hash') AS EncryptedSettingsHash,
+                  _key AS ExtensionId,
+                  _value AS Settings
+              FROM items(
+                  item=get(item=Prefs, member='extensions.settings'))
+          })
+
+      LET ExtensionDetails = SELECT
+          Username,
+          Browser,
+          Profile,
+          ProfilePath,
+          PreferenceFile,
+          PreferencePath,
+          PreferenceMtime,
+          ExtensionId,
+          get(item=Settings, member='location') AS Location,
+          get(item=Settings, member='state') AS State,
+          get(item=Settings, member='path') AS ExtensionPath,
+          get(item=Settings, member='from_webstore') AS FromWebStore,
+          get(item=Settings, member='creation_flags') AS CreationFlags,
+          get(item=Settings, member='newAllowFileAccess') AS NewAllowFileAccess,
+          if(
+              condition=get(item=Settings, member='first_install_time'),
+              then=timestamp(
+                  winfiletime=atoi(
+                      string=get(item=Settings, member='first_install_time')) * 10),
+              else=NULL) AS FirstInstallTime,
+          if(
+              condition=get(item=Settings, member='last_update_time'),
+              then=timestamp(
+                  winfiletime=atoi(
+                      string=get(item=Settings, member='last_update_time')) * 10),
+              else=NULL) AS LastUpdateTime,
+          get(item=Settings, member='manifest.name') AS Name,
+          get(item=Settings, member='manifest.version') AS Version,
+          get(item=Settings, member='manifest.key') AS ManifestKey,
+          get(item=Settings,
+              member='manifest.background.service_worker') AS ServiceWorker,
+          get(item=Settings, member='manifest.permissions') AS ManifestPermissions,
+          get(item=Settings, member='manifest.host_permissions') AS ManifestHostPermissions,
+          get(item=Settings, member='active_permissions.api') AS ActiveAPIs,
+          get(item=Settings,
+              member='active_permissions.explicit_host') AS ActiveExplicitHosts,
+          get(item=Settings,
+              member='active_permissions.scriptable_host') AS ActiveScriptableHosts,
+          get(item=Settings, member='granted_permissions.api') AS GrantedAPIs,
+          get(item=Settings,
+              member='granted_permissions.explicit_host') AS GrantedExplicitHosts,
+          DeveloperMode,
+          EncryptedSettingsHash,
+          Settings AS _Settings
+      FROM Registered
+
+      LET ExtensionContext = SELECT
+          *,
+          if(
+              condition=Location = 4,
+              then='UNPACKED',
+              else=if(
+                  condition=Location = 1,
+                  then='INTERNAL',
+                  else=if(
+                      condition=Location = 8,
+                      then='COMMAND_LINE',
+                      else=format(format='LOCATION_%v', args=[Location])))) AS LocationName,
+          path_join(
+              components=[ExtensionPath, 'manifest.json'],
+              path_type='windows') AS ManifestPath,
+          path_join(
+              components=[ProfilePath, 'Extensions', ExtensionId, '*', 'manifest.json'],
+              path_type='windows') AS ManagedManifestGlob,
+          format(
+              format='%v %v %v %v %v %v %v',
+              args=[ManifestPermissions,
+                    ManifestHostPermissions,
+                    ActiveAPIs,
+                    ActiveExplicitHosts,
+                    ActiveScriptableHosts,
+                    GrantedAPIs,
+                    GrantedExplicitHosts]) AS PermissionText
+      FROM ExtensionDetails
+
+      LET ManagedCopyCount(Glob) = SELECT count() AS Count
+      FROM glob(globs=Glob, accessor=Accessor)
+      WHERE NOT IsDir
+
+      LET OnDiskManifest(Path) = SELECT
+          OSPath,
+          Size,
+          Mtime,
+          hash(path=OSPath, accessor=Accessor).SHA256 AS SHA256,
+          parse_json(
+              data=regex_replace(
+                  source=read_file(
+                      filename=OSPath,
+                      accessor=Accessor,
+                      length=1048576),
+                  re='''(?s)^[^{]*\{''',
+                  replace='{')) AS Manifest
+      FROM stat(filename=Path, accessor=Accessor)
+      WHERE Mode.IsRegular
+
+      LET Signals = SELECT
+          *,
+          Location = 4 AS IsUnpacked,
+          State = 1 AS IsEnabled,
+          ExtensionPath =~ '^[A-Za-z]:[\\/]' AS HasAbsolutePath,
+          NOT (ExtensionPath =~ '(?i)[\\/]User Data[\\/][^\\/]+[\\/]Extensions[\\/]') AS OutsideManagedExtensions,
+          ExtensionPath =~ SuspiciousPathRegex AS SuspiciousPath,
+          PermissionText =~ PowerfulPermissionRegex AS PowerfulPermissions,
+          PermissionText =~ BroadHostRegex AS BroadHostAccess,
+          ActiveAPIs =~ 'nativeMessaging' OR
+              GrantedAPIs =~ 'nativeMessaging' OR
+              ManifestPermissions =~ 'nativeMessaging' AS NativeMessagingPermission,
+          if(condition=ManifestKey, then=TRUE, else=FALSE) AS ManifestKeyPresent,
+          ExtensionId =~ ExpectedStoreExtensionIdRegex AS ExpectedStoreId,
+          Location = 4 AND ExtensionId =~ ExpectedStoreExtensionIdRegex AS StoreIdLoadedUnpacked,
+          Location = 4 AND DeveloperMode AS UnpackedWithDeveloperMode,
+          Location = 4 AND NOT EncryptedSettingsHash AS MissingEncryptedSettingsHash,
+          ManagedCopyCount(Glob=ManagedManifestGlob)[0].Count > 0 AS ManagedCopyPresent,
+          if(
+              condition=Location = 4 AND ExtensionPath,
+              then=OnDiskManifest(Path=ManifestPath)[0],
+              else=NULL) AS ManifestOnDisk
+      FROM ExtensionContext
+
+      LET Scored = SELECT
+          *,
+          if(condition=IsUnpacked, then=40, else=0) +
+          if(condition=IsUnpacked AND IsEnabled, then=5, else=0) +
+          if(condition=UnpackedWithDeveloperMode, then=5, else=0) +
+          if(condition=IsUnpacked AND HasAbsolutePath, then=5, else=0) +
+          if(condition=IsUnpacked AND OutsideManagedExtensions, then=5, else=0) +
+          if(condition=SuspiciousPath, then=20, else=0) +
+          if(condition=PowerfulPermissions, then=10, else=0) +
+          if(condition=BroadHostAccess, then=10, else=0) +
+          if(condition=IsUnpacked AND ManifestKeyPresent, then=10, else=0) +
+          if(condition=IsUnpacked AND ManagedCopyPresent, then=25, else=0) +
+          if(condition=StoreIdLoadedUnpacked, then=30, else=0) +
+          if(condition=MissingEncryptedSettingsHash, then=5, else=0) AS RiskScore,
+          format(
+              format='Unpacked=%v Enabled=%v DevMode=%v SuspiciousPath=%v PowerfulAPIs=%v BroadHosts=%v NativeMessaging=%v ManifestKey=%v ExpectedStoreId=%v ManagedCopy=%v MissingEncryptedHash=%v',
+              args=[IsUnpacked,
+                    IsEnabled,
+                    DeveloperMode,
+                    SuspiciousPath,
+                    PowerfulPermissions,
+                    BroadHostAccess,
+                    NativeMessagingPermission,
+                    ManifestKeyPresent,
+                    StoreIdLoadedUnpacked,
+                    ManagedCopyPresent,
+                    MissingEncryptedSettingsHash]) AS Signals
+      FROM Signals
+
+      SELECT
+          if(
+              condition=RiskScore >= 90,
+              then='HIGH',
+              else=if(
+                  condition=RiskScore >= 60,
+                  then='MEDIUM',
+                  else='LOW')) AS Severity,
+          RiskScore,
+          Username,
+          Browser,
+          Profile,
+          ExtensionId,
+          if(
+              condition=Name,
+              then=Name,
+              else=get(item=ManifestOnDisk.Manifest, member='name')) AS ExtensionName,
+          if(
+              condition=Version,
+              then=Version,
+              else=get(item=ManifestOnDisk.Manifest, member='version')) AS Version,
+          LocationName,
+          ExtensionPath,
+          FirstInstallTime,
+          LastUpdateTime,
+          PreferenceMtime,
+          DeveloperMode,
+          FromWebStore,
+          NativeMessagingPermission,
+          ActiveAPIs,
+          ActiveExplicitHosts,
+          ManifestKeyPresent,
+          ManagedCopyPresent,
+          if(condition=ManifestOnDisk, then=TRUE, else=FALSE) AS ManifestExists,
+          ManifestOnDisk.Mtime AS ManifestMtime,
+          ManifestOnDisk.SHA256 AS ManifestSHA256,
+          Signals
+      FROM Scored
+      WHERE ShowAll OR RiskScore >= MinScore
+      ORDER BY RiskScore DESC
+
+  - name: NativeMessagingHosts
+    precondition:
+      SELECT OS FROM info() WHERE OS = 'windows'
+
+    query: |
+      LET RegistryRows = SELECT
+          Username,
+          UUID AS SID,
+          Directory AS UserDirectory,
+          OSPath AS RegistryPath,
+          OSPath.DelegatePath AS HivePath,
+          OSPath.Path AS RegistrySubPath,
+          if(
+              condition=OSPath.Path =~ '''Google\\Chrome\\NativeMessagingHosts''',
+              then='Chrome',
+              else=if(
+                  condition=OSPath.Path =~ '''Microsoft\\Edge\\NativeMessagingHosts''',
+                  then='Edge',
+                  else='Unknown')) AS Browser,
+          parse_string_with_regex(
+              string=OSPath.Path,
+              regex=['''(?i)\\NativeMessagingHosts\\(?P<NativeHostName>[^\\]+)\\@$''']).NativeHostName AS NativeHostName,
+          regex_replace(
+              source=Data.value,
+              re='''^"|"$''',
+              replace='') AS NativeHostManifestPath,
+          Data.type AS RegistryValueType,
+          Mtime AS RegistryMtime
+      FROM Artifact.Windows.Registry.NTUser(
+          KeyGlob=NativeHostKeyGlob)
+      WHERE NOT Data.type = 'Key'
+
+      LET ReadManifest(Path) = SELECT
+          OSPath,
+          Size,
+          Mtime,
+          hash(path=OSPath, accessor=Accessor).SHA256 AS SHA256,
+          parse_json(
+              data=regex_replace(
+                  source=read_file(
+                      filename=OSPath,
+                      accessor=Accessor,
+                      length=MaxNativeHostManifestReadSize),
+                  re='''(?s)^[^{]*\{''',
+                  replace='{')) AS Manifest
+      FROM stat(filename=Path, accessor=Accessor)
+      WHERE Mode.IsRegular
+
+      LET FileDetails(Path) = SELECT
+          OSPath,
+          Size,
+          Mtime,
+          hash(path=OSPath, accessor=Accessor).SHA256 AS SHA256
+      FROM stat(filename=Path, accessor=Accessor)
+      WHERE Mode.IsRegular
+
+      LET ParsedHosts = SELECT
+          *,
+          ReadManifest(Path=NativeHostManifestPath)[0] AS ManifestFile
+      FROM RegistryRows
+
+      LET HostDetails = SELECT
+          *,
+          ManifestFile.OSPath AS ManifestOnDisk,
+          ManifestFile.Size AS ManifestSize,
+          ManifestFile.Mtime AS ManifestMtime,
+          ManifestFile.SHA256 AS ManifestSHA256,
+          get(item=ManifestFile.Manifest, member='name') AS ManifestName,
+          get(item=ManifestFile.Manifest, member='description') AS ManifestDescription,
+          get(item=ManifestFile.Manifest, member='type') AS NativeHostType,
+          get(item=ManifestFile.Manifest, member='allowed_origins') AS AllowedOrigins,
+          if(
+              condition=NOT get(item=ManifestFile.Manifest, member='path'),
+              then=NULL,
+              else=if(
+                  condition=get(item=ManifestFile.Manifest, member='path') =~ '^[A-Za-z]:',
+                  then=get(item=ManifestFile.Manifest, member='path'),
+                  else=path_join(
+                      components=[
+                          dirname(path=NativeHostManifestPath, path_type='windows'),
+                          get(item=ManifestFile.Manifest, member='path')],
+                      path_type='windows'))) AS NativeExecutable
+      FROM ParsedHosts
+
+      LET HostSignals = SELECT
+          *,
+          if(condition=ManifestOnDisk, then=TRUE, else=FALSE) AS ManifestExists,
+          NativeHostManifestPath =~ SuspiciousPathRegex AS SuspiciousManifestPath,
+          NativeExecutable =~ SuspiciousPathRegex AS SuspiciousExecutablePath,
+          if(
+              condition=NativeExecutable,
+              then=FileDetails(Path=NativeExecutable)[0],
+              else=NULL) AS NativeExecutableOnDisk,
+          if(
+              condition=ManifestName AND NativeHostName != ManifestName,
+              then=TRUE,
+              else=FALSE) AS ManifestNameMismatch
+      FROM HostDetails
+
+      LET ScoredHosts = SELECT
+          *,
+          if(condition=SuspiciousManifestPath, then=25, else=0) +
+          if(condition=SuspiciousExecutablePath, then=25, else=0) +
+          if(condition=NOT ManifestExists, then=15, else=0) +
+          if(condition=NativeExecutable AND NOT NativeExecutableOnDisk, then=10, else=0) +
+          if(condition=ManifestNameMismatch, then=10, else=0) +
+          if(condition=AllowedOrigins, then=5, else=0) AS RiskScore,
+          format(
+              format='SuspiciousManifestPath=%v SuspiciousExecutablePath=%v ManifestExists=%v ExecutableExists=%v NameMismatch=%v AllowedOrigins=%v',
+              args=[SuspiciousManifestPath,
+                    SuspiciousExecutablePath,
+                    ManifestExists,
+                    if(condition=NativeExecutableOnDisk, then=TRUE, else=FALSE),
+                    ManifestNameMismatch,
+                    AllowedOrigins]) AS Signals
+      FROM HostSignals
+
+      SELECT
+          if(
+              condition=RiskScore >= 50,
+              then='HIGH',
+              else=if(
+                  condition=RiskScore >= 25,
+                  then='MEDIUM',
+                  else='LOW')) AS Severity,
+          RiskScore,
+          Username,
+          SID,
+          Browser,
+          NativeHostName,
+          RegistrySubPath,
+          RegistryMtime,
+          NativeHostManifestPath,
+          ManifestMtime,
+          ManifestSHA256,
+          ManifestName,
+          NativeHostType,
+          AllowedOrigins,
+          NativeExecutable,
+          if(
+              condition=NativeExecutableOnDisk,
+              then=TRUE,
+              else=FALSE) AS NativeExecutableExists,
+          NativeExecutableOnDisk.Mtime AS NativeExecutableMtime,
+          NativeExecutableOnDisk.SHA256 AS NativeExecutableSHA256,
+          SuspiciousManifestPath,
+          SuspiciousExecutablePath,
+          ManifestNameMismatch,
+          Signals
+      FROM ScoredHosts
+      WHERE ShowAllNativeHosts OR RiskScore >= NativeHostMinScore
+      ORDER BY RiskScore DESC
