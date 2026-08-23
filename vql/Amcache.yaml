@@ -168,6 +168,7 @@ parameters:
         DR-MFT-RMM-031,RMM - Connectwise Automate (LabTech),Remote Access Software,T1219,High,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,.,,https://lolrmm.io/tools/connectwise_automate__labtech_,Medium,Both,File,LOLRMM,connectwise_automate__labtech_
         DR-MFT-RMM-032,RMM - ConnectWise Control,Remote Access Software,T1219,High,^connectwisechat-customer\.exe$|^connectwisecontrol\.client\.exe$|^screenconnect\.windowsclient\.exe$,.,,https://lolrmm.io/tools/connectwise_control,Medium,Both,File,LOLRMM,connectwise_control
         DR-MFT-RMM-234,RMM - Controlio,Remote Access Software,T1219,High,^bbl\.exe$|^weCliboardListener\.exe$|^weInstSvc\.exe$|^wemonc\.exe$|^weprtct\.exe$|^wesvc\.exe$,.,,https://lolrmm.io/tools/controlio,Medium,Both,File,LOLRMM,controlio
+        DR-MFT-RMM-353,RMM - ControlR,Remote Access Software,T1219,High,^ControlR\.Agent\.exe$|^ControlR\.DesktopClient\.dll$|^ControlR\.DesktopClient\.exe$,.,,https://lolrmm.io/tools/controlr,Medium,Both,File,LOLRMM,controlr
         DR-MFT-RMM-033,RMM - CrossLoop,Remote Access Software,T1219,High,^CrossLoopConnect\.exe$|^WinVNCStub\.exe$|^crossloopservice\.exe$,.,,https://lolrmm.io/tools/crossloop,Medium,Both,File,LOLRMM,crossloop
         DR-MFT-RMM-034,RMM - CrossTec Remote Control,Remote Access Software,T1219,High,^PCIVIDEO\.EXE$|^supporttool\.exe$,.,,https://lolrmm.io/tools/crosstec_remote_control,Medium,Both,File,LOLRMM,crosstec_remote_control
         DR-MFT-RMM-036,RMM - DameWare,Remote Access Software,T1219,Medium,^dwrcst\.exe$|^DameWare Mini Remote Control.*\.exe$|^DameWare Remote Support\.exe$|^SolarWinds-Dameware-DRS.*\.exe$|^SolarWinds-Dameware-MRC.*\.exe$|^dntus.*\.exe$|^dwrcs\.exe$,.,,https://lolrmm.io/tools/dameware,Medium,Both,File,LOLRMM,dameware
@@ -215,7 +216,7 @@ parameters:
         DR-MFT-RMM-266,RMM - iDrive,Remote Access Software,T1219,High,^IDriveWinSetup\.exe$|^IDriveEClassic\.exe$|^id_tray\.exe$,.,,https://lolrmm.io/tools/idrive,Medium,Both,File,LOLRMM,idrive
         DR-MFT-RMM-267,RMM - ImmyBot,Remote Access Software,T1219,High,^ImmyAgent\.exe$|^ImmyUpdater\.exe$|^ImmyBot\.msi$|^ImmyBot\.Agent\.Ephemeral\.exe$,.,,https://lolrmm.io/tools/immybot,Medium,Both,File,LOLRMM,immybot
         DR-MFT-RMM-072,RMM - Impero Connect,Remote Access Software,T1219,High,^ImperoClientSVC\.exe$,.,,https://lolrmm.io/tools/impero_connect,Medium,Both,File,LOLRMM,impero_connect
-        DR-MFT-RMM-073,RMM - Instant Housecall,Remote Access Software,T1219,High,^InstantHousecall\.exe$|^hsloader\.exe$|^ihcserver\.exe$,.,,https://lolrmm.io/tools/instant_housecall,Medium,Both,File,LOLRMM,instant_housecall
+        DR-MFT-RMM-073,RMM - Instant Housecall,Remote Access Software,T1219,High,^hsloader\.exe$|^ihcserver\.exe$|^instanthousecall\.exe$,.,,https://lolrmm.io/tools/instant_housecall,Medium,Both,File,LOLRMM,instant_housecall
         DR-MFT-RMM-074,RMM - Insync,Remote Access Software,T1219,High,^Insync\.exe$,.,,https://lolrmm.io/tools/insync,Medium,Both,File,LOLRMM,insync
         DR-MFT-RMM-075,RMM - IntelliAdmin Remote Control,Remote Access Software,T1219,High,^agent32\.exe$|^agent64\.exe$|^agent_setup_5\.exe$|^iadmin\.exe$|^intelliadmin\.exe$,.,,https://lolrmm.io/tools/intelliadmin_remote_control,Medium,Both,File,LOLRMM,intelliadmin_remote_control
         DR-MFT-RMM-268,RMM - InvGate,Remote Access Software,T1219,High,^DepHlp\.exe$|^InvGate-ED\.exe$|^InvGateAssetsRD\.exe$|^InvGateRD\.exe$,.,,https://lolrmm.io/tools/invgate,Medium,Both,File,LOLRMM,invgate
@@ -307,13 +308,13 @@ parameters:
         DR-MFT-RMM-146,RMM - Remote Desktop Plus,Remote Access Software,T1219,High,^rdp\.exe$,.,,https://lolrmm.io/tools/remote_desktop_plus,Medium,Both,File,LOLRMM,remote_desktop_plus
         DR-MFT-RMM-148,RMM - Remote Manipulator System,Remote Access Software,T1219,High,^rfusclient\.exe$|^rutserv\.exe$,.,,https://lolrmm.io/tools/remote_manipulator_system,Medium,Both,File,LOLRMM,remote_manipulator_system
         DR-MFT-RMM-320,RMM - Remote Ripple,Remote Access Software,T1219,High,^RemoteRipple\.exe$,.,,https://lolrmm.io/tools/remote_ripple,Medium,Both,File,LOLRMM,remote_ripple
-        DR-MFT-RMM-149,RMM - Remote Utilities,Remote Access Software,T1219,High,^rutserv\.exe$|^rutview\.exe$,.,,https://lolrmm.io/tools/remote_utilities,Medium,Both,File,LOLRMM,remote_utilities
         DR-MFT-RMM-318,RMM - Remote.it,Remote Access Software,T1219,High,^remote-it-installer\.exe$|^remote\.it\.exe$|^remoteit\.exe$,.,,https://lolrmm.io/tools/remote.it,Medium,Both,File,LOLRMM,remote.it
         DR-MFT-RMM-150,RMM - RemoteCall,Remote Access Software,T1219,High,^agentu\.exe$|^raautoup\.exe$|^rcengmgru\.exe$|^rcmgrsvc\.exe$|^rcstartsupport\.exe$|^remotesupportplayeru\.exe$|^rxstartsupport\.exe$,.,,https://lolrmm.io/tools/remotecall,Medium,Both,File,LOLRMM,remotecall
         DR-MFT-RMM-321,RMM - Remotely,Remote Access Software,T1219,High,^Remotely_Desktop\.exe$|^Remotely_Agent\.exe$,.,,https://lolrmm.io/tools/remotely,Medium,Both,File,LOLRMM,remotely
         DR-MFT-RMM-151,RMM - RemotePass,Remote Access Software,T1219,High,^remotepass-access\.exe$|^rpaccess\.exe$|^rpwhostscr\.exe$,.,,https://lolrmm.io/tools/remotepass,Medium,Both,File,LOLRMM,remotepass
         DR-MFT-RMM-152,RMM - RemotePC,Remote Access Software,T1219,High,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,.,,https://lolrmm.io/tools/remotepc,Medium,Both,File,LOLRMM,remotepc
         DR-MFT-RMM-322,RMM - RemotePulse,Remote Access Software,T1219,High,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,.,,https://lolrmm.io/tools/remotepulse,Medium,Both,File,LOLRMM,remotepulse
+        DR-MFT-RMM-149,RMM - RemoteUtilities,Remote Access Software,T1219,High,^rutserv\.exe$|^rutview\.exe$,.,,https://lolrmm.io/tools/remoteutilities,Medium,Both,File,LOLRMM,remote_utilities
         DR-MFT-RMM-153,RMM - RemoteView,Remote Access Software,T1219,High,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,.,,https://lolrmm.io/tools/remoteview,Medium,Both,File,LOLRMM,remoteview
         DR-MFT-RMM-154,RMM - RES Automation Manager,Remote Access Software,T1219,Medium,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,.,,https://lolrmm.io/tools/res_automation_manager,Medium,Both,File,LOLRMM,res_automation_manager
         DR-MFT-RMM-155,RMM - Rocket Remote Desktop,Remote Access Software,T1219,High,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,.,,https://lolrmm.io/tools/rocket_remote_desktop,Medium,Both,File,LOLRMM,rocket_remote_desktop
@@ -331,7 +332,7 @@ parameters:
         DR-MFT-RMM-169,RMM - Senso.cloud,Remote Access Software,T1219,High,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,.,,https://lolrmm.io/tools/senso.cloud,Medium,Both,File,LOLRMM,senso.cloud
         DR-MFT-RMM-170,RMM - ServerEye,Remote Access Software,T1219,Medium,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,.,,https://lolrmm.io/tools/servereye,Medium,Both,File,LOLRMM,servereye
         DR-MFT-RMM-172,RMM - ShowMyPC,Remote Access Software,T1219,Medium,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,.,,https://lolrmm.io/tools/showmypc,Medium,Both,File,LOLRMM,showmypc
-        DR-MFT-RMM-173,RMM - SimpleHelp,Remote Access Software,T1219,High,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^windowslauncher\.exe$|^vhost\.exe$,.,,https://lolrmm.io/tools/simplehelp,Medium,Both,File,LOLRMM,simplehelp
+        DR-MFT-RMM-173,RMM - SimpleHelp,Remote Access Software,T1219,High,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^vhost\.exe$|^windowslauncher\.exe$,.,,https://lolrmm.io/tools/simplehelp,Medium,Both,File,LOLRMM,simplehelp
         DR-MFT-RMM-174,RMM - Site24x7,Remote Access Software,T1219,High,^MEAgentHelper\.exe$|^MonitoringAgent\.exe$|^Site24x7PluginAgent\.exe$|^Site24x7WindowsAgentTrayIcon\.exe$,.,,https://lolrmm.io/tools/site24x7,Medium,Both,File,LOLRMM,site24x7
         DR-MFT-RMM-171,RMM - SkyFex,Remote Access Software,T1219,High,^DeskRollUA\.exe$|^Deskroll\.exe$,.,,https://lolrmm.io/tools/skyfex,Medium,Both,File,LOLRMM,skyfex
         DR-MFT-RMM-176,RMM - SmarTTY,Remote Access Software,T1219,High,^SmarTTY\.exe$,.,,https://lolrmm.io/tools/smartty,Medium,Both,File,LOLRMM,smartty
@@ -355,6 +356,7 @@ parameters:
         DR-MFT-RMM-191,RMM - Tanium,Remote Access Software,T1219,High,^TPowerShell\.exe$|^TaniumCX\.exe$|^TaniumClient\.exe$|^TaniumExecWrapper\.exe$|^TaniumFileInfo\.exe$,.,,https://lolrmm.io/tools/tanium,Medium,Both,File,LOLRMM,tanium
         DR-MFT-RMM-192,RMM - TeamViewer,Remote Access Software,T1219,High,^teamviewer_desktop\.exe$|^teamviewer_service\.exe$,.,,https://lolrmm.io/tools/teamviewer,Medium,Both,File,LOLRMM,teamviewer
         DR-MFT-RMM-194,RMM - TeleDesktop,Remote Access Software,T1219,High,^pstlaunch\.exe$|^ptdskclient\.exe$|^ptdskhost\.exe$,.,,https://lolrmm.io/tools/teledesktop,Medium,Both,File,LOLRMM,teledesktop
+        DR-MFT-RMM-354,RMM - Teleport Connect,Remote Access Software,T1219,Medium,^Teleport Connect Setup-.*\.exe$,.,,https://lolrmm.io/tools/teleport_connect,Medium,Both,File,LOLRMM,teleport_connect
         DR-MFT-RMM-336,RMM - Teramind,Remote Access Software,T1219,High,^tmagentsvc\.exe$,.,,https://lolrmm.io/tools/teramind,Medium,Both,File,LOLRMM,teramind
         DR-MFT-RMM-338,RMM - TiFLUX,Remote Access Software,T1219,High,^TiService\.exe$|^TiUpdateService\.exe$|^TiAgent\.exe$,.,,https://lolrmm.io/tools/tiflux,Medium,Both,File,LOLRMM,tiflux
         DR-MFT-RMM-195,RMM - TigerVNC,Remote Access Software,T1219,Medium,^tvnserver\.exe$|^tigervnc.*\.exe$|^winvnc4\.exe$,.,,https://lolrmm.io/tools/tigervnc,Medium,Both,File,LOLRMM,tigervnc

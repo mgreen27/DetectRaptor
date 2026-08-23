@@ -37,6 +37,7 @@ connectwise,ConnectWise,Excluded,DR-MFT-RMM-233,0,,,No safe Windows filename ind
 connectwise_automate__labtech_,Connectwise Automate (LabTech),Generated,DR-MFT-RMM-031,3,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,,,1
 connectwise_control,ConnectWise Control,Generated,DR-MFT-RMM-032,3,^connectwisechat-customer\.exe$|^connectwisecontrol\.client\.exe$|^screenconnect\.windowsclient\.exe$,,,1
 controlio,Controlio,Generated,DR-MFT-RMM-234,6,^bbl\.exe$|^weCliboardListener\.exe$|^weInstSvc\.exe$|^wemonc\.exe$|^weprtct\.exe$|^wesvc\.exe$,^libeay32\.dll$|^ssleay32\.dll$,Filtered ambiguous or non-specific filename indicators,1
+controlr,ControlR,Generated,DR-MFT-RMM-353,3,^ControlR\.Agent\.exe$|^ControlR\.DesktopClient\.dll$|^ControlR\.DesktopClient\.exe$,,,1
 crossloop,CrossLoop,Generated,DR-MFT-RMM-033,3,^CrossLoopConnect\.exe$|^WinVNCStub\.exe$|^crossloopservice\.exe$,,,1
 crosstec_remote_control,CrossTec Remote Control,Generated,DR-MFT-RMM-034,2,^PCIVIDEO\.EXE$|^supporttool\.exe$,,,1
 cruzcontrol,CruzControl,Excluded,DR-MFT-RMM-235,0,,,No safe Windows filename indicator,1
@@ -97,7 +98,7 @@ i'm_intouch,I'm InTouch,Generated,DR-MFT-RMM-265,3,^I'm InTouch Go Installer\.ex
 idrive,iDrive,Generated,DR-MFT-RMM-266,3,^IDriveWinSetup\.exe$|^IDriveEClassic\.exe$|^id_tray\.exe$,^IDComponent\.dll$,Filtered ambiguous or non-specific filename indicators,1
 immybot,ImmyBot,Generated,DR-MFT-RMM-267,4,^ImmyAgent\.exe$|^ImmyUpdater\.exe$|^ImmyBot\.msi$|^ImmyBot\.Agent\.Ephemeral\.exe$,,,1
 impero_connect,Impero Connect,Generated,DR-MFT-RMM-072,1,^ImperoClientSVC\.exe$,,,1
-instant_housecall,Instant Housecall,Generated,DR-MFT-RMM-073,3,^InstantHousecall\.exe$|^hsloader\.exe$|^ihcserver\.exe$,,,2
+instant_housecall,Instant Housecall,Generated,DR-MFT-RMM-073,3,^hsloader\.exe$|^ihcserver\.exe$|^instanthousecall\.exe$,,,2
 insync,Insync,Generated,DR-MFT-RMM-074,1,^Insync\.exe$,,,1
 intelliadmin_remote_control,IntelliAdmin Remote Control,Generated,DR-MFT-RMM-075,5,^agent32\.exe$|^agent64\.exe$|^agent_setup_5\.exe$|^iadmin\.exe$|^intelliadmin\.exe$,,,1
 invgate,InvGate,Generated,DR-MFT-RMM-268,4,^DepHlp\.exe$|^InvGate-ED\.exe$|^InvGateAssetsRD\.exe$|^InvGateRD\.exe$,^Software Matt\.dll$|^sas\.dll$,Filtered ambiguous or non-specific filename indicators,1
@@ -208,13 +209,13 @@ remote_desktop_manager__devolutions_,Remote Desktop Manager (Devolutions),Exclud
 remote_desktop_plus,Remote Desktop Plus,Generated,DR-MFT-RMM-146,1,^rdp\.exe$,,,1
 remote_manipulator_system,Remote Manipulator System,Generated,DR-MFT-RMM-148,2,^rfusclient\.exe$|^rutserv\.exe$,,,1
 remote_ripple,Remote Ripple,Generated,DR-MFT-RMM-320,1,^RemoteRipple\.exe$,,,1
-remote_utilities,Remote Utilities,Generated,DR-MFT-RMM-149,2,^rutserv\.exe$|^rutview\.exe$,,,2
 remote.it,Remote.it,Generated,DR-MFT-RMM-318,3,^remote-it-installer\.exe$|^remote\.it\.exe$|^remoteit\.exe$,,,1
 remotecall,RemoteCall,Generated,DR-MFT-RMM-150,7,^agentu\.exe$|^raautoup\.exe$|^rcengmgru\.exe$|^rcmgrsvc\.exe$|^rcstartsupport\.exe$|^remotesupportplayeru\.exe$|^rxstartsupport\.exe$,,,1
 remotely,Remotely,Generated,DR-MFT-RMM-321,2,^Remotely_Desktop\.exe$|^Remotely_Agent\.exe$,,,1
 remotepass,RemotePass,Generated,DR-MFT-RMM-151,3,^remotepass-access\.exe$|^rpaccess\.exe$|^rpwhostscr\.exe$,,,1
 remotepc,RemotePC,Generated,DR-MFT-RMM-152,4,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,,,1
 remotepulse,RemotePulse,Generated,DR-MFT-RMM-322,5,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,,,1
+remote_utilities,RemoteUtilities,Generated,DR-MFT-RMM-149,2,^rutserv\.exe$|^rutview\.exe$,,,2
 remoteview,RemoteView,Generated,DR-MFT-RMM-153,3,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,,,1
 res_automation_manager,RES Automation Manager,Generated,DR-MFT-RMM-154,4,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,,,1
 rocket_remote_desktop,Rocket Remote Desktop,Generated,DR-MFT-RMM-155,2,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,,,1
@@ -234,7 +235,7 @@ senso.cloud,Senso.cloud,Generated,DR-MFT-RMM-169,3,^SensoClient\.exe$|^SensoServ
 servereye,ServerEye,Generated,DR-MFT-RMM-170,2,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,,,1
 shellhub,ShellHub,Excluded,DR-MFT-RMM-327,0,,,No safe Windows filename indicator,1
 showmypc,ShowMyPC,Generated,DR-MFT-RMM-172,3,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,,,1
-simplehelp,SimpleHelp,Generated,DR-MFT-RMM-173,7,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^windowslauncher\.exe$|^vhost\.exe$,,,2
+simplehelp,SimpleHelp,Generated,DR-MFT-RMM-173,7,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^vhost\.exe$|^windowslauncher\.exe$,,,2
 site24x7,Site24x7,Generated,DR-MFT-RMM-174,4,^MEAgentHelper\.exe$|^MonitoringAgent\.exe$|^Site24x7PluginAgent\.exe$|^Site24x7WindowsAgentTrayIcon\.exe$,,,1
 skyfex,SkyFex,Generated,DR-MFT-RMM-171,2,^DeskRollUA\.exe$|^Deskroll\.exe$,,,1
 smartcode_web_vnc,SmartCode Web VNC,Excluded,DR-MFT-RMM-328,0,,,No safe Windows filename indicator,1
@@ -262,6 +263,7 @@ tanium,Tanium,Generated,DR-MFT-RMM-191,5,^TPowerShell\.exe$|^TaniumCX\.exe$|^Tan
 tanium_deploy,Tanium Deploy,Excluded,DR-MFT-RMM-335,0,,,No safe Windows filename indicator,1
 teamviewer,TeamViewer,Generated,DR-MFT-RMM-192,2,^teamviewer_desktop\.exe$|^teamviewer_service\.exe$,,,1
 teledesktop,TeleDesktop,Generated,DR-MFT-RMM-194,3,^pstlaunch\.exe$|^ptdskclient\.exe$|^ptdskhost\.exe$,,,1
+teleport_connect,Teleport Connect,Generated,DR-MFT-RMM-354,1,^Teleport Connect Setup-.*\.exe$,,,1
 teramind,Teramind,Generated,DR-MFT-RMM-336,1,^tmagentsvc\.exe$,,,1
 terminals,Terminals,Excluded,DR-MFT-RMM-337,0,,,No safe Windows filename indicator,1
 tiflux,TiFLUX,Generated,DR-MFT-RMM-338,3,^TiService\.exe$|^TiUpdateService\.exe$|^TiAgent\.exe$,,,1

@@ -41,6 +41,7 @@ connectwise,DR-MFT-RMM-233
 connectwise_automate__labtech_,DR-MFT-RMM-031
 connectwise_control,DR-MFT-RMM-032
 controlio,DR-MFT-RMM-234
+controlr,DR-MFT-RMM-353
 crossloop,DR-MFT-RMM-033
 crosstec_remote_control,DR-MFT-RMM-034
 cruzcontrol,DR-MFT-RMM-235
@@ -280,6 +281,7 @@ tanium,DR-MFT-RMM-191
 tanium_deploy,DR-MFT-RMM-335
 teamviewer,DR-MFT-RMM-192
 teledesktop,DR-MFT-RMM-194
+teleport_connect,DR-MFT-RMM-354
 teramind,DR-MFT-RMM-336
 terminals,DR-MFT-RMM-337
 tiflux,DR-MFT-RMM-338
