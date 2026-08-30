@@ -3060,8 +3060,8 @@ parameters:
         		date = "2023-11-23"
         		modified = "2024-12-19"
         		reference = "https://github.com/SEKOIA-IO/Community"
-        		source_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/yara_rules/apt_unk_hrserv_memory_commands_strings.yar#L1-L19"
-        		license_url = "https://github.com/SEKOIA-IO/Community/blob/0cfec8bbe51bc92b4d612e53312f158b7597b151/LICENSE.md"
+        		source_url = "https://github.com/SEKOIA-IO/Community/blob/fa3a9630ef9ce484fb1b945480a43f989e6865d4/yara_rules/apt_unk_hrserv_memory_commands_strings.yar#L1-L19"
+        		license_url = "https://github.com/SEKOIA-IO/Community/blob/fa3a9630ef9ce484fb1b945480a43f989e6865d4/LICENSE.md"
         		logic_hash = "a87c35658ded301c098f9ee8ee5886a54e89537eabd145cf82b0286c703a77d2"
         		score = 75
         		quality = 80
@@ -3254,7 +3254,7 @@ parameters:
         		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
         		logic_hash = "ece32e51a12adf0d68420c8d98efbe7df27b9061ddfe4dcedf151f9f06287eee"
         		score = 75
-        		quality = 60
+        		quality = 85
         		tags = ""
         		sample_filtype = "exe"
         
