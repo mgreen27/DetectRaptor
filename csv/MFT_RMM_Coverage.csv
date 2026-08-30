@@ -26,6 +26,7 @@ beyondtrust__bomgar_,BeyondTrust (Bomgar),Generated,DR-MFT-RMM-023,5,^bomgar-pac
 bitvise_ssh_client,Bitvise SSH Client,Generated,DR-MFT-RMM-024,1,^BvSshClient-Inst\.exe$,,,1
 bitvise_ssh_server,Bitvise SSH Server,Generated,DR-MFT-RMM-228,1,^BvSshServer-Inst\.exe$,,,1
 bluetrait,Bluetrait,Excluded,DR-MFT-RMM-229,0,,,No safe Windows filename indicator,1
+breezermm,BreezeRMM,Excluded,DR-MFT-RMM-355,0,,,No safe Windows filename indicator,1
 centrastage__now_datto_,CentraStage (Now Datto),Generated,DR-MFT-RMM-026,2,^AEMAgent\.exe$|^CagService\.exe$,,,1
 centurion,Centurion,Generated,DR-MFT-RMM-027,1,^ctiserv\.exe$,,,1
 chicken__of_the_vnc_,Chicken (of the VNC),Excluded,DR-MFT-RMM-230,0,,,No safe Windows filename indicator,1
