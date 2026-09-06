@@ -39,7 +39,7 @@ rule TRELLIX_ARC_Sodinokobi : RANSOMWARE {
 		description = "This rule detect Sodinokobi Ransomware in memory in old samples and perhaps future."
 		author = "McAfee ATR team"
 		id = "dd05ce31-9699-50a9-944c-5883340791af"
-		date = "2026-08-01"
+		date = "2026-09-01"
 		modified = "2025-03-18"
 		reference = "https://github.com/advanced-threat-research/Yara-Rules/"
 		source_url = "https://github.com/advanced-threat-research/Yara-Rules//blob/1919562a59f190bda60c982424f6a24c542ee3e0/ransomware/RANSOM_Sodinokibi.yar#L32-L53"
@@ -60,261 +60,6 @@ rule TRELLIX_ARC_Sodinokobi : RANSOMWARE {
 
 	condition:
 		all of them
-}
-rule VOLEXITY_Apt_Malware_Any_Dotnet_Aot_Plenet : VERDANTBAMBOO PLENET FILE MEMORY {
-    meta:
-		description = "Detect PLENET, a multiplatform malware compile with native AOT."
-		author = "threatintel@volexity.com"
-		id = "615d7c43-0128-5cfa-a080-6ece5d2dc029"
-		date = "2025-09-22"
-		modified = "2025-10-30"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L1-L31"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "eb141a43958802727a6c813452450c10b92704bea4474ee5fd87c0a1be326e2e"
-		logic_hash = "67d8f7fbc2986b1068a9c557cf85ba83469e3fb7f2433bd10c7ad740a4b0e717"
-		score = 75
-		quality = 80
-		tags = "VERDANTBAMBOO, PLENET, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20251104"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 12367
-		version = 4
-
-	strings:
-		$str1 = "[!] Bad dat" wide
-		$str2 = "[!] Connection error. Kill Pty" wide
-		$str3 = "[!] Error : Plexor is nul" wide
-		$str4 = "[!] Unkown message type" wide
-		$str5 = "[*] Disposing.." wide
-		$str6 = "Lack port ':" wide
-		$str7 = "IPv6 port error ':" wide
-		$str8 = "this.existingPipeGiven." wide
-		$str9 = "port must within 0~6553" wide
-
-	condition:
-		4 of them
-}
-rule VOLEXITY_Apt_Malware_Golang_Brickstorm_B : VERDANTBAMBOO BRICKSTORM FILE MEMORY {
-    meta:
-		description = "Detection for the BRICKSTORM malware family."
-		author = "threatintel@volexity.com"
-		id = "b3b9ff26-56ab-5801-8905-0a304887b998"
-		date = "2025-09-05"
-		modified = "2026-06-09"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L56-L98"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "aa688682d44f0c6b0ed7f30b981a609100107f2d414a3a6e5808671b112d1878"
-		logic_hash = "e91203a714a4bc9d1c70eae4670681e3f416257163cf44db20ad33380be5d39a"
-		score = 75
-		quality = 80
-		tags = "VERDANTBAMBOO, BRICKSTORM, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20251104"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 12299
-		version = 6
-
-	strings:
-		$method1 = "UnPackHeaderData"
-		$method2 = "handleRelay"
-		$method3 = "NewWebSocketClient"
-		$method4 = "createDnsMessage"
-		$method5 = "GetFileOwnerInfo"
-		$err1 = "dns rcode: %v"
-		$err2 = "readFull error"
-		$err3 = "tagAuth error"
-		$err4 = "error: Auth: %s"
-		$ws1 = "<a style='text-decoration: none;'  href='javascript:history.go(-1);'><h5>Back</h5></a>"
-		$ws2 = "Mon, 02 Jan 2006 15:04:05 GMT"
-		$doh = "https://1.0.0.1/dns-queryhttps://1.1.1.1/dns-queryhttps://8.8.4.4/dns-queryhttps://8.8.8.8/dns-query"
-
-	condition:
-		4 of ( $method* ) or 3 of ( $err* ) or all of ( $ws* ) or ( $doh and 3 of ( $method* , $err* , $ws* , $doh ) )
-}
-rule VOLEXITY_Apt_Malware_Golang_Brickstorm : VERDANTBAMBOO BRICKSTORM FILE MEMORY {
-    meta:
-		description = "Detects the BRICKSTORM backdoor using common strings."
-		author = "threatintel@volexity.com"
-		id = "25775278-5115-5873-957f-9c5d0c8e4f5e"
-		date = "2025-09-04"
-		modified = "2025-10-30"
-		reference = "https://blog.nviso.eu/wp-content/uploads/2025/04/NVISO-BRICKSTORM-Report.pdf"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L100-L136"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "40d264cf9c73923932c3dfd52d20f46ff602be3fea8dc6ecc71aca46e6067bf5"
-		hash = "e981fc4eaaa6417e6034e21438e55c0360773674a6fc0b63c1b95026449e5254"
-		logic_hash = "39e3403d90ad67072ae631273e89fe059ec48906ce1d57fe1afbb91304dc84f3"
-		score = 75
-		quality = 80
-		tags = "VERDANTBAMBOO, BRICKSTORM, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20251104"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 12298
-		version = 7
-
-	strings:
-		$dns1 = "https://1.1.1.1/dns-query" ascii
-		$dns2 = "https://8.8.4.4/dns-query" ascii
-		$dns3 = "https://8.8.8.8/dns-query" ascii
-		$pack1 = "wsshell/core" ascii
-		$pack2 = "wssoft/core" ascii
-		$s1 = "github.com/hashicorp/yamux" ascii
-		$s2 = "winbindd:" ascii
-		$s3 = "WEE1=true" ascii
-		$s4 = "WEE2=true" ascii
-
-	condition:
-		all of ( $dns* ) and all of ( $s* ) and any of ( $pack* )
-}
-rule VOLEXITY_Apt_Malware_Py_Agentpsd : VERDANTBAMBOO AGENTPSD MEMORY {
-    meta:
-		description = "Detection for AgentPSD, a python-based malware typically delivered within PyInstaller-built binaries."
-		author = "threatintel@volexity.com"
-		id = "4a7d531f-926d-557e-b2a0-d4f103e9c63a"
-		date = "2025-09-05"
-		modified = "2025-10-30"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L137-L171"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "ee41e06ed96182ce80cd4544a6abd5d7719c4a5c0e5ddb266a83842d39b99b0a"
-		logic_hash = "dd0b957bc2a61ddebd392b86b35bae8c1052a285fa31ccd700e580c2ad9cce59"
-		score = 75
-		quality = 80
-		tags = "VERDANTBAMBOO, AGENTPSD, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "memory"
-		severity = "critical"
-		report1 = "TIB-20251104"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 12297
-		version = 5
-
-	strings:
-		$s1 = "g_strPhpUrl" ascii
-		$s2 = "g_nSleepMinits" ascii
-		$s3 = "g_nDuringTime" ascii
-		$func1 = "startwork" ascii
-		$func2 = "ifrunning" ascii
-		$func3 = "getsysinfo" ascii
-		$func4 = "getcmdfromweb" ascii
-		$func5 = "ParseCmdFromResponse" ascii
-		$func6 = "PostDataToServer" ascii
-		$func7 = "DealWithBuildinCommand" ascii
-		$func8 = "PostBuildinResultToWeb" ascii
-
-	condition:
-		2 of ( $s* ) or 4 of ( $func* )
-}
-rule VOLEXITY_Apt_Webshell_Java_Orangetail_B : UTA0533 ORANGETAIL FILE MEMORY {
-    meta:
-		description = "Detection for the accept logic of ORANGETAIL, a custom Java webshell used by UTA0533."
-		author = "threatintel@volexity.com"
-		id = "e9f19175-ea33-5eea-8663-91fc805306bb"
-		date = "2026-07-06"
-		modified = "2026-07-14"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L1-L25"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "1e1e68bbb899450a57274a8b12082ed4e2040a2aae77014f20431689d2b4edee"
-		hash = "ea9154e374e4f77bc2cf54282e23543573980342a85bc888cb23f20b8bbba081"
-		logic_hash = "e5ed25fb820dc4a18c374936c36d4321e2aba72d8b640cdb0d81abd764786918"
-		score = 75
-		quality = 80
-		tags = "UTA0533, ORANGETAIL, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20260714B"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 13240
-		version = 6
-
-	strings:
-		$s1 = ".equals($1.getHeader(\"User-Agent\"))) {  javax.servlet.jsp.JspFactory" ascii
-		$s2 = " $2.setStatus(404);  $2.setContentLength(0);  $2.flushBuffer();  return;" ascii
-
-	condition:
-		all of them
-}
-rule VOLEXITY_Apt_Webshell_Java_Orangetail : UTA0533 ORANGETAIL FILE MEMORY {
-    meta:
-		description = "Detection for ORANGETAIL, a custom Java webshell used by UTA0533."
-		author = "threatintel@volexity.com"
-		id = "5bbffb5f-0917-57e4-a7d4-f5c770b5d253"
-		date = "2026-07-06"
-		modified = "2026-07-14"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L26-L53"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "ea9154e374e4f77bc2cf54282e23543573980342a85bc888cb23f20b8bbba081"
-		logic_hash = "1a495df2bc13b1c2c61315d76d66b150452b923afa5847121429fa8ae9788a7b"
-		score = 75
-		quality = 80
-		tags = "UTA0533, ORANGETAIL, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20260714B"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 13239
-		version = 5
-
-	strings:
-		$s1 = "agentmain called args="
-		$s2 = "tryInject="
-		$s3 = "agentmain ex:"
-		$s4 = "javassist="
-		$s5 = "tryInject exception"
-		$s6 = "found loaded class:"
-
-	condition:
-		4 of ( $s* )
-}
-rule VOLEXITY_Apt_Malware_Any_Uta0533_Ua : UTA0533 FILE MEMORY {
-    meta:
-		description = "Identify any blob containing a bogus user-agent used in different components of an attack attributed to UTA0533."
-		author = "threatintel@volexity.com"
-		id = "c13dafb2-b2c3-5988-91dd-0345ef60086c"
-		date = "2026-07-06"
-		modified = "2026-07-14"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L54-L76"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "8c470301dcb7278f73e622f1950073567b34011c64b60cdfbb0f89803923a5a3"
-		logic_hash = "d4c0322080e853f5c5d495af05d43eaf3d375af6905e795cef718dec639a7092"
-		score = 75
-		quality = 80
-		tags = "UTA0533, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20260714B"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 13237
-		version = 3
-
-	strings:
-		$s1 = "Mozilla/6.0 (Windows NT 11.0; Win64; x64) AppleWebKit/1537.136 (KHTML, like Gecko) Chrome/149.0.0.1 Safari/1537.136" ascii
-
-	condition:
-		$s1
 }
 rule VOLEXITY_Apt_Malware_Win_Flipflop_Ldr : COZYLARCH FILE MEMORY {
     meta:
@@ -381,77 +126,6 @@ rule VOLEXITY_Malware_Win_Cobaltstrike_D : FILE MEMORY {
 
 	condition:
 		6 of ( $s* )
-}
-rule VOLEXITY_Webshell_Aspx_Regeorgtunnel : FILE MEMORY {
-    meta:
-		description = "A variation of the reGeorgtunnel open-source webshell."
-		author = "threatintel@volexity.com"
-		id = "b8aa27c9-a28a-5051-8f81-1184f28842ed"
-		date = "2021-03-02"
-		modified = "2024-10-18"
-		reference = "https://github.com/sensepost/reGeorg/blob/master/tunnel.aspx"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L26-L56"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "406b680edc9a1bb0e2c7c451c56904857848b5f15570401450b73b232ff38928"
-		logic_hash = "ea3d0532cb609682922469e8272dc8061efca3b3ae27df738ef2646e30404c6f"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 4979
-		version = 4
-
-	strings:
-		$s1 = "System.Net.Sockets"
-		$s2 = "System.Text.Encoding.Default.GetString(Convert.FromBase64String(StrTr(Request.Headers.Get"
-		$t1 = ".Split('|')"
-		$t2 = "Request.Headers.Get"
-		$t3 = ".Substring("
-		$t4 = "new Socket("
-		$t5 = "IPAddress ip;"
-
-	condition:
-		all of ( $s* ) or all of ( $t* )
-}
-rule VOLEXITY_Apt_Webshell_Aspx_Sportsball : FILE MEMORY {
-    meta:
-		description = "The SPORTSBALL webshell, observed in targeted Microsoft Exchange attacks in 2021. SPORTSBALL was later discovered to be a variant of HYPERSHELL, a publicly available webshell."
-		author = "threatintel@volexity.com"
-		id = "25b23a4c-8fc7-5d6f-b4b5-46fe2c1546d8"
-		date = "2021-03-01"
-		modified = "2025-07-24"
-		reference = "https://github.com/misterch0c/APT34/blob/e62f3d14ec78bea5c98d3c895162ca1e47676c18/Webshells_and_Panel/HyperShell/HyperShell/Shell/simple.aspx"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L57-L89"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "2fa06333188795110bba14a482020699a96f76fb1ceb80cbfa2df9d3008b5b0a"
-		logic_hash = "5ec5e52922e97a3080d397b69b2f42f09daa995271e218ea085fa2ec4e3abad2"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 4968
-		version = 6
-
-	strings:
-		$uniq1 = "HttpCookie newcook = new HttpCookie(\"fqrspt\", HttpContext.Current.Request.Form"
-		$uniq2 = "ZN2aDAB4rXsszEvCLrzgcvQ4oi5J1TuiRULlQbYwldE="
-		$s1 = "Result.InnerText = string.Empty;"
-		$s2 = "newcook.Expires = DateTime.Now.AddDays("
-		$s3 = "System.Diagnostics.Process process = new System.Diagnostics.Process();"
-		$s4 = "process.StandardInput.WriteLine(HttpContext.Current.Request.Form[\""
-		$s5 = "else if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form[\""
-		$s6 = "<input type=\"submit\" value=\"Upload\" />"
-
-	condition:
-		any of ( $uniq* ) or all of ( $s* )
 }
 rule VOLEXITY_Apt_Malware_Win_Dolphin : INKYPINE FILE MEMORY {
     meta:
@@ -716,7 +390,7 @@ rule VOLEXITY_Apt_Malware_Rb_Rokrat_Loader : INKYPINE FILE MEMORY {
 		hash = "5bc52f6c1c0d0131cee30b4f192ce738ad70bcb56e84180f464a5125d1a784b2"
 		logic_hash = "30ae14fd55a3ab60e791064f69377f3b9de9b871adfd055f435df657f89f8007"
 		score = 75
-		quality = 80
+		quality = 55
 		tags = "INKYPINE, FILE, MEMORY"
 		os = "win"
 		os_arch = "all"
@@ -772,67 +446,76 @@ rule VOLEXITY_Apt_Malware_Win_Decrok : INKYPINE FILE MEMORY {
 	condition:
 		all of them and $func1 in ( @format .. @format + 10 )
 }
-rule VOLEXITY_Apt_Malware_Golang_Govershell_Strings_UTA0388 : UTA0388 FILE MEMORY {
+rule VOLEXITY_Webshell_Aspx_Regeorgtunnel : FILE MEMORY {
     meta:
-		description = "This rule detects multiple variants of the GOVERSHELL malware family employed by UTA0388 via unique strings. The implant is side-loaded by a legitimate executable and uses various network protocol to communicate with the C2 server."
+		description = "A variation of the reGeorgtunnel open-source webshell."
 		author = "threatintel@volexity.com"
-		id = "1fe9b2b8-5c74-5d3c-954b-37f625911f75"
-		date = "2025-06-30"
-		modified = "2025-10-08"
-		reference = "TIB-20250708B"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2025/2025-10-08 UTA0388/rules.yar#L74-L134"
+		id = "b8aa27c9-a28a-5051-8f81-1184f28842ed"
+		date = "2021-03-02"
+		modified = "2024-10-18"
+		reference = "https://github.com/sensepost/reGeorg/blob/master/tunnel.aspx"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L26-L56"
 		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "a5ee55a78d420dbba6dec0b87ffd7ad6252628fd4130ed4b1531ede960706d2d"
-		hash = "fbade9d8a040ed643b68e25e19cba9562d2bd3c51d38693fe4be72e01da39861"
-		logic_hash = "74fa940002e0af9095790b1cf7260778661c97db4e3d316183eecde0e2b580a8"
+		hash = "406b680edc9a1bb0e2c7c451c56904857848b5f15570401450b73b232ff38928"
+		logic_hash = "ea3d0532cb609682922469e8272dc8061efca3b3ae27df738ef2646e30404c6f"
 		score = 75
-		quality = 78
-		tags = "UTA0388, FILE, MEMORY"
+		quality = 80
+		tags = "FILE, MEMORY"
 		os = "win"
 		os_arch = "all"
-		report2 = "MAR-20250930"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 4979
+		version = 4
+
+	strings:
+		$s1 = "System.Net.Sockets"
+		$s2 = "System.Text.Encoding.Default.GetString(Convert.FromBase64String(StrTr(Request.Headers.Get"
+		$t1 = ".Split('|')"
+		$t2 = "Request.Headers.Get"
+		$t3 = ".Substring("
+		$t4 = "new Socket("
+		$t5 = "IPAddress ip;"
+
+	condition:
+		all of ( $s* ) or all of ( $t* )
+}
+rule VOLEXITY_Apt_Webshell_Aspx_Sportsball : FILE MEMORY {
+    meta:
+		description = "The SPORTSBALL webshell, observed in targeted Microsoft Exchange attacks in 2021. SPORTSBALL was later discovered to be a variant of HYPERSHELL, a publicly available webshell."
+		author = "threatintel@volexity.com"
+		id = "25b23a4c-8fc7-5d6f-b4b5-46fe2c1546d8"
+		date = "2021-03-01"
+		modified = "2025-07-24"
+		reference = "https://github.com/misterch0c/APT34/blob/e62f3d14ec78bea5c98d3c895162ca1e47676c18/Webshells_and_Panel/HyperShell/HyperShell/Shell/simple.aspx"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2021/2021-03-02 - Operation Exchange Marauder/indicators/yara.yar#L57-L89"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "2fa06333188795110bba14a482020699a96f76fb1ceb80cbfa2df9d3008b5b0a"
+		logic_hash = "5ec5e52922e97a3080d397b69b2f42f09daa995271e218ea085fa2ec4e3abad2"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 11993
-		version = 10
+		rule_id = 4968
+		version = 6
 
 	strings:
-		$a1 = "/lib/te64/"
-		$a2 = "te64/payload."
-		$a3 = "payload.sendAuthRequest.Println.func1"
-		$a4 = "sendAuthRequest.deferwrap"
-		$a5 = ".ensureSingleInstance.Printf."
-		$a6 = "httpslike.NewHttpsLikeConn"
-		$a7 = "main.Execute.Println."
-		$a8 = "C:/Users/Dev/Desktop/20250608"
-		$a9 = "/lib/te64/httpslike/httpslike.go"
-		$a10 = "/lib/te64/payload/payload.go"
-		$a11 = "/lib/te64/main.go"
-		$a12 = "'rootFolderObj"
-		$a13 = "'triggersObj"
-		$a14 = "'repetitionObj"
-		$a15 = "httpslike"
-		$a16 = "main.CopySelf.copyDir."
-		$s1 = "C:/Users/Make/Downloads/te250608/lib/te64/payload"
-		$s2 = "te64/payload."
-		$s3 = "C:/Users/Make/Desktop/lib/"
-		$s4 = "CreateUserTask.deferwrap"
-		$s5 = "main.generateRandomDir"
-		$s6 = "te64.dll"
-		$s7 = "payload.NewHttpClient.ProxyURL."
-		$s8 = "payload.normalizeProxyURL"
-		$b1 = {27 70 72 6f 67 72 61 6d 44 61 74 61 00}
-		$b2 = {27 72 61 6e 64 6f 6d 44 69 72 00}
-		$b3 = {27 74 61 72 67 65 74 44 69 72 00}
-		$b4 = {27 65 78 65 50 61 74 68 00}
-		$b5 = {27 63 75 72 72 65 6e 74 44 69 72 00}
-		$b6 = {27 65 78 65 4e 61 6d 65 00}
-		$b7 = {27 74 61 72 67 65 74 45 78 65 00}
-		$b8 = {27 72 65 6c 50 61 74 68 00}
+		$uniq1 = "HttpCookie newcook = new HttpCookie(\"fqrspt\", HttpContext.Current.Request.Form"
+		$uniq2 = "ZN2aDAB4rXsszEvCLrzgcvQ4oi5J1TuiRULlQbYwldE="
+		$s1 = "Result.InnerText = string.Empty;"
+		$s2 = "newcook.Expires = DateTime.Now.AddDays("
+		$s3 = "System.Diagnostics.Process process = new System.Diagnostics.Process();"
+		$s4 = "process.StandardInput.WriteLine(HttpContext.Current.Request.Form[\""
+		$s5 = "else if (!string.IsNullOrEmpty(HttpContext.Current.Request.Form[\""
+		$s6 = "<input type=\"submit\" value=\"Upload\" />"
 
 	condition:
-		4 of ( $a* ) or 5 of ( $s* ) or 3 of ( $b* )
+		any of ( $uniq* ) or all of ( $s* )
 }
 rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
     meta:
@@ -893,54 +576,114 @@ rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
 	condition:
 		all of ( $fn* )
 }
-rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
+rule VOLEXITY_Malware_Golang_Pantegana : FILE MEMORY {
     meta:
-		description = "A malicious Chrome browser extension used by the SharpPine threat actor to steal Gmail data from a victim."
+		description = "Detects PANTEGANA, a Golang backdoor used by a range of threat actors due to its public availability."
 		author = "threatintel@volexity.com"
-		id = "61b5176a-ff73-5fce-bc70-c9e09bb5afed"
-		date = "2021-09-14"
-		modified = "2025-05-21"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
+		id = "b6154165-68e0-5986-a0cf-5631d369c230"
+		date = "2022-03-30"
+		modified = "2025-03-21"
+		reference = "https://github.com/elleven11/pantegana"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L90-L120"
 		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
-		hash = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
-		hash = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
-		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
+		hash = "8297c99391aae918f154077c61ea94a99c7a339166e7981d9912b7fdc2e0d4f0"
+		logic_hash = "791a664a6b4b98051cbfacb451099de085cbab74d73771709377ab68a5a23d2b"
 		score = 75
 		quality = 80
-		tags = "SHARPPINE, FILE, MEMORY"
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6631
+		version = 3
+
+	strings:
+		$s1 = "RunFingerprinter" ascii
+		$s2 = "SendSysInfo" ascii
+		$s3 = "ExecAndGetOutput" ascii
+		$s4 = "RequestCommand" ascii
+		$s5 = "bindataRead" ascii
+		$s6 = "RunClient" ascii
+		$magic = "github.com/elleven11/pantegana" ascii
+
+	condition:
+		5 of ( $s* ) or $magic
+}
+rule VOLEXITY_Malware_Any_Pupyrat_B : FILE MEMORY {
+    meta:
+		description = "Detects the PUPYRAT malware family, a cross-platform RAT written in Python."
+		author = "threatintel@volexity.com"
+		id = "ec8d0448-f47d-5c6e-bcf9-8f40ae83a96f"
+		date = "2022-04-07"
+		modified = "2025-03-21"
+		reference = "https://github.com/n1nj4sec/pupy"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L121-L158"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "7474a6008b99e45686678f216af7d6357bb70a054c6d9b05e1817c8d80d536b4"
+		logic_hash = "f5b5f35ee783ff1163072591c6d48a85894729156935650a0fd166ae22a2ea00"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
 		os = "all"
 		os_arch = "all"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 5916
+		rule_id = 6689
+		version = 4
+
+	strings:
+		$elf1 = "LD_PRELOAD=%s HOOK_EXIT=%d CLEANUP=%d exec %s 1>/dev/null 2>/dev/null" ascii
+		$elf2 = "reflective_inject_dll" fullword ascii
+		$elf3 = "ld_preload_inject_dll" fullword ascii
+		$pupy1 = "_pupy.error" ascii
+		$pupy2 = "pupy://" ascii
+		$s1 = "Args not passed" ascii
+		$s2 = "Too many args" ascii
+		$s3 = "Can't execute" ascii
+		$s4 = "mexec:stdin" ascii
+		$s5 = "mexec:stdout" ascii
+		$s6 = "mexec:stderr" ascii
+		$s7 = "LZMA error" ascii
+
+	condition:
+		any of ( $elf* ) or all of ( $pupy* ) or all of ( $s* )
+}
+rule VOLEXITY_Webshell_Jsp_Regeorg : FILE MEMORY {
+    meta:
+		description = "Detects the reGeorg webshells' JSP version."
+		author = "threatintel@volexity.com"
+		id = "205ee383-4298-5469-a509-4ce3eaf9dd0e"
+		date = "2022-03-08"
+		modified = "2024-09-20"
+		reference = "https://github.com/SecWiki/WebShell-2/blob/master/reGeorg-master/tunnel.jsp"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L57-L86"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "f9b20324f4239a8c82042d8207e35776d6777b6305974964cd9ccc09d431b845"
+		logic_hash = "cecb71605d9112d509823c26e40e1cf9cd6db581db448db5c9ffc63a2bfe529e"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6575
 		version = 5
 
 	strings:
-		$s1 = "\"mode=attach&name=\"" ascii
-		$s2 = "\"mode=new&mid=\"" ascii
-		$s3 = "\"mode=attlist\"" ascii
-		$s4 = "\"mode=list\"" ascii
-		$s5 = "\"mode=domain\"" ascii
-		$s6 = "\"mode=black\"" ascii
-		$s7 = "\"mode=newD&d=\"" ascii
-		$mark1 = "chrome.runtime.onMessage.addListener" ascii
-		$mark2 = "chrome.webNavigation.onCompleted.addListener" ascii
-		$enc1 = "function BSue(string){" ascii
-		$enc2 = "function BSE(input){" ascii
-		$enc3 = "function bin2hex(byteArray)" ascii
-		$xhr1 = ".send(\"mode=cd1" ascii
-		$xhr2 = ".send(\"mode=black" ascii
-		$xhr3 = ".send(\"mode=domain" ascii
-		$xhr4 = ".send(\"mode=list" ascii
-		$manifest1 = "\"description\":\"advanced font\"," ascii
-		$manifest2 = "\"scripts\":[\"bg.js\"]" ascii
-		$manifest3 = "\"devtools_page\":\"dev.html\"" ascii
+		$magic = "socketChannel.connect(new InetSocketAddress(target, port))" ascii
+		$a1 = ".connect(new InetSocketAddress" ascii
+		$a2 = ".configureBlocking(false)" ascii
+		$a3 = ".setHeader(" ascii
+		$a4 = ".getHeader(" ascii
+		$a5 = ".flip();" ascii
 
 	condition:
-		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
+		$magic or all of ( $a* )
 }
 rule VOLEXITY_Apt_Malware_Win_Applejeus_Oct22 : LAZYPINE FILE MEMORY {
     meta:
@@ -1068,114 +811,54 @@ rule VOLEXITY_Apt_Malware_Win_Applejeus_D_Oct22 : LAZYPINE FILE MEMORY {
 	condition:
 		all of them
 }
-rule VOLEXITY_Webshell_Jsp_Regeorg : FILE MEMORY {
+rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
     meta:
-		description = "Detects the reGeorg webshells' JSP version."
+		description = "A malicious Chrome browser extension used by the SharpPine threat actor to steal Gmail data from a victim."
 		author = "threatintel@volexity.com"
-		id = "205ee383-4298-5469-a509-4ce3eaf9dd0e"
-		date = "2022-03-08"
-		modified = "2024-09-20"
-		reference = "https://github.com/SecWiki/WebShell-2/blob/master/reGeorg-master/tunnel.jsp"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-08-10 Mass exploitation of (Un)authenticated Zimbra RCE CVE-2022-27925/yara.yar#L57-L86"
+		id = "61b5176a-ff73-5fce-bc70-c9e09bb5afed"
+		date = "2021-09-14"
+		modified = "2025-05-21"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
 		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "f9b20324f4239a8c82042d8207e35776d6777b6305974964cd9ccc09d431b845"
-		logic_hash = "cecb71605d9112d509823c26e40e1cf9cd6db581db448db5c9ffc63a2bfe529e"
+		hash = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
+		hash = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
+		hash = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
+		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
 		score = 75
 		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
+		tags = "SHARPPINE, FILE, MEMORY"
+		os = "all"
 		os_arch = "all"
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6575
+		rule_id = 5916
 		version = 5
 
 	strings:
-		$magic = "socketChannel.connect(new InetSocketAddress(target, port))" ascii
-		$a1 = ".connect(new InetSocketAddress" ascii
-		$a2 = ".configureBlocking(false)" ascii
-		$a3 = ".setHeader(" ascii
-		$a4 = ".getHeader(" ascii
-		$a5 = ".flip();" ascii
+		$s1 = "\"mode=attach&name=\"" ascii
+		$s2 = "\"mode=new&mid=\"" ascii
+		$s3 = "\"mode=attlist\"" ascii
+		$s4 = "\"mode=list\"" ascii
+		$s5 = "\"mode=domain\"" ascii
+		$s6 = "\"mode=black\"" ascii
+		$s7 = "\"mode=newD&d=\"" ascii
+		$mark1 = "chrome.runtime.onMessage.addListener" ascii
+		$mark2 = "chrome.webNavigation.onCompleted.addListener" ascii
+		$enc1 = "function BSue(string){" ascii
+		$enc2 = "function BSE(input){" ascii
+		$enc3 = "function bin2hex(byteArray)" ascii
+		$xhr1 = ".send(\"mode=cd1" ascii
+		$xhr2 = ".send(\"mode=black" ascii
+		$xhr3 = ".send(\"mode=domain" ascii
+		$xhr4 = ".send(\"mode=list" ascii
+		$manifest1 = "\"description\":\"advanced font\"," ascii
+		$manifest2 = "\"scripts\":[\"bg.js\"]" ascii
+		$manifest3 = "\"devtools_page\":\"dev.html\"" ascii
 
 	condition:
-		$magic or all of ( $a* )
-}
-rule VOLEXITY_Malware_Golang_Pantegana : FILE MEMORY {
-    meta:
-		description = "Detects PANTEGANA, a Golang backdoor used by a range of threat actors due to its public availability."
-		author = "threatintel@volexity.com"
-		id = "b6154165-68e0-5986-a0cf-5631d369c230"
-		date = "2022-03-30"
-		modified = "2025-03-21"
-		reference = "https://github.com/elleven11/pantegana"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L90-L120"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "8297c99391aae918f154077c61ea94a99c7a339166e7981d9912b7fdc2e0d4f0"
-		logic_hash = "791a664a6b4b98051cbfacb451099de085cbab74d73771709377ab68a5a23d2b"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6631
-		version = 3
-
-	strings:
-		$s1 = "RunFingerprinter" ascii
-		$s2 = "SendSysInfo" ascii
-		$s3 = "ExecAndGetOutput" ascii
-		$s4 = "RequestCommand" ascii
-		$s5 = "bindataRead" ascii
-		$s6 = "RunClient" ascii
-		$magic = "github.com/elleven11/pantegana" ascii
-
-	condition:
-		5 of ( $s* ) or $magic
-}
-rule VOLEXITY_Malware_Any_Pupyrat_B : FILE MEMORY {
-    meta:
-		description = "Detects the PUPYRAT malware family, a cross-platform RAT written in Python."
-		author = "threatintel@volexity.com"
-		id = "ec8d0448-f47d-5c6e-bcf9-8f40ae83a96f"
-		date = "2022-04-07"
-		modified = "2025-03-21"
-		reference = "https://github.com/n1nj4sec/pupy"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L121-L158"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "7474a6008b99e45686678f216af7d6357bb70a054c6d9b05e1817c8d80d536b4"
-		logic_hash = "f5b5f35ee783ff1163072591c6d48a85894729156935650a0fd166ae22a2ea00"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6689
-		version = 4
-
-	strings:
-		$elf1 = "LD_PRELOAD=%s HOOK_EXIT=%d CLEANUP=%d exec %s 1>/dev/null 2>/dev/null" ascii
-		$elf2 = "reflective_inject_dll" fullword ascii
-		$elf3 = "ld_preload_inject_dll" fullword ascii
-		$pupy1 = "_pupy.error" ascii
-		$pupy2 = "pupy://" ascii
-		$s1 = "Args not passed" ascii
-		$s2 = "Too many args" ascii
-		$s3 = "Can't execute" ascii
-		$s4 = "mexec:stdin" ascii
-		$s5 = "mexec:stdout" ascii
-		$s6 = "mexec:stderr" ascii
-		$s7 = "LZMA error" ascii
-
-	condition:
-		any of ( $elf* ) or all of ( $pupy* ) or all of ( $s* )
+		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
 }
 rule VOLEXITY_Apt_Malware_Win_Gimmick_Dotnet_Base : STORMBAMBOO FILE MEMORY {
     meta:
@@ -1210,6 +893,166 @@ rule VOLEXITY_Apt_Malware_Win_Gimmick_Dotnet_Base : STORMBAMBOO FILE MEMORY {
 
 	condition:
 		5 of ( $other* )
+}
+rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
+    meta:
+		description = "Detects a opensource malware available on github using strings in the binary. The DISGOMOJI malware family used by TransparentJasmine is based on this malware."
+		author = "threatintel@volexity.com"
+		id = "6816d264-4311-5e90-948b-2e27cdf0b720"
+		date = "2024-03-28"
+		modified = "2024-07-05"
+		reference = "TIB-20240229"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L216-L243"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "de32e96d1f151cc787841c12fad88d0a2276a93d202fc19f93631462512fffaf"
+		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10390
+		version = 3
+
+	strings:
+		$s1 = "File is bigger than 8MB" wide ascii
+		$s2 = "Uploaded file to" wide ascii
+		$s3 = "sess-%d" wide ascii
+		$s4 = "Session *%s* opened" wide ascii
+		$s5 = "%s%d_%dx%d.png" wide ascii
+
+	condition:
+		4 of them
+}
+rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
+    meta:
+		description = "Detects a opensource malware available on github using strings in the binary. DISGOMOJI used by TransparentJasmine is based on this malware."
+		author = "threatintel@volexity.com"
+		id = "1ddbf476-ba2d-5cbb-ad95-38e0ae8db71b"
+		date = "2024-02-22"
+		modified = "2024-07-05"
+		reference = "https://github.com/bmdyy/discord-c2"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L244-L267"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "d9f29a626857fa251393f056e454dfc02de53288ebe89a282bad38d03f614529"
+		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10264
+		version = 12
+
+	strings:
+		$s1 = "**IP**: %s\n**User**: %s\n**Hostname**: %s\n**OS**: %s\n**CWD**" wide ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
+    meta:
+		description = "Detection for a custom webshell seen on Exchange server. The webshell contains two functions, the first is to act as a Tunnel, using code borrowed from reGeorg, the second is custom code to execute arbitrary .NET code."
+		author = "threatintel@volexity.com"
+		id = "2f07748a-a52f-5ac7-9d3e-50fd3ecea271"
+		date = "2023-12-12"
+		modified = "2024-09-30"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L26-L52"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
+		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
+		score = 75
+		quality = 30
+		tags = "UTA0178, FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 9994
+		version = 6
+
+	strings:
+		$s1 = "=Convert.FromBase64String(System.Text.Encoding.Default.GetString(" ascii
+		$re = /Assembly\.Load\(errors\)\.CreateInstance\("[a-z0-9A-Z]{4,12}"\).GetHashCode\(\);/
+
+	condition:
+		for any i in ( 0 .. math.min ( #s1 , 100 ) ) : ( $re in ( @s1 [ i ] .. @s1 [ i ] + 512 ) )
+}
+rule VOLEXITY_Webshell_Aspx_Regeorg : FILE MEMORY {
+    meta:
+		description = "Detects the reGeorg webshell based on common strings in the webshell. May also detect other webshells which borrow code from ReGeorg."
+		author = "threatintel@volexity.com"
+		id = "02365a30-769e-5c47-8d36-a79608ffd121"
+		date = "2018-08-29"
+		modified = "2024-01-09"
+		reference = "TIB-20231215"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L53-L86"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "9d901f1a494ffa98d967ee6ee30a46402c12a807ce425d5f51252eb69941d988"
+		logic_hash = "4fed023e85a32052917f6db1e2e155c91586538938c03acc59f200a8264888ca"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 410
+		version = 7
+
+	strings:
+		$a1 = "every office needs a tool like Georg" ascii
+		$a2 = "cmd = Request.QueryString.Get(\"cmd\")" ascii
+		$a3 = "exKak.Message" ascii
+		$proxy1 = "if (rkey != \"Content-Length\" && rkey != \"Transfer-Encoding\")"
+		$proxy_b1 = "StreamReader repBody = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(\"UTF-8\"));" ascii
+		$proxy_b2 = "string rbody = repBody.ReadToEnd();" ascii
+		$proxy_b3 = "Response.AddHeader(\"Content-Length\", rbody.Length.ToString());" ascii
+
+	condition:
+		any of ( $a* ) or $proxy1 or all of ( $proxy_b* )
+}
+rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
+    meta:
+		description = "SOCKS5 proxy tool used to relay connections."
+		author = "threatintel@volexity.com"
+		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
+		date = "2024-01-09"
+		modified = "2024-01-09"
+		reference = "TIB-20240109"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
+		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10065
+		version = 3
+
+	strings:
+		$s1 = "proxy_loop" ascii
+		$s2 = "connect_to_dst" ascii
+		$s3 = "request_client" ascii
+		$s4 = "subnegotiation_client" ascii
+		$s5 = "bind_port" ascii
+
+	condition:
+		all of them
 }
 rule VOLEXITY_Apt_Malware_Win_Deepdata_Module : BRAZENBAMBOO FILE MEMORY {
     meta:
@@ -1347,19 +1190,19 @@ rule VOLEXITY_Apt_Malware_Win_Lightspy_Orchestrator_Decoded_C2_Strings : BRAZENB
 	condition:
 		3 of ( $s* ) or 5 of ( $ctrl* )
 }
-rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
+rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
     meta:
-		description = "Detects a opensource malware available on github using strings in the binary. The DISGOMOJI malware family used by TransparentJasmine is based on this malware."
+		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
 		author = "threatintel@volexity.com"
-		id = "6816d264-4311-5e90-948b-2e27cdf0b720"
-		date = "2024-03-28"
-		modified = "2024-07-05"
-		reference = "TIB-20240229"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L216-L243"
+		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
+		date = "2024-04-10"
+		modified = "2024-04-15"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
 		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "de32e96d1f151cc787841c12fad88d0a2276a93d202fc19f93631462512fffaf"
-		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
-		score = 75
+		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
+		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
+		score = 50
 		quality = 80
 		tags = "FILE, MEMORY"
 		os = "all"
@@ -1367,31 +1210,27 @@ rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy_1 : FILE MEMORY {
 		scan_context = "file,memory"
 		severity = "high"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10390
-		version = 3
+		rule_id = 10424
+		version = 4
 
 	strings:
-		$s1 = "File is bigger than 8MB" wide ascii
-		$s2 = "Uploaded file to" wide ascii
-		$s3 = "sess-%d" wide ascii
-		$s4 = "Session *%s* opened" wide ascii
-		$s5 = "%s%d_%dx%d.png" wide ascii
+		$proj_1 = "/home/jarischf/"
 
 	condition:
-		4 of them
+		any of ( $proj_* )
 }
-rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
+rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
     meta:
-		description = "Detects a opensource malware available on github using strings in the binary. DISGOMOJI used by TransparentJasmine is based on this malware."
+		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
 		author = "threatintel@volexity.com"
-		id = "1ddbf476-ba2d-5cbb-ad95-38e0ae8db71b"
-		date = "2024-02-22"
-		modified = "2024-07-05"
-		reference = "https://github.com/bmdyy/discord-c2"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L244-L267"
+		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
+		date = "2024-04-10"
+		modified = "2024-04-12"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
 		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "d9f29a626857fa251393f056e454dfc02de53288ebe89a282bad38d03f614529"
-		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
+		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
+		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
 		score = 75
 		quality = 80
 		tags = "FILE, MEMORY"
@@ -1400,14 +1239,23 @@ rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
 		scan_context = "file,memory"
 		severity = "critical"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10264
-		version = 12
+		rule_id = 10423
+		version = 5
 
 	strings:
-		$s1 = "**IP**: %s\n**User**: %s\n**Hostname**: %s\n**OS**: %s\n**CWD**" wide ascii
+		$fun_1 = "createLocalPortForwardingCallback"
+		$fun_2 = "createReversePortForwardingCallback"
+		$fun_3 = "createPasswordHandler"
+		$fun_4 = "createPublicKeyHandler"
+		$fun_5 = "createSFTPHandler"
+		$fun_6 = "dialHomeAndListen"
+		$fun_7 = "createExtraInfoHandler"
+		$fun_8 = "createSSHSessionHandler"
+		$fun_9 = "createReversePortForwardingCallback"
+		$proj_1 = "github.com/Fahrj/reverse-ssh"
 
 	condition:
-		$s1
+		any of ( $proj_* ) or 4 of ( $fun_* )
 }
 rule VOLEXITY_Apt_Malware_Any_Reloadext_Plugin : STORMBAMBOO FILE MEMORY {
     meta:
@@ -1515,104 +1363,6 @@ rule VOLEXITY_Apt_Malware_Py_Dustpan_Pyloader : STORMBAMBOO FILE MEMORY {
 
 	condition:
 		3 of ( $s_* ) or any of ( $url_* ) or $path_1
-}
-rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
-    meta:
-		description = "Detection for a custom webshell seen on Exchange server. The webshell contains two functions, the first is to act as a Tunnel, using code borrowed from reGeorg, the second is custom code to execute arbitrary .NET code."
-		author = "threatintel@volexity.com"
-		id = "2f07748a-a52f-5ac7-9d3e-50fd3ecea271"
-		date = "2023-12-12"
-		modified = "2024-09-30"
-		reference = "TIB-20231215"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L26-L52"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
-		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
-		score = 75
-		quality = 55
-		tags = "UTA0178, FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 9994
-		version = 6
-
-	strings:
-		$s1 = "=Convert.FromBase64String(System.Text.Encoding.Default.GetString(" ascii
-		$re = /Assembly\.Load\(errors\)\.CreateInstance\("[a-z0-9A-Z]{4,12}"\).GetHashCode\(\);/
-
-	condition:
-		for any i in ( 0 .. math.min ( #s1 , 100 ) ) : ( $re in ( @s1 [ i ] .. @s1 [ i ] + 512 ) )
-}
-rule VOLEXITY_Webshell_Aspx_Regeorg : FILE MEMORY {
-    meta:
-		description = "Detects the reGeorg webshell based on common strings in the webshell. May also detect other webshells which borrow code from ReGeorg."
-		author = "threatintel@volexity.com"
-		id = "02365a30-769e-5c47-8d36-a79608ffd121"
-		date = "2018-08-29"
-		modified = "2024-01-09"
-		reference = "TIB-20231215"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L53-L86"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "9d901f1a494ffa98d967ee6ee30a46402c12a807ce425d5f51252eb69941d988"
-		logic_hash = "4fed023e85a32052917f6db1e2e155c91586538938c03acc59f200a8264888ca"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "win"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 410
-		version = 7
-
-	strings:
-		$a1 = "every office needs a tool like Georg" ascii
-		$a2 = "cmd = Request.QueryString.Get(\"cmd\")" ascii
-		$a3 = "exKak.Message" ascii
-		$proxy1 = "if (rkey != \"Content-Length\" && rkey != \"Transfer-Encoding\")"
-		$proxy_b1 = "StreamReader repBody = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(\"UTF-8\"));" ascii
-		$proxy_b2 = "string rbody = repBody.ReadToEnd();" ascii
-		$proxy_b3 = "Response.AddHeader(\"Content-Length\", rbody.Length.ToString());" ascii
-
-	condition:
-		any of ( $a* ) or $proxy1 or all of ( $proxy_b* )
-}
-rule VOLEXITY_Hacktool_Py_Pysoxy : FILE MEMORY {
-    meta:
-		description = "SOCKS5 proxy tool used to relay connections."
-		author = "threatintel@volexity.com"
-		id = "88094b55-784d-5245-9c40-b1eebf0e6e72"
-		date = "2024-01-09"
-		modified = "2024-01-09"
-		reference = "TIB-20240109"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
-		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10065
-		version = 3
-
-	strings:
-		$s1 = "proxy_loop" ascii
-		$s2 = "connect_to_dst" ascii
-		$s3 = "request_client" ascii
-		$s4 = "subnegotiation_client" ascii
-		$s5 = "bind_port" ascii
-
-	condition:
-		all of them
 }
 rule VOLEXITY_Apt_Malware_Vbs_Basicstar_A : CHARMINGCYPRESS FILE MEMORY {
     meta:
@@ -1744,72 +1494,322 @@ rule VOLEXITY_Apt_Malware_Ps1_Powerstar_Generic : CHARMINGCYPRESS FILE MEMORY {
 	condition:
 		all of ( $http* ) or all of ( $json* )
 }
-rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
+rule VOLEXITY_Apt_Malware_Any_Dotnet_Aot_Plenet : VERDANTBAMBOO PLENET FILE MEMORY {
     meta:
-		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
+		description = "Detect PLENET, a multiplatform malware compile with native AOT."
 		author = "threatintel@volexity.com"
-		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
-		date = "2024-04-10"
-		modified = "2024-04-15"
-		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
+		id = "615d7c43-0128-5cfa-a080-6ece5d2dc029"
+		date = "2025-09-22"
+		modified = "2025-10-30"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L1-L31"
 		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
-		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
-		score = 50
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10424
-		version = 4
-
-	strings:
-		$proj_1 = "/home/jarischf/"
-
-	condition:
-		any of ( $proj_* )
-}
-rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
-    meta:
-		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
-		author = "threatintel@volexity.com"
-		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
-		date = "2024-04-10"
-		modified = "2024-04-12"
-		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
-		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
-		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
-		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
+		hash = "eb141a43958802727a6c813452450c10b92704bea4474ee5fd87c0a1be326e2e"
+		logic_hash = "67d8f7fbc2986b1068a9c557cf85ba83469e3fb7f2433bd10c7ad740a4b0e717"
 		score = 75
 		quality = 80
-		tags = "FILE, MEMORY"
+		tags = "VERDANTBAMBOO, PLENET, FILE, MEMORY"
 		os = "all"
 		os_arch = "all"
 		scan_context = "file,memory"
 		severity = "critical"
+		report1 = "TIB-20251104"
 		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10423
+		rule_id = 12367
+		version = 4
+
+	strings:
+		$str1 = "[!] Bad dat" wide
+		$str2 = "[!] Connection error. Kill Pty" wide
+		$str3 = "[!] Error : Plexor is nul" wide
+		$str4 = "[!] Unkown message type" wide
+		$str5 = "[*] Disposing.." wide
+		$str6 = "Lack port ':" wide
+		$str7 = "IPv6 port error ':" wide
+		$str8 = "this.existingPipeGiven." wide
+		$str9 = "port must within 0~6553" wide
+
+	condition:
+		4 of them
+}
+rule VOLEXITY_Apt_Malware_Golang_Brickstorm_B : VERDANTBAMBOO BRICKSTORM FILE MEMORY {
+    meta:
+		description = "Detection for the BRICKSTORM malware family."
+		author = "threatintel@volexity.com"
+		id = "b3b9ff26-56ab-5801-8905-0a304887b998"
+		date = "2025-09-05"
+		modified = "2026-06-09"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L56-L98"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "aa688682d44f0c6b0ed7f30b981a609100107f2d414a3a6e5808671b112d1878"
+		logic_hash = "e91203a714a4bc9d1c70eae4670681e3f416257163cf44db20ad33380be5d39a"
+		score = 75
+		quality = 80
+		tags = "VERDANTBAMBOO, BRICKSTORM, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20251104"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 12299
+		version = 6
+
+	strings:
+		$method1 = "UnPackHeaderData"
+		$method2 = "handleRelay"
+		$method3 = "NewWebSocketClient"
+		$method4 = "createDnsMessage"
+		$method5 = "GetFileOwnerInfo"
+		$err1 = "dns rcode: %v"
+		$err2 = "readFull error"
+		$err3 = "tagAuth error"
+		$err4 = "error: Auth: %s"
+		$ws1 = "<a style='text-decoration: none;'  href='javascript:history.go(-1);'><h5>Back</h5></a>"
+		$ws2 = "Mon, 02 Jan 2006 15:04:05 GMT"
+		$doh = "https://1.0.0.1/dns-queryhttps://1.1.1.1/dns-queryhttps://8.8.4.4/dns-queryhttps://8.8.8.8/dns-query"
+
+	condition:
+		4 of ( $method* ) or 3 of ( $err* ) or all of ( $ws* ) or ( $doh and 3 of ( $method* , $err* , $ws* , $doh ) )
+}
+rule VOLEXITY_Apt_Malware_Golang_Brickstorm : VERDANTBAMBOO BRICKSTORM FILE MEMORY {
+    meta:
+		description = "Detects the BRICKSTORM backdoor using common strings."
+		author = "threatintel@volexity.com"
+		id = "25775278-5115-5873-957f-9c5d0c8e4f5e"
+		date = "2025-09-04"
+		modified = "2025-10-30"
+		reference = "https://blog.nviso.eu/wp-content/uploads/2025/04/NVISO-BRICKSTORM-Report.pdf"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L100-L136"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "40d264cf9c73923932c3dfd52d20f46ff602be3fea8dc6ecc71aca46e6067bf5"
+		hash = "e981fc4eaaa6417e6034e21438e55c0360773674a6fc0b63c1b95026449e5254"
+		logic_hash = "39e3403d90ad67072ae631273e89fe059ec48906ce1d57fe1afbb91304dc84f3"
+		score = 75
+		quality = 80
+		tags = "VERDANTBAMBOO, BRICKSTORM, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20251104"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 12298
+		version = 7
+
+	strings:
+		$dns1 = "https://1.1.1.1/dns-query" ascii
+		$dns2 = "https://8.8.4.4/dns-query" ascii
+		$dns3 = "https://8.8.8.8/dns-query" ascii
+		$pack1 = "wsshell/core" ascii
+		$pack2 = "wssoft/core" ascii
+		$s1 = "github.com/hashicorp/yamux" ascii
+		$s2 = "winbindd:" ascii
+		$s3 = "WEE1=true" ascii
+		$s4 = "WEE2=true" ascii
+
+	condition:
+		all of ( $dns* ) and all of ( $s* ) and any of ( $pack* )
+}
+rule VOLEXITY_Apt_Malware_Py_Agentpsd : VERDANTBAMBOO AGENTPSD MEMORY {
+    meta:
+		description = "Detection for AgentPSD, a python-based malware typically delivered within PyInstaller-built binaries."
+		author = "threatintel@volexity.com"
+		id = "4a7d531f-926d-557e-b2a0-d4f103e9c63a"
+		date = "2025-09-05"
+		modified = "2025-10-30"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L137-L171"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "ee41e06ed96182ce80cd4544a6abd5d7719c4a5c0e5ddb266a83842d39b99b0a"
+		logic_hash = "dd0b957bc2a61ddebd392b86b35bae8c1052a285fa31ccd700e580c2ad9cce59"
+		score = 75
+		quality = 80
+		tags = "VERDANTBAMBOO, AGENTPSD, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "memory"
+		severity = "critical"
+		report1 = "TIB-20251104"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 12297
 		version = 5
 
 	strings:
-		$fun_1 = "createLocalPortForwardingCallback"
-		$fun_2 = "createReversePortForwardingCallback"
-		$fun_3 = "createPasswordHandler"
-		$fun_4 = "createPublicKeyHandler"
-		$fun_5 = "createSFTPHandler"
-		$fun_6 = "dialHomeAndListen"
-		$fun_7 = "createExtraInfoHandler"
-		$fun_8 = "createSSHSessionHandler"
-		$fun_9 = "createReversePortForwardingCallback"
-		$proj_1 = "github.com/Fahrj/reverse-ssh"
+		$s1 = "g_strPhpUrl" ascii
+		$s2 = "g_nSleepMinits" ascii
+		$s3 = "g_nDuringTime" ascii
+		$func1 = "startwork" ascii
+		$func2 = "ifrunning" ascii
+		$func3 = "getsysinfo" ascii
+		$func4 = "getcmdfromweb" ascii
+		$func5 = "ParseCmdFromResponse" ascii
+		$func6 = "PostDataToServer" ascii
+		$func7 = "DealWithBuildinCommand" ascii
+		$func8 = "PostBuildinResultToWeb" ascii
 
 	condition:
-		any of ( $proj_* ) or 4 of ( $fun_* )
+		2 of ( $s* ) or 4 of ( $func* )
+}
+rule VOLEXITY_Apt_Webshell_Java_Orangetail_B : UTA0533 ORANGETAIL FILE MEMORY {
+    meta:
+		description = "Detection for the accept logic of ORANGETAIL, a custom Java webshell used by UTA0533."
+		author = "threatintel@volexity.com"
+		id = "e9f19175-ea33-5eea-8663-91fc805306bb"
+		date = "2026-07-06"
+		modified = "2026-07-14"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L1-L25"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "1e1e68bbb899450a57274a8b12082ed4e2040a2aae77014f20431689d2b4edee"
+		hash = "ea9154e374e4f77bc2cf54282e23543573980342a85bc888cb23f20b8bbba081"
+		logic_hash = "e5ed25fb820dc4a18c374936c36d4321e2aba72d8b640cdb0d81abd764786918"
+		score = 75
+		quality = 80
+		tags = "UTA0533, ORANGETAIL, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20260714B"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 13240
+		version = 6
+
+	strings:
+		$s1 = ".equals($1.getHeader(\"User-Agent\"))) {  javax.servlet.jsp.JspFactory" ascii
+		$s2 = " $2.setStatus(404);  $2.setContentLength(0);  $2.flushBuffer();  return;" ascii
+
+	condition:
+		all of them
+}
+rule VOLEXITY_Apt_Webshell_Java_Orangetail : UTA0533 ORANGETAIL FILE MEMORY {
+    meta:
+		description = "Detection for ORANGETAIL, a custom Java webshell used by UTA0533."
+		author = "threatintel@volexity.com"
+		id = "5bbffb5f-0917-57e4-a7d4-f5c770b5d253"
+		date = "2026-07-06"
+		modified = "2026-07-14"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L26-L53"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "ea9154e374e4f77bc2cf54282e23543573980342a85bc888cb23f20b8bbba081"
+		logic_hash = "1a495df2bc13b1c2c61315d76d66b150452b923afa5847121429fa8ae9788a7b"
+		score = 75
+		quality = 80
+		tags = "UTA0533, ORANGETAIL, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20260714B"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 13239
+		version = 5
+
+	strings:
+		$s1 = "agentmain called args="
+		$s2 = "tryInject="
+		$s3 = "agentmain ex:"
+		$s4 = "javassist="
+		$s5 = "tryInject exception"
+		$s6 = "found loaded class:"
+
+	condition:
+		4 of ( $s* )
+}
+rule VOLEXITY_Apt_Malware_Any_Uta0533_Ua : UTA0533 FILE MEMORY {
+    meta:
+		description = "Identify any blob containing a bogus user-agent used in different components of an attack attributed to UTA0533."
+		author = "threatintel@volexity.com"
+		id = "c13dafb2-b2c3-5988-91dd-0345ef60086c"
+		date = "2026-07-06"
+		modified = "2026-07-14"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L54-L76"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "8c470301dcb7278f73e622f1950073567b34011c64b60cdfbb0f89803923a5a3"
+		logic_hash = "d4c0322080e853f5c5d495af05d43eaf3d375af6905e795cef718dec639a7092"
+		score = 75
+		quality = 80
+		tags = "UTA0533, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20260714B"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 13237
+		version = 3
+
+	strings:
+		$s1 = "Mozilla/6.0 (Windows NT 11.0; Win64; x64) AppleWebKit/1537.136 (KHTML, like Gecko) Chrome/149.0.0.1 Safari/1537.136" ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Apt_Malware_Golang_Govershell_Strings_UTA0388 : UTA0388 FILE MEMORY {
+    meta:
+		description = "This rule detects multiple variants of the GOVERSHELL malware family employed by UTA0388 via unique strings. The implant is side-loaded by a legitimate executable and uses various network protocol to communicate with the C2 server."
+		author = "threatintel@volexity.com"
+		id = "1fe9b2b8-5c74-5d3c-954b-37f625911f75"
+		date = "2025-06-30"
+		modified = "2025-10-08"
+		reference = "TIB-20250708B"
+		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2025/2025-10-08 UTA0388/rules.yar#L74-L134"
+		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+		hash = "a5ee55a78d420dbba6dec0b87ffd7ad6252628fd4130ed4b1531ede960706d2d"
+		hash = "fbade9d8a040ed643b68e25e19cba9562d2bd3c51d38693fe4be72e01da39861"
+		logic_hash = "74fa940002e0af9095790b1cf7260778661c97db4e3d316183eecde0e2b580a8"
+		score = 75
+		quality = 78
+		tags = "UTA0388, FILE, MEMORY"
+		os = "win"
+		os_arch = "all"
+		report2 = "MAR-20250930"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 11993
+		version = 10
+
+	strings:
+		$a1 = "/lib/te64/"
+		$a2 = "te64/payload."
+		$a3 = "payload.sendAuthRequest.Println.func1"
+		$a4 = "sendAuthRequest.deferwrap"
+		$a5 = ".ensureSingleInstance.Printf."
+		$a6 = "httpslike.NewHttpsLikeConn"
+		$a7 = "main.Execute.Println."
+		$a8 = "C:/Users/Dev/Desktop/20250608"
+		$a9 = "/lib/te64/httpslike/httpslike.go"
+		$a10 = "/lib/te64/payload/payload.go"
+		$a11 = "/lib/te64/main.go"
+		$a12 = "'rootFolderObj"
+		$a13 = "'triggersObj"
+		$a14 = "'repetitionObj"
+		$a15 = "httpslike"
+		$a16 = "main.CopySelf.copyDir."
+		$s1 = "C:/Users/Make/Downloads/te250608/lib/te64/payload"
+		$s2 = "te64/payload."
+		$s3 = "C:/Users/Make/Desktop/lib/"
+		$s4 = "CreateUserTask.deferwrap"
+		$s5 = "main.generateRandomDir"
+		$s6 = "te64.dll"
+		$s7 = "payload.NewHttpClient.ProxyURL."
+		$s8 = "payload.normalizeProxyURL"
+		$b1 = {27 70 72 6f 67 72 61 6d 44 61 74 61 00}
+		$b2 = {27 72 61 6e 64 6f 6d 44 69 72 00}
+		$b3 = {27 74 61 72 67 65 74 44 69 72 00}
+		$b4 = {27 65 78 65 50 61 74 68 00}
+		$b5 = {27 63 75 72 72 65 6e 74 44 69 72 00}
+		$b6 = {27 65 78 65 4e 61 6d 65 00}
+		$b7 = {27 74 61 72 67 65 74 45 78 65 00}
+		$b8 = {27 72 65 6c 50 61 74 68 00}
+
+	condition:
+		4 of ( $a* ) or 5 of ( $s* ) or 3 of ( $b* )
 }
 rule VOLEXITY_Apt_Malware_Win_Avburner : DEVIOUSBAMBOO FILE MEMORY {
     meta:
@@ -2690,58 +2690,6 @@ rule DRAGON_THREAT_LABS_Apt_C16_Win_Swisyn : MEMORY FILE {
 	condition:
 		$mz at 0 and all of ( $str* )
 }
-rule NCSC_Sparrowdoor_Shellcode {
-    meta:
-		description = "Targets code features of the reflective loader for SparrowDoor. Targeting in memory."
-		author = "NCSC"
-		id = "572187fb-1a11-54f2-9fe7-2b7468b56556"
-		date = "2022-02-28"
-		modified = "2022-07-06"
-		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
-		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_shellcode.yar#L1-L15"
-		license_url = "N/A"
-		hash = "c1890a6447c991880467b86a013dbeaa66cc615f"
-		logic_hash = "7186bab23114b4825161f58fb02ff397ec8278385482232a4086c86c6fc47082"
-		score = 75
-		quality = 80
-		tags = ""
-
-	strings:
-		$peb = {8B 48 08 89 4D FC 8B 51 3C 8B 54 0A 78 8B 74 0A 20 03 D1 03 F1 B3 64}
-		$getp_match = {8B 06 03 C1 80 38 47 75 34 80 78 01 65 75 2E 80 78 02 74 75 28 80 78 03 50 75 22 80 78 04 72 75 1C 80 78 06 63 75 16 80 78 05 6F 75 10 80 78 07 41 75 0A}
-		$k_check = {8B 48 20 8A 09 80 F9 6B 74 05 80 F9 4B 75 05}
-		$resolve_load_lib = {C7 45 C4 4C 6F 61 64 C7 45 C8 4C 69 62 72 C7 45 CC 61 72 79 41 C7 45 D0 00 00 00 00 FF 75 FC FF 55 E4}
-
-	condition:
-		3 of them
-}
-rule NCSC_Sparrowdoor_Apipatch {
-    meta:
-		description = "Identifies code segments in SparrowDoor responsible for patching APIs. No MZ/PE match as the backdoor has no header. Targeting in memory."
-		author = "NCSC"
-		id = "119b7f3a-1850-53ab-a5d1-8882e34a34b4"
-		date = "2022-02-28"
-		modified = "2022-07-06"
-		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
-		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_apipatch.yar#L1-L17"
-		license_url = "N/A"
-		hash = "c1890a6447c991880467b86a013dbeaa66cc615f"
-		logic_hash = "302ad7fc0354636c57e6ec86876c7d4a5baaa784f5ecf0f2d51ce47631b8542a"
-		score = 75
-		quality = 80
-		tags = ""
-
-	strings:
-		$save = {8B 06 89 07 8A 4E 04}
-		$vp_1 = {89 10 8A 4E 04 8B D6 2B D0 88 48 04 83 EA 05 C6 40 05 E9 89 50 06}
-		$vp_2 = {50 8B D6 6A 40 2B D7 88 4F 04 83 EA 05 6A 05 C6 47 05 E9 89 57 06 56}
-		$vp_3 = {51 52 2B DE 6A 05 83 EB 05 56 C6 06 E9 89 5E 01}
-		$va = {6A 40 68 00 10 00 00 68 00 10 00 00 6A 00}
-		$s_patch = {50 68 7F FF FF FF 68 FF FF 00 00 56}
-
-	condition:
-		3 of them
-}
 rule NCSC_Sparrowdoor_Strings {
     meta:
 		description = "Strings that appear in SparrowDoor’s backdoor. Targeting in memory."
@@ -2775,6 +2723,33 @@ rule NCSC_Sparrowdoor_Strings {
 	condition:
 		10 of them
 }
+rule NCSC_Sparrowdoor_Apipatch {
+    meta:
+		description = "Identifies code segments in SparrowDoor responsible for patching APIs. No MZ/PE match as the backdoor has no header. Targeting in memory."
+		author = "NCSC"
+		id = "119b7f3a-1850-53ab-a5d1-8882e34a34b4"
+		date = "2022-02-28"
+		modified = "2022-07-06"
+		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_apipatch.yar#L1-L17"
+		license_url = "N/A"
+		hash = "c1890a6447c991880467b86a013dbeaa66cc615f"
+		logic_hash = "302ad7fc0354636c57e6ec86876c7d4a5baaa784f5ecf0f2d51ce47631b8542a"
+		score = 75
+		quality = 80
+		tags = ""
+
+	strings:
+		$save = {8B 06 89 07 8A 4E 04}
+		$vp_1 = {89 10 8A 4E 04 8B D6 2B D0 88 48 04 83 EA 05 C6 40 05 E9 89 50 06}
+		$vp_2 = {50 8B D6 6A 40 2B D7 88 4F 04 83 EA 05 6A 05 C6 47 05 E9 89 57 06 56}
+		$vp_3 = {51 52 2B DE 6A 05 83 EB 05 56 C6 06 E9 89 5E 01}
+		$va = {6A 40 68 00 10 00 00 68 00 10 00 00 6A 00}
+		$s_patch = {50 68 7F FF FF FF 68 FF FF 00 00 56}
+
+	condition:
+		3 of them
+}
 rule NCSC_Sparrowdoor_Xor {
     meta:
 		description = "Highlights XOR routines in SparrowDoor. No MZ/PE match as the backdoor has no header. Targeting in memory."
@@ -2798,6 +2773,31 @@ rule NCSC_Sparrowdoor_Xor {
 
 	condition:
 		2 of them
+}
+rule NCSC_Sparrowdoor_Shellcode {
+    meta:
+		description = "Targets code features of the reflective loader for SparrowDoor. Targeting in memory."
+		author = "NCSC"
+		id = "572187fb-1a11-54f2-9fe7-2b7468b56556"
+		date = "2022-02-28"
+		modified = "2022-07-06"
+		reference = "https://www.ncsc.gov.uk/files/NCSC-MAR-SparrowDoor.pdf"
+		source_url = "https://github.com/mikesxrs/Open-Source-YARA-rules/blob/ec0056f767db98bf6d5fd63877ad51fb54d350e9/NCSC/SparrowDoor_shellcode.yar#L1-L15"
+		license_url = "N/A"
+		hash = "c1890a6447c991880467b86a013dbeaa66cc615f"
+		logic_hash = "7186bab23114b4825161f58fb02ff397ec8278385482232a4086c86c6fc47082"
+		score = 75
+		quality = 80
+		tags = ""
+
+	strings:
+		$peb = {8B 48 08 89 4D FC 8B 51 3C 8B 54 0A 78 8B 74 0A 20 03 D1 03 F1 B3 64}
+		$getp_match = {8B 06 03 C1 80 38 47 75 34 80 78 01 65 75 2E 80 78 02 74 75 28 80 78 03 50 75 22 80 78 04 72 75 1C 80 78 06 63 75 16 80 78 05 6F 75 10 80 78 07 41 75 0A}
+		$k_check = {8B 48 20 8A 09 80 F9 6B 74 05 80 F9 4B 75 05}
+		$resolve_load_lib = {C7 45 C4 4C 6F 61 64 C7 45 C8 4C 69 62 72 C7 45 CC 61 72 79 41 C7 45 D0 00 00 00 00 FF 75 FC FF 55 E4}
+
+	condition:
+		3 of them
 }
 rule SBOUSSEADEN_Hunt_Evtmutehook_Memory {
     meta:
@@ -3047,6 +3047,178 @@ rule SEKOIA_Apt_Unk_Hrserv_Memory_Commands_Strings {
 	condition:
 		all of them
 }
+rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_Strings {
+    meta:
+		description = "Identifies strings used in Cobalt Strike Beacon DLL"
+		author = "Elastic"
+		id = "af558aa2-a3dc-5a7a-bc74-42bb2246091c"
+		date = "2021-03-16"
+		modified = "2026-05-26"
+		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_cobaltstrike.yar#L54-L67"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "4349a7ad94df2269217b55c2aef9628c4eef078566c276936accdd4f996ba2cf"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$s1 = "%02d/%02d/%02d %02d:%02d:%02d"
+		$s2 = "Started service %s on %s"
+		$s3 = "%s as %s\\%s: %d"
+
+	condition:
+		2 of them
+}
+rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_XOR_Strings {
+    meta:
+		description = "Identifies XOR'd strings used in Cobalt Strike Beacon DLL"
+		author = "Elastic"
+		id = "359160a8-cf1c-58a8-bf7f-c09a8d661308"
+		date = "2021-03-16"
+		modified = "2026-05-26"
+		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_cobaltstrike.yar#L69-L90"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "214f0400863783ab4294d8acc820cf00ab9941d193b2b843f877207b9912d799"
+		score = 75
+		quality = 85
+		tags = ""
+		xor_s1 = "%02d/%02d/%02d %02d:%02d:%02d"
+		xor_s2 = "Started service %s on %s"
+		xor_s3 = "%s as %s\\%s: %d"
+
+	strings:
+		$s1 = "%02d/%02d/%02d %02d:%02d:%02d" xor(1-255)
+		$s2 = "Started service %s on %s" xor(1-255)
+		$s3 = "%s as %s\\%s: %d" xor(1-255)
+		$fp1 = "MalwareRemovalTool" ascii wide
+		$fp2 = "advanced malware removal tool" ascii wide
+
+	condition:
+		2 of ( $s* ) and not 1 of ( $fp* )
+}
+rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_4_2_Decrypt {
+    meta:
+		description = "Identifies deobfuscation routine used in Cobalt Strike Beacon DLL version 4.2"
+		author = "Elastic"
+		id = "63b71eef-0af5-5765-b957-ccdc9dde053b"
+		date = "2021-03-16"
+		modified = "2026-05-26"
+		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_cobaltstrike.yar#L92-L104"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "8685b1626c8d263f49ccf129dcd4fe1b42482fcdb37c2e109cedcecaed8c2407"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$a_x64 = { 4C 8B 53 08 45 8B 0A 45 8B 5A 04 4D 8D 52 08 45 85 C9 75 05 45 85 DB 74 33 45 3B CB 73 E6 49 8B F9 4C 8B 03 }
+		$a_x86 = { 8B 46 04 8B 08 8B 50 04 83 C0 08 89 55 08 89 45 0C 85 C9 75 04 85 D2 74 23 3B CA 73 E6 8B 06 8D 3C 08 33 D2 }
+
+	condition:
+		any of them
+}
+rule SIGNATURE_BASE_WCE_In_Memory {
+    meta:
+		description = "Detects Windows Credential Editor (WCE) in memory (and also on disk)"
+		author = "Florian Roth (Nextron Systems)"
+		id = "90c90ca5-e3be-5035-b35c-c2e7faec43a5"
+		date = "2016-08-28"
+		modified = "2025-12-18"
+		reference = "Internal Research"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/thor-hacktools.yar#L3256-L3270"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "74ab7772db5b1de8a4eae03370e2be3cd35004730f84d472677688109a1d6d88"
+		score = 80
+		quality = 85
+		tags = ""
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "wkKUSvflehHr::o:t:s:c:i:d:a:g:" fullword ascii
+		$s2 = "wceaux.dll" fullword ascii
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_APT_MAL_RU_WIN_Snake_Malware_May23_1 : MEMORY {
+    meta:
+		description = "Hunting Russian Intelligence Snake Malware"
+		author = "Matt Suiche (Magnet Forensics)"
+		id = "53d2de3c-350c-5090-84bb-b6cde16a80ad"
+		date = "2023-05-10"
+		modified = "2025-03-21"
+		reference = "https://media.defense.gov/2023/May/09/2003218554/-1/-1/0/JOINT_CSA_HUNTING_RU_INTEL_SNAKE_MALWARE_20230509.PDF"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_mal_ru_snake_may23.yar#L17-L42"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "7cff7152259bb17a9b72b91f0fbef220aad2f35a1d2758d7225316a9896bf845"
+		score = 70
+		quality = 71
+		tags = "MEMORY"
+		threat_name = "Windows.Malware.Snake"
+		scan_context = "memory"
+		license = "MIT"
+
+	strings:
+		$a = { 25 73 23 31 }
+		$b = { 25 73 23 32 }
+		$c = { 25 73 23 33 }
+		$d = { 25 73 23 34 }
+		$e = { 2e 74 6d 70 }
+		$g = { 2e 73 61 76 }
+		$h = { 2e 75 70 64 }
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_Opcloudhopper_Wmidll_Inmemory {
+    meta:
+		description = "Malware related to Operation Cloud Hopper - Page 25"
+		author = "Florian Roth (Nextron Systems)"
+		id = "0afb6e52-bc9a-5a68-890b-79a017e5d554"
+		date = "2017-04-07"
+		modified = "2023-12-05"
+		reference = "https://www.pwc.co.uk/cyber-security/pdf/cloud-hopper-annex-b-final.pdf"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_op_cloudhopper.yar#L281-L293"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "6dddda4e519eeaa67eb4c21151cab10553420a23a077751e0fc45fcae0bf6e69"
+		score = 75
+		quality = 85
+		tags = ""
+		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
+
+	strings:
+		$s1 = "wmi.dll 2>&1" ascii
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_Fidelis_Advisory_Cedt370 {
+    meta:
+		description = "Detects a string found in memory of malware cedt370r(3).exe"
+		author = "Florian Roth (Nextron Systems)"
+		id = "b5ebf2d7-e3e4-5b3b-a082-417da9c7fda6"
+		date = "2015-06-09"
+		modified = "2023-12-05"
+		reference = "http://goo.gl/ZjJyti"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_fidelis_phishing_plain_sight.yar#L16-L30"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "1070d3c63a7091c0982e67134f9dc3cd790bb0b5c2ac08f3a00e3b97ef53d64b"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$s0 = "PO.exe" ascii fullword
+		$s1 = "Important.exe" ascii fullword
+		$s2 = "&username=" ascii fullword
+		$s3 = "Browsers.txt" ascii fullword
+
+	condition:
+		all of them
+}
 rule SIGNATURE_BASE_APT_Backdoor_Win_Gorat_Memory_1 {
     meta:
 		description = "Identifies GoRat malware in memory based on strings."
@@ -3055,8 +3227,8 @@ rule SIGNATURE_BASE_APT_Backdoor_Win_Gorat_Memory_1 {
 		date = "2020-12-08"
 		modified = "2025-02-12"
 		reference = "https://www.fireeye.com/blog/products-and-services/2020/12/fireeye-shares-details-of-recent-cyber-attack-actions-to-protect-community.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/gen_fireeye_redteam_tools.yar#L1013-L1039"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/gen_fireeye_redteam_tools.yar#L1013-L1039"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
 		hash = "3b926b5762e13ceec7ac3a61e85c93bb"
 		logic_hash = "bf8d80b7a7d35c1bcb353ff66d10bc95c2e6502043acc6554887465a467cdcf7"
 		score = 75
@@ -3080,6 +3252,163 @@ rule SIGNATURE_BASE_APT_Backdoor_Win_Gorat_Memory_1 {
 	condition:
 		$winblows or 3 of ( $rat* )
 }
+rule SIGNATURE_BASE_Hvs_APT27_Hyperbro_Stage3_C2 {
+    meta:
+		description = "HyperBro Stage 3 C2 path and user agent detection - also tested in memory"
+		author = "Marc Stroebel"
+		id = "d1fe03b9-440c-5127-9572-dddcd5c9966b"
+		date = "2022-02-07"
+		modified = "2023-12-05"
+		reference = "https://www.hvs-consulting.de/en/threat-intelligence-report-emissary-panda-apt27"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_apt27_hyperbro.yar#L86-L100"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		hash = "624e85bd669b97bc55ed5c5ea5f6082a1d4900d235a5d2e2a5683a04e36213e8"
+		logic_hash = "676df1eaa782c6b876df138a0ddddc3c63e277b84d4414b044314ee219674420"
+		score = 50
+		quality = 81
+		tags = ""
+
+	strings:
+		$s1 = "api/v2/ajax" ascii wide nocase
+		$s2 = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36" ascii wide nocase
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_EXPL_React_Server_CVE_2025_55182_POC_Dec25 : CVE_2025_55182 {
+    meta:
+		description = "Detects in-memory webshell indicators related to the proof-of-concept code for the React Server Remote Code Execution Vulnerability (CVE-2025-55182)"
+		author = "Florian Roth"
+		id = "1ad38541-1477-5c07-9975-318357bcb9b8"
+		date = "2025-12-05"
+		modified = "2026-05-15"
+		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/react_pocs_indicators_dec25.yar#L1-L20"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "a4f27fc85807e8f94e6947523a09d87ceed0658334756a9724322181c3eecd20"
+		score = 70
+		quality = 85
+		tags = "CVE-2025-55182"
+
+	strings:
+		$xs1 = "{const cmd=p.query.cmd;if(!cmd)(s.writeHead(400);"
+		$s1 = ";if(p.pathname=="
+		$s2 = ".writeHead(400);"
+		$s3 = ".writeHead(200,{'Content-Type':"
+		$s4 = ".execSync("
+		$s5 = ",stdio:'pipe'})"
+
+	condition:
+		1 of ( $x* ) or all of ( $s* )
+}
+rule SIGNATURE_BASE_APT_Dropper_Raw64_TEARDROP_1 {
+    meta:
+		description = "This rule looks for portions of the TEARDROP backdoor that are vital to how it functions. TEARDROP is a memory only dropper that can read files and registry keys, XOR decode an embedded payload, and load the payload into memory. TEARDROP persists as a Windows service and has been observed dropping Cobalt Strike BEACON into memory."
+		author = "FireEye"
+		id = "88adad58-ba16-5996-9ea8-ea356c3ed5b2"
+		date = "2020-12-14"
+		modified = "2023-12-05"
+		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_solarwinds_sunburst.yar#L141-L156"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "6ab5197e7a1a123055b361a2ef79f8a77a7935606fccc8f163ea5914c94cd14d"
+		score = 85
+		quality = 85
+		tags = ""
+
+	strings:
+		$sb1 = { C7 44 24 ?? 80 00 00 00 [0-64] BA 00 00 00 80 [0-32] 48 8D 0D [4-32] FF 15 [4] 48 83 F8 FF [2-64] 41 B8 40 00 00 00 [0-64] FF 15 [4-5] 85 C0 7? ?? 80 3D [4] FF }
+		$sb2 = { 80 3D [4] D8 [2-32] 41 B8 04 00 00 00 [0-32] C7 44 24 ?? 4A 46 49 46 [0-32] E8 [4-5] 85 C0 [2-32] C6 05 [4] 6A C6 05 [4] 70 C6 05 [4] 65 C6 05 [4] 67 }
+		$sb3 = { BA [4] 48 89 ?? E8 [4] 41 B8 [4] 48 89 ?? 48 89 ?? E8 [4] 85 C0 7? [1-32] 8B 44 24 ?? 48 8B ?? 24 [1-16] 48 01 C8 [0-32] FF D0 }
+
+	condition:
+		all of them
+}
+rule SIGNATURE_BASE_HKTL_Meterpreter_Inmemory {
+    meta:
+		description = "Detects Meterpreter in-memory"
+		author = "netbiosX, Florian Roth"
+		id = "29c3bb7e-4da8-5924-ada7-2f28d9352009"
+		date = "2020-06-29"
+		modified = "2023-04-21"
+		reference = "https://www.reddit.com/r/purpleteamsec/comments/hjux11/meterpreter_memory_indicators_detection_tooling/"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/gen_metasploit_payloads.yar#L341-L363"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "4b39dbcb276842a1306205cf2e51ce86b6d2aa21353d277df15f4ea3b3d97678"
+		score = 85
+		quality = 85
+		tags = ""
+
+	strings:
+		$sxc1 = { 6D 65 74 73 72 76 2E 64 6C 6C 00 00 52 65 66 6C 
+               65 63 74 69 76 65 4C 6F 61 64 65 72 }
+		$sxs1 = "metsrv.x64.dll" ascii fullword
+		$ss1 = "WS2_32.dll" ascii fullword
+		$ss2 = "ReflectiveLoader" ascii fullword
+		$fp1 = "SentinelOne" ascii wide
+		$fp2 = "fortiESNAC" ascii wide
+		$fp3 = "PSNMVHookMS" ascii wide
+
+	condition:
+		(1 of ( $sx* ) or 2 of ( $s* ) ) and not 1 of ( $fp* )
+}
+rule SIGNATURE_BASE_Malware_Sakula_Memory {
+    meta:
+		description = "Sakula malware - strings after unpacking (memory rule)"
+		author = "David Cannings"
+		id = "328e3707-d11d-5b7f-bec4-18a42a2c658b"
+		date = "2016-06-13"
+		modified = "2023-12-05"
+		reference = "https://github.com/Neo23x0/signature-base"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/apt_sakula.yar#L20-L45"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		hash = "b3852b9e7f2b8954be447121bb6b65c3"
+		logic_hash = "ba6d93a1fc5fd81748eb462fc55b681987126ba853ddb677a5f1f9b74ba5cde8"
+		score = 75
+		quality = 85
+		tags = ""
+
+	strings:
+		$str01 = "cmd.exe /c ping 127.0.0.1 & del \"%s\""
+		$str02 = "cmd.exe /c rundll32 \"%s\" Play \"%s\""
+		$str03 = "Mozilla/4.0+(compatible;+MSIE+8.0;+Windows+NT+5.1;+SV1)"
+		$str04 = "cmd.exe /c cmd.exe /c cmd.exe /c cmd.exe /c cmd.exe /c cmd.exe /c \"%s\""
+		$str05 = "Self Process Id:%d"
+		$str06 = "%d_%d_%d_%s"
+		$str07 = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)"
+		$str08 = "cmd.exe /c rundll32 \"%s\" ActiveQvaw \"%s\""
+		$opcodes01 = { 83 F9 00 74 0E 31 C0 8A 03 D0 C0 34 ?? 88 03 49 43 EB ED }
+		$opcodes02 = { 31 C0 8A 04 13 32 01 83 F8 00 75 0E 83 FA 00 74 04 49 4A }
+
+	condition:
+		4 of them
+}
+rule SIGNATURE_BASE_Pos_Malware_Malumpos {
+    meta:
+		description = "Used to detect MalumPOS memory dumper"
+		author = "Trend Micro, Inc."
+		id = "6d85c7fe-bf1b-53fb-b618-4b0f8b63cae4"
+		date = "2015-05-25"
+		modified = "2023-12-05"
+		reference = "https://github.com/Neo23x0/signature-base"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/crime_malumpos.yar#L1-L17"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
+		logic_hash = "ece32e51a12adf0d68420c8d98efbe7df27b9061ddfe4dcedf151f9f06287eee"
+		score = 75
+		quality = 60
+		tags = ""
+		sample_filtype = "exe"
+
+	strings:
+		$string1 = "SOFTWARE\\Borland\\Delphi\\RTL"
+		$string2 = "B)[0-9]{13,19}\\"
+		$string3 = "[A-Za-z\\s]{0,30}\\/[A-Za-z\\s]{0,30}\\"
+		$string4 = "TRegExpr(exec): ExecNext Without Exec[Pos]"
+		$string5 = /Y:\\PROGRAMS\\.{20,300}\.pas/
+
+	condition:
+		all of ( $string* )
+}
 rule SIGNATURE_BASE_Mimikatz_Memory_Rule_1 : APT {
     meta:
 		description = "Detects password dumper mimikatz in memory (False Positives: an service that could have copied a Mimikatz executable, AV signatures)"
@@ -3088,8 +3417,8 @@ rule SIGNATURE_BASE_Mimikatz_Memory_Rule_1 : APT {
 		date = "2014-12-22"
 		modified = "2023-07-04"
 		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/gen_mimikatz.yar#L5-L26"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/gen_mimikatz.yar#L5-L26"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
 		logic_hash = "22064af570b8e0a93ca0d45484848eda3fbecfd27c88247ef0897fe53be4b7fc"
 		score = 70
 		quality = 85
@@ -3117,8 +3446,8 @@ rule SIGNATURE_BASE_HKTL_Mimikatz_Skeletonkey_In_Memory_Aug20_1 {
 		date = "2020-08-09"
 		modified = "2023-12-05"
 		reference = "https://twitter.com/sbousseaden/status/1292143504131600384?s=12"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/gen_mimikatz.yar#L178-L190"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/gen_mimikatz.yar#L178-L190"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
 		logic_hash = "0cc9a4d3b63e07a695df342bd2c96a55570502d6fd0ab9a1b61d63e28e1c3e05"
 		score = 75
 		quality = 85
@@ -3139,8 +3468,8 @@ rule SIGNATURE_BASE_HKTL_Mimikatz_Memssp_Hookfn {
 		date = "2020-08-26"
 		modified = "2023-12-05"
 		reference = "https://github.com/sbousseaden/YaraHunts/blob/master/mimikatz_memssp_hookfn.yara"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/gen_mimikatz.yar#L192-L216"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
+		source_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/yara/gen_mimikatz.yar#L192-L216"
+		license_url = "https://github.com/Neo23x0/signature-base/blob/278165d7845decece517f756cf92ff4a41938d1e/LICENSE"
 		logic_hash = "27cf87f801111f17af76ab4c4f8329b73165f24f755d33edbb22d845bba6d3ff"
 		score = 70
 		quality = 85
@@ -3162,333 +3491,4 @@ rule SIGNATURE_BASE_HKTL_Mimikatz_Memssp_Hookfn {
 
 	condition:
 		$xc1
-}
-rule SIGNATURE_BASE_Fidelis_Advisory_Cedt370 {
-    meta:
-		description = "Detects a string found in memory of malware cedt370r(3).exe"
-		author = "Florian Roth (Nextron Systems)"
-		id = "b5ebf2d7-e3e4-5b3b-a082-417da9c7fda6"
-		date = "2015-06-09"
-		modified = "2023-12-05"
-		reference = "http://goo.gl/ZjJyti"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_fidelis_phishing_plain_sight.yar#L16-L30"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "1070d3c63a7091c0982e67134f9dc3cd790bb0b5c2ac08f3a00e3b97ef53d64b"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$s0 = "PO.exe" ascii fullword
-		$s1 = "Important.exe" ascii fullword
-		$s2 = "&username=" ascii fullword
-		$s3 = "Browsers.txt" ascii fullword
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_APT_Dropper_Raw64_TEARDROP_1 {
-    meta:
-		description = "This rule looks for portions of the TEARDROP backdoor that are vital to how it functions. TEARDROP is a memory only dropper that can read files and registry keys, XOR decode an embedded payload, and load the payload into memory. TEARDROP persists as a Windows service and has been observed dropping Cobalt Strike BEACON into memory."
-		author = "FireEye"
-		id = "88adad58-ba16-5996-9ea8-ea356c3ed5b2"
-		date = "2020-12-14"
-		modified = "2023-12-05"
-		reference = "https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_solarwinds_sunburst.yar#L141-L156"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "6ab5197e7a1a123055b361a2ef79f8a77a7935606fccc8f163ea5914c94cd14d"
-		score = 85
-		quality = 85
-		tags = ""
-
-	strings:
-		$sb1 = { C7 44 24 ?? 80 00 00 00 [0-64] BA 00 00 00 80 [0-32] 48 8D 0D [4-32] FF 15 [4] 48 83 F8 FF [2-64] 41 B8 40 00 00 00 [0-64] FF 15 [4-5] 85 C0 7? ?? 80 3D [4] FF }
-		$sb2 = { 80 3D [4] D8 [2-32] 41 B8 04 00 00 00 [0-32] C7 44 24 ?? 4A 46 49 46 [0-32] E8 [4-5] 85 C0 [2-32] C6 05 [4] 6A C6 05 [4] 70 C6 05 [4] 65 C6 05 [4] 67 }
-		$sb3 = { BA [4] 48 89 ?? E8 [4] 41 B8 [4] 48 89 ?? 48 89 ?? E8 [4] 85 C0 7? [1-32] 8B 44 24 ?? 48 8B ?? 24 [1-16] 48 01 C8 [0-32] FF D0 }
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_Pos_Malware_Malumpos {
-    meta:
-		description = "Used to detect MalumPOS memory dumper"
-		author = "Trend Micro, Inc."
-		id = "6d85c7fe-bf1b-53fb-b618-4b0f8b63cae4"
-		date = "2015-05-25"
-		modified = "2023-12-05"
-		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/crime_malumpos.yar#L1-L17"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "ece32e51a12adf0d68420c8d98efbe7df27b9061ddfe4dcedf151f9f06287eee"
-		score = 75
-		quality = 85
-		tags = ""
-		sample_filtype = "exe"
-
-	strings:
-		$string1 = "SOFTWARE\\Borland\\Delphi\\RTL"
-		$string2 = "B)[0-9]{13,19}\\"
-		$string3 = "[A-Za-z\\s]{0,30}\\/[A-Za-z\\s]{0,30}\\"
-		$string4 = "TRegExpr(exec): ExecNext Without Exec[Pos]"
-		$string5 = /Y:\\PROGRAMS\\.{20,300}\.pas/
-
-	condition:
-		all of ( $string* )
-}
-rule SIGNATURE_BASE_HKTL_Meterpreter_Inmemory {
-    meta:
-		description = "Detects Meterpreter in-memory"
-		author = "netbiosX, Florian Roth"
-		id = "29c3bb7e-4da8-5924-ada7-2f28d9352009"
-		date = "2020-06-29"
-		modified = "2023-04-21"
-		reference = "https://www.reddit.com/r/purpleteamsec/comments/hjux11/meterpreter_memory_indicators_detection_tooling/"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/gen_metasploit_payloads.yar#L341-L363"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "4b39dbcb276842a1306205cf2e51ce86b6d2aa21353d277df15f4ea3b3d97678"
-		score = 85
-		quality = 85
-		tags = ""
-
-	strings:
-		$sxc1 = { 6D 65 74 73 72 76 2E 64 6C 6C 00 00 52 65 66 6C 
-               65 63 74 69 76 65 4C 6F 61 64 65 72 }
-		$sxs1 = "metsrv.x64.dll" ascii fullword
-		$ss1 = "WS2_32.dll" ascii fullword
-		$ss2 = "ReflectiveLoader" ascii fullword
-		$fp1 = "SentinelOne" ascii wide
-		$fp2 = "fortiESNAC" ascii wide
-		$fp3 = "PSNMVHookMS" ascii wide
-
-	condition:
-		(1 of ( $sx* ) or 2 of ( $s* ) ) and not 1 of ( $fp* )
-}
-rule SIGNATURE_BASE_WCE_In_Memory {
-    meta:
-		description = "Detects Windows Credential Editor (WCE) in memory (and also on disk)"
-		author = "Florian Roth (Nextron Systems)"
-		id = "90c90ca5-e3be-5035-b35c-c2e7faec43a5"
-		date = "2016-08-28"
-		modified = "2025-12-18"
-		reference = "Internal Research"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/thor-hacktools.yar#L3256-L3270"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "74ab7772db5b1de8a4eae03370e2be3cd35004730f84d472677688109a1d6d88"
-		score = 80
-		quality = 85
-		tags = ""
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "wkKUSvflehHr::o:t:s:c:i:d:a:g:" fullword ascii
-		$s2 = "wceaux.dll" fullword ascii
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_APT_MAL_RU_WIN_Snake_Malware_May23_1 : MEMORY {
-    meta:
-		description = "Hunting Russian Intelligence Snake Malware"
-		author = "Matt Suiche (Magnet Forensics)"
-		id = "53d2de3c-350c-5090-84bb-b6cde16a80ad"
-		date = "2023-05-10"
-		modified = "2025-03-21"
-		reference = "https://media.defense.gov/2023/May/09/2003218554/-1/-1/0/JOINT_CSA_HUNTING_RU_INTEL_SNAKE_MALWARE_20230509.PDF"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_mal_ru_snake_may23.yar#L17-L42"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "7cff7152259bb17a9b72b91f0fbef220aad2f35a1d2758d7225316a9896bf845"
-		score = 70
-		quality = 71
-		tags = "MEMORY"
-		threat_name = "Windows.Malware.Snake"
-		scan_context = "memory"
-		license = "MIT"
-
-	strings:
-		$a = { 25 73 23 31 }
-		$b = { 25 73 23 32 }
-		$c = { 25 73 23 33 }
-		$d = { 25 73 23 34 }
-		$e = { 2e 74 6d 70 }
-		$g = { 2e 73 61 76 }
-		$h = { 2e 75 70 64 }
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_Hvs_APT27_Hyperbro_Stage3_C2 {
-    meta:
-		description = "HyperBro Stage 3 C2 path and user agent detection - also tested in memory"
-		author = "Marc Stroebel"
-		id = "d1fe03b9-440c-5127-9572-dddcd5c9966b"
-		date = "2022-02-07"
-		modified = "2023-12-05"
-		reference = "https://www.hvs-consulting.de/en/threat-intelligence-report-emissary-panda-apt27"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_apt27_hyperbro.yar#L86-L100"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		hash = "624e85bd669b97bc55ed5c5ea5f6082a1d4900d235a5d2e2a5683a04e36213e8"
-		logic_hash = "676df1eaa782c6b876df138a0ddddc3c63e277b84d4414b044314ee219674420"
-		score = 50
-		quality = 81
-		tags = ""
-
-	strings:
-		$s1 = "api/v2/ajax" ascii wide nocase
-		$s2 = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36" ascii wide nocase
-
-	condition:
-		all of them
-}
-rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_Strings {
-    meta:
-		description = "Identifies strings used in Cobalt Strike Beacon DLL"
-		author = "Elastic"
-		id = "af558aa2-a3dc-5a7a-bc74-42bb2246091c"
-		date = "2021-03-16"
-		modified = "2026-05-26"
-		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_cobaltstrike.yar#L54-L67"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "4349a7ad94df2269217b55c2aef9628c4eef078566c276936accdd4f996ba2cf"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$s1 = "%02d/%02d/%02d %02d:%02d:%02d"
-		$s2 = "Started service %s on %s"
-		$s3 = "%s as %s\\%s: %d"
-
-	condition:
-		2 of them
-}
-rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_XOR_Strings {
-    meta:
-		description = "Identifies XOR'd strings used in Cobalt Strike Beacon DLL"
-		author = "Elastic"
-		id = "359160a8-cf1c-58a8-bf7f-c09a8d661308"
-		date = "2021-03-16"
-		modified = "2026-05-26"
-		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_cobaltstrike.yar#L69-L90"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "214f0400863783ab4294d8acc820cf00ab9941d193b2b843f877207b9912d799"
-		score = 75
-		quality = 85
-		tags = ""
-		xor_s1 = "%02d/%02d/%02d %02d:%02d:%02d"
-		xor_s2 = "Started service %s on %s"
-		xor_s3 = "%s as %s\\%s: %d"
-
-	strings:
-		$s1 = "%02d/%02d/%02d %02d:%02d:%02d" xor(1-255)
-		$s2 = "Started service %s on %s" xor(1-255)
-		$s3 = "%s as %s\\%s: %d" xor(1-255)
-		$fp1 = "MalwareRemovalTool" ascii wide
-		$fp2 = "advanced malware removal tool" ascii wide
-
-	condition:
-		2 of ( $s* ) and not 1 of ( $fp* )
-}
-rule SIGNATURE_BASE_HKTL_Cobaltstrike_Beacon_4_2_Decrypt {
-    meta:
-		description = "Identifies deobfuscation routine used in Cobalt Strike Beacon DLL version 4.2"
-		author = "Elastic"
-		id = "63b71eef-0af5-5765-b957-ccdc9dde053b"
-		date = "2021-03-16"
-		modified = "2026-05-26"
-		reference = "https://www.elastic.co/blog/detecting-cobalt-strike-with-memory-signatures"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_cobaltstrike.yar#L92-L104"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "8685b1626c8d263f49ccf129dcd4fe1b42482fcdb37c2e109cedcecaed8c2407"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$a_x64 = { 4C 8B 53 08 45 8B 0A 45 8B 5A 04 4D 8D 52 08 45 85 C9 75 05 45 85 DB 74 33 45 3B CB 73 E6 49 8B F9 4C 8B 03 }
-		$a_x86 = { 8B 46 04 8B 08 8B 50 04 83 C0 08 89 55 08 89 45 0C 85 C9 75 04 85 D2 74 23 3B CA 73 E6 8B 06 8D 3C 08 33 D2 }
-
-	condition:
-		any of them
-}
-rule SIGNATURE_BASE_Malware_Sakula_Memory {
-    meta:
-		description = "Sakula malware - strings after unpacking (memory rule)"
-		author = "David Cannings"
-		id = "328e3707-d11d-5b7f-bec4-18a42a2c658b"
-		date = "2016-06-13"
-		modified = "2023-12-05"
-		reference = "https://github.com/Neo23x0/signature-base"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_sakula.yar#L20-L45"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		hash = "b3852b9e7f2b8954be447121bb6b65c3"
-		logic_hash = "ba6d93a1fc5fd81748eb462fc55b681987126ba853ddb677a5f1f9b74ba5cde8"
-		score = 75
-		quality = 85
-		tags = ""
-
-	strings:
-		$str01 = "cmd.exe /c ping 127.0.0.1 & del \"%s\""
-		$str02 = "cmd.exe /c rundll32 \"%s\" Play \"%s\""
-		$str03 = "Mozilla/4.0+(compatible;+MSIE+8.0;+Windows+NT+5.1;+SV1)"
-		$str04 = "cmd.exe /c cmd.exe /c cmd.exe /c cmd.exe /c cmd.exe /c cmd.exe /c \"%s\""
-		$str05 = "Self Process Id:%d"
-		$str06 = "%d_%d_%d_%s"
-		$str07 = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)"
-		$str08 = "cmd.exe /c rundll32 \"%s\" ActiveQvaw \"%s\""
-		$opcodes01 = { 83 F9 00 74 0E 31 C0 8A 03 D0 C0 34 ?? 88 03 49 43 EB ED }
-		$opcodes02 = { 31 C0 8A 04 13 32 01 83 F8 00 75 0E 83 FA 00 74 04 49 4A }
-
-	condition:
-		4 of them
-}
-rule SIGNATURE_BASE_EXPL_React_Server_CVE_2025_55182_POC_Dec25 : CVE_2025_55182 {
-    meta:
-		description = "Detects in-memory webshell indicators related to the proof-of-concept code for the React Server Remote Code Execution Vulnerability (CVE-2025-55182)"
-		author = "Florian Roth"
-		id = "1ad38541-1477-5c07-9975-318357bcb9b8"
-		date = "2025-12-05"
-		modified = "2026-05-15"
-		reference = "https://x.com/pyn3rd/status/1996840827897954542/photo/1"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/react_pocs_indicators_dec25.yar#L1-L20"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "a4f27fc85807e8f94e6947523a09d87ceed0658334756a9724322181c3eecd20"
-		score = 70
-		quality = 85
-		tags = "CVE-2025-55182"
-
-	strings:
-		$xs1 = "{const cmd=p.query.cmd;if(!cmd)(s.writeHead(400);"
-		$s1 = ";if(p.pathname=="
-		$s2 = ".writeHead(400);"
-		$s3 = ".writeHead(200,{'Content-Type':"
-		$s4 = ".execSync("
-		$s5 = ",stdio:'pipe'})"
-
-	condition:
-		1 of ( $x* ) or all of ( $s* )
-}
-rule SIGNATURE_BASE_Opcloudhopper_Wmidll_Inmemory {
-    meta:
-		description = "Malware related to Operation Cloud Hopper - Page 25"
-		author = "Florian Roth (Nextron Systems)"
-		id = "0afb6e52-bc9a-5a68-890b-79a017e5d554"
-		date = "2017-04-07"
-		modified = "2023-12-05"
-		reference = "https://www.pwc.co.uk/cyber-security/pdf/cloud-hopper-annex-b-final.pdf"
-		source_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/yara/apt_op_cloudhopper.yar#L281-L293"
-		license_url = "https://github.com/Neo23x0/signature-base/blob/e737ebd96c27a52ee99485d4d3e02e9c256d1d3a/LICENSE"
-		logic_hash = "6dddda4e519eeaa67eb4c21151cab10553420a23a077751e0fc45fcae0bf6e69"
-		score = 75
-		quality = 85
-		tags = ""
-		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
-
-	strings:
-		$s1 = "wmi.dll 2>&1" ascii
-
-	condition:
-		all of them
 }
