@@ -311,6 +311,7 @@ ktgn.sys,994e3f5dd082f5d82f9cc84108a60d359910ba79,,,,,,malicious,Elevate privile
 gftkyj64.sys,a804ebec7e341b4d98d9e94f6e4860a55ea1638d,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/0fc0563c-de9f-41d8-806a-748e04d57365/
 qu829.sys,131b5c8a1083393229999f899826fdc459c8ff2b,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/3599f0ef-67fc-4130-910f-0c482612d16f/
 qu829.sys,e09d059f3f563710b0a34e350a57eec11f47bff5,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/3599f0ef-67fc-4130-910f-0c482612d16f/
+d39DuiY9sxtDSiu4LSvS.sys,5fdc38f30fefcdad652a761927fa5d4fa9ff1122,,,,,AMD64,malicious,Reflectively load and execute an unsigned kernel payload after the loader is installed.,https://www.loldrivers.io/drivers/3207f14b-a66c-4d5e-a5d5-2467ffd58265/
 driver_fdd16a94.sys,ffe5611f1f905f2caa4e846a51f31ef8856c95a2,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/da066835-f37c-40bf-86bb-d77ad45c7f30/
 driver_4f9b5a2f.sys,e6e2e01c527d52fe6b2d377043a1ed77f7257d73,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/b660d253-2b60-46c5-b95a-c354aa5eb154/
 driver_981d03e1.sys,2c42b38f1cd28f4fc449f7c1a76a4f6aedf38b43,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/1106fe7a-b78b-4edf-85c0-6208979f380b/
@@ -321,6 +322,8 @@ daxin_blank3.sys,73bac306292b4e9107147db94d0d836fdb071e33,,,,,I386,malicious,Ele
 Air_SYSTEM10.sys,c23eeb6f18f626ce1fd840227f351fa7543bb167,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/0eb5f4ce-12a7-4b45-b021-42b995de07c5/
 ntbios_2.sys,064de88dbbea67c149e779aac05228e5405985c7, Microsoft(R) Windows (R) NT Operating System,ntbios driver,"5, 0, 2, 1","5, 0, 2, 1",I386,malicious,Elevate privileges,https://www.loldrivers.io/drivers/33a9c9ae-5ca3-442d-9f0f-2615637c1c57/
 ntbios.sys,71469dce9c2f38d0e0243a289f915131bf6dd2a8, Microsoft(R) Windows (R) NT Operating System,ntbios driver,"5, 0, 2, 1","5, 0, 2, 1",I386,malicious,Elevate privileges,https://www.loldrivers.io/drivers/eef1fcf4-8c54-420b-8d38-9c5f95129dcc/
+kernel_utility_driver64.sys,e11e7ee8824e45c25ab638fec6d6e7d4ab89cffa,,,"1,5026,1000,127","1,5026,1000,127",AMD64,malicious,Remove process-creation callbacks registered by antivirus and EDR drivers.,https://www.loldrivers.io/drivers/c7f94129-f95f-4848-b1ab-68aae24275e7/
+kernel_utility_driver64.sys,71ab9bd0a43754b1a87cd05a1188cbf27b95b96f,,,"1,5026,1000,127","1,5026,1000,127",I386,malicious,Remove process-creation callbacks registered by antivirus and EDR drivers.,https://www.loldrivers.io/drivers/c7f94129-f95f-4848-b1ab-68aae24275e7/
 wantd_4.sys,d02403f85be6f243054395a873b41ef8a17ea279,Microsoft Windows Operating System,WAN Transport Driver,6.1.7600.1172,6.1.7600.1172,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/72637cb1-5ca2-4ad0-a5df-20da17b231b5/
 driver_0a636606.sys,48608c80ce98476569ee5bc51823f98dc80f858f,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/82087b26-b649-4ad1-a353-3a225c757ff7/
 driver_5c308aed.sys,e86dd3f83e40682407d499aa9ff6de1da8a2a143,,,,,AMD64,malicious,Elevate privileges,https://www.loldrivers.io/drivers/647f72e7-f378-4908-946c-5e45fab448e8/

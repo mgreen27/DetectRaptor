@@ -98,7 +98,7 @@ DR-MFT-SLOC-013,Suspicious Location - PerfLogs Executable or Script,Suspicious L
 DR-MFT-SLOC-014,Suspicious Location - PerfLogs Archive Installer or Dump,Suspicious Location,,Medium,\.(msi|zip|rar|7z|iso|dmp|hdmp)$,\\PerfLogs\\,,Archive installer or dump under PerfLogs,Medium,MFT,File,DetectRaptor Curated,
 DR-MFT-WEB-001,Web Browsing History Tool,Web History,,High,^BrowsingHistoryView\.exe$,.,,BrowsingHistoryView,Low,Both,File,DetectRaptor Curated,
 DR-MFT-RMM-001,RMM - 247ithelp.com (ConnectWise),Remote Access Software,T1219,High,^Remote Workforce Client\.exe$,.,,https://lolrmm.io/tools/247ithelp.com__connectwise_,Medium,Both,File,LOLRMM,247ithelp.com__connectwise_
-DR-MFT-RMM-002,RMM - Absolute (Computrace),Remote Access Software,T1219,High,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersitence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,.,,https://lolrmm.io/tools/absolute__computrace_,Medium,Both,File,LOLRMM,absolute__computrace_
+DR-MFT-RMM-002,RMM - Absolute (Computrace),Remote Access Software,T1219,High,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersistence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,.,,https://lolrmm.io/tools/absolute__computrace_,Medium,Both,File,LOLRMM,absolute__computrace_
 DR-MFT-RMM-004,RMM - Acronis Cyber Protect (Remotix),Remote Access Software,T1219,Medium,^AcronisCyberProtectConnectAgent\.exe$|^AcronisCyberProtectConnectQuickAssist.*\.exe$,.,,https://lolrmm.io/tools/acronis_cyber_protect__remotix_,Medium,Both,File,LOLRMM,acronis_cyber_protect__remotix_
 DR-MFT-RMM-006,RMM - Adobe Connect,Remote Access Software,T1219,Medium,^ConnectAppSetup.*\.exe$|^ConnectDetector\.exe$|^ConnectShellSetup.*\.exe$,.,,https://lolrmm.io/tools/adobe_connect,Medium,Both,File,LOLRMM,adobe_connect
 DR-MFT-RMM-007,RMM - AeroAdmin,Remote Access Software,T1219,High,^AeroAdmin\.exe$,.,,https://lolrmm.io/tools/aeroadmin,Medium,Both,File,LOLRMM,aeroadmin
@@ -119,7 +119,7 @@ DR-MFT-RMM-024,RMM - Bitvise SSH Client,Remote Access Software,T1219,High,^BvSsh
 DR-MFT-RMM-228,RMM - Bitvise SSH Server,Remote Access Software,T1219,High,^BvSshServer-Inst\.exe$,.,,https://lolrmm.io/tools/bitvise_ssh_server,Medium,Both,File,LOLRMM,bitvise_ssh_server
 DR-MFT-RMM-026,RMM - CentraStage (Now Datto),Remote Access Software,T1219,High,^AEMAgent\.exe$|^CagService\.exe$,.,,https://lolrmm.io/tools/centrastage__now_datto_,Medium,Both,File,LOLRMM,centrastage__now_datto_
 DR-MFT-RMM-027,RMM - Centurion,Remote Access Software,T1219,High,^ctiserv\.exe$,.,,https://lolrmm.io/tools/centurion,Medium,Both,File,LOLRMM,centurion
-DR-MFT-RMM-028,RMM - Chrome Remote Desktop,Remote Access Software,T1219,High,^remoting_host\.exe$|^remote_host\.exe$,.,,https://lolrmm.io/tools/chrome_remote_desktop,Medium,Both,File,LOLRMM,chrome_remote_desktop
+DR-MFT-RMM-028,RMM - Chrome Remote Desktop,Remote Access Software,T1219,High,^remoting_host\.exe$,.,,https://lolrmm.io/tools/chrome_remote_desktop,Medium,Both,File,LOLRMM,chrome_remote_desktop
 DR-MFT-RMM-029,RMM - CloudFlare Tunnel,Remote Access Software,T1219,High,^cloudflared\.exe$,.,,https://lolrmm.io/tools/cloudflare_tunnel,Medium,Both,File,LOLRMM,cloudflare_tunnel
 DR-MFT-RMM-232,RMM - Comodo RMM,Remote Access Software,T1219,High,^itsmagent\.exe$|^rviewer\.exe$,.,,https://lolrmm.io/tools/comodo_rmm,Medium,Both,File,LOLRMM,comodo_rmm
 DR-MFT-RMM-031,RMM - Connectwise Automate (LabTech),Remote Access Software,T1219,High,^ltsvc\.exe$|^ltsvcmon\.exe$|^lttray\.exe$,.,,https://lolrmm.io/tools/connectwise_automate__labtech_,Medium,Both,File,LOLRMM,connectwise_automate__labtech_
@@ -143,7 +143,7 @@ DR-MFT-RMM-045,RMM - Echoware,Remote Access Software,T1219,Medium,^echoserver.*\
 DR-MFT-RMM-046,RMM - eHorus,Remote Access Software,T1219,High,^ehorus standalone\.exe$|^ehorus_agent\.exe$|^ehorus_cmd\.exe$|^ehorus_launcher\.exe$|^ehorus_uit\.exe$,.,,https://lolrmm.io/tools/ehorus,Medium,Both,File,LOLRMM,ehorus
 DR-MFT-RMM-048,RMM - EMCO Remote Console,Remote Access Software,T1219,High,^remoteconsole\.exe$,.,,https://lolrmm.io/tools/emco_remote_console,Medium,Both,File,LOLRMM,emco_remote_console
 DR-MFT-RMM-243,RMM - Ericom AccessNow,Remote Access Software,T1219,Medium,^accessserver.*\.exe$|^accessserver\.exe$,.,,https://lolrmm.io/tools/ericom_accessnow,Medium,Both,File,LOLRMM,ericom_accessnow
-DR-MFT-RMM-244,RMM - Ericom Connect,Remote Access Software,T1219,Medium,^EricomConnectRemoteHost.*\.exe$|^ericomconnnectconfigurationtool\.exe$,.,,https://lolrmm.io/tools/ericom_connect,Medium,Both,File,LOLRMM,ericom_connect
+DR-MFT-RMM-244,RMM - Ericom Connect,Remote Access Software,T1219,Medium,^EricomConnectRemoteHost.*\.exe$|^ericomconnectconfigurationtool\.exe$,.,,https://lolrmm.io/tools/ericom_connect,Medium,Both,File,LOLRMM,ericom_connect
 DR-MFT-RMM-245,RMM - ESET Remote Administrator,Remote Access Software,T1219,Medium,^ERAAgent\.exe$|^einstaller\.exe$|^era\.exe$|^eratool\.exe$|^ezhelp.*\.exe$,.,,https://lolrmm.io/tools/eset_remote_administrator,Medium,Both,File,LOLRMM,eset_remote_administrator
 DR-MFT-RMM-053,RMM - ExtraPuTTY,Remote Access Software,T1219,High,^ExtraPuTTY-0\.30-2016-01-28-installer\.exe$,.,,https://lolrmm.io/tools/extraputty,Medium,Both,File,LOLRMM,extraputty
 DR-MFT-RMM-054,RMM - ezHelp,Remote Access Software,T1219,High,^ezHelpManager\.exe$|^ezhelpclient\.exe$|^ezhelpclientmanager\.exe$,.,,https://lolrmm.io/tools/ezhelp,Medium,Both,File,LOLRMM,ezhelp
@@ -226,12 +226,13 @@ DR-MFT-RMM-299,RMM - Nezha,Remote Access Software,T1219,High,^nezha-agent\.exe$|
 DR-MFT-RMM-349,RMM - ngrok,Remote Access Software,T1219,High,^ngrok\.exe$,.,,https://lolrmm.io/tools/ngrok,Medium,Both,File,LOLRMM,ngrok
 DR-MFT-RMM-300,RMM - Ninite Pro (Ninite Agent),Remote Access Software,T1219,High,^NiniteAgent\.exe$|^NiniteOne\.exe$|^NinitePro\.exe$|^Ninite\.exe$,.,,https://lolrmm.io/tools/ninite_pro__ninite_agent_,Medium,Both,File,LOLRMM,ninite_pro__ninite_agent_
 DR-MFT-RMM-114,RMM - NinjaRMM,Remote Access Software,T1219,High,^NinjaRMMAgentPatcher\.exe$|^NinjaRMMAgent\.exe$|^ninjarmm-cli\.exe$,.,,https://lolrmm.io/tools/ninjarmm,Medium,Both,File,LOLRMM,ninjarmm
-DR-MFT-RMM-115,RMM - NoMachine,Remote Access Software,T1219,Medium,^nomachine.*\.exe$|^nxd\.exe$,.,,https://lolrmm.io/tools/nomachine,Medium,Both,File,LOLRMM,nomachine
+DR-MFT-RMM-115,RMM - NoMachine,Remote Access Software,T1219,Medium,^nomachine.*\.exe$|^nxd\.exe$|^nxservice.*\.exe$,.,,https://lolrmm.io/tools/nomachine,Medium,Both,File,LOLRMM,nomachine
 DR-MFT-RMM-303,RMM - NoteOn-desktop sharing,Remote Access Software,T1219,Medium,^nateon.*\.exe$|^nateon\.exe$|^nateonmain\.exe$,.,,https://lolrmm.io/tools/noteon-desktop_sharing,Medium,Both,File,LOLRMM,noteon-desktop_sharing
 DR-MFT-RMM-116,RMM - NTR Remote,Remote Access Software,T1219,High,^NTRsupportPro_EN\.exe$,.,,https://lolrmm.io/tools/ntr_remote,Medium,Both,File,LOLRMM,ntr_remote
 DR-MFT-RMM-304,RMM - NVDA (Non-Visual Desktop Access),Remote Access Software,T1219,Medium,^nvda\.exe$|^nvda_.*\.exe$|^nvda_service\.exe$,.,,https://lolrmm.io/tools/nvda__non-visual_desktop_access_,Medium,Both,File,LOLRMM,nvda__non-visual_desktop_access_
 DR-MFT-RMM-117,RMM - OCS inventory,Remote Access Software,T1219,High,^ocsinventory\.exe$|^ocsservice\.exe$,.,,https://lolrmm.io/tools/ocs_inventory,Medium,Both,File,LOLRMM,ocs_inventory
 DR-MFT-RMM-118,RMM - Onionshare,Remote Access Software,T1219,Medium,^onionshare.*\.exe$|^OnionShare-win.*\.msi$,.,,https://lolrmm.io/tools/onionshare,Medium,Both,File,LOLRMM,onionshare
+DR-MFT-RMM-356,RMM - OpsBridge Agent,Remote Access Software,T1219,High,^OpsBridgeAgent\.exe$,.,,https://lolrmm.io/tools/opsbridge_agent,Medium,Both,File,LOLRMM,opsbridge_agent
 DR-MFT-RMM-119,RMM - OptiTune,Remote Access Software,T1219,High,^OTPowerShell\.exe$|^OTService\.exe$,.,,https://lolrmm.io/tools/optitune,Medium,Both,File,LOLRMM,optitune
 DR-MFT-RMM-120,RMM - Pandora RC (eHorus),Remote Access Software,T1219,High,^ehorus standalone\.exe$|^ehorus_agent\.exe$,.,,https://lolrmm.io/tools/pandora_rc__ehorus_,Medium,Both,File,LOLRMM,pandora_rc__ehorus_
 DR-MFT-RMM-122,RMM - Panorama9,Remote Access Software,T1219,Medium,^p9agent.*\.exe$,.,,https://lolrmm.io/tools/panorama9,Medium,Both,File,LOLRMM,panorama9
@@ -257,7 +258,7 @@ DR-MFT-RMM-137,RMM - RAdmin,Remote Access Software,T1219,High,^Radmin\.exe$|^rse
 DR-MFT-RMM-312,RMM - Rapid7,Remote Access Software,T1219,High,^ir_agent\.exe$|^rapid7_agent_core\.exe$|^rapid7_endpoint_broker\.exe$,.,,https://lolrmm.io/tools/rapid7,Medium,Both,File,LOLRMM,rapid7
 DR-MFT-RMM-313,RMM - RdClient,Remote Access Software,T1219,High,^RdClientInstaller\.exe$|^SupportTool\.exe$|^rdclient\.exe$,.,,https://lolrmm.io/tools/rdclient,Medium,Both,File,LOLRMM,rdclient
 DR-MFT-RMM-314,RMM - RDCMan,Remote Access Software,T1219,High,^RDCMan-x86\.exe$|^RDCMan\.exe$,.,,https://lolrmm.io/tools/rdcman,Medium,Both,File,LOLRMM,rdcman
-DR-MFT-RMM-138,RMM - rdp2tcp,Remote Access Software,T1219,High,^tdp2tcp\.exe$,.,,https://lolrmm.io/tools/rdp2tcp,Medium,Both,File,LOLRMM,rdp2tcp
+DR-MFT-RMM-138,RMM - rdp2tcp,Remote Access Software,T1219,High,^rdp2tcp\.exe$,.,,https://lolrmm.io/tools/rdp2tcp,Medium,Both,File,LOLRMM,rdp2tcp
 DR-MFT-RMM-140,RMM - rdpwrap,Remote Access Software,T1219,High,^RDPCheck\.exe$|^RDPConf\.exe$|^RDPWInst\.exe$,.,,https://lolrmm.io/tools/rdpwrap,Medium,Both,File,LOLRMM,rdpwrap
 DR-MFT-RMM-144,RMM - Remcos,Remote Access Software,T1219,Medium,^remcos.*\.exe$,.,,https://lolrmm.io/tools/remcos,Medium,Both,File,LOLRMM,remcos
 DR-MFT-RMM-317,RMM - Remmon,Remote Access Software,T1219,High,^remmon\.exe$,.,,https://lolrmm.io/tools/remmon,Medium,Both,File,LOLRMM,remmon
@@ -288,6 +289,7 @@ DR-MFT-RMM-167,RMM - SecureCRT,Remote Access Software,T1219,High,^SecureCRT\.EXE
 DR-MFT-RMM-168,RMM - Seetrol,Remote Access Software,T1219,High,^seetrolcenter\.exe$|^seetrolclient\.exe$|^seetrolmyservice\.exe$|^seetrolremote\.exe$|^seetrolsetting\.exe$,.,,https://lolrmm.io/tools/seetrol,Medium,Both,File,LOLRMM,seetrol
 DR-MFT-RMM-169,RMM - Senso.cloud,Remote Access Software,T1219,High,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,.,,https://lolrmm.io/tools/senso.cloud,Medium,Both,File,LOLRMM,senso.cloud
 DR-MFT-RMM-170,RMM - ServerEye,Remote Access Software,T1219,Medium,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,.,,https://lolrmm.io/tools/servereye,Medium,Both,File,LOLRMM,servereye
+DR-MFT-RMM-357,RMM - SetMe PRO,Remote Access Software,T1219,High,^SetMe_Client\.exe$|^tinUnattendedModule\.exe$,.,,https://lolrmm.io/tools/setme_pro,Medium,Both,File,LOLRMM,setme_pro
 DR-MFT-RMM-172,RMM - ShowMyPC,Remote Access Software,T1219,Medium,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,.,,https://lolrmm.io/tools/showmypc,Medium,Both,File,LOLRMM,showmypc
 DR-MFT-RMM-173,RMM - SimpleHelp,Remote Access Software,T1219,High,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^vhost\.exe$|^windowslauncher\.exe$,.,,https://lolrmm.io/tools/simplehelp,Medium,Both,File,LOLRMM,simplehelp
 DR-MFT-RMM-174,RMM - Site24x7,Remote Access Software,T1219,High,^MEAgentHelper\.exe$|^MonitoringAgent\.exe$|^Site24x7PluginAgent\.exe$|^Site24x7WindowsAgentTrayIcon\.exe$,.,,https://lolrmm.io/tools/site24x7,Medium,Both,File,LOLRMM,site24x7

@@ -1,6 +1,6 @@
 SourceID,Name,Status,RuleID,FilenamePatternCount,FilenameRegex,FilteredFilenameRegex,Reason,SourceRows
 247ithelp.com__connectwise_,247ithelp.com (ConnectWise),Generated,DR-MFT-RMM-001,1,^Remote Workforce Client\.exe$,,,1
-absolute__computrace_,Absolute (Computrace),Generated,DR-MFT-RMM-002,5,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersitence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,,,1
+absolute__computrace_,Absolute (Computrace),Generated,DR-MFT-RMM-002,5,^ctes\.exe$|^cteshostsvc\.exe$|^ctespersistence\.exe$|^rpcld\.exe$|^rpcnet\.exe$,,,1
 acronis_cyber_protect__remotix_,Acronis Cyber Protect (Remotix),Generated,DR-MFT-RMM-004,2,^AcronisCyberProtectConnectAgent\.exe$|^AcronisCyberProtectConnectQuickAssist.*\.exe$,,,1
 addigy,Addigy,Excluded,DR-MFT-RMM-219,0,,,No safe Windows filename indicator,1
 adobe_connect,Adobe Connect,Generated,DR-MFT-RMM-006,3,^ConnectAppSetup.*\.exe$|^ConnectDetector\.exe$|^ConnectShellSetup.*\.exe$,^Connect\.exe$,Filtered ambiguous or non-specific filename indicators,1
@@ -30,7 +30,7 @@ breezermm,BreezeRMM,Excluded,DR-MFT-RMM-355,0,,,No safe Windows filename indicat
 centrastage__now_datto_,CentraStage (Now Datto),Generated,DR-MFT-RMM-026,2,^AEMAgent\.exe$|^CagService\.exe$,,,1
 centurion,Centurion,Generated,DR-MFT-RMM-027,1,^ctiserv\.exe$,,,1
 chicken__of_the_vnc_,Chicken (of the VNC),Excluded,DR-MFT-RMM-230,0,,,No safe Windows filename indicator,1
-chrome_remote_desktop,Chrome Remote Desktop,Generated,DR-MFT-RMM-028,2,^remoting_host\.exe$|^remote_host\.exe$,,,1
+chrome_remote_desktop,Chrome Remote Desktop,Generated,DR-MFT-RMM-028,1,^remoting_host\.exe$,,,1
 chrome_ssh_extension,Chrome SSH Extension,Excluded,DR-MFT-RMM-231,0,,,No safe Windows filename indicator,1
 cloudflare_tunnel,CloudFlare Tunnel,Generated,DR-MFT-RMM-029,1,^cloudflared\.exe$,,,1
 comodo_rmm,Comodo RMM,Generated,DR-MFT-RMM-232,2,^itsmagent\.exe$|^rviewer\.exe$,,,1
@@ -62,7 +62,7 @@ electric_ai__kaseya_,Electric AI (Kaseya),Excluded,DR-MFT-RMM-241,0,,,No safe Wi
 emco_remote_console,EMCO Remote Console,Generated,DR-MFT-RMM-048,1,^remoteconsole\.exe$,,,1
 encapto,Encapto,Excluded,DR-MFT-RMM-242,0,,,No safe Windows filename indicator,1
 ericom_accessnow,Ericom AccessNow,Generated,DR-MFT-RMM-243,2,^accessserver.*\.exe$|^accessserver\.exe$,,,1
-ericom_connect,Ericom Connect,Generated,DR-MFT-RMM-244,2,^EricomConnectRemoteHost.*\.exe$|^ericomconnnectconfigurationtool\.exe$,,,1
+ericom_connect,Ericom Connect,Generated,DR-MFT-RMM-244,2,^EricomConnectRemoteHost.*\.exe$|^ericomconnectconfigurationtool\.exe$,,,1
 eset_remote_administrator,ESET Remote Administrator,Generated,DR-MFT-RMM-245,5,^ERAAgent\.exe$|^einstaller\.exe$|^era\.exe$|^eratool\.exe$|^ezhelp.*\.exe$,,,1
 extraputty,ExtraPuTTY,Generated,DR-MFT-RMM-053,1,^ExtraPuTTY-0\.30-2016-01-28-installer\.exe$,,,1
 ezhelp,ezHelp,Generated,DR-MFT-RMM-054,3,^ezHelpManager\.exe$|^ezhelpclient\.exe$|^ezhelpclientmanager\.exe$,,,1
@@ -165,13 +165,14 @@ ngrok,ngrok,Generated,DR-MFT-RMM-349,1,^ngrok\.exe$,,,1
 ninite_pro__ninite_agent_,Ninite Pro (Ninite Agent),Generated,DR-MFT-RMM-300,4,^NiniteAgent\.exe$|^NiniteOne\.exe$|^NinitePro\.exe$|^Ninite\.exe$,,,1
 ninjaone__formerly_ninjarmm_,NinjaOne (formerly NinjaRMM),Excluded,DR-MFT-RMM-301,0,,,No safe Windows filename indicator,1
 ninjarmm,NinjaRMM,Generated,DR-MFT-RMM-114,3,^NinjaRMMAgentPatcher\.exe$|^NinjaRMMAgent\.exe$|^ninjarmm-cli\.exe$,,,1
-nomachine,NoMachine,Generated,DR-MFT-RMM-115,2,^nomachine.*\.exe$|^nxd\.exe$,,,1
+nomachine,NoMachine,Generated,DR-MFT-RMM-115,3,^nomachine.*\.exe$|^nxd\.exe$|^nxservice.*\.exe$,,,1
 nordlocker,NordLocker,Excluded,DR-MFT-RMM-302,0,,,No safe Windows filename indicator,1
 noteon-desktop_sharing,NoteOn-desktop sharing,Generated,DR-MFT-RMM-303,3,^nateon.*\.exe$|^nateon\.exe$|^nateonmain\.exe$,,,1
 ntr_remote,NTR Remote,Generated,DR-MFT-RMM-116,1,^NTRsupportPro_EN\.exe$,,,1
 nvda__non-visual_desktop_access_,NVDA (Non-Visual Desktop Access),Generated,DR-MFT-RMM-304,3,^nvda\.exe$|^nvda_.*\.exe$|^nvda_service\.exe$,,,1
 ocs_inventory,OCS inventory,Generated,DR-MFT-RMM-117,2,^ocsinventory\.exe$|^ocsservice\.exe$,,,1
 onionshare,Onionshare,Generated,DR-MFT-RMM-118,2,^onionshare.*\.exe$|^OnionShare-win.*\.msi$,,,1
+opsbridge_agent,OpsBridge Agent,Generated,DR-MFT-RMM-356,1,^OpsBridgeAgent\.exe$,,,1
 optitune,OptiTune,Generated,DR-MFT-RMM-119,2,^OTPowerShell\.exe$|^OTService\.exe$,,,1
 pandora_rc__ehorus_,Pandora RC (eHorus),Generated,DR-MFT-RMM-120,2,^ehorus standalone\.exe$|^ehorus_agent\.exe$,,,1
 panorama9,Panorama9,Generated,DR-MFT-RMM-122,1,^p9agent.*\.exe$,,,1
@@ -198,7 +199,7 @@ radmin,RAdmin,Generated,DR-MFT-RMM-137,2,^Radmin\.exe$|^rserver3\.exe$,,,1
 rapid7,Rapid7,Generated,DR-MFT-RMM-312,3,^ir_agent\.exe$|^rapid7_agent_core\.exe$|^rapid7_endpoint_broker\.exe$,,,1
 rdclient,RdClient,Generated,DR-MFT-RMM-313,3,^RdClientInstaller\.exe$|^SupportTool\.exe$|^rdclient\.exe$,,,1
 rdcman,RDCMan,Generated,DR-MFT-RMM-314,2,^RDCMan-x86\.exe$|^RDCMan\.exe$,,,1
-rdp2tcp,rdp2tcp,Generated,DR-MFT-RMM-138,1,^tdp2tcp\.exe$,,,1
+rdp2tcp,rdp2tcp,Generated,DR-MFT-RMM-138,1,^rdp2tcp\.exe$,,,1
 rdpview,RDPView,Excluded,DR-MFT-RMM-139,0,,,Duplicate and misattributed dwrcs.exe indicator; the binary is a SolarWinds Dameware component already covered by the canonical Dameware rule,1
 rdpwrap,rdpwrap,Generated,DR-MFT-RMM-140,3,^RDPCheck\.exe$|^RDPConf\.exe$|^RDPWInst\.exe$,,,1
 realvnc,RealVNC,Excluded,DR-MFT-RMM-315,0,,,No safe Windows filename indicator,1
@@ -234,6 +235,7 @@ securecrt,SecureCRT,Generated,DR-MFT-RMM-167,1,^SecureCRT\.EXE$,,,1
 seetrol,Seetrol,Generated,DR-MFT-RMM-168,5,^seetrolcenter\.exe$|^seetrolclient\.exe$|^seetrolmyservice\.exe$|^seetrolremote\.exe$|^seetrolsetting\.exe$,,,1
 senso.cloud,Senso.cloud,Generated,DR-MFT-RMM-169,3,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,,,1
 servereye,ServerEye,Generated,DR-MFT-RMM-170,2,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,,,1
+setme_pro,SetMe PRO,Generated,DR-MFT-RMM-357,2,^SetMe_Client\.exe$|^tinUnattendedModule\.exe$,,,1
 shellhub,ShellHub,Excluded,DR-MFT-RMM-327,0,,,No safe Windows filename indicator,1
 showmypc,ShowMyPC,Generated,DR-MFT-RMM-172,3,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,,,1
 simplehelp,SimpleHelp,Generated,DR-MFT-RMM-173,7,^remote access\.exe$|^simplegatewayservice\.exe$|^simplehelpcustomer\.exe$|^simpleservice\.exe$|^spsrv\.exe$|^vhost\.exe$|^windowslauncher\.exe$,,,2
