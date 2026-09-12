@@ -122,6 +122,18 @@ sources:
                 )
             })
 
+      LET SafariDownloadFile <= SELECT * FROM foreach(
+            row=target_users,
+            query={
+                SELECT User, OSPath, Mtime
+                FROM glob(
+                    root=HomeDirectory,
+                    globs=[
+                        '/Library/Safari/Downloads.plist'
+                    ]
+                )
+            })
+
       -- run first pass to extract any DomainRegex hits
       LET hits = SELECT BrowserArtifact,
             parse_string_with_regex(string=VisitedURL, regex='^.+://([^:/\\s]+)').g1 as Domain,
@@ -267,6 +279,33 @@ sources:
                           query=SafariURL)
                         ORDER BY Visit_Date DESC
                       })
+            },
+            safaridownload = {
+                SELECT "Safari Download" as BrowserArtifact,
+                    DownloadURL as VisitedURL,
+                    dict(
+                        User=User,
+                        Download_Date=Download_Date,
+                        Download_Date_Finished=Download_Date_Finished,
+                        DownloadPath=DownloadPath,
+                        DownloadURL=DownloadURL,
+                        OSPath=OSPath
+                    ) as ArtifactData
+                FROM foreach(row=SafariDownloadFile,
+                    query={
+                    SELECT *
+                    FROM foreach(row=plist(file=OSPath).DownloadHistory,
+                       query={
+                       SELECT User,
+                       DownloadEntryDateAddedKey AS Download_Date,
+                       DownloadEntryDateFinishedKey AS Download_Date_Finished,
+                       DownloadEntryPath AS DownloadPath,
+                       DownloadEntryURL AS DownloadURL,
+                       OSPath
+                       FROM scope()
+                       ORDER BY Download_Date DESC
+                       })
+                  })
             })
         WHERE Domain =~ join(array=IOCs.DomainRegex,sep='|')
 
