@@ -68,8 +68,8 @@ parameters:
         		date = "2022-06-01"
         		modified = "2024-09-20"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
         		score = 75
         		quality = 80
@@ -96,8 +96,8 @@ parameters:
         		date = "2022-06-01"
         		modified = "2024-07-30"
         		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
         		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
         		score = 75
@@ -127,8 +127,8 @@ parameters:
         		date = "2022-03-30"
         		modified = "2025-03-21"
         		reference = "https://github.com/elleven11/pantegana"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L90-L120"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L90-L120"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "8297c99391aae918f154077c61ea94a99c7a339166e7981d9912b7fdc2e0d4f0"
         		logic_hash = "791a664a6b4b98051cbfacb451099de085cbab74d73771709377ab68a5a23d2b"
         		score = 75
@@ -162,8 +162,8 @@ parameters:
         		date = "2022-04-07"
         		modified = "2025-03-21"
         		reference = "https://github.com/n1nj4sec/pupy"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L121-L158"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2022/2022-06-15 DriftingCloud - Zero-Day Sophos Firewall Exploitation and an Insidious Breach/indicators/yara.yar#L121-L158"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "7474a6008b99e45686678f216af7d6357bb70a054c6d9b05e1817c8d80d536b4"
         		logic_hash = "f5b5f35ee783ff1163072591c6d48a85894729156935650a0fd166ae22a2ea00"
         		score = 75
@@ -202,8 +202,8 @@ parameters:
         		date = "2021-09-14"
         		modified = "2025-05-21"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
         		hash = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
         		hash = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
@@ -251,8 +251,8 @@ parameters:
         		date = "2021-10-18"
         		modified = "2024-08-02"
         		reference = "https://www.volexity.com/blog/2022/03/22/storm-cloud-on-the-horizon-gimmick-malware-strikes-at-macos/"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2022/2022-03-22 GIMMICK/indicators/yara.yar#L1-L59"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2022/2022-03-22 GIMMICK/indicators/yara.yar#L1-L59"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "2a9296ac999e78f6c0bee8aca8bfa4d4638aa30d9c8ccc65124b1cbfc9caab5f"
         		logic_hash = "00fba9df2212874a45d44b3d098a7b76c97fcd53ff083c76b784d2b510a4a467"
         		score = 75
@@ -308,8 +308,8 @@ parameters:
         		date = "2024-03-28"
         		modified = "2024-07-05"
         		reference = "TIB-20240229"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L216-L243"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L216-L243"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "de32e96d1f151cc787841c12fad88d0a2276a93d202fc19f93631462512fffaf"
         		logic_hash = "22b3e5109d0738552fbc310344b2651ab3297e324bc883d5332c1e8a7a1df29b"
         		score = 75
@@ -341,8 +341,8 @@ parameters:
         		date = "2024-02-22"
         		modified = "2024-07-05"
         		reference = "https://github.com/bmdyy/discord-c2"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L244-L267"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-06-13 DISGOMOJI/indicators/rules.yar#L244-L267"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "d9f29a626857fa251393f056e454dfc02de53288ebe89a282bad38d03f614529"
         		logic_hash = "38b860a43b9937351f74b01983888f18ad101cbe66560feb7455d46b713eba0f"
         		score = 75
@@ -370,8 +370,8 @@ parameters:
         		date = "2024-01-09"
         		modified = "2024-01-09"
         		reference = "TIB-20240109"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-01-10 Ivanti Connect Secure/indicators/yara.yar#L87-L114"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "e192932d834292478c9b1032543c53edfc2b252fdf7e27e4c438f4b249544eeb"
         		logic_hash = "f73e9d3c2f64c013218469209f3b69fc868efafc151a7de979dde089bfdb24b2"
         		score = 75
@@ -403,8 +403,8 @@ parameters:
         		date = "2024-04-10"
         		modified = "2024-04-15"
         		reference = "TIB-20240412"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
         		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
         		score = 50
@@ -432,8 +432,8 @@ parameters:
         		date = "2024-04-10"
         		modified = "2024-04-12"
         		reference = "TIB-20240412"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
         		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
         		score = 75
@@ -470,8 +470,8 @@ parameters:
         		date = "2024-02-23"
         		modified = "2024-08-02"
         		reference = "TIB-20240227"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-08-02 StormBamboo/rules.yar#L4-L36"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "9d0928b3cc21ee5e1f2868f692421165f46b5014a901636c2a2b32a4c500f761"
         		logic_hash = "2b11f8fc5b6260ebf00bde83585cd7469709a4979ca579cdf065724bc15052fc"
         		score = 75
@@ -503,8 +503,8 @@ parameters:
         		date = "2024-02-23"
         		modified = "2024-08-02"
         		reference = "TIB-20240227"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-08-02 StormBamboo/rules.yar#L37-L62"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-08-02 StormBamboo/rules.yar#L37-L62"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "07e3b067dc5e5de377ce4a5eff3ccd4e6a2f1d7a47c23fe06b1ededa7aed1ab3"
         		logic_hash = "8688796839202d95ded15e10262a7a7c7cbbae4a332b60305402e5984005d452"
         		score = 75
@@ -535,8 +535,8 @@ parameters:
         		date = "2021-11-12"
         		modified = "2024-08-02"
         		reference = "https://blog.google/threat-analysis-group/analyzing-watering-hole-campaign-using-macos-exploits/"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-08-02 StormBamboo/rules.yar#L63-L111"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-08-02 StormBamboo/rules.yar#L63-L111"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "cf5edcff4053e29cb236d3ed1fe06ca93ae6f64f26e25117d68ee130b9bc60c8"
         		hash = "9b71fad3280cf36501fe110e022845b29c1fb1343d5250769eada7c36bc45f70"
         		hash = "623f99cbe20af8b79cbfea7f485d47d3462d927153d24cac4745d7043c15619a"
@@ -588,8 +588,8 @@ parameters:
         		date = "2023-07-21"
         		modified = "2024-08-02"
         		reference = "TIB-20231221"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-08-02 StormBamboo/rules.yar#L236-L270"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-08-02 StormBamboo/rules.yar#L236-L270"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		logic_hash = "bb3a70dad28181534e27abbbd618165652c137264bfd3726ae4480c642493a3b"
         		score = 75
         		quality = 80
@@ -626,8 +626,8 @@ parameters:
         		date = "2023-10-17"
         		modified = "2023-10-27"
         		reference = "TIB-20231027"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2024/2024-02-13 CharmingCypress/rules.yar#L246-L272"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2024/2024-02-13 CharmingCypress/rules.yar#L246-L272"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "11f0e38d9cf6e78f32fb2d3376badd47189b5c4456937cf382b8a574dc0d262d"
         		hash = "31ca565dcbf77fec474b6dea07101f4dd6e70c1f58398eff65e2decab53a6f33"
         		logic_hash = "da5e9be752648b072a9aaeed884b8e1729a14841e33ed6633a0aaae1f11bd139"
@@ -651,6 +651,48 @@ parameters:
         	condition:
         		2 of ( $s* )
         }
+        rule VOLEXITY_Apt_Malware_Js_Longtale : LONGTALE JUNGLEBAMBOO FILE MEMORY {
+            meta:
+        		description = "Detection for LONGTALE, a chrome extension malware."
+        		author = "threatintel@volexity.com"
+        		id = "b97eaf48-8c4e-5fea-af7c-d1f559d334af"
+        		date = "2026-09-08"
+        		modified = "2026-09-08"
+        		reference = "https://github.com/volexity/threat-intel"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-09-09 Chrome/rules.yar#L1-L37"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
+        		hash = "5eb5645511b00e4f4d73125654eeb3a3930fcf09c65685dc7f03f725331492e3"
+        		logic_hash = "194266bc6710943a421f1e3a65cf5345b061edd3777a9f555fa435fef41e7baa"
+        		score = 75
+        		quality = 80
+        		tags = "LONGTALE, JUNGLEBAMBOO, FILE, MEMORY"
+        		os = "all"
+        		os_arch = "all"
+        		scan_context = "file,memory"
+        		severity = "critical"
+        		report1 = "TIB-20260908B"
+        		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+        		rule_id = 13428
+        		version = 2
+        
+        	strings:
+        		$f1 = "getPublicIP" ascii
+        		$f2 = "captureCookies" ascii
+        		$f3 = "recordFetch" ascii
+        		$f4 = "injectRecorder" ascii
+        		$f5 = "captureVisibleTab" ascii
+        		$f6 = "buildIngestPayload" ascii
+        		$case1 = "SET_KEYWORDS"
+        		$case2 = "GET_KEYWORDS"
+        		$case3 = "SCREENSHOT_NOW"
+        		$case4 = "FETCH_HISTORY"
+        		$case5 = "CAPTURE_STORAGE"
+        		$case6 = "CAPTURE_COOKIES"
+        		$case7 = "TOGGLE_RECORDING"
+        
+        	condition:
+        		all of ( $f* ) or all of ( $case* )
+        }
         rule VOLEXITY_Apt_Malware_Any_Dotnet_Aot_Plenet : VERDANTBAMBOO PLENET FILE MEMORY {
             meta:
         		description = "Detect PLENET, a multiplatform malware compile with native AOT."
@@ -659,8 +701,8 @@ parameters:
         		date = "2025-09-22"
         		modified = "2025-10-30"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L1-L31"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-06-04 VerdantBamboo/rules.yar#L1-L31"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "eb141a43958802727a6c813452450c10b92704bea4474ee5fd87c0a1be326e2e"
         		logic_hash = "67d8f7fbc2986b1068a9c557cf85ba83469e3fb7f2433bd10c7ad740a4b0e717"
         		score = 75
@@ -697,8 +739,8 @@ parameters:
         		date = "2025-09-05"
         		modified = "2026-06-09"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L56-L98"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-06-04 VerdantBamboo/rules.yar#L56-L98"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "aa688682d44f0c6b0ed7f30b981a609100107f2d414a3a6e5808671b112d1878"
         		logic_hash = "e91203a714a4bc9d1c70eae4670681e3f416257163cf44db20ad33380be5d39a"
         		score = 75
@@ -738,8 +780,8 @@ parameters:
         		date = "2025-09-04"
         		modified = "2025-10-30"
         		reference = "https://blog.nviso.eu/wp-content/uploads/2025/04/NVISO-BRICKSTORM-Report.pdf"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L100-L136"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-06-04 VerdantBamboo/rules.yar#L100-L136"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "40d264cf9c73923932c3dfd52d20f46ff602be3fea8dc6ecc71aca46e6067bf5"
         		hash = "e981fc4eaaa6417e6034e21438e55c0360773674a6fc0b63c1b95026449e5254"
         		logic_hash = "39e3403d90ad67072ae631273e89fe059ec48906ce1d57fe1afbb91304dc84f3"
@@ -777,8 +819,8 @@ parameters:
         		date = "2025-09-05"
         		modified = "2025-10-30"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-06-04 VerdantBamboo/rules.yar#L137-L171"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-06-04 VerdantBamboo/rules.yar#L137-L171"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "ee41e06ed96182ce80cd4544a6abd5d7719c4a5c0e5ddb266a83842d39b99b0a"
         		logic_hash = "dd0b957bc2a61ddebd392b86b35bae8c1052a285fa31ccd700e580c2ad9cce59"
         		score = 75
@@ -817,8 +859,8 @@ parameters:
         		date = "2026-07-06"
         		modified = "2026-07-14"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L1-L25"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-07-17 SonicWall/rules.yar#L1-L25"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "1e1e68bbb899450a57274a8b12082ed4e2040a2aae77014f20431689d2b4edee"
         		hash = "ea9154e374e4f77bc2cf54282e23543573980342a85bc888cb23f20b8bbba081"
         		logic_hash = "e5ed25fb820dc4a18c374936c36d4321e2aba72d8b640cdb0d81abd764786918"
@@ -849,8 +891,8 @@ parameters:
         		date = "2026-07-06"
         		modified = "2026-07-14"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L26-L53"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-07-17 SonicWall/rules.yar#L26-L53"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "ea9154e374e4f77bc2cf54282e23543573980342a85bc888cb23f20b8bbba081"
         		logic_hash = "1a495df2bc13b1c2c61315d76d66b150452b923afa5847121429fa8ae9788a7b"
         		score = 75
@@ -884,8 +926,8 @@ parameters:
         		date = "2026-07-06"
         		modified = "2026-07-14"
         		reference = "https://github.com/volexity/threat-intel"
-        		source_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/2026/2026-07-17 SonicWall/rules.yar#L54-L76"
-        		license_url = "https://github.com/volexity/threat-intel/blob/a7eaa9d97a5d0c193f4a3ac99a6239e6ccc211de/LICENSE.txt"
+        		source_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/2026/2026-07-17 SonicWall/rules.yar#L54-L76"
+        		license_url = "https://github.com/volexity/threat-intel/blob/f340f93e4ca5c749342da331900aad2bfc377caf/LICENSE.txt"
         		hash = "8c470301dcb7278f73e622f1950073567b34011c64b60cdfbb0f89803923a5a3"
         		logic_hash = "d4c0322080e853f5c5d495af05d43eaf3d375af6905e795cef718dec639a7092"
         		score = 75
