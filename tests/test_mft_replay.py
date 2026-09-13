@@ -124,10 +124,14 @@ class MFTReplayTests(unittest.TestCase):
         result = benchmark_mft_replay.benchmark(
             self.rules, self.whitelists, cases, iterations=1)
 
-        self.assertEqual(400, result["Cases"])
-        self.assertEqual(369, result["Rules"])
+        # Feed refreshes change the rule count. The benchmark includes the
+        # manual fixtures plus one synthetic positive case per current rule.
+        expected_rules = len(self.rules)
+        expected_cases = len(self.cases) + expected_rules
+        self.assertEqual(expected_cases, result["Cases"])
+        self.assertEqual(expected_rules, result["Rules"])
         self.assertEqual(
-            400 * 369,
+            expected_cases * expected_rules,
             result["EstimatedRuleEvaluationsPerIteration"])
         self.assertEqual(1, result["SuppressedMatches"])
         self.assertEqual(
