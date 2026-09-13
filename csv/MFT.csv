@@ -266,15 +266,16 @@ DR-MFT-RMM-145,RMM - Remobo,Remote Access Software,T1219,High,^remobo\.exe$|^rem
 DR-MFT-RMM-146,RMM - Remote Desktop Plus,Remote Access Software,T1219,High,^rdp\.exe$,.,,https://lolrmm.io/tools/remote_desktop_plus,Medium,Both,File,LOLRMM,remote_desktop_plus
 DR-MFT-RMM-148,RMM - Remote Manipulator System,Remote Access Software,T1219,High,^rfusclient\.exe$|^rutserv\.exe$,.,,https://lolrmm.io/tools/remote_manipulator_system,Medium,Both,File,LOLRMM,remote_manipulator_system
 DR-MFT-RMM-320,RMM - Remote Ripple,Remote Access Software,T1219,High,^RemoteRipple\.exe$,.,,https://lolrmm.io/tools/remote_ripple,Medium,Both,File,LOLRMM,remote_ripple
+DR-MFT-RMM-149,RMM - Remote Utilities,Remote Access Software,T1219,High,^rutserv\.exe$|^rutview\.exe$,.,,https://lolrmm.io/tools/remote_utilities,Medium,Both,File,LOLRMM,remote_utilities
 DR-MFT-RMM-318,RMM - Remote.it,Remote Access Software,T1219,High,^remote-it-installer\.exe$|^remote\.it\.exe$|^remoteit\.exe$,.,,https://lolrmm.io/tools/remote.it,Medium,Both,File,LOLRMM,remote.it
 DR-MFT-RMM-150,RMM - RemoteCall,Remote Access Software,T1219,High,^agentu\.exe$|^raautoup\.exe$|^rcengmgru\.exe$|^rcmgrsvc\.exe$|^rcstartsupport\.exe$|^remotesupportplayeru\.exe$|^rxstartsupport\.exe$,.,,https://lolrmm.io/tools/remotecall,Medium,Both,File,LOLRMM,remotecall
 DR-MFT-RMM-321,RMM - Remotely,Remote Access Software,T1219,High,^Remotely_Desktop\.exe$|^Remotely_Agent\.exe$,.,,https://lolrmm.io/tools/remotely,Medium,Both,File,LOLRMM,remotely
 DR-MFT-RMM-151,RMM - RemotePass,Remote Access Software,T1219,High,^remotepass-access\.exe$|^rpaccess\.exe$|^rpwhostscr\.exe$,.,,https://lolrmm.io/tools/remotepass,Medium,Both,File,LOLRMM,remotepass
 DR-MFT-RMM-152,RMM - RemotePC,Remote Access Software,T1219,High,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,.,,https://lolrmm.io/tools/remotepc,Medium,Both,File,LOLRMM,remotepc
 DR-MFT-RMM-322,RMM - RemotePulse,Remote Access Software,T1219,High,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,.,,https://lolrmm.io/tools/remotepulse,Medium,Both,File,LOLRMM,remotepulse
-DR-MFT-RMM-149,RMM - RemoteUtilities,Remote Access Software,T1219,High,^rutserv\.exe$|^rutview\.exe$,.,,https://lolrmm.io/tools/remoteutilities,Medium,Both,File,LOLRMM,remote_utilities
 DR-MFT-RMM-153,RMM - RemoteView,Remote Access Software,T1219,High,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,.,,https://lolrmm.io/tools/remoteview,Medium,Both,File,LOLRMM,remoteview
 DR-MFT-RMM-154,RMM - RES Automation Manager,Remote Access Software,T1219,Medium,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,.,,https://lolrmm.io/tools/res_automation_manager,Medium,Both,File,LOLRMM,res_automation_manager
+DR-MFT-RMM-358,RMM - RMMmax,Remote Access Software,T1219,High,^RMMmaxAgentService\.exe$|^RMMmaxAgentSetup\.exe$,.,,https://lolrmm.io/tools/rmmmax,Medium,Both,File,LOLRMM,rmmmax
 DR-MFT-RMM-155,RMM - Rocket Remote Desktop,Remote Access Software,T1219,High,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,.,,https://lolrmm.io/tools/rocket_remote_desktop,Medium,Both,File,LOLRMM,rocket_remote_desktop
 DR-MFT-RMM-325,RMM - Rodex RMM,Remote Access Software,T1219,High,^RodexAgent\.exe$|^<random>\.exe$,.,,https://lolrmm.io/tools/rodex_rmm,Medium,Both,File,LOLRMM,rodex_rmm
 DR-MFT-RMM-156,RMM - Royal Apps,Remote Access Software,T1219,High,^royalserver\.exe$|^royalts\.exe$,.,,https://lolrmm.io/tools/royal_apps,Medium,Both,File,LOLRMM,royal_apps

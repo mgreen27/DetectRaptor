@@ -266,15 +266,16 @@ DR-MFT-RMM-145,COVERAGE-DR-MFT-RMM-145,MFT,File,remobo.exe,C:\Replay\remobo.exe,
 DR-MFT-RMM-146,COVERAGE-DR-MFT-RMM-146,MFT,File,rdp.exe,C:\Replay\rdp.exe,True,DR-MFT-RMM-129
 DR-MFT-RMM-148,COVERAGE-DR-MFT-RMM-148,MFT,File,rfusclient.exe,C:\Replay\rfusclient.exe,True,
 DR-MFT-RMM-320,COVERAGE-DR-MFT-RMM-320,MFT,File,RemoteRipple.exe,C:\Replay\RemoteRipple.exe,True,
+DR-MFT-RMM-149,COVERAGE-DR-MFT-RMM-149,MFT,File,rutserv.exe,C:\Replay\rutserv.exe,True,DR-MFT-RMM-148
 DR-MFT-RMM-318,COVERAGE-DR-MFT-RMM-318,MFT,File,remote-it-installer.exe,C:\Replay\remote-it-installer.exe,True,
 DR-MFT-RMM-150,COVERAGE-DR-MFT-RMM-150,MFT,File,agentu.exe,C:\Replay\agentu.exe,True,
 DR-MFT-RMM-321,COVERAGE-DR-MFT-RMM-321,MFT,File,Remotely_Desktop.exe,C:\Replay\Remotely_Desktop.exe,True,
 DR-MFT-RMM-151,COVERAGE-DR-MFT-RMM-151,MFT,File,remotepass-access.exe,C:\Replay\remotepass-access.exe,True,
 DR-MFT-RMM-152,COVERAGE-DR-MFT-RMM-152,MFT,File,RemotePCService.exe,C:\Replay\RemotePCService.exe,True,
 DR-MFT-RMM-322,COVERAGE-DR-MFT-RMM-322,MFT,File,InstallCore.exe,C:\Replay\InstallCore.exe,True,
-DR-MFT-RMM-149,COVERAGE-DR-MFT-RMM-149,MFT,File,rutserv.exe,C:\Replay\rutserv.exe,True,DR-MFT-RMM-148
 DR-MFT-RMM-153,COVERAGE-DR-MFT-RMM-153,MFT,File,remoteview.exe,C:\Replay\remoteview.exe,True,
 DR-MFT-RMM-154,COVERAGE-DR-MFT-RMM-154,MFT,File,wisshell.exe,C:\Replay\wisshell.exe,True,
+DR-MFT-RMM-358,COVERAGE-DR-MFT-RMM-358,MFT,File,RMMmaxAgentService.exe,C:\Replay\RMMmaxAgentService.exe,True,
 DR-MFT-RMM-155,COVERAGE-DR-MFT-RMM-155,MFT,File,RDConsole.exe,C:\Replay\RDConsole.exe,True,
 DR-MFT-RMM-325,COVERAGE-DR-MFT-RMM-325,MFT,File,RodexAgent.exe,C:\Replay\RodexAgent.exe,True,
 DR-MFT-RMM-156,COVERAGE-DR-MFT-RMM-156,MFT,File,royalserver.exe,C:\Replay\royalserver.exe,True,

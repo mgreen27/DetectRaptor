@@ -211,15 +211,16 @@ remote_desktop_manager__devolutions_,Remote Desktop Manager (Devolutions),Exclud
 remote_desktop_plus,Remote Desktop Plus,Generated,DR-MFT-RMM-146,1,^rdp\.exe$,,,1
 remote_manipulator_system,Remote Manipulator System,Generated,DR-MFT-RMM-148,2,^rfusclient\.exe$|^rutserv\.exe$,,,1
 remote_ripple,Remote Ripple,Generated,DR-MFT-RMM-320,1,^RemoteRipple\.exe$,,,1
+remote_utilities,Remote Utilities,Generated,DR-MFT-RMM-149,2,^rutserv\.exe$|^rutview\.exe$,,,2
 remote.it,Remote.it,Generated,DR-MFT-RMM-318,3,^remote-it-installer\.exe$|^remote\.it\.exe$|^remoteit\.exe$,,,1
 remotecall,RemoteCall,Generated,DR-MFT-RMM-150,7,^agentu\.exe$|^raautoup\.exe$|^rcengmgru\.exe$|^rcmgrsvc\.exe$|^rcstartsupport\.exe$|^remotesupportplayeru\.exe$|^rxstartsupport\.exe$,,,1
 remotely,Remotely,Generated,DR-MFT-RMM-321,2,^Remotely_Desktop\.exe$|^Remotely_Agent\.exe$,,,1
 remotepass,RemotePass,Generated,DR-MFT-RMM-151,3,^remotepass-access\.exe$|^rpaccess\.exe$|^rpwhostscr\.exe$,,,1
 remotepc,RemotePC,Generated,DR-MFT-RMM-152,4,^RemotePCService\.exe$|^RemotePC\.exe$|^remotepchost\.exe$|^rpcsuite\.exe$,,,1
 remotepulse,RemotePulse,Generated,DR-MFT-RMM-322,5,^InstallCore\.exe$|^agent\.ps1$|^defender-exclude\.ps1$|^install\.cmd$|^install\.ps1$,,,1
-remote_utilities,RemoteUtilities,Generated,DR-MFT-RMM-149,2,^rutserv\.exe$|^rutview\.exe$,,,2
 remoteview,RemoteView,Generated,DR-MFT-RMM-153,3,^remoteview\.exe$|^rvagent\.exe$|^rvagtray\.exe$,,,1
 res_automation_manager,RES Automation Manager,Generated,DR-MFT-RMM-154,4,^wisshell.*\.exe$|^wmc\.exe$|^wmc_deployer\.exe$|^wmcsvc\.exe$,,,1
+rmmmax,RMMmax,Generated,DR-MFT-RMM-358,2,^RMMmaxAgentService\.exe$|^RMMmaxAgentSetup\.exe$,,,1
 rocket_remote_desktop,Rocket Remote Desktop,Generated,DR-MFT-RMM-155,2,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,,,1
 rodex_rmm,Rodex RMM,Generated,DR-MFT-RMM-325,2,^RodexAgent\.exe$|^<random>\.exe$,,,1
 royal_apps,Royal Apps,Generated,DR-MFT-RMM-156,2,^royalserver\.exe$|^royalts\.exe$,,,1
