@@ -422,7 +422,7 @@ parameters:
         		hash = "5bc52f6c1c0d0131cee30b4f192ce738ad70bcb56e84180f464a5125d1a784b2"
         		logic_hash = "30ae14fd55a3ab60e791064f69377f3b9de9b871adfd055f435df657f89f8007"
         		score = 75
-        		quality = 80
+        		quality = 55
         		tags = "INKYPINE, FILE, MEMORY"
         		os = "win"
         		os_arch = "all"
@@ -1001,7 +1001,7 @@ parameters:
         		hash = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
         		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
         		score = 75
-        		quality = 55
+        		quality = 30
         		tags = "UTA0178, FILE, MEMORY"
         		os = "win"
         		os_arch = "all"
@@ -1620,7 +1620,7 @@ parameters:
         		hash = "337b48c1cd6dd6e7b8073327082a60e149517fa084ba17b180e041fffa3b130d"
         		logic_hash = "6aa6508e063d1230f19e31d2da1bac9fe37c12a29227719f762cf48fd8dfff3a"
         		score = 75
-        		quality = 53
+        		quality = 28
         		tags = "CVE_2026_85046, FILE, MEMORY"
         		os = "win"
         		os_arch = "all"
@@ -3554,7 +3554,7 @@ parameters:
         		license_url = "https://github.com/Neo23x0/signature-base/blob/94a1c48d7ab499879287ff611dfe7f9c56376030/LICENSE"
         		logic_hash = "ece32e51a12adf0d68420c8d98efbe7df27b9061ddfe4dcedf151f9f06287eee"
         		score = 75
-        		quality = 85
+        		quality = 60
         		tags = ""
         		sample_filtype = "exe"
         
