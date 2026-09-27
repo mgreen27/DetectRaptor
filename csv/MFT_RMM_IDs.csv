@@ -8,6 +8,7 @@ addigy,DR-MFT-RMM-219
 adobe_connect,DR-MFT-RMM-006
 aeroadmin,DR-MFT-RMM-007
 aliwangwang-remote-control,DR-MFT-RMM-008
+allocentra,DR-MFT-RMM-359
 alpemix,DR-MFT-RMM-009
 ammyy_admin,DR-MFT-RMM-220
 any_support,DR-MFT-RMM-011
@@ -22,6 +23,7 @@ aweray,DR-MFT-RMM-017
 baramundi_management_suite,DR-MFT-RMM-223
 barracuda,DR-MFT-RMM-224
 basecamp,DR-MFT-RMM-225
+basic_rmm_agent,DR-MFT-RMM-360
 beamyourscreen,DR-MFT-RMM-020
 beanywhere,DR-MFT-RMM-226
 beinsync,DR-MFT-RMM-022
@@ -29,6 +31,7 @@ beyondtrust,DR-MFT-RMM-227
 beyondtrust__bomgar_,DR-MFT-RMM-023
 bitvise_ssh_client,DR-MFT-RMM-024
 bitvise_ssh_server,DR-MFT-RMM-228
+blackcrypt_rmm_agent,DR-MFT-RMM-361
 bluetrait,DR-MFT-RMM-229
 breezermm,DR-MFT-RMM-355
 centrastage__now_datto_,DR-MFT-RMM-026
@@ -86,6 +89,7 @@ freshservice,DR-MFT-RMM-256
 gatherplace-desktop_sharing,DR-MFT-RMM-060
 getscreen,DR-MFT-RMM-061
 glpi_agent,DR-MFT-RMM-257
+go_rmm,DR-MFT-RMM-362
 gorelo_rmm,DR-MFT-RMM-258
 goto_opener,DR-MFT-RMM-259
 gotoassist,DR-MFT-RMM-062
@@ -95,6 +99,7 @@ gotohttp,DR-MFT-RMM-064
 gotomypc,DR-MFT-RMM-261
 goverlan,DR-MFT-RMM-067
 guacamole,DR-MFT-RMM-068
+gxm_rmm_agent,DR-MFT-RMM-363
 heartbeatrm,DR-MFT-RMM-262
 helpbeam,DR-MFT-RMM-069
 helpu,DR-MFT-RMM-070
@@ -112,6 +117,7 @@ invgate,DR-MFT-RMM-268
 iperius_remote,DR-MFT-RMM-076
 isl_light,DR-MFT-RMM-269
 isl_online,DR-MFT-RMM-077
+it_agent,DR-MFT-RMM-364
 itarian,DR-MFT-RMM-078
 itsupport247__connectwise_,DR-MFT-RMM-079
 ivanti_remote_control,DR-MFT-RMM-080
@@ -130,13 +136,16 @@ labtech_rmm__now_connectwise_automate_,DR-MFT-RMM-275
 landesk,DR-MFT-RMM-088
 laplink_everywhere,DR-MFT-RMM-089
 laplink_gold,DR-MFT-RMM-090
+lavawall,DR-MFT-RMM-365
 level,DR-MFT-RMM-091
 level.io,DR-MFT-RMM-276
+lightrmmagent,DR-MFT-RMM-366
 lite_manager,DR-MFT-RMM-277
 litemanager,DR-MFT-RMM-092
 localxpose,DR-MFT-RMM-278
 logmein,DR-MFT-RMM-279
 logmein_rescue,DR-MFT-RMM-094
+ls_rmm,DR-MFT-RMM-367
 lunixar,DR-MFT-RMM-280
 manage_engine__desktop_central_,DR-MFT-RMM-095
 manageengine,DR-MFT-RMM-281
@@ -146,6 +155,7 @@ megasync,DR-MFT-RMM-096
 meshcentral,DR-MFT-RMM-097
 microsoft_quick_assist,DR-MFT-RMM-098
 mikogo,DR-MFT-RMM-100
+mini_rmm_agent,DR-MFT-RMM-368
 mionet__also_known_as_wd_anywhere_access_,DR-MFT-RMM-101
 mionet__wd_anywhere_access_,DR-MFT-RMM-284
 miradore,DR-MFT-RMM-285
@@ -153,6 +163,7 @@ mobaxterm,DR-MFT-RMM-102
 mocha_vnc_lite,DR-MFT-RMM-286
 monitic,DR-MFT-RMM-287
 mouse_without_borders,DR-MFT-RMM-288
+mremote,DR-MFT-RMM-369
 mremoteng,DR-MFT-RMM-103
 msp360,DR-MFT-RMM-104
 mstsc.exe__microsoft_remote_desktop_connection_,DR-MFT-RMM-289
@@ -174,6 +185,7 @@ netsupport_manager,DR-MFT-RMM-111
 neturo,DR-MFT-RMM-112
 netviewer,DR-MFT-RMM-113
 netviewer__gotomeet_,DR-MFT-RMM-298
+nexus_rmm__scogo_,DR-MFT-RMM-370
 nezha,DR-MFT-RMM-299
 ngrok,DR-MFT-RMM-349
 ninite_pro__ninite_agent_,DR-MFT-RMM-300
@@ -186,6 +198,7 @@ ntr_remote,DR-MFT-RMM-116
 nvda__non-visual_desktop_access_,DR-MFT-RMM-304
 ocs_inventory,DR-MFT-RMM-117
 onionshare,DR-MFT-RMM-118
+opendesk_rmm_agent,DR-MFT-RMM-371
 opsbridge_agent,DR-MFT-RMM-356
 optitune,DR-MFT-RMM-119
 pandora_rc__ehorus_,DR-MFT-RMM-120
@@ -228,6 +241,7 @@ remote_desktop_plus,DR-MFT-RMM-146
 remote_manipulator_system,DR-MFT-RMM-148
 remote_ripple,DR-MFT-RMM-320
 remote_utilities,DR-MFT-RMM-149
+remoteagentagent,DR-MFT-RMM-372
 remotecall,DR-MFT-RMM-150
 remotely,DR-MFT-RMM-321
 remotepass,DR-MFT-RMM-151
@@ -237,6 +251,8 @@ remoteutilities,DR-MFT-RMM-323
 remoteview,DR-MFT-RMM-153
 remsupp,DR-MFT-RMM-324
 res_automation_manager,DR-MFT-RMM-154
+rg_system__rg_supervision_,DR-MFT-RMM-373
+rmmcrat,DR-MFT-RMM-374
 rmmmax,DR-MFT-RMM-358
 rocket_remote_desktop,DR-MFT-RMM-155
 rodex_rmm,DR-MFT-RMM-325
@@ -299,6 +315,7 @@ turbomeeting,DR-MFT-RMM-199
 ultra_vnc,DR-MFT-RMM-341
 ultraviewer,DR-MFT-RMM-200
 ultravnc,DR-MFT-RMM-201
+unisystem_rmm,DR-MFT-RMM-375
 veyon,DR-MFT-RMM-342
 visual_studio_dev_tunnel,DR-MFT-RMM-343
 vizor,DR-MFT-RMM-344
@@ -315,6 +332,7 @@ xrdp,DR-MFT-RMM-348
 xshell,DR-MFT-RMM-209
 yandex.disk,DR-MFT-RMM-210
 zabbix_agent,DR-MFT-RMM-211
+zecurit,DR-MFT-RMM-376
 zerotier,DR-MFT-RMM-212
 zoc,DR-MFT-RMM-213
 zoho_assist,DR-MFT-RMM-214

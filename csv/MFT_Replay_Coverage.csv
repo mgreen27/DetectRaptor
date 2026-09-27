@@ -103,6 +103,7 @@ DR-MFT-RMM-004,COVERAGE-DR-MFT-RMM-004,MFT,File,AcronisCyberProtectConnectAgent.
 DR-MFT-RMM-006,COVERAGE-DR-MFT-RMM-006,MFT,File,ConnectAppSetup.exe,C:\Replay\ConnectAppSetup.exe,True,
 DR-MFT-RMM-007,COVERAGE-DR-MFT-RMM-007,MFT,File,AeroAdmin.exe,C:\Replay\AeroAdmin.exe,True,
 DR-MFT-RMM-008,COVERAGE-DR-MFT-RMM-008,MFT,File,alitask.exe,C:\Replay\alitask.exe,True,
+DR-MFT-RMM-359,COVERAGE-DR-MFT-RMM-359,MFT,File,allocentra-agent.exe,C:\Replay\allocentra-agent.exe,True,
 DR-MFT-RMM-009,COVERAGE-DR-MFT-RMM-009,MFT,File,AlpemixService.exe,C:\Replay\AlpemixService.exe,True,
 DR-MFT-RMM-220,COVERAGE-DR-MFT-RMM-220,MFT,File,AMMYY_Admin.exe,C:\Replay\AMMYY_Admin.exe,True,
 DR-MFT-RMM-011,COVERAGE-DR-MFT-RMM-011,MFT,File,ManualLauncher.exe,C:\Replay\ManualLauncher.exe,True,
@@ -117,6 +118,7 @@ DR-MFT-RMM-022,COVERAGE-DR-MFT-RMM-022,MFT,File,Beinsync.exe,C:\Replay\Beinsync.
 DR-MFT-RMM-023,COVERAGE-DR-MFT-RMM-023,MFT,File,bomgar-pac-.exe,C:\Replay\bomgar-pac-.exe,True,
 DR-MFT-RMM-024,COVERAGE-DR-MFT-RMM-024,MFT,File,BvSshClient-Inst.exe,C:\Replay\BvSshClient-Inst.exe,True,
 DR-MFT-RMM-228,COVERAGE-DR-MFT-RMM-228,MFT,File,BvSshServer-Inst.exe,C:\Replay\BvSshServer-Inst.exe,True,
+DR-MFT-RMM-355,COVERAGE-DR-MFT-RMM-355,MFT,File,PixoIT-agent.exe,C:\Replay\PixoIT-agent.exe,True,
 DR-MFT-RMM-026,COVERAGE-DR-MFT-RMM-026,MFT,File,AEMAgent.exe,C:\Replay\AEMAgent.exe,True,
 DR-MFT-RMM-027,COVERAGE-DR-MFT-RMM-027,MFT,File,ctiserv.exe,C:\Replay\ctiserv.exe,True,
 DR-MFT-RMM-028,COVERAGE-DR-MFT-RMM-028,MFT,File,remoting_host.exe,C:\Replay\remoting_host.exe,True,
@@ -164,6 +166,7 @@ DR-MFT-RMM-064,COVERAGE-DR-MFT-RMM-064,MFT,File,GotoHTTP.exe,C:\Replay\GotoHTTP.
 DR-MFT-RMM-261,COVERAGE-DR-MFT-RMM-261,MFT,File,G2M.exe,C:\Replay\G2M.exe,True,
 DR-MFT-RMM-067,COVERAGE-DR-MFT-RMM-067,MFT,File,GovSrv.exe,C:\Replay\GovSrv.exe,True,
 DR-MFT-RMM-068,COVERAGE-DR-MFT-RMM-068,MFT,File,guacd.exe,C:\Replay\guacd.exe,True,
+DR-MFT-RMM-363,COVERAGE-DR-MFT-RMM-363,MFT,File,GxM.Agent.exe,C:\Replay\GxM.Agent.exe,True,
 DR-MFT-RMM-262,COVERAGE-DR-MFT-RMM-262,MFT,File,agent-installer-any.exe,C:\Replay\agent-installer-any.exe,True,
 DR-MFT-RMM-069,COVERAGE-DR-MFT-RMM-069,MFT,File,helpbeam.exe,C:\Replay\helpbeam.exe,True,
 DR-MFT-RMM-070,COVERAGE-DR-MFT-RMM-070,MFT,File,HelpuManager.exe,C:\Replay\HelpuManager.exe,True,
@@ -173,13 +176,14 @@ DR-MFT-RMM-265,COVERAGE-DR-MFT-RMM-265,MFT,File,I'm InTouch Go Installer.exe,C:\
 DR-MFT-RMM-266,COVERAGE-DR-MFT-RMM-266,MFT,File,IDriveWinSetup.exe,C:\Replay\IDriveWinSetup.exe,True,
 DR-MFT-RMM-267,COVERAGE-DR-MFT-RMM-267,MFT,File,ImmyAgent.exe,C:\Replay\ImmyAgent.exe,True,
 DR-MFT-RMM-072,COVERAGE-DR-MFT-RMM-072,MFT,File,ImperoClientSVC.exe,C:\Replay\ImperoClientSVC.exe,True,DR-MFT-RMM-296
-DR-MFT-RMM-073,COVERAGE-DR-MFT-RMM-073,MFT,File,hsloader.exe,C:\Replay\hsloader.exe,True,
+DR-MFT-RMM-073,COVERAGE-DR-MFT-RMM-073,MFT,File,InstantHousecall.exe,C:\Replay\InstantHousecall.exe,True,
 DR-MFT-RMM-074,COVERAGE-DR-MFT-RMM-074,MFT,File,Insync.exe,C:\Replay\Insync.exe,True,
 DR-MFT-RMM-075,COVERAGE-DR-MFT-RMM-075,MFT,File,agent32.exe,C:\Replay\agent32.exe,True,
 DR-MFT-RMM-268,COVERAGE-DR-MFT-RMM-268,MFT,File,DepHlp.exe,C:\Replay\DepHlp.exe,True,
 DR-MFT-RMM-076,COVERAGE-DR-MFT-RMM-076,MFT,File,iperius.exe,C:\Replay\iperius.exe,True,
 DR-MFT-RMM-269,COVERAGE-DR-MFT-RMM-269,MFT,File,islalwaysonmonitor.exe,C:\Replay\islalwaysonmonitor.exe,True,DR-MFT-RMM-077
 DR-MFT-RMM-077,COVERAGE-DR-MFT-RMM-077,MFT,File,ISLLight.exe,C:\Replay\ISLLight.exe,True,DR-MFT-RMM-269
+DR-MFT-RMM-364,COVERAGE-DR-MFT-RMM-364,MFT,File,ITAgentRMMSenderSL.exe,C:\Replay\ITAgentRMMSenderSL.exe,True,
 DR-MFT-RMM-078,COVERAGE-DR-MFT-RMM-078,MFT,File,ComodoRemoteControl.exe,C:\Replay\ComodoRemoteControl.exe,True,
 DR-MFT-RMM-079,COVERAGE-DR-MFT-RMM-079,MFT,File,saazapsc.exe,C:\Replay\saazapsc.exe,True,
 DR-MFT-RMM-080,COVERAGE-DR-MFT-RMM-080,MFT,File,AgentlessRC.exe,C:\Replay\AgentlessRC.exe,True,
@@ -194,10 +198,12 @@ DR-MFT-RMM-275,COVERAGE-DR-MFT-RMM-275,MFT,File,ltsvc.exe,C:\Replay\ltsvc.exe,Tr
 DR-MFT-RMM-088,COVERAGE-DR-MFT-RMM-088,MFT,File,issuser.exe,C:\Replay\issuser.exe,True,
 DR-MFT-RMM-089,COVERAGE-DR-MFT-RMM-089,MFT,File,OOSysAgent.exe,C:\Replay\OOSysAgent.exe,True,
 DR-MFT-RMM-090,COVERAGE-DR-MFT-RMM-090,MFT,File,laplink.exe,C:\Replay\laplink.exe,True,DR-MFT-RMM-089
+DR-MFT-RMM-365,COVERAGE-DR-MFT-RMM-365,MFT,File,LavawallWin.exe,C:\Replay\LavawallWin.exe,True,
 DR-MFT-RMM-276,COVERAGE-DR-MFT-RMM-276,MFT,File,level-remote-control-ffmpeg.exe,C:\Replay\level-remote-control-ffmpeg.exe,True,DR-MFT-RMM-091
-DR-MFT-RMM-092,COVERAGE-DR-MFT-RMM-092,MFT,File,LMNoIpServer.exe,C:\Replay\LMNoIpServer.exe,True,
+DR-MFT-RMM-092,COVERAGE-DR-MFT-RMM-092,MFT,File,ROMFUSClient.exe,C:\Replay\ROMFUSClient.exe,True,
 DR-MFT-RMM-278,COVERAGE-DR-MFT-RMM-278,MFT,File,loclx.exe,C:\Replay\loclx.exe,True,
 DR-MFT-RMM-094,COVERAGE-DR-MFT-RMM-094,MFT,File,lmi_rescue.exe,C:\Replay\lmi_rescue.exe,True,
+DR-MFT-RMM-367,COVERAGE-DR-MFT-RMM-367,MFT,File,LS RMM Worker.exe,C:\Replay\LS RMM Worker.exe,True,
 DR-MFT-RMM-280,COVERAGE-DR-MFT-RMM-280,MFT,File,LunixarRemote.dll,C:\Replay\LunixarRemote.dll,True,
 DR-MFT-RMM-095,COVERAGE-DR-MFT-RMM-095,MFT,File,dcagentregister.exe,C:\Replay\dcagentregister.exe,True,
 DR-MFT-RMM-281,COVERAGE-DR-MFT-RMM-281,MFT,File,dcagentservice.exe,C:\Replay\dcagentservice.exe,True,DR-MFT-RMM-095
@@ -205,6 +211,7 @@ DR-MFT-RMM-283,COVERAGE-DR-MFT-RMM-283,MFT,File,ManageEngine_ServiceDesk_Plus.ex
 DR-MFT-RMM-096,COVERAGE-DR-MFT-RMM-096,MFT,File,MEGAsyncSetup64.exe,C:\Replay\MEGAsyncSetup64.exe,True,
 DR-MFT-RMM-097,COVERAGE-DR-MFT-RMM-097,MFT,File,meshagent.exe,C:\Replay\meshagent.exe,True,
 DR-MFT-RMM-100,COVERAGE-DR-MFT-RMM-100,MFT,File,Mikogo-Screen-Service.exe,C:\Replay\Mikogo-Screen-Service.exe,True,
+DR-MFT-RMM-368,COVERAGE-DR-MFT-RMM-368,MFT,File,MiniRmmAgent.exe,C:\Replay\MiniRmmAgent.exe,True,
 DR-MFT-RMM-101,COVERAGE-DR-MFT-RMM-101,MFT,File,mionet.exe,C:\Replay\mionet.exe,True,DR-MFT-RMM-284
 DR-MFT-RMM-284,COVERAGE-DR-MFT-RMM-284,MFT,File,mionet.exe,C:\Replay\mionet.exe,True,DR-MFT-RMM-101
 DR-MFT-RMM-102,COVERAGE-DR-MFT-RMM-102,MFT,File,MobaXterm_installer_.msi,C:\Replay\MobaXterm_installer_.msi,True,
@@ -222,6 +229,7 @@ DR-MFT-RMM-111,COVERAGE-DR-MFT-RMM-111,MFT,File,client32.exe,C:\Replay\client32.
 DR-MFT-RMM-112,COVERAGE-DR-MFT-RMM-112,MFT,File,neturo.exe,C:\Replay\neturo.exe,True,
 DR-MFT-RMM-113,COVERAGE-DR-MFT-RMM-113,MFT,File,netviewer.exe,C:\Replay\netviewer.exe,True,DR-MFT-RMM-298
 DR-MFT-RMM-298,COVERAGE-DR-MFT-RMM-298,MFT,File,NetViewer.exe,C:\Replay\NetViewer.exe,True,DR-MFT-RMM-113
+DR-MFT-RMM-370,COVERAGE-DR-MFT-RMM-370,MFT,File,nexusrmm.exe,C:\Replay\nexusrmm.exe,True,
 DR-MFT-RMM-299,COVERAGE-DR-MFT-RMM-299,MFT,File,nezha-agent.exe,C:\Replay\nezha-agent.exe,True,
 DR-MFT-RMM-349,COVERAGE-DR-MFT-RMM-349,MFT,File,ngrok.exe,C:\Replay\ngrok.exe,True,DR-MFT-XFER-002|DR-MFT-DEV-002
 DR-MFT-RMM-300,COVERAGE-DR-MFT-RMM-300,MFT,File,NiniteAgent.exe,C:\Replay\NiniteAgent.exe,True,
@@ -232,6 +240,7 @@ DR-MFT-RMM-116,COVERAGE-DR-MFT-RMM-116,MFT,File,NTRsupportPro_EN.exe,C:\Replay\N
 DR-MFT-RMM-304,COVERAGE-DR-MFT-RMM-304,MFT,File,nvda.exe,C:\Replay\nvda.exe,True,
 DR-MFT-RMM-117,COVERAGE-DR-MFT-RMM-117,MFT,File,ocsinventory.exe,C:\Replay\ocsinventory.exe,True,
 DR-MFT-RMM-118,COVERAGE-DR-MFT-RMM-118,MFT,File,onionshare.exe,C:\Replay\onionshare.exe,True,
+DR-MFT-RMM-371,COVERAGE-DR-MFT-RMM-371,MFT,File,OpenDesk-RMM-Agent.exe,C:\Replay\OpenDesk-RMM-Agent.exe,True,
 DR-MFT-RMM-356,COVERAGE-DR-MFT-RMM-356,MFT,File,OpsBridgeAgent.exe,C:\Replay\OpsBridgeAgent.exe,True,
 DR-MFT-RMM-119,COVERAGE-DR-MFT-RMM-119,MFT,File,OTPowerShell.exe,C:\Replay\OTPowerShell.exe,True,
 DR-MFT-RMM-120,COVERAGE-DR-MFT-RMM-120,MFT,File,ehorus standalone.exe,C:\Replay\ehorus standalone.exe,True,DR-MFT-RMM-046
@@ -266,13 +275,14 @@ DR-MFT-RMM-145,COVERAGE-DR-MFT-RMM-145,MFT,File,remobo.exe,C:\Replay\remobo.exe,
 DR-MFT-RMM-146,COVERAGE-DR-MFT-RMM-146,MFT,File,rdp.exe,C:\Replay\rdp.exe,True,DR-MFT-RMM-129
 DR-MFT-RMM-148,COVERAGE-DR-MFT-RMM-148,MFT,File,rfusclient.exe,C:\Replay\rfusclient.exe,True,
 DR-MFT-RMM-320,COVERAGE-DR-MFT-RMM-320,MFT,File,RemoteRipple.exe,C:\Replay\RemoteRipple.exe,True,
-DR-MFT-RMM-149,COVERAGE-DR-MFT-RMM-149,MFT,File,rutserv.exe,C:\Replay\rutserv.exe,True,DR-MFT-RMM-148
 DR-MFT-RMM-318,COVERAGE-DR-MFT-RMM-318,MFT,File,remote-it-installer.exe,C:\Replay\remote-it-installer.exe,True,
+DR-MFT-RMM-372,COVERAGE-DR-MFT-RMM-372,MFT,File,RemoteAgentAgent.exe,C:\Replay\RemoteAgentAgent.exe,True,
 DR-MFT-RMM-150,COVERAGE-DR-MFT-RMM-150,MFT,File,agentu.exe,C:\Replay\agentu.exe,True,
 DR-MFT-RMM-321,COVERAGE-DR-MFT-RMM-321,MFT,File,Remotely_Desktop.exe,C:\Replay\Remotely_Desktop.exe,True,
 DR-MFT-RMM-151,COVERAGE-DR-MFT-RMM-151,MFT,File,remotepass-access.exe,C:\Replay\remotepass-access.exe,True,
 DR-MFT-RMM-152,COVERAGE-DR-MFT-RMM-152,MFT,File,RemotePCService.exe,C:\Replay\RemotePCService.exe,True,
 DR-MFT-RMM-322,COVERAGE-DR-MFT-RMM-322,MFT,File,InstallCore.exe,C:\Replay\InstallCore.exe,True,
+DR-MFT-RMM-149,COVERAGE-DR-MFT-RMM-149,MFT,File,rutserv.exe,C:\Replay\rutserv.exe,True,DR-MFT-RMM-148
 DR-MFT-RMM-153,COVERAGE-DR-MFT-RMM-153,MFT,File,remoteview.exe,C:\Replay\remoteview.exe,True,
 DR-MFT-RMM-154,COVERAGE-DR-MFT-RMM-154,MFT,File,wisshell.exe,C:\Replay\wisshell.exe,True,
 DR-MFT-RMM-358,COVERAGE-DR-MFT-RMM-358,MFT,File,RMMmaxAgentService.exe,C:\Replay\RMMmaxAgentService.exe,True,
@@ -325,8 +335,9 @@ DR-MFT-RMM-197,COVERAGE-DR-MFT-RMM-197,MFT,File,ToDesk_Service.exe,C:\Replay\ToD
 DR-MFT-RMM-198,COVERAGE-DR-MFT-RMM-198,MFT,File,Tsdservice.exe,C:\Replay\Tsdservice.exe,True,
 DR-MFT-RMM-340,COVERAGE-DR-MFT-RMM-340,MFT,File,TrustConnectAgent.exe,C:\Replay\TrustConnectAgent.exe,True,
 DR-MFT-RMM-199,COVERAGE-DR-MFT-RMM-199,MFT,File,pcstarter.exe,C:\Replay\pcstarter.exe,True,
-DR-MFT-RMM-201,COVERAGE-DR-MFT-RMM-201,MFT,File,UVNC_Launch.exe,C:\Replay\UVNC_Launch.exe,True,
 DR-MFT-RMM-200,COVERAGE-DR-MFT-RMM-200,MFT,File,UltraViewer_Desktop.exe,C:\Replay\UltraViewer_Desktop.exe,True,
+DR-MFT-RMM-201,COVERAGE-DR-MFT-RMM-201,MFT,File,UltraVNC.exe,C:\Replay\UltraVNC.exe,True,
+DR-MFT-RMM-375,COVERAGE-DR-MFT-RMM-375,MFT,File,UniRMM.msi,C:\Replay\UniRMM.msi,True,
 DR-MFT-RMM-342,COVERAGE-DR-MFT-RMM-342,MFT,File,veyon-master.exe,C:\Replay\veyon-master.exe,True,
 DR-MFT-RMM-202,COVERAGE-DR-MFT-RMM-202,MFT,File,vncserver.exe,C:\Replay\vncserver.exe,True,
 DR-MFT-RMM-203,COVERAGE-DR-MFT-RMM-203,MFT,File,webrdp.exe,C:\Replay\webrdp.exe,True,
@@ -337,6 +348,7 @@ DR-MFT-RMM-208,COVERAGE-DR-MFT-RMM-208,MFT,File,Xpra-Launcher.exe,C:\Replay\Xpra
 DR-MFT-RMM-209,COVERAGE-DR-MFT-RMM-209,MFT,File,xShell.exe,C:\Replay\xShell.exe,True,
 DR-MFT-RMM-210,COVERAGE-DR-MFT-RMM-210,MFT,File,YandexDisk2.exe,C:\Replay\YandexDisk2.exe,True,
 DR-MFT-RMM-211,COVERAGE-DR-MFT-RMM-211,MFT,File,zabbix_agent.exe,C:\Replay\zabbix_agent.exe,True,
+DR-MFT-RMM-376,COVERAGE-DR-MFT-RMM-376,MFT,File,ZecuritAgentAssetMgr.exe,C:\Replay\ZecuritAgentAssetMgr.exe,True,
 DR-MFT-RMM-212,COVERAGE-DR-MFT-RMM-212,MFT,File,zero-powershell.exe,C:\Replay\zero-powershell.exe,True,
 DR-MFT-RMM-213,COVERAGE-DR-MFT-RMM-213,MFT,File,zoc.exe,C:\Replay\zoc.exe,True,
 DR-MFT-RMM-214,COVERAGE-DR-MFT-RMM-214,MFT,File,ZA_Access.exe,C:\Replay\ZA_Access.exe,True,
