@@ -24,6 +24,7 @@ baramundi_management_suite,DR-MFT-RMM-223
 barracuda,DR-MFT-RMM-224
 basecamp,DR-MFT-RMM-225
 basic_rmm_agent,DR-MFT-RMM-360
+beacon__synertek_,DR-MFT-RMM-377
 beamyourscreen,DR-MFT-RMM-020
 beanywhere,DR-MFT-RMM-226
 beinsync,DR-MFT-RMM-022
@@ -33,9 +34,11 @@ bitvise_ssh_client,DR-MFT-RMM-024
 bitvise_ssh_server,DR-MFT-RMM-228
 blackcrypt_rmm_agent,DR-MFT-RMM-361
 bluetrait,DR-MFT-RMM-229
+borealis,DR-MFT-RMM-378
 breezermm,DR-MFT-RMM-355
 centrastage__now_datto_,DR-MFT-RMM-026
 centurion,DR-MFT-RMM-027
+chaos_rat,DR-MFT-RMM-379
 chicken__of_the_vnc_,DR-MFT-RMM-230
 chrome_remote_desktop,DR-MFT-RMM-028
 chrome_ssh_extension,DR-MFT-RMM-231
@@ -68,6 +71,7 @@ ehorus,DR-MFT-RMM-046
 electric_ai__kaseya_,DR-MFT-RMM-241
 emco_remote_console,DR-MFT-RMM-048
 encapto,DR-MFT-RMM-242
+endar,DR-MFT-RMM-380
 ericom_accessnow,DR-MFT-RMM-243
 ericom_connect,DR-MFT-RMM-244
 eset_remote_administrator,DR-MFT-RMM-245
@@ -89,6 +93,7 @@ freshservice,DR-MFT-RMM-256
 gatherplace-desktop_sharing,DR-MFT-RMM-060
 getscreen,DR-MFT-RMM-061
 glpi_agent,DR-MFT-RMM-257
+go_mini_rmm,DR-MFT-RMM-381
 go_rmm,DR-MFT-RMM-362
 gorelo_rmm,DR-MFT-RMM-258
 goto_opener,DR-MFT-RMM-259
@@ -155,6 +160,7 @@ megasync,DR-MFT-RMM-096
 meshcentral,DR-MFT-RMM-097
 microsoft_quick_assist,DR-MFT-RMM-098
 mikogo,DR-MFT-RMM-100
+minexus,DR-MFT-RMM-382
 mini_rmm_agent,DR-MFT-RMM-368
 mionet__also_known_as_wd_anywhere_access_,DR-MFT-RMM-101
 mionet__wd_anywhere_access_,DR-MFT-RMM-284
@@ -177,6 +183,7 @@ naverisk,DR-MFT-RMM-107
 net_monitor_for_employees,DR-MFT-RMM-292
 netbird,DR-MFT-RMM-293
 netlock_rmm,DR-MFT-RMM-294
+netmaster,DR-MFT-RMM-383
 netop,DR-MFT-RMM-295
 netop_remote_control__aka_impero_connect_,DR-MFT-RMM-110
 netop_remote_control__impero_connect_,DR-MFT-RMM-296
@@ -196,9 +203,12 @@ nordlocker,DR-MFT-RMM-302
 noteon-desktop_sharing,DR-MFT-RMM-303
 ntr_remote,DR-MFT-RMM-116
 nvda__non-visual_desktop_access_,DR-MFT-RMM-304
+obliance,DR-MFT-RMM-384
 ocs_inventory,DR-MFT-RMM-117
 onionshare,DR-MFT-RMM-118
+opale,DR-MFT-RMM-385
 opendesk_rmm_agent,DR-MFT-RMM-371
+openuem,DR-MFT-RMM-386
 opsbridge_agent,DR-MFT-RMM-356
 optitune,DR-MFT-RMM-119
 pandora_rc__ehorus_,DR-MFT-RMM-120
@@ -215,6 +225,7 @@ pitunnel,DR-MFT-RMM-307
 pocket_cloud__wyse_,DR-MFT-RMM-130
 pocket_controller,DR-MFT-RMM-131
 pocket_controller__soti_xsight_,DR-MFT-RMM-308
+proxiport,DR-MFT-RMM-387
 psexec,DR-MFT-RMM-309
 psexec__clone_,DR-MFT-RMM-132
 pulseway,DR-MFT-RMM-133
@@ -256,6 +267,7 @@ rmmcrat,DR-MFT-RMM-374
 rmmmax,DR-MFT-RMM-358
 rocket_remote_desktop,DR-MFT-RMM-155
 rodex_rmm,DR-MFT-RMM-325
+roster,DR-MFT-RMM-388
 royal_apps,DR-MFT-RMM-156
 royal_server,DR-MFT-RMM-157
 royal_ts,DR-MFT-RMM-158
@@ -269,6 +281,7 @@ screenmeet,DR-MFT-RMM-166
 securecrt,DR-MFT-RMM-167
 seetrol,DR-MFT-RMM-168
 senso.cloud,DR-MFT-RMM-169
+sentinel_rmm,DR-MFT-RMM-389
 servereye,DR-MFT-RMM-170
 setme_pro,DR-MFT-RMM-357
 shellhub,DR-MFT-RMM-327
@@ -282,6 +295,7 @@ smartty,DR-MFT-RMM-176
 solar-putty,DR-MFT-RMM-177
 sophos-remote_management_system,DR-MFT-RMM-330
 sorillus,DR-MFT-RMM-178
+sparkrat,DR-MFT-RMM-390
 splashtop,DR-MFT-RMM-331
 splashtop__beta_,DR-MFT-RMM-332
 splashtop_remote,DR-MFT-RMM-179

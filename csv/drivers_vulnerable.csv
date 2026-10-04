@@ -1372,6 +1372,7 @@ dbutil_2_3.sys,c948ae14761095e4d76b55d9de86412258be7afd,,,,,AMD64,vulnerable dri
 dbutil_2_3.sys,c948ae14761095e4d76b55d9de86412258be7afd,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/
 dbutil_2_3.sys,c6920171fa6dff2c17eb83befb5fd28e8dddf5f0,,,,,I386,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/
 dbutil_2_3.sys,10b30bdee43b3a2ec4aa63375577ade650269d25,,,,,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/
+IoDrv.sys,844304be902d933f0b335b35bebbe620b6c8d613,,,,,AMD64,vulnerable driver,Abuse a hardware-access driver to impair endpoint defenses.,https://www.loldrivers.io/drivers/a597bd2a-e3f6-5d53-bd3f-3f0b4a43defa/
 KmWpsMs.sys,1e711120242c556c4521e7859cd543ebc71c1c9d,vSpace,NComputing Station MU driver,12.1.0.0,12.1.0.0,AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a6340f12-b0ee-41c5-acf0-92be886d1296/
 BS_HWMIO64_W10.sys,cb3de54667548a5c9abf5d8fa47db4097fcee9f1,BIOSTAR I/O driver,I/O Interface driver file,"10, 0, 1806, 2200","10, 0, 1806, 2200",AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a66d0413-cc82-4f1e-bcf1-0dcf9d79f6c0/
 kdhacker64_ev.sys,881b7b87284ea81d88ac2f8c6c3c5a19b786b3ef,Kingsoft Internet Security,Kingsoft Firewall TdiFilter Driver,"9,3,312876,367","2017,07,03,367",AMD64,vulnerable driver,Elevate privileges,https://www.loldrivers.io/drivers/a6dd3aef-d3a7-4c72-abcd-e633e0c0706c/

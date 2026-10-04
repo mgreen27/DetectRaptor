@@ -112,6 +112,7 @@ DR-MFT-RMM-222,COVERAGE-DR-MFT-RMM-222,MFT,File,aspia_client.exe,C:\Replay\aspia
 DR-MFT-RMM-015,COVERAGE-DR-MFT-RMM-015,MFT,File,AgentPackageNetworkDiscovery.exe,C:\Replay\AgentPackageNetworkDiscovery.exe,True,
 DR-MFT-RMM-016,COVERAGE-DR-MFT-RMM-016,MFT,File,auvik.agent.exe,C:\Replay\auvik.agent.exe,True,
 DR-MFT-RMM-017,COVERAGE-DR-MFT-RMM-017,MFT,File,AweSun.exe,C:\Replay\AweSun.exe,True,
+DR-MFT-RMM-377,COVERAGE-DR-MFT-RMM-377,MFT,File,beacon-agent.exe,C:\Replay\beacon-agent.exe,True,
 DR-MFT-RMM-020,COVERAGE-DR-MFT-RMM-020,MFT,File,beamyourscreen-host.exe,C:\Replay\beamyourscreen-host.exe,True,
 DR-MFT-RMM-226,COVERAGE-DR-MFT-RMM-226,MFT,File,BASupAppElev.exe,C:\Replay\BASupAppElev.exe,True,
 DR-MFT-RMM-022,COVERAGE-DR-MFT-RMM-022,MFT,File,Beinsync.exe,C:\Replay\Beinsync.exe,True,
@@ -223,6 +224,7 @@ DR-MFT-RMM-108,COVERAGE-DR-MFT-RMM-108,MFT,File,Agent__RW.exe,C:\Replay\Agent__R
 DR-MFT-RMM-107,COVERAGE-DR-MFT-RMM-107,MFT,File,AgentSetup-.exe,C:\Replay\AgentSetup-.exe,True,
 DR-MFT-RMM-293,COVERAGE-DR-MFT-RMM-293,MFT,File,netbird-ui.exe,C:\Replay\netbird-ui.exe,True,
 DR-MFT-RMM-294,COVERAGE-DR-MFT-RMM-294,MFT,File,NetLock_RMM_User_Process.exe,C:\Replay\NetLock_RMM_User_Process.exe,True,
+DR-MFT-RMM-383,COVERAGE-DR-MFT-RMM-383,MFT,File,NetMaster_Client.exe,C:\Replay\NetMaster_Client.exe,True,
 DR-MFT-RMM-110,COVERAGE-DR-MFT-RMM-110,MFT,File,nhostsvc.exe,C:\Replay\nhostsvc.exe,True,DR-MFT-RMM-296
 DR-MFT-RMM-296,COVERAGE-DR-MFT-RMM-296,MFT,File,Connect.Backdrop.cloud.exe,C:\Replay\Connect.Backdrop.cloud.exe,True,
 DR-MFT-RMM-111,COVERAGE-DR-MFT-RMM-111,MFT,File,client32.exe,C:\Replay\client32.exe,True,
@@ -238,8 +240,10 @@ DR-MFT-RMM-115,COVERAGE-DR-MFT-RMM-115,MFT,File,nomachine.exe,C:\Replay\nomachin
 DR-MFT-RMM-303,COVERAGE-DR-MFT-RMM-303,MFT,File,nateon.exe,C:\Replay\nateon.exe,True,
 DR-MFT-RMM-116,COVERAGE-DR-MFT-RMM-116,MFT,File,NTRsupportPro_EN.exe,C:\Replay\NTRsupportPro_EN.exe,True,
 DR-MFT-RMM-304,COVERAGE-DR-MFT-RMM-304,MFT,File,nvda.exe,C:\Replay\nvda.exe,True,
+DR-MFT-RMM-384,COVERAGE-DR-MFT-RMM-384,MFT,File,obliance-agent.exe,C:\Replay\obliance-agent.exe,True,
 DR-MFT-RMM-117,COVERAGE-DR-MFT-RMM-117,MFT,File,ocsinventory.exe,C:\Replay\ocsinventory.exe,True,
 DR-MFT-RMM-118,COVERAGE-DR-MFT-RMM-118,MFT,File,onionshare.exe,C:\Replay\onionshare.exe,True,
+DR-MFT-RMM-385,COVERAGE-DR-MFT-RMM-385,MFT,File,opale-agent.exe,C:\Replay\opale-agent.exe,True,
 DR-MFT-RMM-371,COVERAGE-DR-MFT-RMM-371,MFT,File,OpenDesk-RMM-Agent.exe,C:\Replay\OpenDesk-RMM-Agent.exe,True,
 DR-MFT-RMM-356,COVERAGE-DR-MFT-RMM-356,MFT,File,OpsBridgeAgent.exe,C:\Replay\OpsBridgeAgent.exe,True,
 DR-MFT-RMM-119,COVERAGE-DR-MFT-RMM-119,MFT,File,OTPowerShell.exe,C:\Replay\OTPowerShell.exe,True,
@@ -256,6 +260,7 @@ DR-MFT-RMM-129,COVERAGE-DR-MFT-RMM-129,MFT,File,Pilixo_Installer.exe,C:\Replay\P
 DR-MFT-RMM-130,COVERAGE-DR-MFT-RMM-130,MFT,File,pocketcloud.exe,C:\Replay\pocketcloud.exe,True,
 DR-MFT-RMM-131,COVERAGE-DR-MFT-RMM-131,MFT,File,pocketcloudservice.exe,C:\Replay\pocketcloudservice.exe,True,DR-MFT-RMM-130
 DR-MFT-RMM-308,COVERAGE-DR-MFT-RMM-308,MFT,File,XSightService.exe,C:\Replay\XSightService.exe,True,
+DR-MFT-RMM-387,COVERAGE-DR-MFT-RMM-387,MFT,File,proxiport.exe,C:\Replay\proxiport.exe,True,
 DR-MFT-RMM-309,COVERAGE-DR-MFT-RMM-309,MFT,File,psexec64.exe,C:\Replay\psexec64.exe,True,DR-MFT-EXEC-004
 DR-MFT-RMM-132,COVERAGE-DR-MFT-RMM-132,MFT,File,PAExec-.exe,C:\Replay\PAExec-.exe,True,
 DR-MFT-RMM-133,COVERAGE-DR-MFT-RMM-133,MFT,File,PCMonitorManager.exe,C:\Replay\PCMonitorManager.exe,True,
@@ -299,6 +304,7 @@ DR-MFT-RMM-166,COVERAGE-DR-MFT-RMM-166,MFT,File,ScreenMeetSupport.exe,C:\Replay\
 DR-MFT-RMM-167,COVERAGE-DR-MFT-RMM-167,MFT,File,SecureCRT.EXE,C:\Replay\SecureCRT.EXE,True,
 DR-MFT-RMM-168,COVERAGE-DR-MFT-RMM-168,MFT,File,seetrolcenter.exe,C:\Replay\seetrolcenter.exe,True,
 DR-MFT-RMM-169,COVERAGE-DR-MFT-RMM-169,MFT,File,SensoClient.exe,C:\Replay\SensoClient.exe,True,
+DR-MFT-RMM-389,COVERAGE-DR-MFT-RMM-389,MFT,File,sentinel-agent.exe,C:\Replay\sentinel-agent.exe,True,
 DR-MFT-RMM-170,COVERAGE-DR-MFT-RMM-170,MFT,File,ServiceProxyLocalSys.exe,C:\Replay\ServiceProxyLocalSys.exe,True,
 DR-MFT-RMM-357,COVERAGE-DR-MFT-RMM-357,MFT,File,SetMe_Client.exe,C:\Replay\SetMe_Client.exe,True,
 DR-MFT-RMM-172,COVERAGE-DR-MFT-RMM-172,MFT,File,SMPCSetup.exe,C:\Replay\SMPCSetup.exe,True,

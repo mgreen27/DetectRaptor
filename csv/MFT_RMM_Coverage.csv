@@ -20,6 +20,7 @@ baramundi_management_suite,baramundi Management Suite,Excluded,DR-MFT-RMM-223,0,
 barracuda,Barracuda,Excluded,DR-MFT-RMM-224,0,,,No safe Windows filename indicator,1
 basecamp,Basecamp,Excluded,DR-MFT-RMM-225,0,,,No safe Windows filename indicator,1
 basic_rmm_agent,Basic RMM Agent,Excluded,DR-MFT-RMM-360,0,,,No safe Windows filename indicator,1
+beacon__synertek_,Beacon (Synertek),Generated,DR-MFT-RMM-377,1,^beacon-agent\.exe$,,,1
 beamyourscreen,BeamYourScreen,Generated,DR-MFT-RMM-020,2,^beamyourscreen-host\.exe$|^beamyourscreen\.exe$,,,1
 beanywhere,BeAnyWhere,Generated,DR-MFT-RMM-226,8,^BASupAppElev\.exe$|^BASupAppSrvc\.exe$|^BASupApp\.exe$|^BASupSysInf\.exe$|^TakeControl\.exe$|^basupsrvc\.exe$|^basupsrvcupdate\.exe$|^basuptshelper\.exe$,,,1
 beinsync,BeInSync,Generated,DR-MFT-RMM-022,1,^Beinsync.*\.exe$,,,1
@@ -29,9 +30,11 @@ bitvise_ssh_client,Bitvise SSH Client,Generated,DR-MFT-RMM-024,1,^BvSshClient-In
 bitvise_ssh_server,Bitvise SSH Server,Generated,DR-MFT-RMM-228,1,^BvSshServer-Inst\.exe$,,,1
 blackcrypt_rmm_agent,BlackCrypt RMM Agent,Excluded,DR-MFT-RMM-361,0,,,No safe Windows filename indicator,1
 bluetrait,Bluetrait,Excluded,DR-MFT-RMM-229,0,,,No safe Windows filename indicator,1
+borealis,Borealis,Excluded,DR-MFT-RMM-378,0,,,No safe Windows filename indicator,1
 breezermm,BreezeRMM,Generated,DR-MFT-RMM-355,1,^PixoIT-agent\.exe$,,,1
 centrastage__now_datto_,CentraStage (Now Datto),Generated,DR-MFT-RMM-026,2,^AEMAgent\.exe$|^CagService\.exe$,,,1
 centurion,Centurion,Generated,DR-MFT-RMM-027,1,^ctiserv\.exe$,,,1
+chaos_rat,CHAOS RAT,Excluded,DR-MFT-RMM-379,0,,,No safe Windows filename indicator,1
 chicken__of_the_vnc_,Chicken (of the VNC),Excluded,DR-MFT-RMM-230,0,,,No safe Windows filename indicator,1
 chrome_remote_desktop,Chrome Remote Desktop,Generated,DR-MFT-RMM-028,1,^remoting_host\.exe$,,,1
 chrome_ssh_extension,Chrome SSH Extension,Excluded,DR-MFT-RMM-231,0,,,No safe Windows filename indicator,1
@@ -64,6 +67,7 @@ ehorus,eHorus,Generated,DR-MFT-RMM-046,5,^ehorus standalone\.exe$|^ehorus_agent\
 electric_ai__kaseya_,Electric AI (Kaseya),Excluded,DR-MFT-RMM-241,0,,,No safe Windows filename indicator,1
 emco_remote_console,EMCO Remote Console,Generated,DR-MFT-RMM-048,1,^remoteconsole\.exe$,,,1
 encapto,Encapto,Excluded,DR-MFT-RMM-242,0,,,No safe Windows filename indicator,1
+endar,Endar,Excluded,DR-MFT-RMM-380,0,,,No safe Windows filename indicator,1
 ericom_accessnow,Ericom AccessNow,Generated,DR-MFT-RMM-243,2,^accessserver.*\.exe$|^accessserver\.exe$,,,1
 ericom_connect,Ericom Connect,Generated,DR-MFT-RMM-244,2,^EricomConnectRemoteHost.*\.exe$|^ericomconnectconfigurationtool\.exe$,,,1
 eset_remote_administrator,ESET Remote Administrator,Generated,DR-MFT-RMM-245,5,^ERAAgent\.exe$|^einstaller\.exe$|^era\.exe$|^eratool\.exe$|^ezhelp.*\.exe$,,,1
@@ -84,6 +88,7 @@ freerdp,FreeRDP,Excluded,DR-MFT-RMM-255,0,,,No safe Windows filename indicator,1
 freshservice,Freshservice,Generated,DR-MFT-RMM-256,10,^FSAgentAutoUpdate\.exe$|^FSAgentService\.exe$|^FSWmiScanner\.exe$|^Freshservice\.DiscoveryProbe\.ScanService\.exe$|^Freshservice\.DiscoveryProbe\.Window\.exe$|^plink\.exe$|^FSAgent\.msi$|^fs-probe-.*\.msi$|^fs-windows-agent-.*\.msi$|^win-installer-.*\.msi$,,,1
 getscreen,GetScreen,Generated,DR-MFT-RMM-061,2,^getscreen-x86\.exe$|^getscreen\.upd\.exe$,,,1
 glpi_agent,GLPI Agent,Excluded,DR-MFT-RMM-257,0,,,No safe Windows filename indicator,1
+go_mini_rmm,Go Mini RMM,Excluded,DR-MFT-RMM-381,0,,,No safe Windows filename indicator,1
 go_rmm,GO RMM,Excluded,DR-MFT-RMM-362,0,,,No safe Windows filename indicator,1
 gorelo_rmm,Gorelo RMM,Excluded,DR-MFT-RMM-258,0,,,No safe Windows filename indicator,1
 goto_opener,GoTo Opener,Excluded,DR-MFT-RMM-259,0,,,No safe Windows filename indicator,1
@@ -144,6 +149,7 @@ manageengine_servicedesk_plus,ManageEngine ServiceDesk Plus,Generated,DR-MFT-RMM
 megasync,MEGAsync,Generated,DR-MFT-RMM-096,2,^MEGAsyncSetup64\.exe$|^MEGAupdater\.exe$,,,1
 meshcentral,MeshCentral,Generated,DR-MFT-RMM-097,2,^meshagent.*\.exe$|^meshcentral.*\.exe$,,,1
 mikogo,Mikogo,Generated,DR-MFT-RMM-100,5,^Mikogo-Screen-Service\.exe$|^Mikogo-Service\.exe$|^mikogo-starter\.exe$|^mikogo\.exe$|^mikogolauncher\.exe$,,,1
+minexus,Minexus,Excluded,DR-MFT-RMM-382,0,,,No safe Windows filename indicator,1
 mini_rmm_agent,Mini RMM Agent,Generated,DR-MFT-RMM-368,3,^MiniRmmAgent\.exe$|^Invoke-AVExclusions\.ps1$|^SmartScreenTest\.ps1$,,,1
 mionet__also_known_as_wd_anywhere_access_,MioNet (Also known as WD Anywhere Access),Generated,DR-MFT-RMM-101,2,^mionet\.exe$|^mionetmanager\.exe$,,,1
 mionet__wd_anywhere_access_,MioNet (WD Anywhere Access),Generated,DR-MFT-RMM-284,2,^mionet\.exe$|^mionetmanager\.exe$,,,1
@@ -163,6 +169,7 @@ n-able_remote_access_software,N-ABLE Remote Access Software,Excluded,DR-MFT-RMM-
 naverisk,Naverisk,Generated,DR-MFT-RMM-107,1,^AgentSetup-.*\.exe$,,,1
 netbird,NetBird,Generated,DR-MFT-RMM-293,5,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,,,1
 netlock_rmm,NetLock RMM,Generated,DR-MFT-RMM-294,3,^NetLock_RMM_User_Process\.exe$|^NetLock_RMM_User_UAC\.exe$|^NetLock_RMM_Agent_Installer\.exe$,,,1
+netmaster,NetMaster,Generated,DR-MFT-RMM-383,1,^NetMaster_Client\.exe$,,,1
 netop,Netop,Excluded,DR-MFT-RMM-295,0,,,No safe Windows filename indicator,1
 netop_remote_control__aka_impero_connect_,Netop Remote Control (aka Impero Connect),Generated,DR-MFT-RMM-110,4,^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,,,1
 netop_remote_control__impero_connect_,Netop Remote Control (Impero Connect),Generated,DR-MFT-RMM-296,9,^Connect\.Backdrop\.cloud.*\.exe$|^ImperoClientSVC\.exe$|^ImperoInit\.exe$|^Netop Ondemand\.exe$|^ngstw32\.exe$|^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,,,1
@@ -182,9 +189,12 @@ nordlocker,NordLocker,Excluded,DR-MFT-RMM-302,0,,,No safe Windows filename indic
 noteon-desktop_sharing,NoteOn-desktop sharing,Generated,DR-MFT-RMM-303,3,^nateon.*\.exe$|^nateon\.exe$|^nateonmain\.exe$,,,1
 ntr_remote,NTR Remote,Generated,DR-MFT-RMM-116,1,^NTRsupportPro_EN\.exe$,,,1
 nvda__non-visual_desktop_access_,NVDA (Non-Visual Desktop Access),Generated,DR-MFT-RMM-304,3,^nvda\.exe$|^nvda_.*\.exe$|^nvda_service\.exe$,,,1
+obliance,Obliance,Generated,DR-MFT-RMM-384,3,^obliance-agent\.exe$|^obliance-tray\.exe$|^obliance-watchdog\.exe$,,,1
 ocs_inventory,OCS inventory,Generated,DR-MFT-RMM-117,2,^ocsinventory\.exe$|^ocsservice\.exe$,,,1
 onionshare,Onionshare,Generated,DR-MFT-RMM-118,2,^onionshare.*\.exe$|^OnionShare-win.*\.msi$,,,1
+opale,Opale,Generated,DR-MFT-RMM-385,1,^opale-agent\.exe$,,,1
 opendesk_rmm_agent,OpenDesk RMM Agent,Generated,DR-MFT-RMM-371,1,^OpenDesk-RMM-Agent\.exe$,,,1
+openuem,OpenUEM,Excluded,DR-MFT-RMM-386,0,,,No safe Windows filename indicator,1
 opsbridge_agent,OpsBridge Agent,Generated,DR-MFT-RMM-356,1,^OpsBridgeAgent\.exe$,,,1
 optitune,OptiTune,Generated,DR-MFT-RMM-119,2,^OTPowerShell\.exe$|^OTService\.exe$,,,1
 pandora_rc__ehorus_,Pandora RC (eHorus),Generated,DR-MFT-RMM-120,2,^ehorus standalone\.exe$|^ehorus_agent\.exe$,,,1
@@ -201,6 +211,7 @@ pitunnel,PiTunnel,Excluded,DR-MFT-RMM-307,0,,,No safe Windows filename indicator
 pocket_cloud__wyse_,Pocket Cloud (Wyse),Generated,DR-MFT-RMM-130,2,^pocketcloud.*\.exe$|^pocketcloudservice\.exe$,,,1
 pocket_controller,Pocket Controller,Generated,DR-MFT-RMM-131,3,^pocketcloudservice\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,,,1
 pocket_controller__soti_xsight_,Pocket Controller (Soti Xsight),Generated,DR-MFT-RMM-308,3,^XSightService\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,,,1
+proxiport,ProxiPort,Generated,DR-MFT-RMM-387,1,^proxiport\.exe$,,,1
 psexec,PSEXEC,Generated,DR-MFT-RMM-309,3,^psexec64\.exe$|^psexec\.exe$|^psexecsvc\.exe$,,,1
 psexec__clone_,PSEXEC (Clone),Generated,DR-MFT-RMM-132,7,^PAExec-.*\.exe$|^csexec\.exe$|^paexec\.exe$|^remcom\.exe$|^remcomsvc\.exe$|^xcmd\.exe$|^xcmdsvc\.exe$,,,1
 pulseway,Pulseway,Generated,DR-MFT-RMM-133,2,^PCMonitorManager\.exe$|^pcmonitorsrv\.exe$,,,1
@@ -239,6 +250,7 @@ rmmcrat,RMMCRAT,Excluded,DR-MFT-RMM-374,0,,,No safe Windows filename indicator,1
 rmmmax,RMMmax,Generated,DR-MFT-RMM-358,2,^RMMmaxAgentService\.exe$|^RMMmaxAgentSetup\.exe$,,,1
 rocket_remote_desktop,Rocket Remote Desktop,Generated,DR-MFT-RMM-155,2,^RDConsole\.exe$|^RocketRemoteDesktop_Setup\.exe$,,,1
 rodex_rmm,Rodex RMM,Generated,DR-MFT-RMM-325,2,^RodexAgent\.exe$|^<random>\.exe$,,,1
+roster,Roster,Excluded,DR-MFT-RMM-388,0,,,No safe Windows filename indicator,1
 royal_apps,Royal Apps,Generated,DR-MFT-RMM-156,2,^royalserver\.exe$|^royalts\.exe$,,,1
 royal_ts,Royal TS,Generated,DR-MFT-RMM-158,1,^royalts\.exe$,,,1
 rport,RPort,Generated,DR-MFT-RMM-159,1,^rport\.exe$,,,1
@@ -251,6 +263,7 @@ screenmeet,ScreenMeet,Generated,DR-MFT-RMM-166,2,^ScreenMeetSupport\.exe$|^Scree
 securecrt,SecureCRT,Generated,DR-MFT-RMM-167,1,^SecureCRT\.EXE$,,,1
 seetrol,Seetrol,Generated,DR-MFT-RMM-168,5,^seetrolcenter\.exe$|^seetrolclient\.exe$|^seetrolmyservice\.exe$|^seetrolremote\.exe$|^seetrolsetting\.exe$,,,1
 senso.cloud,Senso.cloud,Generated,DR-MFT-RMM-169,3,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,,,1
+sentinel_rmm,Sentinel RMM,Generated,DR-MFT-RMM-389,1,^sentinel-agent\.exe$,,,1
 servereye,ServerEye,Generated,DR-MFT-RMM-170,2,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,,,1
 setme_pro,SetMe PRO,Generated,DR-MFT-RMM-357,2,^SetMe_Client\.exe$|^tinUnattendedModule\.exe$,,,1
 shellhub,ShellHub,Excluded,DR-MFT-RMM-327,0,,,No safe Windows filename indicator,1
@@ -264,6 +277,7 @@ smartty,SmarTTY,Generated,DR-MFT-RMM-176,1,^SmarTTY\.exe$,,,1
 solar-putty,Solar-PuTTY,Generated,DR-MFT-RMM-177,1,^Solar-PuTTY\.exe$,,,1
 sophos-remote_management_system,Sophos-Remote Management System,Generated,DR-MFT-RMM-330,3,^clientmrinit\.exe$|^mgntsvc\.exe$|^routernt\.exe$,,,1
 sorillus,Sorillus,Generated,DR-MFT-RMM-178,2,^Sorillus Launcher\.exe$|^Sorillus-Launcher.*\.exe$,,,1
+sparkrat,SparkRAT,Excluded,DR-MFT-RMM-390,0,,,No safe Windows filename indicator,1
 splashtop,Splashtop,Generated,DR-MFT-RMM-331,1,^strwinclt\.exe$,,,1
 splashtop__beta_,Splashtop (Beta),Generated,DR-MFT-RMM-332,4,^SRManager\.exe$|^SRServer\.exe$|^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$,,,1
 splashtop_remote,Splashtop Remote,Generated,DR-MFT-RMM-179,7,^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$|^sragent\.exe$|^srmanager\.exe$|^srserver\.exe$|^srservice\.exe$|^strwinclt\.exe$,,,1

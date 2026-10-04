@@ -155,6 +155,7 @@ parameters:
         DR-MFT-RMM-015,RMM - Atera,Remote Access Software,T1219,High,^AgentPackageNetworkDiscovery\.exe$|^AgentPackageTaskScheduler\.exe$|^AteraAgent\.exe$|^atera_agent\.exe$|^syncrosetup\.exe$,.,,https://lolrmm.io/tools/atera,Medium,Both,File,LOLRMM,atera
         DR-MFT-RMM-016,RMM - Auvik,Remote Access Software,T1219,High,^auvik\.agent\.exe$|^auvik\.engine\.exe$,.,,https://lolrmm.io/tools/auvik,Medium,Both,File,LOLRMM,auvik
         DR-MFT-RMM-017,RMM - AweRay,Remote Access Software,T1219,Medium,^AweSun\.exe$|^aweray_remote.*\.exe$,.,,https://lolrmm.io/tools/aweray,Medium,Both,File,LOLRMM,aweray
+        DR-MFT-RMM-377,RMM - Beacon (Synertek),Remote Access Software,T1219,High,^beacon-agent\.exe$,.,,https://lolrmm.io/tools/beacon__synertek_,Medium,Both,File,LOLRMM,beacon__synertek_
         DR-MFT-RMM-020,RMM - BeamYourScreen,Remote Access Software,T1219,High,^beamyourscreen-host\.exe$|^beamyourscreen\.exe$,.,,https://lolrmm.io/tools/beamyourscreen,Medium,Both,File,LOLRMM,beamyourscreen
         DR-MFT-RMM-226,RMM - BeAnyWhere,Remote Access Software,T1219,High,^BASupAppElev\.exe$|^BASupAppSrvc\.exe$|^BASupApp\.exe$|^BASupSysInf\.exe$|^TakeControl\.exe$|^basupsrvc\.exe$|^basupsrvcupdate\.exe$|^basuptshelper\.exe$,.,,https://lolrmm.io/tools/beanywhere,Medium,Both,File,LOLRMM,beanywhere
         DR-MFT-RMM-022,RMM - BeInSync,Remote Access Software,T1219,Medium,^Beinsync.*\.exe$,.,,https://lolrmm.io/tools/beinsync,Medium,Both,File,LOLRMM,beinsync
@@ -266,6 +267,7 @@ parameters:
         DR-MFT-RMM-107,RMM - Naverisk,Remote Access Software,T1219,Medium,^AgentSetup-.*\.exe$,.,,https://lolrmm.io/tools/naverisk,Medium,Both,File,LOLRMM,naverisk
         DR-MFT-RMM-293,RMM - NetBird,Remote Access Software,T1219,High,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,.,,https://lolrmm.io/tools/netbird,Medium,Both,File,LOLRMM,netbird
         DR-MFT-RMM-294,RMM - NetLock RMM,Remote Access Software,T1219,High,^NetLock_RMM_User_Process\.exe$|^NetLock_RMM_User_UAC\.exe$|^NetLock_RMM_Agent_Installer\.exe$,.,,https://lolrmm.io/tools/netlock_rmm,Medium,Both,File,LOLRMM,netlock_rmm
+        DR-MFT-RMM-383,RMM - NetMaster,Remote Access Software,T1219,High,^NetMaster_Client\.exe$,.,,https://lolrmm.io/tools/netmaster,Medium,Both,File,LOLRMM,netmaster
         DR-MFT-RMM-110,RMM - Netop Remote Control (aka Impero Connect),Remote Access Software,T1219,High,^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,.,,https://lolrmm.io/tools/netop_remote_control__aka_impero_connect_,Medium,Both,File,LOLRMM,netop_remote_control__aka_impero_connect_
         DR-MFT-RMM-296,RMM - Netop Remote Control (Impero Connect),Remote Access Software,T1219,Medium,^Connect\.Backdrop\.cloud.*\.exe$|^ImperoClientSVC\.exe$|^ImperoInit\.exe$|^Netop Ondemand\.exe$|^ngstw32\.exe$|^nhostsvc\.exe$|^nhstw32\.exe$|^nldrw32\.exe$|^rmserverconsolemediator\.exe$,.,,https://lolrmm.io/tools/netop_remote_control__impero_connect_,Medium,Both,File,LOLRMM,netop_remote_control__impero_connect_
         DR-MFT-RMM-111,RMM - NetSupport Manager,Remote Access Software,T1219,High,^client32\.exe$|^pcicfgui\.exe$|^pcictlui\.exe$|^remcmdstub\.exe$,.,,https://lolrmm.io/tools/netsupport_manager,Medium,Both,File,LOLRMM,netsupport_manager
@@ -281,8 +283,10 @@ parameters:
         DR-MFT-RMM-303,RMM - NoteOn-desktop sharing,Remote Access Software,T1219,Medium,^nateon.*\.exe$|^nateon\.exe$|^nateonmain\.exe$,.,,https://lolrmm.io/tools/noteon-desktop_sharing,Medium,Both,File,LOLRMM,noteon-desktop_sharing
         DR-MFT-RMM-116,RMM - NTR Remote,Remote Access Software,T1219,High,^NTRsupportPro_EN\.exe$,.,,https://lolrmm.io/tools/ntr_remote,Medium,Both,File,LOLRMM,ntr_remote
         DR-MFT-RMM-304,RMM - NVDA (Non-Visual Desktop Access),Remote Access Software,T1219,Medium,^nvda\.exe$|^nvda_.*\.exe$|^nvda_service\.exe$,.,,https://lolrmm.io/tools/nvda__non-visual_desktop_access_,Medium,Both,File,LOLRMM,nvda__non-visual_desktop_access_
+        DR-MFT-RMM-384,RMM - Obliance,Remote Access Software,T1219,High,^obliance-agent\.exe$|^obliance-tray\.exe$|^obliance-watchdog\.exe$,.,,https://lolrmm.io/tools/obliance,Medium,Both,File,LOLRMM,obliance
         DR-MFT-RMM-117,RMM - OCS inventory,Remote Access Software,T1219,High,^ocsinventory\.exe$|^ocsservice\.exe$,.,,https://lolrmm.io/tools/ocs_inventory,Medium,Both,File,LOLRMM,ocs_inventory
         DR-MFT-RMM-118,RMM - Onionshare,Remote Access Software,T1219,Medium,^onionshare.*\.exe$|^OnionShare-win.*\.msi$,.,,https://lolrmm.io/tools/onionshare,Medium,Both,File,LOLRMM,onionshare
+        DR-MFT-RMM-385,RMM - Opale,Remote Access Software,T1219,High,^opale-agent\.exe$,.,,https://lolrmm.io/tools/opale,Medium,Both,File,LOLRMM,opale
         DR-MFT-RMM-371,RMM - OpenDesk RMM Agent,Remote Access Software,T1219,High,^OpenDesk-RMM-Agent\.exe$,.,,https://lolrmm.io/tools/opendesk_rmm_agent,Medium,Both,File,LOLRMM,opendesk_rmm_agent
         DR-MFT-RMM-356,RMM - OpsBridge Agent,Remote Access Software,T1219,High,^OpsBridgeAgent\.exe$,.,,https://lolrmm.io/tools/opsbridge_agent,Medium,Both,File,LOLRMM,opsbridge_agent
         DR-MFT-RMM-119,RMM - OptiTune,Remote Access Software,T1219,High,^OTPowerShell\.exe$|^OTService\.exe$,.,,https://lolrmm.io/tools/optitune,Medium,Both,File,LOLRMM,optitune
@@ -299,6 +303,7 @@ parameters:
         DR-MFT-RMM-130,RMM - Pocket Cloud (Wyse),Remote Access Software,T1219,Medium,^pocketcloud.*\.exe$|^pocketcloudservice\.exe$,.,,https://lolrmm.io/tools/pocket_cloud__wyse_,Medium,Both,File,LOLRMM,pocket_cloud__wyse_
         DR-MFT-RMM-131,RMM - Pocket Controller,Remote Access Software,T1219,High,^pocketcloudservice\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,.,,https://lolrmm.io/tools/pocket_controller,Medium,Both,File,LOLRMM,pocket_controller
         DR-MFT-RMM-308,RMM - Pocket Controller (Soti Xsight),Remote Access Software,T1219,High,^XSightService\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,.,,https://lolrmm.io/tools/pocket_controller__soti_xsight_,Medium,Both,File,LOLRMM,pocket_controller__soti_xsight_
+        DR-MFT-RMM-387,RMM - ProxiPort,Remote Access Software,T1219,High,^proxiport\.exe$,.,,https://lolrmm.io/tools/proxiport,Medium,Both,File,LOLRMM,proxiport
         DR-MFT-RMM-309,RMM - PSEXEC,Remote Access Software,T1219,High,^psexec64\.exe$|^psexec\.exe$|^psexecsvc\.exe$,.,,https://lolrmm.io/tools/psexec,Medium,Both,File,LOLRMM,psexec
         DR-MFT-RMM-132,RMM - PSEXEC (Clone),Remote Access Software,T1219,Medium,^PAExec-.*\.exe$|^csexec\.exe$|^paexec\.exe$|^remcom\.exe$|^remcomsvc\.exe$|^xcmd\.exe$|^xcmdsvc\.exe$,.,,https://lolrmm.io/tools/psexec__clone_,Medium,Both,File,LOLRMM,psexec__clone_
         DR-MFT-RMM-133,RMM - Pulseway,Remote Access Software,T1219,High,^PCMonitorManager\.exe$|^pcmonitorsrv\.exe$,.,,https://lolrmm.io/tools/pulseway,Medium,Both,File,LOLRMM,pulseway
@@ -342,6 +347,7 @@ parameters:
         DR-MFT-RMM-167,RMM - SecureCRT,Remote Access Software,T1219,High,^SecureCRT\.EXE$,.,,https://lolrmm.io/tools/securecrt,Medium,Both,File,LOLRMM,securecrt
         DR-MFT-RMM-168,RMM - Seetrol,Remote Access Software,T1219,High,^seetrolcenter\.exe$|^seetrolclient\.exe$|^seetrolmyservice\.exe$|^seetrolremote\.exe$|^seetrolsetting\.exe$,.,,https://lolrmm.io/tools/seetrol,Medium,Both,File,LOLRMM,seetrol
         DR-MFT-RMM-169,RMM - Senso.cloud,Remote Access Software,T1219,High,^SensoClient\.exe$|^SensoService\.exe$|^aadg\.exe$,.,,https://lolrmm.io/tools/senso.cloud,Medium,Both,File,LOLRMM,senso.cloud
+        DR-MFT-RMM-389,RMM - Sentinel RMM,Remote Access Software,T1219,High,^sentinel-agent\.exe$,.,,https://lolrmm.io/tools/sentinel_rmm,Medium,Both,File,LOLRMM,sentinel_rmm
         DR-MFT-RMM-170,RMM - ServerEye,Remote Access Software,T1219,Medium,^ServiceProxyLocalSys\.exe$|^servereye.*\.exe$,.,,https://lolrmm.io/tools/servereye,Medium,Both,File,LOLRMM,servereye
         DR-MFT-RMM-357,RMM - SetMe PRO,Remote Access Software,T1219,High,^SetMe_Client\.exe$|^tinUnattendedModule\.exe$,.,,https://lolrmm.io/tools/setme_pro,Medium,Both,File,LOLRMM,setme_pro
         DR-MFT-RMM-172,RMM - ShowMyPC,Remote Access Software,T1219,Medium,^SMPCSetup\.exe$|^showmypc.*\.exe$|^showmypc\.exe$,.,,https://lolrmm.io/tools/showmypc,Medium,Both,File,LOLRMM,showmypc
