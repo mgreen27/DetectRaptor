@@ -1,5 +1,5 @@
-import "pe"
 import "math"
+import "pe"
 rule ARKBIRD_SOLG_APT_UNC2452_Webshell_Chopper_Mar_2021_1 : FILE {
     meta:
 		description = "Detect exploit listener in the exchange configuration for Webshell Chopper used by UNC2452 group"
@@ -357,7 +357,7 @@ rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
 		hash = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
 		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
 		score = 75
-		quality = 30
+		quality = 55
 		tags = "UTA0178, FILE, MEMORY"
 		os = "win"
 		os_arch = "all"
@@ -554,8 +554,8 @@ rule SEKOIA_Tool_Webshell_B374K_Strings : FILE {
 		date = "2024-09-06"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/tool_webshell_b374k_strings.yar#L1-L21"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		hash = "1d27b23fceecbb9e854c41f6a8fb878e"
 		hash = "71fd853a3f3efc3dc2846e866187ee59"
 		hash = "187e001c32487d0d68197ddb7e7796c3"
@@ -583,8 +583,8 @@ rule SEKOIA_Webshell_Wso_Webshell_Strings {
 		date = "2022-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/webshell_wso_webshell_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "4d6966a34dc8e7390913857144da106affea14668d1c2c11a05be62a6e625c8f"
 		score = 75
 		quality = 80
@@ -611,8 +611,8 @@ rule SEKOIA_Webshell_Icesword_Strings : FILE {
 		date = "2024-11-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/webshell_icesword_strings.yar#L1-L20"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/webshell_icesword_strings.yar#L1-L20"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		hash = "0447352827e61696304a8e3d34e1d270"
 		hash = "f49cfcda0abdefa385eda7ec7e7a5411"
 		hash = "e1518388375ba772ed20503ec6dc6c8a"
@@ -639,8 +639,8 @@ rule SEKOIA_Apt_Oilrig_Webshell : FILE {
 		date = "2024-10-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/apt_oilrig_webshell.yar#L1-L18"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/apt_oilrig_webshell.yar#L1-L18"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "0e0879bafa1becf7e4aef008229a79ab8e0c50eda03232abd5cbb8fc59f482d3"
 		score = 75
 		quality = 80
@@ -665,8 +665,8 @@ rule SEKOIA_Apt_Unk_Hrserv_Webshell_Strings : FILE {
 		date = "2023-11-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/apt_unk_hrserv_webshell_strings.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "b5650e08227bbdb82c635bd67abae57e3107be9126639619809bfbe2a7ffee89"
 		score = 75
 		quality = 80
@@ -694,8 +694,8 @@ rule SEKOIA_Tool_Pivotnacci_Webshell : FILE {
 		date = "2024-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/tool_pivotnacci_webshell.yar#L1-L23"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/tool_pivotnacci_webshell.yar#L1-L23"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "a57792915b4c888547ebe0b08b928e4bc32b3526c98a3ccc9fca0193cedee20a"
 		score = 75
 		quality = 80
@@ -725,8 +725,8 @@ rule SEKOIA_Generic_Php_Webshell : FILE {
 		date = "2023-12-08"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/generic_php_webshell.yar#L1-L15"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/generic_php_webshell.yar#L1-L15"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "617264a785b8e9e87a39e12d7b72963d94e0686a174716347369fe71ab7a78af"
 		score = 75
 		quality = 80
@@ -748,8 +748,8 @@ rule SEKOIA_Weevely_Webshell_Payload : FILE {
 		date = "2024-04-22"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/weevely_webshell_payload.yar#L1-L17"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/weevely_webshell_payload.yar#L1-L17"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "bb02ec519d77526cc81ebd7743336b333b9498f79079f7008970cf1bb51c4948"
 		score = 75
 		quality = 80
@@ -23259,6 +23259,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Generic_Eval_On_Input : FILE {
 		hash = "069ea990d32fc980939fffdf1aed77384bf7806bc57c0a7faaff33bd1a3447f6"
 		logic_hash = "f7b9f43cf2fd6d08b7438f003242e9a19dcea282959c7a1fdff3a35e261a031e"
 		score = 75
+		quality = 1
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
@@ -24175,6 +24176,7 @@ rule SIGNATURE_BASE_WEBSHELL_ASP_Runtime_Compile : FILE {
 		hash = "8ce4eaf111c66c2e6c08a271d849204832713f8b66aceb5dadc293b818ccca9e"
 		logic_hash = "6699a44e396eedebb3bafa0e89c3b6d080586a158ed056ec7220bdf2ad764444"
 		score = 75
+		quality = 19
 		tags = "FILE"
 		license = "Detection Rule License 1.1 https://github.com/Neo23x0/signature-base/blob/master/LICENSE"
 		importance = 70
