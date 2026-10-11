@@ -221,6 +221,7 @@ DR-MFT-RMM-104,RMM - MSP360,Remote Access Software,T1219,High,^CBBackupPlan\.exe
 DR-MFT-RMM-105,RMM - MyGreenPC,Remote Access Software,T1219,High,^mygreenpc\.exe$,.,,https://lolrmm.io/tools/mygreenpc,Medium,Both,File,LOLRMM,mygreenpc
 DR-MFT-RMM-106,RMM - MyIVO,Remote Access Software,T1219,High,^myivomanager\.exe$|^myivomgr\.exe$,.,,https://lolrmm.io/tools/myivo,Medium,Both,File,LOLRMM,myivo
 DR-MFT-RMM-108,RMM - N-Able Advanced Monitoring Agent,Remote Access Software,T1219,Medium,^Agent_.*_RW\.exe$|^BASEClient\.exe$|^BASupApp\.exe$|^BASupSrvcCnfg\.exe$|^BASupSrvc\.exe$|^BASupTSHelper\.exe$|^winagent\.exe$,.,,https://lolrmm.io/tools/n-able_advanced_monitoring_agent,Medium,Both,File,LOLRMM,n-able_advanced_monitoring_agent
+DR-MFT-RMM-391,RMM - N-able N-central,Remote Access Software,T1219,High,^agent\.exe$|^AgentMaint\.exe$|^AgentMonitor\.exe$|^BASupTSHelper\.exe$|^msp-agent-core\.exe$,.,,https://lolrmm.io/tools/n-able_n-central,Medium,Both,File,LOLRMM,n-able_n-central
 DR-MFT-RMM-107,RMM - Naverisk,Remote Access Software,T1219,Medium,^AgentSetup-.*\.exe$,.,,https://lolrmm.io/tools/naverisk,Medium,Both,File,LOLRMM,naverisk
 DR-MFT-RMM-293,RMM - NetBird,Remote Access Software,T1219,High,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,.,,https://lolrmm.io/tools/netbird,Medium,Both,File,LOLRMM,netbird
 DR-MFT-RMM-294,RMM - NetLock RMM,Remote Access Software,T1219,High,^NetLock_RMM_User_Process\.exe$|^NetLock_RMM_User_UAC\.exe$|^NetLock_RMM_Agent_Installer\.exe$,.,,https://lolrmm.io/tools/netlock_rmm,Medium,Both,File,LOLRMM,netlock_rmm
@@ -247,6 +248,7 @@ DR-MFT-RMM-385,RMM - Opale,Remote Access Software,T1219,High,^opale-agent\.exe$,
 DR-MFT-RMM-371,RMM - OpenDesk RMM Agent,Remote Access Software,T1219,High,^OpenDesk-RMM-Agent\.exe$,.,,https://lolrmm.io/tools/opendesk_rmm_agent,Medium,Both,File,LOLRMM,opendesk_rmm_agent
 DR-MFT-RMM-356,RMM - OpsBridge Agent,Remote Access Software,T1219,High,^OpsBridgeAgent\.exe$,.,,https://lolrmm.io/tools/opsbridge_agent,Medium,Both,File,LOLRMM,opsbridge_agent
 DR-MFT-RMM-119,RMM - OptiTune,Remote Access Software,T1219,High,^OTPowerShell\.exe$|^OTService\.exe$,.,,https://lolrmm.io/tools/optitune,Medium,Both,File,LOLRMM,optitune
+DR-MFT-RMM-392,RMM - Overlord,Remote Access Software,T1219,Medium,^ovd_.*\.exe$|^svchost\.exe$|^agent\.exe$|^agent-windows-amd64-.*\.exe$|^svchost-windows-amd64-.*\.exe$,.,,https://lolrmm.io/tools/overlord,Medium,Both,File,LOLRMM,overlord
 DR-MFT-RMM-120,RMM - Pandora RC (eHorus),Remote Access Software,T1219,High,^ehorus standalone\.exe$|^ehorus_agent\.exe$,.,,https://lolrmm.io/tools/pandora_rc__ehorus_,Medium,Both,File,LOLRMM,pandora_rc__ehorus_
 DR-MFT-RMM-122,RMM - Panorama9,Remote Access Software,T1219,Medium,^p9agent.*\.exe$,.,,https://lolrmm.io/tools/panorama9,Medium,Both,File,LOLRMM,panorama9
 DR-MFT-RMM-123,RMM - Parallels Access,Remote Access Software,T1219,Medium,^TSClient\.exe$|^parallelsaccess-.*\.exe$|^prl_deskctl_agent\.exe$|^prl_deskctl_wizard\.exe$|^prl_pm_service\.exe$,.,,https://lolrmm.io/tools/parallels_access,Medium,Both,File,LOLRMM,parallels_access
@@ -297,7 +299,7 @@ DR-MFT-RMM-156,RMM - Royal Apps,Remote Access Software,T1219,High,^royalserver\.
 DR-MFT-RMM-158,RMM - Royal TS,Remote Access Software,T1219,High,^royalts\.exe$,.,,https://lolrmm.io/tools/royal_ts,Medium,Both,File,LOLRMM,royal_ts
 DR-MFT-RMM-159,RMM - RPort,Remote Access Software,T1219,High,^rport\.exe$,.,,https://lolrmm.io/tools/rport,Medium,Both,File,LOLRMM,rport
 DR-MFT-RMM-161,RMM - RuDesktop,Remote Access Software,T1219,Medium,^rudesktop.*\.exe$,.,,https://lolrmm.io/tools/rudesktop,Medium,Both,File,LOLRMM,rudesktop
-DR-MFT-RMM-163,RMM - RustDesk,Remote Access Software,T1219,Medium,^rustdesk\.exe$|^rustdesk.*\.exe$,.,,https://lolrmm.io/tools/rustdesk,Medium,Both,File,LOLRMM,rustdesk
+DR-MFT-RMM-163,RMM - RustDesk,Remote Access Software,T1219,Medium,^RustDesk\.exe$|^rustdesk.*\.exe$,.,,https://lolrmm.io/tools/rustdesk,Medium,Both,File,LOLRMM,rustdesk
 DR-MFT-RMM-164,RMM - S3 Browser,Remote Access Software,T1219,Medium,^s3browser.*\.exe$,.,,https://lolrmm.io/tools/s3_browser,Medium,Both,File,LOLRMM,s3_browser
 DR-MFT-RMM-165,RMM - ScreenConnect,Remote Access Software,T1219,Medium,^ScreenConnect\.ClientService\.exe$|^ScreenConnect\.WindowsClient\.exe$|^ConnectWiseControl.*\.exe$|^Remote Workforce Client\.exe$|^connectwise.*\.exe$|^screenconnect.*\.exe$,.,,https://lolrmm.io/tools/screenconnect,Medium,Both,File,LOLRMM,screenconnect
 DR-MFT-RMM-166,RMM - ScreenMeet,Remote Access Software,T1219,High,^ScreenMeetSupport\.exe$|^ScreenMeet\.Support\.exe$,.,,https://lolrmm.io/tools/screenmeet,Medium,Both,File,LOLRMM,screenmeet
@@ -345,6 +347,7 @@ DR-MFT-RMM-200,RMM - UltraViewer,Remote Access Software,T1219,High,^UltraViewer_
 DR-MFT-RMM-201,RMM - UltraVNC,Remote Access Software,T1219,Medium,^UltraVNC.*\.exe$|^UVNC_Launch\.exe$|^vncviewer\.exe$|^winvnc\.exe$,.,,https://lolrmm.io/tools/ultravnc,Medium,Both,File,LOLRMM,ultravnc
 DR-MFT-RMM-375,RMM - UniSystem RMM,Remote Access Software,T1219,High,^UniRMM\.msi$|^UniRMM\.exe$,.,,https://lolrmm.io/tools/unisystem_rmm,Medium,Both,File,LOLRMM,unisystem_rmm
 DR-MFT-RMM-342,RMM - Veyon,Remote Access Software,T1219,High,^veyon-master\.exe$|^veyon-server\.exe$|^veyon-service\.exe$|^veyon-wcli\.exe$|^veyon-worker\.exe$,.,,https://lolrmm.io/tools/veyon,Medium,Both,File,LOLRMM,veyon
+DR-MFT-RMM-393,RMM - Vicarius vRx,Remote Access Software,T1219,High,^topiad\.exe$,.,,https://lolrmm.io/tools/vicarius_vrx,Medium,Both,File,LOLRMM,vicarius_vrx
 DR-MFT-RMM-202,RMM - VNC,Remote Access Software,T1219,Medium,^vncserver\.exe$|^vncserverui\.exe$|^vncviewer\.exe$|^winvnc.*\.exe$|^winvnc\.exe$|^winvncsc\.exe$|^winwvc\.exe$,.,,https://lolrmm.io/tools/vnc,Medium,Both,File,LOLRMM,vnc
 DR-MFT-RMM-203,RMM - WebRDP,Remote Access Software,T1219,High,^webrdp\.exe$,.,,https://lolrmm.io/tools/webrdp,Medium,Both,File,LOLRMM,webrdp
 DR-MFT-RMM-204,RMM - Weezo,Remote Access Software,T1219,Medium,^weezo setup.*\.exe$|^weezo\.exe$|^weezohttpd\.exe$,.,,https://lolrmm.io/tools/weezo,Medium,Both,File,LOLRMM,weezo

@@ -76,7 +76,7 @@ DR-MFT-POL-001,COVERAGE-DR-MFT-POL-001,MFT,File,KMSPico.exe,C:\Replay\KMSPico.ex
 DR-MFT-DEV-001,COVERAGE-DR-MFT-DEV-001,MFT,File,devtunnel.exe,C:\Replay\devtunnel.exe,True,
 DR-MFT-DEV-002,COVERAGE-DR-MFT-DEV-002,MFT,File,ngrok.exe,C:\Replay\ngrok.exe,True,DR-MFT-XFER-002|DR-MFT-RMM-349
 DR-MFT-VPN-001,COVERAGE-DR-MFT-VPN-001,MFT,File,NordVPN.exe,C:\Replay\NordVPN.exe,True,
-DR-MFT-MASQ-001,COVERAGE-DR-MFT-MASQ-001,MFT,File,svchost.exe,C:\Users\A\AppData\,True,DR-MFT-SLOC-003
+DR-MFT-MASQ-001,COVERAGE-DR-MFT-MASQ-001,MFT,File,svchost.exe,C:\Users\A\AppData\,True,DR-MFT-SLOC-003|DR-MFT-RMM-392
 DR-MFT-MASQ-002,COVERAGE-DR-MFT-MASQ-002,MFT,File,A.doc.exe,C:\Users\,True,
 DR-MFT-CRED-007,COVERAGE-DR-MFT-CRED-007,MFT,File,ntds.dit,C:\Replay\ntds.dit,True,
 DR-MFT-SLOC-001,COVERAGE-DR-MFT-SLOC-001,MFT,File,aaaaaaaaaaaaaaaa.exe,C:\Users\A\AppData\Local\aaaaaaaaaaaaaaaa\,True,
@@ -221,6 +221,7 @@ DR-MFT-RMM-104,COVERAGE-DR-MFT-RMM-104,MFT,File,CBBackupPlan.exe,C:\Replay\CBBac
 DR-MFT-RMM-105,COVERAGE-DR-MFT-RMM-105,MFT,File,mygreenpc.exe,C:\Replay\mygreenpc.exe,True,
 DR-MFT-RMM-106,COVERAGE-DR-MFT-RMM-106,MFT,File,myivomanager.exe,C:\Replay\myivomanager.exe,True,
 DR-MFT-RMM-108,COVERAGE-DR-MFT-RMM-108,MFT,File,Agent__RW.exe,C:\Replay\Agent__RW.exe,True,
+DR-MFT-RMM-391,COVERAGE-DR-MFT-RMM-391,MFT,File,agent.exe,C:\Replay\agent.exe,True,DR-MFT-RMM-392
 DR-MFT-RMM-107,COVERAGE-DR-MFT-RMM-107,MFT,File,AgentSetup-.exe,C:\Replay\AgentSetup-.exe,True,
 DR-MFT-RMM-293,COVERAGE-DR-MFT-RMM-293,MFT,File,netbird-ui.exe,C:\Replay\netbird-ui.exe,True,
 DR-MFT-RMM-294,COVERAGE-DR-MFT-RMM-294,MFT,File,NetLock_RMM_User_Process.exe,C:\Replay\NetLock_RMM_User_Process.exe,True,
@@ -247,6 +248,7 @@ DR-MFT-RMM-385,COVERAGE-DR-MFT-RMM-385,MFT,File,opale-agent.exe,C:\Replay\opale-
 DR-MFT-RMM-371,COVERAGE-DR-MFT-RMM-371,MFT,File,OpenDesk-RMM-Agent.exe,C:\Replay\OpenDesk-RMM-Agent.exe,True,
 DR-MFT-RMM-356,COVERAGE-DR-MFT-RMM-356,MFT,File,OpsBridgeAgent.exe,C:\Replay\OpsBridgeAgent.exe,True,
 DR-MFT-RMM-119,COVERAGE-DR-MFT-RMM-119,MFT,File,OTPowerShell.exe,C:\Replay\OTPowerShell.exe,True,
+DR-MFT-RMM-392,COVERAGE-DR-MFT-RMM-392,MFT,File,ovd_.exe,C:\Replay\ovd_.exe,True,
 DR-MFT-RMM-120,COVERAGE-DR-MFT-RMM-120,MFT,File,ehorus standalone.exe,C:\Replay\ehorus standalone.exe,True,DR-MFT-RMM-046
 DR-MFT-RMM-122,COVERAGE-DR-MFT-RMM-122,MFT,File,p9agent.exe,C:\Replay\p9agent.exe,True,
 DR-MFT-RMM-123,COVERAGE-DR-MFT-RMM-123,MFT,File,TSClient.exe,C:\Replay\TSClient.exe,True,
@@ -297,7 +299,7 @@ DR-MFT-RMM-156,COVERAGE-DR-MFT-RMM-156,MFT,File,royalserver.exe,C:\Replay\royals
 DR-MFT-RMM-158,COVERAGE-DR-MFT-RMM-158,MFT,File,royalts.exe,C:\Replay\royalts.exe,True,DR-MFT-RMM-156
 DR-MFT-RMM-159,COVERAGE-DR-MFT-RMM-159,MFT,File,rport.exe,C:\Replay\rport.exe,True,
 DR-MFT-RMM-161,COVERAGE-DR-MFT-RMM-161,MFT,File,rudesktop.exe,C:\Replay\rudesktop.exe,True,
-DR-MFT-RMM-163,COVERAGE-DR-MFT-RMM-163,MFT,File,rustdesk.exe,C:\Replay\rustdesk.exe,True,
+DR-MFT-RMM-163,COVERAGE-DR-MFT-RMM-163,MFT,File,RustDesk.exe,C:\Replay\RustDesk.exe,True,
 DR-MFT-RMM-164,COVERAGE-DR-MFT-RMM-164,MFT,File,s3browser.exe,C:\Replay\s3browser.exe,True,
 DR-MFT-RMM-165,COVERAGE-DR-MFT-RMM-165,MFT,File,ScreenConnect.ClientService.exe,C:\Replay\ScreenConnect.ClientService.exe,True,
 DR-MFT-RMM-166,COVERAGE-DR-MFT-RMM-166,MFT,File,ScreenMeetSupport.exe,C:\Replay\ScreenMeetSupport.exe,True,
@@ -345,6 +347,7 @@ DR-MFT-RMM-200,COVERAGE-DR-MFT-RMM-200,MFT,File,UltraViewer_Desktop.exe,C:\Repla
 DR-MFT-RMM-201,COVERAGE-DR-MFT-RMM-201,MFT,File,UltraVNC.exe,C:\Replay\UltraVNC.exe,True,
 DR-MFT-RMM-375,COVERAGE-DR-MFT-RMM-375,MFT,File,UniRMM.msi,C:\Replay\UniRMM.msi,True,
 DR-MFT-RMM-342,COVERAGE-DR-MFT-RMM-342,MFT,File,veyon-master.exe,C:\Replay\veyon-master.exe,True,
+DR-MFT-RMM-393,COVERAGE-DR-MFT-RMM-393,MFT,File,topiad.exe,C:\Replay\topiad.exe,True,
 DR-MFT-RMM-202,COVERAGE-DR-MFT-RMM-202,MFT,File,vncserver.exe,C:\Replay\vncserver.exe,True,
 DR-MFT-RMM-203,COVERAGE-DR-MFT-RMM-203,MFT,File,webrdp.exe,C:\Replay\webrdp.exe,True,
 DR-MFT-RMM-204,COVERAGE-DR-MFT-RMM-204,MFT,File,weezo setup.exe,C:\Replay\weezo setup.exe,True,
@@ -386,7 +389,7 @@ DR-MFT-RMM-098,COVERAGE-DR-MFT-RMM-098,Amcache,File,quickassist.exe,C:\Replay\qu
 DR-MFT-RMM-142,COVERAGE-DR-MFT-RMM-142,MFT,File,VNC-Connect-Installer-.exe,C:\Replay\VNC-Connect-Installer-.exe,True,
 DR-MFT-RMM-218,COVERAGE-DR-MFT-RMM-218,MFT,File,komari,C:\Replay\komari,True,
 DR-MFT-RMM-287,COVERAGE-DR-MFT-RMM-287,MFT,File,amon.exe,C:\Replay\amon.exe,True,
-DR-MFT-RMM-350,COVERAGE-DR-MFT-RMM-350,MFT,File,agent.exe,C:\Program Files\Monitic\agent.exe,True,
+DR-MFT-RMM-350,COVERAGE-DR-MFT-RMM-350,MFT,File,agent.exe,C:\Program Files\Monitic\agent.exe,True,DR-MFT-RMM-391|DR-MFT-RMM-392
 DR-MFT-RMM-292,COVERAGE-DR-MFT-RMM-292,MFT,File,nmep_agtconfig.exe,C:\Replay\nmep_agtconfig.exe,True,
 DR-MFT-RMM-351,COVERAGE-DR-MFT-RMM-351,MFT,File,winpty-agent.exe,C:\Program Files\Net Monitor for Employees Pro\winpty-agent.exe,True,
 DR-MFT-RMM-324,COVERAGE-DR-MFT-RMM-324,MFT,File,RemSupp.exe,C:\Replay\RemSupp.exe,True,

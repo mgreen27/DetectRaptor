@@ -177,6 +177,7 @@ multcloud,DR-MFT-RMM-290
 mygreenpc,DR-MFT-RMM-105
 myivo,DR-MFT-RMM-106
 n-able_advanced_monitoring_agent,DR-MFT-RMM-108
+n-able_n-central,DR-MFT-RMM-391
 n-able_remote_access_software,DR-MFT-RMM-291
 nateon-desktop_sharing,DR-MFT-RMM-109
 naverisk,DR-MFT-RMM-107
@@ -211,6 +212,7 @@ opendesk_rmm_agent,DR-MFT-RMM-371
 openuem,DR-MFT-RMM-386
 opsbridge_agent,DR-MFT-RMM-356
 optitune,DR-MFT-RMM-119
+overlord,DR-MFT-RMM-392
 pandora_rc__ehorus_,DR-MFT-RMM-120
 panorama9,DR-MFT-RMM-122
 parallels_access,DR-MFT-RMM-123
@@ -331,6 +333,7 @@ ultraviewer,DR-MFT-RMM-200
 ultravnc,DR-MFT-RMM-201
 unisystem_rmm,DR-MFT-RMM-375
 veyon,DR-MFT-RMM-342
+vicarius_vrx,DR-MFT-RMM-393
 visual_studio_dev_tunnel,DR-MFT-RMM-343
 vizor,DR-MFT-RMM-344
 vnc,DR-MFT-RMM-202

@@ -165,6 +165,7 @@ multcloud,MultCloud,Excluded,DR-MFT-RMM-290,0,,,No safe Windows filename indicat
 mygreenpc,MyGreenPC,Generated,DR-MFT-RMM-105,1,^mygreenpc\.exe$,,,1
 myivo,MyIVO,Generated,DR-MFT-RMM-106,2,^myivomanager\.exe$|^myivomgr\.exe$,,,1
 n-able_advanced_monitoring_agent,N-Able Advanced Monitoring Agent,Generated,DR-MFT-RMM-108,7,^Agent_.*_RW\.exe$|^BASEClient\.exe$|^BASupApp\.exe$|^BASupSrvcCnfg\.exe$|^BASupSrvc\.exe$|^BASupTSHelper\.exe$|^winagent\.exe$,,,2
+n-able_n-central,N-able N-central,Generated,DR-MFT-RMM-391,5,^agent\.exe$|^AgentMaint\.exe$|^AgentMonitor\.exe$|^BASupTSHelper\.exe$|^msp-agent-core\.exe$,,,1
 n-able_remote_access_software,N-ABLE Remote Access Software,Excluded,DR-MFT-RMM-291,0,,,No safe Windows filename indicator,1
 naverisk,Naverisk,Generated,DR-MFT-RMM-107,1,^AgentSetup-.*\.exe$,,,1
 netbird,NetBird,Generated,DR-MFT-RMM-293,5,^netbird-ui\.exe$|^netbird\.exe$|^OpenSSH\.msi$|^cis\.vbs$|^netbird\.msi$,,,1
@@ -197,6 +198,7 @@ opendesk_rmm_agent,OpenDesk RMM Agent,Generated,DR-MFT-RMM-371,1,^OpenDesk-RMM-A
 openuem,OpenUEM,Excluded,DR-MFT-RMM-386,0,,,No safe Windows filename indicator,1
 opsbridge_agent,OpsBridge Agent,Generated,DR-MFT-RMM-356,1,^OpsBridgeAgent\.exe$,,,1
 optitune,OptiTune,Generated,DR-MFT-RMM-119,2,^OTPowerShell\.exe$|^OTService\.exe$,,,1
+overlord,Overlord,Generated,DR-MFT-RMM-392,5,^ovd_.*\.exe$|^svchost\.exe$|^agent\.exe$|^agent-windows-amd64-.*\.exe$|^svchost-windows-amd64-.*\.exe$,,,1
 pandora_rc__ehorus_,Pandora RC (eHorus),Generated,DR-MFT-RMM-120,2,^ehorus standalone\.exe$|^ehorus_agent\.exe$,,,1
 panorama9,Panorama9,Generated,DR-MFT-RMM-122,1,^p9agent.*\.exe$,,,1
 parallels_access,Parallels Access,Generated,DR-MFT-RMM-123,5,^TSClient\.exe$|^parallelsaccess-.*\.exe$|^prl_deskctl_agent\.exe$|^prl_deskctl_wizard\.exe$|^prl_pm_service\.exe$,,,1
@@ -256,7 +258,7 @@ royal_ts,Royal TS,Generated,DR-MFT-RMM-158,1,^royalts\.exe$,,,1
 rport,RPort,Generated,DR-MFT-RMM-159,1,^rport\.exe$,,,1
 rudesktop,RuDesktop,Generated,DR-MFT-RMM-161,1,^rudesktop.*\.exe$,,,1
 runsmart,RunSmart,Excluded,DR-MFT-RMM-326,0,,,No safe Windows filename indicator,1
-rustdesk,RustDesk,Generated,DR-MFT-RMM-163,2,^rustdesk\.exe$|^rustdesk.*\.exe$,,,1
+rustdesk,RustDesk,Generated,DR-MFT-RMM-163,2,^RustDesk\.exe$|^rustdesk.*\.exe$,,,1
 s3_browser,S3 Browser,Generated,DR-MFT-RMM-164,1,^s3browser.*\.exe$,,,1
 screenconnect,ScreenConnect,Generated,DR-MFT-RMM-165,6,^ScreenConnect\.ClientService\.exe$|^ScreenConnect\.WindowsClient\.exe$|^ConnectWiseControl.*\.exe$|^Remote Workforce Client\.exe$|^connectwise.*\.exe$|^screenconnect.*\.exe$,,,1
 screenmeet,ScreenMeet,Generated,DR-MFT-RMM-166,2,^ScreenMeetSupport\.exe$|^ScreenMeet\.Support\.exe$,,,1
@@ -312,6 +314,7 @@ ultraviewer,UltraViewer,Generated,DR-MFT-RMM-200,3,^UltraViewer_Desktop\.exe$|^U
 ultravnc,UltraVNC,Generated,DR-MFT-RMM-201,4,^UltraVNC.*\.exe$|^UVNC_Launch\.exe$|^vncviewer\.exe$|^winvnc\.exe$,,,2
 unisystem_rmm,UniSystem RMM,Generated,DR-MFT-RMM-375,2,^UniRMM\.msi$|^UniRMM\.exe$,,,1
 veyon,Veyon,Generated,DR-MFT-RMM-342,5,^veyon-master\.exe$|^veyon-server\.exe$|^veyon-service\.exe$|^veyon-wcli\.exe$|^veyon-worker\.exe$,,,1
+vicarius_vrx,Vicarius vRx,Generated,DR-MFT-RMM-393,1,^topiad\.exe$,,,1
 visual_studio_dev_tunnel,Visual Studio Dev Tunnel,Excluded,DR-MFT-RMM-343,0,,,No safe Windows filename indicator,1
 vizor,VIZOR,Excluded,DR-MFT-RMM-344,0,,,No safe Windows filename indicator,1
 vnc,VNC,Generated,DR-MFT-RMM-202,7,^vncserver\.exe$|^vncserverui\.exe$|^vncviewer\.exe$|^winvnc.*\.exe$|^winvnc\.exe$|^winvncsc\.exe$|^winwvc\.exe$,,,1
