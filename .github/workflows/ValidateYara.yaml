@@ -10,6 +10,9 @@ on:
       - completed
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
@@ -20,24 +23,31 @@ jobs:
         ref: master
 
     - name: Download Velociraptor binaries
+      env:
+        GH_TOKEN: ${{ github.token }}
+      shell: bash
       run: |
-          VERSION="$(
-            curl -s https://api.github.com/repos/Velocidex/velociraptor/releases/latest \
-            | grep '"tag_name":' \
-            | cut -d '"' -f 4 \
-            | sed 's/^v//'
-          )"
+          set -euo pipefail
+          RELEASE="$(gh api repos/Velocidex/velociraptor/releases/latest)"
+          VERSION="$(jq -er '.tag_name' <<< "$RELEASE")"
           LINUX="$(
-            curl -s https://api.github.com/repos/Velocidex/velociraptor/releases/tags/v$VERSION \
-            | grep browser_download_url \
-            | cut -d '"' -f 4 \
-            | grep 'linux-amd64-musl$' \
-            | head -n 1
+            jq -er '
+              [.assets[] | select(.name | test("-linux-amd64-musl(\\.gz)?$"))]
+              | if length == 1 then .[0].browser_download_url
+                else error("Expected exactly one Linux amd64 musl binary asset")
+                end
+            ' <<< "$RELEASE"
           )"
           echo "VERSION=$VERSION"
           echo "LINUX=$LINUX"
-          test -n "$LINUX"
-          curl -L "$LINUX" -o ./velociraptor
+          DOWNLOAD="$(mktemp)"
+          trap 'rm -f "$DOWNLOAD"' EXIT
+          curl --fail --silent --show-error --location --retry 3 "$LINUX" -o "$DOWNLOAD"
+          if [[ "$LINUX" == *.gz ]]; then
+            gzip -dc "$DOWNLOAD" > ./velociraptor
+          else
+            cp "$DOWNLOAD" ./velociraptor
+          fi
           chmod +x ./velociraptor
           ./velociraptor version
 
