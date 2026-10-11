@@ -1417,7 +1417,7 @@ rule VOLEXITY_Apt_Webshell_Aspx_Glasstoken : UTA0178 FILE MEMORY {
 		hash = "26cbb54b1feb75fe008e36285334d747428f80aacdb57badf294e597f3e9430d"
 		logic_hash = "6b8183ac1e87a86c58760db51f767ed278cc0c838ed89e7435af7d0373e58b26"
 		score = 75
-		quality = 30
+		quality = 55
 		tags = "UTA0178, FILE, MEMORY"
 		os = "win"
 		os_arch = "all"
@@ -3189,8 +3189,8 @@ rule SEKOIA_Apt_Unk_Hrserv_Memory_Commands_Strings {
 		date = "2023-11-23"
 		modified = "2024-12-19"
 		reference = "https://github.com/SEKOIA-IO/Community"
-		source_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/yara_rules/apt_unk_hrserv_memory_commands_strings.yar#L1-L19"
-		license_url = "https://github.com/SEKOIA-IO/Community/blob/a438a5901a211c2abdf75da9c93921ef187473d1/LICENSE.md"
+		source_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/yara_rules/apt_unk_hrserv_memory_commands_strings.yar#L1-L19"
+		license_url = "https://github.com/SEKOIA-IO/Community/blob/06702882880251b045e1f047aaea455914a7cbcf/LICENSE.md"
 		logic_hash = "a87c35658ded301c098f9ee8ee5886a54e89537eabd145cf82b0286c703a77d2"
 		score = 75
 		quality = 80
