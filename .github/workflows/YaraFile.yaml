@@ -36,7 +36,7 @@ jobs:
           python get_file_yara.py
           
     - name: Git Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v4.15.4
+      uses: stefanzweifel/git-auto-commit-action@v7.2.0
       with:
         commit_message: AutoUpdate VQL and yara
         file_pattern: yara/full_windows_file.yar.gz yara/full_linux_file.yar.gz yara/full_macos_file.yar.gz yara/yara-rules-full.yar
