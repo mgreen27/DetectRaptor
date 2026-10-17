@@ -12,7 +12,8 @@ from base_functions import *
 # set variables
 template_vql_paths = [
     '../templates/Webhistory.template',
-    '../templates/WebhistoryMacos.template'
+    '../templates/WebhistoryMacos.template',
+    '../templates/WebhistoryLinux.template'
 ]
 
 ioc_csv = '../csv/WebBrowsers.csv'
