@@ -36,6 +36,10 @@ SOURCE_ID_ALIASES = {
 AMBIGUOUS_FILENAME_PATTERNS = {
     r"^connect\.exe$",
 }
+PATH_REQUIRED_FILENAME_PATTERNS = {
+    r"^agent\.exe$",
+    r"^svchost\.exe$",
+}
 
 
 def read_csv(path):
@@ -136,23 +140,36 @@ def _specific_product_dll(pattern, name, item):
     )
 
 
-def filename_patterns(path_regex, name="", item=""):
+def indicator_patterns(path_regex, name="", item=""):
+    """Return filename/path pairs, retaining source paths for generic names."""
     patterns = OrderedDict()
     filtered = OrderedDict()
     for alternative in _split_top_level_alternatives(path_regex):
         pattern = _filename_pattern(alternative)
-        if pattern:
-            target = (
-                patterns
-                if (
-                    pattern.casefold()
-                    not in AMBIGUOUS_FILENAME_PATTERNS
-                    and _specific_product_dll(pattern, name, item)
-                )
-                else filtered
-            )
-            target.setdefault(pattern.casefold(), pattern)
+        if not pattern:
+            continue
+        if (pattern.casefold() in AMBIGUOUS_FILENAME_PATTERNS
+                or not _specific_product_dll(pattern, name, item)):
+            filtered.setdefault(pattern.casefold(), pattern)
+            continue
+
+        path = None
+        if pattern.casefold() in PATH_REQUIRED_FILENAME_PATTERNS:
+            source_path = alternative.strip()
+            directory, separator, _ = source_path.rpartition("\\\\")
+            # A bare basename or wildcard-only directory supplies no context.
+            if not separator or not re.search(r"[A-Za-z0-9]{3}", directory):
+                filtered.setdefault(pattern.casefold(), pattern)
+                continue
+            path = source_path if source_path.endswith("$") else source_path + "$"
+        key = (pattern.casefold(), path.casefold() if path else None)
+        patterns.setdefault(key, (pattern, path))
     return list(patterns.values()), list(filtered.values())
+
+
+def filename_patterns(path_regex, name="", item=""):
+    accepted, filtered = indicator_patterns(path_regex, name, item)
+    return list(dict.fromkeys(pattern for pattern, _ in accepted)), filtered
 
 
 def load_registry(path, existing_rows):
@@ -197,13 +214,20 @@ def build_generated_rules(lolrmm_rows, registry, exclusions=None):
             "LolRMMLink": row["LolRMMLink"],
             "SourceRows": 0,
             "Patterns": OrderedDict(),
+            "Paths": OrderedDict(),
+            "RequiresPath": False,
             "FilteredPatterns": OrderedDict(),
         })
         group["SourceRows"] += 1
-        accepted, filtered = filename_patterns(
+        accepted, filtered = indicator_patterns(
             row["PathRegex"], row["Name"], item)
-        for pattern in accepted:
+        for pattern, path in accepted:
             group["Patterns"].setdefault(pattern.casefold(), pattern)
+            group["RequiresPath"] |= path is not None
+            # Keep each filename paired with its own allowed path. Combining
+            # directory prefixes separately would admit cross-product matches.
+            path = path or r"\\(?:" + pattern.removeprefix("^") + ")"
+            group["Paths"].setdefault(path.casefold(), path)
         for pattern in filtered:
             group["FilteredPatterns"].setdefault(
                 pattern.casefold(), pattern)
@@ -240,7 +264,7 @@ def build_generated_rules(lolrmm_rows, registry, exclusions=None):
                 "Reason": (
                     "No safe Windows filename indicator"
                     if not filtered_patterns
-                    else "Only non-specific DLL filename indicators"),
+                    else "Only ambiguous or non-specific filename indicators"),
                 "SourceRows": str(group["SourceRows"]),
             })
             continue
@@ -256,7 +280,9 @@ def build_generated_rules(lolrmm_rows, registry, exclusions=None):
             "Technique": "",
             "Confidence": confidence,
             "KeywordRegex": keyword_regex,
-            "PathRegex": ".",
+            "PathRegex": (
+                "|".join(f"(?:{path})" for path in group["Paths"].values())
+                if group["RequiresPath"] else "."),
             "IgnoreRegex": "",
             "Reference": group["LolRMMLink"],
             "Criticality": "Medium",
@@ -273,9 +299,12 @@ def build_generated_rules(lolrmm_rows, registry, exclusions=None):
             "FilenamePatternCount": str(len(patterns)),
             "FilenameRegex": keyword_regex,
             "FilteredFilenameRegex": "|".join(filtered_patterns),
-            "Reason": (
+            "Reason": "; ".join(reason for reason in (
                 "Filtered ambiguous or non-specific filename indicators"
-                if filtered_patterns else ""),
+                if filtered_patterns else "",
+                "Preserved source paths for generic filename indicators"
+                if group["RequiresPath"] else "",
+            ) if reason),
             "SourceRows": str(group["SourceRows"]),
         })
     return generated, report

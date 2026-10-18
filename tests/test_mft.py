@@ -15,6 +15,7 @@ import validate_mft_whitelist
 import assign_mft_metadata
 import sync_mft_lolrmm
 import normalize_mft_metadata
+import replay_mft
 
 
 class MFTDetectionTests(unittest.TestCase):
@@ -396,6 +397,89 @@ class MFTDetectionTests(unittest.TestCase):
                 r"connect\.exe$",
                 coverage[source_id]["FilteredFilenameRegex"].casefold(),
             )
+
+    def test_lolrmm_generic_names_preserve_source_paths(self):
+        by_source = {
+            row["SourceID"]: row for row in self.rows if row["SourceID"]
+        }
+        cases = {
+            "overlord": (
+                (
+                    r"C:\Users\analyst\AppData\Roaming\Microsoft\DeviceSync\svchost.exe",
+                    r"C:\Users\analyst\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\svchost.exe",
+                    r"C:\Users\analyst\AppData\Roaming\Overlord\agent.exe",
+                    r"C:\Temp\ovd_test.exe",
+                    r"C:\Temp\agent-windows-amd64-test.exe",
+                    r"C:\Temp\svchost-windows-amd64-test.exe",
+                ),
+                (
+                    r"C:\Windows\System32\svchost.exe",
+                    r"C:\Users\analyst\AppData\Local\Temp\svchost.exe",
+                    r"C:\Temp\agent.exe",
+                    r"C:\Users\analyst\AppData\Roaming\Overlord\svchost.exe",
+                    r"C:\Users\analyst\AppData\Roaming\Microsoft\DeviceSync\agent.exe",
+                    r"C:\Users\analyst\AppData\Roaming\Microsoft\DeviceSync\svchost.exe.bak",
+                ),
+            ),
+            "n-able_n-central": (
+                (
+                    r"C:\Program Files (x86)\N-able Technologies\Windows Agent\bin\agent.exe",
+                    r"C:\Temp\AgentMaint.exe",
+                    r"C:\Temp\msp-agent-core.exe",
+                ),
+                (
+                    r"C:\Temp\agent.exe",
+                    r"C:\Program Files\Monitic\agent.exe",
+                ),
+            ),
+        }
+        for source_id, (accepted, rejected) in cases.items():
+            for artifact in ("MFT", "Amcache"):
+                for expected, paths in ((True, accepted), (False, rejected)):
+                    for path in paths:
+                        with self.subTest(source=source_id, artifact=artifact, path=path):
+                            case = {
+                                "Artifact": artifact, "EntryType": "File",
+                                "FileName": path.rsplit("\\", 1)[-1], "OSPath": path,
+                            }
+                            self.assertEqual(expected, replay_mft.rule_matches_case(
+                                by_source[source_id], case))
+
+    def test_lolrmm_generic_names_without_source_paths_are_filtered(self):
+        generated, report = sync_mft_lolrmm.build_generated_rules([
+            {"Name": "Example", "LolRMMLink": "https://lolrmm.io/tools/example",
+             "PathRegex": r"^svchost\.exe$|.*\\agent\.exe$"},
+        ], {"example": "DR-MFT-RMM-999"})
+        self.assertEqual([], generated)
+        self.assertEqual("Excluded", report[0]["Status"])
+        self.assertEqual(
+            r"^svchost\.exe$|^agent\.exe$", report[0]["FilteredFilenameRegex"])
+
+    def test_lolrmm_duplicate_source_rows_keep_filename_path_pairs(self):
+        rows = [
+            {"Name": "Example", "LolRMMLink": "https://lolrmm.io/tools/example",
+             "PathRegex": pattern}
+            for pattern in (
+                r"C:\\ProductOne\\agent\.exe$",
+                r"C:\\ProductTwo\\svchost\.exe$",
+                r"C:\\ProductThree\\agent\.exe$|^agent\.exe$|^ExampleTool\.exe$",
+            )
+        ]
+        generated, _ = sync_mft_lolrmm.build_generated_rules(
+            rows, {"example": "DR-MFT-RMM-999"})
+        self.assertEqual(1, len(generated))
+        for path, expected in (
+                (r"C:\ProductOne\agent.exe", True),
+                (r"C:\ProductTwo\svchost.exe", True),
+                (r"C:\ProductThree\AGENT.EXE", True),
+                (r"C:\Temp\ExampleTool.exe", True),
+                (r"C:\ProductOne\svchost.exe", False),
+                (r"C:\ProductTwo\agent.exe", False),
+                (r"C:\Temp\agent.exe", False)):
+            with self.subTest(path=path):
+                self.assertEqual(expected, replay_mft.rule_matches_case(
+                    generated[0], {"Artifact": "MFT", "EntryType": "File",
+                                   "FileName": path.rsplit("\\", 1)[-1], "OSPath": path}))
 
     def test_lolrmm_generated_rules_are_safe_and_attributable(self):
         generated = [
