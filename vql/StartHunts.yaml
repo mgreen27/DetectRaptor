@@ -30,6 +30,7 @@ parameters:
         DetectRaptor.Windows.Detection.MFT,,,,
         DetectRaptor.Generic.Detection.YaraFile,,,,
         DetectRaptor.Generic.Detection.BrowserExtensions,,,,
+        DetectRaptor.Linux.Detection.WebhistoryLinux,,,,
         DetectRaptor.Windows.Detection.Bootloaders,,,,
         DetectRaptor.Windows.Detection.Powershell.PSReadline,,,,
         DetectRaptor.Windows.Detection.LolDrivers,,,,
