@@ -259,6 +259,7 @@ DR-MFT-RMM-126,COVERAGE-DR-MFT-RMM-126,MFT,File,mwcliun.exe,C:\Replay\mwcliun.ex
 DR-MFT-RMM-127,COVERAGE-DR-MFT-RMM-127,MFT,File,pcvisit-easysupport.exe,C:\Replay\pcvisit-easysupport.exe,True,
 DR-MFT-RMM-128,COVERAGE-DR-MFT-RMM-128,MFT,File,PDQConnectUpdater-.msi,C:\Replay\PDQConnectUpdater-.msi,True,
 DR-MFT-RMM-129,COVERAGE-DR-MFT-RMM-129,MFT,File,Pilixo_Installer.exe,C:\Replay\Pilixo_Installer.exe,True,
+DR-MFT-RMM-394,COVERAGE-DR-MFT-RMM-394,MFT,File,NSecRTS.exe,C:\Replay\NSecRTS.exe,True,
 DR-MFT-RMM-130,COVERAGE-DR-MFT-RMM-130,MFT,File,pocketcloud.exe,C:\Replay\pocketcloud.exe,True,
 DR-MFT-RMM-131,COVERAGE-DR-MFT-RMM-131,MFT,File,pocketcloudservice.exe,C:\Replay\pocketcloudservice.exe,True,DR-MFT-RMM-130
 DR-MFT-RMM-308,COVERAGE-DR-MFT-RMM-308,MFT,File,XSightService.exe,C:\Replay\XSightService.exe,True,

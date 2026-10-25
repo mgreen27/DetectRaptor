@@ -209,6 +209,7 @@ pcnow,Pcnow,Generated,DR-MFT-RMM-126,3,^mwcliun\.exe$|^pcnmgr\.exe$|^webexpcnow\
 pcvisit,Pcvisit,Generated,DR-MFT-RMM-127,4,^pcvisit-easysupport\.exe$|^pcvisit\.exe$|^pcvisit_client\.exe$|^pcvisit_service_client\.exe$,,,1
 pdq_connect,PDQ Connect,Generated,DR-MFT-RMM-128,2,^PDQConnectUpdater-.*\.msi$|^pdq-connect.*\.exe$,,,1
 pilixo,Pilixo,Generated,DR-MFT-RMM-129,2,^Pilixo_Installer.*\.exe$|^rdp\.exe$,,,1
+ping32,Ping32,Generated,DR-MFT-RMM-394,1,^NSecRTS\.exe$,^PCinfo\.dll$,Filtered ambiguous or non-specific filename indicators,1
 pitunnel,PiTunnel,Excluded,DR-MFT-RMM-307,0,,,No safe Windows filename indicator,1
 pocket_cloud__wyse_,Pocket Cloud (Wyse),Generated,DR-MFT-RMM-130,2,^pocketcloud.*\.exe$|^pocketcloudservice\.exe$,,,1
 pocket_controller,Pocket Controller,Generated,DR-MFT-RMM-131,3,^pocketcloudservice\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,,,1
@@ -319,6 +320,7 @@ visual_studio_dev_tunnel,Visual Studio Dev Tunnel,Excluded,DR-MFT-RMM-343,0,,,No
 vizor,VIZOR,Excluded,DR-MFT-RMM-344,0,,,No safe Windows filename indicator,1
 vnc,VNC,Generated,DR-MFT-RMM-202,7,^vncserver\.exe$|^vncserverui\.exe$|^vncviewer\.exe$|^winvnc.*\.exe$|^winvnc\.exe$|^winvncsc\.exe$|^winwvc\.exe$,,,1
 vnc_connect,VNC Connect,Excluded,DR-MFT-RMM-345,0,,,No safe Windows filename indicator,1
+vs_code_remote_tunnels,VS Code Remote Tunnels,Excluded,DR-MFT-RMM-395,0,,,No safe Windows filename indicator,1
 webex__remote_access_,WebEx (Remote Access),Excluded,DR-MFT-RMM-346,0,,,No safe Windows filename indicator,1
 webrdp,WebRDP,Generated,DR-MFT-RMM-203,1,^webrdp\.exe$,,,1
 weezo,Weezo,Generated,DR-MFT-RMM-204,3,^weezo setup.*\.exe$|^weezo\.exe$|^weezohttpd\.exe$,,,1

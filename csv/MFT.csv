@@ -259,6 +259,7 @@ DR-MFT-RMM-126,RMM - Pcnow,Remote Access Software,T1219,High,^mwcliun\.exe$|^pcn
 DR-MFT-RMM-127,RMM - Pcvisit,Remote Access Software,T1219,High,^pcvisit-easysupport\.exe$|^pcvisit\.exe$|^pcvisit_client\.exe$|^pcvisit_service_client\.exe$,.,,https://lolrmm.io/tools/pcvisit,Medium,Both,File,LOLRMM,pcvisit
 DR-MFT-RMM-128,RMM - PDQ Connect,Remote Access Software,T1219,Medium,^PDQConnectUpdater-.*\.msi$|^pdq-connect.*\.exe$,.,,https://lolrmm.io/tools/pdq_connect,Medium,Both,File,LOLRMM,pdq_connect
 DR-MFT-RMM-129,RMM - Pilixo,Remote Access Software,T1219,Medium,^Pilixo_Installer.*\.exe$|^rdp\.exe$,.,,https://lolrmm.io/tools/pilixo,Medium,Both,File,LOLRMM,pilixo
+DR-MFT-RMM-394,RMM - Ping32,Remote Access Software,T1219,High,^NSecRTS\.exe$,.,,https://lolrmm.io/tools/ping32,Medium,Both,File,LOLRMM,ping32
 DR-MFT-RMM-130,RMM - Pocket Cloud (Wyse),Remote Access Software,T1219,Medium,^pocketcloud.*\.exe$|^pocketcloudservice\.exe$,.,,https://lolrmm.io/tools/pocket_cloud__wyse_,Medium,Both,File,LOLRMM,pocket_cloud__wyse_
 DR-MFT-RMM-131,RMM - Pocket Controller,Remote Access Software,T1219,High,^pocketcloudservice\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,.,,https://lolrmm.io/tools/pocket_controller,Medium,Both,File,LOLRMM,pocket_controller
 DR-MFT-RMM-308,RMM - Pocket Controller (Soti Xsight),Remote Access Software,T1219,High,^XSightService\.exe$|^pocketcontroller\.exe$|^wysebrowser\.exe$,.,,https://lolrmm.io/tools/pocket_controller__soti_xsight_,Medium,Both,File,LOLRMM,pocket_controller__soti_xsight_

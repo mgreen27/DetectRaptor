@@ -223,6 +223,7 @@ pcnow,DR-MFT-RMM-126
 pcvisit,DR-MFT-RMM-127
 pdq_connect,DR-MFT-RMM-128
 pilixo,DR-MFT-RMM-129
+ping32,DR-MFT-RMM-394
 pitunnel,DR-MFT-RMM-307
 pocket_cloud__wyse_,DR-MFT-RMM-130
 pocket_controller,DR-MFT-RMM-131
@@ -338,6 +339,7 @@ visual_studio_dev_tunnel,DR-MFT-RMM-343
 vizor,DR-MFT-RMM-344
 vnc,DR-MFT-RMM-202
 vnc_connect,DR-MFT-RMM-345
+vs_code_remote_tunnels,DR-MFT-RMM-395
 webex__remote_access_,DR-MFT-RMM-346
 webrdp,DR-MFT-RMM-203
 weezo,DR-MFT-RMM-204
