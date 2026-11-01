@@ -243,7 +243,6 @@ parameters:
         DR-MFT-RMM-089,RMM - Laplink Everywhere,Remote Access Software,T1219,Medium,^OOSysAgent\.exe$|^laplink-everywhere-setup.*\.exe$|^laplink\.exe$|^laplinkeverywhere\.exe$|^llrcservice\.exe$|^serverproxyservice\.exe$,.,,https://lolrmm.io/tools/laplink_everywhere,Medium,Both,File,LOLRMM,laplink_everywhere
         DR-MFT-RMM-090,RMM - Laplink Gold,Remote Access Software,T1219,High,^laplink\.exe$|^tsircusr\.exe$,.,,https://lolrmm.io/tools/laplink_gold,Medium,Both,File,LOLRMM,laplink_gold
         DR-MFT-RMM-365,RMM - Lavawall,Remote Access Software,T1219,High,^LavawallWin\.exe$,.,,https://lolrmm.io/tools/lavawall,Medium,Both,File,LOLRMM,lavawall
-        DR-MFT-RMM-276,RMM - Level.io,Remote Access Software,T1219,High,^level-remote-control-ffmpeg\.exe$|^level-windows-amd64\.exe$|^level\.exe$,.,,https://lolrmm.io/tools/level.io,Medium,Both,File,LOLRMM,level.io
         DR-MFT-RMM-092,RMM - LiteManager,Remote Access Software,T1219,High,^ROMFUSClient\.exe$|^ROMServer\.exe$|^lmnoipserver\.exe$|^romviewer\.exe$,.,,https://lolrmm.io/tools/litemanager,Medium,Both,File,LOLRMM,litemanager
         DR-MFT-RMM-278,RMM - LocalXpose,Remote Access Software,T1219,High,^loclx\.exe$,.,,https://lolrmm.io/tools/localxpose,Medium,Both,File,LOLRMM,localxpose
         DR-MFT-RMM-094,RMM - LogMeIn rescue,Remote Access Software,T1219,Medium,^lmi_rescue\.exe$|^lmi_rescue_srv\.exe$|^support-logmeinrescue.*\.exe$|^support-logmeinrescue\.exe$,.,,https://lolrmm.io/tools/logmein_rescue,Medium,Both,File,LOLRMM,logmein_rescue

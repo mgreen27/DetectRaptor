@@ -118,7 +118,7 @@ isl_light,ISL Light,Generated,DR-MFT-RMM-269,3,^islalwaysonmonitor\.exe$|^isllig
 isl_online,ISL Online,Generated,DR-MFT-RMM-077,4,^ISLLight\.exe$|^ISLLightClient\.exe$|^islalwaysonmonitor\.exe$|^isllightservice\.exe$,,,2
 it_agent,IT Agent,Generated,DR-MFT-RMM-364,3,^ITAgentRMMSenderSL\.exe$|^ITAgentRMMSenderUpdater\.exe$|^ITAgentRMMSender\.exe$,,,1
 itarian,Itarian,Generated,DR-MFT-RMM-078,10,^ComodoRemoteControl\.exe$|^ITSMAgent\.exe$|^ITSMService\.exe$|^ITarianRemoteAccessSetup\.exe$|^ItsmRsp\.exe$|^RAccess\.exe$|^RDesktop\.exe$|^RHost\.exe$|^RViewer\.exe$|^RmmService\.exe$,,,1
-itsupport247__connectwise_,ITSupport247 (ConnectWise),Generated,DR-MFT-RMM-079,1,^saazapsc\.exe$,,,2
+itsupport247__connectwise_,ITSupport247 (ConnectWise),Generated,DR-MFT-RMM-079,1,^saazapsc\.exe$,,,1
 ivanti_remote_control,Ivanti Remote Control,Generated,DR-MFT-RMM-080,3,^AgentlessRC\.exe$|^ArcUI\.exe$|^IvantiRemoteControl\.exe$,,,1
 jollysfastvnc,JollysFastVNC,Excluded,DR-MFT-RMM-270,0,,,No safe Windows filename indicator,1
 jump_cloud,Jump Cloud,Generated,DR-MFT-RMM-081,1,^JumpCloud.*\.exe$,,,1
@@ -134,7 +134,6 @@ landesk,LANDesk,Generated,DR-MFT-RMM-088,7,^issuser\.exe$|^softmon\.exe$|^tmcsvc
 laplink_everywhere,Laplink Everywhere,Generated,DR-MFT-RMM-089,6,^OOSysAgent\.exe$|^laplink-everywhere-setup.*\.exe$|^laplink\.exe$|^laplinkeverywhere\.exe$|^llrcservice\.exe$|^serverproxyservice\.exe$,,,1
 laplink_gold,Laplink Gold,Generated,DR-MFT-RMM-090,2,^laplink\.exe$|^tsircusr\.exe$,,,1
 lavawall,Lavawall,Generated,DR-MFT-RMM-365,1,^LavawallWin\.exe$,,,1
-level.io,Level.io,Generated,DR-MFT-RMM-276,3,^level-remote-control-ffmpeg\.exe$|^level-windows-amd64\.exe$|^level\.exe$,,,2
 lightrmmagent,LightRmmAgent,Excluded,DR-MFT-RMM-366,0,,,No safe Windows filename indicator,1
 litemanager,LiteManager,Generated,DR-MFT-RMM-092,4,^ROMFUSClient\.exe$|^ROMServer\.exe$|^lmnoipserver\.exe$|^romviewer\.exe$,,,2
 localxpose,LocalXpose,Generated,DR-MFT-RMM-278,1,^loclx\.exe$,,,1
@@ -229,6 +228,7 @@ rdcman,RDCMan,Generated,DR-MFT-RMM-314,2,^RDCMan-x86\.exe$|^RDCMan\.exe$,,,1
 rdp2tcp,rdp2tcp,Generated,DR-MFT-RMM-138,1,^rdp2tcp\.exe$,,,1
 rdpview,RDPView,Excluded,DR-MFT-RMM-139,0,,,Duplicate and misattributed dwrcs.exe indicator; the binary is a SolarWinds Dameware component already covered by the canonical Dameware rule,1
 rdpwrap,rdpwrap,Generated,DR-MFT-RMM-140,3,^RDPCheck\.exe$|^RDPConf\.exe$|^RDPWInst\.exe$,,,1
+rdviewer,RdViewer,Excluded,DR-MFT-RMM-396,0,,,No safe Windows filename indicator,1
 realvnc,RealVNC,Excluded,DR-MFT-RMM-315,0,,,No safe Windows filename indicator,1
 remcos,Remcos,Generated,DR-MFT-RMM-144,1,^remcos.*\.exe$,,,1
 remmina,Remmina,Excluded,DR-MFT-RMM-316,0,,,No safe Windows filename indicator,1
@@ -285,6 +285,7 @@ splashtop,Splashtop,Generated,DR-MFT-RMM-331,1,^strwinclt\.exe$,,,1
 splashtop__beta_,Splashtop (Beta),Generated,DR-MFT-RMM-332,4,^SRManager\.exe$|^SRServer\.exe$|^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$,,,1
 splashtop_remote,Splashtop Remote,Generated,DR-MFT-RMM-179,7,^SplashtopSOS\.exe$|^Splashtop_Streamer_Windows.*\.exe$|^sragent\.exe$|^srmanager\.exe$|^srserver\.exe$|^srservice\.exe$|^strwinclt\.exe$,,,1
 spyanywhere,SpyAnywhere,Generated,DR-MFT-RMM-180,1,^sysdiag\.exe$,,,1
+stifler__2pint_software_,StifleR (2Pint Software),Excluded,DR-MFT-RMM-397,0,,,No safe Windows filename indicator,1
 sunlogin,SunLogin,Generated,DR-MFT-RMM-181,3,^OrayRemoteService\.exe$|^OrayRemoteShell\.exe$|^sunlogin.*\.exe$,,,1
 superops,SuperOps,Generated,DR-MFT-RMM-182,2,^superops\.exe$|^superopsticket\.exe$,,,1
 superputty,SuperPuTTY,Generated,DR-MFT-RMM-183,1,^superputty\.exe$,,,1
