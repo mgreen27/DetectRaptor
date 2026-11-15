@@ -1,3 +1,107 @@
+rule VOLEXITY_Exploit_Log_Ivanti_Rce : CVE_2026_104935 FILE MEMORY {
+    meta:
+		description = "Identifies files or memory regions containing request headers matching RCE vulnerability for Ivanti."
+		author = "threatintel@volexity.com"
+		id = "f1866c63-bb33-5747-b50c-c6111e44de2b"
+		date = "2026-10-12"
+		modified = "2026-10-12"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2026/2026-10-13 Ivanti/rules.yar#L1-L22"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		logic_hash = "4b17ac31a7e824bae5ef33a5fb16142764193e151348cbaa0cccda3fe2c09850"
+		score = 75
+		quality = 80
+		tags = "CVE_2026_104935, FILE, MEMORY"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20261012"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 13503
+		version = 1
+
+	strings:
+		$s1 = "X-DSCGI-PATH: /home/webserver/htdocs/dana/fb/smb/wu.cgi" ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Exploit_Py_Ivanti_Oct26 : CVE_2026_104935 UTA0576 MEMORY {
+    meta:
+		description = "Detection for EoP vuln implementation in Python used by UTA0576."
+		author = "threatintel@volexity.com"
+		id = "de9fa239-09db-5851-af56-74a616c3a57a"
+		date = "2026-10-10"
+		modified = "2026-10-12"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2026/2026-10-13 Ivanti/rules.yar#L24-L51"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "25b95f47359c327e3a5ae5ac5cd147f8d9afd98092faf136822ee287e25e3dc8"
+		logic_hash = "051f0d737a70836f27f4333f647d91572fc327be219c8dcbe5b62b0042b81312"
+		score = 75
+		quality = 80
+		tags = "CVE_2026_104935, UTA0576, MEMORY"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "memory"
+		severity = "critical"
+		report1 = "TIB-20261012"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 13500
+		version = 3
+
+	strings:
+		$magic1 = "target dsinvoked broker is busy; stop retries and clear its current child" ascii
+		$magic2 = "PATCH_LOCATOR arch=%s offset=%s sha256=%s encoding=%s open=%s call=%s evidence=%s"
+		$pycombo1 = "import os,socket,time,_frozen_importlib_external as ie"
+		$pycombo2 = "def say(*x): print(*x,flush=True)"
+
+	condition:
+		any of ( $magic* ) or all of ( $pycombo* )
+}
+rule VOLEXITY_Apt_Malware_Js_Longtale : LONGTALE JUNGLEBAMBOO FILE MEMORY {
+    meta:
+		description = "Detection for LONGTALE, a chrome extension malware."
+		author = "threatintel@volexity.com"
+		id = "b97eaf48-8c4e-5fea-af7c-d1f559d334af"
+		date = "2026-09-08"
+		modified = "2026-09-08"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2026/2026-09-09 Chrome/rules.yar#L1-L37"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "5eb5645511b00e4f4d73125654eeb3a3930fcf09c65685dc7f03f725331492e3"
+		logic_hash = "194266bc6710943a421f1e3a65cf5345b061edd3777a9f555fa435fef41e7baa"
+		score = 75
+		quality = 80
+		tags = "LONGTALE, JUNGLEBAMBOO, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		report1 = "TIB-20260908B"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 13428
+		version = 2
+
+	strings:
+		$f1 = "getPublicIP" ascii
+		$f2 = "captureCookies" ascii
+		$f3 = "recordFetch" ascii
+		$f4 = "injectRecorder" ascii
+		$f5 = "captureVisibleTab" ascii
+		$f6 = "buildIngestPayload" ascii
+		$case1 = "SET_KEYWORDS"
+		$case2 = "GET_KEYWORDS"
+		$case3 = "SCREENSHOT_NOW"
+		$case4 = "FETCH_HISTORY"
+		$case5 = "CAPTURE_STORAGE"
+		$case6 = "CAPTURE_COOKIES"
+		$case7 = "TOGGLE_RECORDING"
+
+	condition:
+		all of ( $f* ) or all of ( $case* )
+}
 rule VOLEXITY_Apt_Malware_Any_Dotnet_Aot_Plenet : VERDANTBAMBOO PLENET FILE MEMORY {
     meta:
 		description = "Detect PLENET, a multiplatform malware compile with native AOT."
@@ -353,213 +457,6 @@ rule VOLEXITY_Apt_Malware_Linux_Rootrun : UTA0533 ROOTRUN FILE MEMORY {
 	condition:
 		all of them
 }
-rule VOLEXITY_Exploit_Log_Ivanti_Rce : CVE_2026_104935 FILE MEMORY {
-    meta:
-		description = "Identifies files or memory regions containing request headers matching RCE vulnerability for Ivanti."
-		author = "threatintel@volexity.com"
-		id = "f1866c63-bb33-5747-b50c-c6111e44de2b"
-		date = "2026-10-12"
-		modified = "2026-10-12"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2026/2026-10-13 Ivanti/rules.yar#L1-L22"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		logic_hash = "4b17ac31a7e824bae5ef33a5fb16142764193e151348cbaa0cccda3fe2c09850"
-		score = 75
-		quality = 80
-		tags = "CVE_2026_104935, FILE, MEMORY"
-		os = "linux"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20261012"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 13503
-		version = 1
-
-	strings:
-		$s1 = "X-DSCGI-PATH: /home/webserver/htdocs/dana/fb/smb/wu.cgi" ascii
-
-	condition:
-		$s1
-}
-rule VOLEXITY_Exploit_Py_Ivanti_Oct26 : CVE_2026_104935 UTA0576 MEMORY {
-    meta:
-		description = "Detection for EoP vuln implementation in Python used by UTA0576."
-		author = "threatintel@volexity.com"
-		id = "de9fa239-09db-5851-af56-74a616c3a57a"
-		date = "2026-10-10"
-		modified = "2026-10-12"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2026/2026-10-13 Ivanti/rules.yar#L24-L51"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "25b95f47359c327e3a5ae5ac5cd147f8d9afd98092faf136822ee287e25e3dc8"
-		logic_hash = "051f0d737a70836f27f4333f647d91572fc327be219c8dcbe5b62b0042b81312"
-		score = 75
-		quality = 80
-		tags = "CVE_2026_104935, UTA0576, MEMORY"
-		os = "linux"
-		os_arch = "all"
-		scan_context = "memory"
-		severity = "critical"
-		report1 = "TIB-20261012"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 13500
-		version = 3
-
-	strings:
-		$magic1 = "target dsinvoked broker is busy; stop retries and clear its current child" ascii
-		$magic2 = "PATCH_LOCATOR arch=%s offset=%s sha256=%s encoding=%s open=%s call=%s evidence=%s"
-		$pycombo1 = "import os,socket,time,_frozen_importlib_external as ie"
-		$pycombo2 = "def say(*x): print(*x,flush=True)"
-
-	condition:
-		any of ( $magic* ) or all of ( $pycombo* )
-}
-rule VOLEXITY_Apt_Malware_Js_Longtale : LONGTALE JUNGLEBAMBOO FILE MEMORY {
-    meta:
-		description = "Detection for LONGTALE, a chrome extension malware."
-		author = "threatintel@volexity.com"
-		id = "b97eaf48-8c4e-5fea-af7c-d1f559d334af"
-		date = "2026-09-08"
-		modified = "2026-09-08"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2026/2026-09-09 Chrome/rules.yar#L1-L37"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "5eb5645511b00e4f4d73125654eeb3a3930fcf09c65685dc7f03f725331492e3"
-		logic_hash = "194266bc6710943a421f1e3a65cf5345b061edd3777a9f555fa435fef41e7baa"
-		score = 75
-		quality = 80
-		tags = "LONGTALE, JUNGLEBAMBOO, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		report1 = "TIB-20260908B"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 13428
-		version = 2
-
-	strings:
-		$f1 = "getPublicIP" ascii
-		$f2 = "captureCookies" ascii
-		$f3 = "recordFetch" ascii
-		$f4 = "injectRecorder" ascii
-		$f5 = "captureVisibleTab" ascii
-		$f6 = "buildIngestPayload" ascii
-		$case1 = "SET_KEYWORDS"
-		$case2 = "GET_KEYWORDS"
-		$case3 = "SCREENSHOT_NOW"
-		$case4 = "FETCH_HISTORY"
-		$case5 = "CAPTURE_STORAGE"
-		$case6 = "CAPTURE_COOKIES"
-		$case7 = "TOGGLE_RECORDING"
-
-	condition:
-		all of ( $f* ) or all of ( $case* )
-}
-rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
-    meta:
-		description = "Detect the UPSTYLE webshell."
-		author = "threatintel@volexity.com"
-		id = "45726f35-8b3e-5095-b145-9e7f6da6838b"
-		date = "2024-04-11"
-		modified = "2024-04-12"
-		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
-		hash = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
-		hash = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
-		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
-		score = 75
-		quality = 80
-		tags = "UTA0218, FILE, MEMORY"
-		os = "linux"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10429
-		version = 2
-
-	strings:
-		$stage1_str1 = "/opt/pancfg/mgmt/licenses/PA_VM"
-		$stage1_str2 = "exec(base64."
-		$stage2_str1 = "signal.signal(signal.SIGTERM,stop)"
-		$stage2_str2 = "exec(base64."
-		$stage3_str1 = "write(\"/*\"+output+\"*/\")"
-		$stage3_str2 = "SHELL_PATTERN"
-
-	condition:
-		all of ( $stage1* ) or all of ( $stage2* ) or all of ( $stage3* )
-}
-rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
-    meta:
-		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
-		author = "threatintel@volexity.com"
-		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
-		date = "2024-04-10"
-		modified = "2024-04-15"
-		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
-		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
-		score = 50
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "high"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10424
-		version = 4
-
-	strings:
-		$proj_1 = "/home/jarischf/"
-
-	condition:
-		any of ( $proj_* )
-}
-rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
-    meta:
-		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
-		author = "threatintel@volexity.com"
-		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
-		date = "2024-04-10"
-		modified = "2024-04-12"
-		reference = "TIB-20240412"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
-		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 10423
-		version = 5
-
-	strings:
-		$fun_1 = "createLocalPortForwardingCallback"
-		$fun_2 = "createReversePortForwardingCallback"
-		$fun_3 = "createPasswordHandler"
-		$fun_4 = "createPublicKeyHandler"
-		$fun_5 = "createSFTPHandler"
-		$fun_6 = "dialHomeAndListen"
-		$fun_7 = "createExtraInfoHandler"
-		$fun_8 = "createSSHSessionHandler"
-		$fun_9 = "createReversePortForwardingCallback"
-		$proj_1 = "github.com/Fahrj/reverse-ssh"
-
-	condition:
-		any of ( $proj_* ) or 4 of ( $fun_* )
-}
 rule VOLEXITY_Apt_Malware_Macos_Vpnclient_Cc_Oct23 : CHARMINGCYPRESS FILE MEMORY {
     meta:
 		description = "Detection for fake macOS VPN client used by CharmingCypress."
@@ -792,7 +689,7 @@ rule VOLEXITY_Apt_Malware_Elf_Catchdns_Aug20_Memory : DRIFTINGBAMBOO FILE MEMORY
 		hash = "4f3d35f4f8b810362cbd4c59bfe5a961e559fe5713c9478294ccb3af2d306515"
 		logic_hash = "241fd5884b27269b9b07b891fb9e226c33c468276df796f91af98a68765a8b0d"
 		score = 75
-		quality = 55
+		quality = 30
 		tags = "DRIFTINGBAMBOO, FILE, MEMORY"
 		os = "linux"
 		os_arch = "all"
@@ -1074,6 +971,217 @@ rule VOLEXITY_Malware_Golang_Discordc2_Bmdyy : FILE MEMORY {
 	condition:
 		$s1
 }
+rule VOLEXITY_Apt_Malware_Py_Upstyle : UTA0218 FILE MEMORY {
+    meta:
+		description = "Detect the UPSTYLE webshell."
+		author = "threatintel@volexity.com"
+		id = "45726f35-8b3e-5095-b145-9e7f6da6838b"
+		date = "2024-04-11"
+		modified = "2024-04-12"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L1-L34"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "3de2a4392b8715bad070b2ae12243f166ead37830f7c6d24e778985927f9caac"
+		hash = "0d59d7bddac6c22230187ef6cf7fa22bca93759edc6f9127c41dc28a2cea19d8"
+		hash = "4dd4bd027f060f325bf6a90d01bfcf4e7751a3775ad0246beacc6eb2bad5ec6f"
+		logic_hash = "51923600b23d23f4ce29eac7f5ab9f7e1ddb45bed5f6727ddec4dcb75872e473"
+		score = 75
+		quality = 55
+		tags = "UTA0218, FILE, MEMORY"
+		os = "linux"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10429
+		version = 2
+
+	strings:
+		$stage1_str1 = "/opt/pancfg/mgmt/licenses/PA_VM"
+		$stage1_str2 = "exec(base64."
+		$stage2_str1 = "signal.signal(signal.SIGTERM,stop)"
+		$stage2_str2 = "exec(base64."
+		$stage3_str1 = "write(\"/*\"+output+\"*/\")"
+		$stage3_str2 = "SHELL_PATTERN"
+
+	condition:
+		all of ( $stage1* ) or all of ( $stage2* ) or all of ( $stage3* )
+}
+rule VOLEXITY_Susp_Any_Jarischf_User_Path : FILE MEMORY {
+    meta:
+		description = "Detects paths embedded in samples in released projects written by Ferdinand Jarisch, a pentester in AISEC. These tools are sometimes used by attackers in real world intrusions."
+		author = "threatintel@volexity.com"
+		id = "062a6fdb-c516-5643-9c7c-deff32eeb95e"
+		date = "2024-04-10"
+		modified = "2024-04-15"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L59-L81"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
+		logic_hash = "574d5b1fadb91c39251600e7d73d4993d4b16565bd1427a0e8d6ed4e7905ab54"
+		score = 50
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "high"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10424
+		version = 4
+
+	strings:
+		$proj_1 = "/home/jarischf/"
+
+	condition:
+		any of ( $proj_* )
+}
+rule VOLEXITY_Hacktool_Golang_Reversessh_Fahrj : FILE MEMORY {
+    meta:
+		description = "Detects a reverse SSH utility available on GitHub. Attackers may use this tool or similar tools in post-exploitation activity."
+		author = "threatintel@volexity.com"
+		id = "332e323f-cb16-5aa2-8b66-f3d6d50d94f2"
+		date = "2024-04-10"
+		modified = "2024-04-12"
+		reference = "TIB-20240412"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2024/2024-04-12 Palo Alto Networks GlobalProtect/indicators/rules.yar#L82-L116"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "161fd76c83e557269bee39a57baa2ccbbac679f59d9adff1e1b73b0f4bb277a6"
+		logic_hash = "38b40cc7fc1e601da2c7a825f1c2eff209093875a5829ddd2f4c5ad438d660f8"
+		score = 75
+		quality = 55
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 10423
+		version = 5
+
+	strings:
+		$fun_1 = "createLocalPortForwardingCallback"
+		$fun_2 = "createReversePortForwardingCallback"
+		$fun_3 = "createPasswordHandler"
+		$fun_4 = "createPublicKeyHandler"
+		$fun_5 = "createSFTPHandler"
+		$fun_6 = "dialHomeAndListen"
+		$fun_7 = "createExtraInfoHandler"
+		$fun_8 = "createSSHSessionHandler"
+		$fun_9 = "createReversePortForwardingCallback"
+		$proj_1 = "github.com/Fahrj/reverse-ssh"
+
+	condition:
+		any of ( $proj_* ) or 4 of ( $fun_* )
+}
+rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
+    meta:
+		description = "A malicious Chrome browser extension used by the SharpPine threat actor to steal Gmail data from a victim."
+		author = "threatintel@volexity.com"
+		id = "61b5176a-ff73-5fce-bc70-c9e09bb5afed"
+		date = "2021-09-14"
+		modified = "2025-05-21"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
+		hash = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
+		hash = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
+		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
+		score = 75
+		quality = 80
+		tags = "SHARPPINE, FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 5916
+		version = 5
+
+	strings:
+		$s1 = "\"mode=attach&name=\"" ascii
+		$s2 = "\"mode=new&mid=\"" ascii
+		$s3 = "\"mode=attlist\"" ascii
+		$s4 = "\"mode=list\"" ascii
+		$s5 = "\"mode=domain\"" ascii
+		$s6 = "\"mode=black\"" ascii
+		$s7 = "\"mode=newD&d=\"" ascii
+		$mark1 = "chrome.runtime.onMessage.addListener" ascii
+		$mark2 = "chrome.webNavigation.onCompleted.addListener" ascii
+		$enc1 = "function BSue(string){" ascii
+		$enc2 = "function BSE(input){" ascii
+		$enc3 = "function bin2hex(byteArray)" ascii
+		$xhr1 = ".send(\"mode=cd1" ascii
+		$xhr2 = ".send(\"mode=black" ascii
+		$xhr3 = ".send(\"mode=domain" ascii
+		$xhr4 = ".send(\"mode=list" ascii
+		$manifest1 = "\"description\":\"advanced font\"," ascii
+		$manifest2 = "\"scripts\":[\"bg.js\"]" ascii
+		$manifest3 = "\"devtools_page\":\"dev.html\"" ascii
+
+	condition:
+		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
+}
+rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
+    meta:
+		description = "Detects CONVERGE - a file upload webshell observed in incident involving compromise of Confluence server via CVE-2022-26134."
+		author = "threatintel@volexity.com"
+		id = "2a74678e-cb00-567c-a2e0-2e095f3e5ee8"
+		date = "2022-06-01"
+		modified = "2024-09-20"
+		reference = "https://github.com/volexity/threat-intel"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY, CVE-2022-26134"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6788
+		version = 5
+
+	strings:
+		$s1 = "if (request.getParameter(\"name\")!=null && request.getParameter(\"name\").length()!=0){" ascii
+
+	condition:
+		$s1
+}
+rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
+    meta:
+		description = "Detects the RealCMD webshell, one of the payloads for BEHINDER."
+		author = "threatintel@volexity.com"
+		id = "60b30ccc-bcfa-51e6-a3f5-88037d19213e"
+		date = "2022-06-01"
+		modified = "2024-07-30"
+		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
+		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
+		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
+		hash = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
+		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
+		score = 75
+		quality = 80
+		tags = "FILE, MEMORY"
+		os = "all"
+		os_arch = "all"
+		scan_context = "file,memory"
+		severity = "critical"
+		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
+		rule_id = 6786
+		version = 4
+
+	strings:
+		$fn1 = "runCmd" wide ascii fullword
+		$fn2 = "RealCMD" ascii wide fullword
+		$fn3 = "buildJson" ascii wide fullword
+
+	condition:
+		all of ( $fn* )
+}
 rule VOLEXITY_Webshell_Java_Behinder_Shellservice : FILE MEMORY {
     meta:
 		description = "Looks for artifacts generated (generally seen in .class files) related to the Behinder webshell."
@@ -1184,65 +1292,6 @@ rule VOLEXITY_Malware_Any_Pupyrat_B : FILE MEMORY {
 	condition:
 		any of ( $elf* ) or all of ( $pupy* ) or all of ( $s* )
 }
-rule VOLEXITY_Webshell_Jsp_Converge : FILE MEMORY CVE_2022_26134 {
-    meta:
-		description = "Detects CONVERGE - a file upload webshell observed in incident involving compromise of Confluence server via CVE-2022-26134."
-		author = "threatintel@volexity.com"
-		id = "2a74678e-cb00-567c-a2e0-2e095f3e5ee8"
-		date = "2022-06-01"
-		modified = "2024-09-20"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L1-L21"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		logic_hash = "bb48516342eddd48c35e6db0eb74f95e116dc723503552b99ba721b5bdb391e5"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY, CVE-2022-26134"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6788
-		version = 5
-
-	strings:
-		$s1 = "if (request.getParameter(\"name\")!=null && request.getParameter(\"name\").length()!=0){" ascii
-
-	condition:
-		$s1
-}
-rule VOLEXITY_Webshell_Java_Realcmd : FILE MEMORY {
-    meta:
-		description = "Detects the RealCMD webshell, one of the payloads for BEHINDER."
-		author = "threatintel@volexity.com"
-		id = "60b30ccc-bcfa-51e6-a3f5-88037d19213e"
-		date = "2022-06-01"
-		modified = "2024-07-30"
-		reference = "https://github.com/Freakboy/Behinder/blob/master/src/main/java/vip/youwe/sheller/payload/java/RealCMD.java"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2022/2022-06-02 Active Exploitation Of Confluence 0-day/indicators/yara.yar#L61-L84"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "a9a30455d6f3a0a8cd0274ae954aa41674b6fd52877fafc84a9cb833fd8858f6"
-		logic_hash = "e09f2a23674fd73296dd4d1fabf1a2c812bfe69ff02abc96a4be35af6a18e512"
-		score = 75
-		quality = 80
-		tags = "FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 6786
-		version = 4
-
-	strings:
-		$fn1 = "runCmd" wide ascii fullword
-		$fn2 = "RealCMD" ascii wide fullword
-		$fn3 = "buildJson" ascii wide fullword
-
-	condition:
-		all of ( $fn* )
-}
 rule VOLEXITY_Webshell_Jsp_Godzilla : FILE MEMORY {
     meta:
 		description = "Detects the JSP implementation of the Godzilla Webshell."
@@ -1306,55 +1355,6 @@ rule VOLEXITY_Susp_Jsp_General_Runtime_Exec_Req : FILE MEMORY {
 
 	condition:
 		$s1
-}
-rule VOLEXITY_Apt_Malware_Js_Sharpext : SHARPPINE FILE MEMORY {
-    meta:
-		description = "A malicious Chrome browser extension used by the SharpPine threat actor to steal Gmail data from a victim."
-		author = "threatintel@volexity.com"
-		id = "61b5176a-ff73-5fce-bc70-c9e09bb5afed"
-		date = "2021-09-14"
-		modified = "2025-05-21"
-		reference = "https://github.com/volexity/threat-intel"
-		source_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/2022/2022-07-28 SharpTongue SharpTongue Deploys Clever Mail-Stealing Browser Extension SHARPEXT/yara.yar#L1-L52"
-		license_url = "https://github.com/volexity/threat-intel/blob/683296427d8c7f08938ce6c587f618c938cf4c54/LICENSE.txt"
-		hash = "1c9664513fe226beb53268b58b11dacc35b80a12c50c22b76382304badf4eb00"
-		hash = "6025c66c2eaae30c0349731beb8a95f8a5ba1180c5481e9a49d474f4e1bb76a4"
-		hash = "6594b75939bcdab4253172f0fa9066c8aee2fa4911bd5a03421aeb7edcd9c90c"
-		logic_hash = "0ed58c8646582ee36aeac650fac02d1e4962d45c0f6a24783c021d9267bed192"
-		score = 75
-		quality = 80
-		tags = "SHARPPINE, FILE, MEMORY"
-		os = "all"
-		os_arch = "all"
-		scan_context = "file,memory"
-		severity = "critical"
-		license = "See license at https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
-		rule_id = 5916
-		version = 5
-
-	strings:
-		$s1 = "\"mode=attach&name=\"" ascii
-		$s2 = "\"mode=new&mid=\"" ascii
-		$s3 = "\"mode=attlist\"" ascii
-		$s4 = "\"mode=list\"" ascii
-		$s5 = "\"mode=domain\"" ascii
-		$s6 = "\"mode=black\"" ascii
-		$s7 = "\"mode=newD&d=\"" ascii
-		$mark1 = "chrome.runtime.onMessage.addListener" ascii
-		$mark2 = "chrome.webNavigation.onCompleted.addListener" ascii
-		$enc1 = "function BSue(string){" ascii
-		$enc2 = "function BSE(input){" ascii
-		$enc3 = "function bin2hex(byteArray)" ascii
-		$xhr1 = ".send(\"mode=cd1" ascii
-		$xhr2 = ".send(\"mode=black" ascii
-		$xhr3 = ".send(\"mode=domain" ascii
-		$xhr4 = ".send(\"mode=list" ascii
-		$manifest1 = "\"description\":\"advanced font\"," ascii
-		$manifest2 = "\"scripts\":[\"bg.js\"]" ascii
-		$manifest3 = "\"devtools_page\":\"dev.html\"" ascii
-
-	condition:
-		(5 of ( $s* ) and all of ( $mark* ) ) or all of ( $enc* ) or 3 of ( $xhr* ) or 2 of ( $manifest* )
 }
 rule HARFANGLAB_Nhas_Reverse_Shell_Elf_Inmem_Large {
     meta:
