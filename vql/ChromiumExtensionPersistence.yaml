@@ -10,6 +10,16 @@ description: |
   developer mode, and repairs Chromium preference integrity metadata so the
   extension is accepted at next browser start.
 
+  It also flags sideloaded extensions that masquerade as the browser. Unit 42
+  reported the Com-affiliated vishing cluster CL-CRI-1192 (Helix, UNC6671)
+  coaching victims into sideloading a Developer Mode extension named
+  "Google Chrome". The name disguises the "started debugging this browser"
+  infobar while the extension uses chrome.debugger for full remote control
+  of the browser. Sideloaded means UNPACKED or COMMAND_LINE installs, or
+  packed installs that are not from the Web Store. Policy and component
+  installs are excluded, so built-in Google, Microsoft and Brave extensions
+  do not receive the masquerade or sideloaded debugger weighting.
+
   Native Messaging Hosts are collected independently from each user's NTUSER.DAT
   using Windows.Registry.NTUser. This allows registry-only/orphaned native host
   registrations to remain visible even when no matching unpacked extension exists.
@@ -26,6 +36,10 @@ description: |
     * extensions staged from Public, Temp, Downloads, ProgramData or other
       unusual locations
     * powerful API or broad host permissions
+    * the debugger permission (Chrome DevTools Protocol access), especially
+      on sideloaded extensions
+    * sideloaded extensions named as the browser or its vendor
+      (MasqueradeNameRegex), including __MSG_ locale names
     * developer mode enabled
     * Native Messaging Host manifests/executables from suspicious paths
     * Native Messaging Host allowed_origins referencing the same unpacked
@@ -34,6 +48,7 @@ description: |
 reference:
   - https://specterops.io/blog/2026/08/13/chromium-extension-c2-persistence/
   - https://github.com/kingofthenops/silentchrome-bof
+  - https://unit42.paloaltonetworks.com/com-affiliate-vishing-attacks/
   
 type: CLIENT
 
@@ -93,6 +108,17 @@ parameters:
       installs. A match combined with location=4 is high-value because a manifest
       key can make an unpacked extension reuse a legitimate extension ID.
     default: '^$'
+
+  - name: MasqueradeNameRegex
+    type: regex
+    description: |
+      Extension names that impersonate the browser or its vendor. Anchored so
+      the whole name must be a browser/vendor name, optionally followed by a
+      generic component word: "Google Chrome" and "Chrome Update" match,
+      "Google Docs Offline" does not. Compared after __MSG_ locale resolution,
+      removal of invisible format characters and whitespace collapsing.
+      Only scored for sideloaded extensions.
+    default: '(?i)^\s*(Google\s+Chrome|Chrome|Chromium|Microsoft\s+Edge|Edge|Google|Microsoft|Brave|Opera)(\s+(Update|Updater|Helper|Service|Security))?\s*$'
 
   - name: NativeHostKeyGlob
     description: |
@@ -223,6 +249,14 @@ sources:
                       condition=Location = 8,
                       then='COMMAND_LINE',
                       else=format(format='LOCATION_%v', args=[Location])))) AS LocationName,
+          Location in (4, 8) OR (
+              Location in (1, 2, 3, 6) AND NOT FromWebStore) AS IsSideloaded,
+          if(
+              condition=ExtensionPath =~ '''^([A-Za-z]:|\\\\)''',
+              then=ExtensionPath,
+              else=path_join(
+                  components=[ProfilePath, 'Extensions', ExtensionPath],
+                  path_type='windows')) AS ExtensionDirectory,
           path_join(
               components=[ExtensionPath, 'manifest.json'],
               path_type='windows') AS ManifestPath,
@@ -260,6 +294,62 @@ sources:
       FROM stat(filename=Path, accessor=Accessor)
       WHERE Mode.IsRegular
 
+      LET LocaleMessage(Path, Key) = SELECT
+          get(item=_value, member='message') AS Message
+      FROM foreach(
+          row={
+              SELECT parse_json(
+                  data=regex_replace(
+                      source=read_file(
+                          filename=OSPath,
+                          accessor=Accessor,
+                          length=1048576),
+                      re='''(?s)^[^{]*\{''',
+                      replace='{')) AS Messages
+              FROM stat(filename=Path, accessor=Accessor)
+              WHERE Mode.IsRegular
+          },
+          query={
+              SELECT _key, _value
+              FROM items(item=Messages)
+              WHERE lowcase(string=_key) = lowcase(string=Key)
+          })
+      LIMIT 1
+
+      LET ExtensionManifests = SELECT
+          *,
+          if(
+              condition=Location in (4, 8) AND ExtensionPath,
+              then=OnDiskManifest(Path=ManifestPath)[0],
+              else=NULL) AS ManifestOnDisk
+      FROM ExtensionContext
+
+      LET ExtensionNames = SELECT
+          *,
+          if(
+              condition=Name,
+              then=Name,
+              else=get(item=ManifestOnDisk.Manifest, member='name')) AS ExtensionName,
+          if(
+              condition=Name,
+              then=get(item=_Settings, member='manifest.default_locale'),
+              else=get(item=ManifestOnDisk.Manifest, member='default_locale')) AS DefaultLocale
+      FROM ExtensionManifests
+
+      LET LocalizedNames = SELECT
+          *,
+          if(
+              condition=IsSideloaded AND DefaultLocale AND ExtensionName =~ '^__MSG_',
+              then=LocaleMessage(
+                  Path=path_join(
+                      components=[ExtensionDirectory, '_locales', DefaultLocale, 'messages.json'],
+                      path_type='windows'),
+                  Key=parse_string_with_regex(
+                      string=ExtensionName,
+                      regex='''^__MSG_(?P<Key>\w+)__$''').Key)[0].Message,
+              else=NULL) AS LocalizedName
+      FROM ExtensionNames
+
       LET Signals = SELECT
           *,
           Location = 4 AS IsUnpacked,
@@ -272,17 +362,27 @@ sources:
           ActiveAPIs =~ 'nativeMessaging' OR
               GrantedAPIs =~ 'nativeMessaging' OR
               ManifestPermissions =~ 'nativeMessaging' AS NativeMessagingPermission,
+          ActiveAPIs =~ '^debugger$' OR
+              GrantedAPIs =~ '^debugger$' OR
+              ManifestPermissions =~ '^debugger$' OR
+              get(item=ManifestOnDisk.Manifest, member='permissions') =~ '^debugger$' AS DebuggerPermission,
+          regex_replace(
+              source=regex_replace(
+                  source=if(
+                      condition=LocalizedName,
+                      then=LocalizedName,
+                      else=ExtensionName),
+                  re='''\p{Cf}''',
+                  replace=''),
+              re='''[\s\p{Z}]+''',
+              replace=' ') =~ MasqueradeNameRegex AS MasqueradeName,
           if(condition=ManifestKey, then=TRUE, else=FALSE) AS ManifestKeyPresent,
           ExtensionId =~ ExpectedStoreExtensionIdRegex AS ExpectedStoreId,
           Location = 4 AND ExtensionId =~ ExpectedStoreExtensionIdRegex AS StoreIdLoadedUnpacked,
           Location = 4 AND DeveloperMode AS UnpackedWithDeveloperMode,
           Location = 4 AND NOT EncryptedSettingsHash AS MissingEncryptedSettingsHash,
-          ManagedCopyCount(Glob=ManagedManifestGlob)[0].Count > 0 AS ManagedCopyPresent,
-          if(
-              condition=Location = 4 AND ExtensionPath,
-              then=OnDiskManifest(Path=ManifestPath)[0],
-              else=NULL) AS ManifestOnDisk
-      FROM ExtensionContext
+          ManagedCopyCount(Glob=ManagedManifestGlob)[0].Count > 0 AS ManagedCopyPresent
+      FROM LocalizedNames
 
       LET Scored = SELECT
           *,
@@ -297,9 +397,13 @@ sources:
           if(condition=IsUnpacked AND ManifestKeyPresent, then=10, else=0) +
           if(condition=IsUnpacked AND ManagedCopyPresent, then=25, else=0) +
           if(condition=StoreIdLoadedUnpacked, then=30, else=0) +
-          if(condition=MissingEncryptedSettingsHash, then=5, else=0) AS RiskScore,
+          if(condition=MissingEncryptedSettingsHash, then=5, else=0) +
+          if(condition=DebuggerPermission, then=10, else=0) +
+          if(condition=IsSideloaded AND DebuggerPermission, then=20, else=0) +
+          if(condition=IsSideloaded AND MasqueradeName, then=30, else=0) +
+          if(condition=IsSideloaded AND MasqueradeName AND DebuggerPermission, then=20, else=0) AS RiskScore,
           format(
-              format='Unpacked=%v Enabled=%v DevMode=%v SuspiciousPath=%v PowerfulAPIs=%v BroadHosts=%v NativeMessaging=%v ManifestKey=%v ExpectedStoreId=%v ManagedCopy=%v MissingEncryptedHash=%v',
+              format='Unpacked=%v Enabled=%v DevMode=%v SuspiciousPath=%v PowerfulAPIs=%v BroadHosts=%v NativeMessaging=%v ManifestKey=%v ExpectedStoreId=%v ManagedCopy=%v MissingEncryptedHash=%v Sideloaded=%v MasqueradeName=%v Debugger=%v',
               args=[IsUnpacked,
                     IsEnabled,
                     DeveloperMode,
@@ -310,7 +414,10 @@ sources:
                     ManifestKeyPresent,
                     StoreIdLoadedUnpacked,
                     ManagedCopyPresent,
-                    MissingEncryptedSettingsHash]) AS Signals
+                    MissingEncryptedSettingsHash,
+                    IsSideloaded,
+                    MasqueradeName,
+                    DebuggerPermission]) AS Signals
       FROM Signals
 
       SELECT
@@ -326,10 +433,8 @@ sources:
           Browser,
           Profile,
           ExtensionId,
-          if(
-              condition=Name,
-              then=Name,
-              else=get(item=ManifestOnDisk.Manifest, member='name')) AS ExtensionName,
+          ExtensionName,
+          LocalizedName,
           if(
               condition=Version,
               then=Version,
@@ -342,6 +447,8 @@ sources:
           DeveloperMode,
           FromWebStore,
           NativeMessagingPermission,
+          DebuggerPermission,
+          MasqueradeName,
           ActiveAPIs,
           ActiveExplicitHosts,
           ManifestKeyPresent,
