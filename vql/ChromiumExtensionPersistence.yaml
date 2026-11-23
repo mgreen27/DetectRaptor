@@ -254,12 +254,18 @@ sources:
           if(
               condition=ExtensionPath =~ '''^([A-Za-z]:|\\\\)''',
               then=ExtensionPath,
-              else=path_join(
-                  components=[ProfilePath, 'Extensions', ExtensionPath],
-                  path_type='windows')) AS ExtensionDirectory,
-          path_join(
-              components=[ExtensionPath, 'manifest.json'],
-              path_type='windows') AS ManifestPath,
+              else=if(
+                  condition=ExtensionPath,
+                  then=path_join(
+                      components=[ProfilePath, 'Extensions', ExtensionPath],
+                      path_type='windows'),
+                  else=NULL)) AS ExtensionDirectory,
+          if(
+              condition=ExtensionPath,
+              then=path_join(
+                  components=[ExtensionPath, 'manifest.json'],
+                  path_type='windows'),
+              else=NULL) AS ManifestPath,
           path_join(
               components=[ProfilePath, 'Extensions', ExtensionId, '*', 'manifest.json'],
               path_type='windows') AS ManagedManifestGlob,
@@ -339,7 +345,7 @@ sources:
       LET LocalizedNames = SELECT
           *,
           if(
-              condition=IsSideloaded AND DefaultLocale AND ExtensionName =~ '^__MSG_',
+              condition=IsSideloaded AND ExtensionDirectory AND DefaultLocale AND ExtensionName =~ '^__MSG_',
               then=LocaleMessage(
                   Path=path_join(
                       components=[ExtensionDirectory, '_locales', DefaultLocale, 'messages.json'],
@@ -353,7 +359,8 @@ sources:
       LET Signals = SELECT
           *,
           Location = 4 AS IsUnpacked,
-          State = 1 AS IsEnabled,
+          State = 1 OR (
+              NOT 'state' in _Settings AND NOT get(item=_Settings, member='disable_reasons')) AS IsEnabled,
           ExtensionPath =~ '''^[A-Za-z]:[\\/]''' AS HasAbsolutePath,
           NOT (ExtensionPath =~ '''(?i)[\\/]User Data[\\/][^\\/]+[\\/]Extensions[\\/]''') AS OutsideManagedExtensions,
           ExtensionPath =~ SuspiciousPathRegex AS SuspiciousPath,
@@ -533,7 +540,7 @@ sources:
           get(item=ManifestFile.Manifest, member='type') AS NativeHostType,
           get(item=ManifestFile.Manifest, member='allowed_origins') AS AllowedOrigins,
           if(
-              condition=NOT get(item=ManifestFile.Manifest, member='path'),
+              condition=NOT NativeHostManifestPath OR NOT get(item=ManifestFile.Manifest, member='path'),
               then=NULL,
               else=if(
                   condition=get(item=ManifestFile.Manifest, member='path') =~ '^[A-Za-z]:',
