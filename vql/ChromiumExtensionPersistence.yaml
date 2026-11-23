@@ -84,7 +84,7 @@ parameters:
   - name: BroadHostRegex
     type: regex
     description: Broad host access worth prioritising during triage.
-    default: '(?i)(<all_urls>|\\*://\\*/\\*|https?://\\*/\\*)'
+    default: '(?i)(<all_urls>|\*://\*/\*|https?://\*/\*)'
 
   - name: ExpectedStoreExtensionIdRegex
     type: regex
@@ -264,8 +264,8 @@ sources:
           *,
           Location = 4 AS IsUnpacked,
           State = 1 AS IsEnabled,
-          ExtensionPath =~ '^[A-Za-z]:[\\/]' AS HasAbsolutePath,
-          NOT (ExtensionPath =~ '(?i)[\\/]User Data[\\/][^\\/]+[\\/]Extensions[\\/]') AS OutsideManagedExtensions,
+          ExtensionPath =~ '''^[A-Za-z]:[\\/]''' AS HasAbsolutePath,
+          NOT (ExtensionPath =~ '''(?i)[\\/]User Data[\\/][^\\/]+[\\/]Extensions[\\/]''') AS OutsideManagedExtensions,
           ExtensionPath =~ SuspiciousPathRegex AS SuspiciousPath,
           PermissionText =~ PowerfulPermissionRegex AS PowerfulPermissions,
           PermissionText =~ BroadHostRegex AS BroadHostAccess,
