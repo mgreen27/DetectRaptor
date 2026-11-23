@@ -54,6 +54,10 @@ Some contributing repositories:
 - https://github.com/SigmaHQ/sigma
 - https://yarahq.github.io/
 
+## Detection data generation
+
+[Generate and remove lab fixtures for detection testing](detection-data-generation/README.md).
+
 ## Validation
 
 Run the Eventlogs, PSReadLine, and MFT regression tests from the repository
